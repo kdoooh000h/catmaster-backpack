@@ -1,0 +1,34 @@
+{
+  "capabilities": [
+    {
+      "id": "repo.search",
+      "kind": "read_only",
+      "scoped_tool_names": ["search_files", "read_file"],
+      "classification_keywords": ["repo", "file", "files", "workspace", "path", "content", "read", "search", "find", "inspect"]
+    },
+    {
+      "id": "repo.edit",
+      "kind": "write_scoped",
+      "scoped_tool_names": ["search_files", "read_file", "patch", "terminal"],
+      "classification_keywords": ["repo", "file", "files", "workspace", "path", "content", "write", "patch", "edit", "modify", "replace"]
+    },
+    {
+      "id": "web.lookup",
+      "kind": "read_only",
+      "scoped_tool_names": ["web_search", "web_extract"],
+      "classification_keywords": ["web", "url", "http", "extract", "lookup"]
+    },
+    {
+      "id": "browser.inspect",
+      "kind": "read_only",
+      "scoped_tool_names": ["browser_navigate", "browser_snapshot", "browser_vision"],
+      "classification_keywords": ["browser", "screenshot", "snapshot", "navigate", "page"]
+    },
+    {
+      "id": "unknown",
+      "kind": "review_required",
+      "scoped_tool_names": [],
+      "classification_keywords": []
+    }
+  ]
+}

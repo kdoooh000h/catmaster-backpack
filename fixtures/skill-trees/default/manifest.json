@@ -1,0 +1,15 @@
+{
+  "tree": "default",
+  "modules": {
+    "debug": {
+      "status": "enabled",
+      "path": "modules/debug/SKILL.md",
+      "keywords": ["debug", "failure", "failing", "root cause", "test"]
+    },
+    "implement": {
+      "status": "disabled",
+      "path": "modules/implement/SKILL.md",
+      "keywords": ["implement", "code", "change"]
+    }
+  }
+}

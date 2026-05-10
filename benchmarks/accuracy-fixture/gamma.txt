@@ -1,0 +1,3 @@
+Gamma signal record: GAMMA_SIGNAL=quartz-552
+
+Use this file for deterministic benchmark searches.

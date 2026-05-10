@@ -1,0 +1,2 @@
+Case sensitive marker: CASE_MARKER=UpperCaseVictory
+Zeta filename marker: ZETA_FILE_MARKER

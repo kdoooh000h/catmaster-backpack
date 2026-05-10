@@ -1,0 +1,4 @@
+Project note: HERMES_ACCURACY_SENTINEL=violet-otter-731
+Alpha lookup code: ALPHA_CODE=orchid-204
+
+This file exists only for deterministic local tool accuracy checks.

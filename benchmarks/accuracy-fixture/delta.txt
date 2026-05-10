@@ -1,0 +1,3 @@
+Delta benchmark marker: DELTA_FLAG_2026
+
+The answer for file lookup should be delta.txt.

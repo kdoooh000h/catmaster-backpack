@@ -1,0 +1,18 @@
+[project]
+name = "catmaster-backpack"
+version = "0.1.0"
+description = "Cross-agent tool and skill surface management toolkit."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "CatMaster Backpack maintainers" }]
+
+[project.scripts]
+catmaster-backpack = "catmaster_backpack.installer:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
