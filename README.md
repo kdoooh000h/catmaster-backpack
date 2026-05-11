@@ -1,6 +1,16 @@
 # CatMaster Backpack
 
-CatMaster Backpack is an open-source toolkit for reducing visible tool and skill surface area through compact indexes, explicit gateway selection, host adapters, and deterministic benchmarks.
+Lazy tool and skill gateway protocol for agent runtimes.
+
+CatMaster Backpack reduces visible agent capability surface area by exposing compact gateways first, then letting the model explicitly select the tool or skill it needs.
+
+```text
+user request
+  -> optional advisor hints
+  -> tool_backpack / skill_backpack
+  -> selected tool / selected skill
+  -> task execution
+```
 
 It contains two coordinated backpacks:
 
@@ -8,6 +18,83 @@ It contains two coordinated backpacks:
 - **Skill Backpack** - manages skill discovery and loading through compact skill indexes, keeping child skills hidden until selected.
 
 The current validated adapter is the Hermes `Cat Master Toolkit` implementation.
+
+## Why It Exists
+
+Large agent runtimes often expose too many tools and skills at once. That increases prompt size, makes tool choice noisier, and can leak implementation details into every turn.
+
+CatMaster Backpack keeps the initial surface small:
+
+```text
+visible first:   tool_backpack, skill_backpack
+selected later:  read_file, search_files, terminal, debugging skill, TDD skill, ...
+```
+
+The gateway does not semantically route requests. It exposes compact candidates or indexes, the model chooses explicitly, and the host exposes only the selected capability.
+
+## Quick Demo
+
+Blind local Hermes tests did not mention `Backpack`, `gateway`, `tool`, or `select` in the user prompt.
+
+```text
+Prompt:
+  Under /tmp/opencode/hm-blind-search-test/main,
+  find the file containing HM_MAIN_SEARCH_SENTINEL_20260510_E.
+
+Observed session path:
+  tool_backpack -> search_files/read_file
+
+Evidence:
+  tool_backpack {"request":"select search_files"}
+  search_files found target-main.txt
+  no "Tool Backpack index:" full catalog injection
+```
+
+See `docs/demo.md` for the longer transcript-style record.
+
+## Community Sharing
+
+Use `docs/outreach.md` for maintainer email, GitHub Discussion, and community post templates. The templates intentionally describe Hermes as the working runtime prototype and describe OpenCode, Claude Code, and Codex-style runtimes as adapter targets unless their host APIs support dynamic tool visibility.
+
+## Supported Hosts
+
+| Host | Status | Notes |
+| --- | --- | --- |
+| Hermes Agent | Working runtime integration prototype | Supports `tool_backpack`, `skill_backpack`, advisor hints, and selected-tool exposure. |
+| OpenCode | Portable skill/protocol package | Dynamic native tool hiding depends on host hooks. |
+| Claude Code | Portable skill/protocol package | Skill bundle is portable; dynamic tool visibility depends on host APIs. |
+| Codex-style runtimes | Proposal target | Needs a stable extension or tool-surface API. |
+
+## Architecture
+
+```text
+                    user turn
+                       |
+                       v
+              backpack_advisor
+              optional compact hints
+                       |
+                       v
+       +---------------+---------------+
+       |                               |
+       v                               v
+ tool_backpack                    skill_backpack
+ select read_file                 index / select debugging
+       |                               |
+       v                               v
+ selected tool schema             selected SKILL.md content
+       |                               |
+       +---------------+---------------+
+                       |
+                       v
+                  agent loop
+```
+
+## Limitations
+
+Hermes full runtime integration is not a pure plugin. It requires host runtime wiring for lazy tool visibility, selected-tool exposure, advisor hints, TUI guards, and skill sync behavior.
+
+OpenCode and Claude Code currently receive the portable protocol and skill packaging. They should not be advertised as Hermes-equivalent lazy native tool runtimes until those hosts expose stable hooks.
 
 ## Contents
 

@@ -28,6 +28,23 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("catmaster-backpack install-skill-plugin", readme)
         self.assertIn("Hermes full runtime integration is not a pure plugin", readme)
 
+    def test_github_landing_page_materials_exist(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        for section in [
+            "## Why It Exists",
+            "## Quick Demo",
+            "## Supported Hosts",
+            "## Architecture",
+            "## Limitations",
+        ]:
+            self.assertIn(section, readme)
+        self.assertIn("tool_backpack -> search_files/read_file", readme)
+        self.assertIn("docs/demo.md", readme)
+        self.assertIn("docs/outreach.md", readme)
+        self.assertTrue((ROOT / "docs" / "demo.md").exists())
+        self.assertTrue((ROOT / "docs" / "outreach.md").exists())
+
     def test_skill_plugin_dry_run_does_not_write_files(self):
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory) / "project"
