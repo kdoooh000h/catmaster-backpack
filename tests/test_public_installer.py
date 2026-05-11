@@ -96,6 +96,19 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("Tradeoff", readme)
         self.assertIn("47.5% slower", readme)
 
+    def test_github_landing_page_has_designed_hero_and_signal_board(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("Lazy capability surface for agent runtimes", readme)
+        self.assertIn("## Signal Board", readme)
+        self.assertIn("<table>", readme)
+        self.assertIn("68.4% fewer total tokens", readme)
+        self.assertIn("97.4% fewer initial tool-schema chars", readme)
+        self.assertIn("## Use It When", readme)
+        self.assertIn("tool catalogs are crowding the prompt", readme)
+        self.assertIn("## Tradeoff", readme)
+        self.assertIn("explicit gateway-selection round", readme)
+
     def test_outreach_templates_include_current_benchmark_claims(self):
         outreach = (ROOT / "docs" / "outreach.md").read_text(encoding="utf-8")
 

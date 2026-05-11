@@ -1,8 +1,44 @@
 # CatMaster Backpack
 
-Lazy tool and skill gateway protocol for agent runtimes.
+<p align="center"><strong>Lazy capability surface for agent runtimes.</strong></p>
+
+<p align="center">
+  Start with <code>tool_backpack</code> and <code>skill_backpack</code>, then expose only the tool or skill the model explicitly selects.
+</p>
+
+<p align="center">
+  <a href="#signal-board">Signal Board</a> | <a href="#quick-demo">Quick Demo</a> | <a href="#public-install">Install</a> | <a href="docs/outreach.md">Share</a>
+</p>
 
 CatMaster Backpack reduces visible agent capability surface area by exposing compact gateways first, then letting the model explicitly select the tool or skill it needs.
+
+<table>
+  <tr>
+    <td><strong>68.4% fewer total tokens</strong><br />standard hm Backpack vs hm-full on the 12-task fixture</td>
+    <td><strong>68.8% fewer prompt tokens</strong><br />less context spent describing capabilities up front</td>
+  </tr>
+  <tr>
+    <td><strong>92.0% fewer initially visible tools</strong><br />2 Backpack gateways vs 25 full direct tools</td>
+    <td><strong>97.4% fewer initial tool-schema chars</strong><br />655 chars vs 25,514 chars in the schema surface check</td>
+  </tr>
+</table>
+
+It contains two coordinated backpacks:
+
+- **Tool Backpack** - manages tool discovery and activation while keeping most tools hidden until selected.
+- **Skill Backpack** - manages skill discovery and loading through compact skill indexes, keeping child skills hidden until selected.
+
+The current validated adapter is the Hermes `Cat Master Toolkit` implementation.
+
+## Signal Board
+
+| Signal | Standard hm Backpack | Standard hm full direct tools |
+| --- | ---: | ---: |
+| Correct answers | 12/12 | 12/12 |
+| Total tokens | 62,303 | 197,261 |
+| Prompt tokens | 61,313 | 196,667 |
+| Initial visible tools | 2 | 25 |
+| Avg total time | 8,407.90 ms | 5,698.68 ms |
 
 ```text
 user request
@@ -11,13 +47,6 @@ user request
   -> selected tool / selected skill
   -> task execution
 ```
-
-It contains two coordinated backpacks:
-
-- **Tool Backpack** - manages tool discovery and activation while keeping most tools hidden until selected.
-- **Skill Backpack** - manages skill discovery and loading through compact skill indexes, keeping child skills hidden until selected.
-
-The current validated adapter is the Hermes `Cat Master Toolkit` implementation.
 
 ## Latest Local Experiment Conclusion
 
@@ -41,6 +70,17 @@ Tradeoff: 50.0% more API calls and 47.5% slower average total time
 ```
 
 This is useful for runtime maintainers exploring lazy capability surfaces, plugin hooks, or MCP-style adapters for large tool and skill catalogs.
+
+## Use It When
+
+- tool catalogs are crowding the prompt before the agent knows what it needs.
+- skill catalogs are useful, but too large to inject into every turn.
+- the host runtime can hide and reveal native tools dynamically.
+- you want explicit model selection rather than a semantic router choosing tools silently.
+
+## Tradeoff
+
+The explicit gateway-selection round buys a smaller starting context at the cost of more calls. In the current standard Hermes benchmark, Backpack made 50.0% more API calls and was 47.5% slower on average while using 68.4% fewer total tokens.
 
 ## Why It Exists
 
