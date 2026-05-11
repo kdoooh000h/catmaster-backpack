@@ -10,15 +10,31 @@ Current source location:
 /home/k/cccx/hermes/repos/hermes-agent
 ```
 
+Runtime manifest packaged in this repository:
+
+```text
+adapters/hermes/runtime-manifest.json
+```
+
+Validated GitHub runtime source:
+
+```text
+repository: https://github.com/kdoooh000h/hermes-agent.git
+branch: backpack-advisor-gateway
+commit: d8e7b8be8e2ae1a41020a9d8ce518eb580dfd069
+```
+
 Relevant Hermes files:
 
 ```text
-agent/tool_repo.py
-agent/tool_repo_catalog.py
-agent/tool_repo_registry.py
-hermes_cli/tool_backpack_catalog.py
-run_agent.py
+agent/backpack_advisor.py
+tools/tool_backpack.py
 tools/skill_backpack.py
+run_agent.py
+toolsets.py
+hermes_cli/tools_config.py
+tools/skills_sync.py
+tui_gateway/server.py
 ```
 
 ## Behavior

@@ -261,6 +261,20 @@ Hermes full runtime integration is not a pure plugin. It requires host runtime w
 catmaster-backpack hermes-plan --hermes-agent-root /path/to/hermes-agent --hermes-home ~/.hermes
 ```
 
+## One-Repo Runtime Package
+
+`catmaster-backpack` is the single package entrypoint for Backpack v0 assets: protocol, Tool Backpack, Skill Backpack, Hermes adapter metadata, tests, and benchmark records. The Hermes runtime implementation still lives in Hermes Agent because it requires host runtime wiring, but this repository records the validated source in `adapters/hermes/runtime-manifest.json`.
+
+Current Hermes v0 runtime source:
+
+```text
+repository: https://github.com/kdoooh000h/hermes-agent.git
+branch: backpack-advisor-gateway
+system: Tool Backpack + Skill Backpack + deterministic grouped advisor hints
+```
+
+Use `catmaster-backpack hermes-plan` to inspect the manifest-backed file list before applying or auditing a Hermes checkout.
+
 ## Current Strategy
 
 Current version labels:

@@ -1,0 +1,29 @@
+{
+  "adapter": "hermes",
+  "backpack_system_version": "v0",
+  "runtime_source": {
+    "repository": "https://github.com/kdoooh000h/hermes-agent.git",
+    "branch": "backpack-advisor-gateway",
+    "commit": "d8e7b8be8e2ae1a41020a9d8ce518eb580dfd069"
+  },
+  "integrated_parts": [
+    "tool_backpack",
+    "skill_backpack",
+    "deterministic_grouped_advisor_hints"
+  ],
+  "runtime_files": [
+    "agent/backpack_advisor.py",
+    "tools/tool_backpack.py",
+    "tools/skill_backpack.py",
+    "run_agent.py",
+    "toolsets.py",
+    "hermes_cli/tools_config.py",
+    "tools/skills_sync.py",
+    "tui_gateway/server.py"
+  ],
+  "notes": [
+    "CatMaster Backpack packages the v0 protocol, assets, adapter manifest, tests, and benchmarks.",
+    "The referenced Hermes branch is the validated runtime implementation for lazy tool visibility, selected-tool exposure, and advisor hints.",
+    "Do not copy .hermes runtime homes, auth files, or local session logs into this package."
+  ]
+}
