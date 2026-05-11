@@ -1,9 +1,17 @@
-# CatMaster Backpack
+<p align="center"><sub>FOR RUNTIME MAINTAINERS, AGENT TOOLING AUTHORS, AND CONTEXT BUDGET NERDS</sub></p>
+
+<h1 align="center">CatMaster Backpack</h1>
 
 <p align="center"><strong>Lazy capability surface for agent runtimes.</strong></p>
 
 <p align="center">
-  Start with <code>tool_backpack</code> and <code>skill_backpack</code>, then expose only the tool or skill the model explicitly selects.
+  Start with <code>tool_backpack</code> / <code>skill_backpack</code>, then expose only the tool or skill the model explicitly selects.
+</p>
+
+<p align="center">
+  <img alt="Status: Hermes prototype" src="https://img.shields.io/badge/status-Hermes%20prototype-1f6feb" />
+  <img alt="Benchmark: 68.4% fewer tokens" src="https://img.shields.io/badge/benchmark-68.4%25%20fewer%20tokens-238636" />
+  <img alt="Surface: 97.4% fewer schema chars" src="https://img.shields.io/badge/surface-97.4%25%20fewer%20schema%20chars-8957e5" />
 </p>
 
 <p align="center">
@@ -14,14 +22,28 @@ CatMaster Backpack reduces visible agent capability surface area by exposing com
 
 <table>
   <tr>
+    <th align="left">Metric</th>
+    <th align="left">Measured Signal</th>
+  </tr>
+  <tr>
+    <td><strong>Token budget</strong></td>
     <td><strong>68.4% fewer total tokens</strong><br />standard hm Backpack vs hm-full on the 12-task fixture</td>
+  </tr>
+  <tr>
+    <td><strong>Prompt pressure</strong></td>
     <td><strong>68.8% fewer prompt tokens</strong><br />less context spent describing capabilities up front</td>
   </tr>
   <tr>
+    <td><strong>Visible surface</strong></td>
     <td><strong>92.0% fewer initially visible tools</strong><br />2 Backpack gateways vs 25 full direct tools</td>
+  </tr>
+  <tr>
+    <td><strong>Schema surface</strong></td>
     <td><strong>97.4% fewer initial tool-schema chars</strong><br />655 chars vs 25,514 chars in the schema surface check</td>
   </tr>
 </table>
+
+<p align="center"><sup>Measured on standard hm configuration against a full direct-tools tool surface. See benchmark records for methodology and tradeoffs.</sup></p>
 
 It contains two coordinated backpacks:
 

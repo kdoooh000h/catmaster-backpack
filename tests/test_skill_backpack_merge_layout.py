@@ -37,7 +37,7 @@ class SkillBackpackMergeLayoutTests(unittest.TestCase):
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
 
-        self.assertIn("# CatMaster Backpack", readme)
+        self.assertIn('<h1 align="center">CatMaster Backpack</h1>', readme)
         self.assertIn("Tool Backpack", readme)
         self.assertIn("Skill Backpack", readme)
         self.assertIn("CatMaster Backpack", agents)

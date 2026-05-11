@@ -109,6 +109,17 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("## Tradeoff", readme)
         self.assertIn("explicit gateway-selection round", readme)
 
+    def test_github_landing_page_typography_is_polished_for_readme_limits(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("<sub>FOR RUNTIME MAINTAINERS", readme)
+        self.assertIn("<h1 align=\"center\">CatMaster Backpack</h1>", readme)
+        self.assertIn("<img alt=\"Status: Hermes prototype\"", readme)
+        self.assertIn("<img alt=\"Benchmark: 68.4% fewer tokens\"", readme)
+        self.assertIn("<th align=\"left\">Metric</th>", readme)
+        self.assertIn("<code>tool_backpack</code> / <code>skill_backpack</code>", readme)
+        self.assertIn("<sup>Measured on standard hm configuration", readme)
+
     def test_outreach_templates_include_current_benchmark_claims(self):
         outreach = (ROOT / "docs" / "outreach.md").read_text(encoding="utf-8")
 
