@@ -56,6 +56,19 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("reduces visible tool and skill surface area", readme)
         self.assertIn("less context spent describing capabilities", readme)
 
+    def test_latest_current_benchmark_is_distinguished_from_historical_tokens(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        latest = ROOT / "benchmarks" / "results" / "current-hermes-surface-2026-05-11.md"
+
+        self.assertTrue(latest.exists())
+        latest_text = latest.read_text(encoding="utf-8")
+        self.assertIn("655", latest_text)
+        self.assertIn("25,514", latest_text)
+        self.assertIn("97.4%", latest_text)
+        self.assertIn("HTTP 403", latest_text)
+        self.assertIn("current-hermes-surface-2026-05-11.md", readme)
+        self.assertIn("Historical token benchmark", readme)
+
     def test_skill_plugin_dry_run_does_not_write_files(self):
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory) / "project"

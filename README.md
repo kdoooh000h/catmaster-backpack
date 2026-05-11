@@ -43,14 +43,25 @@ less noisy capability selection
 more room for task-specific context
 ```
 
-Measured local Skill Backpack comparison on the same 8-task fixture:
+Current Hermes surface measurement, 2026-05-11:
+
+| Runtime surface | Visible tools | Tool schema chars | Rough schema tokens |
+| --- | ---: | ---: | ---: |
+| Backpack gateways | 2 | 655 | 164 |
+| Direct file tools | 4 | 4,979 | 1,245 |
+| Direct file/terminal/web | 6 | 10,896 | 2,724 |
+| Direct common tools | 18 | 25,514 | 6,378 |
+
+Against the direct common-tools surface, Backpack reduced initial tool schema text by about **97.4%** in this measurement. See `benchmarks/results/current-hermes-surface-2026-05-11.md`.
+
+Historical token benchmark on the same 8-task fixture:
 
 | Runtime | Total tokens | Result |
 | --- | ---: | --- |
 | Old direct/visible skill runtime | 28,673 | 8-task baseline |
 | `skill_backpack` gateway runtime | 13,602 | 8/8 correct selections |
 
-That is about **52.6% fewer total tokens** on the small fixture, with about **62.7% fewer non-cache input tokens**. This number is not a universal guarantee; savings depend on host runtime, model, tool count, skill count, cache behavior, and task mix. The practical goal is less context spent describing capabilities before the agent knows which ones it needs.
+That historical run showed about **52.6% fewer total tokens** on the small fixture, with about **62.7% fewer non-cache input tokens**. These numbers are not universal guarantees; savings depend on host runtime, model, tool count, skill count, cache behavior, and task mix. The practical goal is less context spent describing capabilities before the agent knows which ones it needs.
 
 ## Quick Demo
 
