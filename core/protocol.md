@@ -2,8 +2,6 @@
 
 System version: v0
 
-Advisor strategy version: grouped-hints-v1
-
 Tool Backpack starts with one visible gateway tool. Hosts should provide a compact tool index outside the tool call path when their runtime supports prompt injection, so the model can select tools directly. Canonical selection is `select <id|tool_name>[,<id|tool_name>...]`, but host adapters may normalize bare ids or bare tool names to the same selection result. Hermes uses prompt-index selection: non-selection requests are blocked with selection guidance; the host then exposes exactly the selected tool or tools.
 
 Skill Backpack uses the same rule: gateway returns an index, the model chooses, and the gateway loads only the selected skill. The gateway should not semantically route or auto-select the best skill.

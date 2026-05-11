@@ -25,7 +25,6 @@ Current published runtime version:
 
 ```text
 Backpack System: v0
-Advisor strategy: grouped-hints-v1
 ```
 
 <table>
@@ -268,7 +267,6 @@ Current version labels:
 
 ```text
 Backpack System: v0
-Advisor strategy: grouped-hints-v1
 ```
 
 Tool Backpack and Skill Backpack both use compact candidate hints or indexes, let the model choose, then load or expose exactly the selected target. Do not semantically route inside the gateway. The current Hermes path keeps `tool_backpack` and `skill_backpack` visible, injects compact candidate hints when useful, and accepts only explicit selection calls through the gateways.

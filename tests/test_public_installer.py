@@ -125,9 +125,10 @@ class PublicInstallerTests(unittest.TestCase):
         protocol = (ROOT / "core" / "protocol.md").read_text(encoding="utf-8")
 
         self.assertIn("Backpack System: v0", readme)
-        self.assertIn("Advisor strategy: grouped-hints-v1", readme)
         self.assertIn("System version: v0", protocol)
-        self.assertIn("Advisor strategy version: grouped-hints-v1", protocol)
+        self.assertNotIn("grouped-hints-v1", readme)
+        self.assertNotIn("Advisor strategy version", protocol)
+        self.assertNotIn("grouped-hints-v1", protocol)
 
     def test_readme_uses_conservative_adapter_roadmap(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
