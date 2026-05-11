@@ -14,19 +14,13 @@ FILE=beta.txt
 NOT_FOUND
 ```
 
-## Final Hermes V1 Result
+## Current Hermes Surface Result
 
-See `results/cat-master-toolkit-v1-final.md`.
+See `results/current-hermes-surface-2026-05-11.md`.
 
-The raw local run was recorded in the source Hermes experiment folder as `tool-repo-vs-full-description-trim-2026-04-25.jsonl`. This project keeps the secret-free summary rather than local runtime session homes.
+## Current Hermes Real Benchmark
 
-## Hermes Runtime Smoke Tests
-
-The V2 installed-tool listing and uninstall-routing smoke test is recorded in `docs/cat-master-toolkit-v2-tool-indexer.md`.
-
-## Skill Backpack Result
-
-See `results/skill-backpack-comparison-2026-04-28.md` for the current Skill Backpack gateway comparison.
+See `results/current-hermes-real-benchmark-2026-05-11.md`.
 
 ## Hermes Backpack Runtime Update
 

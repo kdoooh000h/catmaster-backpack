@@ -85,8 +85,26 @@ TASKS = [
 ]
 
 REPO_FILE_TOOLS = {"search_files", "read_file"}
-CUSTOM_TOOLS_TOOLSETS = ["file", "no_mcp", "terminal", "tool_backpack", "web"]
-ENV_CHOICES = ("full-tools", "custom-tools")
+CUSTOM_TOOLS_TOOLSETS = ["tool_backpack"]
+HM_FULL_TOOLSETS = [
+    "web",
+    "browser",
+    "terminal",
+    "file",
+    "code_execution",
+    "vision",
+    "image_gen",
+    "tts",
+    "todo",
+    "memory",
+    "session_search",
+    "clarify",
+    "delegation",
+    "cronjob",
+    "messaging",
+    "no_mcp",
+]
+ENV_CHOICES = ("full-tools", "custom-tools", "file-tools", "hm-backpack", "hm-full")
 IRRELEVANT_TOOLS = {
     "browser_navigate",
     "browser_snapshot",
@@ -110,7 +128,7 @@ class TrackingAgent(AIAgent):
             {
                 "name": function_name,
                 "args": function_args,
-                "active_capability": self.active_capability,
+                "active_capability": getattr(self, "active_capability", None),
                 "visible_before": _visible_tool_names(self),
                 "visible_after": [],
             }
@@ -129,12 +147,51 @@ def _visible_tool_names(agent: AIAgent) -> list[str]:
 
 
 def _enabled_toolsets_for_env(env: str) -> list[str] | None:
+    if env == "hm-backpack":
+        return ["skill_backpack", "tool_backpack"]
+    if env == "hm-full":
+        return HM_FULL_TOOLSETS
+    if env == "file-tools":
+        return ["file"]
     if env != "custom-tools":
         return None
     from hermes_cli.config import load_config
     from hermes_cli.tools_config import _get_platform_tools
 
     return sorted(_get_platform_tools(load_config(), "cli"))
+
+
+def _agent_model_kwargs_for_env(env: str) -> dict[str, str]:
+    if env in {"hm-backpack", "hm-full"}:
+        return _hm_agent_model_kwargs()
+    return {"model": "gemma-26b", "provider": "custom"}
+
+
+def _hm_agent_model_kwargs() -> dict[str, object]:
+    from hermes_cli.config import load_config
+    from hermes_cli.runtime_provider import resolve_runtime_provider
+
+    cfg = load_config()
+    model_cfg = cfg.get("model") or {}
+    if isinstance(model_cfg, str):
+        model = model_cfg
+        provider = ""
+    else:
+        model = model_cfg.get("default") or model_cfg.get("model") or ""
+        provider = model_cfg.get("provider") or ""
+
+    runtime = resolve_runtime_provider(
+        requested=str(provider).strip() or None,
+        target_model=str(model).strip() or None,
+    )
+    return {
+        "api_key": runtime.get("api_key"),
+        "base_url": runtime.get("base_url"),
+        "provider": runtime.get("provider"),
+        "api_mode": runtime.get("api_mode"),
+        "model": model,
+        "credential_pool": runtime.get("credential_pool"),
+    }
 
 
 def _prompt_for_env(env: str, prompt: str) -> str:
@@ -154,14 +211,12 @@ def run_task(env: str, task: dict[str, str]) -> dict[str, object]:
     else:
         enabled_toolsets = _enabled_toolsets_for_env(env)
     agent = TrackingAgent(
-        model="gemma-26b",
-        provider="custom",
         quiet_mode=True,
         enabled_toolsets=enabled_toolsets,
         skip_context_files=True,
         skip_memory=True,
-        persist_session=False,
         tool_delay=0,
+        **_agent_model_kwargs_for_env(env),
     )
     init_ms = round((time.monotonic() - start) * 1000, 2)
     loaded_tools = sorted(tool["function"]["name"] for tool in agent.tools)
@@ -182,7 +237,7 @@ def run_task(env: str, task: dict[str, str]) -> dict[str, object]:
         "used_tool_repo_first": bool(tool_names) and tool_names[0] in {"tool_backpack", "tool_repo"},
         "used_repo_file_tool": any(name in REPO_FILE_TOOLS for name in tool_names),
         "used_irrelevant_tool": any(name in IRRELEVANT_TOOLS for name in tool_names),
-        "active_capability": agent.active_capability,
+        "active_capability": getattr(agent, "active_capability", None),
         "api_calls": result.get("api_calls"),
         "prompt_tokens": agent.session_prompt_tokens,
         "completion_tokens": agent.session_completion_tokens,

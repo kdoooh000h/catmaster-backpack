@@ -15,7 +15,7 @@ class SkillBackpackMergeLayoutTests(unittest.TestCase):
             ROOT / "adapters" / "hermes" / "skill_backpack" / "tools" / "skill_backpack.py",
             ROOT / "fixtures" / "skill-trees" / "default" / "manifest.json",
             ROOT / "fixtures" / "skill-trees" / "default" / "modules" / "debug" / "SKILL.md",
-            ROOT / "benchmarks" / "results" / "skill-backpack-comparison-2026-04-28.md",
+            ROOT / "benchmarks" / "results" / "current-hermes-surface-2026-05-11.md",
         ]
 
         for path in expected:

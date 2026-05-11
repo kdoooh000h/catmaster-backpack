@@ -35,14 +35,14 @@ Passing `py_compile`, `unittest`, or `pytest` is required but not enough for Her
 
 ## Comparison Group Selection
 
-Before every benchmark, inspect the experiment project for comparison groups under `/home/k/cccx/tool/experiments`. Use experiment Hermes homes by default, not the hmk role home.
+Before every benchmark, inspect the requested comparison surface and make sure both arms use matching model/provider configuration. Use standard `hm` configuration for production claims; use experiment Hermes homes only when the user asks for an experiment-home comparison.
 
 Known groups:
 
 | Group | Hermes home | Use when |
 | --- | --- | --- |
-| Tool Backpack file benchmark | `/home/k/cccx/tool/experiments/hermes-test/custom-tools/.hermes` | testing lazy `tool_backpack` against file-search fixtures |
-| Full tools baseline | `/home/k/cccx/tool/experiments/hermes-test/full-tools/.hermes` | comparing against all visible tools |
+| Standard hm Backpack benchmark | `/home/k/.hermes`, runner env `hm-backpack` | testing production Backpack surface against file-search fixtures |
+| Standard hm full direct-tools benchmark | `/home/k/.hermes`, runner env `hm-full` | comparing production config/model against full direct toolsets |
 | Skill Backpack surface | `/home/k/cccx/tool/experiments/hermes-skill-ab/skill-backpack/.hermes` | testing the active Skill Backpack gateway |
 | Visible skills control | `/home/k/cccx/tool/experiments/hermes-skill-ab/control-visible-skills/.hermes` | testing visible-skill control behavior |
 
@@ -112,36 +112,31 @@ For each arm, capture and report:
 
 Do not compare against stale sessions as proof. Historical sessions are context only; run fresh smoke or report that real production verification was not run.
 
-## Canonical Custom-Tools Command
+## Canonical Standard hm Benchmark Commands
 
-Run from the accuracy fixture so file search tasks inspect deterministic data:
-
-```bash
-cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture && \
-HERMES_HOME=/home/k/cccx/tool/experiments/hermes-test/custom-tools/.hermes \
-PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
-/home/k/cccx/tool/experiments/hermes-test/full-tools/.venv/bin/python \
-/home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
---env custom-tools \
---output /home/k/cccx/tool/experiments/hermes-test/tool-backpack-real-llm-$(date +%Y%m%d%H%M%S).jsonl
-```
-
-This uses real LLM calls through Hermes `AIAgent.run_conversation` with `model="gemma-26b"` and `provider="custom"`.
-The runner fixes the custom-tools surface to `file`, `terminal`, `web`, `no_mcp`, and `tool_backpack`; the experiment `HERMES_HOME` supplies provider credentials and model config.
-
-## Optional Full-Tools Comparison
-
-Use this only when comparing against full visible tools:
+Run from the accuracy fixture so file search tasks inspect deterministic data. These commands use the standard hm benchmark home/model/provider and differ only by tool surface.
 
 ```bash
 cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture && \
-HERMES_HOME=/home/k/cccx/tool/experiments/hermes-test/full-tools/.hermes \
+HERMES_HOME=/home/k/.hermes \
 PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
-/home/k/cccx/tool/experiments/hermes-test/full-tools/.venv/bin/python \
+/home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
 /home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
---env full-tools \
---output /home/k/cccx/tool/experiments/hermes-test/tool-backpack-full-tools-$(date +%Y%m%d%H%M%S).jsonl
+--env hm-backpack \
+--output /home/k/cccx/tool/experiments/hermes-test/hm-backpack-real-llm-$(date +%Y%m%d%H%M%S).jsonl
 ```
+
+```bash
+cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture && \
+HERMES_HOME=/home/k/.hermes \
+PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
+/home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
+/home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
+--env hm-full \
+--output /home/k/cccx/tool/experiments/hermes-test/hm-full-real-llm-$(date +%Y%m%d%H%M%S).jsonl
+```
+
+Use experiment-home commands only when testing the experiment homes themselves, and report them separately from standard hm results.
 
 ## Result Review
 
@@ -150,11 +145,11 @@ Open the fresh JSONL and check every row:
 | Field | Required signal |
 | --- | --- |
 | `answer_correct` | `true` for each fixture task |
-| `tool_calls` | starts with `tool_backpack` for custom-tools runs |
+| `tool_calls` | starts with `tool_backpack` for `hm-backpack` runs |
 | `used_repo_file_tool` | `true` |
 | `used_irrelevant_tool` | `false` |
-| `initial_visible_tool_count` | `1` for Tool Backpack lazy runs |
-| `initial_visible_tools` | includes only `tool_backpack` for lazy runs |
+| `initial_visible_tool_count` | `2` for standard hm Backpack runs |
+| `initial_visible_tools` | includes only `skill_backpack` and `tool_backpack` for standard hm Backpack runs |
 | `prompt_tokens`, `completion_tokens`, `total_tokens` | record totals for comparison |
 | `total_ms` | record average runtime |
 

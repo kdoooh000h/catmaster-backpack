@@ -43,4 +43,4 @@ Historical `tool_repo(request="reconcile tools")` behavior is no longer the runt
 
 ## Status
 
-Tool Backpack prompt-index lazy selection is validated by focused Hermes tests and a real `hermes-main -z` agent-loop smoke. Skill Backpack `skill_backpack` is validated on the 2026-04-28 local 8-skill comparison: 8/8 correct selections, 3 API calls per task, and about 52.6% fewer total tokens than the removed old runtime on the small fixture.
+Tool Backpack prompt-index lazy selection is validated by focused Hermes tests and a real `hermes-main -z` agent-loop smoke. Skill Backpack `skill_backpack` is the active Hermes skill gateway, and the current published measurement is the 2026-05-11 Hermes surface result.

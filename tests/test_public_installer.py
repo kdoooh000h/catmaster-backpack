@@ -45,18 +45,17 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertTrue((ROOT / "docs" / "demo.md").exists())
         self.assertTrue((ROOT / "docs" / "outreach.md").exists())
 
-    def test_readme_explains_value_and_measured_token_savings(self):
+    def test_readme_explains_value_and_measured_context_savings(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("## What It Saves", readme)
-        self.assertIn("28,673", readme)
-        self.assertIn("13,602", readme)
-        self.assertIn("52.6% fewer total tokens", readme)
-        self.assertIn("62.7% fewer non-cache input tokens", readme)
+        self.assertIn("655", readme)
+        self.assertIn("25,514", readme)
+        self.assertIn("97.4%", readme)
         self.assertIn("reduces visible tool and skill surface area", readme)
-        self.assertIn("less context spent describing capabilities", readme)
+        self.assertIn("less context describing capabilities", readme)
 
-    def test_latest_current_benchmark_is_distinguished_from_historical_tokens(self):
+    def test_latest_current_benchmark_is_the_published_measurement(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         latest = ROOT / "benchmarks" / "results" / "current-hermes-surface-2026-05-11.md"
 
@@ -67,7 +66,40 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("97.4%", latest_text)
         self.assertIn("HTTP 403", latest_text)
         self.assertIn("current-hermes-surface-2026-05-11.md", readme)
-        self.assertIn("Historical token benchmark", readme)
+        self.assertNotIn("Historical token benchmark", readme)
+
+    def test_fresh_real_benchmark_result_is_published_with_caveats(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        benchmark_index = (ROOT / "benchmarks" / "README.md").read_text(encoding="utf-8")
+        result = ROOT / "benchmarks" / "results" / "current-hermes-real-benchmark-2026-05-11.md"
+
+        self.assertTrue(result.exists())
+        result_text = result.read_text(encoding="utf-8")
+        self.assertIn("12/12", result_text)
+        self.assertIn("62,303", result_text)
+        self.assertIn("197,261", result_text)
+        self.assertIn("68.4% fewer total tokens", result_text)
+        self.assertIn("47.5% slower", result_text)
+        self.assertIn("hm-backpack-real-llm-20260511.jsonl", result_text)
+        self.assertIn("hm-full-real-llm-20260511.jsonl", result_text)
+        self.assertIn("current-hermes-real-benchmark-2026-05-11.md", readme)
+        self.assertIn("current-hermes-real-benchmark-2026-05-11.md", benchmark_index)
+
+    def test_old_benchmark_records_are_not_published(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        benchmark_index = (ROOT / "benchmarks" / "README.md").read_text(encoding="utf-8")
+
+        self.assertFalse((ROOT / "benchmarks" / "results" / "cat-master-toolkit-v1-final.md").exists())
+        self.assertFalse((ROOT / "benchmarks" / "results" / "skill-backpack-comparison-2026-04-28.md").exists())
+        for text in [readme, benchmark_index]:
+            self.assertNotIn("2026-04-25", text)
+            self.assertNotIn("2026-04-28", text)
+            self.assertNotIn("cat-master-toolkit-v1-final.md", text)
+            self.assertNotIn("skill-backpack-comparison-2026-04-28.md", text)
+            self.assertNotIn("28,673", text)
+            self.assertNotIn("13,602", text)
+            self.assertNotIn("52.6%", text)
+            self.assertNotIn("62.7%", text)
 
     def test_readme_leads_with_latest_local_experiment_conclusion(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

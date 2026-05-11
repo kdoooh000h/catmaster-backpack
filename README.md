@@ -60,14 +60,14 @@ Current Hermes surface measurement, 2026-05-11:
 
 Against the direct common-tools surface, Backpack reduced initial tool schema text by about **97.4%** in this measurement. See `benchmarks/results/current-hermes-surface-2026-05-11.md`.
 
-Historical token benchmark on the same 8-task fixture:
+Fresh standard Hermes benchmark, 2026-05-11:
 
-| Runtime | Total tokens | Result |
-| --- | ---: | --- |
-| Old direct/visible skill runtime | 28,673 | 8-task baseline |
-| `skill_backpack` gateway runtime | 13,602 | 8/8 correct selections |
+| Runtime surface | Correct answers | Total tokens | Avg total time |
+| --- | ---: | ---: | ---: |
+| Standard hm Backpack | 12/12 | 62,303 | 8,407.90 ms |
+| Standard hm full direct tools | 12/12 | 197,261 | 5,698.68 ms |
 
-That historical run showed about **52.6% fewer total tokens** on the small fixture, with about **62.7% fewer non-cache input tokens**. These numbers are not universal guarantees; savings depend on host runtime, model, tool count, skill count, cache behavior, and task mix. The practical goal is less context spent describing capabilities before the agent knows which ones it needs.
+This live run validates gateway behavior and token savings: Backpack used **68.4% fewer total tokens** and **68.8% fewer prompt tokens** on this fixture. The tradeoff is latency: Backpack made 50.0% more API calls and was 47.5% slower on average because it adds the explicit gateway selection round. See `benchmarks/results/current-hermes-real-benchmark-2026-05-11.md`.
 
 ## Quick Demo
 
@@ -142,8 +142,8 @@ OpenCode and Claude Code currently receive the portable protocol and skill packa
 - `skills/backpack-manager/` - Backpack management skill for Tool Backpack, Skill Backpack, and external tool changes.
 - `skills/skill-backpack/` - Skill Backpack parent skill and management CLI.
 - `fixtures/` - deterministic Skill Backpack tree fixtures.
-- `benchmarks/` - deterministic fixtures, runners, and benchmark summaries.
-- `docs/` - Tool Backpack records and Skill Backpack benchmark notes.
+- `benchmarks/` - deterministic fixtures, runners, and current benchmark summaries.
+- `docs/` - Backpack runtime notes and demo records.
 - `src/catmaster_backpack/` - public package and installer CLI.
 
 ## Public Install
@@ -201,22 +201,7 @@ Runtime update record: `docs/hermes-backpack-runtime-update-2026-05-01.md`.
 
 ## Current Validated Result
 
-Latest local Hermes comparison, 2026-04-28: 8 test skills, 8 deterministic skill-selection tasks, same model/config, context files and memory disabled.
-
-| Metric | `skill_backpack` |
-| --- | ---: |
-| Correct skill selections | 8/8 |
-| API calls | 24 |
-| Avg API calls/task | 3.0 |
-| Input tokens | 3,975 |
-| Output tokens | 1,643 |
-| Cache-read tokens | 7,984 |
-| Total tokens | 13,602 |
-| Avg tokens/task | 1,700 |
-
-Result: the new skill gateway is the active strategy. The removed old runtime used 28,673 total tokens on the same fixture.
-
-Detailed record: `benchmarks/results/skill-backpack-comparison-2026-04-28.md`.
+The current published measurements are the Hermes surface result in `benchmarks/results/current-hermes-surface-2026-05-11.md` and the fresh real benchmark in `benchmarks/results/current-hermes-real-benchmark-2026-05-11.md`. The fresh run showed 12/12 correct Backpack answers with explicit `tool_backpack` selection on every task.
 
 ## Package Direction
 

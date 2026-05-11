@@ -14,6 +14,7 @@ RUNNER_PATH = Path(__file__).resolve().parents[1] / "benchmarks/run-simple-tool-
 class FakeAgent:
     init_kwargs: dict | None = None
     instance = None
+    omit_active_capability = False
 
     def __init__(self, *args, **kwargs):
         if "lazy_tool_surface" in kwargs:
@@ -26,7 +27,8 @@ class FakeAgent:
         self._tool_backpack_all_tools = [
             {"function": {"name": "tool_backpack", "description": "Tool Backpack"}}
         ]
-        self.active_capability = None
+        if not self.omit_active_capability:
+            self.active_capability = None
         self.session_prompt_tokens = 1
         self.session_completion_tokens = 2
         self.session_total_tokens = 3
@@ -102,10 +104,31 @@ class BenchmarkRunnerTests(unittest.TestCase):
 
         self.assertEqual(
             FakeAgent.init_kwargs["enabled_toolsets"],
-            ["file", "no_mcp", "terminal", "tool_backpack", "web"],
+            ["tool_backpack"],
         )
         self.assertTrue(row["used_tool_repo_first"])
         self.assertEqual(row["tool_calls"], ["tool_backpack", "search_files"])
+
+    def test_run_task_does_not_pass_removed_persist_session_argument(self) -> None:
+        module = _load_runner_module()
+
+        with patch.object(module, "_enabled_toolsets_for_env", return_value=["skills", "skill_backpack"]):
+            module.run_task("custom-tools", module.TASKS[0])
+
+        self.assertNotIn("persist_session", FakeAgent.init_kwargs)
+
+    def test_run_task_handles_agents_without_active_capability(self) -> None:
+        module = _load_runner_module()
+
+        FakeAgent.omit_active_capability = True
+        try:
+            with patch.object(module, "_enabled_toolsets_for_env", return_value=["skills", "skill_backpack"]):
+                row = module.run_task("custom-tools", module.TASKS[0])
+        finally:
+            FakeAgent.omit_active_capability = False
+
+        self.assertIsNone(row["active_capability"])
+        self.assertIsNone(row["tool_call_details"][0]["active_capability"])
 
     def test_configure_hermes_home_preserves_explicit_env(self) -> None:
         module = _load_runner_module()
@@ -134,6 +157,24 @@ class BenchmarkRunnerTests(unittest.TestCase):
         module = _load_runner_module()
 
         self.assertNotIn("inline-index-tools", module.ENV_CHOICES)
+
+    def test_file_tools_env_uses_direct_file_toolset(self) -> None:
+        module = _load_runner_module()
+
+        self.assertIn("file-tools", module.ENV_CHOICES)
+        self.assertEqual(module._enabled_toolsets_for_env("file-tools"), ["file"])
+
+    def test_hm_benchmark_envs_use_standard_model_config(self) -> None:
+        module = _load_runner_module()
+
+        self.assertIn("hm-backpack", module.ENV_CHOICES)
+        self.assertIn("hm-full", module.ENV_CHOICES)
+        self.assertEqual(module._enabled_toolsets_for_env("hm-backpack"), ["skill_backpack", "tool_backpack"])
+        self.assertIn("file", module._enabled_toolsets_for_env("hm-full"))
+        self.assertNotIn("tool_backpack", module._enabled_toolsets_for_env("hm-full"))
+        with patch.object(module, "_hm_agent_model_kwargs", return_value={"model": "configured", "provider": "configured-provider"}):
+            self.assertEqual(module._agent_model_kwargs_for_env("hm-backpack"), {"model": "configured", "provider": "configured-provider"})
+            self.assertEqual(module._agent_model_kwargs_for_env("hm-full"), {"model": "configured", "provider": "configured-provider"})
 
 
 if __name__ == "__main__":

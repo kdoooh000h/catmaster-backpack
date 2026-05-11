@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Measure the current Hermes Backpack runtime surface separately from the older 2026-04-28 Skill Backpack token comparison. This result is the latest measurement in this repository, but it is a schema/context-surface measurement rather than a completed model-token benchmark.
+Measure the current Hermes Backpack runtime surface. This result is a schema/context-surface measurement rather than a completed model-token benchmark.
 
 ## Surface Measurement
 
@@ -69,5 +69,3 @@ initial tool schema/context size
 live gateway behavior
 absence of full Tool Backpack index injection
 ```
-
-The older total-token number remains historical evidence from `skill-backpack-comparison-2026-04-28.md`.

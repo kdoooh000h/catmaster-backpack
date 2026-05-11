@@ -155,4 +155,4 @@ Skill gateway rules:
 - Do not return legacy refs or hash fields in the lightweight gateway protocol.
 - Do not verify content hashes in the lightweight runtime path.
 - Still reject path escapes, symlinks, non-`SKILL.md` targets, disabled entries, and unknown selection numbers.
-- Remove old multi-tool skill runtime surfaces from active profiles; keep historical benchmark records only for comparison.
+- Remove old multi-tool skill runtime surfaces from active profiles.

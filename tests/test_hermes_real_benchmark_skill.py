@@ -38,23 +38,26 @@ class HermesRealBenchmarkSkillTests(unittest.TestCase):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, self.content)
 
-    def test_skill_includes_runnable_custom_tools_command(self) -> None:
-        self.assertIn("HERMES_HOME=/home/k/cccx/tool/experiments/hermes-test/custom-tools/.hermes", self.content)
-        self.assertIn("Use experiment Hermes homes by default", self.content)
+    def test_skill_includes_runnable_standard_hm_benchmark_commands(self) -> None:
+        self.assertIn("HERMES_HOME=/home/k/.hermes", self.content)
+        self.assertIn("standard hm benchmark", self.content)
         self.assertIn("PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent", self.content)
-        self.assertIn("--env custom-tools", self.content)
+        self.assertIn("--env hm-backpack", self.content)
+        self.assertIn("--env hm-full", self.content)
         self.assertIn("--output", self.content)
 
     def test_skill_requires_matching_or_creating_comparison_groups(self) -> None:
         required_phrases = [
-            "Before every benchmark, inspect the experiment project for comparison groups",
+            "Before every benchmark, inspect the requested comparison surface",
+            "Use standard `hm` configuration for production claims",
             "choose existing comparison groups that match the user request",
             "ask before deleting comparison groups",
             "create the missing comparison group",
             "validate each new Hermes home with a real chat response",
             "Do not run benchmark comparisons against mismatched groups",
-            "/home/k/cccx/tool/experiments/hermes-test/custom-tools/.hermes",
-            "/home/k/cccx/tool/experiments/hermes-test/full-tools/.hermes",
+            "/home/k/.hermes",
+            "hm-backpack",
+            "hm-full",
             "/home/k/cccx/tool/experiments/hermes-skill-ab/skill-backpack/.hermes",
         ]
 
