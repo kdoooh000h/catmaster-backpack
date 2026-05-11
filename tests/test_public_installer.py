@@ -120,6 +120,19 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("<code>tool_backpack</code> / <code>skill_backpack</code>", readme)
         self.assertIn("<sup>Measured on standard hm configuration", readme)
 
+    def test_readme_uses_conservative_adapter_roadmap(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("## Adapter Roadmap", readme)
+        self.assertIn("CatMaster Backpack is currently validated on Hermes Agent", readme)
+        self.assertIn("| OpenCode | Portable protocol and skill package only |", readme)
+        self.assertIn("| Claude Code | Portable protocol and skill package only |", readme)
+        self.assertIn("| OpenClaw | Not implemented |", readme)
+        self.assertIn("Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet", readme)
+        self.assertNotIn("## Package Direction", readme)
+        self.assertNotIn("catmaster-backpack-opencode", readme)
+        self.assertNotIn("catmaster-backpack-claude-code", readme)
+
     def test_outreach_templates_include_current_benchmark_claims(self):
         outreach = (ROOT / "docs" / "outreach.md").read_text(encoding="utf-8")
 

@@ -282,20 +282,19 @@ Runtime update record: `docs/hermes-backpack-runtime-update-2026-05-01.md`.
 
 The current published measurements are the Hermes surface result in `benchmarks/results/current-hermes-surface-2026-05-11.md` and the fresh real benchmark in `benchmarks/results/current-hermes-real-benchmark-2026-05-11.md`. The fresh run showed 12/12 correct Backpack answers with explicit `tool_backpack` selection on every task.
 
-## Package Direction
+## Adapter Roadmap
 
-The package should split into a portable core plus tool, skill, and host adapter packages:
+CatMaster Backpack is currently validated on Hermes Agent.
 
-```text
-catmaster-backpack-core
-catmaster-backpack-tools
-catmaster-backpack-skills
-catmaster-backpack-hermes
-catmaster-backpack-opencode
-catmaster-backpack-claude-code
-```
+| Host | Current status | Next step |
+| --- | --- | --- |
+| Hermes Agent | Working runtime integration prototype | Continue hardening Tool Backpack and Skill Backpack runtime behavior. |
+| OpenCode | Portable protocol and skill package only | Add native lazy tool-surface support only if OpenCode exposes stable tool hooks. |
+| Claude Code | Portable protocol and skill package only | Keep Skill Backpack portable; add dynamic tool visibility only if host APIs support it. |
+| OpenClaw | Not implemented | Investigate host extension and tool APIs before claiming support. |
+| Codex-style runtimes | Proposal target | Needs a stable extension or tool-surface API. |
 
-The Hermes adapter currently requires Hermes Agent runtime integration for lazy visible tools. OpenCode and Claude Code adapters should initially expose the protocol and skills, then add dynamic tool-surface control only if the host exposes stable hooks.
+Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet. The portable assets are useful as protocol, skill-tree, and adapter starting points; runtime-level dynamic tool hiding still depends on each host.
 
 ## Security Boundary
 
