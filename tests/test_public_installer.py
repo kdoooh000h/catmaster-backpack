@@ -69,6 +69,15 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("current-hermes-surface-2026-05-11.md", readme)
         self.assertIn("Historical token benchmark", readme)
 
+    def test_readme_leads_with_latest_local_experiment_conclusion(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("## Latest Local Experiment Conclusion", readme)
+        self.assertIn("latest measured win is initial schema/context-surface reduction", readme)
+        self.assertIn("not a fresh end-to-end total-token benchmark", readme)
+        self.assertIn("raw AIAgent token benchmark hit HTTP 403", readme)
+        self.assertIn("wrapper-based live blind checks passed", readme)
+
     def test_skill_plugin_dry_run_does_not_write_files(self):
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory) / "project"

@@ -19,6 +19,12 @@ It contains two coordinated backpacks:
 
 The current validated adapter is the Hermes `Cat Master Toolkit` implementation.
 
+## Latest Local Experiment Conclusion
+
+The latest measured win is initial schema/context-surface reduction, not a fresh end-to-end total-token benchmark. Current Hermes showed 2 Backpack gateway tools and 655 tool-schema chars versus 18 direct common tools and 25,514 tool-schema chars, a 97.4% smaller initial tool-schema surface.
+
+The raw AIAgent token benchmark hit HTTP 403 before it could produce comparable fresh token totals. The wrapper-based live blind checks passed for read and search prompts, and those sessions selected `read_file` and `search_files` through `tool_backpack` without full catalog injection.
+
 ## Why It Exists
 
 Large agent runtimes often expose too many tools and skills at once. That increases prompt size, makes tool choice noisier, and can leak implementation details into every turn.
