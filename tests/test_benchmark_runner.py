@@ -68,12 +68,12 @@ def _load_runner_module():
 
 
 class BenchmarkRunnerTests(unittest.TestCase):
-    def test_tasks_require_search_files_before_final_answer(self) -> None:
+    def test_tasks_do_not_leak_tool_gateway_skill_or_selection_names(self) -> None:
         module = _load_runner_module()
 
         for task in module.TASKS:
             with self.subTest(task=task["id"]):
-                self.assertIn("call search_files", task["prompt"])
+                self.assertEqual(module.forbidden_names_seen(task["prompt"]), [])
 
     def test_tasks_cover_larger_request_set_with_exact_expected_answers(self) -> None:
         module = _load_runner_module()
@@ -81,10 +81,13 @@ class BenchmarkRunnerTests(unittest.TestCase):
         self.assertGreaterEqual(len(module.TASKS), 10)
         self.assertLessEqual(len(module.TASKS), 15)
         self.assertEqual(len({task["id"] for task in module.TASKS}), len(module.TASKS))
+        categories = {task.get("category") for task in module.TASKS}
+        self.assertTrue({"file-search", "file-read", "debug-workflow", "implementation", "web-read", "local-url-fix"} <= categories)
         for task in module.TASKS:
             with self.subTest(task=task["id"]):
                 self.assertIn("expected", task)
-                self.assertIn("reply exactly", task["prompt"])
+                self.assertIn("reply exactly", task["prompt"].lower())
+                self.assertIn("expected_capability", task)
 
     def test_tasks_avoid_secret_redaction_words(self) -> None:
         module = _load_runner_module()
@@ -99,12 +102,12 @@ class BenchmarkRunnerTests(unittest.TestCase):
     def test_run_task_uses_current_aiagent_constructor(self) -> None:
         module = _load_runner_module()
 
-        with patch.object(module, "_enabled_toolsets_for_env", return_value=["skills", "skill_backpack"]):
-            row = module.run_task("custom-tools", module.TASKS[0])
+        with patch.object(module, "_enabled_toolsets_for_env", return_value=["skill_backpack", "tool_backpack"]), patch.object(module, "_hm_agent_model_kwargs", return_value={}):
+            row = module.run_task("advisor-backpack-current", module.TASKS[0])
 
         self.assertEqual(
             FakeAgent.init_kwargs["enabled_toolsets"],
-            ["tool_backpack"],
+            ["skill_backpack", "tool_backpack"],
         )
         self.assertTrue(row["used_tool_repo_first"])
         self.assertEqual(row["tool_calls"], ["tool_backpack", "search_files"])
@@ -112,8 +115,8 @@ class BenchmarkRunnerTests(unittest.TestCase):
     def test_run_task_does_not_pass_removed_persist_session_argument(self) -> None:
         module = _load_runner_module()
 
-        with patch.object(module, "_enabled_toolsets_for_env", return_value=["skills", "skill_backpack"]):
-            module.run_task("custom-tools", module.TASKS[0])
+        with patch.object(module, "_enabled_toolsets_for_env", return_value=["skill_backpack", "tool_backpack"]), patch.object(module, "_hm_agent_model_kwargs", return_value={}):
+            module.run_task("advisor-backpack-current", module.TASKS[0])
 
         self.assertNotIn("persist_session", FakeAgent.init_kwargs)
 
@@ -122,8 +125,8 @@ class BenchmarkRunnerTests(unittest.TestCase):
 
         FakeAgent.omit_active_capability = True
         try:
-            with patch.object(module, "_enabled_toolsets_for_env", return_value=["skills", "skill_backpack"]):
-                row = module.run_task("custom-tools", module.TASKS[0])
+            with patch.object(module, "_enabled_toolsets_for_env", return_value=["skill_backpack", "tool_backpack"]), patch.object(module, "_hm_agent_model_kwargs", return_value={}):
+                row = module.run_task("advisor-backpack-current", module.TASKS[0])
         finally:
             FakeAgent.omit_active_capability = False
 
@@ -134,29 +137,75 @@ class BenchmarkRunnerTests(unittest.TestCase):
         module = _load_runner_module()
 
         with patch.dict(module.os.environ, {"HERMES_HOME": "/tmp/explicit-hermes-home"}):
-            module.configure_hermes_home("custom-tools")
+            module.configure_hermes_home("advisor-backpack-current")
             self.assertEqual(module.os.environ["HERMES_HOME"], "/tmp/explicit-hermes-home")
 
-    def test_custom_tools_env_defaults_to_experiment_custom_tools_home(self) -> None:
-        module = _load_runner_module()
-        expected = str(RUNNER_PATH.parents[2] / "experiments/hermes-test/custom-tools/.hermes")
-
-        with patch.dict(module.os.environ, {}, clear=True):
-            module.configure_hermes_home("custom-tools")
-
-            self.assertEqual(module.os.environ["HERMES_HOME"], expected)
-
-    def test_custom_tools_prompt_uses_formal_inline_index(self) -> None:
+    def test_legacy_experiment_envs_are_removed_from_runner_choices(self) -> None:
         module = _load_runner_module()
 
-        prompt = module._prompt_for_env("custom-tools", "Use tools.")
+        self.assertNotIn("custom-tools", module.ENV_CHOICES)
+        self.assertNotIn("full-tools", module.ENV_CHOICES)
 
-        self.assertIn("select search_files", prompt)
+    def test_advisor_prompt_is_not_mutated_with_legacy_custom_tool_guidance(self) -> None:
+        module = _load_runner_module()
+
+        prompt = module._prompt_for_env("advisor-backpack-current", "Use tools.")
+
+        self.assertEqual(prompt, "Use tools.")
+
+    def test_backpack_selection_metrics_extract_explicit_gateway_selection(self) -> None:
+        module = _load_runner_module()
+        task = {"expected_capability": "file-search"}
+        tool_call_details = [
+            {"name": "tool_backpack", "args": {"request": "select search_files,read_file"}},
+            {"name": "search_files", "args": {"pattern": "marker"}},
+        ]
+
+        metrics = module._backpack_selection_metrics("advisor-backpack-current", tool_call_details, task)
+
+        self.assertTrue(metrics["used_gateway_first"])
+        self.assertTrue(metrics["explicit_select_seen"])
+        self.assertFalse(metrics["used_direct_tool_without_gateway"])
+        self.assertEqual(metrics["selected_tools"], ["search_files", "read_file"])
+        self.assertEqual(metrics["selected_skills"], [])
+        self.assertTrue(metrics["correct_capability_selected"])
+
+    def test_backpack_selection_metrics_detect_direct_tool_without_gateway(self) -> None:
+        module = _load_runner_module()
+        task = {"expected_capability": "file-search"}
+        tool_call_details = [{"name": "search_files", "args": {"pattern": "marker"}}]
+
+        metrics = module._backpack_selection_metrics("advisor-backpack-current", tool_call_details, task)
+
+        self.assertFalse(metrics["used_gateway_first"])
+        self.assertTrue(metrics["used_direct_tool_without_gateway"])
+        self.assertFalse(metrics["explicit_select_seen"])
+
+    def test_expected_web_tool_is_not_counted_as_irrelevant_for_web_read_task(self) -> None:
+        module = _load_runner_module()
+        task = next(task for task in module.TASKS if task["id"] == "read-example-domain")
+
+        def run_web_task(self, _prompt):
+            for name, args in [
+                ("tool_backpack", {"request": "select browser_navigate"}),
+                ("browser_navigate", {"url": "https://example.com"}),
+            ]:
+                if self.tool_start_callback:
+                    self.tool_start_callback(name, name, args)
+                if self.tool_complete_callback:
+                    self.tool_complete_callback(name, name, args, json_result(name))
+            return {"final_response": "PAGE=Example Domain", "api_calls": 2}
+
+        with patch.object(FakeAgent, "run_conversation", run_web_task), patch.object(module, "_hm_agent_model_kwargs", return_value={}):
+            row = module.run_task("advisor-backpack-current", task)
+
+        self.assertFalse(row["used_irrelevant_tool"])
 
     def test_runner_env_choices_do_not_keep_inline_alias(self) -> None:
         module = _load_runner_module()
 
         self.assertNotIn("inline-index-tools", module.ENV_CHOICES)
+        self.assertNotIn("custom-tools", module.ENV_CHOICES)
 
     def test_file_tools_env_uses_direct_file_toolset(self) -> None:
         module = _load_runner_module()
@@ -175,6 +224,25 @@ class BenchmarkRunnerTests(unittest.TestCase):
         with patch.object(module, "_hm_agent_model_kwargs", return_value={"model": "configured", "provider": "configured-provider"}):
             self.assertEqual(module._agent_model_kwargs_for_env("hm-backpack"), {"model": "configured", "provider": "configured-provider"})
             self.assertEqual(module._agent_model_kwargs_for_env("hm-full"), {"model": "configured", "provider": "configured-provider"})
+
+    def test_advisor_ab_envs_use_refreshed_three_arm_homes(self) -> None:
+        module = _load_runner_module()
+
+        self.assertIn("advisor-full-latest", module.ENV_CHOICES)
+        self.assertIn("advisor-backpack-current", module.ENV_CHOICES)
+        self.assertIn("advisor-grouped-hints", module.ENV_CHOICES)
+        self.assertIn("file", module._enabled_toolsets_for_env("advisor-full-latest"))
+        self.assertNotIn("tool_backpack", module._enabled_toolsets_for_env("advisor-full-latest"))
+        self.assertEqual(module._enabled_toolsets_for_env("advisor-backpack-current"), ["skill_backpack", "tool_backpack"])
+        self.assertEqual(module._enabled_toolsets_for_env("advisor-grouped-hints"), ["skill_backpack", "tool_backpack"])
+
+        with patch.dict(module.os.environ, {}, clear=True):
+            module.configure_hermes_home("advisor-grouped-hints")
+
+            self.assertEqual(
+                module.os.environ["HERMES_HOME"],
+                str(RUNNER_PATH.parents[2] / "experiments/hermes-advisor-ab/grouped-hints/.hermes"),
+            )
 
 
 if __name__ == "__main__":

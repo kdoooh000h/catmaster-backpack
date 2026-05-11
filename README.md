@@ -10,6 +10,7 @@
 
 <p align="center">
   <img alt="Status: Hermes prototype" src="https://img.shields.io/badge/status-Hermes%20prototype-1f6feb" />
+  <img alt="Backpack System: v0" src="https://img.shields.io/badge/backpack-v0-0969da" />
   <img alt="Benchmark: 68.4% fewer tokens" src="https://img.shields.io/badge/benchmark-68.4%25%20fewer%20tokens-238636" />
   <img alt="Surface: 97.4% fewer schema chars" src="https://img.shields.io/badge/surface-97.4%25%20fewer%20schema%20chars-8957e5" />
 </p>
@@ -19,6 +20,13 @@
 </p>
 
 CatMaster Backpack reduces visible agent capability surface area by exposing compact gateways first, then letting the model explicitly select the tool or skill it needs.
+
+Current published runtime version:
+
+```text
+Backpack System: v0
+Advisor strategy: grouped-hints-v1
+```
 
 <table>
   <tr>
@@ -255,6 +263,13 @@ catmaster-backpack hermes-plan --hermes-agent-root /path/to/hermes-agent --herme
 ```
 
 ## Current Strategy
+
+Current version labels:
+
+```text
+Backpack System: v0
+Advisor strategy: grouped-hints-v1
+```
 
 Tool Backpack and Skill Backpack both use compact candidate hints or indexes, let the model choose, then load or expose exactly the selected target. Do not semantically route inside the gateway. The current Hermes path keeps `tool_backpack` and `skill_backpack` visible, injects compact candidate hints when useful, and accepts only explicit selection calls through the gateways.
 

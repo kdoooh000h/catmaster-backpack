@@ -12,80 +12,112 @@ from run_agent import AIAgent
 TASKS = [
     {
         "id": "find-sentinel-value",
-        "prompt": "Use local repository/file tools to inspect the current directory. You must call search_files before your final answer. Find HERMES_ACCURACY_SENTINEL and reply exactly SENTINEL=<value>.",
+        "category": "file-search",
+        "prompt": "Inspect the current directory and find HERMES_ACCURACY_SENTINEL. Reply exactly SENTINEL=<value>.",
         "expected": "SENTINEL=violet-otter-731",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
         "id": "find-marker-file",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find which file contains OMEGA_RAVEN_314159 and reply exactly FILE=<filename>.",
+        "category": "file-search",
+        "prompt": "Find which file contains OMEGA_RAVEN_314159. Reply exactly FILE=<filename>.",
         "expected": "FILE=beta.txt",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
         "id": "missing-marker",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Search for MISSING_HERMES_MARKER_000. If it is absent, reply exactly NOT_FOUND.",
+        "category": "file-search",
+        "prompt": "Look for MISSING_HERMES_MARKER_000 in the current directory. If it is absent, reply exactly NOT_FOUND.",
         "expected": "NOT_FOUND",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
         "id": "find-sentinel-file",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find which file contains HERMES_ACCURACY_SENTINEL and reply exactly FILE=<filename>.",
+        "category": "file-search",
+        "prompt": "Find which file contains HERMES_ACCURACY_SENTINEL. Reply exactly FILE=<filename>.",
         "expected": "FILE=alpha.txt",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
         "id": "find-alpha-code",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find ALPHA_CODE and reply exactly ALPHA=<value>.",
+        "category": "file-search",
+        "prompt": "Inspect the current directory and find ALPHA_CODE. Reply exactly ALPHA=<value>.",
         "expected": "ALPHA=orchid-204",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
         "id": "find-beta-color",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find BETA_COLOR and reply exactly BETA=<value>.",
+        "category": "file-search",
+        "prompt": "Inspect the current directory and find BETA_COLOR. Reply exactly BETA=<value>.",
         "expected": "BETA=amber-819",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
-        "id": "find-readme-marker-file",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find which file contains README_ONLY_MARKER and reply exactly FILE=<filename>.",
-        "expected": "FILE=README.md",
+        "id": "read-readme-marker",
+        "category": "file-read",
+        "prompt": "Open README.md and find README_ONLY_MARKER. Reply exactly MARKER=README_ONLY_MARKER.",
+        "expected": "MARKER=README_ONLY_MARKER",
+        "expected_capability": "file-read",
         "mode": "contains",
     },
     {
         "id": "find-gamma-signal",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find GAMMA_SIGNAL and reply exactly GAMMA=<value>.",
+        "category": "file-search",
+        "prompt": "Inspect the current directory and find GAMMA_SIGNAL. Reply exactly GAMMA=<value>.",
         "expected": "GAMMA=quartz-552",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
         "id": "find-delta-file",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find which file contains DELTA_FLAG_2026 and reply exactly FILE=<filename>.",
+        "category": "file-search",
+        "prompt": "Find which file contains DELTA_FLAG_2026. Reply exactly FILE=<filename>.",
         "expected": "FILE=delta.txt",
+        "expected_capability": "file-search",
         "mode": "contains",
     },
     {
-        "id": "find-epsilon-code",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find EPSILON_CODE and reply exactly EPSILON=<value>.",
-        "expected": "EPSILON=crimson-404",
+        "id": "debug-parser-refactor",
+        "category": "debug-workflow",
+        "prompt": "A Python test started failing after a parser refactor. Identify the appropriate work mode. Reply exactly WORKFLOW=debugging.",
+        "expected": "WORKFLOW=debugging",
+        "expected_capability": "debugging",
         "mode": "contains",
     },
     {
-        "id": "find-case-marker",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Find CASE_MARKER and reply exactly CASE=<value>.",
-        "expected": "CASE=UpperCaseVictory",
+        "id": "safe-behavior-change",
+        "category": "implementation",
+        "prompt": "A small behavior change needs to be implemented safely. Identify the appropriate work approach. Reply exactly APPROACH=test-first.",
+        "expected": "APPROACH=test-first",
+        "expected_capability": "implementation",
         "mode": "contains",
     },
     {
-        "id": "missing-second-marker",
-        "prompt": "Use local repository/file tools to search the current directory. You must call search_files before your final answer. Search for ABSENT_BACKPACK_NEEDLE_999. If it is absent, reply exactly NOT_FOUND.",
-        "expected": "NOT_FOUND",
+        "id": "read-example-domain",
+        "category": "web-read",
+        "prompt": "Read the page at https://example.com and reply exactly PAGE=Example Domain.",
+        "expected": "PAGE=Example Domain",
+        "expected_capability": "web-read",
+        "mode": "contains",
+    },
+    {
+        "id": "local-url-parser-fix",
+        "category": "local-url-fix",
+        "prompt": "A URL parser bug exists in the local codebase. Reply exactly APPROACH=local-code-fix.",
+        "expected": "APPROACH=local-code-fix",
+        "expected_capability": "local-url-fix",
         "mode": "contains",
     },
 ]
 
 REPO_FILE_TOOLS = {"search_files", "read_file"}
-CUSTOM_TOOLS_TOOLSETS = ["tool_backpack"]
+BACKPACK_TOOLSETS = ["skill_backpack", "tool_backpack"]
 HM_FULL_TOOLSETS = [
     "web",
     "browser",
@@ -104,7 +136,20 @@ HM_FULL_TOOLSETS = [
     "messaging",
     "no_mcp",
 ]
-ENV_CHOICES = ("full-tools", "custom-tools", "file-tools", "hm-backpack", "hm-full")
+ADVISOR_AB_ROOT = Path(__file__).resolve().parents[2] / "experiments/hermes-advisor-ab"
+ADVISOR_AB_HOMES = {
+    "advisor-full-latest": ADVISOR_AB_ROOT / "full-latest/.hermes",
+    "advisor-backpack-current": ADVISOR_AB_ROOT / "backpack-current/.hermes",
+    "advisor-grouped-hints": ADVISOR_AB_ROOT / "grouped-hints/.hermes",
+}
+ENV_CHOICES = (
+    "file-tools",
+    "hm-backpack",
+    "hm-full",
+    "advisor-full-latest",
+    "advisor-backpack-current",
+    "advisor-grouped-hints",
+)
 IRRELEVANT_TOOLS = {
     "browser_navigate",
     "browser_snapshot",
@@ -114,6 +159,38 @@ IRRELEVANT_TOOLS = {
     "terminal",
     "delegate_task",
 }
+FORBIDDEN_PROMPT_NAMES = (
+    "tool_backpack",
+    "skill_backpack",
+    "search_files",
+    "read_file",
+    "patch",
+    "terminal",
+    "web_search",
+    "web_extract",
+    "browser_navigate",
+    "browser_snapshot",
+    "browser_vision",
+    "systematic-debugging",
+    "test-driven-development",
+    "select",
+    "index",
+)
+BACKPACK_GATEWAYS = {"tool_backpack", "skill_backpack"}
+DIRECT_TOOLS = REPO_FILE_TOOLS | IRRELEVANT_TOOLS | {"patch", "write_file", "execute_code", "browser_navigate"}
+CAPABILITY_MATCHES = {
+    "file-search": {"tools": {"search_files"}, "skills": set()},
+    "file-read": {"tools": {"read_file"}, "skills": set()},
+    "debugging": {"tools": set(), "skills": {"systematic-debugging"}},
+    "implementation": {"tools": {"patch"}, "skills": {"test-driven-development"}},
+    "web-read": {"tools": {"web_extract", "web_search", "browser_navigate"}, "skills": set()},
+    "local-url-fix": {"tools": {"search_files", "read_file", "patch"}, "skills": {"test-driven-development"}},
+}
+
+
+def forbidden_names_seen(prompt: str) -> list[str]:
+    text = prompt.lower()
+    return [name for name in FORBIDDEN_PROMPT_NAMES if name in text]
 
 
 class TrackingAgent(AIAgent):
@@ -147,22 +224,17 @@ def _visible_tool_names(agent: AIAgent) -> list[str]:
 
 
 def _enabled_toolsets_for_env(env: str) -> list[str] | None:
-    if env == "hm-backpack":
-        return ["skill_backpack", "tool_backpack"]
-    if env == "hm-full":
+    if env in {"hm-backpack", "advisor-backpack-current", "advisor-grouped-hints"}:
+        return list(BACKPACK_TOOLSETS)
+    if env in {"hm-full", "advisor-full-latest"}:
         return HM_FULL_TOOLSETS
     if env == "file-tools":
         return ["file"]
-    if env != "custom-tools":
-        return None
-    from hermes_cli.config import load_config
-    from hermes_cli.tools_config import _get_platform_tools
-
-    return sorted(_get_platform_tools(load_config(), "cli"))
+    return None
 
 
 def _agent_model_kwargs_for_env(env: str) -> dict[str, str]:
-    if env in {"hm-backpack", "hm-full"}:
+    if env in {"hm-backpack", "hm-full", *ADVISOR_AB_HOMES}:
         return _hm_agent_model_kwargs()
     return {"model": "gemma-26b", "provider": "custom"}
 
@@ -195,21 +267,67 @@ def _hm_agent_model_kwargs() -> dict[str, object]:
 
 
 def _prompt_for_env(env: str, prompt: str) -> str:
-    if env != "custom-tools":
-        return prompt
-    return (
-        prompt
-        + " Tool Backpack already contains an inline tool index. "
-        + "When you need file search, first call tool_backpack with request exactly 'select search_files'."
+    return prompt
+
+
+def _selected_from_request(request: object) -> list[str]:
+    if not isinstance(request, str):
+        return []
+    lower = request.strip().lower()
+    if not lower.startswith("select "):
+        return []
+    raw = lower.removeprefix("select ").strip()
+    return [token for token in raw.replace(",", " ").split() if token]
+
+
+def _backpack_selection_metrics(env: str, tool_call_details: list[dict[str, object]], task: dict[str, str]) -> dict[str, object]:
+    is_backpack_env = env in {"hm-backpack", "advisor-backpack-current", "advisor-grouped-hints"}
+    call_names = [str(call.get("name") or "") for call in tool_call_details]
+    selected_tools: list[str] = []
+    selected_skills: list[str] = []
+    explicit_select_seen = False
+
+    for call in tool_call_details:
+        name = str(call.get("name") or "")
+        args = call.get("args")
+        request = args.get("request") if isinstance(args, dict) else None
+        selected = _selected_from_request(request)
+        if selected:
+            explicit_select_seen = True
+            if name == "tool_backpack":
+                selected_tools.extend(item for item in selected if item not in selected_tools)
+            elif name == "skill_backpack":
+                selected_skills.extend(item for item in selected if item not in selected_skills)
+
+    first_call = call_names[0] if call_names else ""
+    used_gateway_first = first_call in BACKPACK_GATEWAYS if is_backpack_env else False
+    first_gateway_index = next((index for index, name in enumerate(call_names) if name in BACKPACK_GATEWAYS), None)
+    used_direct_tool_without_gateway = bool(
+        is_backpack_env
+        and any(
+            name in DIRECT_TOOLS and (first_gateway_index is None or index < first_gateway_index)
+            for index, name in enumerate(call_names)
+        )
     )
+
+    expected = CAPABILITY_MATCHES.get(task.get("expected_capability", ""), {"tools": set(), "skills": set()})
+    observed_tools = set(selected_tools) | set(call_names)
+    observed_skills = set(selected_skills)
+    correct_capability_selected = bool(observed_tools & expected["tools"] or observed_skills & expected["skills"])
+
+    return {
+        "used_gateway_first": used_gateway_first,
+        "used_direct_tool_without_gateway": used_direct_tool_without_gateway,
+        "explicit_select_seen": explicit_select_seen,
+        "selected_tools": selected_tools,
+        "selected_skills": selected_skills,
+        "correct_capability_selected": correct_capability_selected,
+    }
 
 
 def run_task(env: str, task: dict[str, str]) -> dict[str, object]:
     start = time.monotonic()
-    if env == "custom-tools":
-        enabled_toolsets = CUSTOM_TOOLS_TOOLSETS
-    else:
-        enabled_toolsets = _enabled_toolsets_for_env(env)
+    enabled_toolsets = _enabled_toolsets_for_env(env)
     agent = TrackingAgent(
         quiet_mode=True,
         enabled_toolsets=enabled_toolsets,
@@ -225,18 +343,27 @@ def run_task(env: str, task: dict[str, str]) -> dict[str, object]:
     final_response = (result.get("final_response") or "").strip()
     tool_names = [call["name"] for call in agent.tool_calls_seen]
     expected = task["expected"]
+    expected_matches = CAPABILITY_MATCHES.get(task.get("expected_capability", ""), {"tools": set(), "skills": set()})
+    irrelevant_tools = IRRELEVANT_TOOLS - expected_matches["tools"]
+    forbidden = forbidden_names_seen(task["prompt"])
+    backpack_metrics = _backpack_selection_metrics(env, agent.tool_calls_seen, task)
 
     return {
         "env": env,
         "task_id": task["id"],
+        "category": task.get("category"),
+        "prompt_contains_forbidden_name": bool(forbidden),
+        "forbidden_names_seen": forbidden,
         "expected": expected,
+        "expected_capability": task.get("expected_capability"),
         "final_response": final_response,
         "answer_correct": expected in final_response,
         "tool_calls": tool_names,
         "tool_call_details": agent.tool_calls_seen,
         "used_tool_repo_first": bool(tool_names) and tool_names[0] in {"tool_backpack", "tool_repo"},
         "used_repo_file_tool": any(name in REPO_FILE_TOOLS for name in tool_names),
-        "used_irrelevant_tool": any(name in IRRELEVANT_TOOLS for name in tool_names),
+        "used_irrelevant_tool": any(name in irrelevant_tools for name in tool_names),
+        **backpack_metrics,
         "active_capability": getattr(agent, "active_capability", None),
         "api_calls": result.get("api_calls"),
         "prompt_tokens": agent.session_prompt_tokens,
@@ -268,10 +395,9 @@ def main() -> None:
 
 
 def configure_hermes_home(env: str) -> None:
-    if env == "custom-tools" and not os.environ.get("HERMES_HOME"):
-        os.environ["HERMES_HOME"] = str(
-            Path(__file__).resolve().parents[2] / "experiments/hermes-test/custom-tools/.hermes"
-        )
+    if env in ADVISOR_AB_HOMES and not os.environ.get("HERMES_HOME"):
+        os.environ["HERMES_HOME"] = str(ADVISOR_AB_HOMES[env])
+        return
 
 
 if __name__ == "__main__":

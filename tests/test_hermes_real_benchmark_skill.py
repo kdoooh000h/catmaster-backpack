@@ -58,7 +58,8 @@ class HermesRealBenchmarkSkillTests(unittest.TestCase):
             "/home/k/.hermes",
             "hm-backpack",
             "hm-full",
-            "/home/k/cccx/tool/experiments/hermes-skill-ab/skill-backpack/.hermes",
+            "/home/k/cccx/tool/experiments/hermes-advisor-ab/backpack-current/.hermes",
+            "/home/k/cccx/tool/experiments/hermes-advisor-ab/grouped-hints/.hermes",
         ]
 
         for phrase in required_phrases:
@@ -71,7 +72,7 @@ class HermesRealBenchmarkSkillTests(unittest.TestCase):
             "/home/k/.local/bin/hm",
             "/home/k/.local/bin/hermes-main",
             "hm-full",
-            "/home/k/cccx/tool/experiments/hermes-test/full-hm/bin/hm-full",
+            "/home/k/cccx/tool/experiments/hermes-advisor-ab/full-latest/bin/hermes-full-latest",
             "skill_backpack({\"request\":\"select <skill-name>\"})",
             "tool_backpack({\"request\":\"select <id|tool_name>\"})",
             "session JSON",
@@ -93,6 +94,24 @@ class HermesRealBenchmarkSkillTests(unittest.TestCase):
             "session path",
             "tool calls",
             "rough schema tokens",
+        ]
+
+        for phrase in required_phrases:
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, self.content)
+
+    def test_skill_requires_prompt_pollution_guard_and_selection_metrics(self) -> None:
+        required_phrases = [
+            "Prompt Pollution Guard",
+            "Do not include tool names, gateway names, skill names, or selection syntax in benchmark task prompts",
+            "forbidden_names_seen",
+            "prompt_contains_forbidden_name",
+            "used_gateway_first",
+            "used_direct_tool_without_gateway",
+            "explicit_select_seen",
+            "selected_tools",
+            "selected_skills",
+            "correct_capability_selected",
         ]
 
         for phrase in required_phrases:

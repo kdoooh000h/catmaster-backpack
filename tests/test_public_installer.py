@@ -120,6 +120,15 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("<code>tool_backpack</code> / <code>skill_backpack</code>", readme)
         self.assertIn("<sup>Measured on standard hm configuration", readme)
 
+    def test_github_landing_page_publishes_backpack_v0(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        protocol = (ROOT / "core" / "protocol.md").read_text(encoding="utf-8")
+
+        self.assertIn("Backpack System: v0", readme)
+        self.assertIn("Advisor strategy: grouped-hints-v1", readme)
+        self.assertIn("System version: v0", protocol)
+        self.assertIn("Advisor strategy version: grouped-hints-v1", protocol)
+
     def test_readme_uses_conservative_adapter_roadmap(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
 

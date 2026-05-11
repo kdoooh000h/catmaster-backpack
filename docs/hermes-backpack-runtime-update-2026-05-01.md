@@ -68,7 +68,7 @@ python /home/k/cccx/tool/catmaster-backpack/skills/skill-backpack/tools/skill_ba
 - It covers:
   - production `hm` smoke through `/home/k/.local/bin/hm`
   - non-interactive `hermes-main` fallback
-  - `hm-full` baseline through `/home/k/cccx/tool/experiments/hermes-test/full-hm/bin/hm-full`
+  - `hm-full` baseline through `/home/k/cccx/tool/experiments/hermes-advisor-ab/full-latest/bin/hermes-full-latest`
   - Tool Backpack smoke requiring `tool_backpack select`
   - Skill Backpack smoke requiring `skill_backpack select`
   - session JSON inspection for visible tools, tool calls, final markers, and rough token estimates

@@ -17,7 +17,7 @@ PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
 /home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
 /home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
 --env hm-backpack \
---output /home/k/cccx/tool/experiments/hermes-test/hm-backpack-real-llm-20260511.jsonl
+--output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/hm-backpack-real-llm-20260511.jsonl
 ```
 
 Full direct-tools arm:
@@ -29,7 +29,7 @@ PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
 /home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
 /home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
 --env hm-full \
---output /home/k/cccx/tool/experiments/hermes-test/hm-full-real-llm-20260511.jsonl
+--output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/hm-full-real-llm-20260511.jsonl
 ```
 
 ## Result
@@ -96,6 +96,6 @@ For serialized schema size, use `current-hermes-surface-2026-05-11.md`, which me
 Raw JSONL files are stored outside this repository:
 
 ```text
-/home/k/cccx/tool/experiments/hermes-test/hm-backpack-real-llm-20260511.jsonl
-/home/k/cccx/tool/experiments/hermes-test/hm-full-real-llm-20260511.jsonl
+/home/k/cccx/tool/experiments/hermes-advisor-ab/results/hm-backpack-real-llm-20260511.jsonl
+/home/k/cccx/tool/experiments/hermes-advisor-ab/results/hm-full-real-llm-20260511.jsonl
 ```

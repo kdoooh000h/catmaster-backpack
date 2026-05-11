@@ -43,8 +43,9 @@ Known groups:
 | --- | --- | --- |
 | Standard hm Backpack benchmark | `/home/k/.hermes`, runner env `hm-backpack` | testing production Backpack surface against file-search fixtures |
 | Standard hm full direct-tools benchmark | `/home/k/.hermes`, runner env `hm-full` | comparing production config/model against full direct toolsets |
-| Skill Backpack surface | `/home/k/cccx/tool/experiments/hermes-skill-ab/skill-backpack/.hermes` | testing the active Skill Backpack gateway |
-| Visible skills control | `/home/k/cccx/tool/experiments/hermes-skill-ab/control-visible-skills/.hermes` | testing visible-skill control behavior |
+| Latest full direct-tools experiment | `/home/k/cccx/tool/experiments/hermes-advisor-ab/full-latest/.hermes`, runner env `advisor-full-latest` | testing the latest full Hermes direct-tool surface |
+| Current Backpack experiment | `/home/k/cccx/tool/experiments/hermes-advisor-ab/backpack-current/.hermes`, runner env `advisor-backpack-current` | testing the current Backpack gateway surface |
+| Grouped hints experiment | `/home/k/cccx/tool/experiments/hermes-advisor-ab/grouped-hints/.hermes`, runner env `advisor-grouped-hints` | testing grouped deterministic Backpack candidate hints |
 
 Workflow:
 
@@ -100,7 +101,7 @@ Use this when comparing the production Backpack surface against a full direct-to
 | Arm | Command/home | Required signal |
 | --- | --- | --- |
 | `hm` | `/home/k/.local/bin/hm` or `/home/k/.local/bin/hermes-main` with `HERMES_HOME=/home/k/.hermes` | hm should start Backpack-only; initial visible tools are `tool_backpack` and `skill_backpack` |
-| `hm-full` | `/home/k/cccx/tool/experiments/hermes-test/full-hm/bin/hm-full` | hm-full should not use Backpack gateways; it should expose full direct tools |
+| `hm-full` | `/home/k/cccx/tool/experiments/hermes-advisor-ab/full-latest/bin/hermes-full-latest` | hm-full should not use Backpack gateways; it should expose full direct tools |
 
 For each arm, capture and report:
 
@@ -123,7 +124,7 @@ PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
 /home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
 /home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
 --env hm-backpack \
---output /home/k/cccx/tool/experiments/hermes-test/hm-backpack-real-llm-$(date +%Y%m%d%H%M%S).jsonl
+--output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/hm-backpack-real-llm-$(date +%Y%m%d%H%M%S).jsonl
 ```
 
 ```bash
@@ -133,10 +134,45 @@ PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
 /home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
 /home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
 --env hm-full \
---output /home/k/cccx/tool/experiments/hermes-test/hm-full-real-llm-$(date +%Y%m%d%H%M%S).jsonl
+--output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/hm-full-real-llm-$(date +%Y%m%d%H%M%S).jsonl
 ```
 
 Use experiment-home commands only when testing the experiment homes themselves, and report them separately from standard hm results.
+
+## Advisor A/B/C Commands
+
+Use these when comparing the latest full Hermes surface, the current Backpack surface, and the grouped-hints experiment:
+
+### Prompt Pollution Guard
+
+Do not include tool names, gateway names, skill names, or selection syntax in benchmark task prompts. The runner records `prompt_contains_forbidden_name` and `forbidden_names_seen`; stop if either shows contamination.
+
+```bash
+cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture && \
+PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
+/home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
+/home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
+--env advisor-full-latest \
+--output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/advisor-full-latest-$(date +%Y%m%d%H%M%S).jsonl
+```
+
+```bash
+cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture && \
+PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
+/home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
+/home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
+--env advisor-backpack-current \
+--output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/advisor-backpack-current-$(date +%Y%m%d%H%M%S).jsonl
+```
+
+```bash
+cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture && \
+PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent/.worktrees/grouped-backpack-hints \
+/home/k/cccx/hermes/repos/hermes-agent/.worktrees/grouped-backpack-hints/.venv/bin/python \
+/home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
+--env advisor-grouped-hints \
+--output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/advisor-grouped-hints-$(date +%Y%m%d%H%M%S).jsonl
+```
 
 ## Result Review
 
@@ -148,6 +184,12 @@ Open the fresh JSONL and check every row:
 | `tool_calls` | starts with `tool_backpack` for `hm-backpack` runs |
 | `used_repo_file_tool` | `true` |
 | `used_irrelevant_tool` | `false` |
+| `used_gateway_first` | `true` for Backpack runs when a gateway is needed |
+| `used_direct_tool_without_gateway` | `false` for Backpack runs |
+| `explicit_select_seen` | `true` for Backpack runs that need hidden capabilities |
+| `selected_tools` | includes the selected hidden tools when `tool_backpack` is used |
+| `selected_skills` | includes the selected hidden skills when `skill_backpack` is used |
+| `correct_capability_selected` | `true` when the selected tool or skill matches the task category |
 | `initial_visible_tool_count` | `2` for standard hm Backpack runs |
 | `initial_visible_tools` | includes only `skill_backpack` and `tool_backpack` for standard hm Backpack runs |
 | `prompt_tokens`, `completion_tokens`, `total_tokens` | record totals for comparison |
