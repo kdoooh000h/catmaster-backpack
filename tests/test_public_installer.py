@@ -45,6 +45,17 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertTrue((ROOT / "docs" / "demo.md").exists())
         self.assertTrue((ROOT / "docs" / "outreach.md").exists())
 
+    def test_readme_explains_value_and_measured_token_savings(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("## What It Saves", readme)
+        self.assertIn("28,673", readme)
+        self.assertIn("13,602", readme)
+        self.assertIn("52.6% fewer total tokens", readme)
+        self.assertIn("62.7% fewer non-cache input tokens", readme)
+        self.assertIn("reduces visible tool and skill surface area", readme)
+        self.assertIn("less context spent describing capabilities", readme)
+
     def test_skill_plugin_dry_run_does_not_write_files(self):
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory) / "project"

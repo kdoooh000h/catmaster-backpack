@@ -32,6 +32,26 @@ selected later:  read_file, search_files, terminal, debugging skill, TDD skill, 
 
 The gateway does not semantically route requests. It exposes compact candidates or indexes, the model chooses explicitly, and the host exposes only the selected capability.
 
+## What It Saves
+
+CatMaster Backpack reduces visible tool and skill surface area, so the model spends less context describing capabilities it will not use. The intended savings are:
+
+```text
+less startup/tool-schema context
+less repeated skill text in global prompts
+less noisy capability selection
+more room for task-specific context
+```
+
+Measured local Skill Backpack comparison on the same 8-task fixture:
+
+| Runtime | Total tokens | Result |
+| --- | ---: | --- |
+| Old direct/visible skill runtime | 28,673 | 8-task baseline |
+| `skill_backpack` gateway runtime | 13,602 | 8/8 correct selections |
+
+That is about **52.6% fewer total tokens** on the small fixture, with about **62.7% fewer non-cache input tokens**. This number is not a universal guarantee; savings depend on host runtime, model, tool count, skill count, cache behavior, and task mix. The practical goal is less context spent describing capabilities before the agent knows which ones it needs.
+
 ## Quick Demo
 
 Blind local Hermes tests did not mention `Backpack`, `gateway`, `tool`, or `select` in the user prompt.
