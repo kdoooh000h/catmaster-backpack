@@ -21,9 +21,26 @@ The current validated adapter is the Hermes `Cat Master Toolkit` implementation.
 
 ## Latest Local Experiment Conclusion
 
-The latest measured win is initial schema/context-surface reduction, not a fresh end-to-end total-token benchmark. Current Hermes showed 2 Backpack gateway tools and 655 tool-schema chars versus 18 direct common tools and 25,514 tool-schema chars, a 97.4% smaller initial tool-schema surface.
+The latest standard Hermes benchmark shows both context reduction and real token savings. On the deterministic 12-task fixture, standard `hm` Backpack matched `hm-full` accuracy at 12/12 while using 62,303 total tokens versus 197,261 total tokens, or **68.4% fewer total tokens**.
 
-The raw AIAgent token benchmark hit HTTP 403 before it could produce comparable fresh token totals. The wrapper-based live blind checks passed for read and search prompts, and those sessions selected `read_file` and `search_files` through `tool_backpack` without full catalog injection.
+The tradeoff is latency: Backpack made 50.0% more API calls and was 47.5% slower on this fixture because it adds an explicit gateway-selection round.
+
+## Why Share It
+
+Agent tools are eating the context window. CatMaster Backpack demonstrates a concrete alternative: keep the initial capability surface small, let the model explicitly select the needed tool or skill, and expose only that selected capability.
+
+Current standard Hermes evidence:
+
+```text
+12/12 correct answers on both arms
+68.4% fewer total tokens
+68.8% fewer prompt tokens
+92.0% fewer initially visible tools
+97.4% fewer initial tool-schema chars
+Tradeoff: 50.0% more API calls and 47.5% slower average total time
+```
+
+This is useful for runtime maintainers exploring lazy capability surfaces, plugin hooks, or MCP-style adapters for large tool and skill catalogs.
 
 ## Why It Exists
 

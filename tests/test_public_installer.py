@@ -85,6 +85,27 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("current-hermes-real-benchmark-2026-05-11.md", readme)
         self.assertIn("current-hermes-real-benchmark-2026-05-11.md", benchmark_index)
 
+    def test_github_landing_page_has_promotional_pitch_and_tradeoff(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("## Why Share It", readme)
+        self.assertIn("Agent tools are eating the context window", readme)
+        self.assertIn("68.4% fewer total tokens", readme)
+        self.assertIn("68.8% fewer prompt tokens", readme)
+        self.assertIn("92.0% fewer initially visible tools", readme)
+        self.assertIn("Tradeoff", readme)
+        self.assertIn("47.5% slower", readme)
+
+    def test_outreach_templates_include_current_benchmark_claims(self):
+        outreach = (ROOT / "docs" / "outreach.md").read_text(encoding="utf-8")
+
+        self.assertIn("68.4% fewer total tokens", outreach)
+        self.assertIn("68.8% fewer prompt tokens", outreach)
+        self.assertIn("2 vs 25 initial visible tools", outreach)
+        self.assertIn("47.5% slower", outreach)
+        self.assertIn("standard hm configuration", outreach)
+        self.assertIn("Show HN", outreach)
+
     def test_old_benchmark_records_are_not_published(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         benchmark_index = (ROOT / "benchmarks" / "README.md").read_text(encoding="utf-8")
@@ -105,10 +126,10 @@ class PublicInstallerTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("## Latest Local Experiment Conclusion", readme)
-        self.assertIn("latest measured win is initial schema/context-surface reduction", readme)
-        self.assertIn("not a fresh end-to-end total-token benchmark", readme)
-        self.assertIn("raw AIAgent token benchmark hit HTTP 403", readme)
-        self.assertIn("wrapper-based live blind checks passed", readme)
+        self.assertIn("latest standard Hermes benchmark shows both context reduction and real token savings", readme)
+        self.assertIn("68.4% fewer total tokens", readme)
+        self.assertIn("standard `hm` Backpack matched `hm-full` accuracy at 12/12", readme)
+        self.assertIn("47.5% slower", readme)
 
     def test_skill_plugin_dry_run_does_not_write_files(self):
         with tempfile.TemporaryDirectory() as directory:
