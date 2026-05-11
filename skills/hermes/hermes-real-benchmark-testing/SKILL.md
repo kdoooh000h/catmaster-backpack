@@ -167,8 +167,8 @@ PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
 
 ```bash
 cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture && \
-PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent/.worktrees/grouped-backpack-hints \
-/home/k/cccx/hermes/repos/hermes-agent/.worktrees/grouped-backpack-hints/.venv/bin/python \
+PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
+/home/k/cccx/hermes/repos/hermes-agent/.venv/bin/python \
 /home/k/cccx/tool/catmaster-backpack/benchmarks/run-simple-tool-round.py \
 --env advisor-grouped-hints \
 --output /home/k/cccx/tool/experiments/hermes-advisor-ab/results/advisor-grouped-hints-$(date +%Y%m%d%H%M%S).jsonl

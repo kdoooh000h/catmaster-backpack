@@ -48,6 +48,8 @@ PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent \
 
 Grouped-hints Backpack arm:
 
+This run was captured before grouped hints were promoted into the formal Hermes Backpack v0 runtime. Current reruns use `/home/k/cccx/hermes/repos/hermes-agent` for this arm.
+
 ```bash
 cd /home/k/cccx/tool/catmaster-backpack/benchmarks/accuracy-fixture
 PYTHONPATH=/home/k/cccx/hermes/repos/hermes-agent/.worktrees/grouped-backpack-hints \

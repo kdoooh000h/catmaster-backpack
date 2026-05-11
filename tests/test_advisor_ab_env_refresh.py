@@ -37,7 +37,7 @@ class AdvisorAbEnvRefreshTests(unittest.TestCase):
         self.assertEqual(specs[1]["toolsets"], ["tool_backpack", "skill_backpack"])
         self.assertEqual(specs[2]["toolsets"], ["tool_backpack", "skill_backpack"])
         self.assertEqual(specs[1]["runtime"], Path("/runtime/current"))
-        self.assertEqual(specs[2]["runtime"], Path("/runtime/grouped"))
+        self.assertEqual(specs[2]["runtime"], Path("/runtime/current"))
         self.assertEqual(specs[1]["skills"]["skill_backpack_root"], "/skills/tree")
         self.assertEqual(specs[2]["skills"]["skill_backpack_root"], "/skills/tree")
 
@@ -88,7 +88,7 @@ class AdvisorAbEnvRefreshTests(unittest.TestCase):
         self.assertEqual(grouped_config["platform_toolsets"]["cli"], ["tool_backpack", "skill_backpack"])
         self.assertEqual(grouped_config["skills"]["skill_backpack_root"], "/skills/tree")
         self.assertIn('export HERMES_HOME="', grouped_wrapper_text)
-        self.assertIn('exec "/runtime/grouped/.venv/bin/hermes" "$@"', grouped_wrapper_text)
+        self.assertIn('exec "/runtime/current/.venv/bin/hermes" "$@"', grouped_wrapper_text)
         self.assertTrue(grouped_wrapper_mode & stat.S_IXUSR)
         self.assertNotIn("secret-value", manifest)
         self.assertNotIn("nested-secret", manifest)

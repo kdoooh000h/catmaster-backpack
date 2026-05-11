@@ -12,7 +12,7 @@ import yaml
 DEFAULT_SOURCE = Path("/home/k/.hermes/config.yaml")
 DEFAULT_EXPERIMENT_ROOT = Path("/home/k/cccx/tool/experiments/hermes-advisor-ab")
 DEFAULT_CURRENT_RUNTIME = Path("/home/k/cccx/hermes/repos/hermes-agent")
-DEFAULT_GROUPED_RUNTIME = DEFAULT_CURRENT_RUNTIME / ".worktrees/grouped-backpack-hints"
+DEFAULT_GROUPED_RUNTIME = DEFAULT_CURRENT_RUNTIME
 DEFAULT_SKILL_BACKPACK_ROOT = Path("/home/k/cccx/hermes/skill-backpack-tree")
 
 FULL_TOOLSETS = [
@@ -97,9 +97,9 @@ def arm_specs(
         },
         {
             "id": "grouped-hints",
-            "label": "Grouped candidate-hints Backpack experiment",
+            "label": "Backpack v0 grouped candidate-hints strategy",
             "toolsets": list(BACKPACK_TOOLSETS),
-            "runtime": Path(grouped_runtime),
+            "runtime": Path(current_runtime),
             "wrapper": "hermes-grouped-hints",
             "skills": dict(backpack_skills),
         },
