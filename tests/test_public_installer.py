@@ -6,10 +6,12 @@ import tempfile
 import tomllib
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ENV = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
+sys.path.insert(0, str(ROOT / "src"))
 
 
 class PublicInstallerTests(unittest.TestCase):
@@ -142,6 +144,17 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertNotIn("## Package Direction", readme)
         self.assertNotIn("catmaster-backpack-opencode", readme)
         self.assertNotIn("catmaster-backpack-claude-code", readme)
+
+    def test_readme_documents_hermes_runtime_manifest_as_single_package_entrypoint(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        adapter_readme = (ROOT / "adapters" / "hermes" / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn("## One-Repo Runtime Package", readme)
+        self.assertIn("adapters/hermes/runtime-manifest.json", readme)
+        self.assertIn("backpack-advisor-gateway", readme)
+        self.assertIn("Tool Backpack + Skill Backpack + deterministic grouped advisor hints", readme)
+        self.assertIn("runtime-manifest.json", adapter_readme)
+        self.assertIn("d8e7b8be8e2ae1a41020a9d8ce518eb580dfd069", adapter_readme)
 
     def test_outreach_templates_include_current_benchmark_claims(self):
         outreach = (ROOT / "docs" / "outreach.md").read_text(encoding="utf-8")
@@ -278,10 +291,94 @@ class PublicInstallerTests(unittest.TestCase):
             payload = json.loads(result.stdout)
             self.assertEqual(payload["status"], "manual_integration_required")
             self.assertEqual(payload["adapter"], "hermes")
+            self.assertEqual(payload["runtime_manifest"], "adapters/hermes/runtime-manifest.json")
+            self.assertEqual(payload["runtime_source"]["repository"], "https://github.com/kdoooh000h/hermes-agent.git")
+            self.assertEqual(payload["runtime_source"]["branch"], "backpack-advisor-gateway")
+            self.assertEqual(payload["runtime_source"]["backpack_system_version"], "v0")
             self.assertIn("tools/tool_backpack.py", payload["runtime_files"])
             self.assertIn("agent/backpack_advisor.py", payload["runtime_files"])
             self.assertFalse(hermes_root.exists())
             self.assertFalse(hermes_home.exists())
+
+    def test_hermes_adapter_manifest_packages_full_backpack_v0_runtime(self):
+        manifest_path = ROOT / "adapters" / "hermes" / "runtime-manifest.json"
+
+        self.assertTrue(manifest_path.exists())
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest["adapter"], "hermes")
+        self.assertEqual(manifest["backpack_system_version"], "v0")
+        self.assertEqual(manifest["runtime_source"]["repository"], "https://github.com/kdoooh000h/hermes-agent.git")
+        self.assertEqual(manifest["runtime_source"]["branch"], "backpack-advisor-gateway")
+        self.assertEqual(manifest["runtime_source"]["commit"], "d8e7b8be8e2ae1a41020a9d8ce518eb580dfd069")
+        self.assertEqual(
+            manifest["integrated_parts"],
+            ["tool_backpack", "skill_backpack", "deterministic_grouped_advisor_hints"],
+        )
+        self.assertIn("agent/backpack_advisor.py", manifest["runtime_files"])
+        self.assertIn("tools/tool_backpack.py", manifest["runtime_files"])
+        self.assertIn("tools/skill_backpack.py", manifest["runtime_files"])
+        self.assertIn("tools/skills_sync.py", manifest["runtime_files"])
+
+    def test_hermes_manifest_packaged_data_matches_adapter_manifest(self):
+        source_manifest = ROOT / "adapters" / "hermes" / "runtime-manifest.json"
+        packaged_manifest = ROOT / "src" / "catmaster_backpack" / "data" / "hermes" / "runtime-manifest.json"
+
+        self.assertTrue(packaged_manifest.exists())
+        self.assertEqual(
+            json.loads(packaged_manifest.read_text(encoding="utf-8")),
+            json.loads(source_manifest.read_text(encoding="utf-8")),
+        )
+
+    def test_hermes_plan_can_read_packaged_manifest_without_source_assets(self):
+        from catmaster_backpack import installer
+
+        with patch.object(installer, "_package_root", side_effect=RuntimeError("no source checkout")):
+            manifest, reference = installer._load_hermes_runtime_manifest()
+
+        self.assertEqual(manifest["adapter"], "hermes")
+        self.assertEqual(reference, "catmaster_backpack:data/hermes/runtime-manifest.json")
+        self.assertEqual(manifest["backpack_system_version"], "v0")
+        self.assertIn("tools/tool_backpack.py", manifest["runtime_files"])
+
+    def test_hermes_plan_falls_back_when_source_manifest_is_missing(self):
+        from catmaster_backpack import installer
+
+        with tempfile.TemporaryDirectory() as directory:
+            source_root = Path(directory)
+            with patch.object(installer, "_package_root", return_value=source_root):
+                manifest, reference = installer._load_hermes_runtime_manifest()
+
+        self.assertEqual(manifest["adapter"], "hermes")
+        self.assertEqual(reference, "catmaster_backpack:data/hermes/runtime-manifest.json")
+
+    def test_hermes_plan_reports_packaged_manifest_reference_for_fallback(self):
+        from argparse import Namespace
+        from contextlib import redirect_stdout
+        from io import StringIO
+
+        from catmaster_backpack import installer
+
+        output = StringIO()
+        with patch.object(installer, "_package_root", side_effect=RuntimeError("no source checkout")):
+            with redirect_stdout(output):
+                result = installer.hermes_plan(
+                    Namespace(hermes_agent_root="/tmp/hermes-agent", hermes_home="/tmp/hermes-home")
+                )
+
+        self.assertEqual(result, 0)
+        payload = json.loads(output.getvalue())
+        self.assertEqual(payload["runtime_manifest"], "catmaster_backpack:data/hermes/runtime-manifest.json")
+
+    def test_hermes_adapter_readme_runtime_files_match_manifest(self):
+        adapter_readme = (ROOT / "adapters" / "hermes" / "README.md").read_text(encoding="utf-8")
+        manifest = json.loads((ROOT / "adapters" / "hermes" / "runtime-manifest.json").read_text(encoding="utf-8"))
+
+        for runtime_file in manifest["runtime_files"]:
+            self.assertIn(runtime_file, adapter_readme)
+        self.assertNotIn("agent/tool_repo.py", adapter_readme)
+        self.assertNotIn("agent/tool_repo_catalog.py", adapter_readme)
+        self.assertNotIn("agent/tool_repo_registry.py", adapter_readme)
 
 
 if __name__ == "__main__":

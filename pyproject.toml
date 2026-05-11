@@ -13,6 +13,9 @@ catmaster-backpack = "catmaster_backpack.installer:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+catmaster_backpack = ["data/hermes/runtime-manifest.json"]
+
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"

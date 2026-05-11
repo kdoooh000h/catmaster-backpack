@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.resources
 import json
 import shutil
 import subprocess
@@ -15,16 +16,8 @@ AGENT_PATHS = {
     "hermes": {"skills": ".hermes/skills", "tree": ".hermes/skill-backpack-tree"},
 }
 
-HERMES_RUNTIME_FILES = [
-    "agent/backpack_advisor.py",
-    "tools/tool_backpack.py",
-    "tools/skill_backpack.py",
-    "run_agent.py",
-    "toolsets.py",
-    "hermes_cli/tools_config.py",
-    "tools/skills_sync.py",
-    "tui_gateway/server.py",
-]
+HERMES_RUNTIME_MANIFEST = Path("adapters/hermes/runtime-manifest.json")
+PACKAGED_HERMES_RUNTIME_MANIFEST = "data/hermes/runtime-manifest.json"
 
 
 def _package_root() -> Path:
@@ -35,6 +28,29 @@ def _package_root() -> Path:
             "or install with `pip install -e .` from the cloned repository."
         )
     return root
+
+
+def _read_hermes_runtime_manifest() -> dict[str, Any]:
+    manifest, _reference = _load_hermes_runtime_manifest()
+    return manifest
+
+
+def _load_hermes_runtime_manifest() -> tuple[dict[str, Any], str]:
+    try:
+        root = _package_root()
+    except RuntimeError:
+        root = None
+    if root is not None:
+        source_manifest = root / HERMES_RUNTIME_MANIFEST
+        if source_manifest.exists():
+            return json.loads(source_manifest.read_text(encoding="utf-8")), str(HERMES_RUNTIME_MANIFEST)
+
+    manifest_text = (
+        importlib.resources.files("catmaster_backpack")
+        .joinpath(PACKAGED_HERMES_RUNTIME_MANIFEST)
+        .read_text(encoding="utf-8")
+    )
+    return json.loads(manifest_text), f"catmaster_backpack:{PACKAGED_HERMES_RUNTIME_MANIFEST}"
 
 
 def _json(payload: dict[str, Any]) -> int:
@@ -136,12 +152,18 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
 
 
 def hermes_plan(args: argparse.Namespace) -> int:
+    manifest, manifest_reference = _load_hermes_runtime_manifest()
     return _json(
         {
             "adapter": "hermes",
             "hermes_agent_root": str(Path(args.hermes_agent_root).resolve()),
             "hermes_home": str(Path(args.hermes_home).resolve()),
-            "runtime_files": HERMES_RUNTIME_FILES,
+            "runtime_files": manifest["runtime_files"],
+            "runtime_manifest": manifest_reference,
+            "runtime_source": {
+                **manifest["runtime_source"],
+                "backpack_system_version": manifest["backpack_system_version"],
+            },
             "status": "manual_integration_required",
             "summary": "Hermes needs host runtime wiring for lazy tool visibility; do not treat this as a pure plugin install.",
         }
