@@ -9,12 +9,20 @@ authors = [{ name = "CatMaster Backpack maintainers" }]
 
 [project.scripts]
 catmaster-backpack = "catmaster_backpack.installer:main"
+catmaster-backpack-mcp = "catmaster_backpack.mcp_gateway:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-catmaster_backpack = ["data/hermes/runtime-manifest.json"]
+catmaster_backpack = [
+  "data/hermes/runtime-manifest.json",
+  "data/skills/skill-backpack/SKILL.md",
+  "data/skills/skill-backpack/tools/*.py",
+  "data/adapters/*/*",
+  "data/adapters/*/tools/*",
+  "data/adapters/hermes/skill_backpack/tools/*.py",
+]
 
 [build-system]
 requires = ["setuptools>=68"]

@@ -248,7 +248,19 @@ Install the portable Skill Backpack parent skill into a project:
 ```bash
 catmaster-backpack install-skill-plugin --agent opencode --project-root /path/to/project --source /path/to/project/.opencode/skills
 catmaster-backpack install-skill-plugin --agent claude-code --project-root /path/to/project --source /path/to/project/.claude/skills
+catmaster-backpack install-skill-plugin --agent codex --project-root /path/to/project --source /path/to/project/.codex/skills
+catmaster-backpack install-skill-plugin --agent openclaw --project-root /path/to/project --source /path/to/project/.openclaw/skills
 ```
+
+The installed package includes packaged adapter assets for OpenCode, Claude Code, Codex-style runtimes, and OpenClaw, so editable checkout paths are not required for portable Skill Backpack installs.
+
+Expose a host-neutral MCP gateway when a runtime supports local MCP servers:
+
+```bash
+catmaster-backpack-mcp
+```
+
+The MCP gateway exposes compact `tool_backpack` and `skill_backpack` protocol decisions. It does not execute selected tools or claim Hermes-equivalent dynamic native tool hiding.
 
 Preview without writing files:
 
