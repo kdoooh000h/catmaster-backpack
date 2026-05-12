@@ -6,7 +6,8 @@ Use this snippet in a project `AGENTS.md` after installing the portable Skill Ba
 
 - Keep the parent skill at `.opencode/skills/skill-backpack/`.
 - Keep hidden child modules under `.opencode/skill-backpack-tree/`.
-- Use the Skill Backpack protocol as `index -> select -> execute`.
+- Treat index/select as an agent/runtime protocol flow, not a user-facing step.
+- Do not present index/select as an end-user workflow.
 - Load only the selected skill guidance for the current task stage.
 
 ## Tool Backpack

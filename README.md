@@ -260,7 +260,7 @@ Expose a host-neutral MCP gateway when a runtime supports local MCP servers:
 catmaster-backpack-mcp
 ```
 
-The MCP gateway exposes compact `tool_backpack` and `skill_backpack` protocol decisions. It does not execute selected tools or claim Hermes-equivalent dynamic native tool hiding.
+The MCP gateway exposes compact `tool_backpack` and `skill_backpack` protocol decisions. Agent/runtime protocol flow may use index/select internally. End users do not run index/select manually. The gateway does not execute selected tools or claim Hermes-equivalent dynamic native tool hiding.
 
 Preview without writing files:
 
