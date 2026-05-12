@@ -125,9 +125,12 @@ class PublicInstallerTests(unittest.TestCase):
     def test_github_landing_page_publishes_backpack_v0(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         protocol = (ROOT / "core" / "protocol.md").read_text(encoding="utf-8")
+        skill = (ROOT / "skills" / "skill-backpack" / "SKILL.md").read_text(encoding="utf-8")
 
         self.assertIn("Backpack System: v0", readme)
         self.assertIn("System version: v0", protocol)
+        self.assertNotIn("native Hermes tool", skill)
+        self.assertIn("host adapter provides a native `skill_backpack` tool", skill)
         self.assertNotIn("grouped-hints-v1", readme)
         self.assertNotIn("Advisor strategy version", protocol)
         self.assertNotIn("grouped-hints-v1", protocol)
@@ -139,7 +142,8 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("CatMaster Backpack is currently validated on Hermes Agent", readme)
         self.assertIn("| OpenCode | Portable protocol and skill package only |", readme)
         self.assertIn("| Claude Code | Portable protocol and skill package only |", readme)
-        self.assertIn("| OpenClaw | Not implemented |", readme)
+        self.assertIn("| Codex-style runtimes | Portable protocol and skill package only |", readme)
+        self.assertIn("| OpenClaw | Portable protocol and skill package only |", readme)
         self.assertIn("Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet", readme)
         self.assertNotIn("## Package Direction", readme)
         self.assertNotIn("catmaster-backpack-opencode", readme)
@@ -189,6 +193,19 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("index -> select -> execute", text)
         self.assertIn("Codex desktop", text)
         self.assertIn("optional MCP gateway", text)
+        self.assertIn("optional plugin", text)
+        self.assertIn("not Hermes-equivalent", text)
+        self.assertIn("Do not claim dynamic native tool hiding", text)
+
+    def test_openclaw_adapter_includes_portable_project_guidance(self):
+        snippet = ROOT / "adapters" / "openclaw" / "AGENTS.md"
+
+        self.assertTrue(snippet.exists())
+        text = snippet.read_text(encoding="utf-8")
+        self.assertIn(".openclaw/skills/skill-backpack/", text)
+        self.assertIn(".openclaw/skill-backpack-tree/", text)
+        self.assertIn("index -> select -> execute", text)
+        self.assertIn("OpenClaw Tool Search", text)
         self.assertIn("optional plugin", text)
         self.assertIn("not Hermes-equivalent", text)
         self.assertIn("Do not claim dynamic native tool hiding", text)
@@ -346,6 +363,41 @@ class PublicInstallerTests(unittest.TestCase):
             self.assertEqual(payload["agent"], "codex")
             self.assertIn("install_codex_guidance", payload["operations"])
             self.assertFalse((project / ".codex").exists())
+
+    def test_openclaw_skill_plugin_dry_run_lists_adapter_guidance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing OpenClaw dry run.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "openclaw",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                    "--dry-run",
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "openclaw")
+            self.assertIn("install_openclaw_guidance", payload["operations"])
+            self.assertFalse((project / ".openclaw").exists())
 
     def test_opencode_install_writes_adapter_assets(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -568,6 +620,79 @@ class PublicInstallerTests(unittest.TestCase):
             self.assertIn("# Existing Codex Rules", text)
             self.assertIn("Keep this line.", text)
             self.assertEqual(text.count("# CatMaster Backpack For Codex"), 1)
+
+    def test_openclaw_install_writes_adapter_assets(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing OpenClaw adapter install.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "openclaw",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "openclaw")
+            self.assertTrue((project / ".openclaw" / "skills" / "skill-backpack" / "SKILL.md").exists())
+            self.assertEqual(payload["installed_openclaw_guidance"], str(project / "AGENTS.md"))
+            self.assertIn("not Hermes-equivalent", (project / "AGENTS.md").read_text(encoding="utf-8"))
+            manifest = json.loads((project / ".openclaw" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIn("demo-skill", manifest["modules"])
+
+    def test_openclaw_install_appends_existing_agents_guidance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            project.mkdir()
+            (project / "AGENTS.md").write_text("# Existing OpenClaw Rules\n\nKeep this line.\n", encoding="utf-8")
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing OpenClaw guidance append.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "openclaw",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            text = (project / "AGENTS.md").read_text(encoding="utf-8")
+            self.assertIn("# Existing OpenClaw Rules", text)
+            self.assertIn("Keep this line.", text)
+            self.assertEqual(text.count("# CatMaster Backpack For OpenClaw"), 1)
 
     def test_hermes_runtime_plan_is_explicit_and_read_only(self):
         with tempfile.TemporaryDirectory() as directory:

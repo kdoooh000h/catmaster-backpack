@@ -22,6 +22,7 @@ AGENT_PATHS = {
     "opencode": {"skills": ".opencode/skills", "tree": ".opencode/skill-backpack-tree"},
     "claude-code": {"skills": ".claude/skills", "tree": ".claude/skill-backpack-tree"},
     "codex": {"skills": ".codex/skills", "tree": ".codex/skill-backpack-tree"},
+    "openclaw": {"skills": ".openclaw/skills", "tree": ".openclaw/skill-backpack-tree"},
     "hermes": {"skills": ".hermes/skills", "tree": ".hermes/skill-backpack-tree"},
 }
 
@@ -96,6 +97,14 @@ def install_codex_adapter(project_root: Path) -> str:
     )
 
 
+def install_openclaw_adapter(project_root: Path) -> str:
+    return append_adapter_guidance(
+        PACKAGE_ROOT / "adapters" / "openclaw" / "AGENTS.md",
+        project_root / "AGENTS.md",
+        "# CatMaster Backpack For OpenClaw",
+    )
+
+
 def import_source(source: Path, tree_root: Path, tree_name: str) -> int:
     result = subprocess.run(
         [sys.executable, str(IMPORTER), "--hermes-home", str(source.parent), "--skills-root", str(source), "--tree-root", str(tree_root), "--tree", tree_name],
@@ -132,6 +141,9 @@ def install(args) -> int:
     installed_codex_guidance = None
     if args.agent == "codex":
         installed_codex_guidance = install_codex_adapter(project_root)
+    installed_openclaw_guidance = None
+    if args.agent == "openclaw":
+        installed_openclaw_guidance = install_openclaw_adapter(project_root)
     payload = {"agent": args.agent, "scope": args.scope, "installed_parent": str(parent_skill), "tree_root": str(tree_root), "imported": imported, "mode": "copy"}
     if installed_hermes_tool:
         payload["installed_hermes_tool"] = installed_hermes_tool
@@ -141,6 +153,8 @@ def install(args) -> int:
         payload["installed_claude_code_guidance"] = installed_claude_code_guidance
     if installed_codex_guidance:
         payload["installed_codex_guidance"] = installed_codex_guidance
+    if installed_openclaw_guidance:
+        payload["installed_openclaw_guidance"] = installed_openclaw_guidance
     print(json.dumps(payload, sort_keys=True))
     return 0
 

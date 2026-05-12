@@ -14,6 +14,7 @@ AGENT_PATHS = {
     "opencode": {"skills": ".opencode/skills", "tree": ".opencode/skill-backpack-tree"},
     "claude-code": {"skills": ".claude/skills", "tree": ".claude/skill-backpack-tree"},
     "codex": {"skills": ".codex/skills", "tree": ".codex/skill-backpack-tree"},
+    "openclaw": {"skills": ".openclaw/skills", "tree": ".openclaw/skill-backpack-tree"},
     "hermes": {"skills": ".hermes/skills", "tree": ".hermes/skill-backpack-tree"},
 }
 
@@ -145,6 +146,14 @@ def _install_codex_adapter(root: Path, project_root: Path) -> Path:
     )
 
 
+def _install_openclaw_adapter(root: Path, project_root: Path) -> Path:
+    return _append_adapter_guidance(
+        root / "adapters" / "openclaw" / "AGENTS.md",
+        project_root / "AGENTS.md",
+        "# CatMaster Backpack For OpenClaw",
+    )
+
+
 def install_skill_plugin(args: argparse.Namespace) -> int:
     root = _package_root()
     project_root = Path(args.project_root).resolve()
@@ -161,6 +170,8 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
         operations.append("install_claude_code_guidance")
     if args.agent == "codex":
         operations.append("install_codex_guidance")
+    if args.agent == "openclaw":
+        operations.append("install_openclaw_guidance")
 
     if args.dry_run:
         return _json(
@@ -207,6 +218,10 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
     if args.agent == "codex":
         guidance_target = _install_codex_adapter(root, project_root)
         payload["installed_codex_guidance"] = str(guidance_target)
+
+    if args.agent == "openclaw":
+        guidance_target = _install_openclaw_adapter(root, project_root)
+        payload["installed_openclaw_guidance"] = str(guidance_target)
 
     return _json(payload)
 

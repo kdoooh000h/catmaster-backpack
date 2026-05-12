@@ -74,6 +74,26 @@ class SkillBackpackPluginTests(unittest.TestCase):
             manifest = json.loads((project / ".codex" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
             self.assertIn("debug-helper", manifest["modules"])
 
+    def test_install_openclaw_project_plugin_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = project / "skills-src" / "debug-helper"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: debug-helper\ndescription: Use when debugging OpenClaw plugin installs.\n---\n\n# Debug Helper\n", encoding="utf-8")
+
+            result = subprocess.run([sys.executable, str(PLUGIN), "install", "--agent", "openclaw", "--scope", "project", "--project-root", str(project), "--source", str(project / "skills-src")], cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "openclaw")
+            self.assertEqual(payload["installed_parent"], str(project / ".openclaw" / "skills" / "skill-backpack" / "SKILL.md"))
+            self.assertEqual(payload["imported"], 1)
+            self.assertEqual(payload["installed_openclaw_guidance"], str(project / "AGENTS.md"))
+            self.assertTrue((project / ".openclaw" / "skill-backpack-tree" / "manifest.json").exists())
+            self.assertTrue((project / "AGENTS.md").exists())
+            manifest = json.loads((project / ".openclaw" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIn("debug-helper", manifest["modules"])
+
     def test_install_hermes_project_plugin_path(self):
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory) / "project"

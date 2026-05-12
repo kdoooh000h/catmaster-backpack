@@ -186,7 +186,8 @@ Use `docs/outreach.md` for maintainer email, GitHub Discussion, and community po
 | Hermes Agent | Working runtime integration prototype | Supports `tool_backpack`, `skill_backpack`, advisor hints, and selected-tool exposure. |
 | OpenCode | Portable skill/protocol package | Dynamic native tool hiding depends on host hooks. |
 | Claude Code | Portable skill/protocol package | Skill bundle is portable; dynamic tool visibility depends on host APIs. |
-| Codex-style runtimes | Proposal target | Needs a stable extension or tool-surface API. |
+| Codex-style runtimes | Portable skill/protocol package | Native dynamic tool visibility depends on the specific Codex client. |
+| OpenClaw | Portable skill/protocol package | Tool Search, plugin tools, and MCP should be verified per selected runtime. |
 
 ## Architecture
 
@@ -217,12 +218,12 @@ Use `docs/outreach.md` for maintainer email, GitHub Discussion, and community po
 
 Hermes full runtime integration is not a pure plugin. It requires host runtime wiring for lazy tool visibility, selected-tool exposure, advisor hints, TUI guards, and skill sync behavior.
 
-OpenCode and Claude Code currently receive the portable protocol and skill packaging. They should not be advertised as Hermes-equivalent lazy native tool runtimes until those hosts expose stable hooks.
+OpenCode, Claude Code, Codex-style runtimes, and OpenClaw currently receive the portable protocol and skill packaging. They should not be advertised as Hermes-equivalent lazy native tool runtimes until those hosts expose and validate stable dynamic tool-surface hooks for the target runtime.
 
 ## Contents
 
 - `core/` - shared lazy-surface protocol, capability catalog, and description style rules.
-- `adapters/` - host-specific integration notes for Hermes, OpenCode, and Claude Code.
+- `adapters/` - host-specific integration notes for Hermes, OpenCode, Claude Code, Codex-style runtimes, and OpenClaw.
 - `adapters/hermes/tool-repo-snapshot/` - Tool Backpack Hermes `tool_backpack` source snapshot and dependencies.
 - `adapters/hermes/skill_backpack/` - Skill Backpack Hermes `skill_backpack` gateway source.
 - `skills/backpack-manager/` - Backpack management skill for Tool Backpack, Skill Backpack, and external tool changes.
@@ -318,8 +319,8 @@ CatMaster Backpack is currently validated on Hermes Agent.
 | Hermes Agent | Working runtime integration prototype | Continue hardening Tool Backpack and Skill Backpack runtime behavior. |
 | OpenCode | Portable protocol and skill package only | Add native lazy tool-surface support only if OpenCode exposes stable tool hooks. |
 | Claude Code | Portable protocol and skill package only | Keep Skill Backpack portable; add dynamic tool visibility only if host APIs support it. |
-| OpenClaw | Not implemented | Investigate host extension and tool APIs before claiming support. |
-| Codex-style runtimes | Proposal target | Needs a stable extension or tool-surface API. |
+| Codex-style runtimes | Portable protocol and skill package only | Add MCP or plugin integration only when the target Codex client documents the surface. |
+| OpenClaw | Portable protocol and skill package only | Investigate Tool Search, plugin tools, and MCP before claiming runtime-level dynamic hiding. |
 
 Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet. The portable assets are useful as protocol, skill-tree, and adapter starting points; runtime-level dynamic tool hiding still depends on each host.
 
