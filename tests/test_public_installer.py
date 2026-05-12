@@ -21,6 +21,123 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertEqual(pyproject["project"]["scripts"]["catmaster-backpack"], "catmaster_backpack.installer:main")
         self.assertIn("README.md", pyproject["project"]["readme"])
         self.assertEqual(pyproject["project"]["license"]["text"], "MIT")
+        package_data = pyproject["tool"]["setuptools"]["package-data"]["catmaster_backpack"]
+        self.assertIn("data/skills/skill-backpack/SKILL.md", package_data)
+        self.assertIn("data/skills/skill-backpack/tools/*.py", package_data)
+        self.assertIn("data/adapters/*/*", package_data)
+
+    def test_skill_plugin_install_uses_packaged_assets_without_source_checkout(self):
+        from catmaster_backpack import installer
+
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing packaged assets.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "codex",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env={**ENV, "CATMASTER_BACKPACK_FORCE_PACKAGED_ASSETS": "1"},
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "codex")
+            self.assertEqual(payload["asset_source"], "packaged")
+            self.assertTrue((project / ".codex" / "skills" / "skill-backpack" / "SKILL.md").exists())
+            self.assertTrue((project / ".codex" / "skills" / "skill-backpack" / "tools" / "skill_backpack.py").exists())
+            self.assertIn("# CatMaster Backpack For Codex", (project / "AGENTS.md").read_text(encoding="utf-8"))
+            manifest = json.loads((project / ".codex" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIn("demo-skill", manifest["modules"])
+
+    def test_hermes_install_preserves_canonical_home_source_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            hermes_home = Path(directory) / ".hermes"
+            source = hermes_home / "skills"
+            skill = source / "mcp" / "tool-installer" / "SKILL.md"
+            skill.parent.mkdir(parents=True)
+            skill.write_text(
+                "---\nname: tool-installer\ndescription: Use when installing MCP tools.\n---\n\n# Tool Installer\n",
+                encoding="utf-8",
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "hermes",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            manifest = json.loads((project / ".hermes" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["modules"]["tool-installer"]["source_path"], "skills/mcp/tool-installer/SKILL.md")
+
+    def test_hermes_install_keeps_explicit_source_path_relative_to_source_root(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "skills-src"
+            skill = source / "debug-helper" / "SKILL.md"
+            skill.parent.mkdir(parents=True)
+            skill.write_text(
+                "---\nname: debug-helper\ndescription: Use when debugging explicit source imports.\n---\n\n# Debug Helper\n",
+                encoding="utf-8",
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "hermes",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            manifest = json.loads((project / ".hermes" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["modules"]["debug-helper"]["source_path"], "debug-helper/SKILL.md")
 
     def test_readme_documents_public_install_boundaries(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -28,6 +145,10 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("## Public Install", readme)
         self.assertIn("pip install -e .", readme)
         self.assertIn("catmaster-backpack install-skill-plugin", readme)
+        self.assertIn("catmaster-backpack-mcp", readme)
+        self.assertIn("packaged adapter assets", readme)
+        self.assertIn("Agent/runtime protocol flow", readme)
+        self.assertIn("End users do not run index/select manually", readme)
         self.assertIn("Hermes full runtime integration is not a pure plugin", readme)
 
     def test_github_landing_page_materials_exist(self):
@@ -157,7 +278,8 @@ class PublicInstallerTests(unittest.TestCase):
         text = snippet.read_text(encoding="utf-8")
         self.assertIn(".opencode/skills/skill-backpack/", text)
         self.assertIn(".opencode/skill-backpack-tree/", text)
-        self.assertIn("index -> select -> execute", text)
+        self.assertIn("agent/runtime protocol flow", text)
+        self.assertIn("Do not present index/select as an end-user workflow", text)
         self.assertIn("deterministic grouped advisor hints", text)
         self.assertIn("not Hermes-equivalent", text)
         self.assertIn("Do not claim dynamic native tool hiding", text)
@@ -177,7 +299,8 @@ class PublicInstallerTests(unittest.TestCase):
         text = snippet.read_text(encoding="utf-8")
         self.assertIn(".claude/skills/skill-backpack/", text)
         self.assertIn(".claude/skill-backpack-tree/", text)
-        self.assertIn("index -> select -> execute", text)
+        self.assertIn("agent/runtime protocol flow", text)
+        self.assertIn("Do not present index/select as an end-user workflow", text)
         self.assertIn("optional MCP gateway", text)
         self.assertIn("optional hook guards", text)
         self.assertIn("not Hermes-equivalent", text)
@@ -190,7 +313,8 @@ class PublicInstallerTests(unittest.TestCase):
         text = snippet.read_text(encoding="utf-8")
         self.assertIn(".codex/skills/skill-backpack/", text)
         self.assertIn(".codex/skill-backpack-tree/", text)
-        self.assertIn("index -> select -> execute", text)
+        self.assertIn("agent/runtime protocol flow", text)
+        self.assertIn("Do not present index/select as an end-user workflow", text)
         self.assertIn("Codex desktop", text)
         self.assertIn("optional MCP gateway", text)
         self.assertIn("optional plugin", text)
@@ -204,7 +328,8 @@ class PublicInstallerTests(unittest.TestCase):
         text = snippet.read_text(encoding="utf-8")
         self.assertIn(".openclaw/skills/skill-backpack/", text)
         self.assertIn(".openclaw/skill-backpack-tree/", text)
-        self.assertIn("index -> select -> execute", text)
+        self.assertIn("agent/runtime protocol flow", text)
+        self.assertIn("Do not present index/select as an end-user workflow", text)
         self.assertIn("OpenClaw Tool Search", text)
         self.assertIn("optional plugin", text)
         self.assertIn("not Hermes-equivalent", text)

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.resources
 import json
+import os
+import re
 import shutil
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -20,9 +22,15 @@ AGENT_PATHS = {
 
 HERMES_RUNTIME_MANIFEST = Path("adapters/hermes/runtime-manifest.json")
 PACKAGED_HERMES_RUNTIME_MANIFEST = "data/hermes/runtime-manifest.json"
+PACKAGED_SKILL_BACKPACK = "data/skills/skill-backpack"
+PACKAGED_ADAPTERS = "data/adapters"
+WORD_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*")
+STOPWORDS = {"a", "an", "and", "are", "as", "for", "from", "in", "is", "it", "of", "on", "or", "set", "the", "to", "use", "when", "with", "user", "asks"}
 
 
 def _package_root() -> Path:
+    if os.environ.get("CATMASTER_BACKPACK_FORCE_PACKAGED_ASSETS"):
+        raise RuntimeError("forced packaged assets")
     root = Path(__file__).resolve().parents[2]
     if not (root / "skills" / "skill-backpack" / "SKILL.md").exists():
         raise RuntimeError(
@@ -30,6 +38,82 @@ def _package_root() -> Path:
             "or install with `pip install -e .` from the cloned repository."
         )
     return root
+
+
+def _copy_resource_tree(source: Any, target: Path) -> None:
+    target.mkdir(parents=True, exist_ok=True)
+    for child in source.iterdir():
+        destination = target / child.name
+        if child.is_dir():
+            if destination.exists():
+                shutil.rmtree(destination)
+            _copy_resource_tree(child, destination)
+        else:
+            destination.write_bytes(child.read_bytes())
+
+
+def _skill_asset_root(root: Path | None) -> Any:
+    if root is not None:
+        return root / "skills" / "skill-backpack"
+    return importlib.resources.files("catmaster_backpack").joinpath(PACKAGED_SKILL_BACKPACK)
+
+
+def _adapter_asset_root(root: Path | None, agent: str) -> Any:
+    if root is not None:
+        return root / "adapters" / agent
+    return importlib.resources.files("catmaster_backpack").joinpath(PACKAGED_ADAPTERS).joinpath(agent)
+
+
+def _read_asset_text(asset: Any, relative_path: str) -> str:
+    return asset.joinpath(relative_path).read_text(encoding="utf-8")
+
+
+def _copy_asset_file(asset: Any, relative_path: str, target: Path) -> None:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(asset.joinpath(relative_path).read_bytes())
+
+
+def _parse_frontmatter(text: str) -> dict[str, str]:
+    if not text.startswith("---\n"):
+        return {}
+    end = text.find("\n---", 4)
+    if end == -1:
+        return {}
+    fields = {}
+    for line in text[4:end].splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        fields[key.strip()] = value.strip().strip('"\'')
+    return fields
+
+
+def _slug(value: str) -> str:
+    cleaned = re.sub(r"[^a-z0-9_-]+", "-", value.strip().lower()).strip("-")
+    return cleaned or "skill"
+
+
+def _keywords_for(name: str, description: str) -> list[str]:
+    words = [word.lower() for word in WORD_RE.findall(f"{name} {description}")]
+    seen = []
+    for word in words:
+        if len(word) < 3 or word in STOPWORDS or word in seen:
+            continue
+        seen.append(word)
+    return seen[:20]
+
+
+def _source_hash_for(source: Path) -> str:
+    return hashlib.sha256(source.read_bytes()).hexdigest()
+
+
+def _source_path_for(source: Path, skills_root: Path) -> str:
+    if skills_root.name == "skills" and skills_root.parent.name == ".hermes":
+        skills_root = skills_root.parent
+    try:
+        return source.relative_to(skills_root).as_posix()
+    except ValueError:
+        return str(source)
 
 
 def _read_hermes_runtime_manifest() -> dict[str, Any]:
@@ -65,63 +149,61 @@ def _fail(message: str) -> int:
     return 1
 
 
-def _import_source(root: Path, source: Path, tree_root: Path, tree_name: str) -> int:
-    importer = root / "skills" / "skill-backpack" / "tools" / "import_hermes_skills.py"
-    result = subprocess.run(
-        [
-            sys.executable,
-            str(importer),
-            "--hermes-home",
-            str(source.parent),
-            "--skills-root",
-            str(source),
-            "--tree-root",
-            str(tree_root),
-            "--tree",
-            tree_name,
-        ],
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(result.stderr.strip())
-    return int(json.loads(result.stdout)["imported"])
+def _import_source(source: Path, tree_root: Path, tree_name: str) -> int:
+    modules_root = tree_root / "modules"
+    modules_root.mkdir(parents=True, exist_ok=True)
+    modules = {}
+    for source_skill in sorted(source.glob("**/SKILL.md")):
+        text = source_skill.read_text(encoding="utf-8")
+        fields = _parse_frontmatter(text)
+        module_id = _slug(fields.get("name") or source_skill.parent.name)
+        target = modules_root / module_id / "SKILL.md"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source_skill, target)
+        source_hash = _source_hash_for(source_skill)
+        modules[module_id] = {
+            "status": "enabled",
+            "path": target.relative_to(tree_root).as_posix(),
+            "keywords": _keywords_for(module_id, fields.get("description", "")),
+            "source": "local",
+            "source_path": _source_path_for(source_skill, source),
+            "source_hash": source_hash,
+            "synced_hash": source_hash,
+        }
+    manifest = {"tree": tree_name, "modules": modules}
+    (tree_root / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return len(modules)
 
 
-def _install_parent(root: Path, agent: str, project_root: Path) -> tuple[Path, Path]:
+def _install_parent(skill_asset: Any, agent: str, project_root: Path) -> tuple[Path, Path]:
     paths = AGENT_PATHS[agent]
     parent_dir = project_root / paths["skills"] / "skill-backpack"
     tree_root = project_root / paths["tree"]
     parent_dir.mkdir(parents=True, exist_ok=True)
     tree_root.mkdir(parents=True, exist_ok=True)
 
-    skill_root = root / "skills" / "skill-backpack"
-    shutil.copy2(skill_root / "SKILL.md", parent_dir / "SKILL.md")
+    _copy_asset_file(skill_asset, "SKILL.md", parent_dir / "SKILL.md")
     tools_target = parent_dir / "tools"
     if tools_target.exists():
         shutil.rmtree(tools_target)
-    shutil.copytree(skill_root / "tools", tools_target)
+    _copy_resource_tree(skill_asset.joinpath("tools"), tools_target)
     return parent_dir / "SKILL.md", tree_root
 
 
-def _install_opencode_adapter(root: Path, project_root: Path) -> tuple[Path, Path]:
-    adapter_root = root / "adapters" / "opencode"
+def _install_opencode_adapter(adapter_asset: Any, project_root: Path) -> tuple[Path, Path]:
     opencode_root = project_root / ".opencode"
     guidance_target = project_root / "AGENTS.md"
     tool_target = opencode_root / "tools" / "tool_backpack.ts"
-    guidance_text = (adapter_root / "AGENTS.md").read_text(encoding="utf-8")
+    guidance_text = _read_asset_text(adapter_asset, "AGENTS.md")
     existing_text = guidance_target.read_text(encoding="utf-8") if guidance_target.exists() else ""
     if "# CatMaster Backpack For OpenCode" not in existing_text:
         separator = "\n\n" if existing_text and not existing_text.endswith("\n\n") else ""
         guidance_target.write_text(f"{existing_text}{separator}{guidance_text}", encoding="utf-8")
-    tool_target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(adapter_root / "tools" / "tool_backpack.ts", tool_target)
+    _copy_asset_file(adapter_asset, "tools/tool_backpack.ts", tool_target)
     return guidance_target, tool_target
 
 
-def _append_adapter_guidance(source: Path, target: Path, marker: str) -> Path:
+def _append_adapter_guidance(source: Any, target: Path, marker: str) -> Path:
     guidance_text = source.read_text(encoding="utf-8")
     existing_text = target.read_text(encoding="utf-8") if target.exists() else ""
     if marker not in existing_text:
@@ -130,32 +212,37 @@ def _append_adapter_guidance(source: Path, target: Path, marker: str) -> Path:
     return target
 
 
-def _install_claude_code_adapter(root: Path, project_root: Path) -> Path:
+def _install_claude_code_adapter(adapter_asset: Any, project_root: Path) -> Path:
     return _append_adapter_guidance(
-        root / "adapters" / "claude-code" / "CLAUDE.md",
+        adapter_asset.joinpath("CLAUDE.md"),
         project_root / "CLAUDE.md",
         "# CatMaster Backpack For Claude Code",
     )
 
 
-def _install_codex_adapter(root: Path, project_root: Path) -> Path:
+def _install_codex_adapter(adapter_asset: Any, project_root: Path) -> Path:
     return _append_adapter_guidance(
-        root / "adapters" / "codex" / "AGENTS.md",
+        adapter_asset.joinpath("AGENTS.md"),
         project_root / "AGENTS.md",
         "# CatMaster Backpack For Codex",
     )
 
 
-def _install_openclaw_adapter(root: Path, project_root: Path) -> Path:
+def _install_openclaw_adapter(adapter_asset: Any, project_root: Path) -> Path:
     return _append_adapter_guidance(
-        root / "adapters" / "openclaw" / "AGENTS.md",
+        adapter_asset.joinpath("AGENTS.md"),
         project_root / "AGENTS.md",
         "# CatMaster Backpack For OpenClaw",
     )
 
 
 def install_skill_plugin(args: argparse.Namespace) -> int:
-    root = _package_root()
+    try:
+        root = _package_root()
+        asset_source = "source"
+    except RuntimeError:
+        root = None
+        asset_source = "packaged"
     project_root = Path(args.project_root).resolve()
     source = Path(args.source).resolve()
     if not source.exists():
@@ -187,11 +274,13 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
 
     tree_root = project_root / AGENT_PATHS[args.agent]["tree"]
     tree_root.mkdir(parents=True, exist_ok=True)
-    imported = _import_source(root, source, tree_root, args.agent)
-    parent_skill, tree_root = _install_parent(root, args.agent, project_root)
+    imported = _import_source(source, tree_root, args.agent)
+    skill_asset = _skill_asset_root(root)
+    parent_skill, tree_root = _install_parent(skill_asset, args.agent, project_root)
 
     payload: dict[str, Any] = {
         "agent": args.agent,
+        "asset_source": asset_source,
         "imported": imported,
         "installed_parent": str(parent_skill),
         "mode": "copy",
@@ -200,27 +289,26 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
     }
 
     if args.agent == "hermes" and args.hermes_agent_root:
-        hermes_tool = root / "adapters" / "hermes" / "skill_backpack" / "tools" / "skill_backpack.py"
         target = Path(args.hermes_agent_root).resolve() / "tools" / "skill_backpack.py"
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(hermes_tool, target)
+        hermes_asset = _adapter_asset_root(root, "hermes")
+        _copy_asset_file(hermes_asset, "skill_backpack/tools/skill_backpack.py", target)
         payload["installed_hermes_tool"] = str(target)
 
     if args.agent == "opencode":
-        guidance_target, tool_target = _install_opencode_adapter(root, project_root)
+        guidance_target, tool_target = _install_opencode_adapter(_adapter_asset_root(root, "opencode"), project_root)
         payload["installed_opencode_guidance"] = str(guidance_target)
         payload["installed_opencode_tool_backpack"] = str(tool_target)
 
     if args.agent == "claude-code":
-        guidance_target = _install_claude_code_adapter(root, project_root)
+        guidance_target = _install_claude_code_adapter(_adapter_asset_root(root, "claude-code"), project_root)
         payload["installed_claude_code_guidance"] = str(guidance_target)
 
     if args.agent == "codex":
-        guidance_target = _install_codex_adapter(root, project_root)
+        guidance_target = _install_codex_adapter(_adapter_asset_root(root, "codex"), project_root)
         payload["installed_codex_guidance"] = str(guidance_target)
 
     if args.agent == "openclaw":
-        guidance_target = _install_openclaw_adapter(root, project_root)
+        guidance_target = _install_openclaw_adapter(_adapter_asset_root(root, "openclaw"), project_root)
         payload["installed_openclaw_guidance"] = str(guidance_target)
 
     return _json(payload)
