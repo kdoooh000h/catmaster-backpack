@@ -166,6 +166,19 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("id: selectedEntry.id", tool_text)
         self.assertIn("does not hide native OpenCode tools", tool_text)
 
+    def test_claude_code_adapter_includes_portable_project_guidance(self):
+        snippet = ROOT / "adapters" / "claude-code" / "CLAUDE.md"
+
+        self.assertTrue(snippet.exists())
+        text = snippet.read_text(encoding="utf-8")
+        self.assertIn(".claude/skills/skill-backpack/", text)
+        self.assertIn(".claude/skill-backpack-tree/", text)
+        self.assertIn("index -> select -> execute", text)
+        self.assertIn("optional MCP gateway", text)
+        self.assertIn("optional hook guards", text)
+        self.assertIn("not Hermes-equivalent", text)
+        self.assertIn("Do not claim dynamic native tool hiding", text)
+
     def test_readme_documents_hermes_runtime_manifest_as_single_package_entrypoint(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         adapter_readme = (ROOT / "adapters" / "hermes" / "README.md").read_text(encoding="utf-8")
@@ -249,6 +262,41 @@ class PublicInstallerTests(unittest.TestCase):
             self.assertIn("install_opencode_adapter_guidance", payload["operations"])
             self.assertIn("install_opencode_tool_backpack", payload["operations"])
             self.assertFalse((project / ".opencode").exists())
+
+    def test_claude_code_skill_plugin_dry_run_lists_adapter_guidance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing Claude Code dry run.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "claude-code",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                    "--dry-run",
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "claude-code")
+            self.assertIn("install_claude_code_guidance", payload["operations"])
+            self.assertFalse((project / ".claude").exists())
 
     def test_opencode_install_writes_adapter_assets(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -358,8 +406,46 @@ class PublicInstallerTests(unittest.TestCase):
             self.assertEqual(payload["status"], "installed")
             self.assertEqual(payload["agent"], "claude-code")
             self.assertTrue((project / ".claude" / "skills" / "skill-backpack" / "SKILL.md").exists())
+            self.assertEqual(payload["installed_claude_code_guidance"], str(project / "CLAUDE.md"))
+            self.assertIn("not Hermes-equivalent", (project / "CLAUDE.md").read_text(encoding="utf-8"))
             manifest = json.loads((project / ".claude" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
             self.assertIn("demo-skill", manifest["modules"])
+
+    def test_claude_code_install_appends_existing_project_memory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            project.mkdir()
+            (project / "CLAUDE.md").write_text("# Existing Claude Rules\n\nKeep this line.\n", encoding="utf-8")
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing Claude Code guidance append.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "claude-code",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            text = (project / "CLAUDE.md").read_text(encoding="utf-8")
+            self.assertIn("# Existing Claude Rules", text)
+            self.assertIn("Keep this line.", text)
+            self.assertEqual(text.count("# CatMaster Backpack For Claude Code"), 1)
 
     def test_hermes_runtime_plan_is_explicit_and_read_only(self):
         with tempfile.TemporaryDirectory() as directory:

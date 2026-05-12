@@ -5,7 +5,8 @@ This adapter is a design placeholder.
 ## Initial Compatibility Target
 
 - Package Tool Backpack as a Claude skill bundle.
-- Expose `tool_repo` through MCP if tool registration is required.
+- Use `adapters/claude-code/CLAUDE.md` as the project memory snippet for portable Skill Backpack behavior.
+- Expose Tool Backpack through an MCP gateway if tool registration is required.
 - Provide `backpack-manager` as the management skill.
 - Use Tool Backpack capability catalog for compact routing guidance.
 
