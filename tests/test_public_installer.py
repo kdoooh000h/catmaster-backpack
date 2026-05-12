@@ -179,6 +179,20 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("not Hermes-equivalent", text)
         self.assertIn("Do not claim dynamic native tool hiding", text)
 
+    def test_codex_adapter_includes_portable_project_guidance(self):
+        snippet = ROOT / "adapters" / "codex" / "AGENTS.md"
+
+        self.assertTrue(snippet.exists())
+        text = snippet.read_text(encoding="utf-8")
+        self.assertIn(".codex/skills/skill-backpack/", text)
+        self.assertIn(".codex/skill-backpack-tree/", text)
+        self.assertIn("index -> select -> execute", text)
+        self.assertIn("Codex desktop", text)
+        self.assertIn("optional MCP gateway", text)
+        self.assertIn("optional plugin", text)
+        self.assertIn("not Hermes-equivalent", text)
+        self.assertIn("Do not claim dynamic native tool hiding", text)
+
     def test_readme_documents_hermes_runtime_manifest_as_single_package_entrypoint(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         adapter_readme = (ROOT / "adapters" / "hermes" / "README.md").read_text(encoding="utf-8")
@@ -297,6 +311,41 @@ class PublicInstallerTests(unittest.TestCase):
             self.assertEqual(payload["agent"], "claude-code")
             self.assertIn("install_claude_code_guidance", payload["operations"])
             self.assertFalse((project / ".claude").exists())
+
+    def test_codex_skill_plugin_dry_run_lists_adapter_guidance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing Codex dry run.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "codex",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                    "--dry-run",
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "codex")
+            self.assertIn("install_codex_guidance", payload["operations"])
+            self.assertFalse((project / ".codex").exists())
 
     def test_opencode_install_writes_adapter_assets(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -446,6 +495,79 @@ class PublicInstallerTests(unittest.TestCase):
             self.assertIn("# Existing Claude Rules", text)
             self.assertIn("Keep this line.", text)
             self.assertEqual(text.count("# CatMaster Backpack For Claude Code"), 1)
+
+    def test_codex_install_writes_adapter_assets(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing Codex adapter install.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "codex",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "codex")
+            self.assertTrue((project / ".codex" / "skills" / "skill-backpack" / "SKILL.md").exists())
+            self.assertEqual(payload["installed_codex_guidance"], str(project / "AGENTS.md"))
+            self.assertIn("not Hermes-equivalent", (project / "AGENTS.md").read_text(encoding="utf-8"))
+            manifest = json.loads((project / ".codex" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIn("demo-skill", manifest["modules"])
+
+    def test_codex_install_appends_existing_agents_guidance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            project.mkdir()
+            (project / "AGENTS.md").write_text("# Existing Codex Rules\n\nKeep this line.\n", encoding="utf-8")
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing Codex guidance append.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "codex",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            text = (project / "AGENTS.md").read_text(encoding="utf-8")
+            self.assertIn("# Existing Codex Rules", text)
+            self.assertIn("Keep this line.", text)
+            self.assertEqual(text.count("# CatMaster Backpack For Codex"), 1)
 
     def test_hermes_runtime_plan_is_explicit_and_read_only(self):
         with tempfile.TemporaryDirectory() as directory:
