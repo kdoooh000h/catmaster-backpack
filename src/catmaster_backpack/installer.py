@@ -104,6 +104,21 @@ def _install_parent(root: Path, agent: str, project_root: Path) -> tuple[Path, P
     return parent_dir / "SKILL.md", tree_root
 
 
+def _install_opencode_adapter(root: Path, project_root: Path) -> tuple[Path, Path]:
+    adapter_root = root / "adapters" / "opencode"
+    opencode_root = project_root / ".opencode"
+    guidance_target = project_root / "AGENTS.md"
+    tool_target = opencode_root / "tools" / "tool_backpack.ts"
+    guidance_text = (adapter_root / "AGENTS.md").read_text(encoding="utf-8")
+    existing_text = guidance_target.read_text(encoding="utf-8") if guidance_target.exists() else ""
+    if "# CatMaster Backpack For OpenCode" not in existing_text:
+        separator = "\n\n" if existing_text and not existing_text.endswith("\n\n") else ""
+        guidance_target.write_text(f"{existing_text}{separator}{guidance_text}", encoding="utf-8")
+    tool_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(adapter_root / "tools" / "tool_backpack.ts", tool_target)
+    return guidance_target, tool_target
+
+
 def install_skill_plugin(args: argparse.Namespace) -> int:
     root = _package_root()
     project_root = Path(args.project_root).resolve()
@@ -114,6 +129,8 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
     operations = ["create_skill_tree", "import_source_skills", "install_parent_skill"]
     if args.agent == "hermes":
         operations.append("install_hermes_skill_backpack_tool")
+    if args.agent == "opencode":
+        operations.extend(["install_opencode_adapter_guidance", "install_opencode_tool_backpack"])
 
     if args.dry_run:
         return _json(
@@ -147,6 +164,11 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(hermes_tool, target)
         payload["installed_hermes_tool"] = str(target)
+
+    if args.agent == "opencode":
+        guidance_target, tool_target = _install_opencode_adapter(root, project_root)
+        payload["installed_opencode_guidance"] = str(guidance_target)
+        payload["installed_opencode_tool_backpack"] = str(tool_target)
 
     return _json(payload)
 

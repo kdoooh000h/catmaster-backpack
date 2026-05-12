@@ -14,6 +14,7 @@ SKILL_ROOT = HERE.parent
 IMPORTER = HERE / "import_hermes_skills.py"
 PACKAGE_ROOT = HERE.parents[2]
 HERMES_SKILL_BACKPACK_TOOL = PACKAGE_ROOT / "adapters" / "hermes" / "skill_backpack" / "tools" / "skill_backpack.py"
+OPENCODE_ADAPTER_ROOT = PACKAGE_ROOT / "adapters" / "opencode"
 
 
 AGENT_PATHS = {
@@ -54,6 +55,20 @@ def install_hermes_native_tool(hermes_agent_root: Path | None) -> str | None:
     return str(target)
 
 
+def install_opencode_adapter(project_root: Path) -> tuple[str, str]:
+    opencode_root = project_root / ".opencode"
+    guidance_target = project_root / "AGENTS.md"
+    tool_target = opencode_root / "tools" / "tool_backpack.ts"
+    guidance_text = (OPENCODE_ADAPTER_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    existing_text = guidance_target.read_text(encoding="utf-8") if guidance_target.exists() else ""
+    if "# CatMaster Backpack For OpenCode" not in existing_text:
+        separator = "\n\n" if existing_text and not existing_text.endswith("\n\n") else ""
+        guidance_target.write_text(f"{existing_text}{separator}{guidance_text}", encoding="utf-8")
+    tool_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(OPENCODE_ADAPTER_ROOT / "tools" / "tool_backpack.ts", tool_target)
+    return str(guidance_target), str(tool_target)
+
+
 def import_source(source: Path, tree_root: Path, tree_name: str) -> int:
     result = subprocess.run(
         [sys.executable, str(IMPORTER), "--hermes-home", str(source.parent), "--skills-root", str(source), "--tree-root", str(tree_root), "--tree", tree_name],
@@ -81,9 +96,14 @@ def install(args) -> int:
     installed_hermes_tool = None
     if args.agent == "hermes":
         installed_hermes_tool = install_hermes_native_tool(args.hermes_agent_root)
+    installed_opencode_adapter = None
+    if args.agent == "opencode":
+        installed_opencode_adapter = install_opencode_adapter(project_root)
     payload = {"agent": args.agent, "scope": args.scope, "installed_parent": str(parent_skill), "tree_root": str(tree_root), "imported": imported, "mode": "copy"}
     if installed_hermes_tool:
         payload["installed_hermes_tool"] = installed_hermes_tool
+    if installed_opencode_adapter:
+        payload["installed_opencode_guidance"], payload["installed_opencode_tool_backpack"] = installed_opencode_adapter
     print(json.dumps(payload, sort_keys=True))
     return 0
 

@@ -5,8 +5,9 @@ This adapter is a design placeholder.
 ## Initial Compatibility Target
 
 - Package Tool Backpack protocol as `.opencode/skills/` guidance.
+- Install the portable `tool_backpack` custom tool template into `.opencode/tools/`.
 - Provide `backpack-manager` as the management skill.
-- Add project `AGENTS.md` snippets that instruct agents to use the Tool Backpack protocol.
+- Use `adapters/opencode/AGENTS.md` as the project guidance snippet for portable Skill Backpack and advisor-hint behavior.
 - If OpenCode exposes a stable tool manifest or MCP surface, add a `tool_repo` tool adapter that returns Tool Backpack protocol responses.
 
 ## Limitation
