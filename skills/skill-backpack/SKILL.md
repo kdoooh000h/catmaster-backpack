@@ -15,13 +15,15 @@ Core protocol: `index -> select -> execute`.
 
 Use Runtime Mode for ordinary development tasks.
 
-1. Call the native Hermes tool `skill_backpack` with `request="index"`.
+1. If the host adapter provides a native `skill_backpack` tool, call it with `request="index"`.
 2. Choose one skill number from the returned index.
 3. Call `skill_backpack` with `request="select <number>"`.
 4. Execute the loaded module text directly.
 5. If a new task stage needs different guidance, call `skill_backpack` again with `request="index"`.
 6. Do not load paths, URLs, disabled modules, unrelated modules, or multiple modules from one index.
 7. Do not modify modules in Runtime Mode.
+
+Portable host adapters may install this parent skill without a native runtime tool. In that case, follow the host-specific project guidance and use Management Mode commands for explicit inspection.
 
 ## Management Mode
 
@@ -43,6 +45,8 @@ Supported project installs:
 
 - OpenCode: `.opencode/skills/skill-backpack/` plus `.opencode/skill-backpack-tree/`
 - Claude Code: `.claude/skills/skill-backpack/` plus `.claude/skill-backpack-tree/`
+- Codex: `.codex/skills/skill-backpack/` plus `.codex/skill-backpack-tree/`
+- OpenClaw: `.openclaw/skills/skill-backpack/` plus `.openclaw/skill-backpack-tree/`
 - Hermes: `.hermes/skills/skill-backpack/` plus `.hermes/skill-backpack-tree/`
 
 Default migration mode is copy, not move. Original skill files remain in place unless a future explicit move mode is added.
