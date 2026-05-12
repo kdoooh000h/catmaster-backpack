@@ -145,6 +145,27 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertNotIn("catmaster-backpack-opencode", readme)
         self.assertNotIn("catmaster-backpack-claude-code", readme)
 
+    def test_opencode_adapter_includes_portable_project_guidance(self):
+        snippet = ROOT / "adapters" / "opencode" / "AGENTS.md"
+        tool_template = ROOT / "adapters" / "opencode" / "tools" / "tool_backpack.ts"
+
+        self.assertTrue(snippet.exists())
+        text = snippet.read_text(encoding="utf-8")
+        self.assertIn(".opencode/skills/skill-backpack/", text)
+        self.assertIn(".opencode/skill-backpack-tree/", text)
+        self.assertIn("index -> select -> execute", text)
+        self.assertIn("deterministic grouped advisor hints", text)
+        self.assertIn("not Hermes-equivalent", text)
+        self.assertIn("Do not claim dynamic native tool hiding", text)
+        self.assertTrue(tool_template.exists())
+        tool_text = tool_template.read_text(encoding="utf-8")
+        self.assertIn("Tool gateway.", tool_text)
+        self.assertIn("tool.schema.string()", tool_text)
+        self.assertIn('decision: "tool_index"', tool_text)
+        self.assertIn('decision: "select_tool"', tool_text)
+        self.assertIn("id: selectedEntry.id", tool_text)
+        self.assertIn("does not hide native OpenCode tools", tool_text)
+
     def test_readme_documents_hermes_runtime_manifest_as_single_package_entrypoint(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         adapter_readme = (ROOT / "adapters" / "hermes" / "README.md").read_text(encoding="utf-8")
@@ -225,7 +246,84 @@ class PublicInstallerTests(unittest.TestCase):
             self.assertEqual(payload["status"], "dry_run")
             self.assertEqual(payload["agent"], "opencode")
             self.assertIn("install_parent_skill", payload["operations"])
+            self.assertIn("install_opencode_adapter_guidance", payload["operations"])
+            self.assertIn("install_opencode_tool_backpack", payload["operations"])
             self.assertFalse((project / ".opencode").exists())
+
+    def test_opencode_install_writes_adapter_assets(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing OpenCode adapter install.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "opencode",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["agent"], "opencode")
+            self.assertTrue((project / ".opencode" / "skills" / "skill-backpack" / "SKILL.md").exists())
+            self.assertEqual(payload["installed_opencode_guidance"], str(project / "AGENTS.md"))
+            self.assertEqual(payload["installed_opencode_tool_backpack"], str(project / ".opencode" / "tools" / "tool_backpack.ts"))
+            self.assertIn("not Hermes-equivalent", (project / "AGENTS.md").read_text(encoding="utf-8"))
+            self.assertIn("Tool gateway.", (project / ".opencode" / "tools" / "tool_backpack.ts").read_text(encoding="utf-8"))
+            manifest = json.loads((project / ".opencode" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIn("demo-skill", manifest["modules"])
+
+    def test_opencode_install_appends_existing_agents_guidance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory) / "project"
+            project.mkdir()
+            (project / "AGENTS.md").write_text("# Existing Project Rules\n\nKeep this line.\n", encoding="utf-8")
+            source = Path(directory) / "source-skills" / "demo-skill"
+            source.mkdir(parents=True)
+            (source / "SKILL.md").write_text("---\nname: demo-skill\ndescription: Use when testing OpenCode adapter install.\n---\n\n# Demo\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "catmaster_backpack",
+                    "install-skill-plugin",
+                    "--agent",
+                    "opencode",
+                    "--project-root",
+                    str(project),
+                    "--source",
+                    str(source.parent),
+                ],
+                cwd=ROOT,
+                env=ENV,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            text = (project / "AGENTS.md").read_text(encoding="utf-8")
+            self.assertIn("# Existing Project Rules", text)
+            self.assertIn("Keep this line.", text)
+            self.assertEqual(text.count("# CatMaster Backpack For OpenCode"), 1)
 
     def test_skill_plugin_install_writes_project_plugin(self):
         with tempfile.TemporaryDirectory() as directory:
