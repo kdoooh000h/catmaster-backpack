@@ -119,6 +119,23 @@ def _install_opencode_adapter(root: Path, project_root: Path) -> tuple[Path, Pat
     return guidance_target, tool_target
 
 
+def _append_adapter_guidance(source: Path, target: Path, marker: str) -> Path:
+    guidance_text = source.read_text(encoding="utf-8")
+    existing_text = target.read_text(encoding="utf-8") if target.exists() else ""
+    if marker not in existing_text:
+        separator = "\n\n" if existing_text and not existing_text.endswith("\n\n") else ""
+        target.write_text(f"{existing_text}{separator}{guidance_text}", encoding="utf-8")
+    return target
+
+
+def _install_claude_code_adapter(root: Path, project_root: Path) -> Path:
+    return _append_adapter_guidance(
+        root / "adapters" / "claude-code" / "CLAUDE.md",
+        project_root / "CLAUDE.md",
+        "# CatMaster Backpack For Claude Code",
+    )
+
+
 def install_skill_plugin(args: argparse.Namespace) -> int:
     root = _package_root()
     project_root = Path(args.project_root).resolve()
@@ -131,6 +148,8 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
         operations.append("install_hermes_skill_backpack_tool")
     if args.agent == "opencode":
         operations.extend(["install_opencode_adapter_guidance", "install_opencode_tool_backpack"])
+    if args.agent == "claude-code":
+        operations.append("install_claude_code_guidance")
 
     if args.dry_run:
         return _json(
@@ -169,6 +188,10 @@ def install_skill_plugin(args: argparse.Namespace) -> int:
         guidance_target, tool_target = _install_opencode_adapter(root, project_root)
         payload["installed_opencode_guidance"] = str(guidance_target)
         payload["installed_opencode_tool_backpack"] = str(tool_target)
+
+    if args.agent == "claude-code":
+        guidance_target = _install_claude_code_adapter(root, project_root)
+        payload["installed_claude_code_guidance"] = str(guidance_target)
 
     return _json(payload)
 

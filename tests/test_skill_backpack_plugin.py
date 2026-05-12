@@ -48,7 +48,9 @@ class SkillBackpackPluginTests(unittest.TestCase):
             self.assertEqual(payload["agent"], "claude-code")
             self.assertEqual(payload["installed_parent"], str(project / ".claude" / "skills" / "skill-backpack" / "SKILL.md"))
             self.assertEqual(payload["imported"], 1)
+            self.assertEqual(payload["installed_claude_code_guidance"], str(project / "CLAUDE.md"))
             self.assertTrue((project / ".claude" / "skill-backpack-tree" / "manifest.json").exists())
+            self.assertTrue((project / "CLAUDE.md").exists())
             manifest = json.loads((project / ".claude" / "skill-backpack-tree" / "manifest.json").read_text(encoding="utf-8"))
             self.assertIn("debug-helper", manifest["modules"])
 
