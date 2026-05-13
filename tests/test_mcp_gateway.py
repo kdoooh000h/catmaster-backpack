@@ -19,7 +19,7 @@ class McpGatewayTests(unittest.TestCase):
         self.assertEqual(tools["tool_backpack"]["description"], "Tool gateway.")
         self.assertEqual(tools["skill_backpack"]["description"], "Skill gateway.")
 
-    def test_tool_backpack_returns_index_and_selection_decisions(self):
+    def test_tool_backpack_blocks_ordinary_index_and_empty_requests(self):
         index_response = mcp_gateway.handle_request(
             {
                 "jsonrpc": "2.0",
@@ -29,13 +29,40 @@ class McpGatewayTests(unittest.TestCase):
             }
         )
         index_payload = json.loads(index_response["result"]["content"][0]["text"])
+        self.assertEqual(index_payload["status"], "blocked")
+        self.assertEqual(index_payload["decision"], "catalog_requires_explicit_mode")
+
+        empty_response = mcp_gateway.handle_request(
+            {
+                "jsonrpc": "2.0",
+                "id": 3,
+                "method": "tools/call",
+                "params": {"name": "tool_backpack", "arguments": {"request": ""}},
+            }
+        )
+        empty_payload = json.loads(empty_response["result"]["content"][0]["text"])
+        self.assertEqual(empty_payload["status"], "blocked")
+        self.assertEqual(empty_payload["decision"], "needs_selection")
+
+    def test_tool_backpack_returns_catalog_only_in_explicit_catalog_mode(self):
+        index_response = mcp_gateway.handle_request(
+            {
+                "jsonrpc": "2.0",
+                "id": 4,
+                "method": "tools/call",
+                "params": {"name": "tool_backpack", "arguments": {"request": "index", "catalog_mode": True}},
+            }
+        )
+        index_payload = json.loads(index_response["result"]["content"][0]["text"])
         self.assertEqual(index_payload["decision"], "tool_index")
         self.assertIn([101, "search_files", "search names/content"], index_payload["tools"])
+
+    def test_tool_backpack_returns_selection_decisions(self):
 
         select_response = mcp_gateway.handle_request(
             {
                 "jsonrpc": "2.0",
-                "id": 3,
+                "id": 5,
                 "method": "tools/call",
                 "params": {"name": "tool_backpack", "arguments": {"request": "select 101"}},
             }
@@ -46,7 +73,7 @@ class McpGatewayTests(unittest.TestCase):
         self.assertEqual(select_payload["tool"], "search_files")
         self.assertIn("does not execute", select_payload["note"])
 
-    def test_skill_backpack_indexes_and_selects_manifest_modules(self):
+    def test_skill_backpack_catalog_requires_explicit_catalog_mode(self):
         with tempfile.TemporaryDirectory() as directory:
             tree_root = Path(directory) / "skill-tree"
             module = tree_root / "modules" / "debug-helper"
@@ -73,7 +100,7 @@ class McpGatewayTests(unittest.TestCase):
             index_response = mcp_gateway.handle_request(
                 {
                     "jsonrpc": "2.0",
-                    "id": 4,
+                    "id": 6,
                     "method": "tools/call",
                     "params": {
                         "name": "skill_backpack",
@@ -82,13 +109,52 @@ class McpGatewayTests(unittest.TestCase):
                 }
             )
             index_payload = json.loads(index_response["result"]["content"][0]["text"])
-            self.assertEqual(index_payload["decision"], "skill_index")
-            self.assertEqual(index_payload["skills"], [[1, "debug-helper", "Use when debugging tests."]])
+            self.assertEqual(index_payload["status"], "blocked")
+            self.assertEqual(index_payload["decision"], "catalog_requires_explicit_mode")
+
+            catalog_response = mcp_gateway.handle_request(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 7,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "skill_backpack",
+                        "arguments": {"request": "index", "tree_root": str(tree_root), "catalog_mode": True},
+                    },
+                }
+            )
+            catalog_payload = json.loads(catalog_response["result"]["content"][0]["text"])
+            self.assertEqual(catalog_payload["decision"], "skill_index")
+            self.assertEqual(catalog_payload["skills"], [[1, "debug-helper", "Use when debugging tests."]])
+
+    def test_skill_backpack_selects_manifest_modules(self):
+        with tempfile.TemporaryDirectory() as directory:
+            tree_root = Path(directory) / "skill-tree"
+            module = tree_root / "modules" / "debug-helper"
+            module.mkdir(parents=True)
+            module.joinpath("SKILL.md").write_text(
+                "---\nname: debug-helper\ndescription: Use when debugging tests.\n---\n\n# Debug Helper\n",
+                encoding="utf-8",
+            )
+            tree_root.joinpath("manifest.json").write_text(
+                json.dumps(
+                    {
+                        "tree": "test-tree",
+                        "modules": {
+                            "debug-helper": {
+                                "status": "enabled",
+                                "path": "modules/debug-helper/SKILL.md",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
 
             select_response = mcp_gateway.handle_request(
                 {
                     "jsonrpc": "2.0",
-                    "id": 5,
+                    "id": 8,
                     "method": "tools/call",
                     "params": {
                         "name": "skill_backpack",
@@ -100,6 +166,45 @@ class McpGatewayTests(unittest.TestCase):
             self.assertEqual(select_payload["decision"], "select_skill")
             self.assertEqual(select_payload["skill"], "debug-helper")
             self.assertIn("# Debug Helper", select_payload["content"])
+
+    def test_skill_backpack_catalog_mode_indexes_manifest_modules(self):
+        with tempfile.TemporaryDirectory() as directory:
+            tree_root = Path(directory) / "skill-tree"
+            module = tree_root / "modules" / "debug-helper"
+            module.mkdir(parents=True)
+            module.joinpath("SKILL.md").write_text(
+                "---\nname: debug-helper\ndescription: Use when debugging tests.\n---\n\n# Debug Helper\n",
+                encoding="utf-8",
+            )
+            tree_root.joinpath("manifest.json").write_text(
+                json.dumps(
+                    {
+                        "tree": "test-tree",
+                        "modules": {
+                            "debug-helper": {
+                                "status": "enabled",
+                                "path": "modules/debug-helper/SKILL.md",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            index_response = mcp_gateway.handle_request(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 9,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "skill_backpack",
+                        "arguments": {"request": "index", "tree_root": str(tree_root), "catalog_mode": True},
+                    },
+                }
+            )
+            index_payload = json.loads(index_response["result"]["content"][0]["text"])
+            self.assertEqual(index_payload["decision"], "skill_index")
+            self.assertEqual(index_payload["skills"], [[1, "debug-helper", "Use when debugging tests."]])
 
     def test_skill_backpack_blocks_manifest_paths_that_escape_tree_root(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -130,7 +235,7 @@ class McpGatewayTests(unittest.TestCase):
                     "method": "tools/call",
                     "params": {
                         "name": "skill_backpack",
-                        "arguments": {"request": "index", "tree_root": str(tree_root)},
+                        "arguments": {"request": "index", "tree_root": str(tree_root), "catalog_mode": True},
                     },
                 }
             )

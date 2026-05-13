@@ -28,6 +28,14 @@ function toolIndex() {
 function selectedTools(request: string) {
   const rawSelector = request.replace(/^select\s+/i, "").trim()
   const selectors = rawSelector.split(/[\s,]+/).filter(Boolean)
+  if (selectors.length === 0) {
+    return {
+      status: "blocked",
+      decision: "needs_selection",
+      d: "blocked",
+      next: "select <id|tool_name>",
+    }
+  }
   const selected = selectors.map((selector) =>
     tools.find((entry) => String(entry.id) === selector || entry.name === selector),
   )
@@ -65,11 +73,20 @@ function selectedTools(request: string) {
 export default tool({
   description: "Tool gateway.",
   args: {
-    request: tool.schema.string().describe("Use index or select <id|tool_name>"),
+    request: tool.schema.string().describe("Use advisor-provided select <id|tool_name>"),
+    catalogMode: tool.schema.boolean().optional().describe("Only true for explicit catalog inspection/admin requests."),
   },
   async execute(args) {
     const request = args.request.trim()
     if (/^(index|list|tools)$/i.test(request)) {
+      if (!args.catalogMode) {
+        return JSON.stringify({
+          status: "blocked",
+          decision: "catalog_requires_explicit_mode",
+          d: "blocked",
+          next: "use select <id|tool_name> from advisor candidates, or retry with catalogMode=true for explicit catalog inspection",
+        })
+      }
       return JSON.stringify(toolIndex())
     }
     if (/^(select\s+)?[A-Za-z0-9_,\s-]+$/.test(request)) {

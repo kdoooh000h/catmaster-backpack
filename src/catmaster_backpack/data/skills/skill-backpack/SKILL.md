@@ -7,27 +7,25 @@ description: Use when software engineering workflows need hidden local skill mod
 
 ## Overview
 
-Skill Backpack keeps child modules invisible to global skill discovery while allowing the current agent to load selected modules at runtime through a controlled gateway.
+Skill Backpack keeps child modules invisible to global skill discovery while allowing the current agent to load advisor-selected modules at runtime through a controlled gateway.
 
-Core protocol: `index -> select -> execute`.
+Core protocol: `advisor selector -> select -> execute`.
 
 ## Runtime Mode
 
 Use Runtime Mode for ordinary development tasks.
 
-1. If the host adapter provides a native `skill_backpack` tool, call it with `request="index"`.
-2. Choose one skill number from the returned index.
-3. Call `skill_backpack` with `request="select <number>"`.
-4. Execute the loaded module text directly.
-5. If a new task stage needs different guidance, call `skill_backpack` again with `request="index"`.
-6. Do not load paths, URLs, disabled modules, unrelated modules, or multiple modules from one index.
-7. Do not modify modules in Runtime Mode.
+1. If the host adapter provides a native `skill_backpack` tool, call it only with a current-turn advisor-provided `request="select <number>"` selector.
+2. Execute the loaded module text directly.
+3. If a new task stage needs different guidance, wait for or request new advisor candidates instead of guessing names or calling `index`.
+4. Do not load paths, URLs, disabled modules, unrelated modules, or multiple modules from one advisor set.
+5. Do not modify modules in Runtime Mode.
 
 Portable host adapters may install this parent skill without a native runtime tool. In that case, follow the host-specific project guidance and use Management Mode commands for explicit inspection.
 
 ## Management Mode
 
-Use Management Mode when users need to inspect or manage hidden child skills through the parent skill.
+Use Management Mode when users explicitly need to inspect or manage hidden child skills through the parent skill.
 
 - `tools/skill_backpack.py index` lists available modules without loading full content.
 - `tools/skill_backpack.py select <number-or-skill-id>` displays one module for inspection.
@@ -60,14 +58,13 @@ tools/skill_backpack_plugin.py install --agent claude-code --scope project --pro
 
 ## Safety Contract
 
-Runtime `select` accepts only a number from the current compact index. It must reject unknown numbers, direct paths, URLs, disabled modules, non-`SKILL.md` targets, symlinks, and paths outside the tree root.
+Runtime `select` accepts only a current-turn advisor-provided number. It must reject unknown numbers, direct paths, URLs, disabled modules, non-`SKILL.md` targets, symlinks, and paths outside the tree root.
 
 ## Quick Reference
 
 | Command | Use |
 | --- | --- |
-| `skill_backpack({"request":"index"})` | Return a numbered module index |
-| `skill_backpack({"request":"select <number>"})` | Return selected module text |
+| `skill_backpack({"request":"select <number>"})` | Return advisor-selected module text |
 | `tools/skill_backpack.py verify` | Check manifest paths |
 | `tools/skill_backpack.py index` | List skill ids, status, keywords |
 | `tools/skill_backpack.py select <number-or-skill-id>` | Display one skill |

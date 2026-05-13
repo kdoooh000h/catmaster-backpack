@@ -165,8 +165,23 @@ class PublicInstallerTests(unittest.TestCase):
         self.assertIn("tool_backpack -> search_files/read_file", readme)
         self.assertIn("docs/demo.md", readme)
         self.assertIn("docs/outreach.md", readme)
+        self.assertIn("docs/host-adapter-verification-notes.md", readme)
         self.assertTrue((ROOT / "docs" / "demo.md").exists())
         self.assertTrue((ROOT / "docs" / "outreach.md").exists())
+        self.assertTrue((ROOT / "docs" / "host-adapter-verification-notes.md").exists())
+
+    def test_host_adapter_verification_notes_record_unvalidated_hosts(self):
+        path = ROOT / "docs" / "host-adapter-verification-notes.md"
+
+        self.assertTrue(path.exists())
+        notes = path.read_text(encoding="utf-8")
+
+        self.assertIn("# Host Adapter Verification Notes", notes)
+        self.assertIn("As of 2026-05-12", notes)
+        self.assertIn("packaged adapter assets and portable protocol guidance", notes)
+        self.assertIn("not been validated with real runtime E2E smoke tests yet", notes)
+        self.assertIn("Non-Hermes hosts must not be described as Hermes-equivalent", notes)
+        self.assertIn("OpenClaw real testing is blocked", notes)
 
     def test_readme_explains_value_and_measured_context_savings(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

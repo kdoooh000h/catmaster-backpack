@@ -160,14 +160,15 @@ class ToolRepoActionTests(unittest.TestCase):
 
         self.assertEqual(capabilities_for_tool("delegate_task", schema), ["unknown"])
 
-    def test_protocol_records_index_does_not_route_semantically(self) -> None:
+    def test_protocol_records_advisor_selectors_do_not_route_semantically(self) -> None:
         protocol = (Path(__file__).resolve().parents[1] / "core/protocol.md").read_text()
 
-        self.assertIn("## Prompt Index", protocol)
+        self.assertIn("## Advisor Selectors", protocol)
         self.assertIn("`select <tool_name>`", protocol)
         self.assertIn("`select search_files`", protocol)
+        self.assertIn("Do not call index/list or guess selector names", protocol)
         self.assertIn("Do not semantically route requests inside `tool_backpack`", protocol)
-        self.assertIn("In prompt-index mode, block non-selection requests", protocol)
+        self.assertIn("In advisor-selector mode, block non-selection requests", protocol)
         self.assertIn("Do not expose indexed tools after an optional `tool_index`", protocol)
         self.assertIn("\"decision\": \"select_tools\"", protocol)
 

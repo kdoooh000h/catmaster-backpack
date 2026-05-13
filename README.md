@@ -55,7 +55,7 @@ Backpack System: v0
 It contains two coordinated backpacks:
 
 - **Tool Backpack** - manages tool discovery and activation while keeping most tools hidden until selected.
-- **Skill Backpack** - manages skill discovery and loading through compact skill indexes, keeping child skills hidden until selected.
+- **Skill Backpack** - manages advisor-scoped skill selection and loading, keeping child skills hidden until selected.
 
 The current validated adapter is the Hermes `Cat Master Toolkit` implementation.
 
@@ -203,7 +203,7 @@ Use `docs/outreach.md` for maintainer email, GitHub Discussion, and community po
        |                               |
        v                               v
  tool_backpack                    skill_backpack
- select read_file                 index / select debugging
+ select read_file                 select debugging
        |                               |
        v                               v
  selected tool schema             selected SKILL.md content
@@ -230,7 +230,7 @@ OpenCode, Claude Code, Codex-style runtimes, and OpenClaw currently receive the 
 - `skills/skill-backpack/` - Skill Backpack parent skill and management CLI.
 - `fixtures/` - deterministic Skill Backpack tree fixtures.
 - `benchmarks/` - deterministic fixtures, runners, and current benchmark summaries.
-- `docs/` - Backpack runtime notes and demo records.
+- `docs/` - Backpack runtime notes, demo records, and host adapter verification notes (`docs/host-adapter-verification-notes.md`).
 - `src/catmaster_backpack/` - public package and installer CLI.
 
 ## Public Install
@@ -260,7 +260,7 @@ Expose a host-neutral MCP gateway when a runtime supports local MCP servers:
 catmaster-backpack-mcp
 ```
 
-The MCP gateway exposes compact `tool_backpack` and `skill_backpack` protocol decisions. Agent/runtime protocol flow may use index/select internally. End users do not run index/select manually. The gateway does not execute selected tools or claim Hermes-equivalent dynamic native tool hiding.
+The MCP gateway exposes compact `tool_backpack` and `skill_backpack` protocol decisions. Agent/runtime protocol flow uses advisor-provided selectors for ordinary task routing; explicit catalog inspection can opt into catalog mode. End users do not run index/select manually. The gateway does not execute selected tools or claim Hermes-equivalent dynamic native tool hiding.
 
 Preview without writing files:
 
@@ -296,7 +296,7 @@ Current version labels:
 Backpack System: v0
 ```
 
-Tool Backpack and Skill Backpack both use compact candidate hints or indexes, let the model choose, then load or expose exactly the selected target. Do not semantically route inside the gateway. The current Hermes path keeps `tool_backpack` and `skill_backpack` visible, injects compact candidate hints when useful, and accepts only explicit selection calls through the gateways.
+Tool Backpack and Skill Backpack both use compact advisor candidate hints for ordinary task routing, let the model choose, then load or expose exactly the selected target. Do not semantically route inside the gateway. The current Hermes path keeps `tool_backpack` and `skill_backpack` visible, injects compact candidate hints when useful, and accepts only explicit selection calls through the gateways.
 
 Current Tool Backpack target protocol:
 
@@ -309,7 +309,7 @@ execute selected tool(s) directly
 Current Skill Backpack target protocol:
 
 ```text
-skill_backpack("index") -> numbered skill index
+advisor hints -> numbered skill selector candidates
 skill_backpack("select <number|skill-name>") -> selected SKILL.md content
 execute loaded skill guidance
 ```
@@ -338,4 +338,4 @@ Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet
 
 ## Security Boundary
 
-CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit list/index requests can return compact catalogs without exposing every tool or skill at startup.
+CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.

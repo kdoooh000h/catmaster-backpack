@@ -136,11 +136,11 @@ def _index_response(root: Path) -> str:
 def _select_response(root: Path, request: str) -> str:
     match = re.match(r"^\s*select\s+(\d+)\s*$", request.lower())
     if not match:
-        return _response(status="error", message="request must be index or select <number>")
+        return _response(status="blocked", decision="needs_selection", d="blocked", next="select <number>")
     selected_number = int(match.group(1))
     entries = _skill_entries(root)
     if selected_number < 1 or selected_number > len(entries):
-        return _response(status="error", message="No skill matched this number.")
+        return _response(status="blocked", decision="unknown_skill", d="blocked", next="select <number>")
     entry = entries[selected_number - 1]
     return _response(status="ok", decision="select_skill", d="loaded", skill=entry["name"], content=entry["content"])
 
@@ -148,7 +148,7 @@ def _select_response(root: Path, request: str) -> str:
 def skill_backpack(args: dict[str, Any], **_kwargs: Any) -> str:
     request = args.get("request")
     if not isinstance(request, str) or not request.strip():
-        request = "index"
+        return _response(status="blocked", decision="needs_selection", d="blocked", next="select <number>")
     root = _library_root()
     if request.strip().lower() in {"index", "list", "show skills", "skills"}:
         return _index_response(root)
@@ -160,7 +160,7 @@ SKILL_BACKPACK_SCHEMA = {
     "description": "Skill gateway.",
     "parameters": {
         "type": "object",
-        "properties": {"request": {"type": "string", "description": "Use index, then select <number>."}},
+        "properties": {"request": {"type": "string", "description": "Use an advisor-provided select <number> request."}},
         "required": ["request"],
         "additionalProperties": False,
     },

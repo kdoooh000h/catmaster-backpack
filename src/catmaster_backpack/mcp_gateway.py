@@ -27,9 +27,22 @@ def _text_result(payload: dict[str, Any]) -> dict[str, Any]:
     return {"content": [{"type": "text", "text": json.dumps(payload, sort_keys=True)}]}
 
 
-def _tool_backpack(request: str) -> dict[str, Any]:
+def _catalog_mode_required() -> dict[str, Any]:
+    return {
+        "status": "blocked",
+        "decision": "catalog_requires_explicit_mode",
+        "d": "blocked",
+        "next": "use an advisor-provided select request, or retry with catalog_mode=true for explicit catalog inspection",
+    }
+
+
+def _tool_backpack(request: str, catalog_mode: bool = False) -> dict[str, Any]:
     value = request.strip()
+    if not value:
+        return {"status": "blocked", "decision": "needs_selection", "d": "blocked", "next": "select <id|tool_name>"}
     if value.lower() in {"index", "list", "tools"}:
+        if not catalog_mode:
+            return _catalog_mode_required()
         return {
             "status": "ok",
             "decision": "tool_index",
@@ -104,12 +117,16 @@ def _enabled_entries(tree_root: Path) -> list[tuple[str, dict[str, Any]]]:
     )
 
 
-def _skill_backpack(request: str, tree_root_value: str | None) -> dict[str, Any]:
+def _skill_backpack(request: str, tree_root_value: str | None, catalog_mode: bool = False) -> dict[str, Any]:
+    value = request.strip()
+    if value.lower() in {"index", "list", "skills"} and not catalog_mode:
+        return _catalog_mode_required()
+    if not value:
+        return {"status": "blocked", "decision": "needs_selection", "d": "blocked", "next": "select <number>"}
     if not tree_root_value:
         return {"status": "blocked", "decision": "missing_tree_root", "d": "blocked", "next": "provide tree_root"}
     tree_root = Path(tree_root_value).resolve()
     entries = _enabled_entries(tree_root)
-    value = request.strip()
     if value.lower() in {"index", "list", "skills"}:
         skills = []
         for number, (module_id, module) in enumerate(entries, start=1):
@@ -141,7 +158,13 @@ def _tool_definitions() -> list[dict[str, Any]]:
             "description": "Tool gateway.",
             "inputSchema": {
                 "type": "object",
-                "properties": {"request": {"type": "string"}},
+                "properties": {
+                    "request": {"type": "string"},
+                    "catalog_mode": {
+                        "type": "boolean",
+                        "description": "Only true for explicit catalog inspection/admin requests, not ordinary task routing.",
+                    },
+                },
                 "required": ["request"],
                 "additionalProperties": False,
             },
@@ -151,7 +174,14 @@ def _tool_definitions() -> list[dict[str, Any]]:
             "description": "Skill gateway.",
             "inputSchema": {
                 "type": "object",
-                "properties": {"request": {"type": "string"}, "tree_root": {"type": "string"}},
+                "properties": {
+                    "request": {"type": "string"},
+                    "tree_root": {"type": "string"},
+                    "catalog_mode": {
+                        "type": "boolean",
+                        "description": "Only true for explicit catalog inspection/admin requests, not ordinary task routing.",
+                    },
+                },
                 "required": ["request"],
                 "additionalProperties": False,
             },
@@ -170,9 +200,9 @@ def handle_request(request: dict[str, Any]) -> dict[str, Any]:
         arguments = params.get("arguments") or {}
         name = params.get("name")
         if name == "tool_backpack":
-            return _jsonrpc_result(request, _text_result(_tool_backpack(str(arguments.get("request", "")))))
+            return _jsonrpc_result(request, _text_result(_tool_backpack(str(arguments.get("request", "")), arguments.get("catalog_mode") is True)))
         if name == "skill_backpack":
-            return _jsonrpc_result(request, _text_result(_skill_backpack(str(arguments.get("request", "")), arguments.get("tree_root"))))
+            return _jsonrpc_result(request, _text_result(_skill_backpack(str(arguments.get("request", "")), arguments.get("tree_root"), arguments.get("catalog_mode") is True)))
         return _jsonrpc_error(request, -32602, "unknown tool")
     return _jsonrpc_error(request, -32601, "method not found")
 

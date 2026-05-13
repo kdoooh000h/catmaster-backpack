@@ -73,12 +73,10 @@ Safety rules:
 
 ## Skill Backpack Management
 
-Skill Backpack runtime loads hidden skills by page, number, or exact skill name:
+Skill Backpack runtime loads hidden skills only from current-turn advisor selectors:
 
 ```text
-skill_backpack({"request":"index"})
-skill_backpack({"request":"index 2"})
-skill_backpack({"request":"select <number|skill-name>"})
+skill_backpack select <number|skill-name>
 ```
 
 Use the canonical management CLI for hidden skill tree changes:
