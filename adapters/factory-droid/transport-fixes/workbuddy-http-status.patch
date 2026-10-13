@@ -1,0 +1,15 @@
+--- a/workbuddy_upstream.mjs
++++ b/workbuddy_upstream.mjs
+@@ -198,7 +198,11 @@
+     } catch(error) {
+       const code=/^WB_[A-Z0-9_]+$/.test(error.message) ? error.message : 'WB_UPSTREAM_UNAVAILABLE';
+       if (res.headersSent) {res.end();return;}
+-      reply(code.includes('NOT_ALLOWED')?400:502,{error:{type:'workbuddy_gateway',message:code}});
++      // Preserve explicit upstream HTTP rejections; a 429 is not an unknown 5xx.
++      // Transport/stream failures retain the existing unknown-result handling.
++      const upstreamHttp=code.match(/^WB_(?:CHAT|CATALOG)_HTTP_([45]\d{2})$/);
++      reply(upstreamHttp?Number(upstreamHttp[1]):code.includes('NOT_ALLOWED')?400:502,
++        {error:{type:'workbuddy_gateway',message:code}});
+     }
+   });
+ }
