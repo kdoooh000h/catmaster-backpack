@@ -167,7 +167,7 @@ def refresh(store, *, provider_factory=None):
             records[key] = {'identity': identity, 'status': 'pending', 'leaves': [], 'reason': 'classification_outcome_unknown'}
             # A crash after the send cannot silently cause a repeat on refresh.
             cache.update(template_sha256=template_hash, entries={**previous, **records})
-            atomic_json(store / FILE, cache)
+            atomic_json(store / FILE, cache, max_bytes=MAX_BYTES)
             provider = None
             try:
                 provider = factory();calls += 1
@@ -179,7 +179,7 @@ def refresh(store, *, provider_factory=None):
                 records[key]['usage'] = usage(provider)
             previous[key] = records[key]
             cache.update(entries={**previous, **records})
-            atomic_json(store / FILE, cache)
+            atomic_json(store / FILE, cache, max_bytes=MAX_BYTES)
         pending = sum(row['status'] != 'classified' for row in records.values())
         directory = None
         classified = {key: row for key, row in records.items() if row['status'] == 'classified'}
@@ -205,9 +205,7 @@ def refresh(store, *, provider_factory=None):
                   'capabilities': len(entries), 'pending': pending, 'classification_calls': calls}
         cache = {'schema': SCHEMA, 'template_sha256': template_hash, 'entries': records,
                  'registry_sha256': digest(registry['plugins']), 'directory': None if stale else directory, 'summary': result}
-        if len(json.dumps(cache, ensure_ascii=False).encode()) > MAX_BYTES:
-            raise ValueError('capability_directory_too_large')
-        atomic_json(store / FILE, cache)
+        atomic_json(store / FILE, cache, max_bytes=MAX_BYTES)
     return result
 
 

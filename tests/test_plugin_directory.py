@@ -6,7 +6,7 @@ import sys,tempfile,unittest
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src/catmaster_backpack'))
 import plugin_directory as directory
-from plugin_pipeline import init_store,atomic_json
+from plugin_pipeline import init_store,atomic_json,LIMIT
 
 
 class Classifier:
@@ -127,5 +127,31 @@ class DirectoryTests(unittest.TestCase):
         root=Path(__file__).resolve().parents[1]
         for name in ('public_capability_directory.py','hierarchical_choice_routing.py','jev_hierarchy_provider.py'):
             self.assertEqual((root/'core'/name).read_bytes(),(root/'src/catmaster_backpack/routing'/name).read_bytes())
+
+    def test_large_directory_uses_its_own_limit_for_all_refresh_writes(self):
+        self.populate(tuple('skill-' + str(i) for i in range(750)))
+        entries=self.entries();template=directory.template();template_hash=directory.digest(template)
+        leaves=[leaf['id'] for leaf in template['leaves']]
+        records={key:{'identity':directory.digest({'metadata':directory.wire(entry),'template':template_hash}),
+                      'status':'classified','leaves':leaves,'reason':None} for key,entry in entries.items()}
+        cache={'schema':directory.SCHEMA,'template_sha256':template_hash,'entries':records}
+        path=self.store/directory.FILE
+        atomic_json(path,cache,max_bytes=directory.MAX_BYTES)
+        self.assertEqual(self.refresh()['classification_calls'],0)
+        self.assertGreater(path.stat().st_size,LIMIT)
+        self.assertLessEqual(path.stat().st_size,directory.MAX_BYTES)
+        self.assertTrue(directory.available_directory(self.store,entries))
+        # Exercise pending and post-classification writes while the existing cache is large.
+        registry=directory.load_registry(self.store)[2]
+        registry['plugins']['fixture']['library'][0]['description']+=' Changed metadata.'
+        atomic_json(self.store/'registry.json',registry)
+        self.assertEqual(self.refresh()['classification_calls'],1)
+        self.assertGreater(path.stat().st_size,LIMIT)
+        before=path.read_bytes()
+        with self.assertRaisesRegex(ValueError,'json_output_too_large'):
+            atomic_json(path,{'schema':directory.SCHEMA,'entries':{},'padding':'x'*directory.MAX_BYTES},
+                        max_bytes=directory.MAX_BYTES)
+        self.assertEqual(path.read_bytes(),before)
+        self.assertEqual(directory.read_cache(self.store)['summary']['status'],'ready')
 
 if __name__=='__main__':unittest.main()
