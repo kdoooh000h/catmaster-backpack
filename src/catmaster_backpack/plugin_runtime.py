@@ -228,6 +228,23 @@ def discover_server(plugin, config, project, data):
 def validate_arguments(value, schema, root=None, depth=0):
     if depth > 32:
         raise ValueError('argument_schema_depth_exceeded')
+    if schema is True:
+        return
+    if schema is False:
+        raise ValueError('argument_schema_false')
+    if not isinstance(schema, dict):
+        raise ValueError('invalid_argument_schema')
+    patterns = schema.get('patternProperties', {})
+    if not isinstance(patterns, dict):
+        raise ValueError('invalid_argument_pattern_properties')
+    compiled_patterns = []
+    for pattern, subschema in patterns.items():
+        if not isinstance(pattern, str) or not isinstance(subschema, (dict, bool)):
+            raise ValueError('invalid_argument_pattern_properties')
+        try:
+            compiled_patterns.append((re.compile(pattern), subschema))
+        except (re.error, OverflowError, RecursionError):
+            raise ValueError('invalid_argument_pattern_properties') from None
     root = schema if root is None else root
     if '$ref' in schema:
         ref = schema['$ref']
@@ -274,9 +291,16 @@ def validate_arguments(value, schema, root=None, depth=0):
             raise ValueError('required_arguments_missing')
         properties = schema.get('properties', {})
         for key, item in value.items():
+            matched = key in properties
             if key in properties:
                 validate_arguments(item, properties[key], root, depth + 1)
-            elif schema.get('additionalProperties') is False:
+            for pattern, subschema in compiled_patterns:
+                if pattern.search(key):
+                    matched = True
+                    validate_arguments(item, subschema, root, depth + 1)
+            if matched:
+                continue
+            if schema.get('additionalProperties') is False:
                 raise ValueError('unexpected_argument')
             elif isinstance(schema.get('additionalProperties'), dict):
                 validate_arguments(item, schema['additionalProperties'], root, depth + 1)

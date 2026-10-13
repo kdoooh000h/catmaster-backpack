@@ -16,6 +16,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src/catmaster_backpack'))
 from plugin_pipeline import add_plugin, connect_host, init_store, inspect_plugin, load_registry, plugin_unchanged
+from plugin_pipeline import LIMIT, atomic_json, read_json, unregister_plugin
 from plugin_runtime import Gateway as KernelGateway, dispatch_event, run_bounded
 from plugin_release import configuration_digest, QWEN_CONFIG_VIEW
 
@@ -85,6 +86,72 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(before, settings.read_bytes())
         self.assertTrue(Path(self.project / '.mcp.json').is_file())
         self.assertEqual(set(json.loads((self.project / '.mcp.json').read_text())['mcpServers']), {'backpack'})
+
+    def test_atomic_json_size_boundary_preserves_previous_readable_bytes(self):
+        path = self.root / 'bounded.json'
+        value = 'x' * (LIMIT - 3)  # Two quotes and one trailing newline.
+        atomic_json(path, value)
+        self.assertEqual(path.stat().st_size, LIMIT)
+        self.assertEqual(read_json(path), value)
+        before = path.read_bytes()
+        with self.assertRaisesRegex(ValueError, 'json_output_too_large'):
+            atomic_json(path, value + '\u96ea')  # Check encoded UTF-8 bytes, not characters.
+        self.assertEqual(path.read_bytes(), before)
+        self.assertEqual(list(self.root.glob('bounded.json.before-backpack-*')), [])
+
+    def test_large_registration_cannot_make_registry_unreadable(self):
+        index = {'tools': [
+            {'name': 'tool_' + str(i), 'description': 'x' * 7000,
+             'inputSchema': {'type': 'object'}} for i in range(100)
+        ], 'resources': []}
+        self.assertLess(len(json.dumps(index).encode()), LIMIT)
+        packages = [self.plugin(name) for name in ['large-one', 'large-two']]
+        for package in packages:
+            (package / '.mcp.json').write_text(json.dumps({'mcpServers': {'sample': {
+                'command': sys.executable, 'args': [str(package / 'hook.py')]}}}))
+        with patch('plugin_runtime.discover_server', return_value=index):
+            self.assertEqual(add_plugin(self.store, packages[0])['status'], 'registered')
+            path = self.store / 'registry.json'
+            before = path.read_bytes()
+            previous = load_registry(self.store)[2]
+            with self.assertRaisesRegex(ValueError, 'json_output_too_large'):
+                add_plugin(self.store, packages[1])
+        self.assertEqual(path.read_bytes(), before)
+        self.assertEqual(load_registry(self.store)[2], previous)
+        self.assertEqual(unregister_plugin(self.store, 'large-one')['status'], 'unregistered')
+        self.assertEqual(load_registry(self.store)[2]['plugins'], {})
+
+    def test_pattern_schema_round_trip_reaches_only_valid_leaf_arguments(self):
+        package = self.plugin('pattern-service')
+        calls = self.root / 'pattern-calls.jsonl'
+        index = {'tools': [{'name': 'pattern-tool', 'description': 'Fixture dynamic keys',
+                            'inputSchema': {'type': 'object',
+                                            'patternProperties': {'^x-': {'type': 'string'}},
+                                            'additionalProperties': False}}], 'resources': []}
+        script = package / 'server.py'
+        script.write_text(
+            'import json,sys,pathlib\nfor line in sys.stdin:\n p=json.loads(line)\n'
+            ' if "id" not in p: continue\n m=p["method"]\n'
+            ' if m=="tools/call":\n'
+            '  with pathlib.Path(' + repr(str(calls)) + ').open("a") as f:f.write(json.dumps(p["params"]["arguments"])+"\\n")\n'
+            '  r={"content":[{"type":"text","text":json.dumps(p["params"]["arguments"])}]}\n'
+            ' else:r=' + repr(HANDSHAKE) + ' if m=="initialize" else ' + repr(index)
+            + ' if m=="tools/list" else {"resources":[]} if m=="resources/list" else {}\n'
+            ' print(json.dumps({"jsonrpc":"2.0","id":p["id"],"result":r}),flush=True)\n')
+        (package / '.mcp.json').write_text(json.dumps({'mcpServers': {'sample': {
+            'command': sys.executable, 'args': [str(script)]}}}))
+        add_plugin(self.store, package)
+        connect_host(self.store, 'claude-code', self.profile)
+        token = self.token(self.start())
+        gateway = Gateway(self.connection)
+        selection = self.select(gateway, token)
+        result = gateway.invoke(selection, {'x-foo': 'ok'}, token)
+        self.assertEqual(result['status'], 'completed')
+        self.assertEqual(json.loads(result['result']['content'][0]['text']), {'x-foo': 'ok'})
+        rejected = self.select(gateway, token)
+        with self.assertRaisesRegex(ValueError, '^unexpected_argument$'):
+            gateway.invoke(rejected, {'other': 'bad'}, token)
+        self.assertEqual(calls.read_text().splitlines(), [json.dumps({'x-foo': 'ok'})])
 
     def test_existing_native_settings_preserved_and_connect_idempotent(self):
         self.profile.mkdir();(self.profile / 'settings.json').write_text(json.dumps({'permissions': {'deny': ['Bash(rm:*)']}, 'theme': 'dark'}))

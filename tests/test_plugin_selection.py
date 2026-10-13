@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/catmaster_backpack'))
-from plugin_runtime import pick, CapabilityEntries
+from plugin_runtime import pick, CapabilityEntries, validate_arguments
 import plugin_directory as directory
 from plugin_pipeline import atomic_json
 
@@ -82,5 +82,67 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(pick('read',dict(self.entries))['reason'],'directory_review_required')
         (self.store/directory.FILE).rename(self.store/'retained-directory.json')
         provider=Provider();self.assertEqual(self.select(provider)['reason'],'directory_review_required');self.assertEqual(provider.calls,[])
+
+class ArgumentPatternTests(unittest.TestCase):
+    def test_pattern_keys_allowed_with_additional_properties_false(self):
+        schema = {'type': 'object', 'patternProperties': {'^x-': {'type': 'string'}},
+                  'additionalProperties': False}
+        validate_arguments({'x-foo': 'ok'}, schema)
+        with self.assertRaisesRegex(ValueError, '^unexpected_argument$'):
+            validate_arguments({'foo': 'ok'}, schema)
+        with self.assertRaisesRegex(ValueError, '^argument_type_mismatch$'):
+            validate_arguments({'x-foo': 1}, schema)
+
+    def test_patterns_search_anywhere_in_key(self):
+        schema = {'patternProperties': {'x-': {'type': 'string'}}, 'additionalProperties': False}
+        validate_arguments({'prefix-x-foo': 'ok'}, schema)
+
+    def test_explicit_property_and_matching_pattern_both_apply(self):
+        schema = {'properties': {'x-foo': {'type': 'string', 'minLength': 2}},
+                  'patternProperties': {'^x-': {'maxLength': 3}}, 'additionalProperties': False}
+        validate_arguments({'x-foo': 'ok'}, schema)
+        for value in ('a', 'long'):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, '^argument_string_size_mismatch$'):
+                validate_arguments({'x-foo': value}, schema)
+
+    def test_every_matching_pattern_applies_in_either_order(self):
+        pairs = [('^x-', {'type': 'integer', 'minimum': 2}), ('count$', {'maximum': 4})]
+        for ordered in (pairs, list(reversed(pairs))):
+            schema = {'patternProperties': dict(ordered), 'additionalProperties': False}
+            validate_arguments({'x-count': 3}, schema)
+            for value in (1, 5):
+                with self.subTest(order=ordered, value=value), self.assertRaisesRegex(ValueError, '^argument_number_bounds_mismatch$'):
+                    validate_arguments({'x-count': value}, schema)
+
+    def test_additional_schema_only_applies_to_unmatched_keys(self):
+        schema = {'properties': {'builtin': {'type': 'boolean'}},
+                  'patternProperties': {'^x-': {'type': 'integer'}},
+                  'additionalProperties': {'type': 'string'}}
+        validate_arguments({'builtin': True, 'x-count': 3, 'other': 'ok'}, schema)
+        with self.assertRaisesRegex(ValueError, '^argument_type_mismatch$'):
+            validate_arguments({'other': 3}, schema)
+
+    def test_pattern_subschemas_keep_root_refs_and_nested_validation(self):
+        schema = {'$defs': {'payload': {'type': 'object', 'patternProperties': {'^n': {'type': 'integer'}},
+                                       'additionalProperties': False}},
+                  'patternProperties': {'^x-': {'$ref': '#/$defs/payload'}}, 'additionalProperties': False}
+        validate_arguments({'x-foo': {'number': 3}}, schema)
+        with self.assertRaisesRegex(ValueError, '^argument_type_mismatch$'):
+            validate_arguments({'x-foo': {'number': 'bad'}}, schema)
+
+    def test_boolean_pattern_subschemas(self):
+        schema = {'patternProperties': {'^x-': True, 'forbidden$': False}, 'additionalProperties': False}
+        validate_arguments({'x-foo': {'any': 'value'}}, schema)
+        with self.assertRaisesRegex(ValueError, '^argument_schema_false$'):
+            validate_arguments({'x-forbidden': 'bad'}, schema)
+
+    def test_malformed_pattern_maps_fail_even_without_matching_values(self):
+        malformed = [None, [], 'bad', {'[': {}}, {'a{999999999999999999999999}': {}},
+                     {'(' * 1000 + ')' * 1000: {}}, {1: {}}, {'^x-': None}, {'^x-': []}, {'^x-': 1}]
+        for patterns in malformed:
+            for value in ({}, {'other': 'ok'}, 'non-object'):
+                with self.subTest(patterns=patterns, value=value), self.assertRaisesRegex(ValueError, '^invalid_argument_pattern_properties$'):
+                    validate_arguments(value, {'patternProperties': patterns})
+
 
 if __name__=='__main__':unittest.main()

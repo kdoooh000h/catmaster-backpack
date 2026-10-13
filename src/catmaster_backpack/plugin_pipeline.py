@@ -117,13 +117,17 @@ def read_json(path):
     return strict_json(path.read_text())
 
 
-def atomic_json(path, value):
+def atomic_json(path, value, *, max_bytes=LIMIT):
     path = Path(path)
+    if type(max_bytes) is not int or max_bytes <= 0:
+        raise ValueError('invalid_json_output_limit')
+    raw = (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
+    if len(raw) > max_bytes:
+        raise ValueError('json_output_too_large')
     path.parent.mkdir(parents=True, exist_ok=True)
     before = path.read_bytes() if path.exists() else None
     if path.is_symlink():
         raise ValueError('configuration_symlink_refused')
-    raw = (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
     if raw == before:
         return False
     with tempfile.NamedTemporaryFile(dir=path.parent, prefix='.backpack-', delete=False) as stream:
