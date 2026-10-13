@@ -28,23 +28,26 @@ FINAL_CONFIDENCE_GATE = 0.60
 FINAL_CANDIDATE_LIMIT = 96
 
 _INSTRUCTIONS = (
-    'Assess whether this directory contains a specialist workflow that directly performs '
-    'at least one explicitly requested operation or deliverable in the original unchanged task, '
-    'including mandatory later actions. Merely related background domain, hypothetical helpfulness, '
-    'or adding unrequested planning, governance, or documentation tasks is insufficient. '
-    'Quoted text, translation subjects, '
-    'hypothetical mentions, explicitly cancelled actions, actions explicitly not requested now or later, '
-    'and possible future tasks without a current instruction to perform them are data, not required actions. '
-    'Do not restrict the required operations to the first or immediately executable step. '
-    'Multiple cards may each contain a directly required specialist workflow. Evaluate this card: '
+    'Does this card contain executable tools/resources or guidance for directly performing '
+    'any operation or deliverable explicitly required by the original unchanged task, '
+    'including mandatory later actions? Multiple cards may match; do not restrict matches '
+    'to the first or immediately executable step. Exclude related background, hypothetical '
+    'helpfulness, and unrequested planning/governance/documentation. Treat quotations, '
+    'translation subjects, hypothetical '
+    'mentions, cancelled or explicitly unrequested actions, and future possibilities without '
+    'a current instruction as data, not required actions. Card: '
 )
 _CRITERIA = {
-    'true': 'Contains a specialist workflow that directly performs an explicitly requested operation or deliverable, including a mandatory later action.',
-    'false': 'Contains no directly requested specialist workflow; merely related background, hypothetical helpfulness, unrequested additional tasks, data, cancelled action, or future possibility without a current instruction.',
+    'true': 'Contains tools/resources or guidance for a directly required operation or deliverable, including a mandatory later action.',
+    'false': 'Contains no directly required tool/resource or guidance; only related background, hypothetical help, added tasks, or data.',
 }
 
 
 class _InvalidResponse(Exception):
+    pass
+
+
+class _InvalidCandidateFilter(Exception):
     pass
 
 
@@ -69,7 +72,7 @@ def _noul_spec(directory, ids):
     }}
 
 
-def _retained(raw, ids):
+def _retained(raw, ids, gate):
     answers = raw.get('answers') if isinstance(raw, Mapping) else None
     if not isinstance(answers, Mapping) or set(answers) != set(ids):
         raise _InvalidResponse
@@ -80,7 +83,7 @@ def _retained(raw, ids):
         if (not isinstance(answer, Mapping) or answer.get('type') != 'noul'
                 or not _probability(value)):
             raise _InvalidResponse
-        if value >= RETENTION_PROBABILITY:
+        if value >= gate:
             retained.append(key)
     return retained
 
@@ -99,19 +102,45 @@ def _choice_fields(raw, pool):
     return choice, confidence
 
 
+def _filtered_pool(pool, candidate_filter):
+    try:
+        filtered = candidate_filter(deepcopy(pool))
+        if not isinstance(filtered, Mapping):
+            raise _InvalidCandidateFilter
+        filtered = dict(filtered)
+        if ('none' not in filtered or not set(filtered) <= set(pool)
+                or any(value != pool[key] for key, value in filtered.items())):
+            raise _InvalidCandidateFilter
+        # Use original values/order, never filter-owned objects. The filter can
+        # remove candidates, but cannot introduce or alter routing identities.
+        return {key: deepcopy(value) for key, value in pool.items() if key in filtered}
+    except Exception:
+        raise _InvalidCandidateFilter from None
+
+
 def select_hierarchical(directory, question, state, provider, *, deadline=None,
-                        clock=time.monotonic):
+                        clock=time.monotonic, root_gate=RETENTION_PROBABILITY,
+                        leaf_gate=RETENTION_PROBABILITY, final_gate=FINAL_CONFIDENCE_GATE,
+                        candidate_filter=None):
     """Select from retained roots/leaves and an exact subset of original choices.
 
     ``directory`` must be a validated ``PublicCapabilityDirectory`` (two levels;
     no third-level traversal). ``state`` and the original question are passed
     unchanged to every provider stage, using independent copies of state.
-    A selected union covering the entire catalog abstains rather than issuing
-    a global Choice. The limit of 96 counts capabilities, excluding ``none``.
+    Retained shortcut roots expand directly; normal roots still receive one
+    leaf stage. Shortcut-only routing skips leaves, but requires final Choice.
+    An optional ``candidate_filter`` receives a copy of the retained pool and
+    must return a subset Mapping with unchanged IDs/descriptions and ``none``.
+    Final candidates preserve original order. An empty capability subset
+    abstains; a pool covering the entire catalog also abstains rather than
+    issuing a global Choice. The limit of 96 counts filtered capabilities,
+    excluding ``none``.
 
     Returns ``status`` (selected/none/abstain/error), ``choice``, ``confidence``,
-    and public ``diagnostics``. Only a valid final response at confidence >=.60
-    produces a choice; explicit final ``none`` is distinct from abstention.
+    and public ``diagnostics``. Gates must be finite probabilities in ascending
+    order (root <= leaf <= final); defaults are .20, .20, .60. A stage retains
+    responses equal to its gate. Only a valid final response at ``final_gate``
+    or higher produces a choice; explicit final ``none`` is distinct from abstention.
     Choice mappings require ``type='choice'``; an already validated runtime
     Answer object may supply choice/confidence attributes instead. A valid
     below-gate response retains its numeric confidence, with no choice.
@@ -133,6 +162,11 @@ def select_hierarchical(directory, question, state, provider, *, deadline=None,
         return result('error', 'missing_question')
     if not isinstance(state, Mapping):
         return result('error', 'invalid_state')
+    if (not all(_probability(gate) for gate in (root_gate, leaf_gate, final_gate))
+            or not root_gate <= leaf_gate <= final_gate):
+        return result('error', 'invalid_gates')
+    if candidate_filter is not None and not callable(candidate_filter):
+        return result('error', 'invalid_candidate_filter')
     if (deadline is not None and
             (type(deadline) not in (int, float) or
              (type(deadline) is float and not math.isfinite(deadline)))):
@@ -165,36 +199,47 @@ def select_hierarchical(directory, question, state, provider, *, deadline=None,
         roots = list(directory.root_ids)
         diagnostics['root_count'] = len(roots)
         selected_roots = _retained(call('roots', noul_method,
-            _noul_spec(directory, roots), deepcopy(original_state)), roots)
+            _noul_spec(directory, roots), deepcopy(original_state)), roots, root_gate)
         diagnostics['retained_root_count'] = len(selected_roots)
         if not selected_roots:
             return result('abstain', 'no_roots')
 
-        children = {leaf for root in selected_roots for leaf in directory.children(root)}
+        shortcut_ids = set(directory.shortcut_root_ids)
+        selected_shortcuts = [root for root in selected_roots if root in shortcut_ids]
+        normal_roots = [root for root in selected_roots if root not in shortcut_ids]
+        children = {leaf for root in normal_roots for leaf in directory.children(root)}
         leaves = [leaf for leaf in directory.leaf_ids if leaf in children]
         diagnostics['leaf_count'] = len(leaves)
-        selected_leaves = _retained(call('leaves', noul_method,
-            _noul_spec(directory, leaves), deepcopy(original_state)), leaves)
+        selected_leaves = []
+        if normal_roots:
+            selected_leaves = _retained(call('leaves', noul_method,
+                _noul_spec(directory, leaves), deepcopy(original_state)), leaves, leaf_gate)
         diagnostics['retained_leaf_count'] = len(selected_leaves)
-        if not selected_leaves:
+        if not selected_leaves and not selected_shortcuts:
             return result('abstain', 'no_leaves')
 
-        pool = directory.subset(selected_leaves)
+        pool = directory.subset(selected_leaves + selected_shortcuts)
+        if candidate_filter is not None:
+            pool = _filtered_pool(pool, candidate_filter)
         diagnostics['candidate_count'] = len(pool) - 1
+        if not diagnostics['candidate_count']:
+            return result('abstain', 'no_candidates')
         if diagnostics['candidate_count'] > FINAL_CANDIDATE_LIMIT:
             return result('abstain', 'candidate_limit_exceeded')
-        if directory.members(selected_leaves) == directory.members(roots):
+        if set(pool) - {'none'} == set(directory.members(roots)):
             return result('abstain', 'full_catalog_retained')
 
         choice, confidence = _choice_fields(call('final', choose_method,
             question, deepcopy(original_state), deepcopy(pool)), pool)
-        if confidence < FINAL_CONFIDENCE_GATE:
+        if confidence < final_gate:
             return result('abstain', 'final_confidence_below_gate', confidence=confidence)
         return result('none' if choice == 'none' else 'selected', 'final_choice', choice, confidence)
     except _DeadlineExceeded:
         return result('abstain', 'deadline_exceeded')
     except _InvalidResponse:
         return result('error', 'invalid_provider_response')
+    except _InvalidCandidateFilter:
+        return result('error', 'invalid_candidate_filter')
     except TimeoutError:
         return result('error', 'provider_timeout')
     except Exception:

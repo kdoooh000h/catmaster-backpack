@@ -1,277 +1,522 @@
 {
   "version": 1,
   "provenance": {
-    "source": "generic_task_and_operation_template",
-    "scope": "Shared task directory for Skill, command, plugin tools and static MCP resources. No capability IDs or guidance bodies."
+    "source": "generic_task_and_direct_operation_template_v2",
+    "scope": "Two directory levels, then one exact capability. Guidance and execution are disjoint leaf modes; common prerequisites do not imply operation membership.",
+    "classification_contract": 4,
+    "membership_gate": 0.4,
+    "leaf_kinds": {
+      "implementation": [
+        "skill",
+        "command"
+      ],
+      "architecture": [
+        "skill",
+        "command"
+      ],
+      "debugging": [
+        "skill",
+        "command"
+      ],
+      "git_review": [
+        "skill",
+        "command"
+      ],
+      "functional_qa": [
+        "skill",
+        "command"
+      ],
+      "code_execution": [
+        "tool",
+        "resource"
+      ],
+      "ios_features": [
+        "skill",
+        "command"
+      ],
+      "simulator_runtime": [
+        "skill",
+        "command"
+      ],
+      "asc_admin": [
+        "skill",
+        "command"
+      ],
+      "app_distribution": [
+        "skill",
+        "command"
+      ],
+      "store_assets": [
+        "skill",
+        "command"
+      ],
+      "apple_execution": [
+        "tool",
+        "resource"
+      ],
+      "interface_design": [
+        "skill",
+        "command"
+      ],
+      "animation": [
+        "skill",
+        "command"
+      ],
+      "image_materials": [
+        "skill",
+        "command"
+      ],
+      "visual_execution": [
+        "tool",
+        "resource"
+      ],
+      "evidence_research": [
+        "skill",
+        "command"
+      ],
+      "browser_gpt": [
+        "skill",
+        "command"
+      ],
+      "context_graph": [
+        "skill",
+        "command"
+      ],
+      "information_execution": [
+        "tool",
+        "resource"
+      ],
+      "infra_services": [
+        "skill",
+        "command"
+      ],
+      "accounts_credentials": [
+        "skill",
+        "command"
+      ],
+      "mac_storage": [
+        "skill",
+        "command"
+      ],
+      "domains_names": [
+        "skill",
+        "command"
+      ],
+      "operations_execution": [
+        "tool",
+        "resource"
+      ],
+      "planning_specs": [
+        "skill",
+        "command"
+      ],
+      "triage_coordination": [
+        "skill",
+        "command"
+      ],
+      "product_marketing": [
+        "skill",
+        "command"
+      ],
+      "writing_knowledge": [
+        "skill",
+        "command"
+      ],
+      "content_execution": [
+        "tool",
+        "resource"
+      ],
+      "ai_routing": [
+        "skill",
+        "command"
+      ],
+      "agent_governance": [
+        "skill",
+        "command"
+      ],
+      "agent_evaluation": [
+        "skill",
+        "command"
+      ],
+      "agent_execution": [
+        "tool",
+        "resource"
+      ],
+      "data_query": [
+        "tool",
+        "resource"
+      ],
+      "database_schema": [
+        "tool",
+        "resource"
+      ],
+      "file_content": [
+        "tool",
+        "resource"
+      ],
+      "file_metadata": [
+        "tool",
+        "resource"
+      ],
+      "file_search": [
+        "tool",
+        "resource"
+      ],
+      "file_edit": [
+        "tool",
+        "resource"
+      ],
+      "data_tables": [
+        "tool",
+        "resource"
+      ],
+      "database_guidance": [
+        "skill",
+        "command"
+      ],
+      "file_guidance": [
+        "skill",
+        "command"
+      ],
+      "table_guidance": [
+        "skill",
+        "command"
+      ],
+      "git_execution": [
+        "tool",
+        "resource"
+      ]
+    },
+    "secondary_membership_gate": 0.4
   },
   "roots": [
     {
       "id": "software",
-      "label": "开发、架构、调试与质量",
-      "description": "代码实现与原型：按规格或票据实现功能，落地工程改动，构建用于验证设计的临时原型。；架构、模块与领域模型：设计模块接口和边界，深化模块，改善可测试性，梳理领域术语、词汇表、架构决策与代码知识图谱。；故障诊断与调试：调查程序崩溃、错误、性能回退；诊断无复现环境问题；使用 Node/V8 检查器、断点、调用栈或 Playwright 调试。；Git 协作、审查与 PR：审查改动、分支和 PR，解决合并冲突，协调实施所有权及 worktree 集成，撰写 PR 说明，审查不必要的代码层次。；功能验收、测试与账户状态：规划测试覆盖，验证真实网页或 iOS 用户流程，验证本地预览归属，开展 TDD、E2E、发布验收，准备测试账号状态或交接测试。",
+      "label": "软件开发、架构与测试 / software",
+      "description": "软件功能实现、架构设计、调试、代码审查和测试方法；运行代码、构建与测试的专用执行能力。通用文件读取不是软件实现能力。",
       "children": [
         "implementation",
         "architecture",
         "debugging",
         "git_review",
-        "functional_qa"
+        "functional_qa",
+        "code_execution",
+        "git_execution"
       ]
     },
     {
       "id": "apple",
-      "label": "iOS、macOS 与 App Store 交付",
-      "description": "SwiftUI、iOS 功能与 Web 封装：实现或重构 SwiftUI 视图，处理导航、Observation、Liquid Glass、Siri、Shortcuts、App Intents、widgets；用 Capacitor 封装现有网页/PWA。；Simulator、设备调试与性能：构建并运行 Simulator 应用、预览或镜像 SwiftUI；调试启动和运行、ETTrace CPU 延迟、内存泄漏、retain cycles、SwiftUI 卡顿；租用已有 Simulator。；App Store Connect 配置与工作流：创建 App 记录，配置 asc 认证及团队访问、bundle ID、签名证书和 provisioning；解析 ID、CLI 参数与分页；定义和协调 ASC 多阶段工作流。；构建、分发、TestFlight 与审核：生成 IPA/PKG、archive、export、upload、build numbers，跟踪或清理 build；发布、提交或修复审核；分发 TestFlight；诊断 beta 崩溃反馈；macOS notarization。；商店元数据、截图与变现：本地化或同步 App Store 描述、关键词和更新说明；ASO；订阅/IAP 文案、跨地区定价、RevenueCat 目录；截图尺寸、Simulator 截图、构图和上传。",
+      "label": "Apple 应用、设备与分发 / Apple",
+      "description": "iOS/macOS 功能、SwiftUI、模拟器和设备、签名、商店资料与应用分发的方法或专用操作。",
       "children": [
         "ios_features",
         "simulator_runtime",
         "asc_admin",
         "app_distribution",
-        "store_assets"
+        "store_assets",
+        "apple_execution"
       ]
     },
     {
       "id": "visuals",
-      "label": "界面设计、动画与视觉素材",
-      "description": "网页和移动界面设计：设计 landing page、portfolio 或界面改版；实现产品视觉方向、SwiftUI UI 模式、Liquid Glass；评审界面可用性和初始用户体验。；GSAP 和界面动效：制作 DOM/SVG tween、timelines、ScrollTrigger、parallax、GSAP plugins、React/Vue/Svelte 集成、缓动和工具函数；优化动画 FPS 或减少卡顿。；图像、Logo、插画与角色素材：创作或评审 Logo、raster icons、wordmarks、视觉方向和图像资产；设计宠物材质、角色姿态和动画、鱼类插画、天空或流水环境图层。",
+      "label": "界面、视觉与动效 / design",
+      "description": "界面排版、网页作品集、字体层级、图像素材与动画的设计方法，或专用设计编辑和生成操作。",
       "children": [
         "interface_design",
         "animation",
-        "image_materials"
+        "image_materials",
+        "visual_execution"
       ]
     },
     {
       "id": "information",
-      "label": "检索、浏览器与信息整理",
-      "description": "公开检索、证据与调研：检索并阅读公开网页、GitHub、社交/视频/RSS 等内容；多来源高可信研究、文档/API 比较、限定路线证据筛选；规划需求或替代方案调查。；浏览器交互、GPT 咨询与自动化：操控授权网页控件、登录后浏览器界面、Playwright/Electron persistent handles；运行专属 GPT 咨询对话或已选定的 legacy browser workflow；创建 ASC App 的浏览器表单。；日志、JSON、图谱与上下文视图：制作日志或 JSON 的紧凑事实视图；构建、更新、检查代码知识图谱；根据已有图谱回答代码问题；整理移交材料。",
+      "label": "信息检索与浏览器 / research",
+      "description": "公开信息与证据调研、浏览器交互、知识图谱的方法；直接网页搜索、浏览器操作和已登记信息资源读取。",
       "children": [
         "evidence_research",
         "browser_gpt",
-        "context_graph"
+        "context_graph",
+        "information_execution"
       ]
     },
     {
       "id": "operations",
-      "label": "基础设施、凭据与本机环境",
-      "description": "服务、部署、Docker 与运行环境：检查服务拓扑、数据库/部署集成层，管理 Docker/Compose 和磁盘用量；部署 cb 开发或 staging；协调 Vercel/Apple 发布，执行 Mac 到 cb 迁移，解析 SSH 目标。；认证、凭据与服务账号：通过受控引用检查或使用凭据；准备认证、账户与 QA 状态；配置 ASC API 认证与签名，准备安全 CI/服务接入或人类交互 wizard。；Mac 储存与可恢复清理：审计 Mac 储存占用，对已批准可重建资源分批清理或移入 Trash，验证所有权、回滚和恢复；不进行永久删除。；项目命名、域名与上线链接：根据项目定位提出名字；查询域名可用性和注册/续费价格，规划 Cloudflare 注册或子域名；准备 pricing、privacy、terms、support 等上线页面和链接。",
+      "label": "环境、账户与服务 / operations",
+      "description": "部署、服务、认证凭据、储存治理和域名的方法，或直接操作这些系统的专用工具。查询单个文件的大小时间由文件目录处理。",
       "children": [
         "infra_services",
         "accounts_credentials",
         "mac_storage",
-        "domains_names"
+        "domains_names",
+        "operations_execution"
       ]
     },
     {
       "id": "product_planning",
-      "label": "需求规划、产品运营与写作",
-      "description": "访谈、计划、规格与任务拆解：反复访谈或质询设计与计划，生成问卷、规格和 tracer-bullet tickets；规划跨会话大任务，提炼决策与架构文档。；议题分诊、工程流程与回顾：分诊 issue/PR，验证和安排执行；搭建 issue 标签与文档结构，协调项目发布和实施、任务交接，开展编码复盘或对话 handoff。；产品经营、定价和推广：准备产品事实更新、launch page、付费墙和升级文案，评估分享机会或增长实验；维护产品 Agent/账号/生态/视觉数据，研究和比较产品候选价值。；文档、知识教学与说明：撰写规格、PR、更新说明、移交文档、代理使用文档与 Skill/AGENTS/CLAUDE 指导；教授概念，重新解释未理解的回答，记录术语和决策。",
+      "label": "产品规划与写作 / planning and writing",
+      "description": "需求拆解、方案规格、工程协调、内容写作、知识说明和产品推广方法；专用文档、沟通或发布操作。",
       "children": [
         "planning_specs",
         "triage_coordination",
         "product_marketing",
-        "writing_knowledge"
+        "writing_knowledge",
+        "content_execution"
       ]
     },
     {
       "id": "agent_systems",
-      "label": "Agent、能力管理与评测",
-      "description": "Jev、TypeSafe 与 AI 判断集成：用 Jev CLI 做分类、筛选、路由、排名、yes/no 或评分；开发 TypeSafe typed judgment 软件、guardrails、模型/Agent 路由或交互集成。；Agent 规则、Skill 与能力管理：审计、比较、修改或恢复 Agent 规则；撰写 Skills、AGENTS/CLAUDE 文档；核对能力按需加载及无关任务弃权；选择或教授工程 Skill 工作流。；Agent 方案实验与协作验收：比较候选指令和机制、盲测 Agent Lab、审查评测和晋级；测试人类/Agent 协作、角色、持久性和项目隔离；解释路由与能力方案的质量边界。",
+      "label": "Agent 与能力管理 / agents",
+      "description": "模型选择、能力路由、Agent 规则、评测和协作的方法，或专门的 Agent 管理执行能力。",
       "children": [
         "ai_routing",
         "agent_governance",
-        "agent_evaluation"
+        "agent_evaluation",
+        "agent_execution"
       ]
     },
     {
       "id": "data_content",
-      "label": "数据查询、文件与表格",
-      "description": "数据库、SQL 与数据查询：查询数据库、表结构和业务数据；执行明确要求的 SQL、聚合、筛选和数据分析；检查查询结果。；文件、文档与静态资源：搜索或读取文件、文档、日志、知识库和静态资源；获取指定内容，编辑或整理文件。；表格与数据转换：制作和编辑电子表格、CSV、JSON 等结构化数据，转换、整理、导出和核对记录。",
+      "label": "文件、数据库与表格 / files and data",
+      "description": "直接读取或修改文件、查大小/修改时间/权限/类型、搜索文件路径，查询数据库 schema/表/字段、执行 SQL 或处理表格；另有独立方法指导。",
       "children": [
         "data_query",
+        "database_schema",
         "file_content",
-        "data_tables"
+        "file_metadata",
+        "file_search",
+        "file_edit",
+        "data_tables",
+        "database_guidance",
+        "file_guidance",
+        "table_guidance"
       ]
     }
   ],
   "leaves": [
     {
       "id": "implementation",
-      "label": "代码实现与原型",
-      "description": "按规格或票据实现功能，落地工程改动，构建用于验证设计的临时原型。",
-      "members": []
+      "label": "方法指导：代码实现与原型",
+      "description": "按规格或票据实现功能，落地工程改动，构建用于验证设计的临时原型。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "architecture",
-      "label": "架构、模块与领域模型",
-      "description": "设计模块接口和边界，深化模块，改善可测试性，梳理领域术语、词汇表、架构决策与代码知识图谱。",
-      "members": []
+      "label": "方法指导：架构、模块与领域模型",
+      "description": "设计模块接口和边界，深化模块，改善可测试性，梳理领域术语、词汇表、架构决策与代码知识图谱。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "debugging",
-      "label": "故障诊断与调试",
-      "description": "调查程序崩溃、错误、性能回退；诊断无复现环境问题；使用 Node/V8 检查器、断点、调用栈或 Playwright 调试。",
-      "members": []
+      "label": "方法指导：故障诊断与调试",
+      "description": "调查程序崩溃、错误、性能回退；诊断无复现环境问题；使用 Node/V8 检查器、断点、调用栈或 Playwright 调试。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "git_review",
-      "label": "Git 协作、审查与 PR",
-      "description": "审查改动、分支和 PR，解决合并冲突，协调实施所有权及 worktree 集成，撰写 PR 说明，审查不必要的代码层次。",
-      "members": []
+      "label": "方法指导：Git 协作、审查与 PR",
+      "description": "审查改动、分支和 PR，解决合并冲突，协调实施所有权及 worktree 集成，撰写 PR 说明，审查不必要的代码层次。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "functional_qa",
-      "label": "功能验收、测试与账户状态",
-      "description": "规划测试覆盖，验证真实网页或 iOS 用户流程，验证本地预览归属，开展 TDD、E2E、发布验收，准备测试账号状态或交接测试。",
-      "members": []
+      "label": "方法指导：功能验收、测试与账户状态",
+      "description": "规划测试覆盖，验证真实网页或 iOS 用户流程，验证本地预览归属，开展 TDD、E2E、发布验收，准备测试账号状态或交接测试。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
+    },
+    {
+      "id": "code_execution",
+      "label": "直接执行：运行代码、构建或测试",
+      "description": "工具直接运行代码、构建、测试、调试命令或代码修改；只读写任意文件的工具不属于此类。"
     },
     {
       "id": "ios_features",
-      "label": "SwiftUI、iOS 功能与 Web 封装",
-      "description": "实现或重构 SwiftUI 视图，处理导航、Observation、Liquid Glass、Siri、Shortcuts、App Intents、widgets；用 Capacitor 封装现有网页/PWA。",
-      "members": []
+      "label": "方法指导：SwiftUI、iOS 功能与 Web 封装",
+      "description": "实现或重构 SwiftUI 视图，处理导航、Observation、Liquid Glass、Siri、Shortcuts、App Intents、widgets；用 Capacitor 封装现有网页/PWA。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "simulator_runtime",
-      "label": "Simulator、设备调试与性能",
-      "description": "构建并运行 Simulator 应用、预览或镜像 SwiftUI；调试启动和运行、ETTrace CPU 延迟、内存泄漏、retain cycles、SwiftUI 卡顿；租用已有 Simulator。",
-      "members": []
+      "label": "方法指导：Simulator、设备调试与性能",
+      "description": "构建并运行 Simulator 应用、预览或镜像 SwiftUI；调试启动和运行、ETTrace CPU 延迟、内存泄漏、retain cycles、SwiftUI 卡顿；租用已有 Simulator。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "asc_admin",
-      "label": "App Store Connect 配置与工作流",
-      "description": "创建 App 记录，配置 asc 认证及团队访问、bundle ID、签名证书和 provisioning；解析 ID、CLI 参数与分页；定义和协调 ASC 多阶段工作流。",
-      "members": []
+      "label": "方法指导：App Store Connect 配置与工作流",
+      "description": "创建 App 记录，配置 asc 认证及团队访问、bundle ID、签名证书和 provisioning；解析 ID、CLI 参数与分页；定义和协调 ASC 多阶段工作流。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "app_distribution",
-      "label": "构建、分发、TestFlight 与审核",
-      "description": "生成 IPA/PKG、archive、export、upload、build numbers，跟踪或清理 build；发布、提交或修复审核；分发 TestFlight；诊断 beta 崩溃反馈；macOS notarization。",
-      "members": []
+      "label": "方法指导：构建、分发、TestFlight 与审核",
+      "description": "生成 IPA/PKG、archive、export、upload、build numbers，跟踪或清理 build；发布、提交或修复审核；分发 TestFlight；诊断 beta 崩溃反馈；macOS notarization。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "store_assets",
-      "label": "商店元数据、截图与变现",
-      "description": "本地化或同步 App Store 描述、关键词和更新说明；ASO；订阅/IAP 文案、跨地区定价、RevenueCat 目录；截图尺寸、Simulator 截图、构图和上传。",
-      "members": []
+      "label": "方法指导：商店元数据、截图与变现",
+      "description": "本地化或同步 App Store 描述、关键词和更新说明；ASO；订阅/IAP 文案、跨地区定价、RevenueCat 目录；截图尺寸、Simulator 截图、构图和上传。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
+    },
+    {
+      "id": "apple_execution",
+      "label": "直接执行：设备、模拟器与 App Store 操作",
+      "description": "专用工具直接构建、运行或检查 Apple 应用、Simulator、设备，或操作 App Store、签名、上传分发；普通文件读取不属于此类。"
     },
     {
       "id": "interface_design",
-      "label": "网页和移动界面设计",
-      "description": "设计 landing page、portfolio 或界面改版；实现产品视觉方向、SwiftUI UI 模式、Liquid Glass；评审界面可用性和初始用户体验。",
-      "members": []
+      "label": "方法指导：网页和移动界面设计",
+      "description": "设计 landing page、portfolio 或界面改版；实现产品视觉方向、SwiftUI UI 模式、Liquid Glass；评审界面可用性和初始用户体验。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "animation",
-      "label": "GSAP 和界面动效",
-      "description": "制作 DOM/SVG tween、timelines、ScrollTrigger、parallax、GSAP plugins、React/Vue/Svelte 集成、缓动和工具函数；优化动画 FPS 或减少卡顿。",
-      "members": []
+      "label": "方法指导：GSAP 和界面动效",
+      "description": "制作 DOM/SVG tween、timelines、ScrollTrigger、parallax、GSAP plugins、React/Vue/Svelte 集成、缓动和工具函数；优化动画 FPS 或减少卡顿。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "image_materials",
-      "label": "图像、Logo、插画与角色素材",
-      "description": "创作或评审 Logo、raster icons、wordmarks、视觉方向和图像资产；设计宠物材质、角色姿态和动画、鱼类插画、天空或流水环境图层。",
-      "members": []
+      "label": "方法指导：图像、Logo、插画与角色素材",
+      "description": "创作或评审 Logo、raster icons、wordmarks、视觉方向和图像资产；设计宠物材质、角色姿态和动画、鱼类插画、天空或流水环境图层。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
+    },
+    {
+      "id": "visual_execution",
+      "label": "直接执行：设计、图像与动画操作",
+      "description": "工具直接创建、编辑、生成或检查设计稿、图片和动画；普通文件读取、写入与图片文件字节读取不等于视觉编辑。"
     },
     {
       "id": "evidence_research",
-      "label": "公开检索、证据与调研",
-      "description": "检索并阅读公开网页、GitHub、社交/视频/RSS 等内容；多来源高可信研究、文档/API 比较、限定路线证据筛选；规划需求或替代方案调查。",
-      "members": []
+      "label": "方法指导：公开检索、证据与调研",
+      "description": "检索并阅读公开网页、GitHub、社交/视频/RSS 等内容；多来源高可信研究、文档/API 比较、限定路线证据筛选；规划需求或替代方案调查。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "browser_gpt",
-      "label": "浏览器交互、GPT 咨询与自动化",
-      "description": "操控授权网页控件、登录后浏览器界面、Playwright/Electron persistent handles；运行专属 GPT 咨询对话或已选定的 legacy browser workflow；创建 ASC App 的浏览器表单。",
-      "members": []
+      "label": "方法指导：浏览器交互、GPT 咨询与自动化",
+      "description": "操控授权网页控件、登录后浏览器界面、Playwright/Electron persistent handles；运行专属 GPT 咨询对话或已选定的 legacy browser workflow；创建 ASC App 的浏览器表单。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "context_graph",
-      "label": "日志、JSON、图谱与上下文视图",
-      "description": "制作日志或 JSON 的紧凑事实视图；构建、更新、检查代码知识图谱；根据已有图谱回答代码问题；整理移交材料。",
-      "members": []
+      "label": "方法指导：日志、JSON、图谱与上下文视图",
+      "description": "制作日志或 JSON 的紧凑事实视图；构建、更新、检查代码知识图谱；根据已有图谱回答代码问题；整理移交材料。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
+    },
+    {
+      "id": "information_execution",
+      "label": "直接执行：网页检索、浏览器或信息资源",
+      "description": "工具直接搜索网页、操作浏览器、查询专用知识库或读取已登记信息资源；任意本地文件读取由文件目录处理。"
     },
     {
       "id": "infra_services",
-      "label": "服务、部署、Docker 与运行环境",
-      "description": "检查服务拓扑、数据库/部署集成层，管理 Docker/Compose 和磁盘用量；部署 cb 开发或 staging；协调 Vercel/Apple 发布，执行 Mac 到 cb 迁移，解析 SSH 目标。",
-      "members": []
+      "label": "方法指导：服务、部署、Docker 与运行环境",
+      "description": "检查服务拓扑、数据库/部署集成层，管理 Docker/Compose 和磁盘用量；部署 cb 开发或 staging；协调 Vercel/Apple 发布，执行 Mac 到 cb 迁移，解析 SSH 目标。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "accounts_credentials",
-      "label": "认证、凭据与服务账号",
-      "description": "通过受控引用检查或使用凭据；准备认证、账户与 QA 状态；配置 ASC API 认证与签名，准备安全 CI/服务接入或人类交互 wizard。",
-      "members": []
+      "label": "方法指导：认证、凭据与服务账号",
+      "description": "通过受控引用检查或使用凭据；准备认证、账户与 QA 状态；配置 ASC API 认证与签名，准备安全 CI/服务接入或人类交互 wizard。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "mac_storage",
-      "label": "Mac 储存与可恢复清理",
-      "description": "审计 Mac 储存占用，对已批准可重建资源分批清理或移入 Trash，验证所有权、回滚和恢复；不进行永久删除。",
-      "members": []
+      "label": "方法指导：Mac 储存与可恢复清理",
+      "description": "审计 Mac 储存占用，对已批准可重建资源分批清理或移入 Trash，验证所有权、回滚和恢复；不进行永久删除。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "domains_names",
-      "label": "项目命名、域名与上线链接",
-      "description": "根据项目定位提出名字；查询域名可用性和注册/续费价格，规划 Cloudflare 注册或子域名；准备 pricing、privacy、terms、support 等上线页面和链接。",
-      "members": []
+      "label": "方法指导：项目命名、域名与上线链接",
+      "description": "根据项目定位提出名字；查询域名可用性和注册/续费价格，规划 Cloudflare 注册或子域名；准备 pricing、privacy、terms、support 等上线页面和链接。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
+    },
+    {
+      "id": "operations_execution",
+      "label": "直接执行：服务、账户、储存与域名操作",
+      "description": "专用工具直接部署、管理环境或账户、受控凭据、域名、储存资源；普通文件属性查询和文件读写不属于此类。"
     },
     {
       "id": "planning_specs",
-      "label": "访谈、计划、规格与任务拆解",
-      "description": "反复访谈或质询设计与计划，生成问卷、规格和 tracer-bullet tickets；规划跨会话大任务，提炼决策与架构文档。",
-      "members": []
+      "label": "方法指导：访谈、计划、规格与任务拆解",
+      "description": "反复访谈或质询设计与计划，生成问卷、规格和 tracer-bullet tickets；规划跨会话大任务，提炼决策与架构文档。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "triage_coordination",
-      "label": "议题分诊、工程流程与回顾",
-      "description": "分诊 issue/PR，验证和安排执行；搭建 issue 标签与文档结构，协调项目发布和实施、任务交接，开展编码复盘或对话 handoff。",
-      "members": []
+      "label": "方法指导：议题分诊、工程流程与回顾",
+      "description": "分诊 issue/PR，验证和安排执行；搭建 issue 标签与文档结构，协调项目发布和实施、任务交接，开展编码复盘或对话 handoff。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "product_marketing",
-      "label": "产品经营、定价和推广",
-      "description": "准备产品事实更新、launch page、付费墙和升级文案，评估分享机会或增长实验；维护产品 Agent/账号/生态/视觉数据，研究和比较产品候选价值。",
-      "members": []
+      "label": "方法指导：产品经营、定价和推广",
+      "description": "准备产品事实更新、launch page、付费墙和升级文案，评估分享机会或增长实验；维护产品 Agent/账号/生态/视觉数据，研究和比较产品候选价值。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "writing_knowledge",
-      "label": "文档、知识教学与说明",
-      "description": "撰写规格、PR、更新说明、移交文档、代理使用文档与 Skill/AGENTS/CLAUDE 指导；教授概念，重新解释未理解的回答，记录术语和决策。",
-      "members": []
+      "label": "方法指导：写作、内容创作与知识说明",
+      "description": "提供文章、博客、短文、介绍、说明、技术文档、教学内容的写作与编辑方法；写作指导不是对任意专业领域事实的专家判断。由 Agent 应用方法产出内容。"
+    },
+    {
+      "id": "content_execution",
+      "label": "直接执行：文档、沟通或发布操作",
+      "description": "工具直接编辑特定文档、发送或发布内容、操作产品记录；任意文件读写不等于写作方法或专业领域知识。"
     },
     {
       "id": "ai_routing",
-      "label": "Jev、TypeSafe 与 AI 判断集成",
-      "description": "用 Jev CLI 做分类、筛选、路由、排名、yes/no 或评分；开发 TypeSafe typed judgment 软件、guardrails、模型/Agent 路由或交互集成。",
-      "members": []
+      "label": "方法指导：Jev、TypeSafe 与 AI 判断集成",
+      "description": "用 Jev CLI 做分类、筛选、路由、排名、yes/no 或评分；开发 TypeSafe typed judgment 软件、guardrails、模型/Agent 路由或交互集成。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "agent_governance",
-      "label": "Agent 规则、Skill 与能力管理",
-      "description": "审计、比较、修改或恢复 Agent 规则；撰写 Skills、AGENTS/CLAUDE 文档；核对能力按需加载及无关任务弃权；选择或教授工程 Skill 工作流。",
-      "members": []
+      "label": "方法指导：Agent 规则、Skill 与能力管理",
+      "description": "审计、比较、修改或恢复 Agent 规则；撰写 Skills、AGENTS/CLAUDE 文档；核对能力按需加载及无关任务弃权；选择或教授工程 Skill 工作流。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
     },
     {
       "id": "agent_evaluation",
-      "label": "Agent 方案实验与协作验收",
-      "description": "比较候选指令和机制、盲测 Agent Lab、审查评测和晋级；测试人类/Agent 协作、角色、持久性和项目隔离；解释路由与能力方案的质量边界。",
-      "members": []
+      "label": "方法指导：Agent 方案实验与协作验收",
+      "description": "比较候选指令和机制、盲测 Agent Lab、审查评测和晋级；测试人类/Agent 协作、角色、持久性和项目隔离；解释路由与能力方案的质量边界。 提供专门方法、方案或步骤供 Agent 应用；不替代实际工具调用。"
+    },
+    {
+      "id": "agent_execution",
+      "label": "直接执行：Agent、能力或评测操作",
+      "description": "工具直接选择模型、管理 Agent/能力、运行专用评测和协作控制；仅能读配置文件的工具不属于此类。"
     },
     {
       "id": "data_query",
-      "label": "数据库、SQL 与数据查询",
-      "description": "查询数据库、表结构和业务数据；执行明确要求的 SQL、聚合、筛选和数据分析；检查查询结果。",
-      "members": []
+      "label": "直接执行：SQL 与业务数据查询",
+      "description": "直接执行 SQL SELECT、聚合、筛选、数据库业务数据查询，返回真实结果行；不含使用教程、仅查表结构或普通文件读取。"
+    },
+    {
+      "id": "database_schema",
+      "label": "直接执行：数据库表和字段 / schema",
+      "description": "直接列出或检索数据库对象、表名、字段、列类型与 schema 元数据；不含连接教程和 SQL 编写指导。"
     },
     {
       "id": "file_content",
-      "label": "文件、文档与静态资源",
-      "description": "搜索或读取文件、文档、日志、知识库和静态资源；获取指定内容，编辑或整理文件。",
-      "members": []
+      "label": "直接执行：读取文件正文或媒体",
+      "description": "直接读取本地文件完整或部分正文、多个文件内容、媒体字节；不修改文件。查询大小、修改时间和类型归文件属性。"
+    },
+    {
+      "id": "file_metadata",
+      "label": "直接执行：文件属性 / metadata, stat",
+      "description": "直接读取文件或目录的属性：size、creation/modified time、permissions、type、stat/file info；或列出服务允许访问的目录 allowed directories/access boundaries。不读取文件正文。"
+    },
+    {
+      "id": "file_search",
+      "label": "直接执行：文件路径搜索与目录浏览",
+      "description": "直接按名称或路径查找文件、递归搜索、列目录和目录树，返回路径或条目；不读取正文、不查数据库表。"
+    },
+    {
+      "id": "file_edit",
+      "label": "直接执行：修改文件与目录",
+      "description": "直接写入或编辑文件正文、创建目录、移动或重命名文件；不自动获得执行授权，不代表代码或写作专业方法。"
     },
     {
       "id": "data_tables",
-      "label": "表格与数据转换",
-      "description": "制作和编辑电子表格、CSV、JSON 等结构化数据，转换、整理、导出和核对记录。",
-      "members": []
+      "label": "直接执行：表格和结构化数据转换",
+      "description": "专用工具直接处理电子表格、CSV/JSON 数据转换、导出、核对记录；只读写任意文本文件不足以完成此类操作。"
+    },
+    {
+      "id": "database_guidance",
+      "label": "方法指导：数据库探索与 SQL 方法",
+      "description": "提供连接和配置数据库（connection, DSN, setup）、探索表和 schema、设计编写 SQL、查询优化的方法；说明由 Agent 应用，不直接返回实时数据库结果。"
+    },
+    {
+      "id": "file_guidance",
+      "label": "方法指导：文件与文档处理方法",
+      "description": "指导文件检索、阅读、编辑、文档处理流程；说明由 Agent 应用，不直接读取实时文件正文或属性。"
+    },
+    {
+      "id": "table_guidance",
+      "label": "方法指导：表格与结构化数据方法",
+      "description": "指导制作表格、CSV/JSON 转换、数据整理和核对方法；说明由 Agent 应用，不替代实际表格操作。"
+    },
+    {
+      "id": "git_execution",
+      "label": "直接执行：Git、PR 与代码审查数据",
+      "description": "专用工具直接读取 Git 状态、commit、branch、PR diff、review、issue、CI 或执行 Git/PR 操作；普通文件读取不属于此类。"
     }
   ]
 }

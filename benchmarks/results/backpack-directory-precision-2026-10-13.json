@@ -1,0 +1,545 @@
+{
+  "schema": "catmaster-backpack-directory-precision-public/v1",
+  "date": "2026-10-13",
+  "version": "0.3.1",
+  "redaction": "Aggregate usage counts and public capability names only; no credentials, raw responses, private logs, or local runtime paths.",
+  "scope": {
+    "catalog_capabilities": 24,
+    "frozen_needs": 9,
+    "positive_needs": 7,
+    "negative_needs": 2,
+    "same_need_and_gold_sha256": "e1d43b916f593213b63f0629c6b8194b62b3a61fa30637ea803336e5cbf84dcc",
+    "experiment": "single_same_fixture_regression",
+    "new_holdout": false,
+    "routing_business_invocations": 0
+  },
+  "comparison": {
+    "baseline": {
+      "source_version": "frozen-baseline-0.3.0",
+      "gates": {
+        "roots": 0.2,
+        "leaves": 0.2,
+        "hierarchy_default_final": 0.6,
+        "effective_final": 0.65,
+        "plugin_final": 0.65,
+        "membership": 0.2,
+        "candidate_limit": 96
+      },
+      "summary": {
+        "case_count": 9,
+        "positive_count": 7,
+        "negative_count": 2,
+        "passed_cases": 5,
+        "accepted_right_kind_and_name": 4,
+        "wrong_accepted": 0,
+        "strict_negative_passes": 1,
+        "negative_safe_abstentions": 1,
+        "positive_gold_retention": {
+          "roots": {
+            "retained": 7,
+            "dropped": 0,
+            "unobserved": 0
+          },
+          "leaves": {
+            "retained": 6,
+            "dropped": 1,
+            "unobserved": 0
+          },
+          "pool": {
+            "retained": 6,
+            "dropped": 1,
+            "unobserved": 0
+          }
+        },
+        "usage": {
+          "known_input_tokens": 71731,
+          "known_output_tokens": 6000,
+          "known_total_tokens": 77731,
+          "known_cases": 9,
+          "partial_usage_cases": 0,
+          "unknown_cases": 0,
+          "complete": true,
+          "total_tokens": 77731
+        },
+        "known_selector_seconds": 24.534,
+        "unknown_selector_duration_cases": 0
+      },
+      "selector_average_seconds": 2.726,
+      "cases": [
+        {
+          "case": "schema_actual",
+          "status": "unavailable",
+          "kind": null,
+          "name": null,
+          "passed": false,
+          "wrong_accepted": false,
+          "selector_seconds": 2.974
+        },
+        {
+          "case": "region_actual",
+          "status": "selected",
+          "kind": "tool",
+          "name": "execute_sql",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 3.25
+        },
+        {
+          "case": "text_actual",
+          "status": "selected",
+          "kind": "tool",
+          "name": "read_text_file",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 4.022
+        },
+        {
+          "case": "design_mixed",
+          "status": "selected",
+          "kind": "skill",
+          "name": "frontend-design",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 2.918
+        },
+        {
+          "case": "schema_zh",
+          "status": "unavailable",
+          "kind": null,
+          "name": null,
+          "passed": false,
+          "wrong_accepted": false,
+          "selector_seconds": 2.564
+        },
+        {
+          "case": "info_synonym",
+          "status": "unavailable",
+          "kind": null,
+          "name": null,
+          "passed": false,
+          "wrong_accepted": false,
+          "selector_seconds": 1.91
+        },
+        {
+          "case": "backend_mixed",
+          "status": "selected",
+          "kind": "skill",
+          "name": "senior-backend",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 3.18
+        },
+        {
+          "case": "absent_geology",
+          "status": "none",
+          "kind": null,
+          "name": null,
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 2.964
+        },
+        {
+          "case": "absent_language",
+          "status": "unavailable",
+          "kind": null,
+          "name": null,
+          "passed": false,
+          "wrong_accepted": false,
+          "selector_seconds": 0.752
+        }
+      ]
+    },
+    "current": {
+      "source_version": "staged-mode-and-shortcuts",
+      "gates": {
+        "roots": 0.1,
+        "leaves": 0.3,
+        "hierarchy_default_final": 0.6,
+        "effective_final": 0.7,
+        "plugin_final": 0.7,
+        "membership": 0.4,
+        "secondary_membership": 0.4,
+        "delivery_mode": 0.7,
+        "candidate_limit": 96
+      },
+      "summary": {
+        "case_count": 9,
+        "positive_count": 7,
+        "negative_count": 2,
+        "passed_cases": 7,
+        "accepted_right_kind_and_name": 7,
+        "wrong_accepted": 0,
+        "strict_negative_passes": 0,
+        "negative_safe_abstentions": 2,
+        "positive_gold_retention": {
+          "roots": {
+            "retained": 7,
+            "dropped": 0,
+            "unobserved": 0
+          },
+          "leaves": {
+            "retained": 7,
+            "dropped": 0,
+            "unobserved": 0
+          },
+          "pool": {
+            "retained": 7,
+            "dropped": 0,
+            "unobserved": 0
+          }
+        },
+        "usage": {
+          "known_input_tokens": 43859,
+          "known_output_tokens": 3120,
+          "known_total_tokens": 46979,
+          "known_cases": 9,
+          "partial_usage_cases": 0,
+          "unknown_cases": 0,
+          "complete": true,
+          "total_tokens": 46979
+        },
+        "known_selector_seconds": 30.229,
+        "unknown_selector_duration_cases": 0
+      },
+      "selector_average_seconds": 3.359,
+      "cases": [
+        {
+          "case": "schema_actual",
+          "status": "selected",
+          "kind": "tool",
+          "name": "search_objects",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 4.02
+        },
+        {
+          "case": "region_actual",
+          "status": "selected",
+          "kind": "tool",
+          "name": "execute_sql",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 3.505
+        },
+        {
+          "case": "text_actual",
+          "status": "selected",
+          "kind": "tool",
+          "name": "read_text_file",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 3.812
+        },
+        {
+          "case": "design_mixed",
+          "status": "selected",
+          "kind": "skill",
+          "name": "frontend-design",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 3.425
+        },
+        {
+          "case": "schema_zh",
+          "status": "selected",
+          "kind": "tool",
+          "name": "search_objects",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 5.312
+        },
+        {
+          "case": "info_synonym",
+          "status": "selected",
+          "kind": "tool",
+          "name": "get_file_info",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 2.296
+        },
+        {
+          "case": "backend_mixed",
+          "status": "selected",
+          "kind": "skill",
+          "name": "senior-backend",
+          "passed": true,
+          "wrong_accepted": false,
+          "selector_seconds": 2.453
+        },
+        {
+          "case": "absent_geology",
+          "status": "unavailable",
+          "kind": null,
+          "name": null,
+          "passed": false,
+          "wrong_accepted": false,
+          "selector_seconds": 3.525
+        },
+        {
+          "case": "absent_language",
+          "status": "unavailable",
+          "kind": null,
+          "name": null,
+          "passed": false,
+          "wrong_accepted": false,
+          "selector_seconds": 1.881
+        }
+      ]
+    }
+  },
+  "delta": {
+    "selector_total_tokens_reduction_percent": 39.56,
+    "selector_seconds_increase_percent": 23.21
+  },
+  "classification": {
+    "phases": [
+      {
+        "phase": "initial_candidate",
+        "evidence": "CLASSIFICATION.json",
+        "status": "pending",
+        "capabilities": 24,
+        "pending": 2,
+        "classification_calls": 24,
+        "elapsed_seconds": 51.991,
+        "usage_complete": true,
+        "usage": {
+          "calls": 24,
+          "input_tokens": 103405,
+          "output_tokens": 8224,
+          "total_tokens": 111629
+        },
+        "usage_evidence": "initial classification cache entries"
+      },
+      {
+        "phase": "v3_pilot",
+        "evidence": "V3-PILOT.json",
+        "status": "pending",
+        "capabilities": 24,
+        "pending": 21,
+        "classification_calls": 3,
+        "elapsed_seconds": 2.591,
+        "usage_complete": true,
+        "usage": {
+          "calls": 3,
+          "input_tokens": 19954,
+          "output_tokens": 2512,
+          "total_tokens": 22466
+        },
+        "usage_evidence": "V3 cache entries for frontend-design, explore, setup; raw responses unavailable"
+      },
+      {
+        "phase": "v3_continuation",
+        "evidence": "V3-CLASSIFICATION-CONTINUATION.json",
+        "status": "pending",
+        "capabilities": 24,
+        "pending": 1,
+        "classification_calls": 21,
+        "elapsed_seconds": 23.124,
+        "usage_complete": true,
+        "usage": {
+          "calls": 21,
+          "input_tokens": 81651,
+          "output_tokens": 10598,
+          "total_tokens": 92249
+        }
+      },
+      {
+        "phase": "final_three_fresh_requests",
+        "evidence": "FINAL-CLASSIFICATION.json",
+        "status": "ready",
+        "capabilities": 24,
+        "pending": 0,
+        "classification_calls": 3,
+        "elapsed_seconds": 2.289,
+        "usage_complete": true,
+        "usage": {
+          "calls": 3,
+          "input_tokens": 19954,
+          "output_tokens": 2512,
+          "total_tokens": 22466
+        }
+      }
+    ],
+    "observed_candidate_calls_including_failed_iterations": 51,
+    "summed_phase_seconds": 79.995,
+    "known_usage_calls": 51,
+    "usage_unknown_calls": 0,
+    "known_total_tokens": 248810,
+    "complete_total_tokens": 248810,
+    "local_threshold_reinterpretation": {
+      "calls": 0,
+      "recorded_capabilities": 21,
+      "raw_missing_pilot_capabilities": 3
+    },
+    "final_warm_refresh": {
+      "calls": 0,
+      "status": "ready",
+      "pending": 0
+    },
+    "original_baseline_record": {
+      "calls": 24,
+      "seconds": 15.943,
+      "usage_complete": true,
+      "included_in_candidate_call_total": false,
+      "usage": {
+        "calls": 24,
+        "input_tokens": 121293,
+        "output_tokens": 12912,
+        "total_tokens": 134205
+      }
+    },
+    "usage_complete": true,
+    "cumulative_usage": {
+      "calls": 51,
+      "input_tokens": 224964,
+      "output_tokens": 23846,
+      "total_tokens": 248810
+    },
+    "cache_reuse_accounting": {
+      "v3_complete_snapshot": {
+        "calls": 24,
+        "input_tokens": 101605,
+        "output_tokens": 13110,
+        "total_tokens": 114715
+      },
+      "final_complete_snapshot": {
+        "calls": 24,
+        "input_tokens": 101605,
+        "output_tokens": 13110,
+        "total_tokens": 114715
+      },
+      "final_snapshot_copied_entries": 21,
+      "final_snapshot_fresh_entries": 3,
+      "copied_usage_counted_as_new_requests": false
+    }
+  },
+  "policy": {
+    "business_roots": 8,
+    "business_leaves": 45,
+    "max_selection_layers": 3,
+    "delivery_kinds": {
+      "guidance": [
+        "skill",
+        "command"
+      ],
+      "execution": [
+        "tool",
+        "resource"
+      ]
+    },
+    "cross_directory_selection": true,
+    "root_gate": 0.1,
+    "leaf_gate": 0.3,
+    "final_gate": 0.7,
+    "delivery_mode": {
+      "same_request_as_root": true,
+      "filter_confidence_gate": 0.7,
+      "ambiguous_mode_preserves_both_kinds": true
+    },
+    "membership": {
+      "primary_gate": 0.4,
+      "independent_secondary_gate": 0.4,
+      "multiple_membership_allowed": true,
+      "unknown_forced_into_category": false
+    },
+    "first_layer": {
+      "explicit_direct_limit": 24,
+      "frequent_window_days": 30,
+      "frequent_min_successful_uses": 2,
+      "frequent_limit": 6,
+      "normal_categories_preserved": true,
+      "on_demand_disclosure": "describe_connection=true",
+      "known_capability_id_confirmation_calls": 1
+    },
+    "successful_usage": {
+      "tool_resource": "Business completion plus durable operation state finished; failed or unknown outcomes excluded.",
+      "skill_command": "Explicit agent report_use after actual application; acquisition alone excluded.",
+      "grants_authorization": false
+    }
+  },
+  "live_demo": {
+    "evidence": "live-proxy/SUMMARY.json",
+    "package": "isolated_installed_candidate_wheel",
+    "candidate_wheel_sha256": "11ba3193c89a33d7eb57aa4a28bff5e4a79c2946af94f073704087fe62d88d22",
+    "real_jev": true,
+    "real_filesystem_mcp": true,
+    "native_host": "simulated_protocol_client_lifecycle",
+    "native_agent_turns": 0,
+    "new_distinct_file_operations": 2,
+    "old_business_calls_replayed": false,
+    "known_id_direct_confirmation": [
+      {
+        "seconds": 0.514,
+        "calls": 1,
+        "input_tokens": 557,
+        "output_tokens": 20,
+        "total_tokens": 577,
+        "mcp_seconds": 0.223
+      },
+      {
+        "seconds": 0.531,
+        "calls": 1,
+        "input_tokens": 557,
+        "output_tokens": 20,
+        "total_tokens": 577,
+        "mcp_seconds": 0.189
+      }
+    ],
+    "promotion_after_two_successes": true,
+    "demotion_after_31_days": "simulated_clock",
+    "normal_membership_preserved": true,
+    "unknown_business_outcomes": 0
+  },
+  "final_build": {
+    "wheel_sha256": "2450ebb865580e381f9e1955624e6ba1c54c82faf09aee6f755c9c1c6b33ff4e",
+    "installed_in_new_isolated_environment": true,
+    "change_after_live_demo": "Initial subscription snapshot error isolation only; routing and business invocation unchanged.",
+    "live_demo_run_on_final_wheel": false,
+    "source_tests": {
+      "collected": 372,
+      "passed": 369,
+      "skipped_opt_in_hermes": 3,
+      "seconds": 27.029
+    },
+    "source_byte_matched_files": 36,
+    "shared_core_copies_identical": true,
+    "installed_cli_directory_view": {
+      "normal_categories_preserved": true,
+      "active_business_categories": [
+        "software",
+        "visuals",
+        "product_planning",
+        "data_content"
+      ],
+      "direct_entries": 0,
+      "frequent_entries": 0,
+      "direct_status": "ready",
+      "frequent_status": "ready"
+    },
+    "verification_evidence": [
+      "FINAL-WHEEL-VERIFIED.json",
+      "FINAL-INSTALLED-DIRECTORY-VIEW.json"
+    ]
+  },
+  "rollout": {
+    "daily_profiles": 8,
+    "daily_profiles_upgraded": 0,
+    "private_production_catalog_migrated": false,
+    "native_host_acceptance": "unobservable"
+  },
+  "limits": [
+    "One run per version on the same frozen nine needs; no unseen holdout or general quality claim.",
+    "The two current negative cases safely returned unavailable, not explicit none; strict score is 7/9, not 9/9.",
+    "Routing timing and usage exclude classification and business execution.",
+    "Known capability ID direct timing is a separate experiment, not an A/B comparison for unknown needs.",
+    "No native Agent complete conversation acceptance; daily profiles and the private production catalog remain unchanged."
+  ],
+  "design_references": [
+    "https://www.anthropic.com/engineering/writing-tools-for-agents",
+    "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+  ],
+  "observability": {
+    "actual_provider_model_identity": "unobservable",
+    "dollar_cost": "unobservable"
+  }
+}

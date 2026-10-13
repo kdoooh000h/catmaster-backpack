@@ -612,7 +612,7 @@ console.log(JSON.stringify({registrations, events: Object.keys(handlers), result
         self.profile.mkdir();(self.profile/'settings.json').write_text(json.dumps({'tools':{'visible':['existing_tool']}}))
         connect_host(self.store,'qwen-code',self.profile)
         settings=json.loads((self.profile/'settings.json').read_text())
-        self.assertEqual(settings['tools']['visible'],['existing_tool','mcp__backpack__acquire','mcp__backpack__invoke'])
+        self.assertEqual(settings['tools']['visible'],['existing_tool','mcp__backpack__acquire','mcp__backpack__invoke','mcp__backpack__report_use'])
         before=(self.profile/'settings.json').read_bytes()
         add_plugin(self.store,self.plugin('future-qwen'))
         self.assertEqual(before,(self.profile/'settings.json').read_bytes())

@@ -35,6 +35,10 @@ class PublicCapabilityDirectory:
         self.leaf_ids = list(leaves)
         if set(roots) & set(leaves) or {"none", "all"} & (set(roots) | set(leaves)):
             raise ValueError("node IDs must be unique and distinct from controls")
+        shortcuts = self._ids(spec["provenance"].get("shortcut_roots", []), "shortcut roots")
+        if not set(shortcuts) <= set(roots):
+            raise ValueError("unknown shortcut root")
+        self._shortcut_root_ids = tuple(shortcuts)
         self._nodes_by_id = {**roots, **leaves}
         self._children = {}
         parents = set()
@@ -63,6 +67,11 @@ class PublicCapabilityDirectory:
             self._members[root_id] = set().union(
                 *(self._members[child] for child in children)
             )
+
+    @property
+    def shortcut_root_ids(self):
+        """Explicit root shortcuts; callers receive an independent ID list."""
+        return list(self._shortcut_root_ids)
 
     @staticmethod
     def _text(value, label):

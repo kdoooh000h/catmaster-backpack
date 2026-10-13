@@ -457,7 +457,7 @@ class PluginReleaseTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         responses = {r['id']: r for r in map(json.loads, result.stdout.splitlines()) if 'id' in r}
         self.assertIn('result', responses[1])
-        self.assertEqual({t['name'] for t in responses[2]['result']['tools']}, {'acquire', 'invoke'})
+        self.assertEqual({t['name'] for t in responses[2]['result']['tools']}, {'acquire', 'invoke', 'report_use'})
         # EOF closes the observed peer; release switching can proceed afterwards.
         release.verify_stopped(self.store, pipeline.read_json(connection)['connection_id'])
 
