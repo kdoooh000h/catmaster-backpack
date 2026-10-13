@@ -1,6 +1,6 @@
 [project]
 name = "catmaster-backpack"
-version = "0.1.0"
+version = "0.3.0"
 description = "Cross-agent tool and skill surface management toolkit."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -10,6 +10,9 @@ authors = [{ name = "CatMaster Backpack maintainers" }]
 [project.scripts]
 catmaster-backpack = "catmaster_backpack.installer:main"
 catmaster-backpack-mcp = "catmaster_backpack.mcp_gateway:main"
+
+[project.optional-dependencies]
+hermes = ["PyYAML>=6.0.3"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -22,6 +25,7 @@ catmaster_backpack = [
   "data/adapters/*/*",
   "data/adapters/*/tools/*",
   "data/adapters/hermes/skill_backpack/tools/*.py",
+  "routing/*.json",
 ]
 
 [build-system]

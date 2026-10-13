@@ -333,8 +333,15 @@ def hermes_plan(args: argparse.Namespace) -> int:
     )
 
 
+def plugin_pipelines(args: argparse.Namespace) -> int:
+    from .plugin_pipeline import cli
+    return cli(args.pipeline_arguments)
+
+
 def build_parser() -> argparse.ArgumentParser:
+    from . import __version__
     parser = argparse.ArgumentParser(description="CatMaster Backpack installer")
+    parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     install_parser = subparsers.add_parser(
@@ -355,12 +362,18 @@ def build_parser() -> argparse.ArgumentParser:
     hermes_parser.add_argument("--hermes-agent-root", required=True)
     hermes_parser.add_argument("--hermes-home", required=True)
     hermes_parser.set_defaults(func=hermes_plan)
+    pipelines_parser = subparsers.add_parser('pipelines', help='Use the shared plugin/MCP capability pipeline')
+    pipelines_parser.add_argument('pipeline_arguments', nargs=argparse.REMAINDER)
+    pipelines_parser.set_defaults(func=plugin_pipelines)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
+    arguments = sys.argv[1:] if argv is None else list(argv)
+    if arguments[:1] == ['pipelines']:
+        return plugin_pipelines(argparse.Namespace(pipeline_arguments=arguments[1:]))
     parser = build_parser()
-    args = parser.parse_args(argv)
+    args = parser.parse_args(arguments)
     try:
         return args.func(args)
     except RuntimeError as exc:
