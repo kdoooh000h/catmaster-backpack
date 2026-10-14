@@ -29,6 +29,14 @@ def digest(value):
 def service_target(config):
     if config['transport'] == 'streamable-http':
         return ['http', config['url']]
+    from market_python import target
+    python = target(config, exact=False)
+    if python is not None:
+        return ['pypi', python[0]]
+    from market_node import target as node_target
+    node = node_target(config, exact=False)
+    if node is not None:
+        return ['npm', node[0].rsplit('@', 1)[0]]
     packages = [arg.removeprefix('--package=') for arg in config['command'][1:] if arg.startswith('--package=')]
     return ['npm', packages[0].rsplit('@', 1)[0]] if len(packages) == 1 else None
 
@@ -69,7 +77,7 @@ class Market:
         config = self.gateway.public_access.owner_json(config_path) if config_path.exists() else {
             'version': 1, 'provider': 'jev-cli', 'executable': shutil.which('jev'),
             'jev_provider': 'typesafe', 'timeout_seconds': 45, 'minimum_confidence': 0.6}
-        minimum = float(config.get('directory_minimum_confidence', 0.1)) if directory else max(
+        minimum = float(config.get('directory_minimum_confidence', 0.1)) if directory or kind == 'mcp-preview' else max(
             0.7, float(config.get('minimum_confidence', 0.6)), float(config.get('skill_minimum_confidence', 0.7)))
         if not math.isfinite(minimum) or not 0 <= minimum <= 1:
             raise ValueError('invalid_minimum_confidence')
@@ -79,11 +87,9 @@ class Market:
         if environment is not None:
             config['provider_environment'] = environment
         candidates = [self.runtime.Skill('market-' + str(i), row['description'], Path('.')) for i, row in enumerate(rows)]
-        if directory or kind == 'plugin':
-            from market_routing import route
-            decision = route(self.runtime, need, candidates, config, 'directory' if directory else 'plugin')
-        else:
-            decision = self.runtime._route(need, candidates, purpose='mcp-server', config=config)
+        from market_routing import route
+        stage = 'directory' if directory else {'plugin': 'plugin', 'mcp-preview': 'mcp-discovery', 'mcp': 'mcp-fit'}[kind]
+        decision = route(self.runtime, need, candidates, config, stage)
         public = {k: v for k, v in decision.items() if k != 'skill'}
         public['minimum_confidence'] = minimum
         if decision.get('status') != 'selected':
@@ -92,6 +98,19 @@ class Market:
         if chosen is None:
             raise ValueError('invalid_market_choice')
         return chosen, public
+
+    def validate_mcp_selection(self, need, result):
+        if result.get('status') != 'selected':
+            return result
+        if not isinstance(result.get('tool'), dict) or not isinstance(result.get('selection'), str):
+            raise ValueError('invalid_selected_mcp_tool')
+        description = json.dumps({'server': result.get('server'), 'tool': result['tool']}, ensure_ascii=False)
+        if len(description) > 24000:
+            return {'status': 'unsupported', 'reason': 'tool_schema_too_large', 'execution': 'not_performed'}
+        row, decision = self.choose(need, [{'description': description}], kind='mcp')
+        if row is None:
+            return {**decision, 'execution': 'not_performed', 'phase': 'actual_tool_validation'}
+        return {**result, 'validation': decision}
 
     def prepare(self, body):
         self.current()
@@ -142,6 +161,7 @@ class Market:
         return self.view(plan)
 
     def prepare_mcp(self, plan, source, search):
+        import market_python
         library = self.manager.mcp.sources
         if source == 'registry':
             from market_registry import browse
@@ -152,21 +172,30 @@ class Market:
         # first page and silently omit later valid capabilities.
         if page.get('next_cursor'):
             return {'status': 'search_too_broad', 'instruction': page.get('instruction', 'Narrow the functional search terms. The registry has too many candidates; none were omitted from a final choice.'), 'execution': 'not_performed'}
-        rows = [{**row, 'description': row['name'] + ': ' + row['description']} for row in page['items']]
-        row, decision = self.choose(plan['need'], rows)
+        rows = []
+        for row in page['items']:
+            options = market_python.options(library, row['receipt'])
+            available = [o for o in options['options'] if not any(f['required'] and not f['default'] for f in o['fields'])]
+            readiness = ('Supported setup without supplied credentials: ' + '; '.join(o['label'] for o in available)
+                         if available else 'No supported setup without additional configuration. Do not select for immediate use.')
+            if available and all(o['id'].startswith('remote:') for o in available):
+                readiness += ' Remote hosted service; a missing credential field does not establish free or anonymous access.'
+            rows.append({**row, 'description': row['name'] + ': ' + row['description'] + '\n' + readiness,
+                         'available': available})
+        row, decision = self.choose(plan['need'], rows, kind='mcp-preview')
         plan['routing'].append(decision)
         if row is None:
             return {**decision, 'execution': 'not_performed'}
-        options = library.options(row['receipt'])
-        available = [option for option in options['options'] if not any(f['required'] and not f['default'] for f in option['fields'])]
+        options = market_python.options(library, row['receipt'])
+        available = row['available']
         if not available:
             return {'status': 'setup_required', 'name': row['name'], 'options': options['options'],
                     'instruction': 'Configure required credentials or unsupported transports in Backpack management, then acquire_mcp. Do not send secrets in routing requests.', 'execution': 'not_performed'}
         # Transport preference is an implementation policy, not a capability
         # filter. Both choices refer to the same Jev-selected service.
         option = next((o for o in available if o['id'].startswith('remote:')), available[0])
-        config = library.configuration({'source_receipt': row['receipt'], 'option': option['id']})
-        plan.update(name=row['name'], description=row['description'], source={'kind': source, 'version': row['version']})
+        config = market_python.configuration(library, row['receipt'], option, self.data, self.descriptor)
+        plan.update(name=row['name'], description=options['description'], source={'kind': source, 'version': row['version']})
         plan['servers'] = [self.server(config, plan)]
 
     def server(self, value, plan):
@@ -187,6 +216,11 @@ class Market:
         if target is None:
             raise ValueError('unsupported_market_runtime')
         identity = digest([self.descriptor, target])[:32]
+        if target[0] == 'npm':
+            from market_node import configuration, target as node_target
+            if node_target(config) is None:
+                directory = self.data / 'mcp-runtime' / identity / self.descriptor.removesuffix('.json')
+                config = configuration(config, directory)
         rows = self.gateway.mcp_backpack.read_registry(self.data)['servers']
         for path in self.folder.glob('*.json'):
             if not re.fullmatch('[a-f0-9]{48}', path.stem):
@@ -247,11 +281,12 @@ class Market:
             plan['source']['version'] = row['version']
             plan['source']['commit'] = self.gateway.public_access.fingerprint(root)
         else:
-            location = row.get('entry', {}).get('source')
-            if not isinstance(location, str):
-                return {'status': 'setup_required', 'name': row['name'], 'reason': 'external_plugin_source_requires_native_host', 'execution': 'not_performed'}
-            prefix = self.sources.safe_path(location.removeprefix('./'))
-            archive = self.sources.fetch('https://codeload.github.com/' + snapshot['repo'] + '/zip/' + snapshot['commit'], 48 * 1024 * 1024)
+            from market_packages import resolve
+            import plugin_sources
+            repo, commit, prefix = resolve(row.get('entry', {}).get('source'), snapshot,
+                                          self.sources, plugin_sources)
+            plan['source'].update(package_repo=repo, package_commit=commit, package_path=prefix)
+            archive = self.sources.fetch('https://codeload.github.com/' + repo + '/zip/' + commit, 48 * 1024 * 1024)
             extract_package(archive, prefix, root, self.sources.safe_path)
         plan['package'] = str(root)
         plan['package_digest'] = self.gateway.public_access.fingerprint(root)
@@ -264,7 +299,13 @@ class Market:
 
     def inspect_plugin(self, root, plan):
         manifests = [root / p for p in ('plugin.json', '.claude-plugin/plugin.json', '.codex-plugin/plugin.json') if (root / p).is_file()]
-        if len(manifests) > 1:
+        # One repository may package several hosts. The selected marketplace
+        # determines the manifest; another host's root manifest is not merged.
+        market = plan.get('source', {}).get('market')
+        preferred = root / ('.claude-plugin/plugin.json' if market == 'anthropic' else '.codex-plugin/plugin.json')
+        if market in {'anthropic', 'openai'} and preferred in manifests:
+            manifests = [preferred]
+        elif len(manifests) > 1:
             raise ValueError('invalid_plugin_manifest')
         manifest = json.loads(manifests[0].read_text()) if manifests else {'name': plan['name']}
         if not isinstance(manifest, dict) or manifest.get('name') != plan['name']:
@@ -387,7 +428,7 @@ class Market:
         return {'status': plan['status'], 'selection': plan['id'], 'name': plan['name'], 'description': plan.get('description', ''), 'source': plan['source'],
                 'components': {'skills': [s['name'] for s in plan['skills']], 'mcp': [s['title'] for s in plan['servers']]},
                 'connections': [{'title': s['title'], 'configuration': s['configuration']} for s in plan['servers']],
-                'setup_actions': 'Save grants and backups. For npm services, download pinned dependencies with lifecycle scripts disabled into the connection runtime directory before protocol startup.',
+                'setup_actions': 'Save grants and backups. Install pinned npm dependencies with lifecycle scripts disabled or pinned PyPI wheels in Backpack-owned environments before protocol startup.',
                 'routing': plan['routing'], 'execution': 'not_performed',
                 'instruction': 'This is a concrete setup preview, not execution permission. If this local setup is within the user-authorized task, call connect_market_capability with the exact selection; no repeated user confirmation is needed. Skill guidance is available through acquire_skill and MCP through acquire_mcp/invoke_mcp after connection. Native apps/hooks are not emulated.'}
 
@@ -425,15 +466,24 @@ class Market:
             config = row['configuration']
             if config['transport'] != 'stdio':
                 continue
-            packages = [arg.removeprefix('--package=') for arg in config['command'][1:] if arg.startswith('--package=')]
+            from market_python import install
+            if install(self, row, plan):
+                continue
+            from market_node import target as node_target, entrypoint
+            node = node_target(config)
+            packages = [node[0]] if node else [arg.removeprefix('--package=') for arg in config['command'][1:] if arg.startswith('--package=')]
             if len(packages) != 1:
                 raise ValueError('unsupported_market_runtime')
             program = shutil.which('npm')
             if not program:
                 raise ValueError('market_runtime_missing')
             directory = self.gateway.public_access.safe(self.data / 'mcp-runtime' / row['id'] / self.descriptor.removesuffix('.json'))
+            if node and node[2] != directory:
+                raise ValueError('npm_environment_scope_mismatch')
             directory.mkdir(parents=True, exist_ok=True, mode=0o700)
             if self.dependency_installed(directory, packages[0]):
+                if node:
+                    entrypoint(directory, node[0], node[1])
                 continue
             home = directory / 'home'
             home.mkdir(exist_ok=True, mode=0o700)
@@ -460,6 +510,8 @@ class Market:
                 raise ValueError('market_dependency_setup_failed')
             if not self.dependency_installed(directory, packages[0]):
                 raise ValueError('market_dependency_setup_unverified')
+            if node:
+                entrypoint(directory, node[0], node[1])
             self.current()
 
     def dependency_installed(self, directory, package):
@@ -566,7 +618,7 @@ def extract_package(content, prefix, destination, safe_path):
         roots = {row.filename.split('/')[0] for row in archive.infolist()}
         if len(roots) != 1:
             raise ValueError('invalid_market_archive')
-        start = next(iter(roots)) + '/' + prefix.rstrip('/') + '/'
+        start = next(iter(roots)) + '/' + (prefix.rstrip('/') + '/' if prefix else '')
         for row in archive.infolist():
             if row.is_dir():
                 continue

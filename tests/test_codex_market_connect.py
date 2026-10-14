@@ -279,6 +279,18 @@ class MarketIntegrationTests(unittest.TestCase):
         self.assertEqual(self.market.inspect_plugin(root, plan), [])
         self.assertEqual(len(plan['servers']), 1)
 
+    def test_market_selects_its_own_manifest_without_merging_other_hosts(self):
+        plan = self.plan(skills=True, servers=False)
+        root = Path(plan['package'])
+        plan['source']['market'] = 'anthropic'
+        self.write(root / 'plugin.json', {'name': 'other-host', 'commands': ['must-not-import']})
+        self.write(root / '.claude-plugin/plugin.json', {'name': 'sample', 'skills': './skills'})
+        plan['skills'] = []
+        self.assertEqual(self.market.inspect_plugin(root, plan), [])
+        self.assertEqual(len(plan['skills']), 1)
+        (root / 'hooks').mkdir()
+        self.assertIn('hooks', self.market.inspect_plugin(root, plan))
+
     def test_unpinned_npx_eval_and_credentials_require_setup(self):
         for config in ({'command': 'npx', 'args': ['-y', 'some-package']},
                        {'command': 'node', 'args': ['-e', 'code']},
@@ -335,6 +347,43 @@ class MarketIntegrationTests(unittest.TestCase):
             result = self.market.prepare({'kind': 'plugin', 'source': 'anthropic', 'need': 'test'})
         self.assertEqual(result['status'], 'uncertain')
         self.assertEqual(list(self.market.folder.iterdir()), [])
+
+    def test_mcp_rank_discloses_but_final_fit_controls_setup(self):
+        from types import SimpleNamespace
+        self.write(self.data / 'config.json', {'version': 1, 'provider': 'jev-cli',
+                                             'minimum_confidence': .8, 'directory_minimum_confidence': .1})
+        rows = [{'name': 'a', 'description': 'Local conversion'}, {'name': 'b', 'description': 'Another converter'}]
+        answers = [SimpleNamespace(choice='market-0', confidence=.44),
+                   SimpleNamespace(choice='market-0', confidence=.79)]
+        with patch.object(self.market.runtime, '_jev_cli', side_effect=answers) as provider:
+            row, preview = self.market.choose('convert a historical time', rows, kind='mcp-preview')
+            result = self.market.validate_mcp_selection('convert a historical time', {
+                'status':'selected','selection':'opaque','server':'a',
+                'tool':{'name':'convert','description':'Convert dated IANA timezones','inputSchema':{'type':'object'}}})
+        self.assertIsNotNone(row)
+        self.assertEqual(preview['minimum_confidence'], .1)
+        self.assertEqual(result['minimum_confidence'], .8)
+        self.assertEqual(result['phase'], 'actual_tool_validation')
+        self.assertNotIn('selection', result)
+        self.assertEqual(set(provider.call_args_list[0].args[3]), {'market-0', 'market-1', 'none'})
+        self.assertEqual(set(provider.call_args_list[1].args[3]), {'market-0', 'none'})
+
+    def test_mcp_readiness_preserves_every_candidate(self):
+        self.market.manager.mcp.sources.items.update({key: {'server': {}} for key in ('a', 'b')})
+        page = {'items': [{'name': 'a', 'description': 'Useful', 'receipt': 'a', 'version': '1'},
+                          {'name': 'b', 'description': 'Useful too', 'receipt': 'b', 'version': '1'}]}
+        def options(receipt):
+            return {'options': [] if receipt == 'a' else [
+                {'id': 'npm:0', 'label': 'Local npm', 'fields': []}]}
+        with patch('market_registry.browse', return_value=page), patch.object(
+                self.market.manager.mcp.sources, 'options', side_effect=options), patch.object(
+                self.market, 'choose', return_value=(None, {'status': 'none'})) as choose:
+            result = self.market.prepare({'kind': 'mcp', 'source': 'registry', 'need': 'local task'})
+        self.assertEqual(result['status'], 'none')
+        rows = choose.call_args.args[1]
+        self.assertEqual([r['name'] for r in rows], ['a', 'b'])
+        self.assertIn('No supported setup', rows[0]['description'])
+        self.assertIn('Local npm', rows[1]['description'])
 
     def test_connect_preserves_unrelated_registry_rows(self):
         plan = self.plan()

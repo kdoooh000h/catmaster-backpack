@@ -2,6 +2,11 @@
 
 This folder stores deterministic Tool Backpack validation assets.
 
+The [market lifecycle retest](../docs/backpack-market-lifecycle-validation-2026-10-14.md)
+uses the ordinary requests in `market-blind/` with native Agent execution. Its
+failure-inclusive metrics and cumulative coverage are separate from deterministic
+fixtures and from a single frozen-version A/B.
+
 ## Fixture
 
 `accuracy-fixture/` contains two local text files used by repository/file search tasks.

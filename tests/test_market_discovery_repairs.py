@@ -84,5 +84,18 @@ class DiscoveryRepairs(unittest.TestCase):
         with patch.object(registry, 'pages', return_value=[a,b]), self.assertRaisesRegex(ValueError, 'changed_during_search'):
             registry.browse(SimpleNamespace(items={}), 'a')
 
+    def test_broad_search_stops_after_exceeding_bound_without_selecting_prefix(self):
+        count = 0
+        def fetch(query, cursor, deadline):
+            nonlocal count
+            count += 1
+            return {'servers': [entry(str(count * 100 + i)) for i in range(100)],
+                    'metadata': {'nextCursor': str(count)}}
+        with patch.object(registry, 'fetch', side_effect=fetch):
+            result = registry.browse(SimpleNamespace(items={}), 'broad')
+        self.assertEqual(count, 2)
+        self.assertEqual(result['items'], [])
+        self.assertTrue(result['next_cursor'])
+
 
 if __name__ == '__main__': unittest.main()

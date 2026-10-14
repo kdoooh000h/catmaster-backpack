@@ -8,7 +8,7 @@ from market_connect import Market
 
 TOOLS = [
     {'name': 'prepare_market_capability',
-     'description': 'When the current task needs a market plugin or MCP not yet connected, submit a concrete secret-free need. Jev selects from public metadata and returns one pinned setup preview or missing requirements. source optionally names the public marketplace, never a capability. For MCP Registry supply one to four short functional keywords (prefer English for its name index), not a sentence or guessed product name. Terms are combined with OR and all pages are checked; broad incomplete results are not silently truncated. Nothing is executed or connected by preparation.',
+     'description': 'When the current task needs a market plugin or MCP not yet connected, submit a concrete secret-free need. Jev selects from public metadata and returns one pinned setup preview or missing requirements. source optionally names the public marketplace, never a capability. For MCP Registry start with ONE precise functional keyword (prefer English for its name index), not a sentence or guessed product name. Up to four alternatives may be supplied only when needed; OR makes searches broader. Oversized or incomplete results are never used for selection. This chooses a setup candidate; actual MCP tools are checked after connection with a stricter confidence threshold. Nothing is executed or connected by preparation.',
      'inputSchema': {'type': 'object', 'properties': {
          'kind': {'type': 'string', 'enum': ['plugin', 'mcp']},
          'need': {'type': 'string', 'maxLength': 2000},
@@ -30,8 +30,9 @@ def tool_catalog(gateway):
         if row['name'] == 'acquire_skill':
             schema = row['inputSchema']
             row['inputSchema'] = {**schema, 'properties': {**schema['properties'], 'market_selection': {'type': 'string'}}}
-            row['description'] += ' Pass market_selection from connect_market_capability to let Jev choose a Skill within that connected plugin; this avoids ambiguity between same-name packages.'
-        if row['name'] in {'acquire_skill', 'acquire_mcp'}:
+            row['description'] += ' Standalone Skills are read on demand, including selected public-market guidance and resources; they do not require a plugin installation or registration in the host Agent. Read and follow the guidance; scripts still require their declared runtime. For a plugin component, first connect that plugin in Backpack, then pass market_selection from connect_market_capability to select only within its installed components.'
+        if row['name'] == 'acquire_mcp':
+            row['description'] += ' MCP services must be registered in Backpack before use: local services need dependencies installed in Backpack; remote services need a configured connection. Registration is not proof of a successful tool call.'
             row['description'] += ' If no connected capability fits and a public market capability may help the authorized task, use prepare_market_capability, then connect its reviewed setup preview and acquire again. A routing outage does not justify retrying execution.'
     return [*rows, *TOOLS]
 
@@ -54,6 +55,8 @@ def dispatch(gateway, connection, reader, market, name, arguments):
         gateway.mcp_backpack.ensure_service(data)
         result = gateway.mcp_backpack.service_call(data, 'acquire' if name == 'acquire_mcp' else 'invoke',
             {'connection': Path(connection['_descriptor']).name, **arguments}, timeout=180 if name == 'acquire_mcp' else 40)
+        if name == 'acquire_mcp':
+            result = market.validate_mcp_selection(arguments['need'], result)
     else:
         if connection['project_root'] is not None and 'project_root' not in arguments:
             arguments = {**arguments, 'project_root': connection['project_root']}

@@ -6,6 +6,14 @@ one pinned, owner-only setup preview. Connection applies that receipt within the
 user-authorized task. It does not invoke a business tool or grant account access.
 The Agent need not ask the user again for setup already covered by their request.
 
+Standalone Skills are read on demand through `acquire_skill`; their selected
+instructions and resources may be cached, without installing a plugin in the
+host Agent. A Skill that uses scripts still needs its declared runtime. Plugins
+must first be installed and registered in Backpack before their components can
+be acquired. MCP must first be registered in Backpack: local services have their
+dependencies installed there, while remote services have their connection saved.
+Registration alone does not establish a successful handshake or business call.
+
 ## Flow
 
 1. Try the connected Backpack capability for the concrete need.
@@ -26,12 +34,16 @@ continues to use the previously verified source-directory/Skill policy.
 
 ## Supported sources and components
 
-- The official MCP Registry and its official reference example. Public npm stdio
-  packages resolve to a specific version; public Streamable HTTP is supported.
-  The Registry search must fit one complete bounded page. Missing required fields
+- The official MCP Registry and its official reference example. Public npm and
+  supported PyPI stdio packages use specific versions; public Streamable HTTP is
+  supported. A Registry search must fit the complete bounded pagination limits. Missing required fields
   return `setup_required`; secrets are not accepted in routing/setup tool arguments.
 - Anthropic's public plugin marketplace, including its supplied categories.
-  Repository-local plugin subtrees are downloaded at the inspected commit.
+  Repository-local subtrees and external public GitHub sources (`github`, `url`,
+  `git-subdir`) are downloaded at an inspected commit. A supplied SHA takes
+  precedence over a branch/tag; catalog and package commits are recorded
+  separately. Unsupported hosts/source types and native components remain
+  explicit requirements. No marketplace installer or repository script runs.
 - OpenAI's directory through the installed Codex CLI, when its validated package
   files are locally available and native policy permits access.
 - Portable plugin Skills and compatible MCP components. An absent plugin manifest
@@ -64,9 +76,30 @@ receipts only inspect their result, and they never restore revoked grants.
 For npm, connection downloads dependencies with lifecycle scripts disabled, using
 an isolated runtime home and a fixed argv command. This precedes the shared MCP
 client's 30-second protocol startup limit. Setup has a 150-second bound; installed
-package identity and lock metadata are checked before reuse. This is an installation
+package identity and lock metadata are checked before reuse. The pinned package's
+unique declared Node entrypoint runs by its real path, without an npx symlink or
+runtime download. This supports packages whose main-module guard otherwise exits
+before MCP initialization. Changed identity, undeclared/escaping entrypoints and
+non-Node executables stop explicitly. Existing service configurations are not
+silently rewritten. This is an installation
 boundary, not an OS sandbox or a review of third-party code. Actual tool calls
 retain the existing durable at-most-once invocation receipts.
+
+For PyPI, an existing `uv` and Python are required. Only fixed versions on the
+public PyPI index, standard stdio, no publisher runtime/package arguments and
+one installed console entrypoint are supported. A declared uvx form
+`--from SAME_PACKAGE[extras] ENTRYPOINT` is also supported: bounded extras are
+applied to that same pinned distribution and the entrypoint must belong to its
+installed metadata. These fields never become arbitrary installer flags.
+Connection creates a dedicated
+virtual environment under Backpack, installs wheels only (no source builds or
+Python downloads), and checks package identity and entrypoint metadata without
+importing the package. A clean task home and environment are used. Each process
+start verifies the environment fingerprint before executing the entrypoint;
+Python bytecode writes are disabled. Setup has a 150-second bound and existing
+incomplete environments require reconciliation, not reinstall. No system Python,
+global host configuration or shared Agent installation is changed. These checks
+do not constitute a security review of third-party code or an OS sandbox.
 
 The two registries cannot be atomically published together. If setup stops between
 them, the plan remains `connecting`; inspect the backups and actual grants before
@@ -77,9 +110,10 @@ archive finished state through maintenance when these limits are reached.
 
 ## Installation and verification
 
-Keep all six `market_*.py` adapter modules together: `market_gateway.py`,
+Keep all nine `market_*.py` adapter modules together: `market_gateway.py`,
 `market_protocol.py`, `market_connect.py`, `market_routing.py`,
-`market_resources.py` and `market_registry.py`.
+`market_resources.py`, `market_registry.py`, `market_packages.py`, `market_python.py`
+and `market_node.py`.
 The launcher still requires the separate existing standalone runtime via
 `--runtime-root`. The runtime source is not bundled in this task branch.
 Only the selected public MCP command changes; private routing and other Agent
@@ -90,7 +124,7 @@ Run the adapter tests with:
 
 ```sh
 CATMASTER_STANDALONE_RUNTIME=/path/to/standalone-backpack \
-  python3 -m unittest discover -s tests -p 'test_codex_market*.py'
+  python3 -m unittest discover -s tests -p '*market*.py'
 ```
 
 Without the environment variable, installed-runtime checks explicitly skip.
@@ -104,13 +138,32 @@ execution. See the dated validation record for the tested scope.
 ## Discovery repair adapter
 
 Source directories are judged as indexes that may contain useful children,
-with the existing 0.1 directory threshold; final selection still requires at
-least 0.7. Plugins have a plugin-specific question. No `none` result is converted
-into a positive match and no capability names are inserted into user requests.
+with the existing 0.1 directory threshold. MCP setup-candidate ranking uses that
+same disclosure threshold: it chooses a bounded setup preview, not a usable tool.
+Every candidate retains its supported setup/required-fields context; unavailable
+entries are labeled, not silently dropped. Connection validates and installs the
+selected configuration within the task's existing authorization.
+
+After connection and the shared runtime's service/tool choice, `acquire_mcp`
+checks the selected **actual tool description and full input schema** with Jev.
+This final fit must reach at least 0.7, or the stricter configured value, before
+its selection receipt is returned to the Agent. A rejected tool yields no receipt.
+Fit means a reliable useful operation toward the task; a single tool need not
+cover every step or requested output. The Agent must obtain valid inputs and
+complete the remaining steps before reporting success.
+Oversized schemas stop explicitly instead of silently truncating. Existing
+invocation grants, at-most-once receipts and unknown-outcome handling remain.
+This distinguishes willingness to inspect/install from confidence in the actual
+operation. It does not claim that setup or a selection score proves task success.
+Plugins retain their plugin-specific question and final threshold. No `none`
+result is converted into a positive match and no capability names are inserted
+into user requests.
 
 Public MCP discovery uses the official Registry only. Its name-substring API
-receives one to four functional keywords combined with OR; all pages are read
-and duplicate name/version pairs are reconciled. Limits remain explicit: six
+starts with one precise functional keyword. Up to four alternatives use OR.
+Selectable results require complete pagination and reconciled name/version pairs.
+A term already exceeding 192 active identities stops early with an explicit
+broad-search result; no truncated prefix is passed to Jev. Limits remain explicit: six
 pages per term, 192 distinct active candidates, an 80-second discovery budget,
 35 seconds per read, one retry only for a failed anonymous GET. Native curl
 negotiates HTTP/2 when available, disables curlrc, enforces HTTPS/TLS and a
@@ -119,6 +172,10 @@ oversized results stop before final selection. This is bounded name discovery,
 not a guarantee of semantic recall over the whole marketplace. Redirects and
 TLS bypass remain prohibited. Dependency setup and business operations keep
 their existing receipt and no-replay rules.
+
+Python environment mechanics follow the [uv environment documentation](https://docs.astral.sh/uv/pip/environments/)
+and [CLI flags](https://docs.astral.sh/uv/reference/cli/). Package descriptions
+and registry entries are not proof of successful invocation.
 
 A selected market plugin may disclose a template or other file from its pinned
 package through `acquire_resource`. It must pass current scope/grant, package

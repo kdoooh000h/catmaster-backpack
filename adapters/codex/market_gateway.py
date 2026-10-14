@@ -15,7 +15,7 @@ from pathlib import Path
 import shutil
 import sys
 
-POLICY = "market-descriptions-v2"
+POLICY = "market-lifecycle-v3"
 
 
 def source_directory_descriptions(module, data):

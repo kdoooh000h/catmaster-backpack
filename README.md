@@ -350,6 +350,11 @@ plugin-resource gaps. Named-service examples do not establish autonomous discove
 The [repair retest](docs/backpack-market-repair-validation-2026-10-14.md) reached
 2/6 complete tasks; it fixed plugin resource access and exercised improved market
 discovery, while final MCP confidence and native plugin requirements still blocked use.
+The [lifecycle and runtime retest](docs/backpack-market-lifecycle-validation-2026-10-14.md)
+adds external plugin sources, isolated PyPI setup and real npm entrypoint handling.
+Across the recorded revisions, 3/6 distinct tasks completed with new capabilities,
+including an actual timezone MCP call. This is cumulative coverage, not a single
+final-version benchmark; all 16 attempts and unresolved requirements are retained.
 
 ## Security Boundary
 

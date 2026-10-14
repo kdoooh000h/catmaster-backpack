@@ -104,6 +104,17 @@ def pages(query, deadline):
         if not isinstance(items, list) or len(items) > 100 or not isinstance(meta, dict):
             raise ValueError('registry_invalid_response')
         rows.extend(items)
+        # A single term already exceeding the final bound cannot become a
+        # selectable complete union. Stop reading its remaining pages early;
+        # return an explicit broad-search result, never a truncated candidate set.
+        active = {(r.get('server', {}).get('name'), r.get('server', {}).get('version')) for r in rows
+                  if isinstance(r, dict) and isinstance(r.get('server'), dict)
+                  and isinstance(r['server'].get('name'), str) and isinstance(r['server'].get('version'), str)
+                  and isinstance(r.get('_meta', {}), dict)
+                  and isinstance(r.get('_meta', {}).get('io.modelcontextprotocol.registry/official', {}), dict)
+                  and r.get('_meta', {}).get('io.modelcontextprotocol.registry/official', {}).get('status') == 'active'}
+        if len(active) > MAX_CANDIDATES:
+            raise ValueError('registry_search_too_broad')
         cursor = meta.get('nextCursor')
         if cursor is None or cursor == '':
             return rows
@@ -122,8 +133,14 @@ def browse(library, search):
         return {'items': [], 'next_cursor': 'search_required',
                 'instruction': 'Supply one to four short functional search terms, preferably English for the public name index; do not guess a product name.'}
     deadline = time.monotonic() + 80
-    with concurrent.futures.ThreadPoolExecutor(max_workers=len(terms)) as pool:
-        batches = list(pool.map(lambda term: pages(term, deadline), terms))
+    try:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=len(terms)) as pool:
+            batches = list(pool.map(lambda term: pages(term, deadline), terms))
+    except ValueError as error:
+        if str(error) == 'registry_search_too_broad':
+            return {'items': [], 'next_cursor': 'too_broad',
+                    'instruction': 'Use one more specific functional keyword; this result exceeds the complete candidate bound.'}
+        raise
     unique = {}
     for rows in batches:
         for row in rows:
