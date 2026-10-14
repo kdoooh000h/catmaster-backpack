@@ -14,8 +14,9 @@ class Classifier:
     def noul(self,spec,state):
         self.calls.append({'input_tokens':10,'output_tokens':2})
         if self.fail:raise TimeoutError('PRIVATE must not leak')
-        name=state['capability_metadata']['name'];leaf='data_query' if name=='query' else 'writing_knowledge'
-        return {'answers':{key:{'type':'noul','noul':.9 if key==leaf else .01} for key in spec['questions']}}
+        name=state['capability_metadata']['name'];leaf='database_guidance' if name=='query' else 'writing_knowledge'
+        return {'answers':{key:({'type':'choice','choice':leaf,'confidence':.9} if key=='primary' else
+                                  {'type':'noul','noul':.9 if key==leaf else .01}) for key in spec['questions']}}
 
 
 class Selector:
@@ -23,7 +24,8 @@ class Selector:
     def noul(self,spec,state):
         self.calls.append({'input_tokens':10,'output_tokens':2})
         if self.fail:raise TimeoutError('PRIVATE error')
-        return {'answers':{key:{'type':'noul','noul':self.confidence if key=='match' else .9 if key in ('data_content','data_query') else .01} for key in spec['questions']}}
+        return {'answers':{key:({'type':'choice','choice':'either','confidence':.9} if key=='_delivery_mode' else
+                             {'type':'noul','noul':self.confidence if key=='match' else .9 if key in ('data_content','database_guidance') else .01}) for key in spec['questions']}}
     def choose(self,question,state,choices):
         self.calls.append({'input_tokens':10,'output_tokens':2});self.pool=choices
         key=next(key for key in choices if key!='none')
@@ -72,7 +74,7 @@ class DirectoryTests(unittest.TestCase):
         self.populate(('query',));self.refresh();provider=Selector(single=True)
         result=directory.select('query database',self.entries(),self.store,provider_factory=lambda _:provider)
         self.assertEqual(result['status'],'selected');self.assertEqual(result['reason'],'singleton_confirmed');self.assertEqual(len(provider.calls),3);self.assertIsNone(provider.pool)
-        for confidence in (.2,.64,True,float('nan')):
+        for confidence in (.2,.69,True,float('nan')):
             p=Selector(single=True,confidence=confidence)
             self.assertNotEqual(directory.select('query',self.entries(),self.store,provider_factory=lambda _:p)['status'],'selected')
     def test_provider_failure_is_one_shot_and_discloses_no_guidance(self):
@@ -88,6 +90,38 @@ class DirectoryTests(unittest.TestCase):
         self.refresh()
         self.assertFalse(any((self.project/name/'SKILL.md').exists() for name in ('query','write')))
         self.assertEqual(len(self.calls),2)
+    def test_instruction_and_executable_memberships_are_disjoint_before_model_call(self):
+        template=directory.template();modes=template['provenance']['leaf_kinds']
+        cards=[{**leaf,'kinds':modes[leaf['id']]} for leaf in template['leaves']]
+        class AllPositive:
+            def __init__(inner):inner.questions=[]
+            def noul(inner,spec,state):
+                inner.questions=list(spec['questions'])
+                leaf=next(key for key in inner.questions if key!='primary')
+                return {'answers':{key:({'type':'choice','choice':leaf,'confidence':.99} if key=='primary' else
+                                       {'type':'noul','noul':.99}) for key in inner.questions}}
+        for kind in ('skill','command','tool','resource'):
+            provider=AllPositive()
+            leaves=directory.classify({'kind':kind,'name':'generic','description':'Public metadata.','plugin':'test'},cards,provider)
+            self.assertEqual(leaves,[key for key in provider.questions if key!='primary'])
+            self.assertTrue(all(kind in modes[leaf] for leaf in leaves))
+            self.assertTrue(all(bool('skill' in modes[leaf]) == (kind in ('skill','command')) for leaf in leaves))
+    def test_file_metadata_and_database_schema_have_distinct_executable_cards(self):
+        leaves={leaf['id']:leaf for leaf in directory.template()['leaves']}
+        self.assertTrue(any(word in leaves['file_metadata']['description'] for word in ('修改时间','modified time')))
+        self.assertTrue(any(word in leaves['file_metadata']['description'] for word in ('不读取正文','不读取文件正文')))
+        self.assertIn('schema',leaves['database_schema']['description'])
+        self.assertIn('不含连接教程',leaves['database_schema']['description'])
+        self.assertLess(len(leaves['file_metadata']['description']),300)
+    def test_root_cards_disclose_compact_labels_instead_of_full_child_bodies(self):
+        self.refresh();tree=directory.available_directory(self.store,self.entries())
+        for card in tree.cards(tree.root_ids):self.assertLess(len(card['description']),600)
+    def test_updated_template_invalidates_previous_classifications_before_provider(self):
+        self.refresh();cache=directory.read_cache(self.store)
+        cache['template_sha256']='previous-template'
+        atomic_json(self.store/directory.FILE,cache,max_bytes=directory.MAX_BYTES)
+        provider=Selector();result=directory.select('query',self.entries(),self.store,provider_factory=lambda _:provider)
+        self.assertEqual(result['reason'],'directory_review_required');self.assertEqual(provider.calls,[])
     def test_service_identity_disambiguates_same_name_tools(self):
         first={'kind':'tool','plugin':'db','server':'reports','name':'query','description':'Query SQL.'}
         second=dict(first,server='billing')
@@ -131,7 +165,7 @@ class DirectoryTests(unittest.TestCase):
     def test_large_directory_uses_its_own_limit_for_all_refresh_writes(self):
         self.populate(tuple('skill-' + str(i) for i in range(750)))
         entries=self.entries();template=directory.template();template_hash=directory.digest(template)
-        leaves=[leaf['id'] for leaf in template['leaves']]
+        leaves=[leaf['id'] for leaf in template['leaves'] if 'skill' in template['provenance']['leaf_kinds'][leaf['id']]]
         records={key:{'identity':directory.digest({'metadata':directory.wire(entry),'template':template_hash}),
                       'status':'classified','leaves':leaves,'reason':None} for key,entry in entries.items()}
         cache={'schema':directory.SCHEMA,'template_sha256':template_hash,'entries':records}

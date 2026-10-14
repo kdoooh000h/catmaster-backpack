@@ -1,0 +1,400 @@
+{
+  "schema": "catmaster.backpack.sampling.v1",
+  "date": "2026-10-13",
+  "evidence_batch": "public-sampling-20261013T081625Z",
+  "tested_source_commit": "831aea6476ab94fb8a2f4a9b77fef19c688913f3",
+  "tested_version": "0.3.0",
+  "tested_wheel_sha256": "ff42f16659643b36df8c41ab7dde349f9895846702ed5b7b44d0ecad5192476c",
+  "scope": {
+    "public_capabilities": 24,
+    "all_376_capabilities_retested": false,
+    "real_jev": true,
+    "real_mcp_services": true,
+    "protocol_host_lifecycle": "simulated",
+    "fresh_native_hosts_complete": false,
+    "daily_connections_upgraded": false,
+    "prior_business_calls_replayed": false,
+    "paid_fallback": false,
+    "strategy_ab_comparison": false
+  },
+  "classification": {
+    "status": "ready",
+    "capabilities": 24,
+    "pending": 0,
+    "classification_calls": 24,
+    "elapsed_seconds": 15.943,
+    "recorded_usage": {
+      "input_tokens": 121293,
+      "output_tokens": 12912
+    },
+    "usage_rows": 24,
+    "warm_refresh": {
+      "status": "ready",
+      "capabilities": 24,
+      "pending": 0,
+      "classification_calls": 0,
+      "elapsed_seconds": null
+    }
+  },
+  "protocol": {
+    "cases": [
+      {
+        "case": "schema_actual",
+        "stratum": "chinese",
+        "positive": true,
+        "status": "unavailable",
+        "strict_pass": false,
+        "seconds": 1.921,
+        "candidate_count": 9,
+        "routing_calls": 3,
+        "reason": "final_confidence_below_gate",
+        "accepted_name": null,
+        "raw_final_name": "search_objects",
+        "raw_final_confidence": 0.46,
+        "known_gold_in_final_pool": true,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": false,
+        "guide_received": false,
+        "usage": null
+      },
+      {
+        "case": "region_actual",
+        "stratum": "mixed",
+        "positive": true,
+        "status": "selected",
+        "strict_pass": true,
+        "seconds": 2.722,
+        "candidate_count": 22,
+        "routing_calls": 3,
+        "reason": "final_choice",
+        "accepted_name": "execute_sql",
+        "raw_final_name": "execute_sql",
+        "raw_final_confidence": 1.0,
+        "known_gold_in_final_pool": true,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": true,
+        "guide_received": false,
+        "usage": {
+          "available": true,
+          "calls": 3,
+          "input_tokens": 9336,
+          "output_tokens": 894
+        }
+      },
+      {
+        "case": "text_actual",
+        "stratum": "synonym",
+        "positive": true,
+        "status": "selected",
+        "strict_pass": true,
+        "seconds": 2.152,
+        "candidate_count": 22,
+        "routing_calls": 3,
+        "reason": "final_choice",
+        "accepted_name": "read_text_file",
+        "raw_final_name": "read_text_file",
+        "raw_final_confidence": 0.99,
+        "known_gold_in_final_pool": true,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": true,
+        "guide_received": false,
+        "usage": {
+          "available": true,
+          "calls": 3,
+          "input_tokens": 9387,
+          "output_tokens": 893
+        }
+      },
+      {
+        "case": "design_mixed",
+        "stratum": "mixed",
+        "positive": true,
+        "status": "selected",
+        "strict_pass": true,
+        "seconds": 1.73,
+        "candidate_count": 22,
+        "routing_calls": 3,
+        "reason": "final_choice",
+        "accepted_name": "frontend-design",
+        "raw_final_name": "frontend-design",
+        "raw_final_confidence": 1.0,
+        "known_gold_in_final_pool": true,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": false,
+        "guide_received": true,
+        "usage": {
+          "available": true,
+          "calls": 3,
+          "input_tokens": 9395,
+          "output_tokens": 895
+        }
+      },
+      {
+        "case": "schema_zh",
+        "stratum": "chinese",
+        "positive": true,
+        "status": "unavailable",
+        "strict_pass": false,
+        "seconds": 1.75,
+        "candidate_count": 22,
+        "routing_calls": 3,
+        "reason": "final_confidence_below_gate",
+        "accepted_name": null,
+        "raw_final_name": "explore",
+        "raw_final_confidence": 0.53,
+        "known_gold_in_final_pool": true,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": false,
+        "guide_received": false,
+        "usage": null
+      },
+      {
+        "case": "info_synonym",
+        "stratum": "synonym",
+        "positive": true,
+        "status": "unavailable",
+        "strict_pass": false,
+        "seconds": 1.09,
+        "candidate_count": 0,
+        "routing_calls": 2,
+        "reason": "no_leaves",
+        "accepted_name": null,
+        "raw_final_name": null,
+        "raw_final_confidence": null,
+        "known_gold_in_final_pool": false,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": false,
+        "guide_received": false,
+        "usage": null
+      },
+      {
+        "case": "backend_mixed",
+        "stratum": "mixed",
+        "positive": true,
+        "status": "unavailable",
+        "strict_pass": false,
+        "seconds": 1.057,
+        "candidate_count": 24,
+        "routing_calls": 2,
+        "reason": "full_catalog_retained",
+        "accepted_name": null,
+        "raw_final_name": null,
+        "raw_final_confidence": null,
+        "known_gold_in_final_pool": null,
+        "gold_not_omitted_at_stop": true,
+        "actual_mcp_completed": false,
+        "guide_received": false,
+        "usage": null
+      },
+      {
+        "case": "absent_geology",
+        "stratum": "chinese",
+        "positive": false,
+        "status": "none",
+        "strict_pass": true,
+        "seconds": 1.729,
+        "candidate_count": 18,
+        "routing_calls": 3,
+        "reason": "final_choice",
+        "accepted_name": null,
+        "raw_final_name": "none",
+        "raw_final_confidence": 0.81,
+        "known_gold_in_final_pool": null,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": false,
+        "guide_received": false,
+        "usage": null
+      },
+      {
+        "case": "absent_language",
+        "stratum": "mixed",
+        "positive": false,
+        "status": "unavailable",
+        "strict_pass": false,
+        "seconds": 0.635,
+        "candidate_count": 0,
+        "routing_calls": 1,
+        "reason": "no_roots",
+        "accepted_name": null,
+        "raw_final_name": null,
+        "raw_final_confidence": null,
+        "known_gold_in_final_pool": null,
+        "gold_not_omitted_at_stop": null,
+        "actual_mcp_completed": false,
+        "guide_received": false,
+        "usage": null
+      }
+    ],
+    "positive_cases": 7,
+    "correct_accepted": 3,
+    "positive_stops": 4,
+    "wrong_accepted": 0,
+    "observed_gold_omissions": 1,
+    "negative_controls": 2,
+    "negative_wrong_operations": 0,
+    "strict_passes": 4,
+    "case_count": 9,
+    "actual_mcp_completions": 2,
+    "original_jev_calls": 23,
+    "timing": {
+      "sum_seconds": 14.786,
+      "mean_seconds": 1.643,
+      "median_seconds": 1.73,
+      "includes_early_stops": true
+    },
+    "recorded_usage_lower_bound": {
+      "input_tokens": 28118,
+      "output_tokens": 2682,
+      "covered_cases": 3,
+      "total_cases": 9,
+      "complete": false
+    },
+    "accepted_selection_pool_counts": [
+      22,
+      22,
+      22
+    ]
+  },
+  "native_claude": {
+    "attempted_cases": 1,
+    "unattempted_planned_cases": 5,
+    "task_completions": 0,
+    "business_invokes": 0,
+    "correct_capability_acquired": true,
+    "native_session_token_binding_matched": true,
+    "original_identity_audit_corrected_without_replay": true,
+    "seconds": 12.227,
+    "routing": {
+      "candidate_count": 9,
+      "leaf_count": 3,
+      "provider_calls": 3,
+      "reason": "final_choice",
+      "retained_leaf_count": 1,
+      "retained_root_count": 1,
+      "root_count": 8,
+      "stage": "final"
+    },
+    "selector_seconds": 2.214,
+    "selector_usage": {
+      "available": true,
+      "calls": 3,
+      "input_tokens": 6540,
+      "output_tokens": 473
+    },
+    "model_requests_forwarded": 2,
+    "second_upstream_response": "HTTP 429",
+    "vendor_429_reason": "unclassified",
+    "sdk_retry_blocked_before_forwarding": true,
+    "explanatory_plugin_hook_in_all_forwarded_requests": true,
+    "responses_mocked": false,
+    "requested_model": "deepseek-v4.1-flash",
+    "observed_model": "unobservable",
+    "observed_model_identity_source": "unobservable",
+    "native_reported_usage": {
+      "input_tokens": 2620,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 106,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "",
+      "iterations": [],
+      "speed": "standard",
+      "fallback_credit": null
+    },
+    "native_usage_complete": false
+  },
+  "new_isolated_codex_cli": {
+    "native_model_turns": 0,
+    "hook_trust_changed": false,
+    "private_catalog_read": false,
+    "own_hooks": 11,
+    "trust_states": [
+      "untrusted"
+    ],
+    "native_hook_ready": false,
+    "status": "native_hook_trust_review_required",
+    "mcp_servers": [
+      {
+        "name": "backpack",
+        "status": null,
+        "tools": [
+          "acquire",
+          "invoke"
+        ]
+      }
+    ]
+  },
+  "current_codex_skill": {
+    "passed": true,
+    "actual_current_codex_backpack_acquisition": true,
+    "name": "frontend-design",
+    "source_repo": "anthropics/skills",
+    "source_commit": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+    "selector_seconds": 0.828,
+    "guide_read_and_applied": true,
+    "execution_by": "current Codex Agent, ordinary local file tools",
+    "browser_render_checked": true,
+    "mobile_viewport": 390,
+    "mobile_horizontal_overflow": false,
+    "desktop_horizontal_overflow": false,
+    "detail_expansion_checked": true,
+    "external_assets": 0,
+    "focus_and_reduced_motion_rules": true,
+    "html_sha256": "d3f73f96b9df73b63b530df4ff38f16ac9707a8fe348451c5acecc36198d6b45",
+    "screenshot": "rendered-desktop.jpg",
+    "backpack_usage_report": "recorded as agent_reported; artifact/browser checks are separate direct evidence",
+    "new_isolated_codex_cli_acceptance": false,
+    "private_catalog_read": false
+  },
+  "private_pdf": {
+    "status": "none",
+    "confidence": 0.96,
+    "root_count": 7,
+    "retained_roots": 1,
+    "retained_leaves": 1,
+    "candidate_count": 26,
+    "eligible_count": 111,
+    "catalog_absence_proven": false,
+    "attempts": 1,
+    "provider_calls": 3,
+    "selector_seconds": 1.67,
+    "input_tokens": 7873,
+    "output_tokens": 505,
+    "guide_received": false,
+    "operation_performed": false,
+    "need": "Merge two synthetic local PDFs in order and verify text/pages",
+    "scope": "Actual current private gateway response in the main Codex conversation; normal abstention, not catalog absence proof."
+  },
+  "cleanup": {
+    "ready_sessions": 0,
+    "active_peer_rows": 1,
+    "business_operation_states": {
+      "finished": 2
+    },
+    "native_process_exited": true,
+    "html_server_stopped": true,
+    "temporary_browser_tab_closed": true,
+    "stale_peer_directly_cleared": false
+  },
+  "review": {
+    "independent_read_only": true,
+    "no_provider_or_business_calls_for_review": true
+  },
+  "conclusion": "Two real MCP service calls and one current-Codex Skill application succeeded. Public positive selection passed 3/7, including one observed gold omission; complete fresh-native host acceptance remains unverified.",
+  "cost_observability": {
+    "full_primary_agent_tokens": "unobservable",
+    "failed_request_tokens": "unobservable",
+    "billed_money": "unobservable"
+  }
+}

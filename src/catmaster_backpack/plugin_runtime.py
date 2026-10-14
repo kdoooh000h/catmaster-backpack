@@ -399,11 +399,13 @@ def dispatch_event(connection, event, *, origin='host'):
         db.execute('COMMIT')
         result = {'blocked': False, 'context': [], 'reason': '', 'status': 'completed', 'handlers': [], 'event_digest': digest}
         deadline = time.monotonic() + 20
-        # Native transport acquire/invoke are wrappers, not the original plugin operation.
+        # Native transport tools are wrappers, not the original plugin operation.
         transport = origin == 'host' and event.get('tool_name') in (
             'mcp__backpack__acquire', 'mcp__backpack__invoke', 'backpack_acquire', 'backpack_invoke',
             'backpack__acquire', 'backpack__invoke',
-            'mcp_backpack_acquire', 'mcp_backpack_invoke', 'backpack___acquire', 'backpack___invoke') and name in ('PreToolUse', 'PostToolUse', 'PostToolUseFailure')
+            'mcp__backpack__report_use', 'backpack_report_use', 'backpack__report_use',
+            'mcp_backpack_acquire', 'mcp_backpack_invoke', 'mcp_backpack_report_use',
+            'backpack___acquire', 'backpack___invoke', 'backpack___report_use') and name in ('PreToolUse', 'PostToolUse', 'PostToolUseFailure')
         declined = name != 'SessionStart' and hook_delivery_declined(connection, session, ending_tokens=ending_tokens)
         if (declined and not transport and name == 'PreToolUse' and
                 any(h['event'] == name for p in registry['plugins'].values() for h in p['hooks'])):
@@ -448,7 +450,7 @@ def dispatch_event(connection, event, *, origin='host'):
             db.execute('UPDATE sessions SET ready=0 WHERE connection_id=? AND session=?', (descriptor['connection_id'], session))
             db.execute('INSERT INTO sessions VALUES(?,?,?,1)', (token, descriptor['connection_id'], session))
             activate_start_plugins(connection, token, registry, result['handlers'], event)
-            result['context'].append('Use Backpack acquire for plugin needs; discovery is automatic. Skill/command guidance is delivered by acquire; apply it directly. Invoke tool/resource selections using the returned schema; resources take {}. Include session_token=' + token + ' in every call. Each selection binds one argument object; acquire anew for a different operation. Selection grants no permission. Never dispatch Hooks yourself.')
+            result['context'].append('Use Backpack acquire for plugin needs; discovery is automatic. describe_connection=true shows first-layer direct/frequent entries; a listed capability_id uses one confirmation. Skill/command guidance is delivered by acquire; apply it directly, then report_use after actual use. Invoke tool/resource selections using the returned schema; resources take {}. Include session_token=' + token + ' in every call. Each selection binds one argument object; acquire anew for a different operation. Selection grants no permission. Never dispatch Hooks yourself.')
         if name in ('SessionStart', 'UserPromptSubmit'):
             db.execute('INSERT OR REPLACE INTO context VALUES(?,?,?,?)', (descriptor['connection_id'], session, name, '\n'.join(result['context'])))
             if name == 'UserPromptSubmit':
@@ -648,14 +650,42 @@ class Gateway:
         return reconcile(self.connection, peer=self.peer if self.handshake_ready else None,
                          session=session, session_token=token)
 
-    def acquire(self, need, session_token, describe_connection=False):
+    def shortcut_entries(self, descriptor, project, entries):
+        eligible = CapabilityEntries(self.store)
+        for key,entry in entries.items():
+            try:
+                if leaf_policy(descriptor,project,entry) != 'deny':eligible[key]=entry
+            except (OSError,ValueError):
+                continue
+        return eligible
+
+    def public_view(self, *, plan=None, session_token=None):
+        try:
+            from .plugin_directory import first_layer
+        except ImportError:
+            from plugin_directory import first_layer
+        plan = plan or self.discovery(session_token)
+        descriptor, store, project, _, entries = catalog(self.connection, plan=plan)
+        entries=self.shortcut_entries(descriptor,project,entries)
+        value = public_document(plan)
+        value['first_layer'] = first_layer(store, entries)
+        return value
+
+    def acquire(self, need, session_token, describe_connection=False, capability_id=None):
         session = self.session(session_token)
         self.native_tokens[session_token] = session
         plan = self.discovery(session_token)
         if describe_connection:
-            return {'status': 'discovered', 'discovery': public_document(plan)}
+            return {'status': 'discovered', 'discovery': self.public_view(plan=plan, session_token=session_token)}
         descriptor, store, project, registry, entries = catalog(self.connection, plan=plan)
-        selected = pick(need, entries)
+        if capability_id is None:
+            selected = pick(need, entries)
+        else:
+            try:
+                from .plugin_directory import select_direct
+            except ImportError:
+                from plugin_directory import select_direct
+            selected = select_direct(need, capability_id, self.shortcut_entries(descriptor,project,entries), store)
         if selected['status'] != 'selected':
             return selected
         entry = entries[selected['choice']]
@@ -683,8 +713,47 @@ class Gateway:
         if entry['kind'] in ('skill', 'command'):
             result['guidance'] = bounded_file(Path(entry['package']), entry['path']).read_text()
             result['invocation_contract'] = 'guidance is already delivered; apply it directly. Optional invoke accepts only arguments={}.'
+            result['usage_contract'] = 'After actually applying this guidance, report_use records one agent-reported use. Acquisition alone does not count.'
         elif entry['kind'] == 'resource':
             result['invocation_contract'] = 'read the selected resource with invoke and arguments={}; do not supply a URI or other arguments.'
+        return result
+
+    def report_use(self, selection, session_token):
+        session = self.session(session_token)
+        row = self.db.execute('SELECT entry FROM selections WHERE id=?', (selection,)).fetchone()
+        if row is None:raise ValueError('unknown_selection')
+        entry = strict_json(row['entry'])
+        if (entry['owner_session'] != session or entry['owner_connection'] != self.descriptor['connection_id']
+                or entry['owner_token_hash'] != identity(session_token)):
+            raise ValueError('selection_session_scope_conflict')
+        if entry['kind'] not in ('skill','command'):raise ValueError('usage_report_requires_guidance')
+        self.recheck(session_token, entry, {})
+        try:
+            from .capability_usage import record_use
+        except ImportError:
+            from capability_usage import record_use
+        receipt = record_use(self.store, entry['catalog_id'], entry['kind'], 'guidance:' + selection,
+                             completed=True, event='application_reported')
+        return {'status':receipt['status'],'counted':receipt['counted'],'evidence':'agent_reported'}
+
+    def record_completed_use(self, selection, entry, result):
+        if result.get('status') == 'completed' and entry['kind'] in ('tool','resource'):
+            try:
+                # Business success can coexist with an unknown post Hook.
+                # Only durable non-quarantined completion counts.
+                operation = self.db.execute('SELECT state FROM operations WHERE selection=?', (selection,)).fetchone()
+                if operation is None or operation['state'] != 'finished' or result.get('post_hook_status') == 'unknown':
+                    return result
+                try:
+                    from .capability_usage import record_use
+                except ImportError:
+                    from capability_usage import record_use
+                record_use(self.store,entry['catalog_id'],entry['kind'],'operation:' + selection,
+                           completed=True,event='completed')
+            except (OSError,ValueError,sqlite3.Error):
+                # The operation already completed. A statistics failure must
+                # never turn it into a failed/unknown business outcome or replay.
+                result = {**result,'usage_recording':'unavailable'}
         return result
 
     def recheck(self, token, entry, arguments):
@@ -735,7 +804,7 @@ class Gateway:
                 self.db.execute('COMMIT');return result
             if row['state'] != 'selected':
                 self.db.execute('COMMIT')
-                return strict_json(row['result']) if row['result'] else {'status': 'unknown', 'reason': 'previous_operation_unfinished'}
+                return self.record_completed_use(selection,entry,strict_json(row['result'])) if row['result'] else {'status': 'unknown', 'reason': 'previous_operation_unfinished'}
             if entry['kind'] == 'tool':
                 validate_arguments(arguments, entry['schema'])
             elif arguments:
@@ -808,7 +877,7 @@ class Gateway:
             stream.write(compact({'time': time.time(), 'session': session, 'selection': selection,
                                  'plugin': entry['plugin'], 'kind': entry['kind'], 'target': entry.get('target', entry.get('path')),
                                  'status': result['status'], 'business_RPC_sent': business_sent}) + '\n')
-        return result
+        return self.record_completed_use(selection,entry,result)
 
     def after(self, event, body, failed):
         name = 'PostToolUseFailure' if failed else 'PostToolUse'
@@ -847,7 +916,12 @@ def stdio_packets(gateway):
         while True:
             ready = selector.select(.75 if gateway.subscription else None)
             if not ready:
-                document = public_document(gateway.discovery())
+                try:
+                    document = gateway.public_view()
+                except (OSError,ValueError,sqlite3.Error):
+                    # Optional directory/view failures do not terminate an
+                    # otherwise live transport or fabricate an update.
+                    continue
                 current = identity(document)
                 if last_document is not None and current != last_document:
                     print(compact({'jsonrpc':'2.0','method':'notifications/resources/updated','params':{'uri':RESOURCE}}),flush=True)
@@ -866,7 +940,10 @@ def stdio_packets(gateway):
                 if line.strip():
                     yield strict_json(line.decode())
             if gateway.subscription and last_document is None:
-                last_document = identity(public_document(gateway.discovery()))
+                try:
+                    last_document = identity(gateway.public_view())
+                except (OSError,ValueError,sqlite3.Error):
+                    pass
 
 
 def serve_stdio(connection):
@@ -875,12 +952,15 @@ def serve_stdio(connection):
         raise SystemExit(0)
     previous = signal.signal(signal.SIGTERM, terminate)
     tools = [
-        {'name': 'acquire', 'description': 'Select one plugin capability; discovery reconciles automatically. Set describe_connection=true only for connection diagnostics. Selection grants no execution permission.',
-         'inputSchema': {'type': 'object', 'properties': {'need': {'type': 'string'}, 'session_token': {'type': 'string'}, 'describe_connection': {'type': 'boolean'}},
+        {'name': 'acquire', 'description': 'Select one plugin capability. describe_connection=true returns first-layer direct/common entries and connection diagnostics. Optional capability_id confirms one eligible direct/common entry. Selection grants no execution permission.',
+         'inputSchema': {'type': 'object', 'properties': {'need': {'type': 'string'}, 'session_token': {'type': 'string'}, 'describe_connection': {'type': 'boolean'}, 'capability_id':{'type':'string'}},
                          'required': ['need', 'session_token'], 'additionalProperties': False}, 'annotations': {'readOnlyHint': True}},
         {'name': 'invoke', 'description': 'Invoke one selection ONCE with one exact argument object under normal host/user authorization. Acquire a FRESH selection for every different operation. Unknown operations cannot be replayed.',
          'inputSchema': {'type': 'object', 'properties': {'selection': {'type': 'string'}, 'arguments': {'type': 'object'}, 'session_token': {'type': 'string'}},
                          'required': ['selection', 'arguments', 'session_token'], 'additionalProperties': False}, 'annotations': {'readOnlyHint': False}},
+        {'name':'report_use','description':'Report that acquired Skill/command guidance was actually applied. Counts once per selection; acquisition alone is not use. No business operation is dispatched.',
+         'inputSchema':{'type':'object','properties':{'selection':{'type':'string'},'session_token':{'type':'string'}},
+                        'required':['selection','session_token'],'additionalProperties':False},'annotations':{'readOnlyHint':False}},
     ] if gateway.scope_active else []
     try:
         for packet in stdio_packets(gateway):
@@ -904,7 +984,7 @@ def serve_stdio(connection):
                     if packet.get('params', {}).get('uri') != RESOURCE:
                         raise ValueError('unknown_connector_resource')
                     result = {'contents': [{'uri': RESOURCE, 'mimeType': 'application/json',
-                        'text': compact(public_document(gateway.discovery()))}]}
+                        'text': compact(gateway.public_view())}]}
                 elif method in ('resources/subscribe', 'resources/unsubscribe'):
                     gateway.observed(method)
                     if packet.get('params', {}).get('uri') != RESOURCE:
@@ -919,7 +999,7 @@ def serve_stdio(connection):
                     params = packet['params'];args = params.get('arguments', {})
                     definition = next(t for t in tools if t['name'] == params['name'])
                     validate_arguments(args, definition['inputSchema'])
-                    value = gateway.acquire(**args) if params['name'] == 'acquire' else gateway.invoke(**args)
+                    value = getattr(gateway, params['name'])(**args)
                     result = {'content': [{'type': 'text', 'text': compact(value)}],
                               'isError': value.get('status') in ('failed', 'denied', 'unknown')}
                 else:

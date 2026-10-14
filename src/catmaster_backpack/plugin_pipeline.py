@@ -519,6 +519,9 @@ def cli(argv=None):
                              help='Confirm native processes for this profile have stopped')
     discovery = sub.add_parser('discover');discovery.add_argument('--connection', required=True)
     refresh = sub.add_parser('refresh-directory');refresh.add_argument('--store', required=True)
+    direct = sub.add_parser('direct-capabilities');direct.add_argument('--store',required=True)
+    direct.add_argument('--id',action='append',default=[],help='Canonical capability ID; omit IDs to clear only these aliases')
+    view = sub.add_parser('directory-view');view.add_argument('--store',required=True)
     hook = sub.add_parser('hook');hook.add_argument('--connection', required=True)
     serve = sub.add_parser('serve');serve.add_argument('--connection', required=True)
     args = parser.parse_args(argv)
@@ -540,6 +543,19 @@ def cli(argv=None):
             except ImportError:
                 from plugin_directory import refresh
             result = refresh(args.store)
+        elif args.action in ('direct-capabilities','directory-view'):
+            try:
+                from .plugin_directory import registered_entries, first_layer, refresh
+                from .capability_usage import configure_direct
+            except ImportError:
+                from plugin_directory import registered_entries, first_layer, refresh
+                from capability_usage import configure_direct
+            entries = registered_entries(load_registry(args.store)[2])
+            if args.action == 'direct-capabilities':
+                result = {'direct_ids':configure_direct(args.store,args.id,entries)}
+                result['directory'] = refresh(args.store)
+            else:
+                result = first_layer(args.store,entries)
         elif args.action == 'connect':
             result = connect_host(args.store, args.host, args.profile_root)
         elif args.action == 'status':

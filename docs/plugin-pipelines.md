@@ -18,7 +18,7 @@ flowchart LR
 
 ## 操作入口
 
-示例路径需要换成实际项目和配置目录。注册库绑定一个项目；连接绑定一个宿主 profile。操作员运行安装命令，agent 只得到 `acquire` 和 `invoke`，没有安装、注册或修改连接的 MCP 权限。
+示例路径需要换成实际项目和配置目录。注册库绑定一个项目；连接绑定一个宿主 profile。操作员运行安装命令，agent 得到 `acquire`、`invoke` 和 `report_use`，没有安装、注册或修改连接的 MCP 权限。
 
 ```sh
 catmaster-backpack pipelines init --store /path/backpack-store --project-root /path/project
@@ -27,6 +27,8 @@ catmaster-backpack pipelines add --store /path/backpack-store --package /path/pu
 catmaster-backpack pipelines status --connection /path/agent-profile/backpack-connection.json
 catmaster-backpack pipelines discover --connection /path/agent-profile/backpack-connection.json
 catmaster-backpack pipelines refresh-directory --store /path/backpack-store
+catmaster-backpack pipelines directory-view --store /path/backpack-store
+catmaster-backpack pipelines direct-capabilities --store /path/backpack-store --id cap_REPLACE_WITH_CANONICAL_ID
 catmaster-backpack pipelines add --store /path/backpack-store --package /path/updated-plugin --replace
 catmaster-backpack pipelines unregister --store /path/backpack-store --plugin plugin-name
 ```
@@ -60,11 +62,15 @@ Pi 需要宿主的原生 MCP 扩展。Hermes 需要模型提供方 SDK；连接�
 
 agent 可读取 `backpack://connector/capabilities`，也可用 `acquire` 的 `describe_connection=true` 获取当前会话的能力报告。报告包含注册和绑定版本、支持方式及观察范围，不授予执行权，也不发送叶业务请求。订阅资源的客户端会收到更新通知；未订阅的客户端仍在每次调用时自动重新匹配。
 
-工具和资源使用 `acquire → invoke`；Skill 和命令说明由 `acquire` 直接交付。新插件的发现已包含在调用中，无需先额外查询能力报告；报告用于连接诊断。选择器与 Skill 目录共用两层引擎：先判断任务大类，再判断操作细类，最后只在保留的原始候选中选择。工具的 MCP 服务归属也进入描述，防止不同服务中的同名工具混淆。最终选中结果仍绑定原来的稳定组件 ID。
+工具和资源使用 `acquire → invoke`；Skill 和命令说明由 `acquire` 直接交付，实际应用后可用 `report_use` 报告使用。新插件的发现已包含在调用中，无需先额外查询能力报告。`describe_connection=true` 也可按需查看第一层的直达、常用和普通分类入口。选择器与 Skill 目录共用两层引擎：先判断任务大类，再判断操作细类，最后只在保留的原始候选中选择。工具的 MCP 服务归属也进入描述，防止不同服务中的同名工具混淆。最终选中结果仍绑定原来的稳定组件 ID。
 
 CLI `add` 和 `add --replace` 在注册完成后更新目录；只有新增或元数据变化的能力需要分类。首次合并已有注册库时执行 `refresh-directory`。一次更新最多分类 64 项，尚未开始的项可在下一次更新继续；失败或未知项按原始身份缓存，不自动重试。按需使用时不再分类全部能力，不缓存跨需求的选择。
 
-当前公共模板有 8 个任务大类、30 个操作细类，覆盖注册插件中的 Skill、命令说明、MCP 工具和静态资源。一个能力可属于多个细类。目录保留概率 0.20，最终置信度仍为原管道的 0.65；完整选择最多三次调用，共享 36 秒。候选超过 96 项或覆盖全部候选时返回未确定，不截断、不退回全量 Choice。仅有一项能力的注册库以最后一次独立 yes/no 判断确认该能力，不能仅凭目录保留就自动选中。
+0.3.1 公共模板有 8 个任务大类、45 个操作细类，覆盖注册插件中的 Skill、命令说明、MCP 工具和静态资源。细类区分指导与执行，一个能力可属于多个合适细类。元数据分类同时做主分类选择和独立多归属判断，保留阈值均为 0.40。任务选择逐级提高要求：大类 0.10、细类 0.30、最终能力 0.70。第一轮同时判断需求的交付方式，只有置信度达到 0.70 才据此缩小指导或执行候选。完整选择最多三次调用，共享 36 秒。候选超过 96 项或覆盖全部候选时返回未确定，不截断、不退回全量 Choice。仅有一项能力的注册库以最后一次独立 yes/no 判断确认该能力，不能仅凭目录保留就自动选中。
+
+第一层允许固定最多 24 项具体能力；新固定项可以先直达而不强制分类。`direct-capabilities` 可重复传入 `--id`，不传 ID 则清空固定入口。已有普通分类不会因固定而移除。常用入口按近 30 天成功使用次数排序，至少两次才进入，最多显示六项；每次读取自动重算，热度下降后退出常用入口，原分类保留。工具和资源只统计持久执行状态已完成的调用，失败或未知不计数。Skill 和命令说明只统计 agent 的实际应用报告，获取说明本身不计数。重复回执不重复计数。插件是容器，固定和常用针对其中可调用的具体能力；Hook 仍由宿主事件分发。
+
+agent 已从第一层读到某项具体 ID 时，可传 `capability_id` 与原始 `need`，经一次置信度至少 0.70 的 Jev 确认后获取。直达或常用不会跳过会话、来源、参数及权限检查。可选目录配置损坏或统计不可用时，普通分类与运行传输继续工作。实际对照、安装包及真实 MCP 验证范围见 [0.3.1 目录优化记录](backpack-directory-precision-2026-10-13.md)。
 
 目录缺失、新能力未分类、原描述或目录模板变化时先返回目录需要复核，不会静默丢掉新能力。源文件、会话、参数、权限和回执仍由原执行管道校验。正式私有 Skill 网关保持原有目录与获取边界，不迁移私有 Skill 文件或调用凭证。
 

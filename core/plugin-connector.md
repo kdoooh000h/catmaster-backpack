@@ -1,7 +1,7 @@
 # CatMaster connector v1
 
 The operator connects one host profile to one project registry. The host receives
-two fixed MCP tools (`acquire`, `invoke`), one capability resource, and one native
+three fixed MCP tools (`acquire`, `invoke`, `report_use`), one capability resource, and one native
 lifecycle bridge. Registering a package never edits the host configuration.
 
 ## Discovery and matching
@@ -11,7 +11,7 @@ subscribe receive `notifications/resources/updated` when its document changes.
 The stdio process checks only while subscribed; it starts no separate service.
 Clients without resource discovery can call `acquire` with
 `describe_connection=true` and their native startup token. This returns the
-same public capability report, scoped to that session, without a selector or
+same public capability report and first-layer direct/frequent/category entries, scoped to that session, without a selector or
 leaf business call.
 
 Tools and static resources use `acquire(need)` followed by `invoke(selection, arguments)`.
@@ -19,6 +19,8 @@ Tools and static resources use `acquire(need)` followed by `invoke(selection, ar
 resource advertises a closed empty-object schema and takes `arguments={}`;
 the gateway already binds its URI. Skill and command guidance is delivered by
 `acquire` and can be applied directly; its optional `invoke` also takes `{}`.
+After actual application, `report_use(selection, session_token)` records an
+agent-reported use once per selection. Delivery alone is not application evidence.
 Both already reconcile the connection; a separate capability-report call is
 for diagnostics, not a prerequisite for discovering a newly registered plugin.
 The selector uses the same two-level engine as Skill routing: task roots, child
@@ -28,12 +30,38 @@ Exact metadata/template identities cache membership, including uncertain outcome
 task decisions are never cached. Acquisition never starts metadata classification.
 Unclassified or changed current metadata stops selection, without truncation or a
 global Choice fallback. Removed, disabled and host-ineligible components are pruned.
-The final threshold remains .65; directory and membership retention is .20.
+The 0.3.1 public template has eight task roots and 45 operation scopes, with
+separate guidance and execution leaves and multiple allowed memberships.
+Metadata classification retains primary/secondary scopes at .40. Task root,
+operation scope and final selection thresholds are .10, .30 and .70 respectively.
+A delivery-mode Choice shares the root request; only confidence at least .70
+restricts the final pool to guidance or execution kinds.
 A one-capability registry uses a final typed yes/no confirmation instead of a global
 Choice. Other full-pool unions and pools over 96 capabilities abstain. Maximum three
 selection calls share 36 seconds, with no retries. Source, session, permission and
 schema checks remain fresh. Original description/name budgets remain unchanged;
 a bounded MCP service name is additionally retained to disambiguate same-name tools.
+
+## Optional first-layer aliases
+
+Operators can pin up to 24 registered capability IDs with `direct-capabilities`.
+A newly pinned capability can be reached without a mandatory ordinary membership;
+existing ordinary memberships remain. The frequent directory exposes up to six
+current, eligible capabilities with at least two successful uses in the last
+30 days, ordered by count, recency and ID. It recalculates on reads, with no daemon.
+Completed tool/resource receipts and reported Skill/command applications are
+distinct evidence. Acquisition, failed/unknown operations and duplicate receipts
+do not increase counts. Existing usage before this version is not backfilled.
+
+An `acquire` with an explicitly listed `capability_id` confirms that exact alias
+against the original `need` with one typed yes/no request at the .70 threshold.
+Ordinary discovery through shortcut roots skips the child round when no normal
+root is retained, then makes a final Choice. Shortcut aliases preserve canonical
+IDs and do not grant permission or bypass fresh execution checks. Disabled or
+denied capabilities do not appear in the host-scoped aliases. Damaged optional
+alias settings or statistics cannot remove ordinary membership or end a subscribed
+transport. A previously direct-only entry is retained for review if its optional
+alias settings become unavailable.
 
 Evidence has separate fields:
 

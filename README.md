@@ -21,6 +21,8 @@
 
 CatMaster Backpack reduces visible agent capability surface area by exposing compact gateways first, then letting the model explicitly select the tool or skill it needs.
 
+The isolated 0.3.1 candidate adds delivery-mode selection, explicit direct entries, and successful-use shortcuts. See the [directory precision regression report](docs/backpack-directory-precision-2026-10-13.md) for the 24-capability experiment and its rollout limits.
+
 Current published runtime version:
 
 ```text

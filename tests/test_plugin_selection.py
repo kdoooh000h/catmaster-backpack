@@ -18,7 +18,8 @@ class Provider:
         self.calls = [];self.final_pool = None
     def noul(self, spec, state):
         self.calls.append({'input_tokens': 1, 'output_tokens': 1})
-        return {'answers': {k: {'type':'noul','noul':.9 if k in ('inventory','stock') else .01} for k in spec['questions']}}
+        return {'answers': {k: ({'type':'choice','choice':'either','confidence':.9} if k=='_delivery_mode' else
+                                {'type':'noul','noul':.9 if k in ('inventory','stock') else .01}) for k in spec['questions']}}
     def choose(self, question, state, choices):
         self.calls.append({'input_tokens': 1, 'output_tokens': 1});self.final_pool = choices
         return {'type':'choice','choice':self.choice,'confidence':self.confidence}
@@ -57,7 +58,7 @@ class SelectionTests(unittest.TestCase):
             with self.subTest(key=key):
                 result=self.select(Provider(key));self.assertEqual(result['status'],'unavailable')
     def test_confidence_boundary_and_typed_probability(self):
-        for confidence,status in ((.64,'unavailable'),(.65,'selected'),(True,'unavailable'),(float('nan'),'unavailable')):
+        for confidence,status in ((.69,'unavailable'),(.70,'selected'),(True,'unavailable'),(float('nan'),'unavailable')):
             with self.subTest(confidence=confidence):
                 self.assertEqual(self.select(Provider(confidence=confidence))['status'],status)
         self.assertEqual(self.select(Provider('none',1))['status'],'none')

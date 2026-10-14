@@ -1,6 +1,6 @@
 [project]
 name = "catmaster-backpack"
-version = "0.3.0"
+version = "0.3.1"
 description = "Cross-agent tool and skill surface management toolkit."
 readme = "README.md"
 requires-python = ">=3.11"

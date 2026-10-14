@@ -36,7 +36,7 @@ def install(profile, project, argv, connection, write):
     project_settings_path.parent.mkdir(parents=True, exist_ok=True)
     write(project_settings_path, project_settings)
     visible = settings.setdefault('tools', {}).setdefault('visible', [])
-    for name in ('mcp__backpack__acquire', 'mcp__backpack__invoke'):
+    for name in ('mcp__backpack__acquire', 'mcp__backpack__invoke', 'mcp__backpack__report_use'):
         if name not in visible:
             visible.append(name)
 
