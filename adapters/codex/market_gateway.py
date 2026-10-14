@@ -15,7 +15,7 @@ from pathlib import Path
 import shutil
 import sys
 
-POLICY = "market-descriptions-v1"
+POLICY = "market-descriptions-v2"
 
 
 def source_directory_descriptions(module, data):
@@ -70,11 +70,20 @@ def make_router(base, module):
             environment = module.backpack_provider_environment.load(self.data)
             if environment is not None:
                 config["provider_environment"] = environment
-            decision = module.runtime._route(need, candidates, purpose=purpose, config=config)
+            if directory:
+                from market_routing import route
+                decision = route(module.runtime, need, candidates, config, "directory")
+            else:
+                decision = module.runtime._route(need, candidates, purpose=purpose, config=config)
             return {**decision, "selection_stage": "directory" if directory else "skill",
                     "minimum_confidence": minimum}
 
         def request(self, operation, arguments):
+            if operation == "resource":
+                from market_resources import plugin_resource
+                result = plugin_resource(self, module, arguments)
+                if result is not None:
+                    return result
             result = super().request(operation, arguments)
             if operation == "acquire":
                 result = {**result, "routing_policy": POLICY}

@@ -347,6 +347,9 @@ for actual samples; they do not establish universal marketplace compatibility.
 The subsequent [ordinary-request Agent pilot](docs/backpack-market-blind-validation-2026-10-14.md)
 completed the full new-capability path in 1/6 tasks and identified discovery and
 plugin-resource gaps. Named-service examples do not establish autonomous discovery.
+The [repair retest](docs/backpack-market-repair-validation-2026-10-14.md) reached
+2/6 complete tasks; it fixed plugin resource access and exercised improved market
+discovery, while final MCP confidence and native plugin requirements still blocked use.
 
 ## Security Boundary
 

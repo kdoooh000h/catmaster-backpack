@@ -27,7 +27,11 @@ stricter existing `minimum_confidence`. Configuration may set
 the existing source-directory/Skill route, at most two selection levels, not the
 separate multi-host semantic directory. It adds no full-catalog fallback.
 
-MCP invocation and Skill reference selection delegate to the existing runtime.
+MCP invocation delegates to the existing runtime. Pinned plugin packages also
+expose Jev-selected resources outside the legacy folder list, including
+`templates/`; source fingerprints, current grants and work-copy checks remain
+in force. Directory choices use an index-coverage question, separate from the
+final Skill, plugin or MCP capability question.
 The adapter also exposes receipt-based public plugin/MCP setup; see
 [codex-market-connect.md](codex-market-connect.md) for supported components,
 dependency preparation, scope and recovery. Setup does not grant account access.

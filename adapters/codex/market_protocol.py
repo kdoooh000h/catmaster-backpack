@@ -8,7 +8,7 @@ from market_connect import Market
 
 TOOLS = [
     {'name': 'prepare_market_capability',
-     'description': 'When the current task needs a market plugin or MCP not yet connected, submit a concrete secret-free need. Jev selects from public metadata and returns one pinned setup preview or missing requirements. source optionally names the public marketplace, never a capability. For MCP Registry use a specific public service search term; broad incomplete results are not silently truncated. Nothing is executed or connected by preparation.',
+     'description': 'When the current task needs a market plugin or MCP not yet connected, submit a concrete secret-free need. Jev selects from public metadata and returns one pinned setup preview or missing requirements. source optionally names the public marketplace, never a capability. For MCP Registry supply one to four short functional keywords (prefer English for its name index), not a sentence or guessed product name. Terms are combined with OR and all pages are checked; broad incomplete results are not silently truncated. Nothing is executed or connected by preparation.',
      'inputSchema': {'type': 'object', 'properties': {
          'kind': {'type': 'string', 'enum': ['plugin', 'mcp']},
          'need': {'type': 'string', 'maxLength': 2000},

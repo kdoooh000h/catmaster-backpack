@@ -77,7 +77,9 @@ archive finished state through maintenance when these limits are reached.
 
 ## Installation and verification
 
-Keep `market_gateway.py`, `market_protocol.py`, and `market_connect.py` together.
+Keep all six `market_*.py` adapter modules together: `market_gateway.py`,
+`market_protocol.py`, `market_connect.py`, `market_routing.py`,
+`market_resources.py` and `market_registry.py`.
 The launcher still requires the separate existing standalone runtime via
 `--runtime-root`. The runtime source is not bundled in this task branch.
 Only the selected public MCP command changes; private routing and other Agent
@@ -98,3 +100,27 @@ Protocol references: the [official MCP Registry API](https://github.com/modelcon
 and [OpenAI plugin packaging guide](https://developers.openai.com/plugins/build/plugins).
 Their catalogs/manifests describe availability and components, not successful task
 execution. See the dated validation record for the tested scope.
+
+## Discovery repair adapter
+
+Source directories are judged as indexes that may contain useful children,
+with the existing 0.1 directory threshold; final selection still requires at
+least 0.7. Plugins have a plugin-specific question. No `none` result is converted
+into a positive match and no capability names are inserted into user requests.
+
+Public MCP discovery uses the official Registry only. Its name-substring API
+receives one to four functional keywords combined with OR; all pages are read
+and duplicate name/version pairs are reconciled. Limits remain explicit: six
+pages per term, 192 distinct active candidates, an 80-second discovery budget,
+35 seconds per read, one retry only for a failed anonymous GET. Native curl
+negotiates HTTP/2 when available, disables curlrc, enforces HTTPS/TLS and a
+response size limit; Python HTTPS is the fallback when curl is unavailable. Incomplete or
+oversized results stop before final selection. This is bounded name discovery,
+not a guarantee of semantic recall over the whole marketplace. Redirects and
+TLS bypass remain prohibited. Dependency setup and business operations keep
+their existing receipt and no-replay rules.
+
+A selected market plugin may disclose a template or other file from its pinned
+package through `acquire_resource`. It must pass current scope/grant, package
+fingerprint, selected-path and work-copy checks. The adapter does not fabricate
+an external Skill source registration or expose files from another package.

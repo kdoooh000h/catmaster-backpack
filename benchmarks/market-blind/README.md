@@ -16,8 +16,10 @@ an existing-capability selection, discovery failures and a plugin-resource gap.
 Each case starts a fresh native conversation, a separate Agent home and a
 separate Backpack store. The existing approved public source **metadata** is
 copied; selected package caches, MCP registrations, Skill grants, invocation
-receipts, frequent-use history and private Skills are not. The launcher and
-standalone runtime are the installed versions. Passive proxies record exact
+receipts, frequent-use history and private Skills are not. By default the launcher and
+standalone runtime are the installed versions. `prepare --launcher PATH` and
+`--runtime-root PATH` select an isolated candidate and record its identity;
+they do not change the daily connection. Passive proxies record exact
 gateway traffic and Jev CLI output without changing candidates or decisions.
 
 Known public native installation/cache roots and Backpack public registries are

@@ -155,24 +155,32 @@ def prepare(args):
     server = selected[0]
     program, launcher = server['command'], server['args'][0]
     runtime = server['args'][server['args'].index('--runtime-root') + 1]
+    installed_launcher = launcher
+    if args.launcher:
+        launcher = str(Path(args.launcher).resolve(strict=True))
+    if args.runtime_root:
+        runtime = str(Path(args.runtime_root).resolve(strict=True))
     baseline = {str(p): digest(p) for p in protected_paths(home, data)}
     dump(root / 'protected-before.json', baseline)
     dump(root / 'installed-before.json', installed_inventory(home, data))
-    dump(root / 'tasks.json', TASKS)
+    tasks = [t for t in TASKS if not args.only_case or t['id'] == args.only_case]
+    dump(root / 'tasks.json', tasks)
     shutil.copy2(__file__, root / 'frozen-runner.py')
-    manifest = {'created_at': time.time(), 'tasks': [t['id'] for t in TASKS],
+    manifest = {'created_at': time.time(), 'tasks': [t['id'] for t in tasks],
         'model': config.get('model'), 'reasoning': config.get('model_reasoning_effort'),
         'native_version': subprocess.check_output(['codex', '--version'], text=True).strip(),
         'attempts_per_task': 1, 'automatic_retries': 0, 'timeout_seconds': 360,
         'family_fixed': True, 'capability_names_supplied': False,
-        'production_launcher': launcher, 'production_source_sha256': digest(Path(launcher)),
+        'production_launcher': installed_launcher, 'production_source_sha256': digest(Path(installed_launcher)),
+        'candidate_launcher': launcher, 'candidate_source_sha256': digest(Path(launcher)),
+        'candidate_modules': {p.name: digest(p) for p in Path(launcher).parent.glob('market_*.py')},
         'runtime_dependency': runtime, 'live_data': str(data), 'real_home': str(home),
         'source_index_state': 'Copy of existing approved metadata only; no public packages, grants or Skill workspaces copied',
         'auth': 'Existing ChatGPT login, copied owner-only into isolated native homes; never included in repository',
         'tool_authorization': 'Only the isolated Backpack MCP is preapproved for the user-authorized test; native apps, remote plugins and host Skill discovery are disabled',
         'isolation': 'Separate homes, stores and workspace-write shell sandbox; not a VM or adversarial read-isolation proof'}
     dump(root / 'manifest.json', manifest)
-    for task in TASKS:
+    for task in tasks:
         case = root / task['id']; case.mkdir(mode=0o700)
         work = case / 'work'; work.mkdir()
         store = case / 'store'; store.mkdir(mode=0o700)
@@ -202,7 +210,7 @@ def prepare(args):
         if task['id'] == 'plugin-review':
             (work / 'cart.py').write_text('def total_cents(items, discount_percent, shipping_cents):\n    subtotal = sum(item["price_cents"] for item in items)\n    return round((subtotal + shipping_cents) * (1 - discount_percent / 100))\n')
         dump(case / 'input-files.json', {p.name: digest(p) for p in work.iterdir() if p.is_file()})
-    print(json.dumps({'prepared': str(root), 'cases': len(TASKS), 'model': manifest['model'], 'reasoning': manifest['reasoning']}))
+    print(json.dumps({'prepared': str(root), 'cases': len(tasks), 'model': manifest['model'], 'reasoning': manifest['reasoning']}))
 
 def run(args):
     root = Path(args.output).resolve(); manifest = json.loads((root / 'manifest.json').read_text())
@@ -249,7 +257,7 @@ def main():
     if len(sys.argv)>1 and sys.argv[1]=='proxy': return proxy(sys.argv[2])
     if len(sys.argv)>1 and sys.argv[1]=='jev-proxy': return jev_proxy(sys.argv[2], sys.argv[3:])
     parser=argparse.ArgumentParser(); sub=parser.add_subparsers(dest='action',required=True)
-    p=sub.add_parser('prepare');p.add_argument('--output',required=True);p.add_argument('--data',required=True)
+    p=sub.add_parser('prepare');p.add_argument('--output',required=True);p.add_argument('--data',required=True);p.add_argument('--launcher');p.add_argument('--runtime-root');p.add_argument('--only-case',choices=[t['id'] for t in TASKS])
     p=sub.add_parser('run');p.add_argument('--output',required=True);p.add_argument('--case',required=True)
     args=parser.parse_args()
     return prepare(args) if args.action=='prepare' else run(args)

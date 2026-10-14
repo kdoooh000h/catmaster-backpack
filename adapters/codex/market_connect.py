@@ -60,7 +60,7 @@ class Market:
             raise ValueError('market_connection_changed')
         return value
 
-    def choose(self, need, rows, *, directory=False):
+    def choose(self, need, rows, *, directory=False, kind="mcp"):
         if not rows:
             return None, {'status': 'none', 'confidence': 1.0}
         if len(rows) > 192:
@@ -79,7 +79,11 @@ class Market:
         if environment is not None:
             config['provider_environment'] = environment
         candidates = [self.runtime.Skill('market-' + str(i), row['description'], Path('.')) for i, row in enumerate(rows)]
-        decision = self.runtime._route(need, candidates, purpose='mcp-server', config=config)
+        if directory or kind == 'plugin':
+            from market_routing import route
+            decision = route(self.runtime, need, candidates, config, 'directory' if directory else 'plugin')
+        else:
+            decision = self.runtime._route(need, candidates, purpose='mcp-server', config=config)
         public = {k: v for k, v in decision.items() if k != 'skill'}
         public['minimum_confidence'] = minimum
         if decision.get('status') != 'selected':
@@ -100,10 +104,10 @@ class Market:
             raise ValueError('sensitive_need_rejected')
         if not isinstance(body.get('search', ''), str) or len(body.get('search', '')) > 100:
             raise ValueError('invalid_market_search')
-        directories = ([{'id': 'registry', 'description': 'Official MCP Registry: public services for development, search, data and integrations.'},
+        directories = ([{'id': 'registry', 'description': 'Official MCP Registry: public services for time and timezone calculations, memory and knowledge graphs, files, development, search, data and integrations. This index contains services from many publishers.'},
                         {'id': 'reference', 'description': 'Official MCP reference server: protocol testing, echo and arithmetic examples.'}]
                        if kind == 'mcp' else
-                       [{'id': 'anthropic', 'description': 'Anthropic official plugin marketplace: coding, frontend design, development workflows and MCP integrations.'},
+                       [{'id': 'anthropic', 'description': 'Anthropic official plugin marketplace: code review, bug finding, testing, frontend design, interactive playgrounds, development workflows and MCP integrations. This directory contains both portable guidance and native components.'},
                         {'id': 'openai', 'description': 'OpenAI native plugin directory: creative tools, documents, development, apps and services.'}])
         source = body.get('source')
         routing = []
@@ -139,11 +143,15 @@ class Market:
 
     def prepare_mcp(self, plan, source, search):
         library = self.manager.mcp.sources
-        page = library.browse({'source': source, 'search': search})
+        if source == 'registry':
+            from market_registry import browse
+            page = browse(library, search)
+        else:
+            page = library.browse({'source': source, 'search': search})
         # A bounded complete result is required; do not pick from an arbitrary
         # first page and silently omit later valid capabilities.
         if page.get('next_cursor'):
-            return {'status': 'search_too_broad', 'instruction': 'Provide a more specific public service name in search. The registry has more results; none were omitted from a final choice.', 'execution': 'not_performed'}
+            return {'status': 'search_too_broad', 'instruction': page.get('instruction', 'Narrow the functional search terms. The registry has too many candidates; none were omitted from a final choice.'), 'execution': 'not_performed'}
         rows = [{**row, 'description': row['name'] + ': ' + row['description']} for row in page['items']]
         row, decision = self.choose(plan['need'], rows)
         plan['routing'].append(decision)
@@ -218,7 +226,7 @@ class Market:
             if group is None:
                 return {**decision, 'execution': 'not_performed'}
             rows = groups[group['id']]
-        row, decision = self.choose(plan['need'], rows)
+        row, decision = self.choose(plan['need'], rows, kind='plugin')
         plan['routing'].append(decision)
         if row is None:
             return {**decision, 'execution': 'not_performed'}

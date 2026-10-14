@@ -5,9 +5,10 @@ import tempfile
 import sys
 from types import SimpleNamespace
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 ENTRY = Path(__file__).resolve().parents[1] / "adapters/codex/market_gateway.py"
+sys.path.insert(0, str(ENTRY.parent))
 SPEC = importlib.util.spec_from_file_location("market_gateway", ENTRY)
 gateway = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(gateway)
@@ -50,12 +51,13 @@ class MarketGatewayTests(unittest.TestCase):
     def test_directory_keeps_identity_order_members_and_describes_source(self):
         identity = "group-" + hashlib.sha256(b"abc:skills").hexdigest()[:48]
         rows = [self.candidate(identity, "skills: react, writing"), self.candidate("group-saved", "saved: local")]
-        answer = self.router._choose("review React", rows)
-        args, kwargs = self.route.call_args
-        self.assertEqual([r.name for r in args[1]], [r.name for r in rows])
-        self.assertEqual(args[1][0].description, "Vercel (vercel-labs/agent-skills); React and web development; skills: react, writing")
-        self.assertEqual(args[1][1].description, rows[1].description)
-        self.assertEqual(kwargs["config"]["minimum_confidence"], 0.1)
+        with patch("market_routing.route", return_value={"status": "uncertain"}) as select:
+            answer = self.router._choose("review React", rows)
+        args, kwargs = select.call_args
+        self.assertEqual([r.name for r in args[2]], [r.name for r in rows])
+        self.assertEqual(args[2][0].description, "Vercel (vercel-labs/agent-skills); React and web development; skills: react, writing")
+        self.assertEqual(args[2][1].description, rows[1].description)
+        self.assertEqual(args[3]["minimum_confidence"], 0.1)
         self.assertEqual(answer["selection_stage"], "directory")
         self.assertEqual(answer["status"], "uncertain")
 
@@ -84,7 +86,8 @@ class MarketGatewayTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "access_revoked"):
             self.router.request("acquire", {"revoked": True})
         self.assertEqual(self.router.request("acquire", {})["routing_policy"], gateway.POLICY)
-        self.assertNotIn("routing_policy", self.router.request("resource", {}))
+        with self.assertRaisesRegex(ValueError, "invalid_arguments"):
+            self.router.request("resource", {})
 
     def test_invalid_threshold_stops_before_provider(self):
         (self.data / "config.json").touch()

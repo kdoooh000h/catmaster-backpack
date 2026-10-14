@@ -108,6 +108,35 @@ class MarketIntegrationTests(unittest.TestCase):
         self.market.save(plan)
         return plan
 
+    def test_plugin_templates_are_disclosed_with_original_receipt_and_rechecked(self):
+        plan = self.plan(skills=True, servers=False)
+        root = Path(plan['skills'][0]['path'])
+        template = root / 'templates/concept-map.md'
+        template.parent.mkdir()
+        template.write_text('Template rules: include a labeled diagram.')
+        plan['skills'][0]['digest'] = self.gateway.public_access.fingerprint(root)
+        plan['package_digest'] = self.gateway.public_access.fingerprint(Path(plan['package']))
+        self.market.save(plan)
+        self.market.connect(plan['id'])
+        key = self.market.bound_skill_keys(plan['id'])[0]
+        router = self.gateway.Router(self.data, None, allowed=[key])
+        module = sys.modules[router.__class__.__mro__[1].__module__]
+        with patch.object(router, '_choose', return_value={'status': 'selected', 'skill': key, 'confidence': 1}):
+            selected = router.request('acquire', {'need': 'format a message'})
+        with patch.object(router, '_choose', return_value={'status': 'selected', 'skill': 'templates/concept-map.md', 'confidence': 1}) as choose:
+            value = router.request('resource', {'selection': selected['selection'], 'need': 'diagram template'})
+        self.assertIn('templates/concept-map.md', [c.name for c in choose.call_args.args[1]])
+        self.assertEqual(value['resources'][0]['content'], template.read_text())
+        self.assertEqual(Path(value['resources'][0]['absolute_path']).read_text(), template.read_text())
+        with patch.object(router, '_choose', return_value={'status': 'selected', 'skill': '../outside', 'confidence': 1}):
+            with self.assertRaisesRegex(ValueError, 'invalid_resource_choice'):
+                router.request('resource', {'selection': selected['selection'], 'need': 'template'})
+        state = json.loads((self.data / 'public-access.json').read_text())
+        state['items'].pop(key)
+        self.write(self.data / 'public-access.json', state)
+        with self.assertRaises(Exception):
+            router.request('resource', {'selection': selected['selection'], 'need': 'template'})
+
     def test_receipt_survives_new_gateway_and_is_idempotent(self):
         plan = self.plan(skills=True)
         result = self.market.connect(plan['id'])
