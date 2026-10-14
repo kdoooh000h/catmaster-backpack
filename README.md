@@ -326,17 +326,24 @@ The current published measurements are the Hermes surface result in `benchmarks/
 
 ## Adapter Roadmap
 
-CatMaster Backpack is currently validated on Hermes Agent.
+The published comparative benchmarks cover Hermes Agent. Separate Codex public
+gateway samples and their limits are documented below.
 
 | Host | Current status | Next step |
 | --- | --- | --- |
 | Hermes Agent | Working runtime integration prototype | Continue hardening Tool Backpack and Skill Backpack runtime behavior. |
 | OpenCode | Portable protocol and skill package only | Add native lazy tool-surface support only if OpenCode exposes stable tool hooks. |
 | Claude Code | Portable protocol and skill package only | Keep Skill Backpack portable; add dynamic tool visibility only if host APIs support it. |
-| Codex-style runtimes | Portable protocol and skill package only | Add MCP or plugin integration only when the target Codex client documents the surface. |
+| Codex-style runtimes | Public MCP gateway extension for on-demand market Skills, portable plugins and MCP services | Requires an existing standalone runtime; verify the installed connection and each service's requirements. |
 | OpenClaw | Portable protocol and skill package only | Investigate Tool Search, plugin tools, and MCP before claiming runtime-level dynamic hiding. |
 
 Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet. The portable assets are useful as protocol, skill-tree, and adapter starting points; runtime-level dynamic tool hiding still depends on each host.
+
+The [Codex market connection guide](docs/codex-market-connect.md) describes
+receipt-based setup and direct use through Backpack. Native apps/hooks and missing
+credentials remain explicit setup requirements. See the
+[market validation record](docs/codex-market-connect-validation-2026-10-14.md)
+for actual samples; they do not establish universal marketplace compatibility.
 
 ## Security Boundary
 

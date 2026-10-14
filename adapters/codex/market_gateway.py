@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Describe public source directories in the existing Codex Skill gateway.
+"""Public source routing and receipt-based market component setup for Codex.
 
 The standalone gateway remains responsible for grants, receipts, pinned caches,
-resources and execution reports. This adapter does not install or execute a
-market package and does not change the private Skill or MCP gateways.
+resources and execution reports. Market setup is separate from business calls
+and does not change the private Skill gateway.
 """
 from __future__ import annotations
 
@@ -105,6 +105,15 @@ def main():
     parser.add_argument("--runtime-root", required=True)
     options, remaining = parser.parse_known_args()
     gateway = load_gateway(options.runtime_root)
+    # Keep the legacy route-need and v1 endpoint behavior intact. The v2 stdio
+    # adapter adds only explicit public-market setup operations.
+    from market_protocol import serve
+    original_serve = gateway.serve
+    def extended(connection):
+        if connection['version'] != 2:
+            return original_serve(connection)
+        return serve(gateway, connection)
+    gateway.serve = extended
     sys.argv = [sys.argv[0], *remaining]
     return gateway.main()
 

@@ -27,10 +27,10 @@ stricter existing `minimum_confidence`. Configuration may set
 the existing source-directory/Skill route, at most two selection levels, not the
 separate multi-host semantic directory. It adds no full-catalog fallback.
 
-MCP and reference selection delegate to the original implementation. Market
-plugin installation and MCP service setup remain separate: a registry listing
-does not supply a working service, host compatibility, dependencies or login.
-The adapter neither executes install commands nor grants external account access.
+MCP invocation and Skill reference selection delegate to the existing runtime.
+The adapter also exposes receipt-based public plugin/MCP setup; see
+[codex-market-connect.md](codex-market-connect.md) for supported components,
+dependency preparation, scope and recovery. Setup does not grant account access.
 
 Before activating sources, verify the public repository, current commit,
 supported metadata, source/group limits and the destination descriptor. Keep a
