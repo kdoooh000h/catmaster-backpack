@@ -101,6 +101,25 @@ class RuntimeBoundaryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'selection_session_scope_conflict'):gateway.report_use(selection,other)
         entries=directory.registered_entries(directory.load_registry(self.f.store)[2])
         self.assertEqual(capability_usage.frequent_ids(self.f.store,entries,min_uses=1),[])
+    def test_all_native_usage_report_aliases_skip_leaf_hooks(self):
+        f=self.f
+        package=f.plugin('deny-business',event='PreToolUse',output={
+            'hookSpecificOutput':{'hookEventName':'PreToolUse','permissionDecision':'deny',
+                                  'permissionDecisionReason':'Business calls are denied.'}})
+        fixtures.add_plugin(f.store,package)
+        fixtures.connect_host(f.store,'claude-code',f.profile)
+        f.start()
+        aliases=('mcp__backpack__report_use','backpack_report_use','backpack__report_use',
+                 'mcp_backpack_report_use','backpack___report_use')
+        for name in aliases:
+            with self.subTest(name=name):
+                result=fixtures.dispatch_event(f.connection,{'hook_event_name':'PreToolUse',
+                    'session_id':'s1','cwd':str(f.project),'delivery_id':name,'tool_name':name})
+                self.assertFalse(result['blocked']);self.assertEqual(result['handlers'],[])
+        leaf=fixtures.dispatch_event(f.connection,{'hook_event_name':'PreToolUse',
+            'session_id':'s1','cwd':str(f.project),'delivery_id':'actual-business',
+            'tool_name':'mcp__service__query'})
+        self.assertTrue(leaf['blocked']);self.assertTrue(leaf['handlers'])
     def test_first_subscription_snapshot_failure_still_allows_ping(self):
         gateway,token=self.client();gateway.subscription=False
         selector=MagicMock();selector.__enter__.return_value=selector

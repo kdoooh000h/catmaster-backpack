@@ -399,12 +399,13 @@ def dispatch_event(connection, event, *, origin='host'):
         db.execute('COMMIT')
         result = {'blocked': False, 'context': [], 'reason': '', 'status': 'completed', 'handlers': [], 'event_digest': digest}
         deadline = time.monotonic() + 20
-        # Native transport acquire/invoke are wrappers, not the original plugin operation.
+        # Native transport tools are wrappers, not the original plugin operation.
         transport = origin == 'host' and event.get('tool_name') in (
             'mcp__backpack__acquire', 'mcp__backpack__invoke', 'backpack_acquire', 'backpack_invoke',
             'backpack__acquire', 'backpack__invoke',
             'mcp__backpack__report_use', 'backpack_report_use', 'backpack__report_use',
-            'mcp_backpack_acquire', 'mcp_backpack_invoke', 'backpack___acquire', 'backpack___invoke') and name in ('PreToolUse', 'PostToolUse', 'PostToolUseFailure')
+            'mcp_backpack_acquire', 'mcp_backpack_invoke', 'mcp_backpack_report_use',
+            'backpack___acquire', 'backpack___invoke', 'backpack___report_use') and name in ('PreToolUse', 'PostToolUse', 'PostToolUseFailure')
         declined = name != 'SessionStart' and hook_delivery_declined(connection, session, ending_tokens=ending_tokens)
         if (declined and not transport and name == 'PreToolUse' and
                 any(h['event'] == name for p in registry['plugins'].values() for h in p['hooks'])):
