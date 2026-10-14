@@ -344,6 +344,9 @@ receipt-based setup and direct use through Backpack. Native apps/hooks and missi
 credentials remain explicit setup requirements. See the
 [market validation record](docs/codex-market-connect-validation-2026-10-14.md)
 for actual samples; they do not establish universal marketplace compatibility.
+The subsequent [ordinary-request Agent pilot](docs/backpack-market-blind-validation-2026-10-14.md)
+completed the full new-capability path in 1/6 tasks and identified discovery and
+plugin-resource gaps. Named-service examples do not establish autonomous discovery.
 
 ## Security Boundary
 
