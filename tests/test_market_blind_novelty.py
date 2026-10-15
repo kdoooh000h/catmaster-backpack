@@ -41,6 +41,9 @@ class BaseMarket:
     def bound_skill_keys(self, token):
         return self.keys
 
+    def bound_skill_context(self, token):
+        return {'keys':self.keys,'need':'original task','validation':None}
+
 
 class NoveltyTests(unittest.TestCase):
     def setUp(self):
@@ -102,6 +105,8 @@ class NoveltyTests(unittest.TestCase):
         self.market.keys = ['new-key','old-key']
         with self.assertRaisesRegex(ValueError,'benchmark_existing_skill_excluded'):
             self.market.bound_skill_keys('receipt')
+        with self.assertRaisesRegex(ValueError,'benchmark_existing_skill_excluded'):
+            self.market.bound_skill_context('receipt')
 
     def test_acquire_requires_market_receipt_and_checks_name_before_disclosure(self):
         protocol = self.protocol({'status':'selected','name':'Existing','content':'must not disclose'})

@@ -124,6 +124,13 @@ def novel_market(base, inventory):
             self.check_novel([state['items'][key] for key in keys])
             return keys
 
+        def bound_skill_context(self, token):
+            inventory.check(self.connection)
+            context = super().bound_skill_context(token)
+            state = self.gateway.public_access.registry(self.data)
+            self.check_novel([state['items'][key] for key in context['keys']])
+            return context
+
     return NovelMarket
 
 

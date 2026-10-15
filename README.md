@@ -361,6 +361,12 @@ the write. Cumulative coverage is 5/6. A new review plugin produced a correct
 artifact using an already installed Skill, so that case still fails the new-capability
 criterion. All 17 native attempts and separate candidate-diagnostic costs are retained;
 the daily installation has not been upgraded by this repair.
+The [public-plugin expansion retest](docs/backpack-public-plugin-expansion-validation-2026-10-15.md)
+completed the remaining review task using a new plugin and new Skill, bringing
+cumulative cross-version coverage to 6/6 without rerunning the five passed tasks.
+It adds two public publisher indexes and reuses bound full-guidance validation.
+The failed attempt and continuation are both counted; complete-flow time and
+tokens increased, while repeated guidance-selection calls were removed.
 
 ## Security Boundary
 

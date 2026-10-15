@@ -22,6 +22,19 @@ import subprocess
 import time
 import zipfile
 
+PUBLIC_PLUGIN_MARKETS = [
+    {'id': 'github:wshobson/agents', 'name': 'wshobson/agents', 'repo': 'wshobson/agents',
+     'agent': 'claude', 'about': 'Public publisher marketplace for development, review, debugging and testing workflows.'},
+    {'id': 'github:trailofbits/skills', 'name': 'trailofbits/skills', 'repo': 'trailofbits/skills',
+     'agent': 'claude', 'about': 'Public publisher marketplace for security analysis, auditing and development guidance.'},
+]
+
+
+def register_public_plugin_markets(library_module):
+    """Extend only this adapter process; never rewrite the manager's source file."""
+    existing = {row['id'] for row in library_module.BUILTINS}
+    library_module.BUILTINS.extend(dict(row) for row in PUBLIC_PLUGIN_MARKETS if row['id'] not in existing)
+
 
 def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
@@ -49,6 +62,8 @@ class Market:
         import manager
         import sources
         import mcp_sources
+        import plugin_sources
+        register_public_plugin_markets(plugin_sources)
         self.gateway = gateway
         self.connection = connection
         self.data = gateway.public_access.safe(connection['data_root'])
@@ -94,6 +109,7 @@ class Market:
                                              'mcp-preview': 'mcp-discovery', 'mcp': 'mcp-fit'}[kind]
         decision = route(self.runtime, need, candidates, config, stage)
         public = {k: v for k, v in decision.items() if k not in {'skill', 'inspect_alternatives', 'plausible'}}
+        ordered = public.pop('inspection_order', [])
         alternatives = decision.get('inspect_alternatives', [])
         if kind in {'plugin-preview', 'plugin-skill-preview'} and alternatives:
             indexed = {'market-' + str(i): row for i, row in enumerate(rows)}
@@ -104,7 +120,81 @@ class Market:
         chosen = next((row for i, row in enumerate(rows) if decision.get('skill') == 'market-' + str(i)), None)
         if chosen is None:
             raise ValueError('invalid_market_choice')
+        if kind == 'plugin-preview' and ordered:
+            indexed = {'market-' + str(i): row for i, row in enumerate(rows)}
+            # This is the complete same-call order, not a top-k shortlist.
+            if len(ordered) != len(rows) or set(ordered) != set(indexed):
+                raise ValueError('invalid_market_order')
+            public['_ranked_rows'] = [indexed[key] for key in ordered if indexed[key] is not chosen]
         return chosen, public
+
+    def plugin_directories(self):
+        directories = [
+            {'id': 'anthropic', 'description': 'Anthropic official plugin marketplace: code review, bug finding, testing, frontend design, interactive playgrounds, development workflows and MCP integrations. This directory contains both portable guidance and native components.'},
+            {'id': 'openai', 'description': 'OpenAI native plugin directory: creative tools, documents, development, apps and services.'}]
+        # Reuse the manager's registered public marketplaces. Never accept an
+        # arbitrary repository from an Agent's setup arguments.
+        for source in self.manager.plugins.sources.listing()['sources']:
+            if source['id'].startswith('github:') and source.get('agent') == 'claude':
+                description = source['name'] + ': Registered public community plugin marketplace; actual package independence is checked before setup.'
+                cached = self.recent_plugin_catalog(source['id'])
+                if cached is not None:
+                    description += ' Public catalog entries: ' + ', '.join(row['name'] for row in cached['items'])
+                directories.append({'id': source['id'], 'description': description})
+        return directories
+
+    def recent_plugin_catalog(self, source):
+        path = self.data / 'plugin-catalog-cache' / (digest(source) + '.json')
+        try:
+            value = self.gateway.public_access.owner_json(path)
+            self.check_plugin_catalog(source, value)
+            return value
+        except (OSError, ValueError, KeyError, TypeError):
+            return None
+
+    def check_plugin_catalog(self, source, value):
+        desc = self.manager.plugins.sources.descriptor(source)
+        now = time.time()
+        if (not isinstance(value, dict) or value.get('id') != source or value.get('repo') != desc['repo']
+                or value.get('agent') != 'claude' or not isinstance(value.get('commit'), str)
+                or not self.sources.SHA.fullmatch(value['commit'])
+                or not isinstance(value.get('checked_at'), (int, float))
+                or not 0 <= now - value['checked_at'] <= 900
+                or not isinstance(value.get('items'), list) or not 1 <= len(value['items']) <= 1000):
+            raise ValueError('invalid_plugin_catalog_cache')
+        import plugin_sources
+        names = set()
+        for row in value['items']:
+            if (not isinstance(row, dict) or not isinstance(row.get('name'), str)
+                    or not plugin_sources.NAME.fullmatch(row['name']) or row['name'] in names
+                    or not isinstance(row.get('description'), str) or len(row['description']) > 1200
+                    or not isinstance(row.get('entry'), dict) or row['entry'].get('name') != row['name']):
+                raise ValueError('invalid_plugin_catalog_cache')
+            names.add(row['name'])
+
+    def cache_plugin_catalog(self, source, snapshot):
+        self.check_plugin_catalog(source, snapshot)
+        if len(json.dumps(snapshot).encode()) > self.gateway.public_access.LIMIT:
+            raise ValueError('plugin_catalog_cache_too_large')
+        folder = self.gateway.public_access.safe(self.data / 'plugin-catalog-cache')
+        folder.mkdir(mode=0o700, exist_ok=True)
+        if folder.stat().st_uid != os.getuid() or folder.stat().st_mode & 0o077:
+            raise ValueError('unsafe_plugin_catalog_cache')
+        path = self.gateway.public_access.safe(folder / (digest(source) + '.json'))
+        self.runtime._atomic_json(path, snapshot)
+
+    def plugin_catalog(self, source):
+        if source == 'openai':
+            return self.manager.plugins.sources.browse(source)
+        cached = self.recent_plugin_catalog(source)
+        if cached is not None:
+            return {**cached, 'catalog': {'mode': 'recent_complete_snapshot',
+                    'checked_at': cached['checked_at'], 'coverage': 'complete_at_snapshot',
+                    'limitation': 'Public catalog pinned at snapshot time; newly added entries may be absent.'}}
+        snapshot = self.manager.plugins.sources.browse(source)
+        self.cache_plugin_catalog(source, snapshot)
+        return {**snapshot, 'catalog': {'mode': 'live_catalog',
+                'checked_at': snapshot['checked_at'], 'coverage': 'complete_at_snapshot'}}
 
     def validate_mcp_selection(self, need, result):
         if result.get('status') != 'selected':
@@ -137,8 +227,7 @@ class Market:
         directories = ([{'id': 'registry', 'description': 'Official MCP Registry: public services for time and timezone calculations, memory and knowledge graphs, files, development, search, data and integrations. This index contains services from many publishers.'},
                         {'id': 'reference', 'description': 'Official MCP reference server: protocol testing, echo and arithmetic examples.'}]
                        if kind == 'mcp' else
-                       [{'id': 'anthropic', 'description': 'Anthropic official plugin marketplace: code review, bug finding, testing, frontend design, interactive playgrounds, development workflows and MCP integrations. This directory contains both portable guidance and native components.'},
-                        {'id': 'openai', 'description': 'OpenAI native plugin directory: creative tools, documents, development, apps and services.'}])
+                       self.plugin_directories())
         source = body.get('source')
         routing = []
         if source is None:
@@ -160,7 +249,30 @@ class Market:
         if kind == 'mcp':
             result = self.prepare_mcp(plan, source, body.get('search', ''))
         else:
-            result = self.prepare_plugin(plan, source)
+            self._plugin_deadline = time.monotonic() + 90
+            automatic = body.get('source') is None and len(directories) > 2
+            self._plugin_probe_limit = 8 if automatic else 16
+            unavailable = []
+            remaining = [row for row in directories if row['id'] != source]
+            for attempt in range(4 if automatic else 1):
+                result = self.prepare_plugin(plan, source)
+                if result is None or result.get('status') not in {'none', 'uncertain', 'setup_required', 'catalog_unavailable'}:
+                    break
+                unavailable.append({'source': source, 'result': result})
+                if (not automatic or attempt == 3 or not remaining
+                        or time.monotonic() >= self._plugin_deadline):
+                    break
+                chosen, decision = self.choose(need, remaining, directory=True)
+                plan['routing'].append(decision)
+                if chosen is None:
+                    result = {**decision, 'execution': 'not_performed'}
+                    break
+                source = chosen['id']
+                remaining = [row for row in remaining if row['id'] != source]
+            plan['unavailable_sources'] = unavailable
+            if result is not None and unavailable:
+                result = {**result, 'unavailable_sources': unavailable,
+                          'unexhausted_sources': [row['id'] for row in remaining]}
         if result is not None:
             return result
         self.current()
@@ -263,10 +375,19 @@ class Market:
 
     def prepare_plugin(self, plan, source):
         self._archives = {}
-        self._preview_deadline = time.monotonic() + 90
-        self._preview_remaining = 16
-        library = self.manager.plugins.sources
-        snapshot = library.browse(source)
+        self._preview_deadline = getattr(self, '_plugin_deadline', time.monotonic() + 90)
+        self._preview_remaining = getattr(self, '_plugin_probe_limit', 16)
+        try:
+            snapshot = self.plugin_catalog(source)
+        except self.sources.SourceError as error:
+            # This is a confirmed anonymous catalog GET rejection, before any
+            # package setup or business action. Do not retry that source; another
+            # registered source may already have a valid complete snapshot.
+            if str(error) != '公开来源暂时限流，请稍后重试；无需提供 API Key':
+                raise
+            return {'status': 'catalog_unavailable', 'reason': 'public_catalog_rate_limited',
+                    'execution': 'not_performed'}
+        plan['catalog'] = snapshot.get('catalog')
         rows = []
         for row in snapshot['items']:
             entry = row.get('entry', {})
@@ -310,13 +431,19 @@ class Market:
         # A none result applies to this directory, not to unseen sibling groups.
         # No registration, business call or unknown outcome is retried.
         inspection_rows = []
+        ranked_rows = None
         for _ in range(min(self._preview_remaining, len(rows))):
             if time.monotonic() >= self._preview_deadline:
                 break
             if inspection_rows:
                 row = inspection_rows.pop(0)
+            elif ranked_rows is not None:
+                if not ranked_rows:
+                    break
+                row = ranked_rows.pop(0)
             else:
                 row, decision = self.choose(plan['need'], rows, kind='plugin-preview')
+                ranked_rows = decision.pop('_ranked_rows', None)
                 alternatives = decision.pop('_inspection_rows', [])
                 plan['routing'].append(decision)
                 # A low-confidence metadata abstention is not evidence that
@@ -417,7 +544,7 @@ class Market:
         plan.update(name=row['name'], description=row['description'], source={'kind': 'plugin', 'market': source, 'repo': snapshot.get('repo'),
                                              'commit': snapshot['commit'], 'name': row['name']})
         plan['market_entry'] = row.get('entry', {})
-        root = self.folder / plan['id'] / ('package-' + digest(row['name'])[:12])
+        root = self.folder / plan['id'] / ('package-' + digest([source, snapshot.get('commit'), row['name']])[:12])
         root.parent.mkdir(mode=0o700, exist_ok=True)
         if source == 'openai':
             native = row['native_entry']
@@ -457,8 +584,9 @@ class Market:
         # One repository may package several hosts. The selected marketplace
         # determines the manifest; another host's root manifest is not merged.
         market = plan.get('source', {}).get('market')
-        preferred = root / ('.claude-plugin/plugin.json' if market == 'anthropic' else '.codex-plugin/plugin.json')
-        if market in {'anthropic', 'openai'} and preferred in manifests:
+        claude_market = market == 'anthropic' or isinstance(market, str) and market.startswith('github:')
+        preferred = root / ('.claude-plugin/plugin.json' if claude_market else '.codex-plugin/plugin.json')
+        if (claude_market or market == 'openai') and preferred in manifests:
             manifests = [preferred]
         elif len(manifests) > 1:
             raise ValueError('invalid_plugin_manifest')
@@ -578,11 +706,28 @@ class Market:
         return plan
 
     def bound_skill_keys(self, token):
+        return self.bound_skill_context(token)['keys']
+
+    def bound_skill_context(self, token):
         plan = self.load(token)
         if plan['status'] != 'connected':
             raise ValueError('market_not_connected')
         self.connected(plan)
-        return plan.get('skill_keys', [])
+        context = {'keys': plan.get('skill_keys', []), 'need': plan.get('need'), 'validation': None}
+        decisions = [row for row in plan.get('routing', []) if row.get('selection_stage') == 'plugin-ready']
+        if (len(plan['skills']) == 1 and len(context['keys']) == 1 and decisions
+                and decisions[-1].get('status') == 'selected'):
+            if self.gateway.public_access.fingerprint(Path(plan['package'])) != plan['package_digest']:
+                raise ValueError('market_package_changed')
+            state = self.gateway.public_access.registry(self.data)
+            copied = self.data/'public-cache'/context['keys'][0]/'skill'/'SKILL.md'
+            original = Path(plan['skills'][0]['path'])/'SKILL.md'
+            if (self.gateway.public_access.fingerprint(copied.parent) != state['items'][context['keys'][0]]['digest']
+                    or self.gateway.public_access.safe(copied).read_bytes() != original.read_bytes()
+                    or state['items'][context['keys'][0]]['name'] != plan['skills'][0]['name']):
+                raise ValueError('market_guidance_changed')
+            context['validation'] = decisions[-1]
+        return context
 
     def unchanged(self, plan, kind):
         filename = 'mcp-servers.json' if kind == 'mcp' else 'public-access.json'
@@ -595,6 +740,8 @@ class Market:
                 'connection_scope': 'portable_components', 'unavailable_components': plan.get('unavailable_components', []),
                 'unvalidated_skill_count': plan.get('unvalidated_skill_count', 0),
                 'unavailable_candidates': plan.get('unavailable_candidates', []),
+                'unavailable_sources': plan.get('unavailable_sources', []),
+                'catalog': plan.get('catalog'),
                 'runtime_directories': self.runtime_directories(plan),
                 'connections': [{'title': s['title'], 'configuration': s['configuration']} for s in plan['servers']],
                 'setup_actions': 'Save grants and backups. Install pinned npm dependencies with lifecycle scripts disabled or pinned PyPI wheels in Backpack-owned environments before protocol startup.',

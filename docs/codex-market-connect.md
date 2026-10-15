@@ -44,6 +44,11 @@ continues to use the previously verified source-directory/Skill policy.
   precedence over a branch/tag; catalog and package commits are recorded
   separately. Unsupported hosts/source types and native components remain
   explicit requirements. No marketplace installer or repository script runs.
+- The publisher marketplaces `wshobson/agents` and `trailofbits/skills`, plus
+  registered public Claude-format community markets. They use the same pinned
+  package, manifest, independent-component and grant checks. The adapter adds its
+  two public indexes only in its own process; it does not rewrite user source
+  registrations. Agent setup arguments cannot add arbitrary repositories.
 - OpenAI's directory through the installed Codex CLI, when its validated package
   files are locally available and native policy permits access.
 - Portable plugin Skills and compatible MCP components. An absent plugin manifest
@@ -78,6 +83,13 @@ registry markers; previews expire in 15 minutes. Public Skill grants retain the
 existing project scope. MCP grants are specific to the current connection.
 The original registries are backed up before mutation. Packages and receipts stay
 in the owner-only Backpack data root, not in the Git repository.
+
+For the same connected plugin task, `acquire_skill` can omit `need` and retain
+the exact prepared need. A single selected component's successful full-content
+fit is reused only after package, entrypoint, grants, project scope and current
+threshold checks. A changed need or stricter threshold receives a fresh actual
+guidance check; it is not reranked from a lone metadata summary. This does not
+authorize execution or turn a prior negative decision into a positive one.
 
 A durable `connecting` record precedes dependency setup and grant mutation.
 An interrupted setup requires reconciliation rather than replay. Existing active
@@ -224,6 +236,21 @@ reused within the preview. Low-confidence metadata abstention may inspect all
 positive alternatives only when the entire set fits the remaining bound; final
 actual-content validation still requires at least 0.7. Unexhausted candidates
 remain explicitly unexhausted.
+
+With multiple public markets and automatic source choice, preparation can probe
+up to four sources, eight packages each, within one shared 90-second budget
+checked between operations. Explicit source requests stay in that source.
+Confirmed anonymous catalog rate rejection is recorded without retrying that
+source; another registered index may still be usable. Other source/provider
+errors stop. A successful metadata ranking retains every candidate in the same
+call's order for subsequent package inspection, avoiding repeated full-catalog
+requests; actual component fit still needs at least 0.7.
+
+Complete Claude-format catalog snapshots are owner-only, bound to the registered
+source ID/repository/commit, and usable for 15 minutes without changing their
+original timestamp. Cached results expose `complete_at_snapshot` and may omit
+newly added entries. Expired, malformed, mismatched or symlinked snapshots are
+not used. There is no stale-cache or network-error success claim.
 
 Python environment mechanics follow the [uv environment documentation](https://docs.astral.sh/uv/pip/environments/)
 and [CLI flags](https://docs.astral.sh/uv/reference/cli/). Package descriptions

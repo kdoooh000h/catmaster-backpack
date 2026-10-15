@@ -16,6 +16,14 @@ from market_routing import route
 
 
 class LifecycleTests(unittest.TestCase):
+    def setUp(self):
+        # Catalog persistence has separate boundary checks. These fixtures test
+        # package progression with the supplied complete in-memory catalog.
+        patcher = patch.object(Market, 'plugin_catalog', lambda market, source:
+                               market.manager.plugins.sources.browse(source))
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_known_setup_failure_can_advance_without_grants_or_need_rewrite(self):
         market=object.__new__(Market)
         market.sources=SimpleNamespace(SourceError=RuntimeError)

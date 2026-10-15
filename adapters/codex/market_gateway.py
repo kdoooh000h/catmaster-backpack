@@ -80,6 +80,28 @@ def make_router(base, module):
             from market_routing import route
             if purpose == 'resource':
                 return public_resource_choice(self, module, need, candidates, config)
+            if (not directory and getattr(self, 'allowed', None) is not None
+                    and len(candidates) == 1 and hasattr(self, 'market_guidance_context')):
+                context = getattr(self, 'market_guidance_context', {})
+                validation = context.get('validation') or {}
+                confidence = validation.get('confidence', 0)
+                if (need == context.get('need') and context.get('keys') == [candidates[0].name]
+                        and isinstance(confidence, (int, float)) and minimum <= confidence <= 1):
+                    self._item(candidates[0].name, self.access.scope)
+                    return {'status': 'selected', 'skill': candidates[0].name, 'confidence': confidence,
+                            'attempts': 0, 'elapsed_seconds': 0, 'selection_stage': 'skill',
+                            'minimum_confidence': minimum, 'validation_reused': True}
+                # A market receipt already binds one inspected plugin component.
+                # Judge the current need against its actual instructions, using
+                # the same final-fit question as preparation, rather than rank a
+                # lone metadata summary and then rank it again as a shortlist.
+                enriched = public_skill_evidence(self, module, candidates, [candidates[0].name])
+                if not enriched:
+                    return {'status': 'unsupported', 'reason': 'bound_skill_evidence_unavailable',
+                            'selection_stage': 'skill', 'minimum_confidence': minimum}
+                decision = route(module.runtime, need, enriched, config, 'plugin-ready')
+                return {**decision, 'selection_stage': 'skill', 'minimum_confidence': minimum,
+                        'evidence_mode': 'complete_bound_plugin_entrypoint'}
             decision = route(module.runtime, need, candidates, config, "directory" if directory else "skill")
             plausible = decision.pop('plausible', [])
             decision.pop('inspect_alternatives', None)

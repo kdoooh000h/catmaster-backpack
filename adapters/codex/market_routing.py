@@ -95,6 +95,16 @@ def route(runtime, need, candidates, config, stage):
     result = {'status': status, 'skill': answer.choice if status == 'selected' else None,
             'confidence': answer.confidence, 'attempts': attempt,
             'elapsed_seconds': round(time.monotonic() - started, 3), 'selection_stage': stage}
+    if stage == 'plugin' and status == 'selected':
+        probabilities = getattr(answer, 'probabilities', {})
+        if isinstance(probabilities, dict) and all(
+                isinstance(probabilities.get(row.name, 0), (int, float))
+                and 0 <= probabilities.get(row.name, 0) <= 1 for row in candidates):
+            # Keep every candidate. Reuse the same metadata ranking after a
+            # confirmed package incompatibility instead of resending the catalog.
+            result['inspection_order'] = [answer.choice] + [row.name for row in sorted(
+                (row for row in candidates if row.name != answer.choice),
+                key=lambda row: -probabilities.get(row.name, 0))]
     if stage == 'skill' and status == 'uncertain':
         result['plausible'] = [row.name for row in candidates if getattr(answer, 'probabilities', {}).get(row.name, 0) > 0]
     if stage in {'plugin', 'skill'} and answer.choice == 'none' and answer.confidence < .7:

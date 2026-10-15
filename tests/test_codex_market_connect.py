@@ -327,6 +327,32 @@ class MarketIntegrationTests(unittest.TestCase):
         self.assertEqual([row.name for row in choose.call_args.args[1]], keys)
         self.assertEqual(result['source']['kind'], 'plugin')
 
+    def test_same_prepared_need_reuses_bound_fit_and_rejects_changed_package(self):
+        plan=self.plan(skills=True,servers=False)
+        plan['routing']=[{'status':'selected','confidence':.86,'selection_stage':'plugin-ready'}]
+        self.market.save(plan);self.market.connect(plan['id'])
+        with patch('market_routing.route') as select:
+            result=market_protocol.dispatch(self.gateway,self.connection,self.gateway.Router(self.data),self.market,
+                'acquire_skill',{'market_selection':plan['id']})
+        self.assertEqual(result['name'],'sample')
+        select.assert_not_called()
+        with patch('market_routing.route',return_value={'status':'none','confidence':.95}) as select:
+            result=market_protocol.dispatch(self.gateway,self.connection,self.gateway.Router(self.data),self.market,
+                'acquire_skill',{'market_selection':plan['id'],'need':'a different purpose'})
+        self.assertEqual(result['status'],'none')
+        select.assert_called_once()
+        self.assertEqual(select.call_args.args[4],'plugin-ready')
+        context=self.market.bound_skill_context(plan['id'])
+        copied=self.data/'public-cache'/context['keys'][0]/'skill'/'SKILL.md'
+        saved=copied.read_bytes();copied.write_bytes(saved+b'Changed cache.\n')
+        with self.assertRaisesRegex(ValueError,'market_guidance_changed'):
+            self.market.bound_skill_context(plan['id'])
+        copied.write_bytes(saved)
+        original=Path(plan['skills'][0]['path'])/'SKILL.md'
+        original.write_text(original.read_text()+'Changed after validation.\n')
+        with self.assertRaisesRegex(ValueError,'market_package_changed'):
+            self.market.bound_skill_context(plan['id'])
+
     def test_dependency_prefetch_does_not_inherit_credentials_or_run_scripts(self):
         plan = self.plan()
         plan['servers'][0]['configuration'] = {'transport': 'stdio', 'command': ['npx', '--package=@example/test@1.2.3', 'test'], 'env': {}}
@@ -384,8 +410,53 @@ class MarketIntegrationTests(unittest.TestCase):
         plan['skills'] = []
         self.assertEqual(self.market.inspect_plugin(root, plan), [])
         self.assertEqual(len(plan['skills']), 1)
+        plan['source']['market'] = 'github:public/catalog'
+        plan['skills'] = []
+        self.assertEqual(self.market.inspect_plugin(root, plan), [])
+        self.assertEqual(len(plan['skills']), 1)
         (root / 'hooks').mkdir()
         self.assertIn('hooks', self.market.inspect_plugin(root, plan))
+
+    def test_complete_plugin_catalog_reused_with_original_age_and_identity(self):
+        import time
+        source='github:public/catalog'
+        snapshot={'id':source,'repo':'public/catalog','agent':'claude','commit':'a'*40,
+                  'checked_at':time.time()-30,'items':[{'name':'sample','description':'Review a file',
+                  'entry':{'name':'sample','source':'./plugins/sample'}}]}
+        descriptor={'id':source,'repo':'public/catalog'}
+        with patch.object(self.market.manager.plugins.sources,'descriptor',return_value=descriptor), \
+                patch.object(self.market.manager.plugins.sources,'browse',return_value=snapshot) as browse:
+            first=self.market.plugin_catalog(source)
+            second=self.market.plugin_catalog(source)
+            self.assertEqual(browse.call_count,1)
+            self.assertEqual(first['catalog']['mode'],'live_catalog')
+            self.assertEqual(second['catalog']['mode'],'recent_complete_snapshot')
+            self.assertEqual(second['checked_at'],snapshot['checked_at'])
+            self.assertEqual(second['items'],snapshot['items'])
+            expired={**snapshot,'checked_at':time.time()-901}
+            with self.assertRaisesRegex(ValueError,'invalid_plugin_catalog_cache'):
+                self.market.cache_plugin_catalog(source,expired)
+            with self.assertRaisesRegex(ValueError,'invalid_plugin_catalog_cache'):
+                self.market.cache_plugin_catalog(source,{**snapshot,'repo':'different/catalog'})
+
+    def test_publisher_directories_are_available_without_mutating_user_sources(self):
+        ids={row['id'] for row in self.market.plugin_directories()}
+        self.assertTrue({'github:wshobson/agents','github:trailofbits/skills'} <= ids)
+        self.assertFalse((self.data/'plugin-sources.json').exists())
+
+    def test_catalog_cache_never_uses_expired_or_symlinked_snapshot(self):
+        import time
+        from market_connect import digest
+        source='github:public/catalog'
+        snapshot={'id':source,'repo':'public/catalog','agent':'claude','commit':'a'*40,
+                  'checked_at':time.time()-901,'items':[{'name':'sample','description':'Review',
+                  'entry':{'name':'sample'}}]}
+        cache=self.data/'plugin-catalog-cache'/(digest(source)+'.json')
+        self.write(cache,snapshot)
+        with patch.object(self.market.manager.plugins.sources,'descriptor',return_value={'repo':'public/catalog'}):
+            self.assertIsNone(self.market.recent_plugin_catalog(source))
+            cache.unlink();cache.symlink_to(self.descriptor)
+            self.assertIsNone(self.market.recent_plugin_catalog(source))
 
     def test_unpinned_npx_eval_and_credentials_require_setup(self):
         for config in ({'command': 'npx', 'args': ['-y', 'some-package']},
@@ -439,7 +510,7 @@ class MarketIntegrationTests(unittest.TestCase):
         choose.assert_not_called()
 
     def test_uncertain_market_never_downloads_or_connects(self):
-        with patch.object(self.market.manager.plugins.sources, 'browse', return_value={'items': [{'name': 'sample', 'description': 'test'}]}), patch.object(self.market, 'choose', return_value=(None, {'status': 'uncertain', 'confidence': 0.3})):
+        with patch.object(self.market, 'plugin_catalog', return_value={'items': [{'name': 'sample', 'description': 'test'}]}), patch.object(self.market, 'choose', return_value=(None, {'status': 'uncertain', 'confidence': 0.3})):
             result = self.market.prepare({'kind': 'plugin', 'source': 'anthropic', 'need': 'test'})
         self.assertEqual(result['status'], 'uncertain')
         self.assertEqual(list(self.market.folder.iterdir()), [])

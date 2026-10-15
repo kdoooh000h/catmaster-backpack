@@ -69,6 +69,60 @@ class MarketGatewayTests(unittest.TestCase):
         self.assertEqual(config["provider_environment"], {"XDG_CONFIG_HOME": "/provider"})
         self.assertEqual(select.call_args.args[4], "skill")
 
+    def test_bound_single_plugin_uses_actual_guidance_once_at_strict_threshold(self):
+        self.router.allowed={'bound-key'}
+        self.router.market_guidance_context={}
+        row=self.candidate('bound-key')
+        evidence=self.module.runtime.Skill('bound-key','Complete selected plugin entrypoint',Path('SKILL.md'))
+        with patch.object(gateway,'public_skill_evidence',return_value=[evidence]), \
+                patch('market_routing.route',return_value={'status':'uncertain','confidence':.69}) as select:
+            result=self.router._choose('Review a local file',[row])
+        self.assertEqual(select.call_count,1)
+        self.assertEqual(select.call_args.args[2],[evidence])
+        self.assertEqual(select.call_args.args[3]['minimum_confidence'],.7)
+        self.assertEqual(select.call_args.args[4],'plugin-ready')
+        self.assertEqual(result['status'],'uncertain')
+        self.assertEqual(result['evidence_mode'],'complete_bound_plugin_entrypoint')
+
+    def test_bound_plugin_without_complete_evidence_does_not_fall_back_to_metadata(self):
+        self.router.allowed={'bound-key'}
+        self.router.market_guidance_context={}
+        with patch.object(gateway,'public_skill_evidence',return_value=[]), \
+                patch('market_routing.route') as select:
+            result=self.router._choose('Review a file',[self.candidate('bound-key')])
+        self.assertEqual(result['status'],'unsupported')
+        select.assert_not_called()
+
+    def test_exact_prepared_need_reuses_valid_fit_but_not_a_stricter_or_changed_need(self):
+        self.router.allowed={'bound-key'}
+        self.router.access=SimpleNamespace(scope='project')
+        self.router._item=Mock(return_value=({},Path('.')))
+        self.router.market_guidance_context={'keys':['bound-key'],'need':'same original task',
+            'validation':{'status':'selected','confidence':.8}}
+        row=self.candidate('bound-key')
+        with patch('market_routing.route') as select:
+            result=self.router._choose('same original task',[row])
+        self.assertTrue(result['validation_reused'])
+        select.assert_not_called()
+        self.router._item.assert_called_once_with('bound-key','project')
+        for need,minimum in [('changed purpose',.7),('same original task',.9)]:
+            with self.subTest(need=need,minimum=minimum):
+                (self.data/'config.json').touch();self.config['minimum_confidence']=minimum
+                with patch.object(gateway,'public_skill_evidence',return_value=[row]), \
+                        patch('market_routing.route',return_value={'status':'none','confidence':.95}) as select:
+                    result=self.router._choose(need,[row])
+                self.assertNotIn('validation_reused',result)
+                self.assertEqual(select.call_args.args[3]['minimum_confidence'],minimum)
+
+    def test_reused_fit_still_checks_access_before_disclosure(self):
+        self.router.allowed={'bound-key'};self.router.access=SimpleNamespace(scope='project')
+        self.router.market_guidance_context={'keys':['bound-key'],'need':'task',
+            'validation':{'status':'selected','confidence':.8}}
+        self.router._item=Mock(side_effect=ValueError('access_revoked'))
+        with patch('market_routing.route') as select,self.assertRaisesRegex(ValueError,'access_revoked'):
+            self.router._choose('task',[self.candidate('bound-key')])
+        select.assert_not_called()
+
     def test_stricter_existing_threshold_is_preserved(self):
         (self.data / "config.json").touch()
         self.config["minimum_confidence"] = 0.9

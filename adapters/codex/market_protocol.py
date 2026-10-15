@@ -13,7 +13,8 @@ TOOLS = [
          'kind': {'type': 'string', 'enum': ['plugin', 'mcp']},
          'need': {'type': 'string', 'maxLength': 2000},
          'search': {'type': 'string', 'maxLength': 100},
-         'source': {'type': 'string', 'enum': ['registry', 'reference', 'openai', 'anthropic']}},
+         'source': {'type': 'string', 'maxLength': 220,
+                    'description': 'Optional registered marketplace ID, including github:owner/repository. Unregistered repositories are rejected.'}},
          'required': ['kind', 'need'], 'additionalProperties': False},
      'annotations': {'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': True}},
     {'name': 'connect_market_capability',
@@ -29,8 +30,11 @@ def tool_catalog(gateway):
     for row in rows:
         if row['name'] == 'acquire_skill':
             schema = row['inputSchema']
-            row['inputSchema'] = {**schema, 'properties': {**schema['properties'], 'market_selection': {'type': 'string'}}}
+            row['inputSchema'] = {**schema, 'properties': {**schema['properties'], 'market_selection': {'type': 'string'}},
+                'required': [key for key in schema.get('required', []) if key != 'need'],
+                'anyOf': [{'required': ['need']}, {'required': ['market_selection']}]}
             row['description'] += ' Standalone Skills are read on demand, including selected public-market guidance and resources; they do not require a plugin installation or registration in the host Agent. Read and follow the guidance; scripts still require their declared runtime. For a plugin component, first connect that plugin in Backpack, then pass market_selection from connect_market_capability to select only within its installed components.'
+            row['description'] += ' For the same prepared task, omit need to reuse its exact original need and validated component. Supply need only for a changed purpose, which requires a fresh fit check. Scope, package integrity, grants and current confidence threshold are checked again.'
         if row['name'] == 'acquire_mcp':
             row['description'] += ' MCP services must be registered in Backpack before use: local services need dependencies installed in Backpack; remote services need a configured connection. Registration is not proof of a successful tool call.'
             row['description'] += ' If no connected capability fits and a public market capability may help the authorized task, use prepare_market_capability, then connect its reviewed setup preview and acquire again. A routing outage does not justify retrying execution.'
@@ -65,8 +69,10 @@ def dispatch(gateway, connection, reader, market, name, arguments):
         elif name in {'acquire_skill', 'acquire_resource'}:
             if name == 'acquire_skill' and 'market_selection' in arguments:
                 arguments = dict(arguments)
-                keys = market.bound_skill_keys(arguments.pop('market_selection'))
-                reader = gateway.Router(connection['data_root'], connection['project_root'], allowed=keys)
+                context = market.bound_skill_context(arguments.pop('market_selection'))
+                arguments.setdefault('need', context['need'])
+                reader = gateway.Router(connection['data_root'], connection['project_root'], allowed=context['keys'])
+                reader.market_guidance_context = context
             result = reader.request('acquire' if name == 'acquire_skill' else 'resource', arguments)
         else:
             raise ValueError('unknown_tool')
