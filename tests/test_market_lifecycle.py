@@ -83,14 +83,16 @@ class LifecycleTests(unittest.TestCase):
         rows=[{'name':category+str(i),'description':'Guidance','entry':{'category':category}}
               for category in ['productivity','development'] for i in range(50)]
         market.manager=SimpleNamespace(plugins=SimpleNamespace(sources=SimpleNamespace(browse=lambda source:{'items':rows})))
+        from market_directory import directories, declared_topics
+        market.task_directories=lambda candidates,kind: directories(candidates,{i:declared_topics(row) for i,row in enumerate(candidates)})
         selected={'status':'selected'}
-        market.choose=Mock(side_effect=[({'id':'productivity'},selected),(rows[0],selected),
-            (None,{'status':'none'}),({'id':'development'},selected),(rows[50],selected)])
+        market.choose=Mock(side_effect=[({'id':'business'},dict(selected)),(rows[0],dict(selected)),
+            (None,{'status':'none'}),({'id':'software'},dict(selected)),(rows[50],dict(selected))])
         market.prepare_plugin_candidate=Mock(side_effect=[{'status':'setup_required','name':rows[0]['name'],'requirements':['agents']},None])
         plan={'need':'Review a local function','routing':[]}
         self.assertIsNone(market.prepare_plugin(plan,'anthropic'))
         second_directories=market.choose.call_args_list[3].args[1]
-        self.assertEqual([d['id'] for d in second_directories],['development'])
+        self.assertEqual([d['id'] for d in second_directories],['software'])
         self.assertEqual(plan['unavailable_candidates'][0]['name'],'productivity0')
 
     def sources(self):

@@ -69,6 +69,26 @@ class MarketGatewayTests(unittest.TestCase):
         self.assertEqual(config["provider_environment"], {"XDG_CONFIG_HOME": "/provider"})
         self.assertEqual(select.call_args.args[4], "skill")
 
+    def test_category_default_inherits_existing_source_floor(self):
+        (self.data/'config.json').touch();self.config['directory_minimum_confidence']=.35
+        rows=[self.candidate('external-'+str(i))for i in range(26)]
+        memberships={i:['software' if i<13 else 'visual']for i in range(26)}
+        with patch('market_directory.classify',return_value=memberships), \
+                patch('market_routing.route',side_effect=[{'status':'selected','skill':'software','confidence':.8},
+                                                        {'status':'none','confidence':.9}]) as select:
+            self.router._choose('ordinary need',rows)
+        self.assertEqual(select.call_args_list[0].args[3]['minimum_confidence'],.35)
+        self.assertEqual(select.call_args_list[1].args[3]['minimum_confidence'],.7)
+
+    def test_saved_guidance_never_enters_public_metadata_classification(self):
+        rows=[self.candidate('saved-'+str(i),'User-owned guidance metadata')for i in range(26)]
+        with patch('market_directory.classify') as classify, \
+                patch('market_routing.route',return_value={'status':'none','confidence':.9}) as select:
+            self.router._choose('ordinary need',rows)
+        classify.assert_not_called()
+        self.assertEqual(select.call_args.args[2],rows)
+        self.assertEqual(select.call_count,1)
+
     def test_bound_single_plugin_uses_actual_guidance_once_at_strict_threshold(self):
         self.router.allowed={'bound-key'}
         self.router.market_guidance_context={}
@@ -138,6 +158,35 @@ class MarketGatewayTests(unittest.TestCase):
         for purpose in ("mcp-server", "mcp-tool", "resource"):
             self.assertEqual(self.router._choose("need", [self.candidate()], purpose), {"delegated": purpose})
         self.route.assert_not_called()
+
+    def test_negative_fit_checks_another_source_but_never_replays_provider_error(self):
+        seen=[]
+        def acquire(reader, operation, arguments):
+            seen.append(set(reader._market_failed_groups))
+            reader._market_last_group='group-first' if len(seen)==1 else 'group-second'
+            return {'status':'none' if len(seen)==1 else 'selected'}
+        with patch.object(Base,'request',new=acquire):
+            result=self.router.request('acquire',{'need':'ordinary need'})
+        self.assertEqual(result['status'],'selected')
+        self.assertEqual(seen,[set(),{'group-first'}])
+        self.assertEqual(len(result['rejected_source_groups']),1)
+        self.assertEqual(self.router._market_failed_groups,set())
+        with patch.object(Base,'request',side_effect=RuntimeError('provider_timeout')) as operation:
+            with self.assertRaisesRegex(RuntimeError,'provider_timeout'):
+                self.router.request('acquire',{'need':'ordinary need'})
+        self.assertEqual(operation.call_count,1)
+
+    def test_source_sibling_search_is_bounded_and_bound_plugin_does_not_search_siblings(self):
+        def negative(reader,operation,arguments):
+            reader._market_last_group='group-'+str(len(reader._market_failed_groups))
+            return {'status':'none'}
+        with patch.object(Base,'request',new=negative):
+            result=self.router.request('acquire',{'need':'ordinary need'})
+        self.assertEqual(len(result['rejected_source_groups']),3)
+        self.router.allowed={'bound-key'}
+        with patch.object(Base,'request',return_value={'status':'none'}) as operation:
+            self.router.request('acquire',{'need':'ordinary need'})
+        self.assertEqual(operation.call_count,1)
 
     def test_ambiguous_public_examples_require_actual_content_fit(self):
         resource=self.data/'public-cache/key/skill/themes/example.md';resource.parent.mkdir(parents=True)

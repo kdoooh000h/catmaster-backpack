@@ -75,7 +75,7 @@ class Inventory:
         return bool(name_keys(name) & self.names)
 
 
-def novel_market(base, inventory):
+def novel_market(base, inventory, family='plugin'):
     class NovelMarket(base):
         def __init__(self, gateway, connection):
             inventory.check(connection)
@@ -89,7 +89,7 @@ def novel_market(base, inventory):
 
         def prepare(self, arguments):
             inventory.check(self.connection)
-            if arguments.get('kind') != 'plugin':
+            if arguments.get('kind') != 'plugin' and family == 'plugin':
                 raise ValueError('benchmark_plugin_only')
             self.excluded_existing = []
             result = super().prepare(arguments)
@@ -111,6 +111,8 @@ def novel_market(base, inventory):
             return bool(eligible) and super().portable_guidance_fit(plan)
 
         def view(self, plan):
+            if family == 'mcp' and any(inventory.existing(row['title']) for row in plan['servers']):
+                raise ValueError('benchmark_existing_mcp_excluded')
             return {**super().view(plan),'excluded_existing':list(plan.get('excluded_existing',[]))}
 
         def connect_skills(self, plan):
@@ -134,15 +136,15 @@ def novel_market(base, inventory):
     return NovelMarket
 
 
-def install(protocol, market_module, inventory):
+def install(protocol, market_module, inventory, family='plugin'):
     """Wrap only this process's benchmark imports; retain original implementations."""
-    market_type = novel_market(market_module.Market,inventory)
+    market_type = novel_market(market_module.Market,inventory,family)
     market_module.Market = protocol.Market = market_type
     original_dispatch, original_catalog = protocol.dispatch, protocol.tool_catalog
 
     def dispatch(gateway, connection, reader, market, name, arguments):
         inventory.check(connection)
-        if name == 'acquire_skill':
+        if name == 'acquire_skill' and family == 'plugin':
             if not isinstance(arguments,dict) or not isinstance(arguments.get('market_selection'),str):
                 raise ValueError('benchmark_market_selection_required')
         result = original_dispatch(gateway,connection,reader,market,name,arguments)
@@ -156,7 +158,7 @@ def install(protocol, market_module, inventory):
     def tool_catalog(gateway):
         rows = original_catalog(gateway)
         for row in rows:
-            if row['name'] == 'acquire_skill':
+            if row['name'] == 'acquire_skill' and family == 'plugin':
                 schema = row['inputSchema']
                 row['inputSchema'] = {**schema,'required':list(dict.fromkeys([*schema.get('required',[]),'market_selection']))}
         return rows

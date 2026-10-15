@@ -18,6 +18,7 @@ import shutil
 import sys
 import subprocess
 import tempfile
+import time
 
 POLICY = "market-lifecycle-v3"
 
@@ -51,7 +52,14 @@ def make_router(base, module):
                     Path(self.data)/'public-cache') for row in candidates):
                 return super()._choose(need, candidates, purpose=purpose)
             directory = purpose == 'skill' and all(row.name.startswith("group-") for row in candidates)
+            # Only source-backed public metadata belongs in the new classifier.
+            # Saved/private and individually enabled guidance retain their route.
+            public_metadata_pool = all(row.name.startswith('external-') for row in candidates)
             if directory:
+                failed = getattr(self, '_market_failed_groups', set())
+                candidates = [row for row in candidates if row.name not in failed]
+                if not candidates:
+                    return {'status': 'none', 'confidence': 1, 'skill': None, 'search_exhausted': True}
                 descriptions = source_directory_descriptions(module, self.data)
                 candidates = [module.runtime.Skill(
                     row.name, descriptions.get(row.name, "") + row.description, row.path
@@ -102,7 +110,39 @@ def make_router(base, module):
                 decision = route(module.runtime, need, enriched, config, 'plugin-ready')
                 return {**decision, 'selection_stage': 'skill', 'minimum_confidence': minimum,
                         'evidence_mode': 'complete_bound_plugin_entrypoint'}
+            category = None
+            if not directory and public_metadata_pool and len(candidates) > 24:
+                from market_directory import classify, directories, pool, POLICY as DIRECTORY_POLICY
+                rows = []
+                for candidate in candidates:
+                    name, separator, description = candidate.description.partition(': ')
+                    rows.append({'name': name if separator else candidate.name,
+                                 'description': description if separator else candidate.description,
+                                 'candidate': candidate})
+                memberships = classify(rows, 'skill', self.data, config, module)
+                cards, groups, pending = directories(rows, memberships)
+                if len(groups) > 1:
+                    early = float(config.get('directory_minimum_confidence', .1))
+                    middle = float(config.get('market_category_minimum_confidence', early))
+                    if not math.isfinite(middle) or not early <= middle <= minimum:
+                        raise ValueError('invalid_minimum_confidence')
+                    categories = [module.runtime.Skill(card['id'], card['description'], Path('.')) for card in cards]
+                    category = route(module.runtime, need, categories, {**config, 'minimum_confidence': middle}, 'directory')
+                    category.update(directory_policy=DIRECTORY_POLICY, catalog_count=len(rows), pending_count=len(pending))
+                    if category.get('status') != 'selected':
+                        return {**category, 'unexhausted': True, 'selection_stage': 'directory'}
+                    retained = pool(rows, groups[category['skill']], pending)
+                    category['retained_count'] = len(retained)
+                    candidates = [row['candidate'] for row in retained]
+            if not directory and public_metadata_pool:
+                from market_directory import describe
+                candidates = [module.runtime.Skill(row.name, describe({'name': row.name, 'description': row.description}, 'skill'), row.path)
+                              for row in candidates]
             decision = route(module.runtime, need, candidates, config, "directory" if directory else "skill")
+            if directory and decision.get('status') == 'selected':
+                self._market_last_group = decision['skill']
+            if category is not None:
+                decision['category'] = {key: value for key, value in category.items() if key != 'skill'}
             plausible = decision.pop('plausible', [])
             decision.pop('inspect_alternatives', None)
             if not directory and decision.get('status') == 'uncertain' and plausible:
@@ -125,7 +165,27 @@ def make_router(base, module):
                 result = plugin_resource(self, module, arguments)
                 if result is not None:
                     return result
-            result = super().request(operation, arguments)
+            if operation == 'acquire' and getattr(self, 'allowed', None) is None:
+                self._market_failed_groups = set()
+                self._market_last_group = None
+                rejected_groups = []
+                try:
+                    for _ in range(3):
+                        self._market_last_group = None
+                        result = super().request(operation, arguments)
+                        group = self._market_last_group
+                        if result.get('status') not in {'none', 'uncertain'} or group is None:
+                            break
+                        rejected_groups.append({'status': result['status'], 'confidence': result.get('confidence')})
+                        self._market_failed_groups.add(group)
+                    if rejected_groups:
+                        result['rejected_source_groups'] = rejected_groups
+                        result['source_search_bounded'] = True
+                finally:
+                    self._market_failed_groups = set()
+                    self._market_last_group = None
+            else:
+                result = super().request(operation, arguments)
             if operation == "acquire":
                 result = {**result, "routing_policy": POLICY}
             return result

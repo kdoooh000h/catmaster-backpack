@@ -25,12 +25,46 @@ Registration alone does not establish a successful handshake or business call.
    normal Backpack routing remains available. For MCP, use `acquire_mcp`, followed
    by the existing receipt-bound `invoke_mcp` after normal execution authorization.
 
-Market lookup has at most source → publisher category → plugin selection. Sources
-may be explicit. Publisher categories preserve every candidate; leaves are bounded
-at 192 entries. An oversized or incomplete result asks for a more specific public
-search instead of silently truncating. Subsequent Skill/tool acquisition is a
-separate use request; it is not another market search. The public Skill directory
-continues to use the previously verified source-directory/Skill policy.
+Market lookup has at most source → task category → capability selection. Sources
+may be explicit. Small catalogs skip the middle category. Complete plugin metadata
+is bounded at 1,000 entries; a choice call remains bounded at 192. An oversized or
+incomplete result stops explicitly instead of silently truncating. Subsequent
+component validation/acquisition uses the pinned package rather than searching
+another global directory. Public Skills preserve their source identities and
+receive the same optional task-category narrowing within a large source group.
+
+## Task descriptions and categories
+
+The shared public directory covers software, visual design, writing, data and
+knowledge records, research/time, operations, security, and product/business.
+Each card includes Chinese/English purposes and deliverables. A leaf preserves
+its publisher description and labels, while explicitly distinguishing guidance,
+plugin components awaiting inspection, and an MCP service awaiting real schema
+validation. These labels do not establish runtime compatibility or permission.
+
+Publisher category/tags/keywords are reused first. Entries without a recognized
+label receive a task-independent Jev classification, with primary and independent
+secondary memberships accepted at 0.4. The owner-only annotation cache binds the
+exact public metadata, taxonomy, kind and configured model. Changed metadata gets
+a new identity. Classification uses batches of eight entries, at most 32 entries
+and an 18-second deadline per call; unprocessed/uncertain entries stay pending.
+Failed or unknown classifier calls are not automatically replayed. Pending entries
+accompany every inspected category; a capability may belong to several categories.
+No request-keyword matching or fixed capability-name allowlist filters the pool.
+
+The source directory threshold defaults to 0.1, the optional task-category
+threshold (`market_category_minimum_confidence`) to 0.1, and actual guidance/tool
+fit to at least 0.7 or the stricter configured value. These are routing scores,
+not measured task success probabilities. A completed negative result in one Skill
+source can inspect another source, bounded at three sources. Provider errors and
+unknown outcomes stop; bound plugin acquisition never searches unrelated sources.
+Plugin category fallback retains its existing package/time budgets. Catalog
+coverage and pending retention are structural checks; semantic no-omission claims
+require the dated ordinary-task evidence, not these invariants alone.
+The provisional package/guide questions ask which candidate is worth inspecting;
+the complete-entrypoint question checks an applicable method/resource against
+the task and actual dependencies. Optional unrelated workflow phases do not
+invalidate an independently usable phase. Final fit still requires at least 0.7.
 
 ## Supported sources and components
 
@@ -141,10 +175,10 @@ archive finished state through maintenance when these limits are reached.
 
 ## Installation and verification
 
-Keep all eleven `market_*.py` adapter modules together: `market_gateway.py`,
+Keep all `market_*.py` adapter modules together: `market_gateway.py`,
 `market_protocol.py`, `market_connect.py`, `market_routing.py`,
 `market_resources.py`, `market_registry.py`, `market_packages.py`, `market_python.py`,
-`market_node.py`, `market_registry_cache.py` and `market_mcp_runtime.py`.
+`market_node.py`, `market_registry_cache.py`, `market_directory.py` and `market_mcp_runtime.py`.
 The launcher still requires the separate existing standalone runtime via
 `--runtime-root`. The runtime source is not bundled in this task branch.
 Only the selected public MCP command changes; private routing and other Agent

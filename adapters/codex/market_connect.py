@@ -20,6 +20,7 @@ import signal
 import stat
 import subprocess
 import time
+from types import SimpleNamespace
 import zipfile
 
 PUBLIC_PLUGIN_MARKETS = [
@@ -84,7 +85,7 @@ class Market:
             raise ValueError('market_connection_changed')
         return value
 
-    def choose(self, need, rows, *, directory=False, kind="mcp"):
+    def choose(self, need, rows, *, directory=False, kind="mcp", directory_level=1):
         if not rows:
             return None, {'status': 'none', 'confidence': 1.0}
         if len(rows) > 192:
@@ -95,6 +96,11 @@ class Market:
             'jev_provider': 'typesafe', 'timeout_seconds': 45, 'minimum_confidence': 0.6}
         minimum = float(config.get('directory_minimum_confidence', 0.1)) if directory or kind in {'mcp-preview','plugin-preview','plugin-skill-preview'} else max(
             0.7, float(config.get('minimum_confidence', 0.6)), float(config.get('skill_minimum_confidence', 0.7)))
+        if directory and directory_level == 2:
+            middle = float(config.get('market_category_minimum_confidence', minimum))
+            if not math.isfinite(middle) or not minimum <= middle <= 1:
+                raise ValueError('invalid_minimum_confidence')
+            minimum = middle
         if not math.isfinite(minimum) or not 0 <= minimum <= 1:
             raise ValueError('invalid_minimum_confidence')
         import backpack_provider_environment
@@ -102,10 +108,13 @@ class Market:
         config = {**config, 'minimum_confidence': minimum}
         if environment is not None:
             config['provider_environment'] = environment
-        candidates = [self.runtime.Skill('market-' + str(i), row['description'], Path('.')) for i, row in enumerate(rows)]
+        from market_directory import describe
+        preview = {'plugin-preview': 'plugin', 'plugin-skill-preview': 'skill', 'mcp-preview': 'mcp'}.get(kind)
+        candidates = [self.runtime.Skill('market-' + str(i), describe(row, preview) if preview and not directory else row['description'],
+                                         Path('.')) for i, row in enumerate(rows)]
         from market_routing import route
         stage = 'directory' if directory else {'plugin': 'plugin', 'plugin-preview': 'plugin', 'plugin-ready': 'plugin-ready',
-                                             'plugin-skill-preview': 'skill',
+                                             'plugin-skill-preview': 'skill-preview',
                                              'mcp-preview': 'mcp-discovery', 'mcp': 'mcp-fit'}[kind]
         decision = route(self.runtime, need, candidates, config, stage)
         public = {k: v for k, v in decision.items() if k not in {'skill', 'inspect_alternatives', 'plausible'}}
@@ -128,6 +137,20 @@ class Market:
             public['_ranked_rows'] = [indexed[key] for key in ordered if indexed[key] is not chosen]
         return chosen, public
 
+    def task_directories(self, rows, kind):
+        from market_directory import classify, directories
+        path = self.data / 'config.json'
+        config = self.gateway.public_access.owner_json(path) if path.exists() else {
+            'provider': 'jev-cli', 'executable': shutil.which('jev'), 'jev_provider': 'typesafe'}
+        import backpack_provider_environment
+        environment = backpack_provider_environment.load(self.data)
+        if environment is not None:
+            config = {**config, 'provider_environment': environment}
+        module = SimpleNamespace(public_access=self.gateway.public_access, runtime=self.runtime)
+        memberships = classify(rows, kind, self.data, config, module,
+                               deadline=min(getattr(self, '_plugin_deadline', time.monotonic() + 18), time.monotonic() + 18))
+        return directories(rows, memberships)
+
     def plugin_directories(self):
         directories = [
             {'id': 'anthropic', 'description': 'Anthropic official plugin marketplace: code review, bug finding, testing, frontend design, interactive playgrounds, development workflows and MCP integrations. This directory contains both portable guidance and native components.'},
@@ -136,9 +159,14 @@ class Market:
         # arbitrary repository from an Agent's setup arguments.
         for source in self.manager.plugins.sources.listing()['sources']:
             if source['id'].startswith('github:') and source.get('agent') == 'claude':
-                description = source['name'] + ': Registered public community plugin marketplace; actual package independence is checked before setup.'
+                description = (source['name'] + ': ' + source.get('about', '')
+                               + ' Registered public community plugin marketplace; actual package independence is checked before setup.')
                 cached = self.recent_plugin_catalog(source['id'])
                 if cached is not None:
+                    from market_directory import TOPICS, declared_topics
+                    topics = {topic for row in cached['items'] for topic in declared_topics(row)}
+                    description += ' Documented task categories: ' + '; '.join(TOPICS[topic][0] + ': ' + TOPICS[topic][1]
+                                                                                for topic in TOPICS if topic in topics)
                     description += ' Public catalog entries: ' + ', '.join(row['name'] for row in cached['items'])
                 directories.append({'id': source['id'], 'description': description})
         return directories
@@ -312,6 +340,17 @@ class Market:
         for row in rows:
             if row['receipt'] in summaries:
                 row['description'] += '\nVersioned publisher metadata: ' + json.dumps(summaries[row['receipt']], ensure_ascii=False)
+        if len(rows) > 24:
+            from market_directory import pool, POLICY
+            cards, groups, pending = self.task_directories(rows, 'mcp')
+            if len(groups) > 1:
+                group, category = self.choose(plan['need'], cards, directory=True, directory_level=2)
+                category.update(directory_policy=POLICY, catalog_count=len(rows), pending_count=len(pending))
+                plan['routing'].append(category)
+                if group is None:
+                    return {**category, 'unexhausted': True, 'execution': 'not_performed'}
+                rows = pool(rows, groups[group['id']], pending)
+                category['retained_count'] = len(rows)
         row, decision = self.choose(plan['need'], rows, kind='mcp-preview')
         plan['routing'].append(decision)
         if row is None:
@@ -398,32 +437,30 @@ class Market:
                 description += '\nPublisher-declared runtime requirements: ' + ', '.join(native) + '. '
                 description += 'These native components are not supplied by this adapter; independent Skills require package inspection.'
             rows.append({**row, 'description': description})
-        if len(rows) > 96:
-            groups = {}
-            for row in rows:
-                # Reuse publisher categories. Every entry remains in exactly
-                # one directory, including uncategorized/native entries.
-                category = row.get('entry', {}).get('category') or 'uncategorized'
-                if not isinstance(category, str) or len(category) > 100:
-                    category = 'uncategorized'
-                groups.setdefault(category, []).append(row)
+        if len(rows) > 24:
+            from market_directory import pool, POLICY
+            cards, groups, pending = self.task_directories(rows, 'plugin')
+        else:
+            cards, groups, pending = [], {}, []
+        if len(groups) > 1:
             rejected = []
-            category_notes = {
-                'development': 'Programming workflows, debugging, testing, code-quality guidance and development tools.',
-                'productivity': 'Review and collaboration workflows, writing, project automation and service integrations.',
-            }
+            inspected = set()
             for _ in range(3):
-                directories = [{'id': key, 'description': key + ': ' + category_notes.get(key, '') + ' Entries: ' + ', '.join(r['name'] for r in members)} for key, members in groups.items()]
-                group, decision = self.choose(plan['need'], directories, directory=True)
+                available = [card for card in cards if card['id'] in groups]
+                group, decision = self.choose(plan['need'], available, directory=True, directory_level=2)
+                decision.update(directory_policy=POLICY, catalog_count=len(rows), pending_count=len(pending))
                 plan['routing'].append(decision)
                 if group is None:
-                    return {**decision, 'unavailable_candidates': rejected, 'execution': 'not_performed'}
-                result = self.prepare_plugin_group(plan, source, snapshot, groups.pop(group['id']), rejected)
-                if result is None or result.get('status') not in {'none', 'setup_required'}:
+                    return {**decision, 'unavailable_candidates': rejected, 'unexhausted': True, 'execution': 'not_performed'}
+                candidates = [row for row in pool(rows, groups.pop(group['id']), pending) if row['name'] not in inspected]
+                decision['retained_count'] = len(candidates)
+                result = self.prepare_plugin_group(plan, source, snapshot, candidates, rejected)
+                inspected.update(row['name'] for row in rejected if 'name' in row)
+                if result is None or result.get('status') not in {'none', 'uncertain', 'setup_required'}:
                     return result
                 if not groups or self._preview_remaining <= 0 or time.monotonic() >= self._preview_deadline:
-                    return result
-            return result
+                    return {**result, 'unexhausted_categories': list(groups)}
+            return {**result, 'unexhausted_categories': list(groups)}
         return self.prepare_plugin_group(plan, source, snapshot, rows, [])
 
     def prepare_plugin_group(self, plan, source, snapshot, rows, rejected):

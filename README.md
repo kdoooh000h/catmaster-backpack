@@ -368,6 +368,13 @@ It adds two public publisher indexes and reuses bound full-guidance validation.
 The failed attempt and continuation are both counted; complete-flow time and
 tokens increased, while repeated guidance-selection calls were removed.
 
+The [market directory/description comparison](docs/backpack-market-directory-comparison-2026-10-15.md)
+adds task descriptions, publisher labels and bounded public metadata classification.
+In the six-task native regression, strict completion was 2/6 old versus 3/6 candidate;
+summed latency increased 6.88% and the five fully metered paired tasks used 32.47%
+more tokens. The HTML native turn timed out and both MCP searches failed on each
+side. This experimental strategy has not been promoted to the daily connection.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.

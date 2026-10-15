@@ -20,7 +20,7 @@ class ExpansionTests(unittest.TestCase):
 
     def market(self):
         market = object.__new__(Market)
-        rows = [{'id':'github:public/catalog','name':'public/catalog','agent':'claude'},
+        rows = [{'id':'github:public/catalog','name':'public/catalog','agent':'claude','about':'Review, debugging and test guidance'},
                 {'id':'opencode','name':'other format','agent':'opencode'}]
         market.manager = SimpleNamespace(plugins=SimpleNamespace(sources=SimpleNamespace(
             listing=lambda: {'sources':rows})))
@@ -35,6 +35,7 @@ class ExpansionTests(unittest.TestCase):
         market = self.market()
         self.assertEqual([r['id'] for r in market.plugin_directories()],
                          ['anthropic','openai','github:public/catalog'])
+        self.assertIn('Review, debugging and test guidance',market.plugin_directories()[-1]['description'])
         market.choose = Mock()
         with self.assertRaisesRegex(ValueError,'unsupported_market_source'):
             market.prepare({'kind':'plugin','need':'review this file','source':'github:unregistered/repo'})

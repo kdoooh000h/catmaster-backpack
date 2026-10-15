@@ -104,6 +104,14 @@ class MarketIntegrationTests(unittest.TestCase):
         path.write_text(json.dumps(value))
         path.chmod(0o600)
 
+    def test_category_default_preserves_an_existing_higher_directory_floor(self):
+        self.write(self.data/'config.json',{'version':1,'provider':'jev-cli',
+            'directory_minimum_confidence':.35,'minimum_confidence':.6})
+        with patch('market_routing.route',return_value={'status':'none','confidence':.9}) as select:
+            self.market.choose('ordinary need',[{'id':'software','description':'Development guidance'}],
+                               directory=True,directory_level=2)
+        self.assertEqual(select.call_args.args[3]['minimum_confidence'],.35)
+
     def plan(self, skills=False, servers=True):
         token = 'b' * 48
         root = self.data / 'market-plans' / token / 'package'

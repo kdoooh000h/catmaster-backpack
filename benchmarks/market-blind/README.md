@@ -48,8 +48,9 @@ A whole case passes only when all relevant conditions hold:
    unchanged. Skill use reports alone do not establish output correctness.
 
 The six task artifacts are checked against the facts and explicit requirements
-in their frozen prompts. The cart review has three independent faults: quantity
-is ignored, shipping is discounted, and empty carts are charged shipping. Time
+in their frozen prompts. The cart review must reproduce discounted shipping and
+shipping charged to empty carts; a demonstrated large-integer precision defect
+may also be reported. Quantity is not specified by this ordinary prompt. Time
 conversion must use an actual service and return Tokyo 22:00 on 2026-07-01 with
 New York UTC-04:00 and Tokyo UTC+09:00. The knowledge task must actually save and
 read back its fictional relations. A plausible unaided answer does not pass the
@@ -67,6 +68,16 @@ known subtotals and coverage remain visible. Native elapsed time includes its
 startup, reasoning, discovery, package setup and task work. Corpus preparation
 and evaluator review are outside this duration. Cost and server-side model
 identity remain unknown unless directly returned.
+
+`snapshot_gateway.py` supports an isolated old/new directory comparison. Both
+arms share complete public source/exact-query snapshots, retaining their original
+observation time. A previously unseen functional query is read from the normal
+public source once and then frozen. This is a fixed-corpus evaluation, not proof
+of live marketplace freshness; query differences and cold corpus reads must be
+reported. Packages, grants, workspaces and business data stay fresh per case.
+The wrapper excludes known installed public leaf names before disclosure and
+retains the normal final guidance/schema, permission and execution checks.
+Source snapshots are never installed packages or successful execution evidence.
 
 ## Run and inspect
 

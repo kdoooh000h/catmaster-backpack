@@ -100,6 +100,21 @@ class NoveltyTests(unittest.TestCase):
         self.market.connect_skills({'skills':[{'name':'New'}]})
         self.assertEqual(self.market.granted,[{'name':'New'}])
 
+    def test_mcp_family_rejects_known_server_before_disclosure(self):
+        market=novelty.novel_market(BaseMarket,self.inventory,family='mcp')(self.gateway,self.connection)
+        with self.assertRaisesRegex(ValueError,'benchmark_existing_mcp_excluded'):
+            market.view({'name':'new-package','servers':[{'title':'publisher:EXISTING'}]})
+        self.assertEqual(market.granted,[])
+        self.assertEqual(market.view({'name':'new-package','servers':[{'title':'New service'}]})['name'],'new-package')
+
+    def test_skill_family_can_acquire_without_a_plugin_setup_receipt(self):
+        protocol=self.protocol();market_module=SimpleNamespace(Market=BaseMarket)
+        novelty.install(protocol,market_module,self.inventory,family='skill')
+        market=market_module.Market(self.gateway,self.connection)
+        result=protocol.dispatch(self.gateway,self.connection,None,market,'acquire_skill',{'need':'ordinary writing task'})
+        self.assertEqual(result['status'],'selected')
+        self.assertNotIn('market_selection',protocol.tool_catalog(self.gateway)[0]['inputSchema']['required'])
+
     def test_old_grant_cannot_be_reintroduced_by_later_acquire(self):
         self.assertEqual(self.market.bound_skill_keys('receipt'),['new-key'])
         self.market.keys = ['new-key','old-key']
