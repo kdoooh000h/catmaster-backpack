@@ -6,6 +6,17 @@ import sys
 
 from market_connect import Market
 
+# Keep this alongside both entrypoints and templates: a template must not silently
+# enlarge the user's deliverable after the initial Skill disclosure.
+APPLICATION_SCOPE = (
+    'The user request defines the deliverable and acceptance scope. Read the selected guidance fully, '
+    'then apply its relevant method to the smallest complete solution. Guide-specific feature lists, '
+    'layouts and example outputs are defaults to adapt, not extra user requirements, even if the guide '
+    'calls them mandatory. Preserve prerequisites and safety/correctness checks. Finish the required '
+    'artifact and its checks; after they pass, report Skill use and finish. Add optional features or '
+    'companion documents only when the user requests them or they are necessary for that outcome.'
+)
+
 TOOLS = [
     {'name': 'prepare_market_capability',
      'description': 'When the current task needs a market plugin or MCP not yet connected, submit a concrete secret-free need. Jev selects from public metadata and returns one pinned setup preview or missing requirements. source optionally names the public marketplace, never a capability. For MCP Registry start with ONE precise functional keyword (prefer English for its name index), not a sentence or guessed product name. Up to four alternatives may be supplied only when needed; OR makes searches broader. Oversized or incomplete results are never used for selection. This chooses a setup candidate; actual MCP tools are checked after connection with a stricter confidence threshold. Nothing is executed or connected by preparation.',
@@ -28,6 +39,8 @@ TOOLS = [
 def tool_catalog(gateway):
     rows = [dict(row) for row in gateway.PERSISTENT_TOOLS]
     for row in rows:
+        if row['name'] in {'acquire_skill', 'acquire_resource'}:
+            row['description'] += ' ' + APPLICATION_SCOPE
         if row['name'] == 'acquire_skill':
             schema = row['inputSchema']
             row['inputSchema'] = {**schema, 'properties': {**schema['properties'], 'market_selection': {'type': 'string'}},
@@ -65,7 +78,12 @@ def dispatch(gateway, connection, reader, market, name, arguments):
         if connection['project_root'] is not None and 'project_root' not in arguments:
             arguments = {**arguments, 'project_root': connection['project_root']}
         if name == 'report_skill_use':
-            result = reader.report(arguments)
+            if isinstance(arguments.get('summary'), str) and len(arguments['summary']) > 500:
+                result = {'status': 'invalid_usage_report', 'reason': 'summary_too_long',
+                    'recorded': False, 'execution': 'not_performed', 'max_summary_characters': 500,
+                    'instruction': 'This report was rejected before writing. Shorten its factual summary to at most 500 characters, preserving actual limitations, and submit the report with the same selection, event and run id. Do not repeat task execution or setup.'}
+            else:
+                result = reader.report(arguments)
         elif name in {'acquire_skill', 'acquire_resource'}:
             if name == 'acquire_skill' and 'market_selection' in arguments:
                 arguments = dict(arguments)
@@ -74,9 +92,8 @@ def dispatch(gateway, connection, reader, market, name, arguments):
                 reader = gateway.Router(connection['data_root'], connection['project_root'], allowed=context['keys'])
                 reader.market_guidance_context = context
             result = reader.request('acquire' if name == 'acquire_skill' else 'resource', arguments)
-            if name == 'acquire_skill' and hasattr(reader, 'market_guidance_context') and result.get('status') == 'selected':
-                result = {**result, 'application_scope':
-                    'Apply this guidance within the original requested outcome. Finish the required artifact and its checks before optional extras. Guide examples are not additional user requirements.'}
+            if result.get('status') == 'selected':
+                result = {**result, 'application_scope': APPLICATION_SCOPE}
         else:
             raise ValueError('unknown_tool')
     if not gateway.load_connection(connection['_descriptor'])['enabled']:

@@ -171,6 +171,7 @@ def prepare(args):
         'model': config.get('model'), 'reasoning': config.get('model_reasoning_effort'),
         'native_version': subprocess.check_output(['codex', '--version'], text=True).strip(),
         'attempts_per_task': 1, 'automatic_retries': 0, 'timeout_seconds': 360,
+        'persist_session_telemetry': bool(getattr(args, 'persist_session_telemetry', False)),
         'family_fixed': True, 'capability_names_supplied': False,
         'production_launcher': installed_launcher, 'production_source_sha256': digest(Path(installed_launcher)),
         'candidate_launcher': launcher, 'candidate_source_sha256': digest(Path(launcher)),
@@ -238,7 +239,8 @@ def run(args):
     env.update(HOME=str(case / 'home'), CODEX_HOME=str(native), PYTHONDONTWRITEBYTECODE='1')
     spec = json.loads((case / 'spec.json').read_text())
     program = spec['gateway'][0]
-    argv = ['codex', 'exec', '--ignore-user-config', '--json', '--ephemeral', '--sandbox', 'workspace-write',
+    persistence = [] if manifest.get('persist_session_telemetry') else ['--ephemeral']
+    argv = ['codex', 'exec', '--ignore-user-config', '--json', *persistence, '--sandbox', 'workspace-write',
         '--disable', 'apps', '--disable', 'remote_plugin', '--enable', 'skip_host_skill_discovery',
         '--skip-git-repo-check', '--color', 'never', '-m', manifest['model'],
         '-c', 'model_reasoning_effort=' + json.dumps(manifest['reasoning']),
@@ -254,7 +256,7 @@ def run(args):
     dump(receipt, state)
     start = time.monotonic()
     with (case / 'events.jsonl').open('x') as out, (case / 'native-stderr.log').open('x') as err:
-        p = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=err, env=env, text=True, start_new_session=True)
+        p = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=err, env=env, text=True, start_new_session=True, umask=0o077)
         state['pid'] = p.pid; dump(receipt, state)
         recorder = threading.Thread(target=record_native_events, args=(p.stdout,out,case/'event-times.jsonl',start), daemon=True)
         recorder.start()
@@ -279,6 +281,8 @@ def main():
     if len(sys.argv)>1 and sys.argv[1]=='jev-proxy': return jev_proxy(sys.argv[2], sys.argv[3:])
     parser=argparse.ArgumentParser(); sub=parser.add_subparsers(dest='action',required=True)
     p=sub.add_parser('prepare');p.add_argument('--output',required=True);p.add_argument('--data',required=True);p.add_argument('--launcher');p.add_argument('--runtime-root');p.add_argument('--only-case',choices=[t['id'] for t in TASKS])
+    p.add_argument('--persist-session-telemetry', action='store_true',
+                   help='Keep private native session usage events, including completed requests before a timeout')
     p=sub.add_parser('run');p.add_argument('--output',required=True);p.add_argument('--case',required=True)
     args=parser.parse_args()
     return prepare(args) if args.action=='prepare' else run(args)

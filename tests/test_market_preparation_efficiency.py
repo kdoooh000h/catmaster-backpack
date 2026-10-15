@@ -111,5 +111,44 @@ class PreparationEfficiencyTests(TestCase):
         self.assertIn('required artifact and its checks',actual['application_scope'])
         self.assertEqual(reader.request.call_args.args[1]['need'],'original need')
 
+    def test_task_scope_survives_resource_disclosure_without_rewriting_it(self):
+        import market_protocol
+        connection={'_descriptor':'descriptor','data_root':'store','project_root':None}
+        resource={'status':'selected','resources':[{'content':'Full template with extra features.'}],
+                  'instruction':'Read the selected resource completely.'}
+        reader=Mock();reader.request.return_value=resource
+        gateway=SimpleNamespace(load_connection=lambda _: {'enabled':True})
+        actual=market_protocol.dispatch(gateway,connection,reader,None,'acquire_resource',{'need':'original need'})
+        self.assertEqual(actual['resources'],resource['resources'])
+        self.assertEqual(actual['instruction'],resource['instruction'])
+        self.assertIn('application_scope',actual)
+
+    def test_task_scope_is_in_both_disclosure_tool_descriptions(self):
+        import market_protocol
+        rows=[{'name':n,'description':'Read guidance.', 'inputSchema':{'properties':{}}}
+              for n in ('acquire_skill','acquire_resource')]
+        gateway=SimpleNamespace(PERSISTENT_TOOLS=rows)
+        catalog=market_protocol.tool_catalog(gateway)
+        for row in catalog[:2]:
+            self.assertIn('user',row['description'])
+            self.assertIn('scope',row['description'])
+        self.assertEqual(rows[1]['description'],'Read guidance.')
+
+    def test_oversized_report_is_rejected_before_write_with_specific_recovery(self):
+        import market_protocol
+        connection={'_descriptor':'descriptor','data_root':'store','project_root':None}
+        reader=Mock();reader.report.side_effect=ValueError('invalid_usage_report')
+        gateway=SimpleNamespace(load_connection=lambda _: {'enabled':True})
+        args={'selection':'selected','event':'completed','run':'same-run','summary':'x'*505}
+        actual=market_protocol.dispatch(gateway,connection,reader,None,'report_skill_use',args)
+        self.assertFalse(actual['recorded'])
+        self.assertEqual(actual['max_summary_characters'],500)
+        reader.report.assert_not_called()
+        reader.report.side_effect=None;reader.report.return_value={'status':'recorded'}
+        args['summary']='x'*500
+        actual=market_protocol.dispatch(gateway,connection,reader,None,'report_skill_use',args)
+        self.assertEqual(actual['status'],'recorded')
+        self.assertEqual(reader.report.call_args.args[0]['summary'],args['summary'])
+
 
 if __name__ == '__main__': main()

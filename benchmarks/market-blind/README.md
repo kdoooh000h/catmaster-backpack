@@ -101,4 +101,20 @@ receipts determine this pilot's results.
 
 `event-times.jsonl` records when each complete native stdout event line reaches the harness. It preserves `events.jsonl` unchanged and records event index/type, not extra prompt content. Gaps include generation, provider/transport and client waiting; they are not a measure of reasoning time. A killed native turn without usage remains unmetered.
 
+For diagnosing a failed case, `prepare --persist-session-telemetry` retains the
+native session inside that case's private home instead of using `--ephemeral`.
+The child uses an owner-only file creation mask. The summarizer reads only the
+recorded native thread's cumulative `token_count` events and exposes numeric
+counters. Repeated notifications, cached input and reasoning output are not
+added twice. These counters can recover a lower bound after a timeout; an
+interrupted request may still be missing, so they never establish complete
+coverage without the final turn receipt. Raw sessions remain outside the repo.
+
 [2026-10-15 preparation optimization and three failed-case retests](../../docs/backpack-market-preparation-optimization-2026-10-15.md) reuses previous passes and reports the two MCP successes separately from the HTML timeout.
+
+[HTML-only timeout follow-up](../../docs/backpack-web-timeout-optimization-2026-10-15.md)
+records normal native completion at 286.780 seconds with unchanged model/effort.
+Simulated interaction checks pass; actual browser verification remains unavailable
+and the native usage report needed a separate evaluator correction. It does not
+reclassify that run as a fully autonomous strict success or claim a native-token
+reduction against the unmetered baseline.

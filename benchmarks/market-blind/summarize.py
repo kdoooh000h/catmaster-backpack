@@ -40,6 +40,43 @@ def interval_seconds(spans):
         end=max(end if end is not None else stop,stop)
     return round(total,3)
 
+def session_usage(case, events):
+    """Recover observed cumulative usage, never an estimate of an unfinished request.
+
+    Only the single recorded native thread is read. Repeated token_count events
+    report cumulative totals, so neither those nor reasoning/cache subsets add
+    another charge to the total. Raw session text stays in the private home.
+    """
+    threads={e.get('thread_id') for e in events if e.get('type')=='thread.started'}-{None}
+    if len(threads)!=1:return None
+    thread=next(iter(threads))
+    # Thread IDs are filenames supplied by the native runtime, not glob patterns.
+    paths=[p for p in (case/'home/.codex/sessions').rglob('rollout-*.jsonl') if p.stem.endswith('-'+thread)]
+    if len(paths)!=1:return None
+    updates=[];previous=None
+    for event in lines(paths[0]):
+        body=event.get('payload',{})
+        if event.get('type')!='event_msg' or body.get('type')!='token_count':continue
+        info=body.get('info') or {};total=info.get('total_token_usage') or {}
+        if not all(type(total.get(k)) is int and total[k]>=0 for k in ('input_tokens','output_tokens')):continue
+        identity=(total['input_tokens'],total['output_tokens'])
+        if identity==previous:continue
+        if previous and any(a<b for a,b in zip(identity,previous)):return None
+        previous=identity
+        # Include only token counters, not unrelated session/response metadata.
+        fields=('input_tokens','cached_input_tokens','output_tokens','reasoning_output_tokens')
+        updates.append({'at':event.get('timestamp'),
+            'cumulative':{k:total[k] for k in fields if type(total.get(k)) is int},
+            'last_request':{k:v for k,v in (info.get('last_token_usage') or {}).items()
+                            if k in fields and type(v) is int}})
+    if not updates:return None
+    total=updates[-1]['cumulative'];cached=total.get('cached_input_tokens')
+    return {**total,'known_total_tokens':total['input_tokens']+total['output_tokens'],
+        'noncached_input_tokens':total['input_tokens']-cached
+            if type(cached) is int and 0<=cached<=total['input_tokens'] else None,
+        'observed_usage_updates':len(updates),'updates':updates,
+        'coverage':'Observed usage events only; an interrupted in-flight request may be missing.'}
+
 def case_summary(case, baseline):
     run=json.loads((case/'run.json').read_text()) if (case/'run.json').exists() else {'status':'not_started'}
     events=lines(case/'events.jsonl')
@@ -56,6 +93,7 @@ def case_summary(case, baseline):
     native['noncached_input_tokens']=(native['input_tokens']-native['cached_input_tokens']
                                       if native['cache_accounting_complete'] else None)
     native['cache_write_input_tokens']=sum(x.get('usage',{}).get('cache_write_input_tokens',0) for x in complete)
+    observed=session_usage(case,events)
     jev=lines(case/'jev.jsonl')
     routing=usage([x.get('usage') for x in jev if x.get('event')=='finished'],sum(x.get('event')=='started' for x in jev))
     requests={}; calls=[]; spans=[]
@@ -90,9 +128,10 @@ def case_summary(case, baseline):
             'jev_elapsed_seconds':round(sum(x.get('elapsed_seconds',0) for x in jev if x.get('event')=='finished'),3),
             'host_operations':{kind:sum(e.get('type')=='item.completed' and e.get('item',{}).get('type')==kind for e in events)
                                for kind in ('mcp_tool_call','command_execution','file_change')},
-            'native_turn_completed':len(complete),'native_usage':native,'jev_usage':routing,
+            'native_turn_completed':len(complete),'native_usage':native,'native_session_usage':observed,'jev_usage':routing,
             'native_transport_error_events':transport_errors,
-            'backpack_calls':calls,'known_total_tokens':native['known_total_tokens']+routing['known_total_tokens'],
+            'backpack_calls':calls,'known_total_tokens':max(native['known_total_tokens'],
+                observed['known_total_tokens'] if observed else 0)+routing['known_total_tokens'],
             'token_coverage_complete':native['complete'] and routing['complete'] and bool(complete) and not transport_errors,
             'final_exists':(case/'final.txt').exists(),
             'output_files':sorted(str(x.relative_to(case/'work')) for x in (case/'work').rglob('*') if x.is_file()),

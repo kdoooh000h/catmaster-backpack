@@ -12,6 +12,39 @@ SPEC.loader.exec_module(module)
 
 
 class TelemetryTests(unittest.TestCase):
+    def test_timeout_recovers_observed_usage_without_claiming_full_coverage(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case=Path(temp);(case/'work').mkdir()
+            (case/'events.jsonl').write_text(json.dumps({'type':'thread.started','thread_id':'test-thread'})+'\n'+
+                json.dumps({'type':'turn.started'})+'\n')
+            sessions=case/'home/.codex/sessions';sessions.mkdir(parents=True)
+            totals={'input_tokens':100,'cached_input_tokens':80,'output_tokens':10,'reasoning_output_tokens':4}
+            row={'timestamp':'2026-10-15T00:00:00Z','type':'event_msg',
+                 'payload':{'type':'token_count','info':{'total_token_usage':totals,'last_token_usage':totals}}}
+            # Repeated usage notifications must not double count the cumulative total.
+            (sessions/'rollout-test-thread.jsonl').write_text((json.dumps(row)+'\n')*2)
+            result=module.case_summary(case,set())
+            self.assertEqual(result['known_total_tokens'],110)
+            self.assertFalse(result['token_coverage_complete'])
+            observed=result['native_session_usage']
+            self.assertEqual(observed['observed_usage_updates'],1)
+            self.assertEqual(observed['noncached_input_tokens'],20)
+            self.assertEqual(observed['reasoning_output_tokens'],4)
+
+    def test_completed_turn_and_session_usage_are_not_added(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case=Path(temp);(case/'work').mkdir()
+            totals={'input_tokens':100,'cached_input_tokens':80,'output_tokens':10}
+            rows=[{'type':'thread.started','thread_id':'test-thread'},{'type':'turn.started'},
+                  {'type':'turn.completed','usage':totals}]
+            (case/'events.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
+            sessions=case/'home/.codex/sessions';sessions.mkdir(parents=True)
+            row={'type':'event_msg','payload':{'type':'token_count','info':{'total_token_usage':totals}}}
+            (sessions/'rollout-test-thread.jsonl').write_text(json.dumps(row)+'\n')
+            result=module.case_summary(case,set())
+            self.assertEqual(result['known_total_tokens'],110)
+            self.assertTrue(result['token_coverage_complete'])
+
     def test_missing_usage_keeps_known_subtotal_and_marks_incomplete(self):
         result = module.usage([{'input_tokens': 20, 'output_tokens': 3}, None], 2)
         self.assertEqual(result['known_total_tokens'], 23)

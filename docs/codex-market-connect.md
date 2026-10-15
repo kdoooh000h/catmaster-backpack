@@ -300,3 +300,20 @@ an external Skill source registration or expose files from another package.
 包内组件复用完整排序，先轮流检查候选包的首选组件，再回查其余组件；完整证据与最终至少 0.7 门槛保留。单组件证据超限不再放弃同包兄弟，未覆盖的候选不能当作不适用。Registry 匿名读取每页最多 45 秒，共用 90 秒分页预算，取消短超时自动重发，仍不使用不完整结果。
 
 实测仅证明一条准备预检减少消耗、两个原失败 MCP 题完成；网页原生结束仍超时。见[同题续测与完整计账](backpack-market-preparation-optimization-2026-10-15.md)。
+
+## Applying guidance within the requested task
+
+Skill and resource disclosure now carry the same application scope in their
+tool descriptions and selected results. The Agent reads the full guidance and
+adapts its method to the user's deliverable. Generic feature lists, layouts and
+example outputs do not expand the task; prerequisites and safety/correctness
+checks still apply. Once the required artifact and checks are complete, the
+Agent reports use and finishes. Entry text, templates, selection thresholds,
+package integrity checks and grants remain unchanged.
+
+Oversized usage summaries return an explicit rejection before writing, with the
+existing 500-character limit and instructions to correct only that report using
+the same run. Reports are never silently truncated. The
+[HTML-only follow-up](backpack-web-timeout-optimization-2026-10-15.md) completed
+within 286.780 seconds; simulated checks and actual browser verification remain
+separate, and its report correction was performed by the evaluator after the run.
