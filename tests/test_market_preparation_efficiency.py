@@ -84,6 +84,18 @@ class PreparationEfficiencyTests(TestCase):
             self.assertTrue(market.portable_guidance_fit(plan))
             self.assertEqual([s['name'] for s in plan['skills']], ['useful'])
 
+    def test_uncertain_fit_is_not_reported_as_known_runtime_incompatibility(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'SKILL.md').write_text('Portable local guidance.')
+            market=object.__new__(Market)
+            market.runtime=SimpleNamespace(_read_skill=lambda _:SimpleNamespace(description='local'))
+            market.gateway=SimpleNamespace(public_access=SimpleNamespace(safe=lambda p:p))
+            market.choose=lambda need, rows, kind: ((rows[0],{'status':'selected'})
+                if kind=='plugin-skill-preview' else (None,{'status':'uncertain','confidence':.62}))
+            plan={'name':'sample','need':'ordinary need','skills':[{'name':'guide','path':str(root)}],'routing':[]}
+            self.assertFalse(market.portable_guidance_fit(plan))
+            self.assertEqual(market.guidance_failure(plan),'portable_guidance_fit_uncertain')
+
     def test_event_recorder_preserves_original_events_and_separates_timings(self):
         import importlib.util, io, json
         location=Path(__file__).resolve().parents[1]/'benchmarks/market-blind/run.py'
@@ -149,6 +161,46 @@ class PreparationEfficiencyTests(TestCase):
         actual=market_protocol.dispatch(gateway,connection,reader,None,'report_skill_use',args)
         self.assertEqual(actual['status'],'recorded')
         self.assertEqual(reader.report.call_args.args[0]['summary'],args['summary'])
+
+    def test_connect_can_return_full_bound_guidance_and_resource(self):
+        import market_protocol
+        connection={'_descriptor':'descriptor','data_root':'store','project_root':'project'}
+        context={'need':'ordinary need','keys':['a']}
+        guide={'status':'selected','selection':'signed','content':'Complete Skill'}
+        resource={'status':'selected','resources':[{'content':'Complete template'}]}
+        reader=Mock();reader.request.side_effect=[guide,resource]
+        gateway=SimpleNamespace(load_connection=lambda _: {'enabled':True},Router=lambda *a,**kw:reader)
+        market=Mock();market.connect.return_value={'status':'connected','market_selection':'prepared','components':{'skills':1}}
+        market.bound_skill_context.return_value=context
+        actual=market_protocol.dispatch(gateway,connection,reader,market,'connect_market_capability',
+                                        {'selection':'prepared','include_guidance':True})
+        self.assertEqual(actual['guidance']['content'],'Complete Skill')
+        self.assertEqual(actual['resource']['resources'],resource['resources'])
+        self.assertEqual(reader.request.call_args_list[1].args[1],
+                         {'selection':'signed','need':'ordinary need','project_root':'project'})
+        market.connect.assert_called_once_with('prepared')
+        reader.report.assert_not_called()
+
+    def test_failed_disclosure_preserves_successful_setup_without_retry(self):
+        import market_protocol
+        connection={'_descriptor':'descriptor','data_root':'store','project_root':None}
+        gateway=SimpleNamespace(load_connection=lambda _: {'enabled':True})
+        market=Mock();market.connect.return_value={'status':'connected','components':{'skills':1},'market_selection':'pinned'}
+        market.bound_skill_context.side_effect=ValueError('market_package_changed')
+        actual=market_protocol.dispatch(gateway,connection,None,market,'connect_market_capability',
+                                        {'selection':'pinned','include_guidance':True})
+        self.assertEqual(actual['status'],'connected')
+        self.assertEqual(actual['guidance']['reason'],'market_package_changed')
+        market.connect.assert_called_once()
+        market.bound_skill_context.assert_called_once()
+
+    def test_invalid_bundle_flag_never_starts_setup(self):
+        import market_protocol
+        gateway=SimpleNamespace(load_connection=lambda _: {'enabled':True});market=Mock()
+        with self.assertRaisesRegex(ValueError,'invalid_arguments'):
+            market_protocol.dispatch(gateway,{'_descriptor':'d'},None,market,'connect_market_capability',
+                                     {'selection':'pinned','include_guidance':'yes'})
+        market.connect.assert_not_called()
 
 
 if __name__ == '__main__': main()

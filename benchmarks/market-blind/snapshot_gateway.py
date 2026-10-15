@@ -47,6 +47,7 @@ def main():
     for name in ('adapter-root', 'runtime-root', 'connection', 'inventory', 'inventory-sha256', 'corpus'):
         parser.add_argument('--' + name, required=True)
     parser.add_argument('--family', choices=['skill', 'plugin', 'mcp'], required=True)
+    parser.add_argument('--browser-review-dir', help='Private host browser review queue for an HTML-only run')
     args = parser.parse_args()
     inventory = Inventory(args.inventory, args.inventory_sha256, args.connection)
     corpus = Path(args.corpus)
@@ -85,6 +86,9 @@ def main():
             return super()._choose(need, candidates, purpose)
 
     gateway.Router = NovelRouter
+    if args.browser_review_dir:
+        import browser_review
+        browser_review.install(market_protocol,connection,args.browser_review_dir)
     return market_protocol.serve(gateway, connection)
 
 

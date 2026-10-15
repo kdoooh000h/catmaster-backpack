@@ -500,6 +500,7 @@ class Market:
             plan['skills'], plan['servers'] = [], []
             plan.pop('_guidance_state', None)
             plan.pop('guidance_limits', None)
+            plan.pop('guidance_uncertain', None)
             plan.pop('uninspected_skill_count', None)
             plan.pop('unavailable_components', None)
             plan.pop('archive_requirements', None)
@@ -553,7 +554,7 @@ class Market:
             return {**terminal, 'unavailable_candidates': rejected, 'execution': 'not_performed'}
         return {'status': 'setup_required', 'unavailable_candidates': rejected,
                 'deferred_components': sum(len(p['_guidance_state']['rows']) for p in deferred),
-                'instruction': 'Inspected candidates need unsupported components or configuration. No grants or business calls were made. Remaining candidates were not exhausted.',
+                'instruction': 'Inspection did not establish usable guidance; see per-candidate uncertainty, evidence limits or missing requirements. No grants or business calls were made. Remaining candidates were not exhausted.',
                 'execution': 'not_performed'}
 
     @staticmethod
@@ -562,6 +563,8 @@ class Market:
             return 'portable_guidance_budget_exhausted'
         if plan.get('guidance_limits'):
             return 'portable_guidance_evidence_limit'
+        if plan.get('guidance_uncertain'):
+            return 'portable_guidance_fit_uncertain'
         return 'portable_guidance_does_not_fit_available_runtime'
 
     def portable_guidance_fit(self, plan, *, max_inspections=None):
@@ -626,6 +629,8 @@ class Market:
                 continue
             usable, fit = self.choose(plan['need'], [{'description': evidence}], kind='plugin-ready')
             plan['routing'].append(fit)
+            if fit.get('status') == 'uncertain':
+                plan['guidance_uncertain'] = True
             if usable is not None:
                 # One independent component does not establish portability of
                 # its siblings. Grant only the inspected component; another

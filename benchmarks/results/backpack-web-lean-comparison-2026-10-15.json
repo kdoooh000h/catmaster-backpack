@@ -1,0 +1,180 @@
+{
+  "schema": "backpack-web-lean-comparison-v1",
+  "date": "2026-10-15",
+  "task": "Original spring-mass single-file HTML prompt only. No other passed task replayed.",
+  "model": "gpt-6-astra",
+  "reasoning": "xhigh",
+  "threshold": 0.7,
+  "source_corpus": "Same frozen complete public metadata, same initial 70 annotations. Existing installed capabilities excluded.",
+  "baseline": {
+    "native_seconds": 286.78,
+    "native_tokens": 200031,
+    "native_input_tokens": 191066,
+    "native_output_tokens": 8965,
+    "cached_input_tokens": 163456,
+    "noncached_input_tokens": 27610,
+    "native_usage_updates": 10,
+    "jev_tokens": 46502,
+    "jev_calls": 10,
+    "known_total_tokens": 246533,
+    "backpack_calls": 6,
+    "host_operations": {
+      "mcp_tool_call": 6,
+      "command_execution": 5,
+      "file_change": 2
+    },
+    "html_bytes": 12238,
+    "browser": "not_verified",
+    "automatic_usage_report": false
+  },
+  "final": {
+    "native_seconds": 144.6,
+    "native_tokens": 123182,
+    "native_input_tokens": 119918,
+    "native_output_tokens": 3264,
+    "cached_input_tokens": 103680,
+    "noncached_input_tokens": 16238,
+    "native_usage_updates": 7,
+    "jev_tokens": 46414,
+    "jev_calls": 10,
+    "known_total_tokens": 169596,
+    "backpack_calls": 4,
+    "host_operations": {
+      "mcp_tool_call": 4,
+      "command_execution": 0,
+      "file_change": 1
+    },
+    "html_bytes": 6136,
+    "browser": "real_host_browser_passed",
+    "automatic_usage_report": true,
+    "uninterrupted": true,
+    "capability_preexisting": false,
+    "selected": "playground"
+  },
+  "reductions_percent": {
+    "native_seconds": 49.58,
+    "native_tokens": 38.42,
+    "noncached_input_tokens": 41.19,
+    "known_total_tokens": 31.21
+  },
+  "browser_receipt": {
+    "status": "passed",
+    "executor": "root_cua",
+    "checks": {
+      "formula": true,
+      "sliders": true,
+      "reset": true,
+      "clipboard": true
+    },
+    "observations": {
+      "initial": {
+        "k": 20,
+        "m": 1,
+        "display_T": 1.405
+      },
+      "after_real_k_drag": {
+        "k": 80,
+        "m": 1,
+        "display_T": 0.7025,
+        "json_T": 0.7024814731040726
+      },
+      "after_real_m_drag": {
+        "k": 80,
+        "m": 4,
+        "display_T": 1.405
+      },
+      "copied_json": {
+        "k": 80,
+        "m": 4,
+        "T": 1.4049629462081452,
+        "units": {
+          "k": "N/m",
+          "m": "kg",
+          "T": "s"
+        }
+      },
+      "reset": {
+        "k": 20,
+        "m": 1,
+        "T": 1.4049629462081452
+      },
+      "console_errors_or_warnings": [],
+      "artifact_unchanged": true,
+      "clipboard_restored": true,
+      "external_resource_references": false
+    },
+    "limitations": [
+      "Actual Codex in-app browser on localhost, external network blocked by preview CSP; file:// scheme not exercised.",
+      "Host root controller executed UI actions; controller model token cost is unobservable and excluded from native/Jev usage."
+    ],
+    "elapsed_seconds": 16.345
+  },
+  "earlier_current_iteration_attempts": [
+    {
+      "name": "generated_chinese_need",
+      "outcome": "Preparation abstained: plugin-ready .62 below .7; no artifact or business use.",
+      "native_seconds": 57.977,
+      "native_tokens": 55896,
+      "native_input_tokens": 55408,
+      "native_output_tokens": 488,
+      "cached_input_tokens": 47104,
+      "noncached_input_tokens": 8304,
+      "native_usage_updates": 4,
+      "jev_tokens": 120885,
+      "jev_calls": 24,
+      "known_total_tokens": 176781,
+      "backpack_calls": 1,
+      "host_operations": {
+        "mcp_tool_call": 1,
+        "command_execution": 0,
+        "file_change": 0
+      }
+    },
+    {
+      "name": "fixed_baseline_need_before_path_and_wait_fix",
+      "outcome": "Browser path rejected before operation; native failure report recorded. Same-session continuation checked unchanged artifact and reported completion; five short/intermediate polling calls increased tokens.",
+      "native_seconds": 257.879,
+      "native_tokens": 323076,
+      "native_input_tokens": 318062,
+      "native_output_tokens": 5014,
+      "cached_input_tokens": 302080,
+      "noncached_input_tokens": 15982,
+      "native_usage_updates": 16,
+      "jev_tokens": 46348,
+      "jev_calls": 10,
+      "known_total_tokens": 369424,
+      "backpack_calls": 6,
+      "host_operations": {
+        "mcp_tool_call": 6,
+        "command_execution": 1,
+        "file_change": 1
+      },
+      "wall_seconds_with_intervention": 366.014,
+      "first_turn_native_tokens": 145911,
+      "continuation_native_tokens": 177165
+    }
+  ],
+  "diagnostics": {
+    "calls": 4,
+    "known_tokens": 5964,
+    "scope": "Saved same need/guide fit only plus one synthetic missing-runtime control. Experimental question changes did not help and were reverted. Exact Chinese user prompt scored .68; generated Chinese need .62; prior English representation .72. No threshold reduction."
+  },
+  "current_iteration_known_total_tokens": 721765,
+  "scope_limits": [
+    "One task per implementation version, not a statistical accuracy estimate or pure single-factor A/B.",
+    "Final runs keep original Chinese user prompt and freeze baseline secret-free English discovery need and generic search; no capability/provider names supplied. Chinese paraphrase sensitivity remains unresolved.",
+    "Final browser tool is benchmark host infrastructure, not a newly shipped production browser capability.",
+    "Root browser-controller and orchestration tokens/cost are unobservable; not counted as zero. No dollar-cost claim.",
+    "Real localhost with CSP blocking external network, not file://; source has no external resources.",
+    "Same standalone runtime path was reused, but its dirty shared checkout was not byte-frozen.",
+    "Daily installed release is unchanged."
+  ],
+  "protected_config_files_unchanged": 6,
+  "installed_inventory_unchanged": true,
+  "verification": {
+    "affected_tests_passed": 181,
+    "post_wait_hint_focused_tests_passed": 13,
+    "preview_stopped": true,
+    "browser_tab_closed": true
+  }
+}

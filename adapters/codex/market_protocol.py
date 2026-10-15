@@ -14,7 +14,10 @@ APPLICATION_SCOPE = (
     'layouts and example outputs are defaults to adapt, not extra user requirements, even if the guide '
     'calls them mandatory. Preserve prerequisites and safety/correctness checks. Finish the required '
     'artifact and its checks; after they pass, report Skill use and finish. Add optional features or '
-    'companion documents only when the user requests them or they are necessary for that outcome.'
+    'companion documents only when the user requests them or they are necessary for that outcome. '
+    'For a small interactive page, implement the requested inputs, results and actions directly. '
+    'Do not add animation, charts, presets, panels or explanatory documents unless explicitly requested '
+    'or needed to meet an acceptance criterion. Batch independent local checks instead of building a test framework.'
 )
 
 TOOLS = [
@@ -29,8 +32,9 @@ TOOLS = [
          'required': ['kind', 'need'], 'additionalProperties': False},
      'annotations': {'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': True}},
     {'name': 'connect_market_capability',
-     'description': 'Apply the exact market setup preview within the user-authorized task. Installs the selected plugin package and registers its listed portable components in Backpack with backups; unavailable_components remain unavailable and are never emulated. MCP access is granted only to this connection. Skills use the existing project scope. Does not run business tools, native hooks or log into accounts. Then acquire_skill or acquire_mcp/invoke_mcp uses the capability. Reuse the same receipt to inspect completed setup; never replay an interrupted or unknown setup. Selection itself is not permission.',
-     'inputSchema': {'type': 'object', 'properties': {'selection': {'type': 'string'}},
+     'description': 'Apply the exact market setup preview within the user-authorized task. Installs the selected plugin package and registers its listed portable components in Backpack with backups; unavailable_components remain unavailable and are never emulated. MCP access is granted only to this connection. Skills use the existing project scope. For plugin guidance prefer include_guidance=true: after successful setup, return the complete bound Skill and one Jev-selected resource for the original need in this response, saving separate acquisition calls. Read these fully; do not reacquire returned content. This does not execute the task or report use. MCP uses acquire_mcp/invoke_mcp after connection. Reuse the same receipt to inspect completed setup; never replay an interrupted or unknown setup. Selection itself is not permission.',
+     'inputSchema': {'type': 'object', 'properties': {'selection': {'type': 'string'},
+                     'include_guidance': {'type': 'boolean', 'default': False}},
                      'required': ['selection'], 'additionalProperties': False},
      'annotations': {'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': True}}
 ]
@@ -51,7 +55,14 @@ def tool_catalog(gateway):
         if row['name'] == 'acquire_mcp':
             row['description'] += ' MCP services must be registered in Backpack before use: local services need dependencies installed in Backpack; remote services need a configured connection. Registration is not proof of a successful tool call.'
             row['description'] += ' If no connected capability fits and a public market capability may help the authorized task, use prepare_market_capability, then connect its reviewed setup preview and acquire again. A routing outage does not justify retrying execution.'
-    return [*rows, *TOOLS]
+        if row['name'] == 'report_skill_use':
+            row['description'] += ' Submit this automatically after the authorized work and checks; do not ask the user to report it. Keep the summary to one short sentence, preferably under 200 characters, stating the checked outcome and actual limitations without recounting setup.'
+    # Waiting is not another capability decision. Short polling repeats the
+    # entire model context while a package/provider request is still running.
+    market_tools = [dict(row) for row in TOOLS]
+    for row in market_tools:
+        row['description'] += ' Await this operation. If an asynchronous host wrapper yields a running cell, wait 30–60 seconds per poll instead of repeatedly checking after 1 second; do not issue a duplicate operation.'
+    return [*rows, *market_tools]
 
 
 def dispatch(gateway, connection, reader, market, name, arguments):
@@ -62,9 +73,29 @@ def dispatch(gateway, connection, reader, market, name, arguments):
     if name == 'prepare_market_capability':
         result = market.prepare(arguments)
     elif name == 'connect_market_capability':
-        if set(arguments) != {'selection'}:
+        if (set(arguments) - {'selection', 'include_guidance'} or 'selection' not in arguments
+                or not isinstance(arguments['selection'], str)
+                or 'include_guidance' in arguments and type(arguments['include_guidance']) is not bool):
             raise ValueError('invalid_arguments')
         result = market.connect(arguments['selection'])
+        if (arguments.get('include_guidance') and result.get('status') == 'connected'
+                and result.get('components', {}).get('skills', 0)):
+            # Setup has committed. Preserve that fact even if a later read fails;
+            # callers must never repeat an installation to recover disclosure.
+            stage = 'guidance'
+            try:
+                context = market.bound_skill_context(arguments['selection'])
+                result['guidance'] = dispatch(gateway, connection, reader, market, 'acquire_skill',
+                    {'market_selection': arguments['selection']})
+                if result['guidance'].get('status') == 'selected':
+                    stage = 'resource'
+                    result['resource'] = dispatch(gateway, connection, reader, market, 'acquire_resource',
+                        {'selection': result['guidance']['selection'], 'need': context['need']})
+                result['instruction'] = ('Setup is saved. Read the returned guidance and selected resource fully, then perform only the original task and its checks. Reuse returned content. If another reference is genuinely needed, acquire_resource uses the guidance selection. Report actual use with that selection and a short factual summary; acquisition is not execution.')
+            except (OSError, ValueError, TypeError, RuntimeError, KeyError) as error:
+                result[stage] = {'status': 'unavailable_or_changed', 'execution': 'not_performed',
+                    'reason': str(error) if re.fullmatch('[a-z][a-z0-9_]{1,80}', str(error)) else type(error).__name__}
+                result['instruction'] = 'Setup is saved; disclosure did not finish. Inspect this receipt and the failed read. Do not repeat setup or execute without the required guidance.'
     elif name in {'acquire_mcp', 'invoke_mcp'}:
         if set(arguments) != ({'need'} if name == 'acquire_mcp' else {'selection', 'arguments'}):
             raise ValueError('invalid_arguments')
