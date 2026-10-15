@@ -62,16 +62,19 @@ class MarketGatewayTests(unittest.TestCase):
         self.assertEqual(answer["status"], "uncertain")
 
     def test_final_stage_is_strict_and_retains_provider_environment(self):
-        self.router._choose("review React", [self.candidate()])
-        config = self.route.call_args.kwargs["config"]
+        with patch("market_routing.route", return_value={"status": "none"}) as select:
+            self.router._choose("review React", [self.candidate()])
+        config = select.call_args.args[3]
         self.assertEqual(config["minimum_confidence"], 0.7)
         self.assertEqual(config["provider_environment"], {"XDG_CONFIG_HOME": "/provider"})
+        self.assertEqual(select.call_args.args[4], "skill")
 
     def test_stricter_existing_threshold_is_preserved(self):
         (self.data / "config.json").touch()
         self.config["minimum_confidence"] = 0.9
-        self.router._choose("review React", [self.candidate()])
-        self.assertEqual(self.route.call_args.kwargs["config"]["minimum_confidence"], 0.9)
+        with patch("market_routing.route", return_value={"status": "none"}) as select:
+            self.router._choose("review React", [self.candidate()])
+        self.assertEqual(select.call_args.args[3]["minimum_confidence"], 0.9)
 
     def test_disabled_source_adds_no_description(self):
         self.rows["abc"]["enabled"] = False
@@ -81,6 +84,60 @@ class MarketGatewayTests(unittest.TestCase):
         for purpose in ("mcp-server", "mcp-tool", "resource"):
             self.assertEqual(self.router._choose("need", [self.candidate()], purpose), {"delegated": purpose})
         self.route.assert_not_called()
+
+    def test_ambiguous_public_examples_require_actual_content_fit(self):
+        resource=self.data/'public-cache/key/skill/themes/example.md';resource.parent.mkdir(parents=True)
+        resource.write_text('Colors: #E2AC31, #171717, #FFF3D0. Use a readable body font.')
+        self.module.public_access.safe=lambda path:path
+        candidate=self.module.runtime.Skill('themes/example.md','Theme example',resource)
+        with patch('market_routing.route',side_effect=[
+            {'status':'selected','skill':candidate.name,'confidence':.33},
+            {'status':'selected','skill':candidate.name,'confidence':.95}]) as select:
+            result=self.router._choose('prepare several distinct themes',[candidate],purpose='resource')
+        self.assertEqual(result['confidence'],.95)
+        self.assertEqual(select.call_args_list[0].args[3]['minimum_confidence'],.1)
+        self.assertEqual(select.call_args_list[1].args[3]['minimum_confidence'],.7)
+        self.assertIn('#E2AC31',select.call_args_list[1].args[2][0].description)
+
+    def test_evidence_refinement_never_truncates_a_large_shortlist(self):
+        self.assertEqual(gateway.public_skill_evidence(self.router,self.module,[],list('abcdefghi')),[])
+
+    def test_binary_resource_uses_bounded_extracted_text_and_containing_guide(self):
+        resource=self.data/'public-cache/key/skill/showcase.pdf';resource.parent.mkdir(parents=True)
+        resource.write_bytes(b'%PDF-1.7\x80')
+        (resource.parent/'SKILL.md').write_text('Show showcase.pdf for theme examples.')
+        self.module.public_access.safe=lambda path:path
+        candidate=self.module.runtime.Skill('showcase.pdf','Theme showcase',resource)
+        def extract(argv, **kwargs):
+            self.assertEqual(argv[1:], [str(resource), '-'])
+            self.assertEqual(kwargs['timeout'],5)
+            kwargs['stdout'].write(b'Autumn theme: warm amber and dark brown.')
+            return SimpleNamespace(returncode=0)
+        with patch('market_routing.route',side_effect=[
+            {'status':'selected','skill':candidate.name,'confidence':.4},
+            {'status':'selected','skill':candidate.name,'confidence':.9}]) as select, \
+                patch.object(gateway.shutil,'which',return_value='/local/pdftotext'), \
+                patch.object(gateway.subprocess,'run',side_effect=extract):
+            self.router._choose('Get the local showcase path',[candidate],purpose='resource')
+        evidence=select.call_args.args[2][0].description
+        self.assertIn('Autumn theme',evidence)
+        self.assertIn('Show showcase.pdf',evidence)
+        self.assertIn('Verified local file',evidence)
+        self.assertEqual(resource.read_bytes(),b'%PDF-1.7\x80')
+
+    def test_binary_extractor_failure_does_not_invent_resource_content(self):
+        resource=self.data/'public-cache/key/skill/showcase.pdf';resource.parent.mkdir(parents=True)
+        resource.write_bytes(b'%PDF-1.7\x80')
+        self.module.public_access.safe=lambda path:path
+        candidate=self.module.runtime.Skill('showcase.pdf','Theme showcase',resource)
+        with patch('market_routing.route',side_effect=[
+            {'status':'selected','skill':candidate.name,'confidence':.4},
+            {'status':'uncertain','skill':None,'confidence':.4}]) as select, \
+                patch.object(gateway.shutil,'which',return_value='/local/pdftotext'), \
+                patch.object(gateway.subprocess,'run',side_effect=gateway.subprocess.TimeoutExpired('pdftotext',5)):
+            result=self.router._choose('Find a theme palette',[candidate],purpose='resource')
+        self.assertEqual(result['status'],'uncertain')
+        self.assertNotIn('extracted_pdf_text',select.call_args.args[2][0].description)
 
     def test_receipt_and_access_errors_are_not_bypassed(self):
         with self.assertRaisesRegex(ValueError, "access_revoked"):

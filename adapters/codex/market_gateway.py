@@ -10,10 +10,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.util
+import json
 import math
+import os
 from pathlib import Path
 import shutil
 import sys
+import subprocess
+import tempfile
 
 POLICY = "market-lifecycle-v3"
 
@@ -41,9 +45,12 @@ def source_directory_descriptions(module, data):
 def make_router(base, module):
     class MarketRouter(base):
         def _choose(self, need, candidates, purpose="skill"):
-            if purpose != "skill" or not candidates:
+            if purpose not in {"skill", "resource"} or not candidates:
                 return super()._choose(need, candidates, purpose=purpose)
-            directory = all(row.name.startswith("group-") for row in candidates)
+            if purpose == 'resource' and any(not row.path.is_absolute() or not row.path.is_relative_to(
+                    Path(self.data)/'public-cache') for row in candidates):
+                return super()._choose(need, candidates, purpose=purpose)
+            directory = purpose == 'skill' and all(row.name.startswith("group-") for row in candidates)
             if directory:
                 descriptions = source_directory_descriptions(module, self.data)
                 candidates = [module.runtime.Skill(
@@ -70,11 +77,23 @@ def make_router(base, module):
             environment = module.backpack_provider_environment.load(self.data)
             if environment is not None:
                 config["provider_environment"] = environment
-            if directory:
-                from market_routing import route
-                decision = route(module.runtime, need, candidates, config, "directory")
-            else:
-                decision = module.runtime._route(need, candidates, purpose=purpose, config=config)
+            from market_routing import route
+            if purpose == 'resource':
+                return public_resource_choice(self, module, need, candidates, config)
+            decision = route(module.runtime, need, candidates, config, "directory" if directory else "skill")
+            plausible = decision.pop('plausible', [])
+            decision.pop('inspect_alternatives', None)
+            if not directory and decision.get('status') == 'uncertain' and plausible:
+                enriched = public_skill_evidence(self, module, candidates, plausible)
+                if enriched:
+                    ranking = route(module.runtime, need, enriched, {**config, 'minimum_confidence': .1}, 'skill-evidence')
+                    if ranking.get('status') == 'selected':
+                        chosen = next(c for c in enriched if c.name == ranking['skill'])
+                        evidence = route(module.runtime, need, [chosen], config, 'skill-fit')
+                    else:
+                        evidence = ranking
+                    decision = {**evidence, 'metadata_decision': decision,
+                                'evidence_rank': {k:v for k,v in ranking.items() if k != 'skill'}}
             return {**decision, "selection_stage": "directory" if directory else "skill",
                     "minimum_confidence": minimum}
 
@@ -92,6 +111,96 @@ def make_router(base, module):
     return MarketRouter
 
 
+def public_resource_choice(reader, module, need, candidates, config):
+    from market_routing import route
+    minimum = float(config.get('directory_minimum_confidence', .1))
+    if not math.isfinite(minimum) or not 0 <= minimum <= 1:
+        raise ValueError('invalid_minimum_confidence')
+    ranked = route(module.runtime, need, candidates, {**config, 'minimum_confidence': minimum}, 'resource-discovery')
+    if ranked.get('status') != 'selected':
+        return ranked
+    candidate = next(row for row in candidates if row.name == ranked['skill'])
+    path = module.public_access.safe(candidate.path)
+    evidence = {'path': candidate.name, 'bytes': path.stat().st_size,
+                'availability': 'Verified local file in the selected pinned package; '
+                                'resource acquisition returns its scoped work-copy path.'}
+    if evidence['bytes'] <= 24000:
+        try:
+            evidence['content'] = path.read_text()
+        except UnicodeError:
+            evidence['encoding'] = 'binary'
+    # Binary assets are often explicitly explained by their selected guide.
+    # Preserve that provenance instead of judging an opaque filename alone.
+    if 'content' not in evidence:
+        extractor = shutil.which('pdftotext') if path.suffix.lower() == '.pdf' else None
+        if extractor:
+            try:
+                with tempfile.TemporaryFile() as output:
+                    process = subprocess.run([extractor, str(path), '-'], stdout=output, stderr=subprocess.DEVNULL,
+                        timeout=5, env={'PATH':os.environ.get('PATH',os.defpath),'LANG':'C.UTF-8',
+                                        'HOME':str(Path(reader.data)/'resource-runtime-home')})
+                    output.seek(0); text = output.read(24001)
+                if process.returncode == 0 and len(text) <= 24000:
+                    evidence['extracted_pdf_text'] = text.decode('utf-8')
+            except (OSError,UnicodeError,subprocess.TimeoutExpired):
+                pass
+        for parent in path.parents:
+            if not parent.is_relative_to(Path(reader.data)/'public-cache'):
+                break
+            entry = parent/'SKILL.md'
+            if entry.is_file():
+                module.public_access.safe(entry)
+                if entry.stat().st_size <= 24000:
+                    evidence['containing_guide'] = entry.read_text()
+                break
+    row = module.runtime.Skill(candidate.name, json.dumps(evidence, ensure_ascii=False), candidate.path)
+    result = route(module.runtime, need, [row], config, 'resource-fit')
+    return {**result, 'minimum_confidence': config['minimum_confidence'],
+            'metadata_decision': {k: v for k, v in ranked.items() if k != 'skill'}}
+
+
+def public_skill_evidence(reader, module, candidates, plausible):
+    """One bounded evidence refinement, only for approved public candidates.
+
+    Keep all nonzero model alternatives or stop; never take a truncated top-k.
+    Full pinned entrypoints stay inside Backpack until the final selection.
+    """
+    if not 1 <= len(plausible) <= 8 or len(set(plausible)) != len(plausible):
+        return []
+    selected = [c for c in candidates if c.name in plausible]
+    if len(selected) != len(plausible):
+        return []
+    external_names = {c.name for c in selected if c.name.startswith('external-')}
+    lookup = {}
+    for source, row in module.external_skills.registry(reader.data)['sources'].items():
+        if not module.external_skills.eligible(row, reader.access.scope, reader.access.scope):
+            continue
+        for skill in row['skills']:
+            key = 'external-' + hashlib.sha256(json.dumps([source, row['revision'], skill['path']]).encode()).hexdigest()[:48]
+            if key in plausible:
+                lookup[key] = source, row, skill
+    if set(lookup) != external_names:
+        return []
+    result = []; total = 0
+    for candidate in selected:
+        if candidate.name in external_names:
+            key = module.external_skills.cache(reader.data, *lookup[candidate.name], module.runtime)
+            _, root = reader._item(key, reader.access.scope)
+        else:
+            item, root = reader._item(candidate.name, reader.access.scope)
+            if item.get('provenance', {}).get('kind') != 'plugin':
+                return []
+        content = (root/'SKILL.md').read_text()
+        paths = [p.relative_to(root).as_posix() for p in sorted(root.rglob('*')) if p.is_file()
+                 and p.name not in {'SKILL.md', '.backpack-source.json'} and 'upstream-notices' not in p.parts]
+        total += len(content)
+        if total > 96000 or len(paths) > 128:
+            return []
+        description = json.dumps({'metadata': candidate.description, 'entrypoint': content, 'resources': paths}, ensure_ascii=False)
+        result.append(module.runtime.Skill(candidate.name, description, candidate.path))
+    return result
+
+
 def load_gateway(root):
     root = Path(root).expanduser().resolve(strict=True)
     entry = root / "scripts/backpack_public_mcp.py"
@@ -106,6 +215,9 @@ def load_gateway(root):
     spec.loader.exec_module(gateway)
     router_module = sys.modules[gateway.Router.__module__]
     gateway.Router = make_router(gateway.Router, router_module)
+    from market_mcp_runtime import ensure_service
+    if hasattr(gateway, 'mcp_backpack'):
+        gateway.mcp_backpack.ensure_service = lambda data: ensure_service(gateway, data, root)
     return gateway
 
 

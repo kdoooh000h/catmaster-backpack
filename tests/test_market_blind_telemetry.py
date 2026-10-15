@@ -22,6 +22,22 @@ class TelemetryTests(unittest.TestCase):
         result = module.usage([{'input_tokens': 20, 'cached_input_tokens': 15, 'output_tokens': 3}], 1)
         self.assertEqual(result['known_total_tokens'], 23)
 
+    def test_overlapping_waits_are_not_double_counted(self):
+        self.assertEqual(module.interval_seconds([(2,5),(3,7),(9,10)]),6)
+
+    def test_native_cache_is_separate_and_missing_cache_is_unknown(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case=Path(temp);(case/'work').mkdir()
+            rows=[{'type':'turn.started'},{'type':'turn.completed','usage':{
+                'input_tokens':100,'cached_input_tokens':80,'output_tokens':5}}]
+            (case/'events.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
+            value=module.case_summary(case,set())
+            self.assertEqual(value['known_total_tokens'],105)
+            self.assertEqual(value['native_usage']['noncached_input_tokens'],20)
+            del rows[-1]['usage']['cached_input_tokens']
+            (case/'events.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
+            self.assertIsNone(module.case_summary(case,set())['native_usage']['noncached_input_tokens'])
+
     def test_unanswered_gateway_request_is_not_success(self):
         with tempfile.TemporaryDirectory() as temp:
             case = Path(temp); (case/'work').mkdir()

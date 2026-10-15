@@ -32,6 +32,14 @@ def usage(values, expected):
     result['known_total_tokens']=result['input_tokens']+result['output_tokens']
     return result
 
+def interval_seconds(spans):
+    total=0; end=None
+    for start,stop in sorted(spans):
+        if stop < start:continue
+        total+=max(0,stop-max(start,end if end is not None else start))
+        end=max(end if end is not None else stop,stop)
+    return round(total,3)
+
 def case_summary(case, baseline):
     run=json.loads((case/'run.json').read_text()) if (case/'run.json').exists() else {'status':'not_started'}
     events=lines(case/'events.jsonl')
@@ -42,15 +50,22 @@ def case_summary(case, baseline):
     started=sum(x.get('type')=='turn.started' for x in events)
     native=usage([x.get('usage') for x in complete],started)
     native['cached_input_tokens']=sum(x.get('usage',{}).get('cached_input_tokens',0) for x in complete)
+    native['cache_accounting_complete']=bool(complete) and native['complete'] and all(
+        isinstance(x.get('usage',{}).get('cached_input_tokens'),int)
+        and 0 <= x['usage']['cached_input_tokens'] <= x['usage']['input_tokens'] for x in complete)
+    native['noncached_input_tokens']=(native['input_tokens']-native['cached_input_tokens']
+                                      if native['cache_accounting_complete'] else None)
+    native['cache_write_input_tokens']=sum(x.get('usage',{}).get('cache_write_input_tokens',0) for x in complete)
     jev=lines(case/'jev.jsonl')
     routing=usage([x.get('usage') for x in jev if x.get('event')=='finished'],sum(x.get('event')=='started' for x in jev))
-    requests={}; calls=[]
+    requests={}; calls=[]; spans=[]
     for row in lines(case/'backpack-wire.jsonl'):
         msg=row.get('message',{})
         if row.get('direction')=='in' and msg.get('method')=='tools/call':
             requests[msg['id']]=row
         if row.get('direction')!='out' or msg.get('id') not in requests:continue
         request=requests.pop(msg['id']);params=request['message']['params']
+        spans.append((request['at'],row['at']))
         value=payload(msg)
         result={'tool':params['name'],'elapsed_seconds':round(row['at']-request['at'],3),
                 'status':value.get('status'), 'reason':value.get('reason'),
@@ -68,7 +83,13 @@ def case_summary(case, baseline):
         calls.append(result)
     for row in requests.values():
         calls.append({'tool':row['message']['params']['name'],'status':'no_recorded_response','is_error':True})
+    wait=interval_seconds(spans)
     return {'case':case.name, **{k:run.get(k) for k in ('status','returncode','elapsed_seconds')},
+            'backpack_wait_seconds':wait,
+            'other_elapsed_seconds':round(max(0,run['elapsed_seconds']-wait),3) if run.get('elapsed_seconds') is not None else None,
+            'jev_elapsed_seconds':round(sum(x.get('elapsed_seconds',0) for x in jev if x.get('event')=='finished'),3),
+            'host_operations':{kind:sum(e.get('type')=='item.completed' and e.get('item',{}).get('type')==kind for e in events)
+                               for kind in ('mcp_tool_call','command_execution','file_change')},
             'native_turn_completed':len(complete),'native_usage':native,'jev_usage':routing,
             'native_transport_error_events':transport_errors,
             'backpack_calls':calls,'known_total_tokens':native['known_total_tokens']+routing['known_total_tokens'],

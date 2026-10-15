@@ -1,7 +1,7 @@
 # On-demand market components in Codex
 
 The public Backpack gateway now exposes `prepare_market_capability` and
-`connect_market_capability`. Preparation sends public metadata to Jev and creates
+`connect_market_capability`. Preparation sends bounded public metadata and selected component instructions to Jev and creates
 one pinned, owner-only setup preview. Connection applies that receipt within the
 user-authorized task. It does not invoke a business tool or grant account access.
 The Agent need not ask the user again for setup already covered by their request.
@@ -55,8 +55,21 @@ continues to use the previously verified source-directory/Skill policy.
 Native apps, hooks, commands, agents, dependency plugins, settings, channels,
 experimental components, marketplace component overrides, unsupported transports,
 unpinned commands and missing login/configuration remain explicit requirements.
-No partial plugin is reported as connected when these declarations are present.
-This adapter does not emulate host events or implement OAuth.
+A mixed package can expose an independently usable Skill while its hooks,
+commands, agents, LSP and output-style extras remain explicitly unavailable.
+Preparation reads the full selected Skill and its explicitly linked local Markdown
+references before a strict fit decision. Only that validated Skill is granted;
+uninspected siblings are not enabled. The result labels `portable_components`,
+lists `unavailable_components` and records the unvalidated Skill count. Dependency
+plugins, credentials, settings and required app integrations still block setup.
+Root contributor `CLAUDE.md` alone is not a runtime dependency. This adapter does
+not emulate host events, native subagents, commands or OAuth.
+An explicit diagnosis-only request can use applicable diagnosis phases while
+omitting later edits or commits; it cannot omit a mandatory unavailable runtime
+dependency. Archive extraction materializes a direct in-subtree regular-file
+alias as a regular copy. It creates no filesystem symlink and rejects absolute
+or parent paths, link chains, missing targets, directories and expanded-size
+overflow; inherited notices remain present.
 
 ## State and recovery
 
@@ -100,6 +113,12 @@ Python bytecode writes are disabled. Setup has a 150-second bound and existing
 incomplete environments require reconciliation, not reinstall. No system Python,
 global host configuration or shared Agent installation is changed. These checks
 do not constitute a security review of third-party code or an OS sandbox.
+If the selected distribution's installed source imports v1-only
+`mcp.server.fastmcp` and dependency resolution installed MCP SDK 2+, the adapter
+re-resolves the same fixed package inside its own environment with `mcp<2`.
+Conflicting publisher requirements fail explicitly; package source and global
+Python are not rewritten. This targeted compatibility rule does not establish
+that an arbitrary package will start or perform the task.
 
 The two registries cannot be atomically published together. If setup stops between
 them, the plan remains `connecting`; inspect the backups and actual grants before
@@ -110,10 +129,10 @@ archive finished state through maintenance when these limits are reached.
 
 ## Installation and verification
 
-Keep all nine `market_*.py` adapter modules together: `market_gateway.py`,
+Keep all eleven `market_*.py` adapter modules together: `market_gateway.py`,
 `market_protocol.py`, `market_connect.py`, `market_routing.py`,
-`market_resources.py`, `market_registry.py`, `market_packages.py`, `market_python.py`
-and `market_node.py`.
+`market_resources.py`, `market_registry.py`, `market_packages.py`, `market_python.py`,
+`market_node.py`, `market_registry_cache.py` and `market_mcp_runtime.py`.
 The launcher still requires the separate existing standalone runtime via
 `--runtime-root`. The runtime source is not bundled in this task branch.
 Only the selected public MCP command changes; private routing and other Agent
@@ -144,12 +163,26 @@ Every candidate retains its supported setup/required-fields context; unavailable
 entries are labeled, not silently dropped. Connection validates and installs the
 selected configuration within the task's existing authorization.
 
-After connection and the shared runtime's service/tool choice, `acquire_mcp`
-checks the selected **actual tool description and full input schema** with Jev.
+After connection, newly started market runtimes rank connected services and tools
+with the provisional directory threshold. Tool ranking reuses the actual complete
+schemas from the same `tools/list` response (at most 96,000 characters), without
+an extra listing or a truncated candidate prefix. Then `acquire_mcp` checks the selected **actual tool description and full input schema** with Jev.
 This final fit must reach at least 0.7, or the stricter configured value, before
-its selection receipt is returned to the Agent. A rejected tool yields no receipt.
-Fit means a reliable useful operation toward the task; a single tool need not
-cover every step or requested output. The Agent must obtain valid inputs and
+creating the normal staged selection receipt. A completed negative fit removes
+only that leaf and reranks all remaining candidates, within three leaves and a
+40-second selection budget. Rejected and unexhausted candidates remain explicit.
+Provider errors and unknown outcomes stop without selecting another leaf.
+The legacy no-captured-schema fallback validates after receipt creation; a
+rejected fallback receipt remains inspectable but expires immediately and is not
+returned to the Agent.
+The gateway reuses matching staged validation bound to the need, selection and
+actual schema while checking the current threshold; it does not call Jev twice.
+Healthy legacy services are reused and still receive gateway final validation.
+The adapter does not silently stop or replace them. An identity mismatch stops
+for reconciliation. The original runtime still owns invocation and receipts.
+Fit means a reliable useful operation toward the task, including a documented
+read-only prerequisite such as learning stored vocabulary or identifiers; a
+single tool need not cover every step or requested output. The Agent must obtain valid inputs and
 complete the remaining steps before reporting success.
 Oversized schemas stop explicitly instead of silently truncating. Existing
 invocation grants, at-most-once receipts and unknown-outcome handling remain.
@@ -164,14 +197,33 @@ starts with one precise functional keyword. Up to four alternatives use OR.
 Selectable results require complete pagination and reconciled name/version pairs.
 A term already exceeding 192 active identities stops early with an explicit
 broad-search result; no truncated prefix is passed to Jev. Limits remain explicit: six
-pages per term, 192 distinct active candidates, an 80-second discovery budget,
-35 seconds per read, one retry only for a failed anonymous GET. Native curl
+pages per term, 192 distinct active candidates, a 26-second live search budget,
+12 seconds per read, one retry only for a failed anonymous GET. Native curl
 negotiates HTTP/2 when available, disables curlrc, enforces HTTPS/TLS and a
 response size limit; Python HTTPS is the fallback when curl is unavailable. Incomplete or
 oversized results stop before final selection. This is bounded name discovery,
 not a guarantee of semantic recall over the whole marketplace. Redirects and
 TLS bypass remain prohibited. Dependency setup and business operations keep
 their existing receipt and no-replay rules.
+
+Complete query snapshots are stored owner-only and can be reused for five minutes.
+On a confirmed Registry read outage, an exact-query snapshot up to 24 hours old
+can be used only after refreshing every cached service against its official latest
+detail endpoint (at most 12 names, four workers, a separate 30-second budget).
+If any detail cannot be checked, selection stops. The result exposes its original
+snapshot time, age, exclusions and `complete_at_snapshot` coverage: newly added
+services may be absent. A cache never claims a fresh complete market scan. Other
+cached functional query labels may be offered as explicitly historical hints;
+capability names are not injected into the user's request.
+
+Plugin preparation inspects at most three publisher categories and 16 packages;
+a 90-second deadline is checked between operations, not a hard cancellation of
+an in-progress network/model call. Known incompatible packages can be skipped
+with explicit reasons, while network/unknown failures stop. Pinned archives are
+reused within the preview. Low-confidence metadata abstention may inspect all
+positive alternatives only when the entire set fits the remaining bound; final
+actual-content validation still requires at least 0.7. Unexhausted candidates
+remain explicitly unexhausted.
 
 Python environment mechanics follow the [uv environment documentation](https://docs.astral.sh/uv/pip/environments/)
 and [CLI flags](https://docs.astral.sh/uv/reference/cli/). Package descriptions

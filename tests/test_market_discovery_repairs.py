@@ -28,7 +28,7 @@ class DiscoveryRepairs(unittest.TestCase):
         provider.return_value = SimpleNamespace(choice='a', confidence=.05)
         self.assertEqual(route(runtime, 'review a file', rows, cfg, 'directory')['status'], 'uncertain')
         route(runtime, 'review a file', rows, cfg, 'plugin')
-        self.assertIn('plugin materially helps', provider.call_args.args[1])
+        self.assertIn('portable Skill guidance', provider.call_args.args[1])
 
     def test_union_all_pages_and_dedup_does_not_drop_later_match(self):
         def fetch(q, cursor, deadline):
@@ -59,7 +59,7 @@ class DiscoveryRepairs(unittest.TestCase):
             opener.return_value.open.side_effect = TimeoutError()
             with self.assertRaisesRegex(ValueError, 'registry_read_timeout_or_network_error'):
                 registry.fetch('clock', '', registry.time.monotonic() + 80)
-            self.assertEqual(opener.return_value.open.call_args.kwargs['timeout'], 35)
+            self.assertEqual(opener.return_value.open.call_args.kwargs['timeout'], 12)
 
     def test_curl_retains_https_identity_size_and_no_redirect_boundary(self):
         response = SimpleNamespace(returncode=0, stdout=b'{"servers": []}\n200')
@@ -83,6 +83,29 @@ class DiscoveryRepairs(unittest.TestCase):
         b['server']['description'] = 'changed'
         with patch.object(registry, 'pages', return_value=[a,b]), self.assertRaisesRegex(ValueError, 'changed_during_search'):
             registry.browse(SimpleNamespace(items={}), 'a')
+
+    def test_latest_version_conflict_never_creates_complete_cache(self):
+        a,b=entry('alpha'),entry('alpha');b['server']['version']='2'
+        with patch.object(registry,'pages',side_effect=[[a],[b]]), \
+                patch('market_registry_cache.read',return_value=None), \
+                patch('market_registry_cache.write') as save, \
+                self.assertRaisesRegex(ValueError,'changed_during_search'):
+            registry.browse(SimpleNamespace(items={}), 'alpha beta', Path('/unused'))
+        save.assert_not_called()
+
+    def test_read_outage_fallback_keeps_cache_provenance(self):
+        a=entry('graph');a['_meta']['io.modelcontextprotocol.registry/official']['isLatest']=True
+        snapshot={'rows':[a],'cache_age_seconds':600,'checked_at':1,'coverage':'complete_at_snapshot','metadata_refreshed_at':None}
+        refreshed={**snapshot,'metadata_refreshed_at':601,'exclusions':[]}
+        with patch.object(registry,'pages',side_effect=ValueError('registry_read_timeout_or_network_error')), \
+                patch('market_registry_cache.read',return_value=snapshot), \
+                patch('market_registry_cache.refresh',return_value=refreshed) as refresh:
+            result=registry.browse(SimpleNamespace(items={}), 'graph', Path('/unused'))
+        self.assertEqual(result['catalog']['mode'],'query_cache_live_details')
+        self.assertEqual(result['catalog']['checked_at'],1)
+        self.assertEqual(result['catalog']['coverage'],'complete_at_snapshot')
+        self.assertTrue(refresh.call_args.kwargs['network_outage'])
+        self.assertEqual(len(result['items']),1)
 
     def test_broad_search_stops_after_exceeding_bound_without_selecting_prefix(self):
         count = 0

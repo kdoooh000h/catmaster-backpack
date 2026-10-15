@@ -31,11 +31,11 @@ def _fetch(query, cursor, deadline):
     url = ROOT + '?' + urllib.parse.urlencode(params)
     executable = shutil.which('curl')
     if executable:
-        return curl_fetch(executable, url, min(35, remaining))
+        return curl_fetch(executable, url, min(12, remaining))
     request = urllib.request.Request(url,
                                      headers={'User-Agent': 'CatMaster-Backpack', 'Accept': 'application/json'})
     try:
-        with urllib.request.build_opener(NoRedirect()).open(request, timeout=min(35, remaining)) as response:
+        with urllib.request.build_opener(NoRedirect()).open(request, timeout=min(12, remaining)) as response:
             content = response.read(MAX_BYTES + 1)
     except urllib.error.HTTPError as error:
         code = error.code
@@ -124,7 +124,7 @@ def pages(query, deadline):
     raise ValueError('registry_search_too_broad')
 
 
-def browse(library, search):
+def browse(library, search, cache_root=None):
     # The upstream API matches name substrings, not natural-language sentences.
     # OR the supplied functional terms. Never inject known capability names or
     # silently take only the first page. Chinese can be supplied as a term too.
@@ -132,16 +132,45 @@ def browse(library, search):
     if not terms or len(terms) > 4:
         return {'items': [], 'next_cursor': 'search_required',
                 'instruction': 'Supply one to four short functional search terms, preferably English for the public name index; do not guess a product name.'}
-    deadline = time.monotonic() + 80
+    import market_registry_cache as cache
+    snapshot = None
+    if cache_root is not None:
+        try:
+            snapshot = cache.read(cache_root, terms)
+        except (OSError, ValueError):
+            pass  # Invalid cache is never used and does not block a fresh read.
+    catalog = {'mode': 'live_query', 'coverage': 'complete_at_query'}
+    deadline = time.monotonic() + 26
     try:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=len(terms)) as pool:
-            batches = list(pool.map(lambda term: pages(term, deadline), terms))
+        if snapshot is not None and snapshot['cache_age_seconds'] <= cache.FRESH_AGE:
+            batches = [snapshot['rows']]
+            catalog = cache_provenance(snapshot, 'recent_query_cache')
+        else:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=len(terms)) as pool:
+                batches = list(pool.map(lambda term: pages(term, deadline), terms))
     except ValueError as error:
         if str(error) == 'registry_search_too_broad':
             return {'items': [], 'next_cursor': 'too_broad',
                     'instruction': 'Use one more specific functional keyword; this result exceeds the complete candidate bound.'}
-        raise
+        if str(error) != 'registry_read_timeout_or_network_error':
+            raise
+        if snapshot is None:
+            queries = cached_queries(cache_root) if cache_root is not None else []
+            if not queries:
+                raise
+            return {'items': [], 'next_cursor': 'source_unavailable',
+                    'available_snapshot_queries': queries,
+                    'instruction': 'The official search read failed. These previously complete functional query snapshots are available. '
+                                   'If one describes this need, submit that query to inspect it; its service details will be refreshed, '
+                                   'but new matching services may be absent. No setup or business operation was attempted.'}
+        executable = shutil.which('curl')
+        if not executable:
+            raise
+        refreshed = cache.refresh(snapshot, lambda url, timeout: curl_fetch(executable, url, timeout), network_outage=True)
+        batches = [refreshed['rows']]
+        catalog = cache_provenance(refreshed, 'query_cache_live_details')
     unique = {}
+    versions = {}
     for rows in batches:
         for row in rows:
             if not isinstance(row, dict):
@@ -159,12 +188,27 @@ def browse(library, search):
             if not isinstance(name, str) or not 1 <= len(name) <= 200 or not isinstance(version, str) or not 1 <= len(version) <= 100:
                 raise ValueError('registry_invalid_entry')
             key = (name, version)
+            if name in versions and versions[name] != version:
+                raise ValueError('registry_changed_during_search')
+            versions[name] = version
             if key in unique and unique[key] != server:
                 raise ValueError('registry_changed_during_search')
             unique[key] = server
     if len(unique) > MAX_CANDIDATES:
         return {'items': [], 'next_cursor': 'too_broad', 'candidate_count': len(unique)}
     now = time.time()
+    if cache_root is not None and catalog['mode'] == 'live_query':
+        try:
+            # Cache the full official envelopes, only after all pages/terms and
+            # conflicts validated. isLatest is validated by the cache itself.
+            envelopes = {}
+            for batch in batches:
+                for row in batch:
+                    if row.get('_meta', {}).get(cache.OFFICIAL, {}).get('status') == 'active':
+                        envelopes[row['server']['name']] = row
+            cache.write(cache_root, terms, list(envelopes.values()), now, complete=True)
+        except (OSError, ValueError):
+            catalog['cache_saved'] = False
     library.items = {k: v for k, v in library.items.items() if now - v['checked_at'] < 900}
     if len(library.items) + len(unique) > 640:
         raise ValueError('registry_receipt_limit')
@@ -174,4 +218,16 @@ def browse(library, search):
         library.items[token] = {'server': server, 'checked_at': now, 'source': 'registry'}
         result.append({'receipt': token, 'name': name, 'title': str(server.get('title', name))[:200],
                        'description': str(server.get('description', ''))[:1200], 'version': version})
-    return {'items': result, 'next_cursor': None, 'search_terms': terms, 'checked_at': now}
+    return {'items': result, 'next_cursor': None, 'search_terms': terms, 'checked_at': now, 'catalog': catalog}
+
+
+def cache_provenance(snapshot, mode):
+    return {'mode': mode, **{key: snapshot.get(key) for key in (
+        'checked_at', 'cache_age_seconds', 'coverage', 'metadata_refreshed_at', 'exclusions')},
+        'limitation': 'Complete for this query at snapshot time; new matching services may be absent.'}
+
+
+def cached_queries(cache_root):
+    """Bounded functional query hints, not a complete service inventory."""
+    from market_registry_cache import available_queries
+    return available_queries(cache_root)

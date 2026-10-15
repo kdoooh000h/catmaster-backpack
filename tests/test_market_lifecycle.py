@@ -16,6 +16,75 @@ from market_routing import route
 
 
 class LifecycleTests(unittest.TestCase):
+    def test_known_setup_failure_can_advance_without_grants_or_need_rewrite(self):
+        market=object.__new__(Market)
+        market.sources=SimpleNamespace(SourceError=RuntimeError)
+        market.manager=SimpleNamespace(plugins=SimpleNamespace(sources=SimpleNamespace(browse=lambda source:{
+            'items':[{'name':'native','description':'Review code'},{'name':'portable','description':'Debug code'}]})))
+        market.choose=Mock(side_effect=[({'name':'native'},{'status':'selected'}),
+                                       ({'name':'portable'},{'status':'selected'})])
+        market.prepare_plugin_candidate=Mock(side_effect=[{'status':'setup_required','name':'native','requirements':['agents']},None])
+        plan={'need':'Review a local function','routing':[],'skills':[],'servers':[]}
+        self.assertIsNone(market.prepare_plugin(plan,'anthropic'))
+        self.assertEqual(market.choose.call_count,2)
+        self.assertEqual(market.choose.call_args.args[0],plan['need'])
+        self.assertEqual([r['name'] for r in market.choose.call_args.args[1]],['portable'])
+        self.assertEqual(plan['unavailable_candidates'][0]['requirements'],['agents'])
+
+    def test_none_does_not_retry_or_prepare_a_package(self):
+        market=object.__new__(Market)
+        market.sources=SimpleNamespace(SourceError=RuntimeError)
+        market.manager=SimpleNamespace(plugins=SimpleNamespace(sources=SimpleNamespace(browse=lambda source:{
+            'items':[{'name':'native','description':'Review code'}]})))
+        market.choose=Mock(return_value=(None,{'status':'none'}));market.prepare_plugin_candidate=Mock()
+        result=market.prepare_plugin({'need':'Review','routing':[]},'anthropic')
+        self.assertEqual(result['status'],'none')
+        market.prepare_plugin_candidate.assert_not_called()
+
+    def test_ambiguous_metadata_can_inspect_all_alternatives_but_not_truncate(self):
+        market=object.__new__(Market);market.sources=SimpleNamespace(SourceError=RuntimeError)
+        rows=[{'name':'one','description':'Review'},{'name':'two','description':'Debug'}]
+        market.manager=SimpleNamespace(plugins=SimpleNamespace(sources=SimpleNamespace(browse=lambda source:{'items':rows})))
+        market.choose=Mock(return_value=(None,{'status':'none','confidence':.3,'_inspection_rows':rows}))
+        market.prepare_plugin_candidate=Mock(side_effect=[{'status':'setup_required','name':'one'},None])
+        plan={'need':'Find a bug','routing':[]}
+        self.assertIsNone(market.prepare_plugin(plan,'anthropic'))
+        self.assertEqual(market.prepare_plugin_candidate.call_count,2)
+        self.assertEqual(market.choose.call_count,1)
+        self.assertNotIn('_inspection_rows',plan['routing'][0])
+        market._preview_remaining=1;market._preview_deadline=10**12
+        market.prepare_plugin_candidate.reset_mock()
+        market.choose.return_value=(None,{'status':'none','confidence':.3,'_inspection_rows':list(rows)})
+        result=market.prepare_plugin_group({'need':'Find a bug','routing':[]},'anthropic',{},rows,[])
+        self.assertEqual(result['status'],'none')
+        market.prepare_plugin_candidate.assert_not_called()
+
+    def test_unsafe_preparation_rejects_package_and_continues_without_installing(self):
+        market=object.__new__(Market);market.sources=SimpleNamespace(SourceError=RuntimeError)
+        rows=[{'name':'bad','description':'Review'},{'name':'safe','description':'Debug'}]
+        market.manager=SimpleNamespace(plugins=SimpleNamespace(sources=SimpleNamespace(browse=lambda source:{'items':rows})))
+        market.choose=Mock(side_effect=[(rows[0],{'status':'selected'}),(rows[1],{'status':'selected'})])
+        market.prepare_plugin_candidate=Mock(side_effect=[ValueError('unsafe_market_archive'),None])
+        plan={'need':'Find a bug','routing':[]}
+        self.assertIsNone(market.prepare_plugin(plan,'anthropic'))
+        self.assertEqual(plan['unavailable_candidates'][0]['requirements'],['package_rejected_unsafe_archive'])
+
+    def test_unavailable_category_does_not_hide_a_usable_sibling(self):
+        market=object.__new__(Market)
+        market.sources=SimpleNamespace(SourceError=RuntimeError)
+        rows=[{'name':category+str(i),'description':'Guidance','entry':{'category':category}}
+              for category in ['productivity','development'] for i in range(50)]
+        market.manager=SimpleNamespace(plugins=SimpleNamespace(sources=SimpleNamespace(browse=lambda source:{'items':rows})))
+        selected={'status':'selected'}
+        market.choose=Mock(side_effect=[({'id':'productivity'},selected),(rows[0],selected),
+            (None,{'status':'none'}),({'id':'development'},selected),(rows[50],selected)])
+        market.prepare_plugin_candidate=Mock(side_effect=[{'status':'setup_required','name':rows[0]['name'],'requirements':['agents']},None])
+        plan={'need':'Review a local function','routing':[]}
+        self.assertIsNone(market.prepare_plugin(plan,'anthropic'))
+        second_directories=market.choose.call_args_list[3].args[1]
+        self.assertEqual([d['id'] for d in second_directories],['development'])
+        self.assertEqual(plan['unavailable_candidates'][0]['name'],'productivity0')
+
     def sources(self):
         def safe(path, allow_empty=False):
             if not path and allow_empty: return path
@@ -75,6 +144,8 @@ class LifecycleTests(unittest.TestCase):
         provider.return_value = SimpleNamespace(choice='none', confidence=.95)
         self.assertEqual(route(runtime, 'convert time', rows, {**cfg, 'minimum_confidence': .7}, 'mcp-fit')['status'], 'none')
         self.assertEqual(set(provider.call_args.args[3]), {'market-0', 'none'})
+        self.assertEqual(provider.call_args.args[2], {'need':'convert time'})
+        self.assertEqual(provider.call_args.args[3]['market-0'], 'Local time conversion')
 
 
 if __name__ == '__main__': unittest.main()

@@ -1,5 +1,8 @@
 """Pinned PyPI MCPs in Backpack-owned environments; no host Python installation."""
 import configparser
+import ast
+import csv
+import concurrent.futures
 import email.parser
 import hashlib
 import json
@@ -11,6 +14,8 @@ import signal
 import subprocess
 import sys
 import time
+import urllib.parse
+import urllib.request
 
 NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._-]{0,99}')
 VERSION = re.compile(r'\d+(?:\.\d+){1,3}(?:(?:a|b|rc)\d+|\.post\d+|\.dev\d+)?')
@@ -44,6 +49,55 @@ def package_launch(package):
 
 def normalized(name):
     return re.sub(r'[-_.]+', '-', name).lower()
+
+
+def metadata_summaries(library, rows):
+    """Small complete pools can reuse versioned publisher summaries and tags.
+
+    Reads are anonymous and optional: failures never remove a Registry candidate.
+    Package descriptions are evidence, never instructions or permission.
+    """
+    tasks = {}
+    for row in rows:
+        for option in row.get('available', []):
+            if option['id'].startswith('pypi:'):
+                package = library.items[row['receipt']]['server']['packages'][int(option['id'].split(':')[1])]
+                name, version = package['identifier'], package['version']
+                if NAME.fullmatch(name) and VERSION.fullmatch(version):
+                    tasks.setdefault((name, version), []).append(row['receipt'])
+    if not tasks or len(rows) > 12 or len(tasks) > 12:
+        return {}
+    deadline = time.monotonic() + 12
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, *args, **kwargs):
+            raise ValueError('pypi_metadata_redirect')
+    def fetch(key):
+        name, version = key
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            return key, None
+        url = 'https://pypi.org/pypi/' + urllib.parse.quote(name, safe='') + '/' + urllib.parse.quote(version, safe='') + '/json'
+        try:
+            request = urllib.request.Request(url, headers={'User-Agent':'CatMaster-Backpack','Accept':'application/json'})
+            with urllib.request.build_opener(NoRedirect()).open(request, timeout=remaining) as response:
+                content = response.read(2 * 1024 * 1024 + 1)
+            if len(content) > 2 * 1024 * 1024:
+                return key, None
+            info = json.loads(content)['info']
+            if normalized(info['name']) != normalized(name) or info['version'] != version:
+                return key, None
+            values = {field: info[field] for field in ('summary','keywords','requires_python')
+                      if isinstance(info.get(field),str) and len(info[field]) <= 2000}
+            return key, values
+        except (OSError,ValueError,KeyError,TypeError):
+            return key, None
+    result = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        for key, value in pool.map(fetch, tasks):
+            if value:
+                for receipt in tasks[key]:
+                    result.setdefault(receipt, []).append({'package':key[0], 'version':key[1], **value})
+    return result
 
 
 def options(library, receipt):
@@ -155,6 +209,58 @@ def entrypoint(directory, name, version, requested=''):
     return script
 
 
+def legacy_mcp_constraint(directory, name, version):
+    """Constrain only a selected wheel that imports v1 APIs against installed v2.
+
+    Inspect that distribution's own RECORD and Python AST without importing it.
+    The resolver still enforces all publisher requirements; an incompatible
+    declared floor fails rather than being overridden. Mixed v1/v2 code is not
+    automatically downgraded.
+    """
+    sites = list((directory / 'venv/lib').glob('python*/site-packages'))
+    if len(sites) != 1:
+        raise ValueError('python_mcp_environment_invalid')
+    site = sites[0]
+    selected = None
+    sdk = ''
+    for dist in site.glob('*.dist-info'):
+        meta = email.parser.Parser().parsestr((dist / 'METADATA').read_text())
+        if normalized(meta.get('Name', '')) == name and meta.get('Version') == version:
+            selected = dist
+        if normalized(meta.get('Name', '')) == 'mcp':
+            sdk = meta.get('Version', '')
+    if selected is None or not sdk or not sdk.split('.')[0].isdigit() or int(sdk.split('.')[0]) < 2:
+        return None
+    record = selected / 'RECORD'
+    if not record.is_file() or record.stat().st_size > 1024 * 1024:
+        return None
+    legacy = modern = False
+    total = count = 0
+    with record.open(newline='') as stream:
+        for row in csv.reader(stream):
+            count += 1
+            if count > 10000:
+                raise ValueError('python_mcp_package_too_large')
+            if not row or not row[0].endswith('.py'):
+                continue
+            path = site / row[0]
+            if path.is_symlink() or not path.resolve().is_relative_to(site.resolve()) or not path.is_file():
+                raise ValueError('python_mcp_package_path_invalid')
+            total += path.stat().st_size
+            if total > 2 * 1024 * 1024:
+                raise ValueError('python_mcp_package_too_large')
+            try:
+                tree = ast.parse(path.read_text())
+            except (SyntaxError, UnicodeError):
+                continue
+            for node in ast.walk(tree):
+                modules = ([node.module or ''] if isinstance(node, ast.ImportFrom) else
+                           [alias.name for alias in node.names] if isinstance(node, ast.Import) else [])
+                legacy |= any(m == 'mcp.server.fastmcp' or m.startswith('mcp.server.fastmcp.') for m in modules)
+                modern |= any(m == 'mcp.server.mcpserver' or m.startswith('mcp.server.mcpserver.') for m in modules)
+    return 'mcp<2' if legacy and not modern else None
+
+
 def verify(directory, name, version, extras='', requested=''):
     record = json.loads((directory / 'ready.json').read_text())
     script = entrypoint(directory, name, version, requested)
@@ -202,7 +308,8 @@ def install(market, row, plan):
     log = market.folder / (plan['id'] + '-pypi.log')
     with log.open('wb') as output:
         log.chmod(0o600)
-        for command in commands:
+        compatibility = None
+        for index, command in enumerate(commands):
             process = subprocess.Popen(command, cwd=directory, env=environment, stdin=subprocess.DEVNULL,
                                        stdout=output, stderr=output, start_new_session=True)
             try:
@@ -215,9 +322,17 @@ def install(market, row, plan):
                 raise ValueError('python_mcp_setup_interrupted') from None
             if code:
                 raise ValueError('python_mcp_dependency_setup_failed')
+            if index == 1:
+                compatibility = legacy_mcp_constraint(directory, name, version)
+                if compatibility:
+                    constraint = directory / 'compatibility-constraints.txt'
+                    constraint.write_text(compatibility + '\n')
+                    constraint.chmod(0o600)
+                    commands.append([*command, '--constraint', str(constraint)])
     script = entrypoint(directory, name, version, requested)
     market.runtime._atomic_json(directory / 'ready.json', {'name': name, 'version': version,
-        'entrypoint': script.name, 'extras': extras, 'digest': tree_digest(directory / 'venv')})
+        'entrypoint': script.name, 'extras': extras, 'compatibility_constraint': compatibility,
+        'digest': tree_digest(directory / 'venv')})
     market.current()
     return True
 

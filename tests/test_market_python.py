@@ -1,4 +1,5 @@
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -14,6 +15,18 @@ from market_connect import service_target
 
 
 class PythonMCPTests(unittest.TestCase):
+    def test_publisher_tags_are_version_checked_and_failures_preserve_candidates(self):
+        rows=[{'receipt':'receipt','available':[{'id':'pypi:0'}]}]
+        content={'info':{'name':'demo-mcp','version':'1.2.3','summary':'Local SQLite graph','keywords':'sqlite, graph'}}
+        opener=Mock();opener.open.side_effect=lambda *a,**k:io.BytesIO(json.dumps(content).encode())
+        with patch.object(python.urllib.request,'build_opener',return_value=opener):
+            result=python.metadata_summaries(self.library(),rows)
+            self.assertIn('SQLite',result['receipt'][0]['summary'])
+            self.assertTrue(opener.open.call_args.args[0].full_url.endswith('/demo-mcp/1.2.3/json'))
+            content['info']['version']='9.9.9'
+            self.assertEqual(python.metadata_summaries(self.library(),rows),{})
+        self.assertEqual(rows[0]['receipt'],'receipt')
+
     def library(self, **changes):
         package = {'registryType': 'pypi', 'identifier': 'demo-mcp', 'version': '1.2.3',
                    'transport': {'type': 'stdio'}, **changes}
@@ -96,7 +109,8 @@ class PythonMCPTests(unittest.TestCase):
                 runtime=SimpleNamespace(_atomic_json=lambda p,v:p.write_text(json.dumps(v))), current=Mock())
             config = self.config(data)
             with patch.object(python.subprocess, 'Popen') as launch, patch.object(python.shutil, 'which', return_value='/uv'), patch.object(
-                    python, 'entrypoint', return_value=Path('/fake/demo')), patch.object(python, 'tree_digest', return_value='digest'), patch.dict(
+                    python, 'entrypoint', return_value=Path('/fake/demo')), patch.object(python, 'tree_digest', return_value='digest'), patch.object(
+                    python, 'legacy_mcp_constraint', return_value=None), patch.dict(
                     os.environ, {'SECRET_KEY': 'do-not-copy'}):
                 launch.return_value.wait.return_value = 0
                 self.assertTrue(python.install(market, {'configuration':config}, {'id':'plan'}))
@@ -109,6 +123,24 @@ class PythonMCPTests(unittest.TestCase):
             self.assertNotIn('SECRET_KEY', call.kwargs['env'])
             self.assertTrue(Path(call.kwargs['env']['HOME']).is_relative_to(data))
             self.assertNotIn('--system', call.args[0])
+
+    def test_legacy_constraint_uses_owned_code_not_comments_or_import_execution(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory=Path(temp);site=directory/'venv/lib/python3.14/site-packages';site.mkdir(parents=True)
+            for folder,metadata in [('demo-1.2.3.dist-info','Name: demo\nVersion: 1.2.3\nRequires-Dist: mcp>=1\n'),
+                                    ('mcp-2.3.0.dist-info','Name: mcp\nVersion: 2.3.0\n')]:
+                dist=site/folder;dist.mkdir();(dist/'METADATA').write_text(metadata)
+            (site/'demo-1.2.3.dist-info/RECORD').write_text('server.py,,\n')
+            script=site/'server.py'
+            script.write_text('from mcp.server.fastmcp import FastMCP\nraise RuntimeError("must not execute")\n')
+            self.assertEqual(python.legacy_mcp_constraint(directory,'demo','1.2.3'),'mcp<2')
+            script.write_text('# from mcp.server.fastmcp import FastMCP\n')
+            self.assertIsNone(python.legacy_mcp_constraint(directory,'demo','1.2.3'))
+            script.write_text('from mcp.server.fastmcp import FastMCP\nfrom mcp.server.mcpserver import MCPServer\n')
+            self.assertIsNone(python.legacy_mcp_constraint(directory,'demo','1.2.3'))
+            (site/'demo-1.2.3.dist-info/RECORD').write_text('../../../outside.py,,\n')
+            with self.assertRaisesRegex(ValueError,'package_path_invalid'):
+                python.legacy_mcp_constraint(directory,'demo','1.2.3')
 
     def test_interrupted_install_is_not_replayed(self):
         with tempfile.TemporaryDirectory() as temp:

@@ -355,6 +355,12 @@ adds external plugin sources, isolated PyPI setup and real npm entrypoint handli
 Across the recorded revisions, 3/6 distinct tasks completed with new capabilities,
 including an actual timezone MCP call. This is cumulative coverage, not a single
 final-version benchmark; all 16 attempts and unresolved requirements are retained.
+The [remaining-failure repair and cost audit](docs/backpack-market-failure-repair-validation-2026-10-14.md)
+completed the theme task and a persistent MCP write/read chain without replaying
+the write. Cumulative coverage is 5/6. A new review plugin produced a correct
+artifact using an already installed Skill, so that case still fails the new-capability
+criterion. All 17 native attempts and separate candidate-diagnostic costs are retained;
+the daily installation has not been upgraded by this repair.
 
 ## Security Boundary
 

@@ -60,6 +60,24 @@ class ArchiveTests(unittest.TestCase):
                     extract_package(self.archive(case), 'plugin', root, safe_path)
                 self.assertFalse(root.exists())
 
+    def test_direct_in_package_file_alias_is_materialized_without_link(self):
+        content=self.archive([('repo/plugin/CLAUDE.md','Contributor docs',stat.S_IFREG|0o644),
+                              ('repo/plugin/AGENTS.md','CLAUDE.md',stat.S_IFLNK|0o777)])
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)/'out';extract_package(content,'plugin',root,safe_path)
+            self.assertEqual((root/'AGENTS.md').read_text(),'Contributor docs')
+            self.assertFalse((root/'AGENTS.md').is_symlink())
+
+    def test_aliases_cannot_escape_follow_chains_or_target_directories(self):
+        for target,rows in [('../outside',[]),('/outside',[]),('missing',[]),
+                ('b',[('repo/plugin/b','c',stat.S_IFLNK|0o777)]),
+                ('dir/', [('repo/plugin/dir/','',stat.S_IFDIR|0o755)])]:
+            content=self.archive([('repo/plugin/a',target,stat.S_IFLNK|0o777),*rows])
+            with self.subTest(target=target),tempfile.TemporaryDirectory() as temp:
+                root=Path(temp)/'out'
+                with self.assertRaises(ValueError):extract_package(content,'plugin',root,safe_path)
+                self.assertFalse(root.exists())
+
 
 RUNTIME = os.environ.get('CATMASTER_STANDALONE_RUNTIME')
 
@@ -207,6 +225,84 @@ class MarketIntegrationTests(unittest.TestCase):
         plan['market_entry'] = {}
         self.write(root / 'plugin.json', {'name': 'sample', 'hooks': {}, 'extensions': {'com.openai': {'hooks': {'required': True}}}})
         self.assertIn('hooks', self.market.inspect_plugin(root, plan))
+
+    def test_portable_components_are_explicit_and_dependencies_still_block(self):
+        plan=self.plan(skills=True,servers=False);root=Path(plan['package']);plan['skills']=[]
+        (root/'CLAUDE.md').write_text('Contributor guide: read AGENTS.md before modifying this repository.')
+        self.write(root/'plugin.json',{'name':'sample','hooks':{'needed':True}})
+        self.assertEqual(self.market.inspect_plugin(root,plan,portable=True),[])
+        self.assertEqual(plan['unavailable_components'],['hooks'])
+        plan['package_digest']=self.gateway.public_access.fingerprint(root)
+        self.market.save(plan)
+        result=self.market.connect(plan['id'])
+        self.assertEqual(result['connection_scope'],'portable_components')
+        self.assertEqual(result['unavailable_components'],['hooks'])
+        self.assertEqual(result['components']['skills'],1)
+        self.write(root/'plugin.json',{'name':'sample','dependencies':{'needed':True}})
+        self.assertIn('dependencies',self.market.inspect_plugin(root,plan,portable=True))
+
+    def test_portable_readiness_inspects_native_dependency_in_complete_body(self):
+        plan=self.plan(skills=True,servers=False);plan['need']='Review a function'
+        skill=plan['skills'][0];entry=Path(skill['path'])/'SKILL.md'
+        entry.write_text('---\nname: sample\ndescription: Review local code.\n---\nRequires the native Task agent runner. Dispatch a reviewer subagent; do not review yourself.\n')
+        def choose(need,rows,kind):
+            if kind=='plugin-skill-preview':return rows[0],{'status':'selected'}
+            self.assertIn('Requires the native Task agent runner',rows[0]['description'])
+            return None,{'status':'none','confidence':.98}
+        with patch.object(self.market,'choose',side_effect=choose):
+            self.assertFalse(self.market.portable_guidance_fit(plan))
+
+    def test_portable_readiness_reads_only_explicit_local_markdown_references(self):
+        plan=self.plan(skills=True,servers=False);plan['need']='Review a function'
+        root=Path(plan['skills'][0]['path'])
+        (root/'SKILL.md').write_text('---\nname: sample\ndescription: Review code.\n---\nUse [rubric](rubric.md). External [link](https://example.com/a.md).\n')
+        (root/'rubric.md').write_text('Check concrete inputs and expected versus actual outputs using local tools.')
+        (root/'unreferenced.md').write_text('Do not disclose unreferenced material.')
+        def choose(need,rows,kind):
+            if kind=='plugin-skill-preview':return rows[0],{'status':'selected'}
+            evidence=json.loads(rows[0]['description'])
+            self.assertEqual(list(evidence['referenced_documents']),['rubric.md'])
+            self.assertIn('expected versus actual',evidence['referenced_documents']['rubric.md'])
+            return rows[0],{'status':'selected','confidence':.9}
+        with patch.object(self.market,'choose',side_effect=choose):
+            self.assertTrue(self.market.portable_guidance_fit(plan))
+
+    def test_one_portable_skill_never_grants_uninspected_sibling(self):
+        plan=self.plan(skills=True,servers=False)
+        sibling=Path(plan['package'])/'skills/native';sibling.mkdir()
+        (sibling/'SKILL.md').write_text('---\nname: native\ndescription: Review code.\n---\nRequires unavailable host agents.\n')
+        plan['skills'].append({'name':'native','path':str(sibling),'digest':self.gateway.public_access.fingerprint(sibling)})
+        selected=plan['skills'][0]
+        with patch.object(self.market,'choose',side_effect=[(selected,{'status':'selected'}),({'description':'yes'},{'status':'selected'})]):
+            self.assertTrue(self.market.portable_guidance_fit(plan))
+        self.assertEqual([s['name'] for s in plan['skills']],['sample'])
+        self.assertEqual(plan['unvalidated_skill_count'],1)
+        plan['package_digest']=self.gateway.public_access.fingerprint(Path(plan['package']))
+        self.market.save(plan);result=self.market.connect(plan['id'])
+        self.assertEqual(result['components']['skills'],1)
+        grants=self.gateway.public_access.registry(self.data)['items'].values()
+        self.assertEqual([g['name'] for g in grants],['sample'])
+
+    def test_runtime_directories_match_connection_and_effective_environment(self):
+        plan=self.plan();row=plan['servers'][0]
+        row['configuration']={'transport':'stdio','command':['/python','script.py'],'env':{}}
+        info=self.market.runtime_directories(plan)[0]
+        self.assertEqual(Path(info['HOME']),self.data/'mcp-runtime'/row['id']/self.descriptor.stem/'home')
+        row['configuration']['env']['HOME']='/explicit/home'
+        self.assertEqual(self.market.runtime_directories(plan)[0]['HOME'],'/explicit/home')
+
+    def test_sibling_plugins_reuse_the_exact_pinned_archive(self):
+        plan=self.plan(servers=False);self.market._archives={}
+        snapshot={'repo':'acme/catalog','commit':'a'*40}
+        stream=io.BytesIO()
+        with zipfile.ZipFile(stream,'w') as archive:
+            archive.writestr('repo/plugins/a/readme.txt','A')
+            archive.writestr('repo/plugins/b/readme.txt','B')
+        with patch('market_packages.resolve',side_effect=[('acme/catalog','a'*40,'plugins/a'),('acme/catalog','a'*40,'plugins/b')]),patch.object(
+                self.market.sources,'fetch',return_value=stream.getvalue()) as fetch,patch.object(self.market,'inspect_plugin',return_value=[]):
+            for name in ['a','b']:
+                self.market.prepare_plugin_candidate(plan,'anthropic',snapshot,{'name':name,'description':name,'entry':{}})
+        self.assertEqual(fetch.call_count,1)
 
     def test_removed_service_invalidates_prepared_and_future_setup(self):
         plan = self.plan()

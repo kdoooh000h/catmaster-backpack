@@ -1,6 +1,6 @@
 """Bounded, receipt-based market acquisition for the existing public gateway.
 
-Only metadata goes to Jev. Preparation downloads inspected public package bytes;
+Only bounded public metadata and selected instructions go to Jev. Preparation downloads inspected public package bytes;
 connection registers portable components and never performs a business action.
 Native hooks/apps and missing credentials are explicit setup requirements.
 """
@@ -11,6 +11,7 @@ import io
 import json
 import math
 import os
+import posixpath
 from pathlib import Path
 import re
 import secrets
@@ -77,7 +78,7 @@ class Market:
         config = self.gateway.public_access.owner_json(config_path) if config_path.exists() else {
             'version': 1, 'provider': 'jev-cli', 'executable': shutil.which('jev'),
             'jev_provider': 'typesafe', 'timeout_seconds': 45, 'minimum_confidence': 0.6}
-        minimum = float(config.get('directory_minimum_confidence', 0.1)) if directory or kind == 'mcp-preview' else max(
+        minimum = float(config.get('directory_minimum_confidence', 0.1)) if directory or kind in {'mcp-preview','plugin-preview','plugin-skill-preview'} else max(
             0.7, float(config.get('minimum_confidence', 0.6)), float(config.get('skill_minimum_confidence', 0.7)))
         if not math.isfinite(minimum) or not 0 <= minimum <= 1:
             raise ValueError('invalid_minimum_confidence')
@@ -88,9 +89,15 @@ class Market:
             config['provider_environment'] = environment
         candidates = [self.runtime.Skill('market-' + str(i), row['description'], Path('.')) for i, row in enumerate(rows)]
         from market_routing import route
-        stage = 'directory' if directory else {'plugin': 'plugin', 'mcp-preview': 'mcp-discovery', 'mcp': 'mcp-fit'}[kind]
+        stage = 'directory' if directory else {'plugin': 'plugin', 'plugin-preview': 'plugin', 'plugin-ready': 'plugin-ready',
+                                             'plugin-skill-preview': 'skill',
+                                             'mcp-preview': 'mcp-discovery', 'mcp': 'mcp-fit'}[kind]
         decision = route(self.runtime, need, candidates, config, stage)
-        public = {k: v for k, v in decision.items() if k != 'skill'}
+        public = {k: v for k, v in decision.items() if k not in {'skill', 'inspect_alternatives', 'plausible'}}
+        alternatives = decision.get('inspect_alternatives', [])
+        if kind in {'plugin-preview', 'plugin-skill-preview'} and alternatives:
+            indexed = {'market-' + str(i): row for i, row in enumerate(rows)}
+            public['_inspection_rows'] = [indexed[key] for key in alternatives]
         public['minimum_confidence'] = minimum
         if decision.get('status') != 'selected':
             return None, public
@@ -107,6 +114,10 @@ class Market:
         description = json.dumps({'server': result.get('server'), 'tool': result['tool']}, ensure_ascii=False)
         if len(description) > 24000:
             return {'status': 'unsupported', 'reason': 'tool_schema_too_large', 'execution': 'not_performed'}
+        from market_mcp_runtime import configuration, reusable_validation
+        minimum = configuration(self.data, self.gateway.mcp_backpack, final=True)['minimum_confidence']
+        if reusable_validation(need,result,minimum):
+            return result
         row, decision = self.choose(need, [{'description': description}], kind='mcp')
         if row is None:
             return {**decision, 'execution': 'not_performed', 'phase': 'actual_tool_validation'}
@@ -165,12 +176,15 @@ class Market:
         library = self.manager.mcp.sources
         if source == 'registry':
             from market_registry import browse
-            page = browse(library, search)
+            page = browse(library, search, self.data / 'registry-query-cache')
         else:
             page = library.browse({'source': source, 'search': search})
         # A bounded complete result is required; do not pick from an arbitrary
         # first page and silently omit later valid capabilities.
         if page.get('next_cursor'):
+            if page['next_cursor'] == 'source_unavailable':
+                return {'status': 'catalog_read_unavailable', 'instruction': page['instruction'],
+                        'available_snapshot_queries': page.get('available_snapshot_queries', []), 'execution': 'not_performed'}
             return {'status': 'search_too_broad', 'instruction': page.get('instruction', 'Narrow the functional search terms. The registry has too many candidates; none were omitted from a final choice.'), 'execution': 'not_performed'}
         rows = []
         for row in page['items']:
@@ -182,6 +196,10 @@ class Market:
                 readiness += ' Remote hosted service; a missing credential field does not establish free or anonymous access.'
             rows.append({**row, 'description': row['name'] + ': ' + row['description'] + '\n' + readiness,
                          'available': available})
+        summaries = market_python.metadata_summaries(library, rows)
+        for row in rows:
+            if row['receipt'] in summaries:
+                row['description'] += '\nVersioned publisher metadata: ' + json.dumps(summaries[row['receipt']], ensure_ascii=False)
         row, decision = self.choose(plan['need'], rows, kind='mcp-preview')
         plan['routing'].append(decision)
         if row is None:
@@ -196,6 +214,8 @@ class Market:
         option = next((o for o in available if o['id'].startswith('remote:')), available[0])
         config = market_python.configuration(library, row['receipt'], option, self.data, self.descriptor)
         plan.update(name=row['name'], description=options['description'], source={'kind': source, 'version': row['version']})
+        if page.get('catalog'):
+            plan['source']['catalog'] = page['catalog']
         plan['servers'] = [self.server(config, plan)]
 
     def server(self, value, plan):
@@ -242,9 +262,21 @@ class Market:
                 'revision': digest([value, config])[:32], 'connections': [self.descriptor]}
 
     def prepare_plugin(self, plan, source):
+        self._archives = {}
+        self._preview_deadline = time.monotonic() + 90
+        self._preview_remaining = 16
         library = self.manager.plugins.sources
         snapshot = library.browse(source)
-        rows = [{**row, 'description': row['name'] + ': ' + row['description']} for row in snapshot['items']]
+        rows = []
+        for row in snapshot['items']:
+            entry = row.get('entry', {})
+            native = [key for key in ('lspServers', 'agents', 'hooks', 'commands', 'userConfig', 'dependencies')
+                      if entry.get(key)]
+            description = row['name'] + ': ' + row['description']
+            if native:
+                description += '\nPublisher-declared runtime requirements: ' + ', '.join(native) + '. '
+                description += 'These native components are not supplied by this adapter; independent Skills require package inspection.'
+            rows.append({**row, 'description': description})
         if len(rows) > 96:
             groups = {}
             for row in rows:
@@ -254,21 +286,139 @@ class Market:
                 if not isinstance(category, str) or len(category) > 100:
                     category = 'uncategorized'
                 groups.setdefault(category, []).append(row)
-            directories = [{'id': key, 'description': key + ': ' + ', '.join(r['name'] for r in members)} for key, members in groups.items()]
-            group, decision = self.choose(plan['need'], directories, directory=True)
-            plan['routing'].append(decision)
-            if group is None:
-                return {**decision, 'execution': 'not_performed'}
-            rows = groups[group['id']]
-        row, decision = self.choose(plan['need'], rows, kind='plugin')
-        plan['routing'].append(decision)
-        if row is None:
-            return {**decision, 'execution': 'not_performed'}
+            rejected = []
+            category_notes = {
+                'development': 'Programming workflows, debugging, testing, code-quality guidance and development tools.',
+                'productivity': 'Review and collaboration workflows, writing, project automation and service integrations.',
+            }
+            for _ in range(3):
+                directories = [{'id': key, 'description': key + ': ' + category_notes.get(key, '') + ' Entries: ' + ', '.join(r['name'] for r in members)} for key, members in groups.items()]
+                group, decision = self.choose(plan['need'], directories, directory=True)
+                plan['routing'].append(decision)
+                if group is None:
+                    return {**decision, 'unavailable_candidates': rejected, 'execution': 'not_performed'}
+                result = self.prepare_plugin_group(plan, source, snapshot, groups.pop(group['id']), rejected)
+                if result is None or result.get('status') not in {'none', 'setup_required'}:
+                    return result
+                if not groups or self._preview_remaining <= 0 or time.monotonic() >= self._preview_deadline:
+                    return result
+            return result
+        return self.prepare_plugin_group(plan, source, snapshot, rows, [])
+
+    def prepare_plugin_group(self, plan, source, snapshot, rows, rejected):
+        # Only confirmed preparation failures advance to another candidate.
+        # A none result applies to this directory, not to unseen sibling groups.
+        # No registration, business call or unknown outcome is retried.
+        inspection_rows = []
+        for _ in range(min(self._preview_remaining, len(rows))):
+            if time.monotonic() >= self._preview_deadline:
+                break
+            if inspection_rows:
+                row = inspection_rows.pop(0)
+            else:
+                row, decision = self.choose(plan['need'], rows, kind='plugin-preview')
+                alternatives = decision.pop('_inspection_rows', [])
+                plan['routing'].append(decision)
+                # A low-confidence metadata abstention is not evidence that
+                # every package is unsuitable. Inspect ALL positive alternatives
+                # if they fit the remaining bound, then require actual-component
+                # fit. A confident none or an oversized set still abstains.
+                if row is None and alternatives and len(alternatives) <= self._preview_remaining:
+                    inspection_rows = list(alternatives)
+                    row = inspection_rows.pop(0)
+            if row is None:
+                return {**decision, 'unavailable_candidates': rejected, 'execution': 'not_performed'}
+            self._preview_remaining -= 1
+            plan['skills'], plan['servers'] = [], []
+            plan.pop('unavailable_components', None)
+            plan.pop('archive_requirements', None)
+            try:
+                result = self.prepare_plugin_candidate(plan, source, snapshot, row)
+            except (ValueError, self.sources.SourceError) as error:
+                reasons = {'market_package_too_large': 'source_or_components_exceed_portable_size_limits',
+                           '来源内容超出大小限制': 'source_or_components_exceed_portable_size_limits',
+                           'unsafe_market_archive': 'package_rejected_unsafe_archive',
+                           'portable_manifest_required': 'portable_manifest_missing',
+                           'unsupported_plugin_source': 'unsupported_package_source',
+                           'plugin_source_unavailable': 'publisher_repository_unavailable'}
+                if str(error) not in reasons:
+                    raise
+                result = {'status': 'setup_required', 'name': row['name'],
+                          'requirements': [reasons[str(error)]]}
+            if result is None and plan['skills']:
+                if not self.portable_guidance_fit(plan):
+                    result = {'status': 'setup_required', 'name': row['name'],
+                              'requirements': ['portable_guidance_does_not_fit_available_runtime']}
+            if result is None:
+                plan['unavailable_candidates'] = rejected
+                return None
+            if result.get('status') != 'setup_required':
+                return result
+            rejected.append({k: result[k] for k in ('name', 'reason', 'requirements') if k in result})
+            rows = [candidate for candidate in rows if candidate['name'] != row['name']]
+        return {'status': 'setup_required', 'unavailable_candidates': rejected,
+                'instruction': 'Inspected candidates need unsupported components or configuration. No grants or business calls were made. Remaining candidates were not exhausted.',
+                'execution': 'not_performed'}
+
+    def portable_guidance_fit(self, plan):
+        """Inspect complete selected instructions before claiming usable guidance."""
+        rows = [{**skill, 'description': self.runtime._read_skill(Path(skill['path'])/'SKILL.md').description}
+                for skill in plan['skills']]
+        inspection_rows = []
+        budget = min(16, len(rows))
+        for inspected in range(budget):
+            if inspection_rows:
+                selected = inspection_rows.pop(0)
+            else:
+                selected, ranking = self.choose(plan['need'], rows, kind='plugin-skill-preview')
+                alternatives = ranking.pop('_inspection_rows', [])
+                plan['routing'].append(ranking)
+                if selected is None and alternatives and len(alternatives) <= budget - inspected:
+                    inspection_rows = list(alternatives)
+                    selected = inspection_rows.pop(0)
+            if selected is None:
+                return False
+            root = Path(selected['path'])
+            entry = (root/'SKILL.md').read_text()
+            resources = [p.relative_to(root).as_posix() for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'SKILL.md']
+            if len(entry) > 48000 or len(resources) > 128:
+                return False
+            # Referenced instructions can describe an independent role/resource
+            # that the entrypoint only introduces. Read only explicit in-package
+            # Markdown links, never arbitrary links or an entire repository.
+            linked = sorted({target for target in re.findall(r'\[[^\]]*\]\(([^\s)]+)\)', entry)
+                             if target in resources and target.lower().endswith('.md')})
+            if len(linked) > 8:
+                return False
+            documents = {}
+            for target in linked:
+                path = self.gateway.public_access.safe(root/target)
+                if path.stat().st_size > 24000:
+                    return False
+                documents[target] = path.read_text()
+            evidence = json.dumps({'plugin': plan['name'], 'name': selected['name'],
+                'entrypoint': entry, 'resources': resources, 'referenced_documents': documents,
+                'unavailable_components': plan.get('unavailable_components', [])}, ensure_ascii=False)
+            if len(evidence) > 56000:
+                return False
+            usable, fit = self.choose(plan['need'], [{'description': evidence}], kind='plugin-ready')
+            plan['routing'].append(fit)
+            if usable is not None:
+                # One independent component does not establish portability of
+                # its siblings. Grant only the inspected component; another
+                # need must independently prepare/validate other Skills.
+                plan['unvalidated_skill_count'] = len(plan['skills']) - 1
+                plan['skills'] = [skill for skill in plan['skills'] if skill['path'] == selected['path']]
+                return True
+            rows = [row for row in rows if row['name'] != selected['name']]
+        return False
+
+    def prepare_plugin_candidate(self, plan, source, snapshot, row):
         plan.update(name=row['name'], description=row['description'], source={'kind': 'plugin', 'market': source, 'repo': snapshot.get('repo'),
                                              'commit': snapshot['commit'], 'name': row['name']})
         plan['market_entry'] = row.get('entry', {})
-        root = self.folder / plan['id'] / 'package'
-        root.parent.mkdir(mode=0o700)
+        root = self.folder / plan['id'] / ('package-' + digest(row['name'])[:12])
+        root.parent.mkdir(mode=0o700, exist_ok=True)
         if source == 'openai':
             native = row['native_entry']
             if not native['installed'] and native['installPolicy'] != 'AVAILABLE':
@@ -286,18 +436,23 @@ class Market:
             repo, commit, prefix = resolve(row.get('entry', {}).get('source'), snapshot,
                                           self.sources, plugin_sources)
             plan['source'].update(package_repo=repo, package_commit=commit, package_path=prefix)
-            archive = self.sources.fetch('https://codeload.github.com/' + repo + '/zip/' + commit, 48 * 1024 * 1024)
+            identity = (repo, commit)
+            archive = self._archives.get(identity)
+            if archive is None:
+                archive = self.sources.fetch('https://codeload.github.com/' + repo + '/zip/' + commit, 48 * 1024 * 1024)
+                if sum(map(len, self._archives.values())) + len(archive) <= 64 * 1024 * 1024:
+                    self._archives[identity] = archive
             extract_package(archive, prefix, root, self.sources.safe_path)
         plan['package'] = str(root)
         plan['package_digest'] = self.gateway.public_access.fingerprint(root)
-        requirements = self.inspect_plugin(root, plan)
+        requirements = self.inspect_plugin(root, plan, portable=True)
         if requirements:
             return {'status': 'setup_required', 'name': row['name'], 'requirements': requirements,
                     'instruction': 'This package needs native host components or explicit configuration. Nothing was connected; use the native plugin manager for these requirements.', 'execution': 'not_performed'}
         if not plan['skills'] and not plan['servers']:
             return {'status': 'setup_required', 'name': row['name'], 'reason': 'no_portable_components', 'execution': 'not_performed'}
 
-    def inspect_plugin(self, root, plan):
+    def inspect_plugin(self, root, plan, *, portable=False):
         manifests = [root / p for p in ('plugin.json', '.claude-plugin/plugin.json', '.codex-plugin/plugin.json') if (root / p).is_file()]
         # One repository may package several hosts. The selected marketplace
         # determines the manifest; another host's root manifest is not merged.
@@ -322,9 +477,19 @@ class Market:
             'dependencies', 'settings', 'channels', 'experimental', 'types') if part.get(key)]
         if entry.get('skills') or entry.get('mcpServers'):
             blocked.append('marketplace_component_override')
-        blocked += [p for p in ('hooks', 'commands', 'agents', '.claude', '.app.json', '.lsp.json', 'mcp.json', 'settings.json', 'CLAUDE.md') if (root / p).exists()]
-        if blocked:
+        # Repository contributor guidance is not a native runtime requirement.
+        # Only selected Skill entrypoints are disclosed; CLAUDE.md/AGENTS.md at
+        # the package root neither run nor gain authority over this adapter.
+        blocked += [p for p in ('hooks', 'commands', 'agents', '.claude', '.app.json', '.lsp.json', 'mcp.json', 'settings.json') if (root / p).exists()]
+        blocked += plan.get('archive_requirements', [])
+        # Native extras stay unavailable. Explicit portable mode can register
+        # independent Skill guidance, never emulate hooks/agents/commands or
+        # ignore dependencies, configuration or marketplace overrides.
+        independent_extras = {'hooks', 'commands', 'agents', 'lspServers', 'outputStyles'}
+        if blocked and (not portable or set(blocked) - independent_extras):
             return sorted(set(blocked))
+        if blocked:
+            plan['unavailable_components'] = sorted(set(blocked))
         manifest = {**overlay, **manifest}
         roots = manifest.get('skills', './skills')
         roots = [roots] if isinstance(roots, str) else roots
@@ -358,7 +523,7 @@ class Market:
                     'configuration': normalized, 'source': {**plan['source'], 'component': name}}, plan))
             except (ValueError, RuntimeError):
                 requirements.append('MCP ' + name + ': explicit configuration or unsupported transport/runtime')
-        return requirements
+        return requirements or (sorted(set(blocked)) if blocked and not plan['skills'] else [])
 
     def plugin_mcp(self, value, root):
         if not isinstance(value, dict):
@@ -427,10 +592,27 @@ class Market:
     def view(self, plan):
         return {'status': plan['status'], 'selection': plan['id'], 'name': plan['name'], 'description': plan.get('description', ''), 'source': plan['source'],
                 'components': {'skills': [s['name'] for s in plan['skills']], 'mcp': [s['title'] for s in plan['servers']]},
+                'connection_scope': 'portable_components', 'unavailable_components': plan.get('unavailable_components', []),
+                'unvalidated_skill_count': plan.get('unvalidated_skill_count', 0),
+                'unavailable_candidates': plan.get('unavailable_candidates', []),
+                'runtime_directories': self.runtime_directories(plan),
                 'connections': [{'title': s['title'], 'configuration': s['configuration']} for s in plan['servers']],
                 'setup_actions': 'Save grants and backups. Install pinned npm dependencies with lifecycle scripts disabled or pinned PyPI wheels in Backpack-owned environments before protocol startup.',
                 'routing': plan['routing'], 'execution': 'not_performed',
                 'instruction': 'This is a concrete setup preview, not execution permission. If this local setup is within the user-authorized task, call connect_market_capability with the exact selection; no repeated user confirmation is needed. Skill guidance is available through acquire_skill and MCP through acquire_mcp/invoke_mcp after connection. Native apps/hooks are not emulated.'}
+
+    def runtime_directories(self, plan):
+        result = []
+        for row in plan['servers']:
+            config = row['configuration']
+            if config['transport'] != 'stdio':
+                continue
+            directory = self.data/'mcp-runtime'/row['id']/self.descriptor.removesuffix('.json')
+            environment = config.get('env', {})
+            result.append({'server': row['title'], 'cwd': str(directory), 'HOME': environment.get('HOME', str(directory/'home')),
+                           'TMPDIR': environment.get('TMPDIR', str(directory)), 'configured_env': environment,
+                           'note': 'Connection-owned launch directories. Default paths relative to HOME/cwd resolve here unless the configured environment or service overrides them. This is launch configuration, not an OS sandbox or a proof of every file write.'})
+        return result
 
     def connect(self, token):
         self.current()
@@ -605,12 +787,15 @@ class Market:
             raise ValueError('market_components_changed_or_revoked')
         return {'status': 'connected', 'name': plan['name'], 'source': plan['source'],
                 'market_selection': plan['id'],
+                'connection_scope': 'portable_components', 'unavailable_components': plan.get('unavailable_components', []),
+                'unvalidated_skill_count': plan.get('unvalidated_skill_count', 0),
+                'runtime_directories': self.runtime_directories(plan),
                 'components': {'skills': len(plan['skills']), 'mcp': len(plan['servers'])},
                 'execution': 'not_performed', 'instruction': 'For this plugin use acquire_skill with market_selection and the concrete need; Jev chooses among its connected Skills. For MCP use acquire_mcp then invoke_mcp. Connection saved; protocol and actual task execution must still be checked. Repeating this setup receipt only inspects the result.'}
 
 
 def extract_package(content, prefix, destination, safe_path):
-    """Extract one selected subtree, bounded before writing, without archive links."""
+    """Extract one bounded subtree; safe direct file aliases become regular copies."""
     files = []
     with zipfile.ZipFile(io.BytesIO(content)) as archive:
         total = 0
@@ -630,13 +815,30 @@ def extract_package(content, prefix, destination, safe_path):
             else:
                 continue
             mode = row.external_attr >> 16
+            source = row
+            if stat.S_IFMT(mode) == stat.S_IFLNK:
+                # Do not create a filesystem link. Accept only a direct regular
+                # file in this selected subtree; no parents, chains or dirs.
+                if row.file_size > 4096:
+                    raise ValueError('unsafe_market_archive')
+                try:
+                    target = safe_path(archive.read(row).decode('utf-8'))
+                    target_name = posixpath.join(posixpath.dirname(row.filename),target)
+                    if not target_name.startswith(start):
+                        raise ValueError('unsafe_market_archive')
+                    source = archive.getinfo(target_name)
+                except (UnicodeError,KeyError,ValueError,RuntimeError) as error:
+                    raise ValueError('unsafe_market_archive') from error
+                mode = source.external_attr >> 16
+                if source.is_dir():
+                    raise ValueError('unsafe_market_archive')
             if stat.S_IFMT(mode) not in {0, stat.S_IFREG} or relative in seen:
                 raise ValueError('unsafe_market_archive')
             seen.add(relative)
-            total += row.file_size
+            total += source.file_size
             if total > 16 * 1024 * 1024 or len(seen) > 512:
                 raise ValueError('market_package_too_large')
-            files.append((relative, archive.read(row), 0o755 if mode & 0o111 else 0o644))
+            files.append((relative, archive.read(source), 0o755 if mode & 0o111 else 0o644))
         if not files:
             raise ValueError('market_package_missing')
     destination.mkdir(mode=0o700)

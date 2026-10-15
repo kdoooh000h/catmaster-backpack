@@ -17,7 +17,7 @@ TOOLS = [
          'required': ['kind', 'need'], 'additionalProperties': False},
      'annotations': {'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': True}},
     {'name': 'connect_market_capability',
-     'description': 'Apply the exact market setup preview within the user-authorized task. Registers portable plugin Skills and MCP services in Backpack with backups; MCP access is granted only to this connection. Skills use the existing project scope. Does not run business tools, native hooks or log into accounts. Then acquire_skill or acquire_mcp/invoke_mcp uses the capability. Reuse the same receipt to inspect completed setup; never replay an interrupted or unknown setup. Selection itself is not permission.',
+     'description': 'Apply the exact market setup preview within the user-authorized task. Installs the selected plugin package and registers its listed portable components in Backpack with backups; unavailable_components remain unavailable and are never emulated. MCP access is granted only to this connection. Skills use the existing project scope. Does not run business tools, native hooks or log into accounts. Then acquire_skill or acquire_mcp/invoke_mcp uses the capability. Reuse the same receipt to inspect completed setup; never replay an interrupted or unknown setup. Selection itself is not permission.',
      'inputSchema': {'type': 'object', 'properties': {'selection': {'type': 'string'}},
                      'required': ['selection'], 'additionalProperties': False},
      'annotations': {'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': True}}
