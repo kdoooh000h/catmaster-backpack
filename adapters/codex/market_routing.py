@@ -97,7 +97,7 @@ def route(runtime, need, candidates, config, stage):
     result = {'status': status, 'skill': answer.choice if status == 'selected' else None,
             'confidence': answer.confidence, 'attempts': attempt,
             'elapsed_seconds': round(time.monotonic() - started, 3), 'selection_stage': stage}
-    if stage == 'plugin' and status == 'selected':
+    if stage in {'plugin', 'skill-preview'} and status == 'selected':
         probabilities = getattr(answer, 'probabilities', {})
         if isinstance(probabilities, dict) and all(
                 isinstance(probabilities.get(row.name, 0), (int, float))

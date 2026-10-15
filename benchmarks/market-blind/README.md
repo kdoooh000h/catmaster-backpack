@@ -98,3 +98,7 @@ The [native MCP execution issue discussion](https://github.com/openai/codex/issu
 motivates observing actual MCP receipts instead of treating a completed CLI turn
 as successful capability execution. These references are context; the local
 receipts determine this pilot's results.
+
+`event-times.jsonl` records when each complete native stdout event line reaches the harness. It preserves `events.jsonl` unchanged and records event index/type, not extra prompt content. Gaps include generation, provider/transport and client waiting; they are not a measure of reasoning time. A killed native turn without usage remains unmetered.
+
+[2026-10-15 preparation optimization and three failed-case retests](../../docs/backpack-market-preparation-optimization-2026-10-15.md) reuses previous passes and reports the two MCP successes separately from the HTML timeout.

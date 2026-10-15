@@ -6,6 +6,7 @@ Native hooks/apps and missing credentials are explicit setup requirements.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import io
 import json
@@ -129,7 +130,7 @@ class Market:
         chosen = next((row for i, row in enumerate(rows) if decision.get('skill') == 'market-' + str(i)), None)
         if chosen is None:
             raise ValueError('invalid_market_choice')
-        if kind == 'plugin-preview' and ordered:
+        if kind in {'plugin-preview', 'plugin-skill-preview'} and ordered:
             indexed = {'market-' + str(i): row for i, row in enumerate(rows)}
             # This is the complete same-call order, not a top-k shortlist.
             if len(ordered) != len(rows) or set(ordered) != set(indexed):
@@ -469,6 +470,8 @@ class Market:
         # No registration, business call or unknown outcome is retried.
         inspection_rows = []
         ranked_rows = None
+        deferred = []
+        terminal = None
         for _ in range(min(self._preview_remaining, len(rows))):
             if time.monotonic() >= self._preview_deadline:
                 break
@@ -491,9 +494,13 @@ class Market:
                     inspection_rows = list(alternatives)
                     row = inspection_rows.pop(0)
             if row is None:
-                return {**decision, 'unavailable_candidates': rejected, 'execution': 'not_performed'}
+                terminal = decision
+                break
             self._preview_remaining -= 1
             plan['skills'], plan['servers'] = [], []
+            plan.pop('_guidance_state', None)
+            plan.pop('guidance_limits', None)
+            plan.pop('uninspected_skill_count', None)
             plan.pop('unavailable_components', None)
             plan.pop('archive_requirements', None)
             try:
@@ -510,9 +517,18 @@ class Market:
                 result = {'status': 'setup_required', 'name': row['name'],
                           'requirements': [reasons[str(error)]]}
             if result is None and plan['skills']:
-                if not self.portable_guidance_fit(plan):
+                if not self.portable_guidance_fit(plan, max_inspections=1):
+                    if plan.get('_guidance_state'):
+                        # Inspect each package's most promising component before
+                        # spending the budget on a long tail of one package.
+                        # Retain every deferred component and its original rank.
+                        pending = copy.deepcopy(plan)
+                        pending['routing'] = plan['routing']
+                        deferred.append(pending)
+                        rows = [candidate for candidate in rows if candidate['name'] != row['name']]
+                        continue
                     result = {'status': 'setup_required', 'name': row['name'],
-                              'requirements': ['portable_guidance_does_not_fit_available_runtime']}
+                              'requirements': [self.guidance_failure(plan)]}
             if result is None:
                 plan['unavailable_candidates'] = rejected
                 return None
@@ -520,51 +536,94 @@ class Market:
                 return result
             rejected.append({k: result[k] for k in ('name', 'reason', 'requirements') if k in result})
             rows = [candidate for candidate in rows if candidate['name'] != row['name']]
+        while deferred and time.monotonic() < self._preview_deadline:
+            pending = deferred.pop(0)
+            if self.portable_guidance_fit(pending, max_inspections=1):
+                plan.clear()
+                plan.update(pending)
+                plan['unavailable_candidates'] = rejected
+                return None
+            if pending.get('_guidance_state'):
+                deferred.append(pending)
+            else:
+                rejected.append({'name': pending['name'],
+                    'requirements': [self.guidance_failure(pending)]})
+        plan.pop('_guidance_state', None)
+        if terminal and not deferred:
+            return {**terminal, 'unavailable_candidates': rejected, 'execution': 'not_performed'}
         return {'status': 'setup_required', 'unavailable_candidates': rejected,
+                'deferred_components': sum(len(p['_guidance_state']['rows']) for p in deferred),
                 'instruction': 'Inspected candidates need unsupported components or configuration. No grants or business calls were made. Remaining candidates were not exhausted.',
                 'execution': 'not_performed'}
 
-    def portable_guidance_fit(self, plan):
+    @staticmethod
+    def guidance_failure(plan):
+        if plan.get('uninspected_skill_count'):
+            return 'portable_guidance_budget_exhausted'
+        if plan.get('guidance_limits'):
+            return 'portable_guidance_evidence_limit'
+        return 'portable_guidance_does_not_fit_available_runtime'
+
+    def portable_guidance_fit(self, plan, *, max_inspections=None):
         """Inspect complete selected instructions before claiming usable guidance."""
-        rows = [{**skill, 'description': self.runtime._read_skill(Path(skill['path'])/'SKILL.md').description}
-                for skill in plan['skills']]
-        inspection_rows = []
-        budget = min(16, len(rows))
-        for inspected in range(budget):
-            if inspection_rows:
-                selected = inspection_rows.pop(0)
+        state = plan.pop('_guidance_state', None)
+        if state is None:
+            rows = [{**skill, 'description': self.runtime._read_skill(Path(skill['path'])/'SKILL.md').description}
+                    for skill in plan['skills']]
+            state = {'rows': rows, 'ranked': None, 'alternatives': [], 'remaining': min(16, len(rows))}
+        budget = state['remaining'] if max_inspections is None else min(max_inspections, state['remaining'])
+        for _ in range(budget):
+            rows = state['rows']
+            if not rows:
+                return False
+            if state['alternatives']:
+                selected = state['alternatives'].pop(0)
+            elif state['ranked'] is not None:
+                if not state['ranked']:
+                    return False
+                selected = state['ranked'].pop(0)
             else:
                 selected, ranking = self.choose(plan['need'], rows, kind='plugin-skill-preview')
+                state['ranked'] = ranking.pop('_ranked_rows', None)
                 alternatives = ranking.pop('_inspection_rows', [])
                 plan['routing'].append(ranking)
-                if selected is None and alternatives and len(alternatives) <= budget - inspected:
-                    inspection_rows = list(alternatives)
-                    selected = inspection_rows.pop(0)
+                if selected is None and alternatives and len(alternatives) <= state['remaining']:
+                    state['alternatives'] = list(alternatives)
+                    selected = state['alternatives'].pop(0)
             if selected is None:
                 return False
+            state['remaining'] -= 1
+            state['rows'] = [row for row in rows if row['path'] != selected['path']]
             root = Path(selected['path'])
             entry = (root/'SKILL.md').read_text()
             resources = [p.relative_to(root).as_posix() for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'SKILL.md']
             if len(entry) > 48000 or len(resources) > 128:
-                return False
+                plan.setdefault('guidance_limits', []).append(selected['name'])
+                continue
             # Referenced instructions can describe an independent role/resource
             # that the entrypoint only introduces. Read only explicit in-package
             # Markdown links, never arbitrary links or an entire repository.
             linked = sorted({target for target in re.findall(r'\[[^\]]*\]\(([^\s)]+)\)', entry)
                              if target in resources and target.lower().endswith('.md')})
             if len(linked) > 8:
-                return False
+                plan.setdefault('guidance_limits', []).append(selected['name'])
+                continue
             documents = {}
             for target in linked:
                 path = self.gateway.public_access.safe(root/target)
                 if path.stat().st_size > 24000:
-                    return False
+                    documents = None
+                    break
                 documents[target] = path.read_text()
+            if documents is None:
+                plan.setdefault('guidance_limits', []).append(selected['name'])
+                continue
             evidence = json.dumps({'plugin': plan['name'], 'name': selected['name'],
                 'entrypoint': entry, 'resources': resources, 'referenced_documents': documents,
                 'unavailable_components': plan.get('unavailable_components', [])}, ensure_ascii=False)
             if len(evidence) > 56000:
-                return False
+                plan.setdefault('guidance_limits', []).append(selected['name'])
+                continue
             usable, fit = self.choose(plan['need'], [{'description': evidence}], kind='plugin-ready')
             plan['routing'].append(fit)
             if usable is not None:
@@ -574,7 +633,10 @@ class Market:
                 plan['unvalidated_skill_count'] = len(plan['skills']) - 1
                 plan['skills'] = [skill for skill in plan['skills'] if skill['path'] == selected['path']]
                 return True
-            rows = [row for row in rows if row['name'] != selected['name']]
+        if state['rows'] and state['remaining']:
+            plan['_guidance_state'] = state
+        elif state['rows']:
+            plan['uninspected_skill_count'] = len(state['rows'])
         return False
 
     def prepare_plugin_candidate(self, plan, source, snapshot, row):

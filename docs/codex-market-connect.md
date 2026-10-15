@@ -294,3 +294,9 @@ A selected market plugin may disclose a template or other file from its pinned
 package through `acquire_resource`. It must pass current scope/grant, package
 fingerprint, selected-path and work-copy checks. The adapter does not fabricate
 an external Skill source registration or expose files from another package.
+
+## 准备成本与慢目录读取（2026-10-15）
+
+包内组件复用完整排序，先轮流检查候选包的首选组件，再回查其余组件；完整证据与最终至少 0.7 门槛保留。单组件证据超限不再放弃同包兄弟，未覆盖的候选不能当作不适用。Registry 匿名读取每页最多 45 秒，共用 90 秒分页预算，取消短超时自动重发，仍不使用不完整结果。
+
+实测仅证明一条准备预检减少消耗、两个原失败 MCP 题完成；网页原生结束仍超时。见[同题续测与完整计账](backpack-market-preparation-optimization-2026-10-15.md)。

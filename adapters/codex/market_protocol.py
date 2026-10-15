@@ -74,6 +74,9 @@ def dispatch(gateway, connection, reader, market, name, arguments):
                 reader = gateway.Router(connection['data_root'], connection['project_root'], allowed=context['keys'])
                 reader.market_guidance_context = context
             result = reader.request('acquire' if name == 'acquire_skill' else 'resource', arguments)
+            if name == 'acquire_skill' and hasattr(reader, 'market_guidance_context') and result.get('status') == 'selected':
+                result = {**result, 'application_scope':
+                    'Apply this guidance within the original requested outcome. Finish the required artifact and its checks before optional extras. Guide examples are not additional user requirements.'}
         else:
             raise ValueError('unknown_tool')
     if not gateway.load_connection(connection['_descriptor'])['enabled']:

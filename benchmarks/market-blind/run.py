@@ -213,6 +213,20 @@ def prepare(args):
         dump(case / 'input-files.json', {p.name: digest(p) for p in work.iterdir() if p.is_file()})
     print(json.dumps({'prepared': str(root), 'cases': len(tasks), 'model': manifest['model'], 'reasoning': manifest['reasoning']}))
 
+def record_native_events(stream, output, timings, started):
+    """Timestamp receipt of complete native event lines, not model reasoning."""
+    for index, line in enumerate(stream):
+        output.write(line)
+        output.flush()
+        try:
+            value = json.loads(line)
+            item = value.get('item') or {}
+            journal(timings, {'index': index, 'elapsed_seconds': time.monotonic()-started,
+                'event': value.get('type'), 'item_type': item.get('type'), 'item_id': item.get('id')})
+        except ValueError:
+            journal(timings, {'index': index, 'elapsed_seconds': time.monotonic()-started, 'event': 'invalid_json'})
+
+
 def run(args):
     root = Path(args.output).resolve(); manifest = json.loads((root / 'manifest.json').read_text())
     case = root / args.case
@@ -240,16 +254,22 @@ def run(args):
     dump(receipt, state)
     start = time.monotonic()
     with (case / 'events.jsonl').open('x') as out, (case / 'native-stderr.log').open('x') as err:
-        p = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=out, stderr=err, env=env, text=True, start_new_session=True)
+        p = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=err, env=env, text=True, start_new_session=True)
         state['pid'] = p.pid; dump(receipt, state)
+        recorder = threading.Thread(target=record_native_events, args=(p.stdout,out,case/'event-times.jsonl',start), daemon=True)
+        recorder.start()
         try:
-            p.communicate((case / 'prompt.txt').read_text(), timeout=manifest['timeout_seconds'])
+            p.stdin.write((case / 'prompt.txt').read_text()); p.stdin.close()
+            p.wait(timeout=manifest['timeout_seconds'])
             state['status'] = 'exited'
         except subprocess.TimeoutExpired:
             state['status'] = 'timed_out'
             os.killpg(p.pid, signal.SIGTERM)
             try: p.wait(timeout=10)
             except subprocess.TimeoutExpired: os.killpg(p.pid, signal.SIGKILL); p.wait()
+        recorder.join(timeout=10)
+        if recorder.is_alive():
+            state['event_stream_incomplete'] = True
     state.update(returncode=p.returncode, elapsed_seconds=round(time.monotonic()-start,3), finished_at=time.time())
     dump(receipt, state)
     print(json.dumps({k:v for k,v in state.items() if k != 'argv'}))

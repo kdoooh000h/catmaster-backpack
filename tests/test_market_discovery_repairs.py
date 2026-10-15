@@ -59,7 +59,7 @@ class DiscoveryRepairs(unittest.TestCase):
             opener.return_value.open.side_effect = TimeoutError()
             with self.assertRaisesRegex(ValueError, 'registry_read_timeout_or_network_error'):
                 registry.fetch('clock', '', registry.time.monotonic() + 80)
-            self.assertEqual(opener.return_value.open.call_args.kwargs['timeout'], 12)
+            self.assertEqual(opener.return_value.open.call_args.kwargs['timeout'], 45)
 
     def test_curl_retains_https_identity_size_and_no_redirect_boundary(self):
         response = SimpleNamespace(returncode=0, stdout=b'{"servers": []}\n200')
@@ -76,7 +76,7 @@ class DiscoveryRepairs(unittest.TestCase):
                     registry.curl_fetch('/usr/bin/curl', registry.ROOT, 35)
         with patch.object(registry, '_fetch', side_effect=ValueError('registry_read_timeout_or_network_error')) as fetch:
             with self.assertRaises(ValueError): registry.fetch('clock', '', registry.time.monotonic()+80)
-            self.assertEqual(fetch.call_count, 2)
+            self.assertEqual(fetch.call_count, 1)
 
     def test_conflicting_versions_in_one_search_abort(self):
         a, b = entry('a'), entry('a')

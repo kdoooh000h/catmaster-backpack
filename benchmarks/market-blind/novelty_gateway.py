@@ -95,7 +95,7 @@ def novel_market(base, inventory, family='plugin'):
             result = super().prepare(arguments)
             return {**result,'excluded_existing':list(self.excluded_existing)}
 
-        def portable_guidance_fit(self, plan):
+        def portable_guidance_fit(self, plan, **kwargs):
             inventory.check(self.connection)
             eligible = []
             excluded = plan.setdefault('excluded_existing',[])
@@ -108,7 +108,7 @@ def novel_market(base, inventory, family='plugin'):
                 else:
                     eligible.append(row)
             plan['skills'] = eligible
-            return bool(eligible) and super().portable_guidance_fit(plan)
+            return bool(eligible) and super().portable_guidance_fit(plan, **kwargs)
 
         def view(self, plan):
             if family == 'mcp' and any(inventory.existing(row['title']) for row in plan['servers']):

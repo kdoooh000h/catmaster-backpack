@@ -31,11 +31,11 @@ def _fetch(query, cursor, deadline):
     url = ROOT + '?' + urllib.parse.urlencode(params)
     executable = shutil.which('curl')
     if executable:
-        return curl_fetch(executable, url, min(12, remaining))
+        return curl_fetch(executable, url, min(45, remaining))
     request = urllib.request.Request(url,
                                      headers={'User-Agent': 'CatMaster-Backpack', 'Accept': 'application/json'})
     try:
-        with urllib.request.build_opener(NoRedirect()).open(request, timeout=min(12, remaining)) as response:
+        with urllib.request.build_opener(NoRedirect()).open(request, timeout=min(45, remaining)) as response:
             content = response.read(MAX_BYTES + 1)
     except urllib.error.HTTPError as error:
         code = error.code
@@ -85,15 +85,10 @@ def curl_fetch(executable, url, timeout):
 
 
 def fetch(query, cursor, deadline):
-    # Only this anonymous idempotent GET may retry a confirmed read failure.
-    # Setup and business receipts never pass through this transport.
-    for attempt in range(2):
-        try:
-            return _fetch(query, cursor, deadline)
-        except ValueError as error:
-            if (str(error) != 'registry_read_timeout_or_network_error' or attempt
-                    or deadline - time.monotonic() < 1):
-                raise
+    # One uninterrupted read. Repeating a short timeout caused two cancelled
+    # searches even when the server would return a valid result after 22-29s.
+    # The shared deadline still bounds all terms/pages; no partial selection.
+    return _fetch(query, cursor, deadline)
 
 
 def pages(query, deadline):
@@ -140,7 +135,7 @@ def browse(library, search, cache_root=None):
         except (OSError, ValueError):
             pass  # Invalid cache is never used and does not block a fresh read.
     catalog = {'mode': 'live_query', 'coverage': 'complete_at_query'}
-    deadline = time.monotonic() + 26
+    deadline = time.monotonic() + 90
     try:
         if snapshot is not None and snapshot['cache_age_seconds'] <= cache.FRESH_AGE:
             batches = [snapshot['rows']]
