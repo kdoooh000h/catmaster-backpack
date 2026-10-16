@@ -117,6 +117,40 @@ class ContextEfficiencyTests(unittest.TestCase):
         self.market.connect.assert_called_once()
         self.reader.report.assert_not_called()
 
+    def test_negative_resource_lookup_is_explained_without_changing_selection(self):
+        negative = {'status': 'none', 'confidence': .78, 'minimum_confidence': .7,
+                    'selection_stage': 'resource-fit', 'execution': 'not_performed'}
+        self.reader.request.side_effect = [
+            {'status': 'selected', 'selection': 'skill-receipt', 'content': 'Full guidance'}, negative]
+        result = self.invoke()
+        self.assertEqual({k: result['resource'][k] for k in negative}, negative)
+        self.assertIn('lookup is complete', result['resource']['instruction'])
+        self.assertIn('required reference is unavailable', result['resource']['instruction'])
+        self.assertNotIn('If another reference', result['instruction'])
+        self.assertEqual(self.reader.request.call_count, 2)
+
+    def test_new_resource_requirement_is_not_suppressed_or_cached_as_a_paraphrase(self):
+        self.reader.request.side_effect = [
+            {'status': 'none', 'confidence': .98},
+            {'status': 'selected', 'resources': [{'content': 'New required reference'}]}]
+        first = protocol.dispatch(self.gateway, self.connection, self.reader, self.market,
+            'acquire_resource', {'selection': 'skill-receipt', 'need': 'original requirement'})
+        second = protocol.dispatch(self.gateway, self.connection, self.reader, self.market,
+            'acquire_resource', {'selection': 'skill-receipt', 'need': 'new missing requirement'})
+        self.assertEqual(first['status'], 'none')
+        self.assertEqual(second['resources'][0]['content'], 'New required reference')
+        self.assertEqual(self.reader.request.call_count, 2)
+
+    def test_resource_outage_or_uncertainty_is_not_called_a_complete_negative_lookup(self):
+        for status in ('uncertain', 'unavailable_or_changed', 'sensitive_need_rejected'):
+            with self.subTest(status=status):
+                original = {'status': status, 'confidence': .69}
+                self.reader.request.side_effect = None
+                self.reader.request.return_value = original
+                result = protocol.dispatch(self.gateway, self.connection, self.reader, self.market,
+                    'acquire_resource', {'selection': 'skill-receipt', 'need': 'requirement'})
+                self.assertEqual(result, original)
+
     def test_revocation_is_rechecked_before_connection(self):
         self.gateway.load_connection.side_effect = [{'enabled': True}, {'enabled': False}, {'enabled': False}]
         with self.assertRaisesRegex(ValueError, 'connection_disabled'):

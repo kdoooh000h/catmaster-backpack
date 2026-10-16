@@ -1,0 +1,725 @@
+{
+  "source_base": "d0f896ac31484b75a6aa4b8082cf7282f230efc2",
+  "final_floor": 0.7,
+  "tests_passed": 205,
+  "earlier_chinese_baseline": {
+    "case": "plugin-playground",
+    "status": "exited",
+    "returncode": 0,
+    "elapsed_seconds": 164.759,
+    "backpack_wait_seconds": 60.614,
+    "other_elapsed_seconds": 104.145,
+    "jev_elapsed_seconds": 6.027,
+    "host_operations": {
+      "mcp_tool_call": 4,
+      "command_execution": 0,
+      "file_change": 1
+    },
+    "native_turn_completed": 1,
+    "native_usage": {
+      "calls_expected": 1,
+      "calls_with_usage": 1,
+      "complete": true,
+      "input_tokens": 119520,
+      "output_tokens": 3409,
+      "known_total_tokens": 122929,
+      "cached_input_tokens": 103168,
+      "cache_accounting_complete": true,
+      "noncached_input_tokens": 16352,
+      "cache_write_input_tokens": 0
+    },
+    "native_session_usage": {
+      "input_tokens": 119520,
+      "cached_input_tokens": 103168,
+      "output_tokens": 3409,
+      "reasoning_output_tokens": 411,
+      "known_total_tokens": 122929,
+      "noncached_input_tokens": 16352,
+      "observed_usage_updates": 7,
+      "updates": [
+        {
+          "at": "2026-10-16T02:06:14.554Z",
+          "cumulative": {
+            "input_tokens": 12159,
+            "cached_input_tokens": 9600,
+            "output_tokens": 87,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 12159,
+            "cached_input_tokens": 9600,
+            "output_tokens": 87,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:06:27.741Z",
+          "cumulative": {
+            "input_tokens": 26371,
+            "cached_input_tokens": 21632,
+            "output_tokens": 214,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 14212,
+            "cached_input_tokens": 12032,
+            "output_tokens": 127,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:06:32.709Z",
+          "cumulative": {
+            "input_tokens": 41519,
+            "cached_input_tokens": 31232,
+            "output_tokens": 285,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 15148,
+            "cached_input_tokens": 9600,
+            "output_tokens": 71,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:07:36.541Z",
+          "cumulative": {
+            "input_tokens": 58747,
+            "cached_input_tokens": 46208,
+            "output_tokens": 2875,
+            "reasoning_output_tokens": 242
+          },
+          "last_request": {
+            "input_tokens": 17228,
+            "cached_input_tokens": 14976,
+            "output_tokens": 2590,
+            "reasoning_output_tokens": 242
+          }
+        },
+        {
+          "at": "2026-10-16T02:08:32.383Z",
+          "cumulative": {
+            "input_tokens": 78589,
+            "cached_input_tokens": 63232,
+            "output_tokens": 3005,
+            "reasoning_output_tokens": 262
+          },
+          "last_request": {
+            "input_tokens": 19842,
+            "cached_input_tokens": 17024,
+            "output_tokens": 130,
+            "reasoning_output_tokens": 20
+          }
+        },
+        {
+          "at": "2026-10-16T02:08:37.971Z",
+          "cumulative": {
+            "input_tokens": 98952,
+            "cached_input_tokens": 82944,
+            "output_tokens": 3150,
+            "reasoning_output_tokens": 262
+          },
+          "last_request": {
+            "input_tokens": 20363,
+            "cached_input_tokens": 19712,
+            "output_tokens": 145,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:08:48.672Z",
+          "cumulative": {
+            "input_tokens": 119520,
+            "cached_input_tokens": 103168,
+            "output_tokens": 3409,
+            "reasoning_output_tokens": 411
+          },
+          "last_request": {
+            "input_tokens": 20568,
+            "cached_input_tokens": 20224,
+            "output_tokens": 259,
+            "reasoning_output_tokens": 149
+          }
+        }
+      ],
+      "coverage": "Observed usage events only; an interrupted in-flight request may be missing."
+    },
+    "jev_usage": {
+      "calls_expected": 10,
+      "calls_with_usage": 10,
+      "complete": true,
+      "input_tokens": 41644,
+      "output_tokens": 5167,
+      "known_total_tokens": 46811
+    },
+    "native_transport_error_events": [],
+    "backpack_calls": [
+      {
+        "tool": "prepare_market_capability",
+        "elapsed_seconds": 8.338,
+        "status": "prepared",
+        "reason": null,
+        "is_error": false,
+        "need": "为学生制作可离线打开的单文件 HTML 交互学习页面：使用滑块调整弹簧刚度 k 和物体质量 m，实时显示带单位的参数及周期 T=2π√(m/k)，提供重置与复制当前配置 JSON，并检查计算和交互。需要适合小型交互教学网页的制作指导。",
+        "search": "interactive educational webpage",
+        "selected_name": "playground",
+        "preexisting_name": false,
+        "source": {
+          "kind": "plugin",
+          "market": "anthropic",
+          "repo": "anthropics/claude-plugins-official",
+          "commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "name": "playground",
+          "package_repo": "anthropics/claude-plugins-official",
+          "package_commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "package_path": "plugins/playground"
+        },
+        "components": {
+          "skills": [
+            "playground"
+          ],
+          "mcp": []
+        }
+      },
+      {
+        "tool": "connect_market_capability",
+        "elapsed_seconds": 1.498,
+        "status": "connected",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null,
+        "selected_name": "playground",
+        "preexisting_name": false,
+        "source": {
+          "commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "kind": "plugin",
+          "market": "anthropic",
+          "name": "playground",
+          "package_commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "package_path": "plugins/playground",
+          "package_repo": "anthropics/claude-plugins-official",
+          "repo": "anthropics/claude-plugins-official"
+        },
+        "components": {
+          "skills": 1,
+          "mcp": 0
+        }
+      },
+      {
+        "tool": "verify_local_webpage",
+        "elapsed_seconds": 50.768,
+        "status": "passed",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null
+      },
+      {
+        "tool": "report_skill_use",
+        "elapsed_seconds": 0.01,
+        "status": "recorded",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null,
+        "reported_event": "completed"
+      }
+    ],
+    "known_total_tokens": 169740,
+    "token_coverage_complete": true,
+    "final_exists": true,
+    "output_files": [
+      "index.html"
+    ],
+    "acceptance": {
+      "passed": true,
+      "novel_public_plugin": true,
+      "capability_name_supplied": false,
+      "fixed_english_need": false,
+      "generated_need_language": "Chinese",
+      "real_browser_checks": [
+        "formula",
+        "sliders",
+        "reset",
+        "clipboard"
+      ],
+      "browser_scope": "localhost preview; external requests blocked; file scheme untested",
+      "native_usage_report": "recorded and persisted as completed",
+      "evaluator_repaired_usage_report": false
+    }
+  },
+  "previous_candidate": {
+    "case": "plugin-playground",
+    "status": "exited",
+    "returncode": 0,
+    "elapsed_seconds": 245.415,
+    "backpack_wait_seconds": 99.148,
+    "other_elapsed_seconds": 146.267,
+    "jev_elapsed_seconds": 9.102,
+    "host_operations": {
+      "mcp_tool_call": 4,
+      "command_execution": 0,
+      "file_change": 1
+    },
+    "native_turn_completed": 1,
+    "native_usage": {
+      "calls_expected": 1,
+      "calls_with_usage": 1,
+      "complete": true,
+      "input_tokens": 99112,
+      "output_tokens": 4770,
+      "known_total_tokens": 103882,
+      "cached_input_tokens": 80640,
+      "cache_accounting_complete": true,
+      "noncached_input_tokens": 18472,
+      "cache_write_input_tokens": 0
+    },
+    "native_session_usage": {
+      "input_tokens": 99112,
+      "cached_input_tokens": 80640,
+      "output_tokens": 4770,
+      "reasoning_output_tokens": 819,
+      "known_total_tokens": 103882,
+      "noncached_input_tokens": 18472,
+      "observed_usage_updates": 6,
+      "updates": [
+        {
+          "at": "2026-10-16T02:34:28.165Z",
+          "cumulative": {
+            "input_tokens": 12177,
+            "cached_input_tokens": 9600,
+            "output_tokens": 90,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 12177,
+            "cached_input_tokens": 9600,
+            "output_tokens": 90,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:34:57.764Z",
+          "cumulative": {
+            "input_tokens": 26004,
+            "cached_input_tokens": 19200,
+            "output_tokens": 204,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 13827,
+            "cached_input_tokens": 9600,
+            "output_tokens": 114,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:35:09.869Z",
+          "cumulative": {
+            "input_tokens": 41862,
+            "cached_input_tokens": 28800,
+            "output_tokens": 471,
+            "reasoning_output_tokens": 70
+          },
+          "last_request": {
+            "input_tokens": 15858,
+            "cached_input_tokens": 9600,
+            "output_tokens": 267,
+            "reasoning_output_tokens": 70
+          }
+        },
+        {
+          "at": "2026-10-16T02:38:00.314Z",
+          "cumulative": {
+            "input_tokens": 58115,
+            "cached_input_tokens": 44416,
+            "output_tokens": 4436,
+            "reasoning_output_tokens": 689
+          },
+          "last_request": {
+            "input_tokens": 16253,
+            "cached_input_tokens": 15616,
+            "output_tokens": 3965,
+            "reasoning_output_tokens": 619
+          }
+        },
+        {
+          "at": "2026-10-16T02:38:13.087Z",
+          "cumulative": {
+            "input_tokens": 78362,
+            "cached_input_tokens": 60544,
+            "output_tokens": 4544,
+            "reasoning_output_tokens": 710
+          },
+          "last_request": {
+            "input_tokens": 20247,
+            "cached_input_tokens": 16128,
+            "output_tokens": 108,
+            "reasoning_output_tokens": 21
+          }
+        },
+        {
+          "at": "2026-10-16T02:38:22.637Z",
+          "cumulative": {
+            "input_tokens": 99112,
+            "cached_input_tokens": 80640,
+            "output_tokens": 4770,
+            "reasoning_output_tokens": 819
+          },
+          "last_request": {
+            "input_tokens": 20750,
+            "cached_input_tokens": 20096,
+            "output_tokens": 226,
+            "reasoning_output_tokens": 109
+          }
+        }
+      ],
+      "coverage": "Observed usage events only; an interrupted in-flight request may be missing."
+    },
+    "jev_usage": {
+      "calls_expected": 17,
+      "calls_with_usage": 17,
+      "complete": true,
+      "input_tokens": 47240,
+      "output_tokens": 5631,
+      "known_total_tokens": 52871
+    },
+    "native_transport_error_events": [],
+    "backpack_calls": [
+      {
+        "tool": "prepare_market_capability",
+        "elapsed_seconds": 24.229,
+        "status": "connected",
+        "reason": null,
+        "is_error": false,
+        "need": "Create an offline single-file HTML educational spring oscillator with sliders for spring stiffness k and mass m, display units and period T=2π√(m/k), reset and copy configuration JSON; use guidance for clear accessible interactive frontend design.",
+        "search": "interactive frontend",
+        "selected_name": "playground",
+        "preexisting_name": false,
+        "source": {
+          "commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "kind": "plugin",
+          "market": "anthropic",
+          "name": "playground",
+          "package_commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "package_path": "plugins/playground",
+          "package_repo": "anthropics/claude-plugins-official",
+          "repo": "anthropics/claude-plugins-official"
+        },
+        "components": {
+          "skills": 1,
+          "mcp": 0
+        }
+      },
+      {
+        "tool": "acquire_resource",
+        "elapsed_seconds": 1.2,
+        "status": "none",
+        "reason": null,
+        "is_error": false,
+        "need": "Read the closest learning-and-exploration template for an educational spring oscillator showing the relationship between stiffness, mass, and period, adapting to the user's required sliders and JSON output.",
+        "search": null
+      },
+      {
+        "tool": "verify_local_webpage",
+        "elapsed_seconds": 73.715,
+        "status": "passed",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null
+      },
+      {
+        "tool": "report_skill_use",
+        "elapsed_seconds": 0.004,
+        "status": "recorded",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null,
+        "reported_event": "completed"
+      }
+    ],
+    "known_total_tokens": 156753,
+    "token_coverage_complete": true,
+    "final_exists": true,
+    "output_files": [
+      "index.html"
+    ],
+    "acceptance": {
+      "passed": true,
+      "novel_public_plugin": true,
+      "capability_names_supplied": false,
+      "fixed_english_need": false,
+      "browser_scope": "Actual localhost browser with external requests blocked; file:// not exercised.",
+      "formula_sliders_reset_clipboard": true,
+      "native_usage_report_persisted": true,
+      "evaluator_repaired_report": false
+    }
+  },
+  "candidate": {
+    "case": "plugin-playground",
+    "status": "exited",
+    "returncode": 0,
+    "elapsed_seconds": 193.906,
+    "backpack_wait_seconds": 57.42,
+    "other_elapsed_seconds": 136.486,
+    "jev_elapsed_seconds": 9.9,
+    "host_operations": {
+      "mcp_tool_call": 3,
+      "command_execution": 0,
+      "file_change": 1
+    },
+    "native_turn_completed": 1,
+    "native_usage": {
+      "calls_expected": 1,
+      "calls_with_usage": 1,
+      "complete": true,
+      "input_tokens": 62461,
+      "output_tokens": 4592,
+      "known_total_tokens": 67053,
+      "cached_input_tokens": 51200,
+      "cache_accounting_complete": true,
+      "noncached_input_tokens": 11261,
+      "cache_write_input_tokens": 0
+    },
+    "native_session_usage": {
+      "input_tokens": 62461,
+      "cached_input_tokens": 51200,
+      "output_tokens": 4592,
+      "reasoning_output_tokens": 1185,
+      "known_total_tokens": 67053,
+      "noncached_input_tokens": 11261,
+      "observed_usage_updates": 4,
+      "updates": [
+        {
+          "at": "2026-10-16T04:14:48.840Z",
+          "cumulative": {
+            "input_tokens": 12168,
+            "cached_input_tokens": 9600,
+            "output_tokens": 90,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 12168,
+            "cached_input_tokens": 9600,
+            "output_tokens": 90,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T04:15:09.923Z",
+          "cumulative": {
+            "input_tokens": 25986,
+            "cached_input_tokens": 21632,
+            "output_tokens": 204,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 13818,
+            "cached_input_tokens": 12032,
+            "output_tokens": 114,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T04:17:39.377Z",
+          "cumulative": {
+            "input_tokens": 42002,
+            "cached_input_tokens": 35328,
+            "output_tokens": 4335,
+            "reasoning_output_tokens": 1034
+          },
+          "last_request": {
+            "input_tokens": 16016,
+            "cached_input_tokens": 13696,
+            "output_tokens": 4131,
+            "reasoning_output_tokens": 1034
+          }
+        },
+        {
+          "at": "2026-10-16T04:17:48.060Z",
+          "cumulative": {
+            "input_tokens": 62461,
+            "cached_input_tokens": 51200,
+            "output_tokens": 4592,
+            "reasoning_output_tokens": 1185
+          },
+          "last_request": {
+            "input_tokens": 20459,
+            "cached_input_tokens": 15872,
+            "output_tokens": 257,
+            "reasoning_output_tokens": 151
+          }
+        }
+      ],
+      "coverage": "Observed usage events only; an interrupted in-flight request may be missing."
+    },
+    "jev_usage": {
+      "calls_expected": 10,
+      "calls_with_usage": 10,
+      "complete": true,
+      "input_tokens": 41557,
+      "output_tokens": 5167,
+      "known_total_tokens": 46724
+    },
+    "native_transport_error_events": [],
+    "backpack_calls": [
+      {
+        "tool": "prepare_market_capability",
+        "elapsed_seconds": 15.103,
+        "status": "connected",
+        "reason": null,
+        "is_error": false,
+        "need": "制作一个无需网络、可离线打开的单文件 HTML 教学页面：学生拖动滑块调整弹簧刚度 k 和质量 m，实时查看 T=2π√(m/k)、参数和单位，并提供重置和复制当前配置 JSON。需要适合此任务的网页实现指导。",
+        "search": "interactive educational webpage",
+        "selected_name": "playground",
+        "preexisting_name": false,
+        "source": {
+          "commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "kind": "plugin",
+          "market": "anthropic",
+          "name": "playground",
+          "package_commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "package_path": "plugins/playground",
+          "package_repo": "anthropics/claude-plugins-official",
+          "repo": "anthropics/claude-plugins-official"
+        },
+        "components": {
+          "skills": 1,
+          "mcp": 0
+        }
+      },
+      {
+        "tool": "verify_local_webpage",
+        "elapsed_seconds": 42.287,
+        "status": "passed",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null
+      },
+      {
+        "tool": "report_skill_use",
+        "elapsed_seconds": 0.03,
+        "status": "recorded",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null,
+        "reported_event": "completed"
+      }
+    ],
+    "known_total_tokens": 113777,
+    "token_coverage_complete": true,
+    "final_exists": true,
+    "output_files": [
+      "index.html"
+    ],
+    "acceptance": {
+      "passed": true,
+      "novel_public_plugin": true,
+      "capability_names_supplied": false,
+      "fixed_english_need": false,
+      "browser_scope": "Actual localhost browser with external requests blocked; file:// not directly tested.",
+      "formula_sliders_reset_clipboard": true,
+      "native_usage_report_persisted": true,
+      "evaluator_repaired_report": false
+    }
+  },
+  "deltas_vs_previous_candidate": {
+    "main_token_reduction_percent": 35.45,
+    "total_known_token_reduction_percent": 27.42,
+    "elapsed_reduction_percent": 20.99,
+    "browser_wait_reduction_percent": 42.63
+  },
+  "browser_timing_seconds": {
+    "request_to_observer": 0.014,
+    "observer_to_ui_start": 3.982,
+    "ui_work_including_host_turns": 25.496,
+    "ui_finish_to_publication": 12.636,
+    "publication_to_gateway": 0.146,
+    "total": 42.273
+  },
+  "host_calls": [
+    {
+      "at": "2026-10-16T04:14:48.558Z",
+      "host_tool": "exec",
+      "bytes": 130,
+      "nested_tools": [
+        "clock__curr_time"
+      ],
+      "is_wait": false
+    },
+    {
+      "at": "2026-10-16T04:14:54.784Z",
+      "host_tool": "exec",
+      "bytes": 426,
+      "nested_tools": [
+        "mcp__backpack__prepare_market_capability"
+      ],
+      "is_wait": false
+    },
+    {
+      "at": "2026-10-16T04:16:56.942Z",
+      "host_tool": "exec",
+      "bytes": 9674,
+      "nested_tools": [
+        "apply_patch",
+        "mcp__backpack__verify_local_webpage",
+        "mcp__backpack__report_skill_use"
+      ],
+      "is_wait": false
+    }
+  ],
+  "preflight": {
+    "native_version": "codex-cli 0.163.0-alpha.10.2",
+    "previous_native_version": "codex-cli 0.163.0-alpha.10.2",
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "same_prompt": true,
+    "same_policy": true,
+    "initial_classifications": 70,
+    "selection_byte_unchanged": {
+      "market_routing.py": true,
+      "market_guidance_fit.py": true,
+      "market_directory.py": true,
+      "market_connect.py": true,
+      "market_gateway.py": true,
+      "market_resources.py": true
+    },
+    "final_selection_floor": 0.7,
+    "generic_config_floor_unchanged": 0.6,
+    "lifecycle_files_protected": 112,
+    "lifecycle_release": "0.3.70+lifecycle.20261015",
+    "tests": 204,
+    "only_case": "plugin-playground",
+    "attempts": 1,
+    "timeout_seconds": 360
+  },
+  "protection": {
+    "six_daily_files_unchanged": true,
+    "lifecycle_release": "0.3.70+lifecycle.20261015",
+    "lifecycle_file_count": 112,
+    "lifecycle_all_bytes_unchanged": true,
+    "public_inventory_names_unchanged": true,
+    "candidate_is_tested_source": true,
+    "preview_server_stopped": true,
+    "tab_closed": true,
+    "clipboard_restored": true
+  },
+  "limitations": [
+    "One original HTML task and one candidate attempt, no other passed business cases rerun.",
+    "No fixed English summary or capability name; natural task wording and candidate work varied.",
+    "Browser waiter and immediate publication are benchmark infrastructure, not a daily browser capability upgrade.",
+    "Elapsed UI segment includes host model/tool gaps; it is not pure browser CPU time.",
+    "Shared standalone runtime bytes were not fully frozen across historical runs.",
+    "Native and Jev counts exclude root orchestration and one browser-guidance preflight with unavailable usage.",
+    "No measured monetary cost or broad accuracy improvement.",
+    "file:// was not directly tested.",
+    "No merge, daily installation upgrade, or lifecycle module edits."
+  ],
+  "post_live_check": "Added an expired-request guard to the host waiter; positive behavior stays compatible. Offline expiry regression passed; the task was not replayed."
+}

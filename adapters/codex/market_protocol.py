@@ -100,7 +100,7 @@ def dispatch(gateway, connection, reader, market, name, arguments):
                     stage = 'resource'
                     result['resource'] = dispatch(gateway, connection, reader, market, 'acquire_resource',
                         {'selection': result['guidance']['selection'], 'need': context['need']})
-                result['instruction'] = ('Setup is saved. Read the returned guidance and selected resource fully, then perform only the original task and its checks. Reuse returned content. If another reference is genuinely needed, acquire_resource uses the guidance selection. Report actual use with that selection and a short factual summary; acquisition is not execution.')
+                result['instruction'] = ('Setup is saved. Read the returned guidance and any selected resource fully, then perform the original task and its checks. The resource result already covers the prepared need; follow its outcome instead of repeating discovery. Report actual use with the guidance selection and a short factual summary; acquisition is not execution.')
             except (OSError, ValueError, TypeError, RuntimeError, KeyError) as error:
                 result[stage] = {'status': 'unavailable_or_changed', 'execution': 'not_performed',
                     'reason': str(error) if re.fullmatch('[a-z][a-z0-9_]{1,80}', str(error)) else type(error).__name__}
@@ -134,6 +134,15 @@ def dispatch(gateway, connection, reader, market, name, arguments):
             result = reader.request('acquire' if name == 'acquire_skill' else 'resource', arguments)
             if result.get('status') == 'selected':
                 result = {**result, 'application_scope': APPLICATION_SCOPE}
+            elif name == 'acquire_resource' and result.get('status') == 'none':
+                # Explain the completed negative lookup, without caching by
+                # paraphrase, changing the decision, or denying a new need.
+                result = {**result, 'instruction': (
+                    'No supplementary resource passed the existing checks for this need. '
+                    'This lookup is complete; do not rephrase the same need to retry it. '
+                    'Use the loaded guidance if sufficient for the user task. Request another '
+                    'resource only for a genuinely new missing requirement. If a required '
+                    'reference is unavailable, report that limitation; do not assume it is optional.')}
         else:
             raise ValueError('unknown_tool')
     if not gateway.load_connection(connection['_descriptor'])['enabled']:

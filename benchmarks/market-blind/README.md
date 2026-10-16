@@ -101,6 +101,20 @@ receipts determine this pilot's results.
 
 `event-times.jsonl` records when each complete native stdout event line reaches the harness. It preserves `events.jsonl` unchanged and records event index/type, not extra prompt content. Gaps include generation, provider/transport and client waiting; they are not a measure of reasoning time. A killed native turn without usage remains unmetered.
 
+For the HTML case, start the bounded host waiter before running the native case:
+`python3 browser_review.py await-request --folder /absolute/private/review`.
+It returns as soon as the artifact-bound request exists and records `host-ready.json`.
+It performs no browser action and generates no test result. The host must inspect
+the page through its supported real-browser controls, then publish the matching
+observation with `python3 browser_review.py complete --folder /absolute/private/review --evidence /absolute/observed.json`.
+Evidence includes the request ID/hash, actual checks, executor and optional
+`review_started_at`/`review_finished_at` timestamps. Publish immediately after
+the required checks, before analysis or screenshots unrelated to acceptance.
+`timing.json` separates pickup, UI work, publication and receipt delivery; missing
+timestamps stay unknown. Writes are atomic and exclusive. Neither helper retries
+expired or unknown actions, overwrites receipts, reports Skill use, or substitutes
+for a browser. This is test-harness optimization, not a production browser service.
+
 For diagnosing a failed case, `prepare --persist-session-telemetry` retains the
 native session inside that case's private home instead of using `--ephemeral`.
 The child uses an owner-only file creation mask. The summarizer reads only the
