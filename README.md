@@ -407,6 +407,14 @@ final abstains at 0.51 despite retaining its correct target. Each need still use
 one Jev call, but mean tokens rise 47.68% and warm selector time rises 8.90%.
 The remaining final-selection failure prevents daily promotion.
 
+The [typed final and compression follow-up](docs/backpack-final-contrast-2026-10-16.md)
+keeps recall fixed, distinguishes Skill/plugin/MCP modes and uses reversible
+short option IDs. All three arms pass 2/4 needs: presentation confidence remains
+below 0.7, and a new Word-manual expression misses a later reference offline.
+Across the same three dispatched needs, compact mean tokens fall 29.52%
+(6,146.3 to 4,332), while warm selector time rises 2.50%. This is a bounded
+token-saving result, without an accuracy gain or daily promotion.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
