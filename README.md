@@ -392,6 +392,13 @@ strict final selection is 2/5 versus 0/5 for the adaptive directory control.
 Mean reported tokens fall 81.35%. Three low-confidence finals remain unresolved,
 so this experiment does not change the daily connection.
 
+The [one-call current-step follow-up](docs/backpack-conditional-current-2026-10-16.md)
+repairs all three original final-selection failures without another Jev call or
+a lower threshold. Strict success is 2/7 versus 5/7, including four new needs;
+two new document/spreadsheet needs fail retrieval before final selection. Mean
+tokens for the same five live pairs rise 1.70%, and measured final-dispatch time
+rises 12.46%. The remaining recall omissions prevent daily promotion.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
