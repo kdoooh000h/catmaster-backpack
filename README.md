@@ -379,7 +379,11 @@ The [merged-source directory preflight](docs/backpack-merged-source-preflight-20
 combines public markets by task category, keeps plugins whole, and programmatically
 merges five confirmed duplicate records into a 935-candidate snapshot. Ranking
 data, complete MCP coverage and missing classifications still prevent a meaningful
-live ranking comparison; no accuracy or cost improvement has been established.
+live ranking comparison at that stage. The subsequent
+[completed five-need comparison](docs/backpack-merged-comparison-2026-10-16.md)
+adds all 589 index assignments, public ranking feeds and a completed MCP census.
+Both arms fail the omission-safe criterion on all five needs; ranking adds 18.82%
+tokens. The experimental merged index is not promoted to the daily installation.
 
 ## Security Boundary
 
