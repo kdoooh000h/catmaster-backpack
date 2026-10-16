@@ -1278,7 +1278,8 @@
     "Confidence is a provider score, not calibrated probability of correctness. One fresh pass provides no population accuracy or stable latency claim.",
     "Jev selector time and reported tokens only. Root preparation/analysis cost, full task cost, backend model revision and monetary charges are unobservable.",
     "354 protected release/configuration files and 232 main-worktree files are unchanged at verification. Three snapshotted lifecycle-worktree files changed concurrently; its HEAD is unchanged. Those changes were observed, never overwritten or reverted by this task.",
-    "No installation, daily activation, private catalog mutation, lifecycle change, business task execution, previously passed need replay or boundary review."
+    "No installation, daily activation, private catalog mutation, lifecycle change, business task execution, previously passed need replay or boundary review.",
+    "After the first save, one host configuration file and seven snapshotted lifecycle-worktree files differ from start. The earlier 354-file and three-file observations remain valid at their recorded time; no concurrency-wide unchanged claim is made."
   ],
   "cases": [
     {
@@ -1534,5 +1535,32 @@
       "total_calls": 39
     }
   },
-  "conclusion": "Original two abstentions pass with current-step final instructions. Full omission-safe comparison improves 4/8 to 7/8; one new first-layer mandatory-later omission affects both arms. The all-pass gate remains unmet; no daily promotion."
+  "conclusion": "Original two abstentions pass with current-step final instructions. Full omission-safe comparison improves 4/8 to 7/8; one new first-layer mandatory-later omission affects both arms. The all-pass gate remains unmet; no daily promotion.",
+  "post_save_observation": {
+    "task_commit": "c94f5950331c0b32c89c6e4cc5104529d0aa8548",
+    "task_clean_and_uploaded": true,
+    "protected_paths": 354,
+    "changed_protected_path_count": 1,
+    "changed_protected_kind": "Host configuration changed concurrently after initial verification; content not inspected or reverted.",
+    "other_worktrees": {
+      "main": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "changed_paths": []
+      },
+      "lifecycle": {
+        "head_unchanged": true,
+        "status_unchanged": false,
+        "changed_paths": [
+          "adapters/codex/lifecycle_maintenance.py",
+          "adapters/codex/lifecycle_runtime.py",
+          "docs/codex-capability-lifecycle.md",
+          "tests/test_lifecycle_completion.py",
+          "tests/test_lifecycle_maintenance.py",
+          "tools/build_lifecycle_plugin.py",
+          "tools/verify_lifecycle_live_update.py"
+        ]
+      }
+    }
+  }
 }
