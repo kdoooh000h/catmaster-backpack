@@ -1,0 +1,225 @@
+{
+  "scope": "Frozen before any new-case recall; five positive metadata-reference cases. The sixth authored localization request is withheld before results because no suitable whole-plugin reference can be established from this frozen catalog; request text is retained, not rewritten. Not an exhaustive equivalence or execution check.",
+  "excluded": [
+    {
+      "id": "new_translation_then_accessibility",
+      "reason": "No defensible positive reference for the full localization-planning requirement in the inspected frozen metadata; not scored or sent."
+    }
+  ],
+  "cases": [
+    {
+      "id": "new_finance_runway_then_slides",
+      "acceptable_current_ids": [
+        "financial-analyst"
+      ],
+      "pending_groups": [
+        [
+          "skill-91d13b46fe5873284eee"
+        ]
+      ],
+      "primary_current_id": "financial-analyst",
+      "primary_pending_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "rationale": "Financial forecasts and cash-flow analysis; later presentation speaker notes.",
+      "references": [
+        {
+          "id": "financial-analyst",
+          "name": "financial-analyst",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "30c40006ee7bd879e68cefd9aa2ec08beebfe730740f3c7d9cb0102dd4167cca"
+        },
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "0197a5fe5ea196e480d3fc7838335f8527bcf05ac4cb59d5211f88226c99b850"
+        }
+      ]
+    },
+    {
+      "id": "new_api_contract_then_handbook",
+      "acceptable_current_ids": [
+        "api-design-reviewer"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "api-design-reviewer",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "rationale": "API design review and breaking changes; later Word handbook.",
+      "references": [
+        {
+          "id": "api-design-reviewer",
+          "name": "api-design-reviewer",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "15d31aee099ecc53545480546a148518c949bf07975b0ce17630b2943bb471f6"
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "622e60ca3c82adf6866787ba2d255299582e9eac6a5dd450062dbf69be6f46b3"
+        }
+      ]
+    },
+    {
+      "id": "new_incident_response_playbook",
+      "acceptable_current_ids": [
+        "plugin-94c53a5aab94973d6525",
+        "incident-commander"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-94c53a5aab94973d6525",
+      "primary_pending_ids": [],
+      "rationale": "Incident management and triage workflow; the whole-plugin metadata is broad, so detailed readiness is unverified.",
+      "references": [
+        {
+          "id": "plugin-94c53a5aab94973d6525",
+          "name": "incident-response",
+          "kind": "plugin",
+          "historical_control": false,
+          "description_sha256": "5fc6e71dd4d4c0e4baab2dc1ddb1df90b8edbc137f5b8fe2e8d1d8f7a9230d48"
+        },
+        {
+          "id": "incident-commander",
+          "name": "incident-commander",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "5aa36346f8af4824b7a8cc081f47c4f2788efde062d16975a71e87ad555d290a"
+        }
+      ]
+    },
+    {
+      "id": "new_scholarly_paper_lookup",
+      "acceptable_current_ids": [
+        "registry-0e262030f2280db7235b",
+        "registry-b0e31b6ac13290381d48",
+        "registry-7a2942ecf95602e3f188",
+        "registry-d1463a97f7fa1f38e1fb",
+        "registry-c9b5aa404f72f1b7f586"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-0e262030f2280db7235b",
+      "primary_pending_ids": [],
+      "rationale": "Public academic search, paper details and metadata; reference alternatives are not exhaustive.",
+      "references": [
+        {
+          "id": "registry-0e262030f2280db7235b",
+          "name": "CLIO Arxiv",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "b55d79eaf41bf75aa2ac3999abc39761d4881ecd470bd61a8073df31db90942d"
+        },
+        {
+          "id": "registry-b0e31b6ac13290381d48",
+          "name": "Paper Finder",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "ae637bcd2dc1b6c93411dfa0d6595f9514bfeaf59ea468abcfce17600585daa8"
+        },
+        {
+          "id": "registry-7a2942ecf95602e3f188",
+          "name": "io.github.robertoyanguas-ops/arxiv-digest-mcp",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "a3b2a9ce087ba2ef8c647b6d20c644ad1af0174312d12b843f993434c4ce5251"
+        },
+        {
+          "id": "registry-d1463a97f7fa1f38e1fb",
+          "name": "io.github.SMABoundless/semanticscholar",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "d27b2adf00e34d7f11b0cb303e0266a3b3a7452b67b10de3281a0a802c26051c"
+        },
+        {
+          "id": "registry-c9b5aa404f72f1b7f586",
+          "name": "Semantic Scholar MCP Server",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "af0c9fc1f48c99f6ea8e93b6fc76723e5f6f6ff7924fa1d256fe8b19c7ae0331"
+        }
+      ]
+    },
+    {
+      "id": "new_forecast_then_sheet",
+      "acceptable_current_ids": [
+        "registry-2a63e0ac4cf6e3f8da5f",
+        "registry-1f05b3e78010b3e15ed8",
+        "registry-29a269f8e64d71925f35",
+        "registry-04180724d8de119205cf",
+        "registry-d5d2d6811eb7455b8324",
+        "registry-7c76d6f63c7c2070c140"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "registry-2a63e0ac4cf6e3f8da5f",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "rationale": "Current and multi-day/hourly weather forecasting; individual variable support requires later tool inspection.",
+      "references": [
+        {
+          "id": "registry-2a63e0ac4cf6e3f8da5f",
+          "name": "Weather Forecast MCP",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "e0fc19b7a650d33a23049e5a986e80edfa7509307bb5dbab3c03e694bdc2ba70"
+        },
+        {
+          "id": "registry-1f05b3e78010b3e15ed8",
+          "name": "Weather MCP",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "a0b0f6ad4d07cdbfcb2006d97d1db49865f56ee4728170e1c408e05cd1ba0f2a"
+        },
+        {
+          "id": "registry-29a269f8e64d71925f35",
+          "name": "Open-Meteo Weather",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "c92b22e00432a5c1232f87ad52e4196c3a27e22f3c51c36a6b95dc376edd332a"
+        },
+        {
+          "id": "registry-04180724d8de119205cf",
+          "name": "Weather API",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "d5e32e90bdef2f07086989220f68837aa62ecd70d1a00c46fd0b115c7e6c9092"
+        },
+        {
+          "id": "registry-d5d2d6811eb7455b8324",
+          "name": "Weather & Climate Intelligence MCP",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "5682bb003e1b6aff5859508e0171784b52fd47df297ca0830138e8fb5977cf9f"
+        },
+        {
+          "id": "registry-7c76d6f63c7c2070c140",
+          "name": "Weather Data MCP Server",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "68516288d67c3b6dd54ac530fa93947595016468ed7751c3fbc1e2cbadcc4cbf"
+        },
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "efd008c86ccd7afe9019af48f04fcd5192414bef7f1f5c44d8454348db04ed2f"
+        }
+      ]
+    }
+  ]
+}

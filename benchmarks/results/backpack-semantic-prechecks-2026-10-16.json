@@ -1,0 +1,829 @@
+{
+  "scope": "Development-only offline checks of the same ten previously failed needs. Five scored new requests were not inspected during tuning. No Jev calls in these checks. These checks are not the final frozen benchmark.",
+  "models": {
+    "first": {
+      "repo": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "download_seconds": 10.312386374978814
+    },
+    "aligned": {
+      "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "download_seconds": 23.003598540992243
+    },
+    "rejected_translation": {
+      "repo": "Helsinki-NLP/opus-mt-zh-en",
+      "revision": "cf109095479db38d6df799875e34039d4938aaa6",
+      "download_seconds": 16.843917999998666
+    }
+  },
+  "first_model_index_seconds": 136.37333041601232,
+  "first_model_pilot": {
+    "scope": "Only ten failed development requests, no new holdout or model calls. Three generic neighbor breadths; not per-case word edits.",
+    "query_embedding_seconds": 0.7073348749836441,
+    "rows": [
+      {
+        "case": "unseen_local_modal_testing",
+        "k": 3,
+        "pool": 98,
+        "missing": [
+          0,
+          1
+        ],
+        "missing_primary": [
+          "code-reviewer",
+          "skill-61da1b60bbd8685c59f0"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_local_modal_testing",
+        "k": 6,
+        "pool": 127,
+        "missing": [
+          1
+        ],
+        "missing_primary": [
+          "code-reviewer"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_local_modal_testing",
+        "k": 12,
+        "pool": 192,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_dashboard_visual_design",
+        "k": 3,
+        "pool": 80,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_dashboard_visual_design",
+        "k": 6,
+        "pool": 110,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_dashboard_visual_design",
+        "k": 12,
+        "pool": 158,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_accessibility_then_handbook",
+        "k": 3,
+        "pool": 79,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_accessibility_then_handbook",
+        "k": 6,
+        "pool": 114,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_accessibility_then_handbook",
+        "k": 12,
+        "pool": 173,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_bug_root_cause_workflow",
+        "k": 3,
+        "pool": 89,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_bug_root_cause_workflow",
+        "k": 6,
+        "pool": 120,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_bug_root_cause_workflow",
+        "k": 12,
+        "pool": 174,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_kubernetes_release_plan",
+        "k": 3,
+        "pool": 76,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-d234e38b94a91ef65c51"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_kubernetes_release_plan",
+        "k": 6,
+        "pool": 100,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-d234e38b94a91ef65c51"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_kubernetes_release_plan",
+        "k": 12,
+        "pool": 140,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-d234e38b94a91ef65c51"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "k": 3,
+        "pool": 66,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "k": 6,
+        "pool": 97,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "k": 12,
+        "pool": 149,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_package_docs_then_review",
+        "k": 3,
+        "pool": 95,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_package_docs_then_review",
+        "k": 6,
+        "pool": 130,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_package_docs_then_review",
+        "k": 12,
+        "pool": 190,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_browser_readonly_research",
+        "k": 3,
+        "pool": 98,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_browser_readonly_research",
+        "k": 6,
+        "pool": 133,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_browser_readonly_research",
+        "k": 12,
+        "pool": 193,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_public_repo_inventory",
+        "k": 3,
+        "pool": 78,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_public_repo_inventory",
+        "k": 6,
+        "pool": 103,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_public_repo_inventory",
+        "k": 12,
+        "pool": 159,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "k": 3,
+        "pool": 45,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "k": 6,
+        "pool": 71,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "k": 12,
+        "pool": 118,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "status": "recalled"
+      }
+    ]
+  },
+  "aligned_model_probe": {
+    "queries": [
+      "把纽约上午九点换算成伦敦和东京的当地时间",
+      "读取仓库中的问题和拉取请求",
+      "排查偶发故障并验证根因"
+    ],
+    "passages": [
+      "Time zone conversion with daylight saving rules.",
+      "Search GitHub repositories and issues and pull requests.",
+      "Debugging and root cause investigation.",
+      "生成随机数MCP Server",
+      "Search your enterprise content"
+    ],
+    "scores": [
+      [
+        0.35356736183166504,
+        -0.13902339339256287,
+        -0.09693171083927155,
+        -0.002827078104019165,
+        -0.003930395003408194
+      ],
+      [
+        0.07688941061496735,
+        0.4541906714439392,
+        0.16791163384914398,
+        0.25827187299728394,
+        0.45723965764045715
+      ],
+      [
+        0.10323253273963928,
+        0.1968751847743988,
+        0.5648965239524841,
+        0.2699704170227051,
+        0.17942611873149872
+      ]
+    ],
+    "passed": false
+  },
+  "aligned_model_pilot": {
+    "scope": "Only ten failed development requests, no new holdout or model calls. Three generic neighbor breadths; not per-case word edits.",
+    "query_embedding_seconds": 3.8350333330163267,
+    "rows": [
+      {
+        "case": "unseen_local_modal_testing",
+        "k": 3,
+        "pool": 132,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_local_modal_testing",
+        "k": 6,
+        "pool": 168,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_local_modal_testing",
+        "k": 12,
+        "pool": 263,
+        "missing": [],
+        "missing_primary": [],
+        "status": "widen_required"
+      },
+      {
+        "case": "unseen_dashboard_visual_design",
+        "k": 3,
+        "pool": 109,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_dashboard_visual_design",
+        "k": 6,
+        "pool": 153,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_dashboard_visual_design",
+        "k": 12,
+        "pool": 237,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_accessibility_then_handbook",
+        "k": 3,
+        "pool": 104,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_accessibility_then_handbook",
+        "k": 6,
+        "pool": 152,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_accessibility_then_handbook",
+        "k": 12,
+        "pool": 241,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_bug_root_cause_workflow",
+        "k": 3,
+        "pool": 126,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_bug_root_cause_workflow",
+        "k": 6,
+        "pool": 174,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_bug_root_cause_workflow",
+        "k": 12,
+        "pool": 261,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "status": "widen_required"
+      },
+      {
+        "case": "unseen_kubernetes_release_plan",
+        "k": 3,
+        "pool": 103,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_kubernetes_release_plan",
+        "k": 6,
+        "pool": 145,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_kubernetes_release_plan",
+        "k": 12,
+        "pool": 226,
+        "missing": [],
+        "missing_primary": [],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "k": 3,
+        "pool": 96,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "k": 6,
+        "pool": 144,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "k": 12,
+        "pool": 234,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_package_docs_then_review",
+        "k": 3,
+        "pool": 147,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_package_docs_then_review",
+        "k": 6,
+        "pool": 194,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_package_docs_then_review",
+        "k": 12,
+        "pool": 287,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "status": "widen_required"
+      },
+      {
+        "case": "unseen_browser_readonly_research",
+        "k": 3,
+        "pool": 125,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_browser_readonly_research",
+        "k": 6,
+        "pool": 185,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_browser_readonly_research",
+        "k": 12,
+        "pool": 283,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "status": "widen_required"
+      },
+      {
+        "case": "unseen_public_repo_inventory",
+        "k": 3,
+        "pool": 103,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_public_repo_inventory",
+        "k": 6,
+        "pool": 154,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_public_repo_inventory",
+        "k": 12,
+        "pool": 250,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "k": 3,
+        "pool": 50,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "k": 6,
+        "pool": 85,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "status": "recalled"
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "k": 12,
+        "pool": 161,
+        "missing": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "status": "recalled"
+      }
+    ]
+  },
+  "rejected_translation_pilot": [
+    {
+      "case": "unseen_local_modal_testing",
+      "pool": 215,
+      "missing": [],
+      "missing_primary": [],
+      "translation_seconds": 3.2314461250207387,
+      "translated": "Currently local demo app first does a Playwright check: authenticate modal opening off, form error tip and keyboard operation ; Save Screenshot ; And read the browser console to look for anomalies ; After the test has been completed, review the complexity and code odour in the source code. ; Only use local fictional data ; Non-deployment"
+    },
+    {
+      "case": "unseen_dashboard_visual_design",
+      "pool": 208,
+      "missing": [],
+      "missing_primary": [],
+      "translation_seconds": 1.164282416983042,
+      "translated": "Make the fictional backstage of reading as a fine front page: a clear level of information, comfortable fonts and colours, cards and empty spaces adapted to a mobile phone ; Try not to feel like a template. ; All we need now is an interface. ; Do not take database ; And it's not published."
+    },
+    {
+      "case": "unseen_accessibility_then_handbook",
+      "pool": 212,
+      "missing": [],
+      "missing_primary": [],
+      "translation_seconds": 0.5151292920054402,
+      "translated": "Accessibility check for fictitious shopping sites: checking keyboard accessibility, focus order, contrast and screen reader tips ; Remedial programmes according to the magnitude of the problem ; Then we'll write the operation into Word's training manual. ; Let's review it now. ; After the manual. ; Do not change online"
+    },
+    {
+      "case": "unseen_bug_root_cause_workflow",
+      "pool": 260,
+      "missing": [
+        0
+      ],
+      "missing_primary": [
+        "plugin-9221213abca765914373"
+      ],
+      "translation_seconds": 0.7387513749999925,
+      "translated": "Illustrative services are occasionally misreported. ; There's no direct cause in the log. ; Currently, a screening process is in place: recovery of problems, tracking of calls, phasing down of malfunctions and validation of root causes ; To avoid a change in your senses. ; And then we'll sort out the conclusions into a Word document with page numbers. ; We're now giving priority to locating malfunctions."
+    },
+    {
+      "case": "unseen_kubernetes_release_plan",
+      "pool": 209,
+      "missing": [],
+      "missing_primary": [],
+      "translation_seconds": 0.8225250830000732,
+      "translated": "Design a Kubernetes distribution program for fictional services first ; Prepare Deployment and Service configurations, Helm management, health probes and recoverable rollout processes ; Subsequent review of security risks associated with reliance ; Only release configurations and feed options are currently available ; Not connected to clusters, not actually deployed"
+    },
+    {
+      "case": "unseen_search_friendly_article",
+      "pool": 202,
+      "missing": [
+        0
+      ],
+      "missing_primary": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "translation_seconds": 0.5484781660197768,
+      "translated": "Make a fictional gardening curriculum available to readers. ; Let's get to the problem and the search word that the reader wants to solve. ; Rearranging title levels, summaries and article structure ; Avoid hard stacking for keywords ; Only writing now. ; Do not login or publish"
+    },
+    {
+      "case": "unseen_package_docs_then_review",
+      "pool": 221,
+      "missing": [
+        0
+      ],
+      "missing_primary": [
+        "registry-b423e6fd7d18af4889fb"
+      ],
+      "translation_seconds": 0.5343172500142828,
+      "translated": "Queries the latest official usage of React and Next.js ; Found example of a quoteable code relevant to the app root and server components ; Avoid the use of outdated API ; Then we'll review the code quality of the fictional examples. ; We'll check the documents first. ; Do not install dependent or modified items"
+    },
+    {
+      "case": "unseen_browser_readonly_research",
+      "pool": 245,
+      "missing": [],
+      "missing_primary": [
+        "registry-78eb9cf9af75b00491be"
+      ],
+      "translation_seconds": 0.42528062500059605,
+      "translated": "Let's open a few pages of a public presentation. ; Read web pages and clickable elements ; View date, location and fare by page ; Save screenshots as a basis for checking ; Then we'll make it into an edited spreadsheet. ; Now read the web page. ; No login, no forms, no tickets."
+    },
+    {
+      "case": "unseen_public_repo_inventory",
+      "pool": 201,
+      "missing": [],
+      "missing_primary": [],
+      "translation_seconds": 0.6901762920024339,
+      "translated": "Read one of the READMEs, directories and recent issues from an open GitHub repository ; Find discussion about the installation failure ; and sort out the status of the current Pull Requests ; Then we'll review one of the fictional code changes. ; Only currently query the repository ; Not submitted, not commented upon"
+    },
+    {
+      "case": "unseen_time_zone_conversion",
+      "pool": 142,
+      "missing": [
+        0
+      ],
+      "missing_primary": [
+        "registry-f76327aa6af982c2cb41"
+      ],
+      "translation_seconds": 0.6115557920129504,
+      "translated": "Convert New York, a fictional conference, into local time in London and Tokyo at 9:00 a.m. ; When you have to consider a date for the summer. ; And give the city the time difference. ; It's only time conversion now. ; Could not close temporary folder: %s"
+    }
+  ],
+  "decisions": [
+    "Reject the first multilingual retrieval model for poor development recall.",
+    "The second model passes 2 of 3 small alignment probes; one ambiguous repository probe ranks enterprise content slightly higher. Preserve that failed probe and evaluate actual catalog recall rather than reporting it as passed.",
+    "Across the second model development sweep, k=6 and k=12 add candidates without additional complete-reference cases. Choose k=3.",
+    "Literal full-name matches are added generically from observed catalog names; no gold IDs or new domain vocabulary.",
+    "Reject local translation: concrete mistranslations, including an unrelated temporary-folder error sentence, make it unsuitable for the candidate.",
+    "Freeze the simpler additive retrieval and independent suitability experiment before new-case recall and all Jev calls."
+  ],
+  "notes": [
+    "Pilot cached-vector times are not reported as fresh per-task timings. Final freeze computes fresh query embeddings for all fifteen scored requests.",
+    "No runtime promotion follows these development observations."
+  ]
+}

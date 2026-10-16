@@ -432,6 +432,16 @@ the same four live pairs, coverage uses 2.92% more tokens and 1.64% more warm
 selector time. The prior two-case success does not generalize; no daily promotion
 or capability execution is claimed.
 
+The [general recall and independent-suitability follow-up](docs/backpack-semantic-recall-2026-10-16.md)
+tests only the ten failed needs plus five new ones. Additive name/description
+search and local multilingual semantic recall raise strict success from 1/15
+to 5/15, while all 10 later reference requirements survive. Three additional
+selections are plausible unlisted alternatives and receive no retroactive credit.
+Independent current-step Choices keep a 0.7 gate but assess suitability rather
+than unique-best confidence. Same-three-pair tokens rise 7.96x and warm selector
+time rises 41.22%; seven primary current references remain missing. This costly
+experimental candidate is not promoted; daily runtime remains unchanged.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
