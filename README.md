@@ -375,6 +375,12 @@ summed latency increased 6.88% and the five fully metered paired tasks used 32.4
 more tokens. The HTML native turn timed out and both MCP searches failed on each
 side. This experimental strategy has not been promoted to the daily connection.
 
+The [merged-source directory preflight](docs/backpack-merged-source-preflight-2026-10-16.md)
+combines public markets by task category, keeps plugins whole, and programmatically
+merges five confirmed duplicate records into a 935-candidate snapshot. Ranking
+data, complete MCP coverage and missing classifications still prevent a meaningful
+live ranking comparison; no accuracy or cost improvement has been established.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
