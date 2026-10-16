@@ -1,5 +1,30 @@
 # Public directory depth/width pilot
 
+The later [adaptive pilot](../../docs/backpack-adaptive-directory-2026-10-15.md)
+adds operation-based source subdivisions and per-branch stopping. It selected
+all six measured positive targets without observed omissions; the five common
+cases used fewer calls and less time than full-depth traversal. Token savings
+are not established after checking directory-score variation. Negative controls
+remain unrun because the fixed budget stopped the experiment. This does not
+promote a daily runtime or replace the earlier failed evidence below.
+
+Adaptive entry points (use the original frozen bundle as `--source` for freeze):
+
+```sh
+python3 benchmarks/directory-depth/adaptive_experiment.py freeze \
+  --source /path/to/original/frozen/bundle --output /path/to/adaptive/bundle
+python3 benchmarks/directory-depth/adaptive_experiment.py run \
+  --source /path/to/adaptive/bundle --output /path/to/adaptive/live
+```
+
+The parent directory must already exist. Freeze binds source metadata, the
+operation groups, requests, thresholds, budget and runner bytes. Two pilot
+adaptive cases must retain all required targets and select correctly before
+remaining cases start. A stopped run is not resumed or replayed under a new
+directory name. The analysis helper also checks an owner-supplied
+`protected-before.json` hash manifest in the evidence parent; it never reads
+configuration values into the exported report. Raw evidence stays local.
+
 This is an isolated selector experiment, not a Backpack runtime or lifecycle
 change. It never installs or executes capabilities. The 2026-10-15 pilot found
 **no eligible winner**: broad summaries and a permissive early retention gate
