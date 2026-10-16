@@ -1,5 +1,23 @@
 # Public directory depth/width pilot
 
+The [28-new-case breadth test](../../docs/backpack-adaptive-breadth-2026-10-16.md)
+freezes both selectors and corrected metadata from the same-14 follow-up. Twenty
+new targets span six roots and fourteen source domains, with four cross-root
+combinations and four controls. Slim passes 20/20 single tasks and preserves all
+required targets in 24/24 positive requests, but both arms abstain below 0.7 on
+two combinations. Frozen overall scoring is 24/28 versus 26/28; one quotation
+control is ambiguous, so the report also shows 24/27 versus 25/27 without it.
+Mean tokens fall 34.75% and time 20.48%, with latency variability documented.
+The all-pass gate is **not met**; no daily promotion or runtime change occurs.
+Concurrent lifecycle-worktree changes are observed and preserved, not overwritten.
+
+Use `breadth_experiment.py freeze/run` with the same command shape below and the
+slim bundle as source. It delegates execution to the unchanged slim runner. The
+plan freezes 28 new cases, one pass, no retries, 392 calls / 800,000 known tokens /
+600 seconds. All failures stay in the denominator. New requests were written
+after code freeze but have no independent blind review; no population accuracy
+or stable speedup claim is supported.
+
 The [same-14 slim follow-up](../../docs/backpack-adaptive-slim-2026-10-16.md)
 preserves the corrected directory bytes and full final descriptions, removes
 boundary review from the candidate, and reuses the original explicit-request
