@@ -6,18 +6,21 @@ from pathlib import Path
 
 from analyze_adaptive_cost import metrics
 from experiment import identity, read, write_once
-from repair_experiment import ARMS
 
 
 def analyze(bundle, live, output, summary_name='summary.json'):
     bundle, live = Path(bundle), Path(live)
     plan, summary = read(bundle / 'plan.json'), read(live / summary_name)
+    arms = plan['arms']
+    if len(arms) < 2 or len(arms) != len(set(arms)):
+        raise ValueError('invalid_comparison_arms')
+    baseline = arms[0]
     nodes = read(bundle / 'repaired-nodes.json')
     cases = {case['id']: case for case in read(bundle / 'cases.json')}
     rows = summary['rows']
     finished = [r for r in rows if r['usage_complete'] and r['result'].get('reason') in
                 {None, 'directory_limit', 'final_limit', 'no_progress'}]
-    complete = [case for case in cases if {r['arm'] for r in finished if r['case'] == case} == set(ARMS)]
+    complete = [case for case in cases if {r['arm'] for r in finished if r['case'] == case} == set(arms)]
     usage, repeated = defaultdict(lambda: defaultdict(float)), defaultdict(list)
     missing, errors = [], []
     for path in live.glob('*.pending.json'):
@@ -60,8 +63,8 @@ def analyze(bundle, live, output, summary_name='summary.json'):
     protected = read(live.parent / 'protected-before.json')
     changed = [path for path, before in protected.items() if
         (hashlib.sha256(Path(path).read_bytes()).hexdigest() if Path(path).is_file() else None) != before]
-    aggregate = {arm: metrics([r for r in rows if r['arm'] == arm]) for arm in ARMS}
-    full = summary['stop'] == 'completed' and len(rows) == len(cases) * len(ARMS) and len(complete) == len(cases)
+    aggregate = {arm: metrics([r for r in rows if r['arm'] == arm]) for arm in arms}
+    full = summary['stop'] == 'completed' and len(rows) == len(cases) * len(arms) and len(complete) == len(cases)
     result = {'version': 1, 'scope': plan['scope'],
         'plan': {key: value for key, value in plan.items() if key != 'executable'},
         'stop': summary['stop'], 'complete_cases': len(complete), 'all_cases_complete': full,
@@ -69,25 +72,25 @@ def analyze(bundle, live, output, summary_name='summary.json'):
         'usage_complete': all(r['usage_complete'] for r in rows), 'unresolved': missing, 'errors': errors,
         'by_arm': aggregate,
         'complete_case_ids': complete,
-        'complete_case_metrics': {arm: metrics([r for r in rows if r['arm'] == arm and r['case'] in complete]) for arm in ARMS},
+        'complete_case_metrics': {arm: metrics([r for r in rows if r['arm'] == arm and r['case'] in complete]) for arm in arms},
         'case_progress': {case: {arm: ('completed' if any(r['case'] == case and r['arm'] == arm for r in finished)
             else 'incomplete' if any(r['case'] == case and r['arm'] == arm for r in rows) else 'unrun')
-            for arm in ARMS} for case in cases},
-        'positive_by_arm': {arm: metrics([r for r in rows if r['arm'] == arm and not r['control']]) for arm in ARMS},
+            for arm in arms} for case in cases},
+        'positive_by_arm': {arm: metrics([r for r in rows if r['arm'] == arm and not r['control']]) for arm in arms},
         'candidate_eligible_on_this_regression': {arm: full and all(r['omission_safe_pass'] for r in rows if r['arm'] == arm)
-                                                for arm in ARMS if arm != 'adaptive'},
-        'change_vs_baseline_percent': {arm: {field: 100 * (aggregate[arm][field] / aggregate['adaptive'][field] - 1)
-            for field in ('mean_tokens', 'mean_seconds', 'mean_calls')} for arm in ARMS[:] if full},
+                                                for arm in arms if arm != baseline},
+        'change_vs_baseline_percent': {arm: {field: 100 * (aggregate[arm][field] / aggregate[baseline][field] - 1)
+            for field in ('mean_tokens', 'mean_seconds', 'mean_calls')} for arm in arms if full},
         'stage_usage': dict(usage), 'boundary_reviews': boundary, 'failures': failures, 'rows': sanitized,
         'identical_request_groups_with_score_variation': sum(len(v) > 1 and len({identity(a) for a in v}) > 1 for v in repeated.values()),
         'protected_paths_checked': len(protected), 'protected_files_unchanged': not changed,
         'source_summary_sha256': hashlib.sha256((live / summary_name).read_bytes()).hexdigest(),
         'budget_extension': summary.get('extension'),
         'limitations': [plan['limitations'],
-            'One pass, three independently sampled arms; score and network variation remain. No significance claim.',
+            'One pass with independently sampled comparison arms; score and network variation remain. No significance claim.',
             'All semantic failures remain in denominators; lower cost from early failure is not quality-equivalent improvement.',
-            'Descriptions, prompt semantics and adaptive stop interact; no individual description-versus-wording ablation.',
-            'Boundary review counts only one bounded extra batch; skipped reviews and all errors are preserved.',
+            'The frozen plan defines the combined treatment; this run does not isolate each changed factor.',
+            'Boundary review limit is declared in the frozen plan; all calls, skipped reviews and errors are preserved.',
             'Jev selector timing and reported tokens only. Root-agent and full task execution costs, backend model revision and monetary charges unobservable.',
             'Daily 0.3.73 installation, dispatcher, lifecycle and other worktrees are not modified or functionally retested.']}
     write_once(output, result)

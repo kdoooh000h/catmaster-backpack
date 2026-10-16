@@ -1,5 +1,33 @@
 # Public directory depth/width pilot
 
+The [same-14 slim follow-up](../../docs/backpack-adaptive-slim-2026-10-16.md)
+preserves the corrected directory bytes and full final descriptions, removes
+boundary review from the candidate, and reuses the original explicit-request
+adaptive selector with whole-small-branch retention. Both fresh arms pass 14/14.
+Mean reported tokens fall from 13,483 to 6,560 (51.35%), selector time from 3.563
+to 2.498 seconds (29.89%), and calls from 4.71 to 3.57. Positive-only savings are
+48.52% tokens and 23.11% time. This is one known-case regression pass, not unseen
+validation or a daily promotion. Final confidence stays 0.7; daily 0.3.73 and the
+other worktrees remain unchanged. Neither arm invokes boundary review, so the
+comparison isolates the combined prompt/carry treatment after review removal.
+
+```sh
+python3 benchmarks/directory-depth/slim_experiment.py freeze \
+  --source /path/to/repair/bundle --output /path/to/slim/bundle
+python3 benchmarks/directory-depth/slim_experiment.py run \
+  --source /path/to/slim/bundle --output /path/to/slim/live
+python3 benchmarks/directory-depth/analyze_repair.py \
+  --bundle /path/to/slim/bundle --live /path/to/slim/live \
+  --output /path/to/slim/result.json
+```
+
+Freeze checks the original source and repaired bundle hashes. The plan permits
+196 calls / 450,000 known tokens / 360 seconds, with no retries or in-run tuning.
+Transport failure, missing usage, malformed output or budget exhaustion stops
+the whole run; semantic failures remain in the denominator. Reuse passing
+execution tests rather than rerunning other business tasks. The analysis helper
+expects an owner-supplied `protected-before.json` in the evidence parent.
+
 The [same-14 description repair and boundary-review experiment](../../docs/backpack-adaptive-repair-2026-10-15.md)
 recovers the three known omission targets but costs substantially more. After an
 explicit user budget extension, all 14 three-arm cases complete: baseline 13/14,
