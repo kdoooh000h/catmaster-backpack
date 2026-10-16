@@ -1,11 +1,13 @@
 # Public directory depth/width pilot
 
 The [same-14 description repair and boundary-review experiment](../../docs/backpack-adaptive-repair-2026-10-15.md)
-recovers the three known omission targets but costs substantially more. It stopped
-at its frozen token budget with 12 complete three-arm cases, one incomplete case
-and one unrun case. It is not a 14/14 result or a daily promotion. All completed
-receipts and the budget stop are preserved; continuation requires additional user
-budget and never resends a completed request. Daily 0.3.73 is unchanged.
+recovers the three known omission targets but costs substantially more. After an
+explicit user budget extension, all 14 three-arm cases complete: baseline 13/14,
+description repair 14/14 and boundary review 14/14. Mean tokens are 7,075 / 13,182 /
+14,712; time is 2.22 / 2.63 / 3.12 seconds. Thirteen boundary reviews recover no
+required target. Only 17 new requests completed the missing work; original receipts
+and the budget stop remain preserved, with no completed request resent. This is
+known-case regression evidence, not a daily promotion. Daily 0.3.73 is unchanged.
 
 The [expanded new-task check](../../docs/backpack-adaptive-expanded-2026-10-15.md)
 finds regressions: the unchanged baseline passes 13/14 new requests and the
