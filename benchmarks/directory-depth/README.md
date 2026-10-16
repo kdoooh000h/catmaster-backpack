@@ -1,5 +1,29 @@
 # Public directory depth/width pilot
 
+The [adaptive cost follow-up](../../docs/backpack-adaptive-cost-2026-10-15.md)
+compares the original adaptive arm with compact shared scope text and aggregate
+candidate stopping. Two fresh repetitions complete all eight original requests,
+including both negative controls: 16/16 omission-safe passes for each arm.
+Average measured tokens fall 44.84% overall (40.86% on positive requests), while
+elapsed selection time falls 11.70% overall (6.42% on positives). This is a
+combined, familiar-case selector experiment, not a daily runtime promotion or
+an end-to-end capability execution test. Original source and evidence remain.
+
+```sh
+python3 benchmarks/directory-depth/adaptive_cost_experiment.py freeze \
+  --source /path/to/adaptive/bundle --output /path/to/cost/bundle \
+  --executable /path/to/configured/jev
+python3 benchmarks/directory-depth/adaptive_cost_experiment.py run \
+  --source /path/to/cost/bundle --output /path/to/cost/live
+```
+
+The cost plan freezes two repetitions, alternating arm order, controls first,
+160 calls / 260,000 known tokens / 300 seconds, and a candidate acceptance gate
+after each result. A stopped run cannot be resumed under another output name.
+The analysis entry `analyze_adaptive_cost.py` consumes bundle/live directories
+and the evidence parent's `protected-before.json`, and writes one sanitized
+result with `--output`. Keep raw payloads and protection paths outside Git.
+
 The later [adaptive pilot](../../docs/backpack-adaptive-directory-2026-10-15.md)
 adds operation-based source subdivisions and per-branch stopping. It selected
 all six measured positive targets without observed omissions; the five common
