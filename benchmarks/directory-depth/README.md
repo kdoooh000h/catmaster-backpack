@@ -1,5 +1,17 @@
 # Public directory depth/width pilot
 
+The [expanded new-task check](../../docs/backpack-adaptive-expanded-2026-10-15.md)
+finds regressions: the unchanged baseline passes 13/14 new requests and the
+compact candidate passes 11/14. Candidate data-quality and meeting tasks omit
+their expected capability; both arms omit the research-summary target. The
+compact candidate is **not eligible for daily promotion**, despite lower token
+usage. Three selected public Skill artifacts were exercised locally, with an
+API example-argument correction; this does not test installed acquisition,
+plugin setup or MCP invocation. Run `expanded_experiment.py freeze/run` with
+the same arguments as the cost runner below, using its frozen cost bundle as
+the source. Inputs and selector bytes are frozen; semantic failures remain in
+the denominator without tuning or retries. See `expanded_cases.json`.
+
 The [adaptive cost follow-up](../../docs/backpack-adaptive-cost-2026-10-15.md)
 compares the original adaptive arm with compact shared scope text and aggregate
 candidate stopping. Two fresh repetitions complete all eight original requests,

@@ -1,0 +1,10 @@
+{
+  "base_version": "1.4.2",
+  "commits": [
+    {"hash": "1111111", "message": "feat(export): add CSV export"},
+    {"hash": "2222222", "message": "fix(parser): handle empty rows"},
+    {"hash": "3333333", "message": "docs: clarify export options"},
+    {"hash": "4444444", "message": "feat(api)!: replace numeric IDs with strings\n\nBREAKING CHANGE: API IDs are now strings."},
+    {"hash": "5555555", "message": "perf(query): reduce scan count"}
+  ]
+}

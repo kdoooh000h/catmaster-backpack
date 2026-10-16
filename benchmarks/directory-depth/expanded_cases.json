@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "scope": "New synthetic requests; freeze before model calls, no selector tuning on their results.",
+  "cases": [
+    {"id":"quote_new_work","stratum":"chinese","need":"请原样保存这句待讨论的想法：‘先检查数据缺失，再审查接口兼容性’。现在不要做这两项工作，只回复收到。","expected_ids":[],"pending_ids":[],"control":true},
+    {"id":"cancel_new_work","stratum":"mixed","need":"Cancel 刚才的发布说明和会议整理需求；本条只确认取消，不继续任何任务。","expected_ids":[],"pending_ids":[],"control":true},
+    {"id":"zh_data_profile","stratum":"chinese","need":"检查给定的合成订单表：统计缺失值、重复订单编号、异常金额和字段格式问题，按完整性、一致性与有效性整理质量报告，并给出修复优先级。保留原数据，不自动修正。","expected_ids":["data-quality-auditor"],"pending_ids":[],"control":false},
+    {"id":"mix_api_contract","stratum":"mixed","need":"对照旧版和新版的 OpenAPI 文件做 REST 接口设计审查：标出 breaking changes、错误响应缺口、分页及命名不一致，并给出兼容迁移建议。只写审查报告，不实现接口。","expected_ids":["api-design-reviewer"],"pending_ids":[],"control":false},
+    {"id":"syn_release_notes","stratum":"synonym","need":"根据给定的规范化提交记录整理这一版改了什么，分成新增、修复和不兼容变更；判断应该增加版本号的哪一段，并生成可追溯到提交的发布说明。不要修改实际仓库或发布。","expected_ids":["changelog-generator"],"pending_ids":[],"control":false},
+    {"id":"zh_query_join","stratum":"chinese","need":"为给定的本地演示数据库写查询：按客户统计已支付订单总额，显示没有已支付订单的客户为零，并按金额降序排列。解释连接与聚合的选择，实际运行核对结果，不修改数据。","expected_ids":["sql-database-assistant"],"pending_ids":[],"control":false},
+    {"id":"mix_accessibility","stratum":"mixed","need":"审查一个纯 HTML 表单的 accessibility：检查 keyboard navigation、label 关联、focus 可见性和错误提示的读屏可达性，给出对应 WCAG 2.2 A/AA 的修改清单。不要重做视觉风格。","expected_ids":["a11y-audit"],"pending_ids":[],"control":false},
+    {"id":"zh_copy_polish","stratum":"chinese","need":"润色已经写好的产品介绍文案：分轮检查表达清晰度、冗余、术语一致性与行动提示，保留可核实事实，删除没有证据的夸张承诺。输出修改稿和逐项修改理由，不策划新营销活动。","expected_ids":["copy-editing"],"pending_ids":[],"control":false},
+    {"id":"syn_meeting_actions","stratum":"synonym","need":"把这份凌乱的会议笔记整理成谁负责什么、什么时候完成的清单，单独标出没有负责人或没有截止日期的事项，并判断哪些问题值得再开会。不要发送通知或创建日历事件。","expected_ids":["meetings"],"pending_ids":[],"control":false},
+    {"id":"zh_research_brief","stratum":"chinese","need":"对给定的三段虚构研究摘要做结构化对比：列出研究问题、样本、主要发现和限制，区分证据与推测，并保留各摘要的引用编号。只用提供的材料，不额外搜索。","expected_ids":["research-summarizer"],"pending_ids":[],"control":false},
+    {"id":"mix_design_tokens","stratum":"mixed","need":"为一个已有的界面建立 design tokens：整理颜色、字号、间距、圆角及组件状态，给出可复用命名、响应式使用规则和开发交接说明。交付 token JSON，不做新网页或图片。","expected_ids":["ui-design-system"],"pending_ids":[],"control":false},
+    {"id":"syn_corrective_actions","stratum":"synonym","need":"针对一个虚构医疗器械厂的重复标签错印问题，设计纠正和预防措施的调查流程：追查根因，区分临时遏制与长期改进，规定责任人及有效性验证。只做演示流程，不作合规认证结论。","expected_ids":["capa-officer"],"pending_ids":[],"control":false},
+    {"id":"mix_retention_cohorts","stratum":"mixed","need":"为虚构产品定义 activation、feature adoption 和 cohort retention 指标，解释各指标分子分母及观察窗口，设计能区分新老用户变化的看板。不要设计付费弹窗或营销活动。","expected_ids":["product-analytics"],"pending_ids":[],"control":false},
+    {"id":"multi_quality_then_query","stratum":"mixed","need":"先给合成客户与订单表做 data profiling，检查缺失、重复和无效金额；随后必须写 SQL，按客户汇总已支付订单并保留零订单客户。当前先处理数据质量，但后续查询也需要对应能力。","expected_ids":["data-quality-auditor"],"pending_ids":["sql-database-assistant"],"control":false}
+  ]
+}

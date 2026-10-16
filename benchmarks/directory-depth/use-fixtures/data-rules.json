@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "required": ["order_id", "customer_id", "amount_cents", "status", "ordered_at"],
+  "unique": ["order_id"],
+  "amount_cents": {"integer": true, "minimum": 0, "maximum": 1000000},
+  "status": ["paid", "pending", "cancelled"],
+  "ordered_at": "real calendar date in YYYY-MM-DD"
+}
