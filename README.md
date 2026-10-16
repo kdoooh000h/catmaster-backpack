@@ -399,6 +399,14 @@ two new document/spreadsheet needs fail retrieval before final selection. Mean
 tokens for the same five live pairs rise 1.70%, and measured final-dispatch time
 rises 12.46%. The remaining recall omissions prevent daily promotion.
 
+The [structured metadata recall follow-up](docs/backpack-structured-recall-2026-10-16.md)
+adds bilingual objects/actions and existing categories while retaining all
+lexical candidates. Both old document omissions pass; all 12 required references
+survive across six needs. Strict success is 0/6 versus 5/6: one new presentation
+final abstains at 0.51 despite retaining its correct target. Each need still uses
+one Jev call, but mean tokens rise 47.68% and warm selector time rises 8.90%.
+The remaining final-selection failure prevents daily promotion.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
