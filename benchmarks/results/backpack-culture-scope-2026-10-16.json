@@ -1,0 +1,1489 @@
+{
+  "version": 1,
+  "scope": "Isolated public directory selection only; no installation, daily activation, private catalog or lifecycle changes.",
+  "plan": {
+    "version": 1,
+    "arms": [
+      "current_step",
+      "culture_scope"
+    ],
+    "case_count": 7,
+    "repetitions": 1,
+    "case_order": [
+      "multi_reverse_wiki_now",
+      "culture_after_package_audit",
+      "culture_after_service_signals",
+      "culture_after_welcome_letters",
+      "charts_culture_then_wiki",
+      "culture_now_then_dependencies",
+      "cancel_culture_keep_delivery"
+    ],
+    "original_failed_case_ids": [
+      "multi_reverse_wiki_now"
+    ],
+    "baseline_plan_sha256": "8c9d294f0dc119a4624fd9484a52a4de1a1663375864944f426054e0aad1d852",
+    "baseline_results_sha256": "54692c1128474a1ce68609a8daeaacb92b591e92a842f0aa48a61535cf808977",
+    "base_commit": "6de306a6f88c9a7c81c346cf81798bd9e8185909",
+    "same_original_failed_need_and_gold": true,
+    "same_membership": true,
+    "same_final_question_and_full_descriptions": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "max_boundary_calls_per_task": 0,
+    "carry_limit": 8,
+    "adaptive_target": 24,
+    "final_limit": 96,
+    "max_rounds": 6,
+    "max_calls": 98,
+    "max_known_tokens": 300000,
+    "max_seconds": 300,
+    "timeout_seconds": 15,
+    "provider": "typesafe",
+    "attempts": 1,
+    "ordering": "Original failure then six new cases; alternate fresh arms by case; one pass.",
+    "scope": "Isolated public directory selection only; no installation, daily activation, private catalog or lifecycle changes.",
+    "changes": [
+      "Append source-grounded culture operations to one first-layer directory description. No member or rule changes."
+    ],
+    "scope_evidence": {
+      "node": "root:leadership-and-business",
+      "before": "Leadership, Business Operations & Finance: Make executive decisions across company functions; organize business operations and financial analysis.",
+      "after": "Leadership, Business Operations & Finance: Make executive decisions across company functions; organize business operations and financial analysis. Also build company culture: translate mission, vision and values into observable behaviors; create culture codes and rituals; assess culture health and address culture clashes.",
+      "capability": "culture-architect",
+      "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+      "source_description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+    },
+    "acceptance": "All seven candidate cases select the current reference at >=0.7 and retain every current/later reference at every layer. Cancelled culture must not become the current selection. Preserve every failure; no retries, within-run tuning or replay of previously passed needs.",
+    "token_cap": "Check before each dispatch; one response may cross it. Stop on transport, unknown usage, malformed output or exhausted budget.",
+    "limitations": "One known failure and six author-written combinations, one pass without independent blind review. Selection and retention only, not business-task execution or population accuracy.",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+      "benchmarks/directory-depth/expanded_experiment.py": "bff01ab4da9090932e8fb1ae9bb7150ea80e42cd757cf39b65583df1650f6eec",
+      "benchmarks/directory-depth/expanded_cases.json": "6712d6909d27b6035d4e12ad2082165b5e25fa3fa9b63e20238777f23e7f45e9",
+      "benchmarks/directory-depth/adaptive_repair.py": "5cfb14f71b07a8200a951c8cbe7eb9a535c582e05df2f023dc83025e27037979",
+      "benchmarks/directory-depth/repair_experiment.py": "cdf8b0541ac162c1dca06970365cb9b586583dca4a5200d1da8e4e879f292519",
+      "benchmarks/directory-depth/slim_experiment.py": "ce7bb8ce3de60f5d42cb9182c82e595da7a9dc5f1fd1baabd7aece370cc72044",
+      "benchmarks/directory-depth/breadth_experiment.py": "47081cae41bb2ee631689c49297ac9a291669269c9adc2655bece144b4d66982",
+      "benchmarks/directory-depth/breadth_cases.json": "69e3117dd7ca6371684d6aea9b64a8b6bf22673bb61d24edca84626f2f22b6c9",
+      "benchmarks/directory-depth/large_public_cases.json": "a8dfc3b7f6b30bd87b897effe16c3b188b85655d77cc2021c006339848ff2560",
+      "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+      "benchmarks/directory-depth/current_step_experiment.py": "cb0627cc7cd2effd08045677c1bddc321436a8201a71e2af4da850e3594510f9",
+      "benchmarks/directory-depth/current_step_cases.json": "fd34a3bb9210c5a5aaec98e8670921068cf56d7f430463a121146ed812f218a8",
+      "benchmarks/directory-depth/culture_scope.py": "8c8f8e919a968c933aca6e78330fb8dbe3afb3c5da49feedf069e818b014b45a",
+      "benchmarks/directory-depth/culture_scope_experiment.py": "903b5113e5ca4285b309a7a9051c87ff15fe6fe651f45d90b300bfed58e309db",
+      "benchmarks/directory-depth/culture_scope_cases.json": "93e6a1d7f223e88ca9ffdd5a963371ebc957e4f19f28508957e1826280e62244"
+    },
+    "input_sha256": {
+      "candidate-nodes.json": "4c6df2621938559e41613a7abe5827ad4db2b4170cc118879e1bde1bd9f6b56e",
+      "repaired-nodes.json": "fb0ef88629b667df9deedce313f3b3c96fe9dd86de466d8f0f627b75ea4dbaef",
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "cases.json": "4081ce295b0b4aee7760bf7eef1c3399ff0087de1831f6bcd07997fd7a42173e",
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "nodes.json": "52326ec32b7326872e68d464e14c09a5583fc07b951e2551a7d4e8e0248a592f"
+    }
+  },
+  "stop": "completed",
+  "complete_cases": 7,
+  "all_cases_complete": true,
+  "actual_calls": 68,
+  "known_tokens": 216394,
+  "wall_seconds": 37.94720666701323,
+  "usage_complete": true,
+  "unresolved": [],
+  "errors": [],
+  "by_arm": {
+    "current_step": {
+      "count": 7,
+      "omission_safe_successes": 3,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.603033827285149,
+      "mean_tokens": 14492.857142857143,
+      "mean_calls": 4.714285714285714
+    },
+    "culture_scope": {
+      "count": 7,
+      "omission_safe_successes": 6,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.81608897013939,
+      "mean_tokens": 16420.571428571428,
+      "mean_calls": 5
+    }
+  },
+  "complete_case_ids": [
+    "multi_reverse_wiki_now",
+    "culture_after_package_audit",
+    "culture_after_service_signals",
+    "culture_after_welcome_letters",
+    "charts_culture_then_wiki",
+    "culture_now_then_dependencies",
+    "cancel_culture_keep_delivery"
+  ],
+  "complete_case_metrics": {
+    "current_step": {
+      "count": 7,
+      "omission_safe_successes": 3,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.603033827285149,
+      "mean_tokens": 14492.857142857143,
+      "mean_calls": 4.714285714285714
+    },
+    "culture_scope": {
+      "count": 7,
+      "omission_safe_successes": 6,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.81608897013939,
+      "mean_tokens": 16420.571428571428,
+      "mean_calls": 5
+    }
+  },
+  "case_progress": {
+    "multi_reverse_wiki_now": {
+      "current_step": "completed",
+      "culture_scope": "completed"
+    },
+    "culture_after_package_audit": {
+      "current_step": "completed",
+      "culture_scope": "completed"
+    },
+    "culture_after_service_signals": {
+      "current_step": "completed",
+      "culture_scope": "completed"
+    },
+    "culture_after_welcome_letters": {
+      "current_step": "completed",
+      "culture_scope": "completed"
+    },
+    "charts_culture_then_wiki": {
+      "current_step": "completed",
+      "culture_scope": "completed"
+    },
+    "culture_now_then_dependencies": {
+      "current_step": "completed",
+      "culture_scope": "completed"
+    },
+    "cancel_culture_keep_delivery": {
+      "current_step": "completed",
+      "culture_scope": "completed"
+    }
+  },
+  "positive_by_arm": {
+    "current_step": {
+      "count": 7,
+      "omission_safe_successes": 3,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.603033827285149,
+      "mean_tokens": 14492.857142857143,
+      "mean_calls": 4.714285714285714
+    },
+    "culture_scope": {
+      "count": 7,
+      "omission_safe_successes": 6,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.81608897013939,
+      "mean_tokens": 16420.571428571428,
+      "mean_calls": 5
+    }
+  },
+  "candidate_eligible_on_this_regression": {
+    "culture_scope": false
+  },
+  "change_vs_baseline_percent": {
+    "current_step": {
+      "mean_tokens": 0.0,
+      "mean_seconds": 0.0,
+      "mean_calls": 0.0
+    },
+    "culture_scope": {
+      "mean_tokens": 13.30113356333169,
+      "mean_seconds": 8.184877992017793,
+      "mean_calls": 6.060606060606055
+    }
+  },
+  "stage_usage": {
+    "culture_scope": {
+      "directory_calls": 28.0,
+      "directory_tokens": 74642.0,
+      "directory_seconds": 15.163799211062724,
+      "final_calls": 7.0,
+      "final_tokens": 40302.0,
+      "final_seconds": 4.42341362501611
+    },
+    "current_step": {
+      "directory_calls": 26.0,
+      "directory_tokens": 67256.0,
+      "directory_seconds": 13.825585083017359,
+      "final_calls": 7.0,
+      "final_tokens": 34194.0,
+      "final_seconds": 4.287315917928936
+    }
+  },
+  "boundary_reviews": [],
+  "failures": [
+    {
+      "case": "multi_reverse_wiki_now",
+      "arm": "current_step",
+      "first_omission_stage": 1,
+      "scores_at_omission": [
+        {
+          "node": "root:leadership-and-business",
+          "score": 0.17
+        },
+        {
+          "node": "root:delivery-and-personal-work",
+          "score": 0.33
+        }
+      ],
+      "selected": "confluence-expert",
+      "confidence": 1.0,
+      "status": "selected"
+    },
+    {
+      "case": "culture_after_service_signals",
+      "arm": "current_step",
+      "first_omission_stage": 1,
+      "scores_at_omission": [
+        {
+          "node": "root:build-and-agents",
+          "score": 0.91
+        },
+        {
+          "node": "root:leadership-and-business",
+          "score": 0.15
+        }
+      ],
+      "selected": "observability-designer",
+      "confidence": 1.0,
+      "status": "selected"
+    },
+    {
+      "case": "charts_culture_then_wiki",
+      "arm": "current_step",
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:engineering:topic4",
+          "score": 0.39
+        },
+        {
+          "node": "domain:c-level-advisor:topic3",
+          "score": 0.85
+        },
+        {
+          "node": "domain:project-management:na",
+          "score": 0.94
+        }
+      ],
+      "selected": "senior-devops",
+      "confidence": 0.75,
+      "status": "selected"
+    },
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "culture_scope",
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:engineering:topic7",
+          "score": 0.35
+        },
+        {
+          "node": "domain:c-level-advisor:topic3",
+          "score": 0.96
+        }
+      ],
+      "selected": "culture-architect",
+      "confidence": 1.0,
+      "status": "selected"
+    },
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "current_step",
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:engineering:topic7",
+          "score": 0.36
+        },
+        {
+          "node": "domain:c-level-advisor:topic3",
+          "score": 0.96
+        }
+      ],
+      "selected": "culture-architect",
+      "confidence": 1.0,
+      "status": "selected"
+    }
+  ],
+  "rows": [
+    {
+      "case": "multi_reverse_wiki_now",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 1.9597647500049789,
+      "calls": 4,
+      "known_tokens": 8494,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        false,
+        false,
+        false
+      ],
+      "first_omission_stage": 1,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "confluence-expert",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 98,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 15,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_reverse_wiki_now",
+      "arm": "culture_scope",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6761225420050323,
+      "calls": 5,
+      "known_tokens": 12910,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "confluence-expert",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 27
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 162,
+          "offered": 14,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 32,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 27,
+          "offered": 2,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_after_package_audit",
+      "arm": "culture_scope",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.0165428330074064,
+      "calls": 5,
+      "known_tokens": 19108,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 39
+      },
+      "stages": [
+        {
+          "pool_size": 307,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 230,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 79,
+          "offered": 29,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 39,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_after_package_audit",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1478662089793943,
+      "calls": 5,
+      "known_tokens": 20183,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 50
+      },
+      "stages": [
+        {
+          "pool_size": 307,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 230,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 79,
+          "offered": 29,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 50,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_after_service_signals",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.114461959019536,
+      "calls": 4,
+      "known_tokens": 9042,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        false,
+        false,
+        false
+      ],
+      "first_omission_stage": 1,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "observability-designer",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 17
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 152,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 17,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_after_service_signals",
+      "arm": "culture_scope",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.728585665987339,
+      "calls": 5,
+      "known_tokens": 15645,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "observability-designer",
+        "confidence": 0.99,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 36
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 199,
+          "offered": 14,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 48,
+          "offered": 24,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 36,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_after_welcome_letters",
+      "arm": "culture_scope",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.815057750005508,
+      "calls": 5,
+      "known_tokens": 21079,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "email-sequence",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 54
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 176,
+          "offered": 18,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 87,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 54,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_after_welcome_letters",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.909451250015991,
+      "calls": 5,
+      "known_tokens": 19375,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "email-sequence",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 41
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 176,
+          "offered": 18,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 80,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 41,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "charts_culture_then_wiki",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.8731384160055313,
+      "calls": 5,
+      "known_tokens": 19290,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": true,
+      "result": {
+        "status": "selected",
+        "choice": "senior-devops",
+        "confidence": 0.75,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 57
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 215,
+          "offered": 14,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 85,
+          "offered": 27,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 57,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "charts_culture_then_wiki",
+      "arm": "culture_scope",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.806305165984668,
+      "calls": 5,
+      "known_tokens": 20442,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "helm-chart-builder",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 57
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 215,
+          "offered": 14,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 94,
+          "offered": 27,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 57,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "culture_scope",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.7983108749904204,
+      "calls": 5,
+      "known_tokens": 13873,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "culture-architect",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 34
+      },
+      "stages": [
+        {
+          "pool_size": 275,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 145,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 39,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 34,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.58439704097691,
+      "calls": 5,
+      "known_tokens": 13844,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "culture-architect",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 34
+      },
+      "stages": [
+        {
+          "pool_size": 275,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 145,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 39,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 34,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "cancel_culture_keep_delivery",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6321571659937035,
+      "calls": 5,
+      "known_tokens": 11222,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "helm-chart-builder",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 24
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 159,
+          "offered": 7,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 36,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 24,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "cancel_culture_keep_delivery",
+      "arm": "culture_scope",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.8716979589953553,
+      "calls": 5,
+      "known_tokens": 11887,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "helm-chart-builder",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 29
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 159,
+          "offered": 7,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 41,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 29,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    }
+  ],
+  "identical_request_groups_with_score_variation": 14,
+  "protected_paths_checked": 354,
+  "protected_files_unchanged": true,
+  "source_summary_sha256": "9cf9e6fc2582e9d2acb45d93f4122af2d5cee3331003d6671247bc939c019141",
+  "budget_extension": null,
+  "limitations": [
+    "One known failure and six author-written combinations, one pass without independent blind review. Selection and retention only, not business-task execution or population accuracy.",
+    "All failures remain in primary denominators, including correct current selection with a missing later reference. The common-passing subset is post-hoc cost context only.",
+    "The baseline DevOps substitute does not meet the predeclared Helm reference. Its actual task competence was not executed or adjudicated; wrong_accepts means reference mismatch in this benchmark.",
+    "Only one root description changes; all other scopes, members, final instructions, full descriptions and gates are frozen. Directory score sampling varies, so one pass does not establish stable gains or independently isolate downstream score variation.",
+    "Confidence scores are not calibrated correctness probabilities. One cancellation case cannot establish universal cancellation behavior.",
+    "Jev selector timing and reported tokens only. Root preparation/analysis and intent-entry cost, full task cost, backend model revision and monetary charges are unobservable in these comparison metrics.",
+    "At verification all 354 protected release/configuration paths, 232 main-worktree files and 224 lifecycle-worktree files match their start snapshots; HEADs and Git status match. These are time-bounded observations, not a claim about future concurrent work.",
+    "No installation, activation, private catalog mutation, lifecycle modification, business task execution or replay of passed needs."
+  ],
+  "cases": [
+    {
+      "id": "multi_reverse_wiki_now",
+      "stratum": "mixed",
+      "need": "这份演示项目最终要把团队价值观变成可观察行为并建立文化健康评估；不过先后顺序是先规划 Confluence 的页面层级、权限、模板宏和复审归档，再开展价值观设计。当前只做知识库结构，后面的文化设计也必须保留，不访问实际站点。",
+      "expected_ids": [
+        "confluence-expert"
+      ],
+      "pending_ids": [
+        "culture-architect"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "confluence-expert",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/confluence-expert/SKILL.md",
+          "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, and documentation. Configures space permissions and hierarchies, creates page templates with macros, sets up documentation taxonomies, designs page layouts, and manages content governance. Use when users need to build or restructure a Confluence space, design page hierarchies with permission structures, author or standardise documentation templates, embed Jira reports in pages, run knowledge base audits, or establish documentation standards and collaborative workflows."
+        },
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        }
+      ]
+    },
+    {
+      "id": "culture_after_package_audit",
+      "stratum": "chinese",
+      "need": "为虚构团队完成两项工作：当前先审查演示仓库依赖中的漏洞、许可证冲突和间接依赖风险，给出升级优先级；然后必须把团队使命和价值观转成可观察行为、文化准则以及日常仪式。两项都要交付，先交依赖审查，不改软件包。",
+      "expected_ids": [
+        "dependency-auditor"
+      ],
+      "pending_ids": [
+        "culture-architect"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        },
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        }
+      ]
+    },
+    {
+      "id": "culture_after_service_signals",
+      "stratum": "mixed",
+      "need": "项目最后还要做 culture health assessment，把 values 变成可观察的日常行为并设计团队仪式；这项不能遗漏。不过当前先为虚构服务设计 metrics/logs/traces、SLI/SLO 和降噪告警，交完监控方案再做文化评估，两步都属于本次工作，不连接生产系统。",
+      "expected_ids": [
+        "observability-designer"
+      ],
+      "pending_ids": [
+        "culture-architect"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "observability-designer",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/observability-designer/SKILL.md",
+          "description": "Design production-ready observability strategies combining metrics, logs, and traces. Includes SLI/SLO design, golden-signals monitoring, alert optimization. Use when adding observability to a new service, refactoring alerting that is too noisy, or designing an SLO program before scaling production load."
+        },
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        }
+      ]
+    },
+    {
+      "id": "culture_after_welcome_letters",
+      "stratum": "synonym",
+      "need": "先给同意接收消息的演示新订阅者设计一串从欢迎到激活的邮件，说明每封信的目的与间隔；之后还得把虚构团队墙上的口号变成大家日常能做到、能观察的行为约定，设计共同习惯和评估办法。当前先做欢迎邮件，两项都必须完成，不发送任何邮件。",
+      "expected_ids": [
+        "email-sequence"
+      ],
+      "pending_ids": [
+        "culture-architect"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "email-sequence",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/marketing-skill/skills/email-sequence/SKILL.md",
+          "description": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \"email sequence,\" \"drip campaign,\" \"nurture sequence,\" \"onboarding emails,\" \"welcome sequence,\" \"re-engagement emails,\" \"email automation,\" or \"lifecycle emails.\" For in-app onboarding, see onboarding-cro."
+        },
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        }
+      ]
+    },
+    {
+      "id": "charts_culture_then_wiki",
+      "stratum": "mixed",
+      "need": "演示项目分三步交付：当前先规划 Helm chart 的 values.yaml、模板 helper 和子图依赖检查；接着必须把团队价值观落实到行为标准、文化准则和仪式；最后必须设计 Confluence 页面层级、权限、模板宏及复审归档，承载第二步成果。三步都要保留，按这个顺序做，只设计，不连接集群或站点。",
+      "expected_ids": [
+        "helm-chart-builder"
+      ],
+      "pending_ids": [
+        "culture-architect",
+        "confluence-expert"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "helm-chart-builder",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/helm-chart-builder/skills/helm-chart-builder/SKILL.md",
+          "description": "Helm chart development agent skill and plugin for Claude Code, Codex, Gemini CLI, Cursor, OpenClaw — chart scaffolding, values design, template patterns, dependency management, security hardening, and chart testing. Use when: user wants to create or improve Helm charts, design values.yaml files, implement template helpers, audit chart security (RBAC, network policies, pod security), manage subcharts, or run helm lint/test."
+        },
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        },
+        {
+          "id": "confluence-expert",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/confluence-expert/SKILL.md",
+          "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, and documentation. Configures space permissions and hierarchies, creates page templates with macros, sets up documentation taxonomies, designs page layouts, and manages content governance. Use when users need to build or restructure a Confluence space, design page hierarchies with permission structures, author or standardise documentation templates, embed Jira reports in pages, run knowledge base audits, or establish documentation standards and collaborative workflows."
+        }
+      ]
+    },
+    {
+      "id": "culture_now_then_dependencies",
+      "stratum": "chinese",
+      "need": "演示仓库依赖的安全漏洞、许可证和间接依赖风险也需要审查，但排在下一步。当前先为虚构合并团队设计共同价值观、可观察的行为准则、跨团队文化仪式与文化健康评估，处理两组习惯冲突。两步都必须交付，先做文化方案，不调整人员或软件包。",
+      "expected_ids": [
+        "culture-architect"
+      ],
+      "pending_ids": [
+        "dependency-auditor"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        },
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        }
+      ]
+    },
+    {
+      "id": "cancel_culture_keep_delivery",
+      "stratum": "mixed",
+      "need": "取消先前的团队价值观、文化准则与文化仪式设计，本次不要做这些。仍然必须完成两件事：当前先设计演示服务的 Helm chart、values.yaml、模板 helper 与子图检查；之后再规划 metrics/logs/traces、SLI/SLO 和告警降噪。两项按顺序交付，不连接实际系统。",
+      "expected_ids": [
+        "helm-chart-builder"
+      ],
+      "pending_ids": [
+        "observability-designer"
+      ],
+      "forbidden_current_ids": [
+        "culture-architect"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "helm-chart-builder",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/helm-chart-builder/skills/helm-chart-builder/SKILL.md",
+          "description": "Helm chart development agent skill and plugin for Claude Code, Codex, Gemini CLI, Cursor, OpenClaw — chart scaffolding, values design, template patterns, dependency management, security hardening, and chart testing. Use when: user wants to create or improve Helm charts, design values.yaml files, implement template helpers, audit chart security (RBAC, network policies, pod security), manage subcharts, or run helm lint/test."
+        },
+        {
+          "id": "observability-designer",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/observability-designer/SKILL.md",
+          "description": "Design production-ready observability strategies combining metrics, logs, and traces. Includes SLI/SLO design, golden-signals monitoring, alert optimization. Use when adding observability to a new service, refactoring alerting that is too noisy, or designing an SLO program before scaling production load."
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "frozen_inputs_and_sources_match": true,
+    "only_one_root_description_changed": true,
+    "all_memberships_unchanged": true,
+    "previously_passed_cases_replayed": 0,
+    "original_failed_case_exactly_preserved": true,
+    "offline_checks": 8,
+    "rows": 14,
+    "receipt_pairs": 68,
+    "known_tokens": 216394,
+    "wall_seconds": 37.94720666701323,
+    "original_task_and_final_question_and_full_descriptions_preserved": true,
+    "final_gate": 0.7,
+    "cancelled_culture_not_selected": true,
+    "protected_files": 354,
+    "other_worktrees": {
+      "main": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "snapshotted_files": 232,
+        "changed_paths": [],
+        "added_paths": []
+      },
+      "lifecycle": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "snapshotted_files": 224,
+        "changed_paths": [],
+        "added_paths": []
+      }
+    },
+    "changed_protected_path_count": 0
+  },
+  "by_arm_details": {
+    "current_step": {
+      "current_reference_accepted": 6,
+      "all_required_retained": 3,
+      "culture_required_count": 6,
+      "culture_retained_through_all_stages": 4,
+      "median_seconds": 2.6321571659937035,
+      "total_tokens": 101450,
+      "total_calls": 33
+    },
+    "culture_scope": {
+      "current_reference_accepted": 7,
+      "all_required_retained": 6,
+      "culture_required_count": 6,
+      "culture_retained_through_all_stages": 6,
+      "median_seconds": 2.806305165984668,
+      "total_tokens": 114944,
+      "total_calls": 35
+    }
+  },
+  "culture_root_scores": {
+    "multi_reverse_wiki_now": {
+      "current_step": 0.17,
+      "culture_scope": 0.72
+    },
+    "culture_after_package_audit": {
+      "current_step": 0.28,
+      "culture_scope": 0.93
+    },
+    "culture_after_service_signals": {
+      "current_step": 0.15,
+      "culture_scope": 0.93
+    },
+    "culture_after_welcome_letters": {
+      "current_step": 0.3,
+      "culture_scope": 0.9
+    },
+    "charts_culture_then_wiki": {
+      "current_step": 0.29,
+      "culture_scope": 0.93
+    },
+    "culture_now_then_dependencies": {
+      "current_step": 0.31,
+      "culture_scope": 0.96
+    },
+    "cancel_culture_keep_delivery": {
+      "current_step": 0.04,
+      "culture_scope": 0.04
+    }
+  },
+  "common_passing_subset": {
+    "post_hoc": true,
+    "case_ids": [
+      "culture_after_package_audit",
+      "culture_after_welcome_letters",
+      "cancel_culture_keep_delivery"
+    ],
+    "does_not_replace_primary_denominator": true,
+    "by_arm": {
+      "current_step": {
+        "total_tokens": 50780,
+        "total_seconds": 8.689474624989089
+      },
+      "culture_scope": {
+        "total_tokens": 52074,
+        "total_seconds": 8.70329854200827
+      }
+    }
+  },
+  "remaining_failure": {
+    "case": "culture_now_then_dependencies",
+    "stage": 3,
+    "missing_reference": "dependency-auditor",
+    "node": "domain:engineering:topic7",
+    "description": "Audit dependencies and unsafe code patterns; manage environment secrets and vault infrastructure; verify release readiness.",
+    "scores": {
+      "current_step": 0.36,
+      "culture_scope": 0.35
+    },
+    "threshold": 0.4,
+    "current_target_selected_both_arms": true
+  },
+  "conclusion": "The original first-layer culture omission is repaired in this pass and all six culture-required cases retain culture guidance. Strict selection and all-required retention improves 3/7 to 6/7. A new third-layer later dependency omission remains in both arms; all-pass acceptance is unmet and no daily promotion occurs. Mean tokens increase 13.30% and time 8.18%."
+}

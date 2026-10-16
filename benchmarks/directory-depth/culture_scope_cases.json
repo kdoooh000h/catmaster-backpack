@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "scope": "Six new author-written combinations frozen before live calls. Five require culture work; one explicitly cancels it while retaining two other tasks.",
+  "cases": [
+    {"id":"culture_after_package_audit","stratum":"chinese","need":"为虚构团队完成两项工作：当前先审查演示仓库依赖中的漏洞、许可证冲突和间接依赖风险，给出升级优先级；然后必须把团队使命和价值观转成可观察行为、文化准则以及日常仪式。两项都要交付，先交依赖审查，不改软件包。","expected_ids":["dependency-auditor"],"pending_ids":["culture-architect"],"control":false},
+    {"id":"culture_after_service_signals","stratum":"mixed","need":"项目最后还要做 culture health assessment，把 values 变成可观察的日常行为并设计团队仪式；这项不能遗漏。不过当前先为虚构服务设计 metrics/logs/traces、SLI/SLO 和降噪告警，交完监控方案再做文化评估，两步都属于本次工作，不连接生产系统。","expected_ids":["observability-designer"],"pending_ids":["culture-architect"],"control":false},
+    {"id":"culture_after_welcome_letters","stratum":"synonym","need":"先给同意接收消息的演示新订阅者设计一串从欢迎到激活的邮件，说明每封信的目的与间隔；之后还得把虚构团队墙上的口号变成大家日常能做到、能观察的行为约定，设计共同习惯和评估办法。当前先做欢迎邮件，两项都必须完成，不发送任何邮件。","expected_ids":["email-sequence"],"pending_ids":["culture-architect"],"control":false},
+    {"id":"charts_culture_then_wiki","stratum":"mixed","need":"演示项目分三步交付：当前先规划 Helm chart 的 values.yaml、模板 helper 和子图依赖检查；接着必须把团队价值观落实到行为标准、文化准则和仪式；最后必须设计 Confluence 页面层级、权限、模板宏及复审归档，承载第二步成果。三步都要保留，按这个顺序做，只设计，不连接集群或站点。","expected_ids":["helm-chart-builder"],"pending_ids":["culture-architect","confluence-expert"],"control":false},
+    {"id":"culture_now_then_dependencies","stratum":"chinese","need":"演示仓库依赖的安全漏洞、许可证和间接依赖风险也需要审查，但排在下一步。当前先为虚构合并团队设计共同价值观、可观察的行为准则、跨团队文化仪式与文化健康评估，处理两组习惯冲突。两步都必须交付，先做文化方案，不调整人员或软件包。","expected_ids":["culture-architect"],"pending_ids":["dependency-auditor"],"control":false},
+    {"id":"cancel_culture_keep_delivery","stratum":"mixed","need":"取消先前的团队价值观、文化准则与文化仪式设计，本次不要做这些。仍然必须完成两件事：当前先设计演示服务的 Helm chart、values.yaml、模板 helper 与子图检查；之后再规划 metrics/logs/traces、SLI/SLO 和告警降噪。两项按顺序交付，不连接实际系统。","expected_ids":["helm-chart-builder"],"pending_ids":["observability-designer"],"forbidden_current_ids":["culture-architect"],"control":false}
+  ]
+}

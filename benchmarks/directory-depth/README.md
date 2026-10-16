@@ -1,5 +1,17 @@
 # Public directory depth/width pilot
 
+The [culture-scope follow-up](../../docs/backpack-culture-scope-2026-10-16.md)
+adds source-grounded culture operations to one first-layer description, retaining
+current-step final selection, all memberships and the 0.7 gate. It retests the one
+failed need and six new combinations. Culture survives all stages in 6/6 required
+cases (previously 4/6), and strict complete passes improve 3/7 to 6/7. A new
+third-layer later-dependency omission remains in both arms, so no daily promotion
+occurs. Mean tokens rise 13.30% and time 8.18%; extra retained work has a cost.
+Eight offline checks and all 68 receipt pairs reconcile. Use
+`culture_scope_experiment.py freeze/run` with the current-step bundle as source;
+the frozen cap is 98 calls / 300,000 tokens / 300 seconds, one pass, no retries.
+Passed needs, installed versions and the other workspaces are left untouched.
+
 The [current-step follow-up](../../docs/backpack-current-step-2026-10-16.md)
 retests only the two failed multi-task needs and adds six new combinations.
 Only final-dispatch instructions prioritize the explicit current step; raw needs,
