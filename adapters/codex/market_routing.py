@@ -76,13 +76,23 @@ def route(runtime, need, candidates, config, stage):
     call = {'jev-cli': runtime._jev_cli, 'typesafe-http': runtime._typesafe_http}.get(config.get('provider'))
     if call is None:
         raise runtime.BackpackError('invalid_config')
+    atomic_fit = stage == 'plugin-ready' and config.get('provider') == 'jev-cli'
+    if atomic_fit and len(candidates) != 1:
+        raise runtime.BackpackError('invalid_market_choice')
+    fit_checks = None
     started = time.monotonic()
     for attempt in range(1, runtime.MAX_PROVIDER_ATTEMPTS + 1):
         remaining = runtime.ROUTING_BUDGET_SECONDS - (time.monotonic() - started)
         try:
             if remaining <= 0:
                 raise runtime.BackpackError('provider_timeout')
-            answer = call({**config, 'timeout_seconds': min(float(config.get('timeout_seconds', 45)), remaining)}, question, state, choices)
+            attempt_config = {**config, 'timeout_seconds': min(float(config.get('timeout_seconds', 45)), remaining)}
+            if atomic_fit:
+                from market_guidance_fit import check
+                answer, fit_checks = check(runtime, attempt_config, need, candidates[0])
+            else:
+                # The legacy HTTP adapter supports one Choice, not Jev run.
+                answer = call(attempt_config, question, state, choices)
             if answer.choice not in choices:
                 raise runtime.BackpackError('invalid_market_choice')
             break
@@ -93,10 +103,13 @@ def route(runtime, need, candidates, config, stage):
                     or runtime.ROUTING_BUDGET_SECONDS - (time.monotonic() - started) <= runtime.RETRY_DELAY_SECONDS):
                 raise
             time.sleep(runtime.RETRY_DELAY_SECONDS)
-    status = 'uncertain' if answer.confidence < config['minimum_confidence'] else ('none' if answer.choice == 'none' else 'selected')
+    minimum = max(.7, config['minimum_confidence']) if stage == 'plugin-ready' else config['minimum_confidence']
+    status = 'uncertain' if answer.confidence < minimum else ('none' if answer.choice == 'none' else 'selected')
     result = {'status': status, 'skill': answer.choice if status == 'selected' else None,
             'confidence': answer.confidence, 'attempts': attempt,
             'elapsed_seconds': round(time.monotonic() - started, 3), 'selection_stage': stage}
+    if fit_checks is not None:
+        result['fit_checks'] = fit_checks
     if stage in {'plugin', 'skill-preview'} and status == 'selected':
         probabilities = getattr(answer, 'probabilities', {})
         if isinstance(probabilities, dict) and all(

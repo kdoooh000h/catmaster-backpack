@@ -1,0 +1,64 @@
+[
+  {
+    "id": "original_zh",
+    "need": "制作一个能离线打开的单文件 index.html，让学生拖动滑块调整弹簧刚度 k 和物体质量 m，观察周期 T=2π√(m/k) 如何变化。显示参数、单位和周期，提供重置按钮，并能复制当前配置的 JSON。不要依赖外部网络，完成后检查计算和交互。",
+    "positive": true,
+    "partition": "development"
+  },
+  {
+    "id": "prior_generated_zh",
+    "need": "制作可离线打开的单文件中文交互教学网页，用两个滑块调整弹簧刚度 k 和质量 m，显示单位和 T=2π√(m/k)，提供重置和复制当前配置 JSON，检查计算与交互。需要适合小型原生 HTML/CSS/JavaScript 页面制作的指导。",
+    "positive": true,
+    "partition": "development"
+  },
+  {
+    "id": "synonym_zh",
+    "need": "给学生做一个断网也能用的单页小实验。用拖动条改变弹簧的软硬程度和挂着物体的质量，立即显示按 T=2π√(m/k) 算出的往返一次用时以及单位；能恢复初始数值，能把现有设置复制为 JSON。最后验证数值和按钮。",
+    "positive": true,
+    "partition": "held_out"
+  },
+  {
+    "id": "mixed_controls",
+    "need": "做一个 offline 单文件 HTML 教学小工具：用 range slider 调 k（弹簧刚度）和 m（质量），实时显示 period=2π√(m/k) 与单位；提供 reset 和 copy JSON，检查交互，不能依赖 CDN。",
+    "positive": true,
+    "partition": "held_out"
+  },
+  {
+    "id": "mixed_paraphrase",
+    "need": "请制作不用联网的 spring-mass 教学网页，只有 index.html。学生拖拽两个滑动控件改变 stiffness k 和 mass m，查看 T=2π√(m/k) 的计算结果和单位。可以还原默认参数，并复制当前配置 JSON；需要验证公式和交互。",
+    "positive": true,
+    "partition": "held_out"
+  },
+  {
+    "id": "short_zh",
+    "need": "做个离线弹簧周期实验网页，全部放在 index.html：滑块改 k 和 m，实时算 T=2π√(m/k)，显示单位，重置，复制配置 JSON，检查是否正常。",
+    "positive": true,
+    "partition": "held_out"
+  },
+  {
+    "id": "negative_prose",
+    "need": "仅用一段纯文字解释弹簧振子的周期公式；不要代码、网页或可交互页面。",
+    "positive": false,
+    "partition": "held_out"
+  },
+  {
+    "id": "negative_native",
+    "need": "调节实体实验装置上的弹簧与砝码，读取真实传感器数据。不能用模拟网页代替实体设备测量。",
+    "positive": false,
+    "partition": "held_out"
+  },
+  {
+    "id": "negative_service",
+    "need": "制作一个能离线打开的单文件 index.html，让学生拖动滑块调整弹簧刚度 k 和物体质量 m，观察周期 T=2π√(m/k) 如何变化。显示参数、单位和周期，提供重置按钮，并能复制当前配置的 JSON。不要依赖外部网络，完成后检查计算和交互。",
+    "positive": false,
+    "partition": "development",
+    "synthetic": "mandatory_service"
+  },
+  {
+    "id": "negative_unrelated",
+    "need": "制作一个能离线打开的单文件 index.html，让学生拖动滑块调整弹簧刚度 k 和物体质量 m，观察周期 T=2π√(m/k) 如何变化。显示参数、单位和周期，提供重置按钮，并能复制当前配置的 JSON。不要依赖外部网络，完成后检查计算和交互。",
+    "positive": false,
+    "partition": "held_out",
+    "synthetic": "unrelated_guide"
+  }
+]
