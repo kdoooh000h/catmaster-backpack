@@ -1,5 +1,19 @@
 # Public directory depth/width pilot
 
+The [current-step follow-up](../../docs/backpack-current-step-2026-10-16.md)
+retests only the two failed multi-task needs and adds six new combinations.
+Only final-dispatch instructions prioritize the explicit current step; raw needs,
+directory policy, full candidates, later-target retention and the 0.7 gate remain.
+Fresh paired runs improve complete selection/retention from 4/8 to 7/8, including
+both original failures. A new reversed-order case loses its later culture target
+at the first directory level in both arms, so the all-pass gate remains unmet.
+Mean time is 2.875/2.796 seconds, tokens 13,378/13,481 and calls 4.875/4.875.
+This is a selection improvement with nearly unchanged cost, not daily promotion.
+Use `current_step_experiment.py freeze/run` with the breadth bundle as source;
+the frozen limit is 112 calls / 350,000 tokens / 360 seconds, one pass, no retries.
+Eight offline checks and all 78 live receipt pairs reconcile. Other passed needs
+are not replayed; concurrent lifecycle-worktree changes are left untouched.
+
 The [28-new-case breadth test](../../docs/backpack-adaptive-breadth-2026-10-16.md)
 freezes both selectors and corrected metadata from the same-14 follow-up. Twenty
 new targets span six roots and fourteen source domains, with four cross-root

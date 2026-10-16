@@ -1,0 +1,1538 @@
+{
+  "version": 1,
+  "scope": "Isolated multi-step selection only; no installed capability, plugin, MCP, dispatcher or lifecycle changes.",
+  "plan": {
+    "version": 1,
+    "arms": [
+      "slim",
+      "current_step"
+    ],
+    "case_count": 8,
+    "repetitions": 1,
+    "case_order": [
+      "multi_culture_then_wiki",
+      "multi_accounts_then_finance",
+      "multi_reverse_wiki_now",
+      "multi_reverse_finance_now",
+      "multi_study_then_documents",
+      "multi_charts_then_signals",
+      "multi_welcome_then_channels",
+      "multi_procurement_support_wiki"
+    ],
+    "original_failed_case_ids": [
+      "multi_culture_then_wiki",
+      "multi_accounts_then_finance"
+    ],
+    "baseline_plan_sha256": "07cfe7eae1b72f8b6188566a3b43b6a3f42be44be7d78b00877bd5fd04a5df37",
+    "baseline_results_sha256": "ba067fe44e599420d72947dd4ba9921b2c257476d8026a8a339029fdf93379c5",
+    "base_commit": "cbc877bc799fbb21784b5e4aa30fe13da082c5cc",
+    "same_original_failed_need_and_gold": true,
+    "same_corrected_description_bytes": true,
+    "same_membership": true,
+    "same_full_final_descriptions": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "max_boundary_calls_per_task": 0,
+    "carry_limit": 8,
+    "adaptive_target": 24,
+    "final_limit": 96,
+    "max_rounds": 6,
+    "max_calls": 112,
+    "max_known_tokens": 350000,
+    "max_seconds": 360,
+    "timeout_seconds": 15,
+    "provider": "typesafe",
+    "attempts": 1,
+    "ordering": "Two original failures then six new cases; alternate fresh arms by case; one pass.",
+    "scope": "Isolated multi-step selection only; no installed capability, plugin, MCP, dispatcher or lifecycle changes.",
+    "changes": [
+      "Only final dispatch instructions prioritize the explicit current step. All required later candidates remain.",
+      "Directory policy, raw task, full criteria, order, gate and reading-cost estimator are unchanged."
+    ],
+    "acceptance": "All eight candidate cases retain every current/later target and select the current target at >=0.7. All failures remain. No retries, within-run tuning or replay of previously passed needs.",
+    "token_cap": "Checked before each dispatch; one response may cross it. Stop on transport, unknown usage, malformed output or exhausted budget.",
+    "limitations": "Two known failures and six author-written combinations, one pass without independent blind review. Exact reference-target selection and retention only; no task execution or population-accuracy claim.",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+      "benchmarks/directory-depth/expanded_experiment.py": "bff01ab4da9090932e8fb1ae9bb7150ea80e42cd757cf39b65583df1650f6eec",
+      "benchmarks/directory-depth/expanded_cases.json": "6712d6909d27b6035d4e12ad2082165b5e25fa3fa9b63e20238777f23e7f45e9",
+      "benchmarks/directory-depth/adaptive_repair.py": "5cfb14f71b07a8200a951c8cbe7eb9a535c582e05df2f023dc83025e27037979",
+      "benchmarks/directory-depth/repair_experiment.py": "cdf8b0541ac162c1dca06970365cb9b586583dca4a5200d1da8e4e879f292519",
+      "benchmarks/directory-depth/slim_experiment.py": "ce7bb8ce3de60f5d42cb9182c82e595da7a9dc5f1fd1baabd7aece370cc72044",
+      "benchmarks/directory-depth/breadth_experiment.py": "47081cae41bb2ee631689c49297ac9a291669269c9adc2655bece144b4d66982",
+      "benchmarks/directory-depth/breadth_cases.json": "69e3117dd7ca6371684d6aea9b64a8b6bf22673bb61d24edca84626f2f22b6c9",
+      "benchmarks/directory-depth/large_public_cases.json": "a8dfc3b7f6b30bd87b897effe16c3b188b85655d77cc2021c006339848ff2560",
+      "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+      "benchmarks/directory-depth/current_step_experiment.py": "cb0627cc7cd2effd08045677c1bddc321436a8201a71e2af4da850e3594510f9",
+      "benchmarks/directory-depth/current_step_cases.json": "fd34a3bb9210c5a5aaec98e8670921068cf56d7f430463a121146ed812f218a8"
+    },
+    "input_sha256": {
+      "repaired-nodes.json": "fb0ef88629b667df9deedce313f3b3c96fe9dd86de466d8f0f627b75ea4dbaef",
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "cases.json": "838e4d4dbf1886d9b3e9e99ee41ec2c3d3fe955671aa066c03a7fba51bf8241b",
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "nodes.json": "52326ec32b7326872e68d464e14c09a5583fc07b951e2551a7d4e8e0248a592f"
+    }
+  },
+  "stop": "completed",
+  "complete_cases": 8,
+  "all_cases_complete": true,
+  "actual_calls": 78,
+  "known_tokens": 214878,
+  "wall_seconds": 45.38676670897985,
+  "usage_complete": true,
+  "unresolved": [],
+  "errors": [],
+  "by_arm": {
+    "slim": {
+      "count": 8,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.875479416379676,
+      "mean_tokens": 13378.375,
+      "mean_calls": 4.875
+    },
+    "current_step": {
+      "count": 8,
+      "omission_safe_successes": 7,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.795770770750096,
+      "mean_tokens": 13481.375,
+      "mean_calls": 4.875
+    }
+  },
+  "complete_case_ids": [
+    "multi_culture_then_wiki",
+    "multi_accounts_then_finance",
+    "multi_reverse_wiki_now",
+    "multi_reverse_finance_now",
+    "multi_study_then_documents",
+    "multi_charts_then_signals",
+    "multi_welcome_then_channels",
+    "multi_procurement_support_wiki"
+  ],
+  "complete_case_metrics": {
+    "slim": {
+      "count": 8,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.875479416379676,
+      "mean_tokens": 13378.375,
+      "mean_calls": 4.875
+    },
+    "current_step": {
+      "count": 8,
+      "omission_safe_successes": 7,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.795770770750096,
+      "mean_tokens": 13481.375,
+      "mean_calls": 4.875
+    }
+  },
+  "case_progress": {
+    "multi_culture_then_wiki": {
+      "slim": "completed",
+      "current_step": "completed"
+    },
+    "multi_accounts_then_finance": {
+      "slim": "completed",
+      "current_step": "completed"
+    },
+    "multi_reverse_wiki_now": {
+      "slim": "completed",
+      "current_step": "completed"
+    },
+    "multi_reverse_finance_now": {
+      "slim": "completed",
+      "current_step": "completed"
+    },
+    "multi_study_then_documents": {
+      "slim": "completed",
+      "current_step": "completed"
+    },
+    "multi_charts_then_signals": {
+      "slim": "completed",
+      "current_step": "completed"
+    },
+    "multi_welcome_then_channels": {
+      "slim": "completed",
+      "current_step": "completed"
+    },
+    "multi_procurement_support_wiki": {
+      "slim": "completed",
+      "current_step": "completed"
+    }
+  },
+  "positive_by_arm": {
+    "slim": {
+      "count": 8,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.875479416379676,
+      "mean_tokens": 13378.375,
+      "mean_calls": 4.875
+    },
+    "current_step": {
+      "count": 8,
+      "omission_safe_successes": 7,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.795770770750096,
+      "mean_tokens": 13481.375,
+      "mean_calls": 4.875
+    }
+  },
+  "candidate_eligible_on_this_regression": {
+    "current_step": false
+  },
+  "change_vs_baseline_percent": {
+    "slim": {
+      "mean_tokens": 0.0,
+      "mean_seconds": 0.0,
+      "mean_calls": 0.0
+    },
+    "current_step": {
+      "mean_tokens": 0.7698991843179792,
+      "mean_seconds": -2.7720123877616243,
+      "mean_calls": 0.0
+    }
+  },
+  "stage_usage": {
+    "slim": {
+      "final_calls": 8.0,
+      "final_tokens": 41698.0,
+      "final_seconds": 4.917907625989756,
+      "directory_calls": 31.0,
+      "directory_tokens": 65329.0,
+      "directory_seconds": 17.9472561259754
+    },
+    "current_step": {
+      "directory_calls": 31.0,
+      "directory_tokens": 65174.0,
+      "directory_seconds": 17.50851679200423,
+      "final_calls": 8.0,
+      "final_tokens": 42677.0,
+      "final_seconds": 4.7220504579890985
+    }
+  },
+  "boundary_reviews": [],
+  "failures": [
+    {
+      "case": "multi_culture_then_wiki",
+      "arm": "slim",
+      "first_omission_stage": null,
+      "scores_at_omission": [],
+      "selected": null,
+      "confidence": 0.64,
+      "status": "abstain"
+    },
+    {
+      "case": "multi_accounts_then_finance",
+      "arm": "slim",
+      "first_omission_stage": null,
+      "scores_at_omission": [],
+      "selected": null,
+      "confidence": 0.37,
+      "status": "abstain"
+    },
+    {
+      "case": "multi_reverse_wiki_now",
+      "arm": "slim",
+      "first_omission_stage": 1,
+      "scores_at_omission": [
+        {
+          "node": "root:leadership-and-business",
+          "score": 0.16
+        },
+        {
+          "node": "root:delivery-and-personal-work",
+          "score": 0.32
+        }
+      ],
+      "selected": "confluence-expert",
+      "confidence": 1.0,
+      "status": "selected"
+    },
+    {
+      "case": "multi_reverse_wiki_now",
+      "arm": "current_step",
+      "first_omission_stage": 1,
+      "scores_at_omission": [
+        {
+          "node": "root:leadership-and-business",
+          "score": 0.17
+        },
+        {
+          "node": "root:delivery-and-personal-work",
+          "score": 0.3
+        }
+      ],
+      "selected": "confluence-expert",
+      "confidence": 1.0,
+      "status": "selected"
+    },
+    {
+      "case": "multi_welcome_then_channels",
+      "arm": "slim",
+      "first_omission_stage": null,
+      "scores_at_omission": [],
+      "selected": null,
+      "confidence": 0.49,
+      "status": "abstain"
+    }
+  ],
+  "rows": [
+    {
+      "case": "multi_culture_then_wiki",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.989409208006691,
+      "calls": 5,
+      "known_tokens": 13284,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.64,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 28
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 146,
+          "offered": 14,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 44,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 28,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_culture_then_wiki",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.801864332985133,
+      "calls": 5,
+      "known_tokens": 15112,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "culture-architect",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 35
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 146,
+          "offered": 14,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 35,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_accounts_then_finance",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.0222789580002427,
+      "calls": 5,
+      "known_tokens": 11473,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "customer-success-manager",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 32
+      },
+      "stages": [
+        {
+          "pool_size": 292,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 42,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 32,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_accounts_then_finance",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.9245478329830803,
+      "calls": 5,
+      "known_tokens": 11392,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.37,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 32
+      },
+      "stages": [
+        {
+          "pool_size": 292,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 42,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 32,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_reverse_wiki_now",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.34757733301376,
+      "calls": 4,
+      "known_tokens": 8413,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        false,
+        false,
+        false
+      ],
+      "first_omission_stage": 1,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "confluence-expert",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 98,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 15,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_reverse_wiki_now",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.3739544170093723,
+      "calls": 4,
+      "known_tokens": 8494,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        false,
+        false,
+        false
+      ],
+      "first_omission_stage": 1,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "confluence-expert",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 98,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 15,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_reverse_finance_now",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.833055666007567,
+      "calls": 5,
+      "known_tokens": 11466,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "saas-metrics-coach",
+        "confidence": 0.98,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 32
+      },
+      "stages": [
+        {
+          "pool_size": 292,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 42,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 32,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_reverse_finance_now",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.8935664580203593,
+      "calls": 5,
+      "known_tokens": 11385,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "saas-metrics-coach",
+        "confidence": 0.9,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 32
+      },
+      "stages": [
+        {
+          "pool_size": 292,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 42,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 32,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_study_then_documents",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.79734916597954,
+      "calls": 5,
+      "known_tokens": 12878,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "clinical-research",
+        "confidence": 0.99,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "pool_size": 233,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 147,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 41,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 25,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_study_then_documents",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.7693187500117347,
+      "calls": 5,
+      "known_tokens": 12959,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "clinical-research",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "pool_size": 233,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 147,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 41,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 25,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_charts_then_signals",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.9957661670050584,
+      "calls": 5,
+      "known_tokens": 11808,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "helm-chart-builder",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 159,
+          "offered": 7,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 42,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 25,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_charts_then_signals",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.7931379160145298,
+      "calls": 5,
+      "known_tokens": 11727,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "helm-chart-builder",
+        "confidence": 0.94,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 159,
+          "offered": 7,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 42,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 25,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_welcome_then_channels",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.3475896250165533,
+      "calls": 5,
+      "known_tokens": 23002,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.49,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 81
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 190,
+          "offered": 18,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 101,
+          "offered": 19,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 81,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_welcome_then_channels",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.8746702919888776,
+      "calls": 5,
+      "known_tokens": 21512,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "email-sequence",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 76
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 168,
+          "offered": 18,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 90,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 76,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_procurement_support_wiki",
+      "arm": "current_step",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.695257582992781,
+      "calls": 5,
+      "known_tokens": 15027,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "procurement-optimizer",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 45
+      },
+      "stages": [
+        {
+          "pool_size": 249,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 84,
+          "offered": 11,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 61,
+          "offered": 9,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 45,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "multi_procurement_support_wiki",
+      "arm": "slim",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.910657792002894,
+      "calls": 5,
+      "known_tokens": 14946,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "procurement-optimizer",
+        "confidence": 0.97,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 45
+      },
+      "stages": [
+        {
+          "pool_size": 249,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 84,
+          "offered": 11,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 61,
+          "offered": 9,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 45,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    }
+  ],
+  "identical_request_groups_with_score_variation": 28,
+  "protected_paths_checked": 354,
+  "protected_files_unchanged": true,
+  "source_summary_sha256": "54692c1128474a1ce68609a8daeaacb92b591e92a842f0aa48a61535cf808977",
+  "budget_extension": null,
+  "limitations": [
+    "Two known failures and six author-written combinations, one pass without independent blind review. Exact reference-target selection and retention only; no task execution or population-accuracy claim.",
+    "Only final-dispatch instructions change in source. Stochastic directory scores produce different final pools in two paired cases, so this is not a matched-final-pool ablation.",
+    "All semantic failures remain in denominators. Selecting the current target does not pass when a mandatory later target was omitted.",
+    "Confidence is a provider score, not calibrated probability of correctness. One fresh pass provides no population accuracy or stable latency claim.",
+    "Jev selector time and reported tokens only. Root preparation/analysis cost, full task cost, backend model revision and monetary charges are unobservable.",
+    "354 protected release/configuration files and 232 main-worktree files are unchanged at verification. Three snapshotted lifecycle-worktree files changed concurrently; its HEAD is unchanged. Those changes were observed, never overwritten or reverted by this task.",
+    "No installation, daily activation, private catalog mutation, lifecycle change, business task execution, previously passed need replay or boundary review."
+  ],
+  "cases": [
+    {
+      "id": "multi_culture_then_wiki",
+      "stratum": "mixed",
+      "need": "先把虚构团队的 values 转成可观察行为和文化评估规则；随后必须在演示 Confluence 知识库里规划承载这些内容的页面层级、权限、模板宏及复审归档流程。当前先完成文化设计，不访问实际站点。",
+      "expected_ids": [
+        "culture-architect"
+      ],
+      "pending_ids": [
+        "confluence-expert"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        },
+        {
+          "id": "confluence-expert",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/confluence-expert/SKILL.md",
+          "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, and documentation. Configures space permissions and hierarchies, creates page templates with macros, sets up documentation taxonomies, designs page layouts, and manages content governance. Use when users need to build or restructure a Confluence space, design page hierarchies with permission structures, author or standardise documentation templates, embed Jira reports in pages, run knowledge base audits, or establish documentation standards and collaborative workflows."
+        }
+      ]
+    },
+    {
+      "id": "multi_accounts_then_finance",
+      "stratum": "chinese",
+      "need": "先给虚构客户账户做加权健康评分，划分流失风险和扩展机会；随后必须用全公司的订阅收入及客户数字计算月度经常性收入、净收入留存和获客回报，解释整体经营健康度。当前先分析账户，两项都要完成，但不联系客户。",
+      "expected_ids": [
+        "customer-success-manager"
+      ],
+      "pending_ids": [
+        "saas-metrics-coach"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "customer-success-manager",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/business-growth/skills/customer-success-manager/SKILL.md",
+          "description": "Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success. Use when analyzing customer accounts, reviewing retention metrics, scoring at-risk customers, or when the user mentions churn, customer health scores, upsell opportunities, expansion revenue, retention analysis, or customer analytics. Runs three Python CLI tools to produce deterministic health scores, churn risk tiers, and prioritized expansion recommendations across Enterprise, Mid-Market, and SMB segments."
+        },
+        {
+          "id": "saas-metrics-coach",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/finance/skills/saas-metrics-coach/SKILL.md",
+          "description": "SaaS financial health advisor. Use when a user shares revenue or customer numbers, or mentions ARR, MRR, churn, LTV, CAC, NRR, or asks how their SaaS business is doing."
+        }
+      ]
+    },
+    {
+      "id": "multi_reverse_wiki_now",
+      "stratum": "mixed",
+      "need": "这份演示项目最终要把团队价值观变成可观察行为并建立文化健康评估；不过先后顺序是先规划 Confluence 的页面层级、权限、模板宏和复审归档，再开展价值观设计。当前只做知识库结构，后面的文化设计也必须保留，不访问实际站点。",
+      "expected_ids": [
+        "confluence-expert"
+      ],
+      "pending_ids": [
+        "culture-architect"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "confluence-expert",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/confluence-expert/SKILL.md",
+          "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, and documentation. Configures space permissions and hierarchies, creates page templates with macros, sets up documentation taxonomies, designs page layouts, and manages content governance. Use when users need to build or restructure a Confluence space, design page hierarchies with permission structures, author or standardise documentation templates, embed Jira reports in pages, run knowledge base audits, or establish documentation standards and collaborative workflows."
+        },
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        }
+      ]
+    },
+    {
+      "id": "multi_reverse_finance_now",
+      "stratum": "chinese",
+      "need": "演示客户账户的加权健康分、流失风险分层和扩展机会都要做，但那是第二步。现在先根据全公司订阅收入与客户数字计算月度经常性收入、净收入留存和获客回报，解释公司经营健康度；两步都必须完成，不联系客户。",
+      "expected_ids": [
+        "saas-metrics-coach"
+      ],
+      "pending_ids": [
+        "customer-success-manager"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "saas-metrics-coach",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/finance/skills/saas-metrics-coach/SKILL.md",
+          "description": "SaaS financial health advisor. Use when a user shares revenue or customer numbers, or mentions ARR, MRR, churn, LTV, CAC, NRR, or asks how their SaaS business is doing."
+        },
+        {
+          "id": "customer-success-manager",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/business-growth/skills/customer-success-manager/SKILL.md",
+          "description": "Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success. Use when analyzing customer accounts, reviewing retention metrics, scoring at-risk customers, or when the user mentions churn, customer health scores, upsell opportunities, expansion revenue, retention analysis, or customer analytics. Runs three Python CLI tools to produce deterministic health scores, churn risk tiers, and prioritized expansion recommendations across Enterprise, Mid-Market, and SMB segments."
+        }
+      ]
+    },
+    {
+      "id": "multi_study_then_documents",
+      "stratum": "mixed",
+      "need": "为虚构器械研究做两项连续工作：先设计前瞻性两组研究的主要和次要终点，估算 sample size、power 并评估可行性，交人工专家审阅；之后必须规划器械质量体系受控文件的版本、变更审批和留存规则。当前先交研究设计估算，不招募受试者或提交申报。",
+      "expected_ids": [
+        "clinical-research"
+      ],
+      "pending_ids": [
+        "quality-documentation-manager"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "clinical-research",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/research-ops/skills/clinical-research/SKILL.md",
+          "description": "Use when designing a prospective clinical study before submission — selecting and classifying endpoints (primary / key-secondary / exploratory, with surrogate-endpoint flagging), estimating sample size and power for two-arm designs (means / proportions / survival), or scoring a study plan for feasibility and a GO / GO-WITH-CONDITIONS / REDESIGN / NO-GO phase-gate decision. Every output is an ESTIMATE plus a named human owner (clinician / biostatistician / regulatory owner) — never clinical fact, never a finished protocol. Distinct from ra-qm-team, which handles the regulatory/QM submission (ISO 13485, EU MDR, FDA 510(k)/PMA/QSR), not the study design."
+        },
+        {
+          "id": "quality-documentation-manager",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/ra-qm-team/skills/quality-documentation-manager/SKILL.md",
+          "description": "Document control system management for medical device QMS. Covers document numbering, version control, change management, and 21 CFR Part 11 compliance. Use when working on document control procedures, change control workflows, document numbering, version management, electronic signature compliance, or regulatory documentation review."
+        }
+      ]
+    },
+    {
+      "id": "multi_charts_then_signals",
+      "stratum": "mixed",
+      "need": "演示服务上线准备有两步：先做 Helm chart 的 values.yaml、模板 helper、子图依赖和 lint 检查方案；随后必须设计 metrics、logs、traces 的关联、SLI/SLO 和降噪告警。当前先完成 chart 设计，两步都要交付，只在纸面规划，不连接集群。",
+      "expected_ids": [
+        "helm-chart-builder"
+      ],
+      "pending_ids": [
+        "observability-designer"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "helm-chart-builder",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/helm-chart-builder/skills/helm-chart-builder/SKILL.md",
+          "description": "Helm chart development agent skill and plugin for Claude Code, Codex, Gemini CLI, Cursor, OpenClaw — chart scaffolding, values design, template patterns, dependency management, security hardening, and chart testing. Use when: user wants to create or improve Helm charts, design values.yaml files, implement template helpers, audit chart security (RBAC, network policies, pod security), manage subcharts, or run helm lint/test."
+        },
+        {
+          "id": "observability-designer",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/observability-designer/SKILL.md",
+          "description": "Design production-ready observability strategies combining metrics, logs, and traces. Includes SLI/SLO design, golden-signals monitoring, alert optimization. Use when adding observability to a new service, refactoring alerting that is too noisy, or designing an SLO program before scaling production load."
+        }
+      ]
+    },
+    {
+      "id": "multi_welcome_then_channels",
+      "stratum": "synonym",
+      "need": "先给已同意接收邮件的虚构新订阅者设计从欢迎到激活的连续邮件，说明每封信的目的和发送节奏；之后还必须核算直销与合作伙伴渠道含获客、支持、折扣和间接费用的真实利润，并建议渠道配比。现在先做欢迎邮件方案，不发送邮件，两项都要完成。",
+      "expected_ids": [
+        "email-sequence"
+      ],
+      "pending_ids": [
+        "channel-economics"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "email-sequence",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/marketing-skill/skills/email-sequence/SKILL.md",
+          "description": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \"email sequence,\" \"drip campaign,\" \"nurture sequence,\" \"onboarding emails,\" \"welcome sequence,\" \"re-engagement emails,\" \"email automation,\" or \"lifecycle emails.\" For in-app onboarding, see onboarding-cro."
+        },
+        {
+          "id": "channel-economics",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/commercial/skills/channel-economics/SKILL.md",
+          "description": "Use when reviewing or rebalancing direct vs. partner-led channel economics — computing fully-loaded cost-to-serve per channel, channel ROI with cash / LTV / marginal lenses, and optimal channel mix subject to constraints. For Head of Commercial, RevOps, and VP Sales doing quarterly channel review when pipeline is mixed (e.g., 60% direct + 40% partner-led) and nobody actually knows which channel makes money after CAC, support load, partner discount, deal-velocity differences, retention differential, and overhead allocation are all loaded in. Outputs cost to serve, channel ROI verdicts (DOUBLE-DOWN / MAINTAIN / DEFUND / EXIT), a sensitivity-tested channel-mix recommendation, and the diminishing-returns inflection (e.g., 'which channel actually makes money — direct or partner?')."
+        }
+      ]
+    },
+    {
+      "id": "multi_procurement_support_wiki",
+      "stratum": "mixed",
+      "need": "为虚构公司做三步运营整理，顺序不能倒：第一步审查重复 SaaS 采购、品类支出和续约集中，提出有风险兜底的供应商整合方案；第二步必须根据客服来量、工时和服务水平估算人手与排班缺口；第三步必须规划 Confluence 页面层级、权限、模板宏和归档流程来保存方案。当前先做采购审查，不取消订阅、不调班、不登录站点。",
+      "expected_ids": [
+        "procurement-optimizer"
+      ],
+      "pending_ids": [
+        "capacity-planner",
+        "confluence-expert"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "procurement-optimizer",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/business-operations/skills/procurement-optimizer/SKILL.md",
+          "description": "Use when running an annual SaaS audit, doing category-level spend review, or rationalizing the supplier base — when the user needs a spend audit, spend categorization (UNSPSC-aligned with Pareto breakdown and industry profiles), purchasing-cycle analysis (bottleneck categories per Goldratt's Theory of Constraints), or risk-balanced supplier consolidation that refuses single-source recommendations for tier-1 categories without a documented break-glass plan. Triggers on \"spend audit\", \"SaaS audit\", \"spend categorization\", \"supplier rationalization\", \"supplier consolidation\", \"category strategy\", \"duplicate SaaS\", \"renewal cluster\"."
+        },
+        {
+          "id": "capacity-planner",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/business-operations/skills/capacity-planner/SKILL.md",
+          "description": "Use when an ops leader (Director of CX, Head of Support, VP Ops, Head of BizOps, Head of IT ops, Head of Finance ops) is sizing ops capacity, building a headcount plan, modeling utilization risk, planning Q3 capacity or annual support capacity, or designing CS coverage — and needs Erlang-C queueing math, P90 demand sizing, shrinkage-adjusted FTE, manager-trigger thresholds, and a quarterly hiring sequence with ramp + attrition. Apply when sustained team utilization is above 80% or when the team is growing >50% in 12 months. Run before committing the headcount budget. This is NOT engineering capacity (see vpe-advisor for DORA + cycle time) and NOT strategic 3-year workforce planning (see chro-advisor)."
+        },
+        {
+          "id": "confluence-expert",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/confluence-expert/SKILL.md",
+          "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, and documentation. Configures space permissions and hierarchies, creates page templates with macros, sets up documentation taxonomies, designs page layouts, and manages content governance. Use when users need to build or restructure a Confluence space, design page hierarchies with permission structures, author or standardise documentation templates, embed Jira reports in pages, run knowledge base audits, or establish documentation standards and collaborative workflows."
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "frozen_inputs_and_sources_match": true,
+    "previously_passed_cases_replayed": 0,
+    "old_failed_cases_exactly_preserved": 2,
+    "rows": 16,
+    "receipt_pairs": 78,
+    "known_tokens": 214878,
+    "wall_seconds": 45.38676670897985,
+    "original_task_bytes_and_full_descriptions_preserved": true,
+    "final_gate": 0.7,
+    "new_prompt_only_at_final_dispatch": true,
+    "protected_files": 354,
+    "other_worktrees": {
+      "main": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "snapshotted_files": 232,
+        "changed_paths": [],
+        "added_paths": []
+      },
+      "lifecycle": {
+        "head_unchanged": true,
+        "status_unchanged": false,
+        "snapshotted_files": 223,
+        "changed_paths": [
+          "adapters/codex/lifecycle_maintenance.py",
+          "adapters/codex/lifecycle_runtime.py",
+          "tools/build_lifecycle_plugin.py"
+        ],
+        "added_paths": []
+      }
+    },
+    "changed_protected_path_count": 0
+  },
+  "by_arm_details": {
+    "slim": {
+      "current_target_accepted": 5,
+      "all_required_retained": 7,
+      "original_failure_passes": 0,
+      "new_case_passes": 4,
+      "median_seconds": 2.9021121250116266,
+      "total_tokens": 107027,
+      "total_calls": 39
+    },
+    "current_step": {
+      "current_target_accepted": 8,
+      "all_required_retained": 7,
+      "original_failure_passes": 2,
+      "new_case_passes": 5,
+      "median_seconds": 2.81745999949635,
+      "total_tokens": 107851,
+      "total_calls": 39
+    }
+  },
+  "conclusion": "Original two abstentions pass with current-step final instructions. Full omission-safe comparison improves 4/8 to 7/8; one new first-layer mandatory-later omission affects both arms. The all-pass gate remains unmet; no daily promotion."
+}
