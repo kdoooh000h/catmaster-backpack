@@ -1,0 +1,655 @@
+{
+  "version": 1,
+  "catalog_count": 45325,
+  "final_gate": 0.7,
+  "difference": "All arms share additive alias-repaired recall, original raw needs, complete compact descriptions, short IDs, catalog order and final 0.7 gate. Evidence adds only literal metadata hints; coverage additionally prioritizes explicit support for requested details.",
+  "aggregates": {
+    "compact": {
+      "cases": 2,
+      "measured_cases": 2,
+      "correct_current": 1,
+      "all_required_retained": 2,
+      "omission_safe_pass": 1,
+      "calls": 2,
+      "tokens": 8452,
+      "measured_means": {
+        "tokens": 4226,
+        "input_tokens": 3769,
+        "output_tokens": 457,
+        "jev_cli_seconds": 0.6479572079988429,
+        "current_dispatch_wall_seconds": 0.6851564995013177,
+        "retrieval_seconds": 0.03547081249416806,
+        "selector_seconds": 0.7206273119954858,
+        "final_pool_size": 49,
+        "payload_chars": 10731.5
+      }
+    },
+    "evidence": {
+      "cases": 2,
+      "measured_cases": 2,
+      "correct_current": 2,
+      "all_required_retained": 2,
+      "omission_safe_pass": 2,
+      "calls": 2,
+      "tokens": 8639,
+      "measured_means": {
+        "tokens": 4319.5,
+        "input_tokens": 3862.5,
+        "output_tokens": 457,
+        "jev_cli_seconds": 0.6179960625013337,
+        "current_dispatch_wall_seconds": 0.6804392295016441,
+        "retrieval_seconds": 0.03547081249416806,
+        "selector_seconds": 0.7159100419958122,
+        "final_pool_size": 49,
+        "payload_chars": 11149
+      }
+    },
+    "coverage": {
+      "cases": 2,
+      "measured_cases": 2,
+      "correct_current": 2,
+      "all_required_retained": 2,
+      "omission_safe_pass": 2,
+      "calls": 2,
+      "tokens": 8761,
+      "measured_means": {
+        "tokens": 4380.5,
+        "input_tokens": 3923.5,
+        "output_tokens": 457,
+        "jev_cli_seconds": 0.5916765415167902,
+        "current_dispatch_wall_seconds": 0.6390025625005364,
+        "retrieval_seconds": 0.03547081249416806,
+        "selector_seconds": 0.6744733749947045,
+        "final_pool_size": 49,
+        "payload_chars": 11520
+      }
+    }
+  },
+  "strata": {
+    "old_failure": {
+      "compact": {
+        "cases": 2,
+        "measured_cases": 2,
+        "correct_current": 1,
+        "all_required_retained": 2,
+        "omission_safe_pass": 1,
+        "calls": 2,
+        "tokens": 8452,
+        "measured_means": {
+          "tokens": 4226,
+          "input_tokens": 3769,
+          "output_tokens": 457,
+          "jev_cli_seconds": 0.6479572079988429,
+          "current_dispatch_wall_seconds": 0.6851564995013177,
+          "retrieval_seconds": 0.03547081249416806,
+          "selector_seconds": 0.7206273119954858,
+          "final_pool_size": 49,
+          "payload_chars": 10731.5
+        }
+      },
+      "evidence": {
+        "cases": 2,
+        "measured_cases": 2,
+        "correct_current": 2,
+        "all_required_retained": 2,
+        "omission_safe_pass": 2,
+        "calls": 2,
+        "tokens": 8639,
+        "measured_means": {
+          "tokens": 4319.5,
+          "input_tokens": 3862.5,
+          "output_tokens": 457,
+          "jev_cli_seconds": 0.6179960625013337,
+          "current_dispatch_wall_seconds": 0.6804392295016441,
+          "retrieval_seconds": 0.03547081249416806,
+          "selector_seconds": 0.7159100419958122,
+          "final_pool_size": 49,
+          "payload_chars": 11149
+        }
+      },
+      "coverage": {
+        "cases": 2,
+        "measured_cases": 2,
+        "correct_current": 2,
+        "all_required_retained": 2,
+        "omission_safe_pass": 2,
+        "calls": 2,
+        "tokens": 8761,
+        "measured_means": {
+          "tokens": 4380.5,
+          "input_tokens": 3923.5,
+          "output_tokens": 457,
+          "jev_cli_seconds": 0.5916765415167902,
+          "current_dispatch_wall_seconds": 0.6390025625005364,
+          "retrieval_seconds": 0.03547081249416806,
+          "selector_seconds": 0.6744733749947045,
+          "final_pool_size": 49,
+          "payload_chars": 11520
+        }
+      }
+    },
+    "new": {
+      "compact": {
+        "cases": 0,
+        "measured_cases": 0,
+        "correct_current": 0,
+        "all_required_retained": 0,
+        "omission_safe_pass": 0,
+        "calls": 0,
+        "tokens": 0,
+        "measured_means": null
+      },
+      "evidence": {
+        "cases": 0,
+        "measured_cases": 0,
+        "correct_current": 0,
+        "all_required_retained": 0,
+        "omission_safe_pass": 0,
+        "calls": 0,
+        "tokens": 0,
+        "measured_means": null
+      },
+      "coverage": {
+        "cases": 0,
+        "measured_cases": 0,
+        "correct_current": 0,
+        "all_required_retained": 0,
+        "omission_safe_pass": 0,
+        "calls": 0,
+        "tokens": 0,
+        "measured_means": null
+      }
+    }
+  },
+  "rows": [
+    {
+      "case": "new_slides_then_word_handout",
+      "arm": "compact",
+      "stratum": "old_failure",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 4115,
+      "jev_cli_seconds": 0.6578734579961747,
+      "current_dispatch_wall_seconds": 0.6774954580178019,
+      "retrieval_seconds": 0.025372875010361895,
+      "retrieval_basis": "shared_repaired_recall_with_historical_original_query_time",
+      "selector_seconds": 0.7028683330281638,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "skill-91d13b46fe5873284eee",
+      "confidence": 0.62,
+      "final_pool_size": 48,
+      "expected_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "input_tokens": 3667,
+      "output_tokens": 448,
+      "payload_chars": 10693,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.63
+        },
+        {
+          "id": "plugin-6240c030a9c65e80db06",
+          "name": "pptx-deck-creation",
+          "kind": "plugin",
+          "probability": 0.14
+        },
+        {
+          "id": "registry-b429279ba028a9ee3394",
+          "name": "Plus AI",
+          "kind": "mcp",
+          "probability": 0.12
+        },
+        {
+          "id": "registry-c36886c829e9850f4c77",
+          "name": "Arcdeck",
+          "kind": "mcp",
+          "probability": 0.08
+        },
+        {
+          "id": "registry-6de3e41c0f6e4b3d9fe9",
+          "name": "stagenth · 文档生成",
+          "kind": "mcp",
+          "probability": 0.01
+        }
+      ]
+    },
+    {
+      "case": "new_slides_then_word_handout",
+      "arm": "evidence",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 4204,
+      "jev_cli_seconds": 0.7096028329979163,
+      "current_dispatch_wall_seconds": 0.7716622920124792,
+      "retrieval_seconds": 0.025372875010361895,
+      "retrieval_basis": "shared_repaired_recall_with_historical_original_query_time",
+      "selector_seconds": 0.797035167022841,
+      "status": "selected",
+      "choice": "skill-91d13b46fe5873284eee",
+      "raw_choice": "skill-91d13b46fe5873284eee",
+      "confidence": 0.71,
+      "final_pool_size": 48,
+      "expected_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "input_tokens": 3756,
+      "output_tokens": 448,
+      "payload_chars": 11068,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.72
+        },
+        {
+          "id": "plugin-6240c030a9c65e80db06",
+          "name": "pptx-deck-creation",
+          "kind": "plugin",
+          "probability": 0.12
+        },
+        {
+          "id": "registry-b429279ba028a9ee3394",
+          "name": "Plus AI",
+          "kind": "mcp",
+          "probability": 0.09
+        },
+        {
+          "id": "registry-c36886c829e9850f4c77",
+          "name": "Arcdeck",
+          "kind": "mcp",
+          "probability": 0.05
+        },
+        {
+          "id": "registry-6de3e41c0f6e4b3d9fe9",
+          "name": "stagenth · 文档生成",
+          "kind": "mcp",
+          "probability": 0.01
+        }
+      ]
+    },
+    {
+      "case": "new_slides_then_word_handout",
+      "arm": "coverage",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 4265,
+      "jev_cli_seconds": 0.5326084580156021,
+      "current_dispatch_wall_seconds": 0.5902659579878673,
+      "retrieval_seconds": 0.025372875010361895,
+      "retrieval_basis": "shared_repaired_recall_with_historical_original_query_time",
+      "selector_seconds": 0.6156388329982292,
+      "status": "selected",
+      "choice": "skill-91d13b46fe5873284eee",
+      "raw_choice": "skill-91d13b46fe5873284eee",
+      "confidence": 0.78,
+      "final_pool_size": 48,
+      "expected_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "input_tokens": 3817,
+      "output_tokens": 448,
+      "payload_chars": 11439,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.78
+        },
+        {
+          "id": "plugin-6240c030a9c65e80db06",
+          "name": "pptx-deck-creation",
+          "kind": "plugin",
+          "probability": 0.13
+        },
+        {
+          "id": "registry-c36886c829e9850f4c77",
+          "name": "Arcdeck",
+          "kind": "mcp",
+          "probability": 0.060000000000000005
+        },
+        {
+          "id": "registry-b429279ba028a9ee3394",
+          "name": "Plus AI",
+          "kind": "mcp",
+          "probability": 0.03
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "new_reference_layout_then_handout",
+      "arm": "evidence",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 4435,
+      "jev_cli_seconds": 0.526389292004751,
+      "current_dispatch_wall_seconds": 0.5892161669908091,
+      "retrieval_seconds": 0.04556874997797422,
+      "retrieval_basis": "shared_repaired_recall_with_historical_original_query_time",
+      "selector_seconds": 0.6347849169687834,
+      "status": "selected",
+      "choice": "plugin-6240c030a9c65e80db06",
+      "raw_choice": "plugin-6240c030a9c65e80db06",
+      "confidence": 0.93,
+      "final_pool_size": 50,
+      "expected_ids": [
+        "plugin-6240c030a9c65e80db06"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "input_tokens": 3969,
+      "output_tokens": 466,
+      "payload_chars": 11230,
+      "top_choice_probabilities": [
+        {
+          "id": "plugin-6240c030a9c65e80db06",
+          "name": "pptx-deck-creation",
+          "kind": "plugin",
+          "probability": 0.93
+        },
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.05
+        },
+        {
+          "id": "none",
+          "name": null,
+          "kind": null,
+          "probability": 0.01
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "new_reference_layout_then_handout",
+      "arm": "coverage",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 4496,
+      "jev_cli_seconds": 0.6507446250179783,
+      "current_dispatch_wall_seconds": 0.6877391670132056,
+      "retrieval_seconds": 0.04556874997797422,
+      "retrieval_basis": "shared_repaired_recall_with_historical_original_query_time",
+      "selector_seconds": 0.7333079169911798,
+      "status": "selected",
+      "choice": "plugin-6240c030a9c65e80db06",
+      "raw_choice": "plugin-6240c030a9c65e80db06",
+      "confidence": 0.99,
+      "final_pool_size": 50,
+      "expected_ids": [
+        "plugin-6240c030a9c65e80db06"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "input_tokens": 4030,
+      "output_tokens": 466,
+      "payload_chars": 11601,
+      "top_choice_probabilities": [
+        {
+          "id": "plugin-6240c030a9c65e80db06",
+          "name": "pptx-deck-creation",
+          "kind": "plugin",
+          "probability": 0.99
+        },
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.01
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "plugin-88445d646480e6d3ac90",
+          "name": "carbone-skill",
+          "kind": "plugin",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "new_reference_layout_then_handout",
+      "arm": "compact",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 4337,
+      "jev_cli_seconds": 0.6380409580015112,
+      "current_dispatch_wall_seconds": 0.6928175409848336,
+      "retrieval_seconds": 0.04556874997797422,
+      "retrieval_basis": "shared_repaired_recall_with_historical_original_query_time",
+      "selector_seconds": 0.7383862909628078,
+      "status": "selected",
+      "choice": "plugin-6240c030a9c65e80db06",
+      "raw_choice": "plugin-6240c030a9c65e80db06",
+      "confidence": 0.93,
+      "final_pool_size": 50,
+      "expected_ids": [
+        "plugin-6240c030a9c65e80db06"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "input_tokens": 3871,
+      "output_tokens": 466,
+      "payload_chars": 10770,
+      "top_choice_probabilities": [
+        {
+          "id": "plugin-6240c030a9c65e80db06",
+          "name": "pptx-deck-creation",
+          "kind": "plugin",
+          "probability": 0.93
+        },
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.04
+        },
+        {
+          "id": "none",
+          "name": null,
+          "kind": null,
+          "probability": 0.02
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    }
+  ],
+  "shared_reference_coverage": {
+    "new_slides_then_word_handout": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_ids": []
+    },
+    "new_reference_layout_then_handout": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_ids": []
+    }
+  },
+  "calls": 6,
+  "known_tokens": 25852,
+  "index_seconds": {
+    "structured": 3.9739382920088246
+  },
+  "coverage_change_percent": {
+    "compact": {
+      "tokens": 3.6559394226218567,
+      "input_tokens": 4.099230565136636,
+      "output_tokens": 0.0,
+      "jev_cli_seconds": -8.685861625935221,
+      "current_dispatch_wall_seconds": -6.736262012310156,
+      "retrieval_seconds": 0.0,
+      "selector_seconds": -6.404688836033234,
+      "final_pool_size": 0.0,
+      "payload_chars": 7.347528304524054
+    },
+    "evidence": {
+      "tokens": 1.4122004861673698,
+      "input_tokens": 1.5792880258899578,
+      "output_tokens": 0.0,
+      "jev_cli_seconds": -4.2588493004333206,
+      "current_dispatch_wall_seconds": -6.089694010067004,
+      "retrieval_seconds": 0.0,
+      "selector_seconds": -5.787971193362596,
+      "final_pool_size": 0.0,
+      "payload_chars": 3.3276527042784165
+    }
+  },
+  "source_sha256": {
+    "benchmarks/directory-depth/conditional_experiment.py": "127329b23bad4205c15e98194d31cc7e6836178af2a62c56b376d322c2f184f1",
+    "benchmarks/directory-depth/conditional_search.py": "9e0fcdf32192e40644ae5ab14324f0cbca33a73e7d033b450aa7d67f819117f8",
+    "benchmarks/directory-depth/merged_experiment.py": "0031b0a778745d990936c29795d8c1f3088c55d2b2617850a8a3cd1931d8dcea",
+    "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+    "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+    "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+    "benchmarks/directory-depth/conditional_current_experiment.py": "e78ff50ce20958f1a552023562c758db7a0a066622b05213f32a31572604c0b4",
+    "benchmarks/directory-depth/conditional_current.py": "6e2ea31c08d81eee668a092ef1b7afa32ea13ef43fdf588ceae00dbdb0f81549",
+    "benchmarks/directory-depth/conditional_current_cases.json": "3e9f2c4dfae68204ea512e997ae3250969e2f41dfb37fbdd8cd052d914951135",
+    "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+    "benchmarks/directory-depth/structured_recall_experiment.py": "2b36d545cc6a92203be841dd36e7b37db938ce59dda4eeb9556239c93c25a1c8",
+    "benchmarks/directory-depth/structured_recall.py": "22d14c59943a6bd98a32e6b19e60053a396b5374a881ccadcf34838decf9a056",
+    "benchmarks/directory-depth/structured_recall_cases.json": "8abf9901ce294e5159081156419f9799f3a6fa478d3d272a0edd88660e60d16d",
+    "benchmarks/directory-depth/final_contrast_experiment.py": "1dd12d439e1d717e1eff763ce65bd27ef46eec76cfb0afc8a6b0db23fffd22cf",
+    "benchmarks/directory-depth/final_contrast.py": "348fb93d990a149aa2a5ca93e4e3ed2795c66bf4b3d93a2172c8a2db1a7b26da",
+    "benchmarks/directory-depth/final_contrast_cases.json": "78c00e517700c67f7e161415e0b20ebf3720f899d3c5f618e42f1df70c8104c2",
+    "benchmarks/directory-depth/requirement_coverage_experiment.py": "c3196409062eb32b889dfe4d74907a56c710cd2d9948dbfce93e0d681dbd6a3a",
+    "benchmarks/directory-depth/requirement_coverage.py": "5626955c99e9682aa706fb1aad99a6e766d95e4b89db5023ab88fd1afc935954"
+  },
+  "catalog_sha256": "64bc3d608649768fc3117e6a4ed4eb5e32278a3ae540f23bd2a568aa7bd7e57a",
+  "cases_sha256": "53d7c41f82c385a4fa67c975e23e9364bf08b39dfbbba872eeac014d7c98a4ea",
+  "preflight": {
+    "rows": [
+      {
+        "case": "new_slides_then_word_handout",
+        "original_missing_required": [],
+        "missing_required": [],
+        "eligible_for_live": true,
+        "original_pool_size": 48,
+        "pool_size": 48,
+        "aliases": [],
+        "payload_chars": {
+          "compact": 10693,
+          "evidence": 11068,
+          "coverage": 11439
+        },
+        "evidence_counts": {
+          "compact": 0,
+          "evidence": 7,
+          "coverage": 7
+        }
+      },
+      {
+        "case": "new_reference_layout_then_handout",
+        "original_missing_required": [
+          "skill-f28f584d1874df3e7ad9"
+        ],
+        "missing_required": [],
+        "eligible_for_live": true,
+        "original_pool_size": 42,
+        "pool_size": 50,
+        "aliases": [
+          "Word 操作手册"
+        ],
+        "payload_chars": {
+          "compact": 10770,
+          "evidence": 11230,
+          "coverage": 11601
+        },
+        "evidence_counts": {
+          "compact": 0,
+          "evidence": 9,
+          "coverage": 9
+        }
+      }
+    ],
+    "eligible": 2
+  },
+  "limits": [
+    "Two known failures only, one three-arm pass; no new generalization claim or capability execution. Alias repair is common to all live arms and is evaluated offline against original recall. No confidence recalculation, pruning, retry or daily change.",
+    "Same two live needs across arms. Actual Jev input/output and wall times; shared retrieval includes historical original query duration plus fresh repair. Index build separate; root Agent costs and backend revision unobservable.",
+    "Both unchanged failed needs remain in every accuracy denominator. All live arms share the repaired recall; original missing references are preserved in preflight.",
+    "Strict frozen-reference coverage does not prove every equivalent capability survives or that other candidates are incapable.",
+    "Evidence versus compact changes only literal hint prefixes plus their explanation. Coverage versus evidence adds only the explicit requested-detail criterion.",
+    "The accepted references are one Skill and one whole plugin; no capability is installed or executed. Previously passing requests are not rerun."
+  ],
+  "verdict": "bounded_all_pass"
+}

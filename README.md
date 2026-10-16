@@ -415,6 +415,14 @@ Across the same three dispatched needs, compact mean tokens fall 29.52%
 (6,146.3 to 4,332), while warm selector time rises 2.50%. This is a bounded
 token-saving result, without an accuracy gain or daily promotion.
 
+The [two-failure repair](docs/backpack-requirement-coverage-2026-10-16.md) restores
+the later Word reference through additive document-noun aliases and makes
+literal requirement details visible to the final selector. Both original needs
+pass at 0.78/0.99 with all four references retained and one Jev call per need.
+Against the prior final on the same repaired pools, strict success is 1/2 versus
+2/2; tokens rise 3.66% and measured warm time falls 6.40%. This small regression
+does not establish general accuracy or a stable speedup; daily runtime is unchanged.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
