@@ -1,0 +1,1849 @@
+{
+  "version": 1,
+  "scope": "Public isolated directory experiment; no runtime install, private catalog or other worktree writes.",
+  "plan": {
+    "version": 1,
+    "arms": [
+      "baseline",
+      "adaptive_gate",
+      "adaptive_focus"
+    ],
+    "case_count": 5,
+    "repetitions": 1,
+    "case_order": [
+      "finance_packages_then_wiki",
+      "signals_then_finance_and_culture",
+      "channels_then_incident_and_wiki",
+      "borrowed_code_now_culture_welcome_later",
+      "cancel_finance_keep_discovery_jira"
+    ],
+    "original_failed_case_ids": [
+      "finance_packages_then_wiki"
+    ],
+    "case_arms": {
+      "finance_packages_then_wiki": [
+        "adaptive_gate",
+        "adaptive_focus"
+      ],
+      "signals_then_finance_and_culture": [
+        "baseline",
+        "adaptive_gate",
+        "adaptive_focus"
+      ],
+      "channels_then_incident_and_wiki": [
+        "baseline",
+        "adaptive_gate",
+        "adaptive_focus"
+      ],
+      "borrowed_code_now_culture_welcome_later": [
+        "baseline",
+        "adaptive_gate",
+        "adaptive_focus"
+      ],
+      "cancel_finance_keep_discovery_jira": [
+        "baseline",
+        "adaptive_gate",
+        "adaptive_focus"
+      ]
+    },
+    "primary_comparison": "Four new cases, three fresh arms. The old failed need gets two new arms only; its previously passing description baseline is reused and excluded from paired live aggregates.",
+    "baseline_plan_sha256": "84b9a07e699c1309332e9c08a1a38b6a87cb1be12f29aa2de205df836c512e84",
+    "baseline_results_sha256": "70cffe0da27c41f1f3d45f10ffb6aa2bb6cfa8524c5f8a50a65ab04d2f4fd1dd",
+    "base_commit": "e8cd61c679d10019572b3ade9fe98300927df04e",
+    "same_membership_and_descriptions": true,
+    "same_raw_need_and_final_question": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "adaptive_gate_policy": {
+      "pressure_limit": 96,
+      "min_gap": 0.12,
+      "max_raise": 0.1,
+      "first_adaptive_depth": 3
+    },
+    "final_limit": 96,
+    "max_rounds": 6,
+    "reading_cost_ratio": 0.65,
+    "max_calls": 98,
+    "max_known_tokens": 380000,
+    "max_seconds": 240,
+    "timeout_seconds": 15,
+    "executable_sha256": "dc5a6f352390447543f47cf8795f6362b67b4a1e4d9de20337fadb343c7b10ba",
+    "provider": "typesafe",
+    "attempts": 1,
+    "ordering": "Old failure once per new candidate, then four new cases with rotating three-arm order; no passed-arm replay.",
+    "scope": "Public isolated directory experiment; no runtime install, private catalog or other worktree writes.",
+    "changes": {
+      "baseline": "Accepted description repairs and current-step selector unchanged.",
+      "adaptive_gate": "Raise only depth >=3 Noul retention gates by <=0.1 when retained pool >96 and adjacent score gap >=0.12; never normalize independent Nouls or force top-k.",
+      "adaptive_focus": "Same adaptive gates; structured Noul asks about performing a concrete required action rather than domain similarity. Original state/rules, scope text, final Choice and estimator unchanged."
+    },
+    "acceptance": "All current references selected at >=0.7 and every current/later reference retained throughout all five cases. Only all-pass candidates eligible for promotion; compare costs on the four fresh complete triplets. No retry or post-live tuning.",
+    "token_cap": "Checked before dispatch; one response can cross it. Unknown send/usage or malformed response stops all remaining sends.",
+    "limitations": "One prior boundary failure and four author-written combinations; one sample per arm, not blind or population accuracy. Noul probabilities and Choice confidence are different signals; neither is locally calibrated. Provider backend revision unobservable.",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+      "benchmarks/directory-depth/expanded_experiment.py": "bff01ab4da9090932e8fb1ae9bb7150ea80e42cd757cf39b65583df1650f6eec",
+      "benchmarks/directory-depth/expanded_cases.json": "6712d6909d27b6035d4e12ad2082165b5e25fa3fa9b63e20238777f23e7f45e9",
+      "benchmarks/directory-depth/adaptive_repair.py": "5cfb14f71b07a8200a951c8cbe7eb9a535c582e05df2f023dc83025e27037979",
+      "benchmarks/directory-depth/repair_experiment.py": "cdf8b0541ac162c1dca06970365cb9b586583dca4a5200d1da8e4e879f292519",
+      "benchmarks/directory-depth/slim_experiment.py": "ce7bb8ce3de60f5d42cb9182c82e595da7a9dc5f1fd1baabd7aece370cc72044",
+      "benchmarks/directory-depth/breadth_experiment.py": "47081cae41bb2ee631689c49297ac9a291669269c9adc2655bece144b4d66982",
+      "benchmarks/directory-depth/breadth_cases.json": "69e3117dd7ca6371684d6aea9b64a8b6bf22673bb61d24edca84626f2f22b6c9",
+      "benchmarks/directory-depth/large_public_cases.json": "a8dfc3b7f6b30bd87b897effe16c3b188b85655d77cc2021c006339848ff2560",
+      "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+      "benchmarks/directory-depth/current_step_experiment.py": "cb0627cc7cd2effd08045677c1bddc321436a8201a71e2af4da850e3594510f9",
+      "benchmarks/directory-depth/current_step_cases.json": "fd34a3bb9210c5a5aaec98e8670921068cf56d7f430463a121146ed812f218a8",
+      "benchmarks/directory-depth/culture_scope.py": "8c8f8e919a968c933aca6e78330fb8dbe3afb3c5da49feedf069e818b014b45a",
+      "benchmarks/directory-depth/culture_scope_experiment.py": "903b5113e5ca4285b309a7a9051c87ff15fe6fe651f45d90b300bfed58e309db",
+      "benchmarks/directory-depth/culture_scope_cases.json": "93e6a1d7f223e88ca9ffdd5a963371ebc957e4f19f28508957e1826280e62244",
+      "benchmarks/directory-depth/dependency_scope.py": "b63f21959200ead57e504250d00cea7460f05160f8a1ad61d62ba39ca47bcfad",
+      "benchmarks/directory-depth/dependency_selection.py": "e1f98a2f550fb2d605eeb23108fdfce695b7cb7106e14eec611d4a16729f72c8",
+      "benchmarks/directory-depth/dependency_experiment.py": "f0cd28524bd026f30d88c6105b1e3433045ce7bb88600e54349b1965a1486270",
+      "benchmarks/directory-depth/dependency_cases.json": "437cc2a5d5c81ba20454025ce1b4a083b0a8f215668a83f22122251f220ef678",
+      "benchmarks/directory-depth/adaptive_early_stop.py": "df9f324f24ff41314f48d7d2905a51f5adf7667854b0da5662068490c6f85e4f",
+      "benchmarks/directory-depth/adaptive_threshold.py": "fd58b833f00f020336a646b4ba29d61e986f7b8efd59a26e84c4421ba690a4f5",
+      "benchmarks/directory-depth/threshold_experiment.py": "c1466e962a03a4f26d8b8e6c49beae235b1a78355b740849d5e605bbe361ef65",
+      "benchmarks/directory-depth/threshold_cases.json": "d4b6762386cb0291ddffd9a7bb6008c7f82972858d9bc5ed9360a7f7fdf2120c"
+    },
+    "input_sha256": {
+      "candidate-nodes.json": "e45570315dec74021f68f765ca08e0a5446b7dd9f7f466ac2d4c215f4caa95da",
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "cases.json": "94708cf249b6e778f19b1429d2fb02704732d0aa30d2935c2937abf90c88040e",
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "reused-baseline.json": "b38116ee5d37285a00af31ab81e751bf3e20d93318f2e0f6bef58d495fa39eaf"
+    }
+  },
+  "stop": "completed",
+  "actual_calls": 68,
+  "known_tokens": 267977,
+  "wall_seconds": 45.06487724999897,
+  "fresh_case_metrics": {
+    "baseline": {
+      "count": 4,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.5275898434847477,
+      "mean_tokens": 21790,
+      "mean_calls": 5,
+      "current_reference_selected": 4,
+      "all_required_retained": 4,
+      "median_seconds": 3.257341770484345,
+      "total_tokens": 87160,
+      "total_calls": 20,
+      "mean_last_pool": 64.75
+    },
+    "adaptive_gate": {
+      "count": 4,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.0382461562403478,
+      "mean_tokens": 20981,
+      "mean_calls": 5,
+      "current_reference_selected": 4,
+      "all_required_retained": 4,
+      "median_seconds": 3.074673395996797,
+      "total_tokens": 83924,
+      "total_calls": 20,
+      "mean_last_pool": 61.5
+    },
+    "adaptive_focus": {
+      "count": 4,
+      "omission_safe_successes": 3,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.9426606667475426,
+      "mean_tokens": 15201.25,
+      "mean_calls": 4.75,
+      "current_reference_selected": 3,
+      "all_required_retained": 3,
+      "median_seconds": 2.9877440629934426,
+      "total_tokens": 60805,
+      "total_calls": 19,
+      "mean_last_pool": 33.25
+    }
+  },
+  "fresh_case_ids": [
+    "signals_then_finance_and_culture",
+    "channels_then_incident_and_wiki",
+    "borrowed_code_now_culture_welcome_later",
+    "cancel_finance_keep_discovery_jira"
+  ],
+  "change_vs_baseline_percent": {
+    "adaptive_gate": {
+      "mean_tokens": -3.7127122533272106,
+      "mean_seconds": -13.871898632098322,
+      "mean_calls": 0.0
+    },
+    "adaptive_focus": {
+      "mean_tokens": -30.237494263423592,
+      "mean_seconds": -16.581552921112277,
+      "mean_calls": -5.000000000000004
+    }
+  },
+  "candidate_all_five_metrics": {
+    "adaptive_gate": {
+      "count": 5,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.045881633396493,
+      "mean_tokens": 20158.8,
+      "mean_calls": 4.8,
+      "current_reference_selected": 4,
+      "all_required_retained": 5,
+      "median_seconds": 3.0764235420210753,
+      "total_tokens": 100794,
+      "total_calls": 24,
+      "mean_last_pool": 70.2
+    },
+    "adaptive_focus": {
+      "count": 5,
+      "omission_safe_successes": 3,
+      "wrong_accepts": 1,
+      "mean_seconds": 3.14141134180245,
+      "mean_tokens": 16004.6,
+      "mean_calls": 4.8,
+      "current_reference_selected": 4,
+      "all_required_retained": 3,
+      "median_seconds": 3.031480334000662,
+      "total_tokens": 80023,
+      "total_calls": 24,
+      "mean_last_pool": 37.6
+    }
+  },
+  "candidate_eligible": {
+    "adaptive_gate": false,
+    "adaptive_focus": false
+  },
+  "reused_old_baseline": {
+    "counted_as_new_measurement": false,
+    "row": {
+      "case": "finance_packages_then_wiki",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1630130000121426,
+      "calls": 5,
+      "known_tokens": 28656,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "saas-metrics-coach",
+        "confidence": 0.96,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 93
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.84,
+            "root:leadership-and-business": 0.82,
+            "root:delivery-and-personal-work": 0.55
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 264,
+          "offered": 20,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.95,
+            "domain:finance": 0.97,
+            "domain:project-management": 0.96
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 144,
+          "offered": 32,
+          "carried": 4,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic7": 0.94,
+            "domain:project-management:na": 0.92
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 93,
+          "offered": 16,
+          "carried": 10,
+          "missing_required_ids": [],
+          "required_branch_scores": {},
+          "threshold_adjustment": null
+        }
+      ]
+    }
+  },
+  "rows": [
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "adaptive_gate",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.0764235420210753,
+      "calls": 4,
+      "known_tokens": 16870,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "unavailable",
+        "reason": "final_limit"
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.83,
+            "root:leadership-and-business": 0.82,
+            "root:delivery-and-personal-work": 0.54
+          },
+          "threshold_adjustment": {
+            "base_pool": 376,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 264,
+          "offered": 20,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.95,
+            "domain:finance": 0.98,
+            "domain:project-management": 0.96
+          },
+          "threshold_adjustment": {
+            "base_pool": 264,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 156,
+          "offered": 32,
+          "carried": 4,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic7": 0.95,
+            "domain:project-management:na": 0.92
+          },
+          "threshold_adjustment": {
+            "base_pool": 156,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 105,
+          "offered": 16,
+          "carried": 12,
+          "missing_required_ids": [],
+          "required_branch_scores": {},
+          "threshold_adjustment": {
+            "base_pool": 105,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "adaptive_focus",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.9364140420220792,
+      "calls": 5,
+      "known_tokens": 19218,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "first_omission_stage": 1,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "saas-metrics-coach",
+        "confidence": 0.98,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 55
+      },
+      "stages": [
+        {
+          "pool_size": 318,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [
+            "confluence-expert"
+          ],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.63,
+            "root:leadership-and-business": 0.46,
+            "root:delivery-and-personal-work": 0.18
+          },
+          "threshold_adjustment": {
+            "base_pool": 318,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 207,
+          "offered": 14,
+          "carried": 0,
+          "missing_required_ids": [
+            "confluence-expert"
+          ],
+          "required_branch_scores": {
+            "domain:engineering": 0.97,
+            "domain:finance": 0.91
+          },
+          "threshold_adjustment": {
+            "base_pool": 207,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 55,
+          "offered": 22,
+          "carried": 4,
+          "missing_required_ids": [
+            "confluence-expert"
+          ],
+          "required_branch_scores": {
+            "domain:engineering:topic7": 0.96
+          },
+          "threshold_adjustment": {
+            "base_pool": 55,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 55,
+          "offered": 4,
+          "carried": 5,
+          "missing_required_ids": [
+            "confluence-expert"
+          ],
+          "required_branch_scores": {},
+          "threshold_adjustment": {
+            "base_pool": 55,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "signals_then_finance_and_culture",
+      "arm": "adaptive_gate",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.2306355419859756,
+      "calls": 5,
+      "known_tokens": 23004,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "observability-designer",
+        "confidence": 0.9,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 82
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.93,
+            "root:leadership-and-business": 0.96
+          },
+          "threshold_adjustment": {
+            "base_pool": 350,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 247,
+          "offered": 18,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.88,
+            "domain:c-level-advisor": 0.9,
+            "domain:finance": 0.97
+          },
+          "threshold_adjustment": {
+            "base_pool": 247,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 96,
+          "offered": 28,
+          "carried": 5,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic4": 0.65,
+            "domain:c-level-advisor:topic3": 0.94
+          },
+          "threshold_adjustment": {
+            "base_pool": 96,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 82,
+          "offered": 10,
+          "carried": 8,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic4:nb": 0.98,
+            "domain:c-level-advisor:topic3:nb": 0.94
+          },
+          "threshold_adjustment": {
+            "base_pool": 82,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "signals_then_finance_and_culture",
+      "arm": "adaptive_focus",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.9440077919862233,
+      "calls": 5,
+      "known_tokens": 15210,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": true,
+      "result": {
+        "status": "selected",
+        "choice": "cto-advisor",
+        "confidence": 0.92,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 37
+      },
+      "stages": [
+        {
+          "pool_size": 292,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.77,
+            "root:leadership-and-business": 0.94
+          },
+          "threshold_adjustment": {
+            "base_pool": 292,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 147,
+          "offered": 12,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.74,
+            "domain:c-level-advisor": 0.6,
+            "domain:finance": 0.92
+          },
+          "threshold_adjustment": {
+            "base_pool": 147,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 42,
+          "offered": 15,
+          "carried": 3,
+          "missing_required_ids": [
+            "observability-designer"
+          ],
+          "required_branch_scores": {
+            "domain:engineering:topic4": 0.34,
+            "domain:c-level-advisor:topic3": 0.74
+          },
+          "threshold_adjustment": {
+            "base_pool": 42,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 37,
+          "offered": 4,
+          "carried": 3,
+          "missing_required_ids": [
+            "observability-designer"
+          ],
+          "required_branch_scores": {
+            "domain:c-level-advisor:topic3:nb": 0.94
+          },
+          "threshold_adjustment": {
+            "base_pool": 37,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "signals_then_finance_and_culture",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.376280540978769,
+      "calls": 5,
+      "known_tokens": 23004,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "observability-designer",
+        "confidence": 0.9,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 82
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.93,
+            "root:leadership-and-business": 0.96
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 247,
+          "offered": 18,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.88,
+            "domain:c-level-advisor": 0.89,
+            "domain:finance": 0.97
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 96,
+          "offered": 28,
+          "carried": 5,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic4": 0.67,
+            "domain:c-level-advisor:topic3": 0.94
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 82,
+          "offered": 10,
+          "carried": 8,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic4:nb": 0.98,
+            "domain:c-level-advisor:topic3:nb": 0.94
+          },
+          "threshold_adjustment": null
+        }
+      ]
+    },
+    {
+      "case": "channels_then_incident_and_wiki",
+      "arm": "adaptive_focus",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.4430341660045087,
+      "calls": 5,
+      "known_tokens": 16222,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "channel-economics",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 41
+      },
+      "stages": [
+        {
+          "pool_size": 318,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.67,
+            "root:marketing-and-growth": 0.74,
+            "root:delivery-and-personal-work": 0.27
+          },
+          "threshold_adjustment": {
+            "base_pool": 318,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 127,
+          "offered": 15,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering-team": 0.5,
+            "domain:commercial": 0.9,
+            "domain:project-management": 0.88
+          },
+          "threshold_adjustment": {
+            "base_pool": 127,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 55,
+          "offered": 13,
+          "carried": 4,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering-team:topic2": 0.46,
+            "domain:project-management:na": 0.89
+          },
+          "threshold_adjustment": {
+            "base_pool": 55,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 41,
+          "offered": 2,
+          "carried": 7,
+          "missing_required_ids": [],
+          "required_branch_scores": {},
+          "threshold_adjustment": {
+            "base_pool": 41,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "channels_then_incident_and_wiki",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1384029999899212,
+      "calls": 5,
+      "known_tokens": 25786,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "channel-economics",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 83
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.8,
+            "root:marketing-and-growth": 0.91,
+            "root:delivery-and-personal-work": 0.7
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 255,
+          "offered": 18,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering-team": 0.75,
+            "domain:commercial": 0.97,
+            "domain:project-management": 0.95
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 133,
+          "offered": 30,
+          "carried": 4,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering-team:topic2": 0.75,
+            "domain:project-management:na": 0.94
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 83,
+          "offered": 14,
+          "carried": 10,
+          "missing_required_ids": [],
+          "required_branch_scores": {},
+          "threshold_adjustment": null
+        }
+      ]
+    },
+    {
+      "case": "channels_then_incident_and_wiki",
+      "arm": "adaptive_gate",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.967410374985775,
+      "calls": 5,
+      "known_tokens": 23584,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "channel-economics",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 74
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.82,
+            "root:marketing-and-growth": 0.91,
+            "root:delivery-and-personal-work": 0.69
+          },
+          "threshold_adjustment": {
+            "base_pool": 376,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 233,
+          "offered": 20,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering-team": 0.76,
+            "domain:commercial": 0.97,
+            "domain:project-management": 0.95
+          },
+          "threshold_adjustment": {
+            "base_pool": 233,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 109,
+          "offered": 27,
+          "carried": 4,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering-team:topic2": 0.79,
+            "domain:project-management:na": 0.94
+          },
+          "threshold_adjustment": {
+            "base_pool": 109,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 74,
+          "offered": 10,
+          "carried": 9,
+          "missing_required_ids": [],
+          "required_branch_scores": {},
+          "threshold_adjustment": {
+            "base_pool": 74,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "borrowed_code_now_culture_welcome_later",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.782260416977806,
+      "calls": 5,
+      "known_tokens": 24417,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 63
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.83,
+            "root:marketing-and-growth": 0.51,
+            "root:leadership-and-business": 0.9
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 257,
+          "offered": 20,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.95,
+            "domain:marketing-skill": 0.71,
+            "domain:c-level-advisor": 0.75
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 106,
+          "offered": 31,
+          "carried": 2,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic7": 0.95,
+            "domain:marketing-skill:topic0": 0.85,
+            "domain:c-level-advisor:topic3": 0.9
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 63,
+          "offered": 12,
+          "carried": 6,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:marketing-skill:topic0:na": 0.65,
+            "domain:c-level-advisor:topic3:nb": 0.93
+          },
+          "threshold_adjustment": null
+        }
+      ]
+    },
+    {
+      "case": "borrowed_code_now_culture_welcome_later",
+      "arm": "adaptive_gate",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.181936417007819,
+      "calls": 5,
+      "known_tokens": 24417,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 63
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.84,
+            "root:marketing-and-growth": 0.41,
+            "root:leadership-and-business": 0.89
+          },
+          "threshold_adjustment": {
+            "base_pool": 376,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 257,
+          "offered": 20,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.95,
+            "domain:marketing-skill": 0.7,
+            "domain:c-level-advisor": 0.79
+          },
+          "threshold_adjustment": {
+            "base_pool": 257,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 106,
+          "offered": 31,
+          "carried": 2,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic7": 0.96,
+            "domain:marketing-skill:topic0": 0.86,
+            "domain:c-level-advisor:topic3": 0.9
+          },
+          "threshold_adjustment": {
+            "base_pool": 106,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 63,
+          "offered": 12,
+          "carried": 6,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:marketing-skill:topic0:na": 0.62,
+            "domain:c-level-advisor:topic3:nb": 0.92
+          },
+          "threshold_adjustment": {
+            "base_pool": 63,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "borrowed_code_now_culture_welcome_later",
+      "arm": "adaptive_focus",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.031480334000662,
+      "calls": 5,
+      "known_tokens": 18151,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 35
+      },
+      "stages": [
+        {
+          "pool_size": 318,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:build-and-agents": 0.58,
+            "root:marketing-and-growth": 0.26,
+            "root:leadership-and-business": 0.89
+          },
+          "threshold_adjustment": {
+            "base_pool": 318,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 238,
+          "offered": 14,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering": 0.98,
+            "domain:marketing-skill": 0.64,
+            "domain:c-level-advisor": 0.61
+          },
+          "threshold_adjustment": {
+            "base_pool": 238,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 48,
+          "offered": 27,
+          "carried": 1,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:engineering:topic7": 0.96,
+            "domain:marketing-skill:topic0": 0.7,
+            "domain:c-level-advisor:topic3": 0.67
+          },
+          "threshold_adjustment": {
+            "base_pool": 48,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 35,
+          "offered": 6,
+          "carried": 2,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:marketing-skill:topic0:na": 0.48,
+            "domain:c-level-advisor:topic3:nb": 0.92
+          },
+          "threshold_adjustment": {
+            "base_pool": 35,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "cancel_finance_keep_discovery_jira",
+      "arm": "adaptive_gate",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.7730022909818217,
+      "calls": 5,
+      "known_tokens": 12919,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "product-manager-toolkit",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 27
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:product-and-research": 0.96,
+            "root:delivery-and-personal-work": 0.7
+          },
+          "threshold_adjustment": {
+            "base_pool": 207,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 133,
+          "offered": 10,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:product-team": 0.9,
+            "domain:project-management": 0.97
+          },
+          "threshold_adjustment": {
+            "base_pool": 133,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 38,
+          "offered": 18,
+          "carried": 2,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:product-team:topic1": 0.93,
+            "domain:project-management:na": 0.97
+          },
+          "threshold_adjustment": {
+            "base_pool": 38,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 27,
+          "offered": 2,
+          "carried": 6,
+          "missing_required_ids": [],
+          "required_branch_scores": {},
+          "threshold_adjustment": {
+            "base_pool": 27,
+            "applied_gates": {
+              "4": 0.45
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "cancel_finance_keep_discovery_jira",
+      "arm": "adaptive_focus",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.3521203749987762,
+      "calls": 4,
+      "known_tokens": 11222,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "product-manager-toolkit",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 20
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:product-and-research": 0.91,
+            "root:delivery-and-personal-work": 0.29
+          },
+          "threshold_adjustment": {
+            "base_pool": 207,
+            "applied_gates": {
+              "1": 0.2
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 120,
+          "offered": 10,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:product-team": 0.86,
+            "domain:project-management": 0.95
+          },
+          "threshold_adjustment": {
+            "base_pool": 120,
+            "applied_gates": {
+              "2": 0.3
+            },
+            "changes": []
+          }
+        },
+        {
+          "pool_size": 20,
+          "offered": 16,
+          "carried": 1,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:product-team:topic1": 0.85,
+            "domain:project-management:na": 0.96
+          },
+          "threshold_adjustment": {
+            "base_pool": 20,
+            "applied_gates": {
+              "3": 0.4
+            },
+            "changes": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "cancel_finance_keep_discovery_jira",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 4.813415415992495,
+      "calls": 5,
+      "known_tokens": 13953,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "product-manager-toolkit",
+        "confidence": 0.99,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 31
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "root:product-and-research": 0.96,
+            "root:delivery-and-personal-work": 0.73
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 133,
+          "offered": 10,
+          "carried": 0,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:product-team": 0.87,
+            "domain:project-management": 0.97
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 47,
+          "offered": 18,
+          "carried": 2,
+          "missing_required_ids": [],
+          "required_branch_scores": {
+            "domain:product-team:topic1": 0.93,
+            "domain:project-management:na": 0.97
+          },
+          "threshold_adjustment": null
+        },
+        {
+          "pool_size": 31,
+          "offered": 4,
+          "carried": 6,
+          "missing_required_ids": [],
+          "required_branch_scores": {},
+          "threshold_adjustment": null
+        }
+      ]
+    }
+  ],
+  "live_gate_adjustments": 0,
+  "stage_usage": {
+    "adaptive_gate": {
+      "directory_calls": 20.0,
+      "directory_tokens": 67253.0,
+      "directory_seconds": 12.541825540101854,
+      "final_calls": 4.0,
+      "final_tokens": 33541.0,
+      "final_seconds": 2.5930854169710074
+    },
+    "adaptive_focus": {
+      "directory_calls": 19.0,
+      "directory_tokens": 51297.0,
+      "directory_seconds": 11.958504542999435,
+      "final_calls": 5.0,
+      "final_tokens": 28726.0,
+      "final_seconds": 3.6498095000279136
+    },
+    "baseline": {
+      "directory_calls": 16.0,
+      "directory_tokens": 52543.0,
+      "directory_seconds": 10.902986541041173,
+      "final_calls": 4.0,
+      "final_tokens": 34617.0,
+      "final_seconds": 3.123415082023712
+    }
+  },
+  "validation": {
+    "offline_tests": 12,
+    "all_requests_reconciled": true,
+    "receipt_pairs": 68,
+    "frozen_inputs_and_source_match": true,
+    "protected_files": 354,
+    "changed_protected_count": 0,
+    "other_worktrees": {
+      "main": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "snapshotted_files": 228,
+        "changed_or_missing_files": 0,
+        "added_files": 0
+      },
+      "lifecycle": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "snapshotted_files": 224,
+        "changed_or_missing_files": 0,
+        "added_files": 0
+      }
+    },
+    "passed_baseline_resent": false,
+    "unknown_sends": 0,
+    "transport_errors": 0,
+    "missing_usage": 0
+  },
+  "source_summary_sha256": "8e92c19b88fbb6cef362973466c7c5063965933a573e6684539dbed53812d75a",
+  "offline_gate_replay": {
+    "scope": "Pointwise replay of existing directory scores only; no new model calls or counterfactual final accuracy. Gold never enters retention.",
+    "policy": {
+      "min_gap": 0.12,
+      "max_raise": 0.1,
+      "pressure_limit": 96,
+      "first_adaptive_depth": 3
+    },
+    "rows_checked": 51,
+    "stages_checked": 199,
+    "records": [
+      {
+        "source": "adaptive-dependency-cost-20261016",
+        "case": "finance_packages_then_wiki",
+        "arm": "early_stop",
+        "stage": 3,
+        "before": 150,
+        "after": 110,
+        "newly_omitted": [],
+        "changes": [
+          {
+            "depth": 3,
+            "base": 0.4,
+            "applied": 0.5,
+            "gap": [
+              0.47,
+              0.63
+            ],
+            "removed": [
+              "domain:engineering-team:topic5",
+              "domain:engineering:topic1",
+              "domain:engineering:topic10",
+              "domain:product-team:topic0",
+              "domain:c-level-advisor:topic1"
+            ],
+            "pool_after": 110
+          }
+        ]
+      }
+    ],
+    "new_omission_count": 0
+  },
+  "offline_route_replay": {
+    "scope": "Exact offline receipt replay, no new model sends or accuracy samples.",
+    "network_calls": 0,
+    "rows": [
+      {
+        "case": "signals_then_finance_and_culture",
+        "matched_requests": 5,
+        "diverged_stages": [],
+        "same_result": true
+      },
+      {
+        "case": "channels_then_incident_and_wiki",
+        "matched_requests": 5,
+        "diverged_stages": [],
+        "same_result": true
+      },
+      {
+        "case": "borrowed_code_now_culture_welcome_later",
+        "matched_requests": 5,
+        "diverged_stages": [],
+        "same_result": true
+      },
+      {
+        "case": "cancel_finance_keep_discovery_jira",
+        "matched_requests": 5,
+        "diverged_stages": [],
+        "same_result": true
+      }
+    ]
+  },
+  "jev_usage_audit": {
+    "cli_version": "0.3.2",
+    "cli_sha256": "dc5a6f352390447543f47cf8795f6362b67b4a1e4d9de20337fadb343c7b10ba",
+    "structured_questions_preserved": true,
+    "no_network_calls": true,
+    "confidence_field_checks": [
+      {
+        "receipt": "r0--cancel_packages_keep_signals_accounts--described--final.done.json",
+        "options": 53,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--wiki_then_package_risks--described--final.done.json",
+        "options": 27,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--culture_now_then_dependencies--described--final.done.json",
+        "options": 40,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--culture_now_then_dependencies--baseline--final.done.json",
+        "options": 35,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--packages_now_then_channels--baseline--final.done.json",
+        "options": 50,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--cancel_packages_keep_signals_accounts--early_stop--final.done.json",
+        "options": 53,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--welcome_then_borrowed_packages--early_stop--final.done.json",
+        "options": 59,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--accounts_then_license_chain--described--final.done.json",
+        "options": 42,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--wiki_then_package_risks--early_stop--final.done.json",
+        "options": 32,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--accounts_then_license_chain--baseline--final.done.json",
+        "options": 42,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--culture_now_then_dependencies--early_stop--final.done.json",
+        "options": 45,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--welcome_then_borrowed_packages--baseline--final.done.json",
+        "options": 59,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--welcome_then_borrowed_packages--described--final.done.json",
+        "options": 59,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--finance_packages_then_wiki--described--final.done.json",
+        "options": 94,
+        "confidence": 0.96,
+        "derived": 0.9595698924731182,
+        "difference": 0.00043010752688177334
+      },
+      {
+        "receipt": "r0--wiki_then_package_risks--baseline--final.done.json",
+        "options": 27,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--cancel_packages_keep_signals_accounts--baseline--final.done.json",
+        "options": 53,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--accounts_then_license_chain--early_stop--final.done.json",
+        "options": 42,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--packages_now_then_channels--early_stop--final.done.json",
+        "options": 50,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      },
+      {
+        "receipt": "r0--packages_now_then_channels--described--final.done.json",
+        "options": 50,
+        "confidence": 1.0,
+        "derived": 1.0,
+        "difference": 0.0
+      }
+    ],
+    "largest_rounding_difference": 0.00043010752688177334,
+    "backend_model_revision": "unobservable",
+    "unchanged_transport": "Explicit typesafe provider, one process per stage, retries zero; original state/spec passed via mode-0600 temporary files."
+  },
+  "preferred_candidate": "unchanged_description_baseline",
+  "limitations": [
+    "One prior boundary failure and four author-written combinations; one sample per arm, not blind or population accuracy. Noul probabilities and Choice confidence are different signals; neither is locally calibrated. Provider backend revision unobservable.",
+    "Adaptive gates never fired live, so cost differences in that arm are sampling/timing differences, not a demonstrated threshold gain.",
+    "Focused treatment changes both question wording and its structure; individual contributions are not isolated.",
+    "Old passing baseline is historical, excluded from fresh cost comparisons. All semantic failures remain.",
+    "Costs cover Jev selection only, excluding root analysis, intent entry and business execution. No daily installation or real capability execution is validated."
+  ]
+}

@@ -1,5 +1,19 @@
 # Public directory depth/width pilot
 
+The [adaptive threshold / Jev usage audit](../../docs/backpack-adaptive-threshold-jev-2026-10-16.md)
+keeps the previous description baseline. Four new multi-task needs pass 4/4 for
+baseline, 4/4 for bounded count/gap gates, and 3/4 for gates plus focused wording.
+The old three-step boundary need is sent only to the two new arms; its already
+passing baseline is reused, outside fresh cost averages. Both candidates fail
+that need, giving 4/5 and 3/5 overall. No live gate adjustment fires, so apparent
+cost differences in the gate-only arm cannot be attributed to adaptive gates.
+Focused wording reduces fresh-case tokens by 30.24% but loses required targets;
+neither candidate is promoted. Noul probabilities and Choice confidence are
+distinct, same-level batching is already present, and the 96 cap is local.
+Twelve offline checks and 68 receipt pairs reconcile (267,977 tokens); 20 exact
+offline request replays add no network calls. Use `threshold_experiment.py` with
+`freeze/run` and `analyze_threshold.py`. No daily or other-worktree changes.
+
 The [dependency-scope/cost follow-up](../../docs/backpack-dependency-cost-2026-10-16.md)
 keeps adaptive traversal, current-step selection and all confidence gates. It
 clarifies package-audit operations in one third-layer scope and its parent copy,
