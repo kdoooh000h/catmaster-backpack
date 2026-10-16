@@ -423,6 +423,15 @@ Against the prior final on the same repaired pools, strict success is 1/2 versus
 2/2; tokens rise 3.66% and measured warm time falls 6.40%. This small regression
 does not establish general accuracy or a stable speedup; daily runtime is unchanged.
 
+The [new-request breadth check](docs/backpack-unseen-breadth-2026-10-16.md) freezes
+those selectors and tests 12 new Chinese, synonym-oriented and mixed-language
+needs across Skill, whole-plugin and MCP targets. Both compact and coverage pass
+only 2/12: eight fail local reference coverage (including all four MCP needs),
+and two abstain below 0.7. Only 7/9 later requirements survive retrieval. Across
+the same four live pairs, coverage uses 2.92% more tokens and 1.64% more warm
+selector time. The prior two-case success does not generalize; no daily promotion
+or capability execution is claimed.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
