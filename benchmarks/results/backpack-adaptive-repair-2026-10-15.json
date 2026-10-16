@@ -1,0 +1,3106 @@
+{
+  "version": 1,
+  "scope": "Selector regression only; no capability execution, installation or native lifecycle mutation.",
+  "plan": {
+    "version": 1,
+    "arms": [
+      "adaptive",
+      "repaired",
+      "repaired_boundary"
+    ],
+    "repetitions": 1,
+    "source_commit": "19392f7a08264ed00486a251f5b2098321771f94",
+    "baseline_plan_sha256": "aabf0bdda550941f86de54b976b639acc328c96f6e0bf90507d7ad11a28aa8ca",
+    "case_count": 14,
+    "same_case_bytes": true,
+    "same_membership": true,
+    "same_full_final_descriptions": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "boundary_margin": 0.15,
+    "max_boundary_calls_per_task": 1,
+    "max_boundary_cards": 6,
+    "max_boundary_chars": 12000,
+    "max_calls": 240,
+    "max_known_tokens": 450000,
+    "max_seconds": 420,
+    "timeout_seconds": 15,
+    "provider": "typesafe",
+    "attempts": 1,
+    "ordering": "Rotate three arms by case; independent stateless requests; one pass.",
+    "scope": "Selector regression only; no capability execution, installation or native lifecycle mutation.",
+    "acceptance": "All 14 omissions/choices/controls must pass. Keep all semantic failures. Stop whole run on transport, missing usage, malformed output or budget. No retries or within-run tuning.",
+    "limitations": "Known development cases used to diagnose and repair metadata, not unseen validation. Review rescues only near-threshold branches within a one-call budget; cannot guarantee no omissions.",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+      "benchmarks/directory-depth/expanded_experiment.py": "bff01ab4da9090932e8fb1ae9bb7150ea80e42cd757cf39b65583df1650f6eec",
+      "benchmarks/directory-depth/expanded_cases.json": "6712d6909d27b6035d4e12ad2082165b5e25fa3fa9b63e20238777f23e7f45e9",
+      "benchmarks/directory-depth/adaptive_repair.py": "5cfb14f71b07a8200a951c8cbe7eb9a535c582e05df2f023dc83025e27037979",
+      "benchmarks/directory-depth/repair_experiment.py": "cdf8b0541ac162c1dca06970365cb9b586583dca4a5200d1da8e4e879f292519"
+    },
+    "input_sha256": {
+      "repaired-nodes.json": "fb0ef88629b667df9deedce313f3b3c96fe9dd86de466d8f0f627b75ea4dbaef",
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "cases.json": "038d70d56be064744f1b242a5296cacc9bc1875e097581f884bcbd3c22f95526",
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "nodes.json": "52326ec32b7326872e68d464e14c09a5583fc07b951e2551a7d4e8e0248a592f"
+    }
+  },
+  "stop": "budget_or_provider_failure",
+  "complete_cases": 12,
+  "all_cases_complete": false,
+  "actual_calls": 178,
+  "known_tokens": 452981,
+  "wall_seconds": 102.7152145410073,
+  "usage_complete": true,
+  "unresolved": [],
+  "errors": [],
+  "by_arm": {
+    "adaptive": {
+      "count": 13,
+      "omission_safe_successes": 12,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.2380703687667847,
+      "mean_tokens": 7061.461538461538,
+      "mean_calls": 3.769230769230769
+    },
+    "repaired": {
+      "count": 13,
+      "omission_safe_successes": 13,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.6335028717719697,
+      "mean_tokens": 13361.615384615385,
+      "mean_calls": 4.615384615384615
+    },
+    "repaired_boundary": {
+      "count": 13,
+      "omission_safe_successes": 12,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.026841535389674,
+      "mean_tokens": 14421.615384615385,
+      "mean_calls": 5.3076923076923075
+    }
+  },
+  "complete_case_ids": [
+    "quote_new_work",
+    "cancel_new_work",
+    "zh_data_profile",
+    "mix_api_contract",
+    "syn_release_notes",
+    "zh_query_join",
+    "mix_accessibility",
+    "zh_copy_polish",
+    "syn_meeting_actions",
+    "zh_research_brief",
+    "mix_design_tokens",
+    "syn_corrective_actions"
+  ],
+  "complete_case_metrics": {
+    "adaptive": {
+      "count": 12,
+      "omission_safe_successes": 11,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.2033384029152026,
+      "mean_tokens": 7064.583333333333,
+      "mean_calls": 3.75
+    },
+    "repaired": {
+      "count": 12,
+      "omission_safe_successes": 12,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.5824261770855323,
+      "mean_tokens": 12961.666666666666,
+      "mean_calls": 4.5
+    },
+    "repaired_boundary": {
+      "count": 12,
+      "omission_safe_successes": 12,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.053004795253704,
+      "mean_tokens": 14329.333333333334,
+      "mean_calls": 5.333333333333333
+    }
+  },
+  "case_progress": {
+    "quote_new_work": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "cancel_new_work": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "zh_data_profile": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "mix_api_contract": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "syn_release_notes": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "zh_query_join": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "mix_accessibility": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "zh_copy_polish": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "syn_meeting_actions": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "zh_research_brief": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "mix_design_tokens": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "syn_corrective_actions": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "completed"
+    },
+    "mix_retention_cohorts": {
+      "adaptive": "completed",
+      "repaired": "completed",
+      "repaired_boundary": "incomplete"
+    },
+    "multi_quality_then_query": {
+      "adaptive": "unrun",
+      "repaired": "unrun",
+      "repaired_boundary": "unrun"
+    }
+  },
+  "positive_by_arm": {
+    "adaptive": {
+      "count": 11,
+      "omission_safe_successes": 10,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.480629829724256,
+      "mean_tokens": 8034.636363636364,
+      "mean_calls": 4.181818181818182
+    },
+    "repaired": {
+      "count": 11,
+      "omission_safe_successes": 11,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.7517186514557,
+      "mean_tokens": 14372.363636363636,
+      "mean_calls": 4.818181818181818
+    },
+    "repaired_boundary": {
+      "count": 11,
+      "omission_safe_successes": 10,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.121349871370264,
+      "mean_tokens": 15212.454545454546,
+      "mean_calls": 5.454545454545454
+    }
+  },
+  "candidate_eligible_on_this_regression": {
+    "repaired": false,
+    "repaired_boundary": false
+  },
+  "change_vs_baseline_percent": {},
+  "stage_usage": {
+    "adaptive": {
+      "directory_calls": 38.0,
+      "directory_tokens": 61945.0,
+      "directory_seconds": 22.619074005109724,
+      "final_calls": 11.0,
+      "final_tokens": 29854.0,
+      "final_seconds": 6.329939044080675
+    },
+    "repaired_boundary": {
+      "directory_calls": 45.0,
+      "directory_tokens": 128845.0,
+      "directory_seconds": 24.995670536969556,
+      "boundary_calls": 12.0,
+      "boundary_tokens": 14508.0,
+      "boundary_seconds": 6.876436711027054,
+      "final_calls": 12.0,
+      "final_tokens": 44128.0,
+      "final_seconds": 7.258026915980736
+    },
+    "repaired": {
+      "directory_calls": 47.0,
+      "directory_tokens": 125836.0,
+      "directory_seconds": 26.37080000183778,
+      "final_calls": 13.0,
+      "final_tokens": 47865.0,
+      "final_seconds": 7.676468874968123
+    }
+  },
+  "boundary_reviews": [
+    {
+      "case": "quote_new_work",
+      "stage": 1,
+      "nodes": [
+        "root:product-and-research",
+        "root:marketing-and-growth",
+        "root:leadership-and-business",
+        "root:delivery-and-personal-work",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [
+        "root:leadership-and-business",
+        "root:delivery-and-personal-work",
+        "root:regulatory-and-compliance"
+      ],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "cancel_new_work",
+      "stage": 1,
+      "nodes": [
+        "root:product-and-research",
+        "root:marketing-and-growth",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "zh_data_profile",
+      "stage": 1,
+      "nodes": [
+        "root:marketing-and-growth",
+        "root:delivery-and-personal-work"
+      ],
+      "recovered": [],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "mix_api_contract",
+      "stage": 1,
+      "nodes": [
+        "root:marketing-and-growth",
+        "root:leadership-and-business",
+        "root:delivery-and-personal-work",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "syn_release_notes",
+      "stage": 1,
+      "nodes": [
+        "root:marketing-and-growth",
+        "root:leadership-and-business",
+        "root:delivery-and-personal-work",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [
+        "root:delivery-and-personal-work"
+      ],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "zh_query_join",
+      "stage": 1,
+      "nodes": [
+        "root:product-and-research",
+        "root:delivery-and-personal-work",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "mix_accessibility",
+      "stage": 1,
+      "nodes": [
+        "root:marketing-and-growth",
+        "root:leadership-and-business",
+        "root:delivery-and-personal-work"
+      ],
+      "recovered": [
+        "root:marketing-and-growth",
+        "root:delivery-and-personal-work"
+      ],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "zh_copy_polish",
+      "stage": 4,
+      "nodes": [
+        "domain:marketing-skill:topic0:nb"
+      ],
+      "recovered": [],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "syn_meeting_actions",
+      "stage": 1,
+      "nodes": [
+        "root:marketing-and-growth",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [
+        "root:regulatory-and-compliance"
+      ],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "mix_design_tokens",
+      "stage": 1,
+      "nodes": [
+        "root:marketing-and-growth",
+        "root:leadership-and-business",
+        "root:delivery-and-personal-work",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [
+        "root:delivery-and-personal-work"
+      ],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "syn_corrective_actions",
+      "stage": 1,
+      "nodes": [
+        "root:marketing-and-growth"
+      ],
+      "recovered": [],
+      "required_ids_recovered": []
+    },
+    {
+      "case": "mix_retention_cohorts",
+      "stage": 1,
+      "nodes": [
+        "root:delivery-and-personal-work",
+        "root:regulatory-and-compliance"
+      ],
+      "recovered": [],
+      "required_ids_recovered": []
+    }
+  ],
+  "failures": [
+    {
+      "case": "zh_research_brief",
+      "arm": "adaptive",
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:product-team:topic0",
+          "score": 0.39
+        }
+      ],
+      "selected": "deepread",
+      "confidence": 0.93,
+      "status": "selected"
+    },
+    {
+      "case": "mix_retention_cohorts",
+      "arm": "repaired_boundary",
+      "first_omission_stage": null,
+      "scores_at_omission": [],
+      "selected": null,
+      "confidence": null,
+      "status": "unavailable"
+    }
+  ],
+  "rows": [
+    {
+      "case": "quote_new_work",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": true,
+      "seconds": 1.2870685830130242,
+      "calls": 2,
+      "known_tokens": 2337,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "pool_size": 149,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 0,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "quote_new_work",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": true,
+      "seconds": 2.185643375007203,
+      "calls": 4,
+      "known_tokens": 9438,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 0.88,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 29,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 151,
+          "offered": 9,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:loop-library",
+            "domain:product-team",
+            "domain:research",
+            "domain:ra-qm-team"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 29,
+          "offered": 20,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic3",
+            "domain:engineering:topic5",
+            "domain:engineering:topic8"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "quote_new_work",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": true,
+      "seconds": 2.8501323749951553,
+      "calls": 5,
+      "known_tokens": 12828,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 0.88,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 29,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 275,
+          "offered": 6,
+          "boundary": [
+            "root:product-and-research",
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:product-and-research",
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 161,
+          "offered": 13,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:loop-library",
+            "domain:c-level-advisor",
+            "domain:c-level-agents",
+            "domain:project-management",
+            "domain:markdown-html",
+            "domain:ra-qm-team",
+            "domain:compliance-os"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 29,
+          "offered": 22,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic3",
+            "domain:engineering:topic5",
+            "domain:engineering:topic7",
+            "domain:engineering:topic8"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "cancel_new_work",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": true,
+      "seconds": 1.7809887920157053,
+      "calls": 3,
+      "known_tokens": 6167,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 16,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 249,
+          "offered": 6,
+          "boundary": [
+            "root:product-and-research",
+            "root:marketing-and-growth",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 16,
+          "offered": 11,
+          "boundary": [
+            "domain:engineering",
+            "domain:agent-launcher",
+            "domain:loop-library",
+            "domain:c-level-agents",
+            "domain:productivity"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "cancel_new_work",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": true,
+      "seconds": 2.1639589999977034,
+      "calls": 4,
+      "known_tokens": 7316,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 16,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 249,
+          "offered": 6,
+          "boundary": [
+            "root:product-and-research",
+            "root:marketing-and-growth",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:product-and-research",
+            "root:marketing-and-growth",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 16,
+          "offered": 11,
+          "boundary": [
+            "domain:engineering",
+            "domain:agent-launcher",
+            "domain:loop-library",
+            "domain:c-level-agents",
+            "domain:productivity"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "cancel_new_work",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": true,
+      "seconds": 0.5209180839883629,
+      "calls": 1,
+      "known_tokens": 1081,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "pool_size": 0,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_data_profile",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.757172999990871,
+      "calls": 5,
+      "known_tokens": 14418,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "data-quality-auditor",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 40,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:delivery-and-personal-work"
+          ],
+          "reviewed": [
+            "root:marketing-and-growth",
+            "root:delivery-and-personal-work"
+          ],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 174,
+          "offered": 13,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:product-team",
+            "domain:research-ops",
+            "domain:c-level-advisor",
+            "domain:ra-qm-team"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 40,
+          "offered": 26,
+          "boundary": [
+            "domain:engineering-team:topic6",
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic6",
+            "domain:engineering:topic8",
+            "domain:business-operations:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "zh_data_profile",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.010452916001668,
+      "calls": 4,
+      "known_tokens": 8139,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "data-quality-auditor",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 13
+      },
+      "stages": [
+        {
+          "pool_size": 275,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 151,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 13,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_data_profile",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.105267791019287,
+      "calls": 4,
+      "known_tokens": 13452,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "data-quality-auditor",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 40,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:delivery-and-personal-work"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 174,
+          "offered": 13,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:product-team",
+            "domain:research-ops",
+            "domain:c-level-advisor",
+            "domain:ra-qm-team"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 40,
+          "offered": 26,
+          "boundary": [
+            "domain:engineering-team:topic6",
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic6",
+            "domain:engineering:topic8",
+            "domain:business-operations:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_api_contract",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.737597791972803,
+      "calls": 5,
+      "known_tokens": 8947,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "api-design-reviewer",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 14
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 159,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 30,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 14,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_api_contract",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.993316165986471,
+      "calls": 4,
+      "known_tokens": 10132,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "api-design-reviewer",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 42,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 160,
+          "offered": 7,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:research"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 42,
+          "offered": 21,
+          "boundary": [
+            "domain:engineering-team:topic0",
+            "domain:engineering-team:topic3",
+            "domain:engineering:topic1",
+            "domain:engineering:topic2",
+            "domain:engineering:topic9",
+            "domain:product-team:topic0",
+            "domain:product-team:topic1"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_api_contract",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.6453551670128945,
+      "calls": 5,
+      "known_tokens": 11592,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "api-design-reviewer",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 42,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 160,
+          "offered": 7,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:research"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 42,
+          "offered": 21,
+          "boundary": [
+            "domain:engineering-team:topic0",
+            "domain:engineering-team:topic3",
+            "domain:engineering:topic0",
+            "domain:engineering:topic1",
+            "domain:engineering:topic2",
+            "domain:engineering:topic9",
+            "domain:product-team:topic0",
+            "domain:product-team:topic1"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "syn_release_notes",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.9466526659962256,
+      "calls": 4,
+      "known_tokens": 9299,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "changelog-generator",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 36,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 96,
+          "offered": 7,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:product-team",
+            "domain:research"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 36,
+          "offered": 13,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic6",
+            "domain:engineering:topic7"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "syn_release_notes",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.5312914999958593,
+      "calls": 5,
+      "known_tokens": 11094,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "changelog-generator",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 36,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [
+            "root:delivery-and-personal-work"
+          ],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 96,
+          "offered": 10,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:product-team",
+            "domain:research",
+            "domain:project-management",
+            "domain:productivity"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 36,
+          "offered": 13,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic6",
+            "domain:engineering:topic7"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "syn_release_notes",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.332719083991833,
+      "calls": 4,
+      "known_tokens": 5733,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "changelog-generator",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 9
+      },
+      "stages": [
+        {
+          "pool_size": 175,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 89,
+          "offered": 7,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 9,
+          "offered": 11,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_query_join",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.432759208022617,
+      "calls": 6,
+      "known_tokens": 13805,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "sql-database-assistant",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 20,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 292,
+          "offered": 6,
+          "boundary": [
+            "root:product-and-research",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:product-and-research",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 148,
+          "offered": 12,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:commercial",
+            "domain:c-level-advisor",
+            "domain:business-operations",
+            "domain:finance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 52,
+          "offered": 20,
+          "boundary": [
+            "domain:engineering-team:topic0",
+            "domain:engineering-team:topic2",
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic7",
+            "domain:engineering:topic9"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 20,
+          "offered": 10,
+          "boundary": [
+            "domain:engineering:topic6:nb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "zh_query_join",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.456910915992921,
+      "calls": 4,
+      "known_tokens": 7866,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "sql-database-assistant",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21
+      },
+      "stages": [
+        {
+          "pool_size": 223,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 142,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 21,
+          "offered": 18,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_query_join",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1867412090068683,
+      "calls": 6,
+      "known_tokens": 14672,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "sql-database-assistant",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 292,
+          "offered": 6,
+          "boundary": [
+            "root:product-and-research",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 142,
+          "offered": 12,
+          "boundary": [
+            "domain:loop-library",
+            "domain:business-growth",
+            "domain:commercial",
+            "domain:c-level-advisor",
+            "domain:business-operations",
+            "domain:finance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 59,
+          "offered": 18,
+          "boundary": [
+            "domain:engineering-team:topic2",
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic9"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 27,
+          "offered": 12,
+          "boundary": [
+            "domain:engineering:topic6:nb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 21,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_accessibility",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.5936865840048995,
+      "calls": 5,
+      "known_tokens": 9224,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "a11y-audit",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "pool_size": 175,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 151,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 25,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 25,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_accessibility",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.659876207995694,
+      "calls": 5,
+      "known_tokens": 12240,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "a11y-audit",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 14,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 151,
+          "offered": 9,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:loop-library",
+            "domain:product-team",
+            "domain:research"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 52,
+          "offered": 20,
+          "boundary": [
+            "domain:engineering-team:topic3",
+            "domain:engineering:topic0",
+            "domain:engineering:topic1"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 14,
+          "offered": 10,
+          "boundary": [
+            "domain:engineering:topic6:nb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_accessibility",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.248708708997583,
+      "calls": 6,
+      "known_tokens": 15770,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "a11y-audit",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 14,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 302,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work"
+          ],
+          "reviewed": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work"
+          ],
+          "recovered": [
+            "root:marketing-and-growth",
+            "root:delivery-and-personal-work"
+          ],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 163,
+          "offered": 16,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:loop-library",
+            "domain:product-team",
+            "domain:research",
+            "domain:marketing-skill",
+            "domain:commercial",
+            "domain:productivity"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 52,
+          "offered": 24,
+          "boundary": [
+            "domain:engineering-team:topic3",
+            "domain:engineering:topic0",
+            "domain:engineering:topic1",
+            "domain:markdown-html:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 14,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_copy_polish",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.631524583994178,
+      "calls": 5,
+      "known_tokens": 19457,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "copy-editing",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 7,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 241,
+          "offered": 20,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:agent-launcher",
+            "domain:loop-library",
+            "domain:research-ops",
+            "domain:c-level-agents",
+            "domain:productivity",
+            "domain:markdown-html",
+            "domain:ra-qm-team"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 73,
+          "offered": 35,
+          "boundary": [
+            "domain:engineering:topic2",
+            "domain:product-team:topic0",
+            "domain:product-team:topic1",
+            "domain:marketing-skill:topic4"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 7,
+          "offered": 14,
+          "boundary": [
+            "domain:marketing-skill:topic0:nb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_copy_polish",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.3430437920033,
+      "calls": 6,
+      "known_tokens": 20133,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "copy-editing",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 8,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 234,
+          "offered": 20,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:agent-launcher",
+            "domain:research-ops",
+            "domain:commercial",
+            "domain:c-level-agents",
+            "domain:productivity",
+            "domain:markdown-html",
+            "domain:ra-qm-team"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "review_payload_limit"
+        },
+        {
+          "pool_size": 74,
+          "offered": 33,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic9",
+            "domain:product-team:topic1",
+            "domain:marketing-skill:topic4"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "review_payload_limit"
+        },
+        {
+          "pool_size": 8,
+          "offered": 14,
+          "boundary": [
+            "domain:marketing-skill:topic0:nb"
+          ],
+          "reviewed": [
+            "domain:marketing-skill:topic0:nb"
+          ],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_copy_polish",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.2602094169997144,
+      "calls": 4,
+      "known_tokens": 7583,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "copy-editing",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 20
+      },
+      "stages": [
+        {
+          "pool_size": 270,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 54,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 20,
+          "offered": 5,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "syn_meeting_actions",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6668777499871794,
+      "calls": 5,
+      "known_tokens": 16919,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "meetings",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 47,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 307,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:marketing-and-growth",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [
+            "root:regulatory-and-compliance"
+          ],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 128,
+          "offered": 16,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:product-team",
+            "domain:research-ops",
+            "domain:c-level-advisor",
+            "domain:c-level-agents",
+            "domain:markdown-html",
+            "domain:ra-qm-team",
+            "domain:compliance-os"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 47,
+          "offered": 19,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic9"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "syn_meeting_actions",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.042305875016609,
+      "calls": 4,
+      "known_tokens": 9595,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "meetings",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 28
+      },
+      "stages": [
+        {
+          "pool_size": 249,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 28,
+          "offered": 11,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 28,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "syn_meeting_actions",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.194678500003647,
+      "calls": 4,
+      "known_tokens": 16742,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "meetings",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 47,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 133,
+          "offered": 18,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:product-team",
+            "domain:research-ops",
+            "domain:marketing-skill",
+            "domain:commercial",
+            "domain:c-level-advisor",
+            "domain:c-level-agents"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 47,
+          "offered": 21,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic9"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_research_brief",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.0286169169994537,
+      "calls": 4,
+      "known_tokens": 7603,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": true,
+      "result": {
+        "status": "selected",
+        "choice": "deepread",
+        "confidence": 0.93,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 32,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 15,
+          "offered": 5,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_research_brief",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6348367920145392,
+      "calls": 5,
+      "known_tokens": 15834,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "research-summarizer",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 12,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 138,
+          "offered": 20,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:agent-launcher",
+            "domain:marketing-skill",
+            "domain:business-growth",
+            "domain:commercial",
+            "domain:c-level-agents",
+            "domain:finance",
+            "domain:productivity",
+            "domain:markdown-html",
+            "domain:ra-qm-team"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 50,
+          "offered": 22,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic8",
+            "domain:engineering:topic9"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 12,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "zh_research_brief",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.5946305000106804,
+      "calls": 5,
+      "known_tokens": 17022,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "research-summarizer",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 12,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 150,
+          "offered": 20,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:agent-launcher",
+            "domain:marketing-skill",
+            "domain:business-growth",
+            "domain:commercial",
+            "domain:c-level-agents",
+            "domain:finance",
+            "domain:markdown-html",
+            "domain:ra-qm-team"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "review_payload_limit"
+        },
+        {
+          "pool_size": 50,
+          "offered": 24,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic2",
+            "domain:engineering:topic7",
+            "domain:engineering:topic8",
+            "domain:engineering:topic9"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "review_payload_limit"
+        },
+        {
+          "pool_size": 12,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_design_tokens",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.101153208001051,
+      "calls": 4,
+      "known_tokens": 8207,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "ui-design-system",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 29,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 181,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 106,
+          "offered": 7,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:agent-launcher",
+            "domain:loop-library"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 29,
+          "offered": 14,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic1",
+            "domain:engineering:topic6"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_design_tokens",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6452145000221208,
+      "calls": 5,
+      "known_tokens": 11064,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "ui-design-system",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 31,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:marketing-and-growth",
+            "root:leadership-and-business",
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [
+            "root:delivery-and-personal-work"
+          ],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 111,
+          "offered": 10,
+          "boundary": [
+            "domain:engineering-team",
+            "domain:agent-launcher",
+            "domain:loop-library"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 31,
+          "offered": 16,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic1",
+            "domain:engineering:topic6"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "mix_design_tokens",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.056462084001396,
+      "calls": 4,
+      "known_tokens": 7887,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "ui-design-system",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 14
+      },
+      "stages": [
+        {
+          "pool_size": 207,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 159,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 14,
+          "offered": 21,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "syn_corrective_actions",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.75691204200848,
+      "calls": 7,
+      "known_tokens": 19991,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "capa-officer",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 22,
+        "boundary_review_calls": 1
+      },
+      "stages": [
+        {
+          "pool_size": 307,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth"
+          ],
+          "reviewed": [
+            "root:marketing-and-growth"
+          ],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 184,
+          "offered": 16,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:product-team",
+            "domain:research",
+            "domain:research-ops",
+            "domain:c-level-agents"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 59,
+          "offered": 26,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic5",
+            "domain:ra-qm-team:topic1",
+            "domain:compliance-os:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 29,
+          "offered": 12,
+          "boundary": [
+            "domain:compliance-os:nba"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 22,
+          "offered": 4,
+          "boundary": [
+            "domain:c-level-advisor:topic0:nbb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    },
+    {
+      "case": "syn_corrective_actions",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.1131125829997472,
+      "calls": 4,
+      "known_tokens": 8780,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "capa-officer",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 23
+      },
+      "stages": [
+        {
+          "pool_size": 307,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 34,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 23,
+          "offered": 5,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "syn_corrective_actions",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.5684348339855205,
+      "calls": 6,
+      "known_tokens": 19900,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "capa-officer",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 26,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 307,
+          "offered": 6,
+          "boundary": [
+            "root:marketing-and-growth"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 184,
+          "offered": 16,
+          "boundary": [
+            "domain:agent-launcher",
+            "domain:product-team",
+            "domain:research",
+            "domain:c-level-agents"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 63,
+          "offered": 26,
+          "boundary": [
+            "domain:engineering:topic0",
+            "domain:engineering:topic5",
+            "domain:engineering:topic9",
+            "domain:ra-qm-team:topic2",
+            "domain:compliance-os:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 33,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 26,
+          "offered": 4,
+          "boundary": [
+            "domain:c-level-advisor:topic0:nbb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_retention_cohorts",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6548539589857683,
+      "calls": 4,
+      "known_tokens": 7024,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "product-analytics",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 16
+      },
+      "stages": [
+        {
+          "pool_size": 281,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 27,
+          "offered": 14,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 16,
+          "offered": 3,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_retention_cohorts",
+      "arm": "repaired",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.246423208009219,
+      "calls": 6,
+      "known_tokens": 18161,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "product-analytics",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 23,
+        "boundary_review_calls": 0
+      },
+      "stages": [
+        {
+          "pool_size": 324,
+          "offered": 6,
+          "boundary": [
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 264,
+          "offered": 15,
+          "boundary": [
+            "domain:research",
+            "domain:marketing",
+            "domain:commercial",
+            "domain:c-level-agents",
+            "domain:business-operations"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 36,
+          "boundary": [
+            "domain:engineering-team:topic0",
+            "domain:engineering:topic0",
+            "domain:engineering:topic1",
+            "domain:engineering:topic3",
+            "domain:marketing-skill:topic4",
+            "domain:c-level-advisor:topic1",
+            "domain:c-level-advisor:topic3",
+            "domain:finance:nb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 34,
+          "offered": 12,
+          "boundary": [
+            "domain:engineering:topic5:na",
+            "domain:product-team:topic0:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 23,
+          "offered": 4,
+          "boundary": [
+            "domain:c-level-advisor:topic0:nbb"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "mix_retention_cohorts",
+      "arm": "repaired_boundary",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.7128824170213193,
+      "calls": 5,
+      "known_tokens": 15529,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "unavailable",
+        "reason": "experiment_budget_stop"
+      },
+      "stages": [
+        {
+          "pool_size": 324,
+          "offered": 6,
+          "boundary": [
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "reviewed": [
+            "root:delivery-and-personal-work",
+            "root:regulatory-and-compliance"
+          ],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 271,
+          "offered": 15,
+          "boundary": [
+            "domain:marketing",
+            "domain:commercial",
+            "domain:c-level-agents"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 68,
+          "offered": 38,
+          "boundary": [
+            "domain:engineering-team:topic0",
+            "domain:engineering:topic0",
+            "domain:engineering:topic1",
+            "domain:engineering:topic3",
+            "domain:c-level-advisor:topic1",
+            "domain:c-level-advisor:topic3",
+            "domain:business-operations:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        },
+        {
+          "pool_size": 40,
+          "offered": 14,
+          "boundary": [
+            "domain:engineering:topic5:na",
+            "domain:product-team:topic0:na"
+          ],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": "one_review_budget_spent"
+        }
+      ]
+    }
+  ],
+  "identical_request_groups_with_score_variation": 29,
+  "protected_paths_checked": 354,
+  "protected_files_unchanged": true,
+  "source_summary_sha256": "f2d0ffcd020f9be22a40cd1ec582d77575dce2fda7831c635fb89cfc678d68d9",
+  "budget_extension": null,
+  "limitations": [
+    "Known development cases used to diagnose and repair metadata, not unseen validation. Review rescues only near-threshold branches within a one-call budget; cannot guarantee no omissions.",
+    "One pass, three independently sampled arms; score and network variation remain. No significance claim.",
+    "All semantic failures remain in denominators; lower cost from early failure is not quality-equivalent improvement.",
+    "Descriptions, prompt semantics and adaptive stop interact; no individual description-versus-wording ablation.",
+    "Boundary review counts only one bounded extra batch; skipped reviews and all errors are preserved.",
+    "Jev selector timing and reported tokens only. Root-agent and full task execution costs, backend model revision and monetary charges unobservable.",
+    "Daily 0.3.73 installation, dispatcher, lifecycle and other worktrees are not modified or functionally retested."
+  ]
+}
