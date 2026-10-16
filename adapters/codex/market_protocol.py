@@ -9,30 +9,34 @@ from market_connect import Market
 # Keep this alongside both entrypoints and templates: a template must not silently
 # enlarge the user's deliverable after the initial Skill disclosure.
 APPLICATION_SCOPE = (
-    'The user request defines the deliverable and acceptance scope. Read the selected guidance fully, '
-    'then apply its relevant method to the smallest complete solution. Guide-specific feature lists, '
-    'layouts and example outputs are defaults to adapt, not extra user requirements, even if the guide '
-    'calls them mandatory. Preserve prerequisites and safety/correctness checks. Finish the required '
-    'artifact and its checks; after they pass, report Skill use and finish. Add optional features or '
-    'companion documents only when the user requests them or they are necessary for that outcome. '
-    'For a small interactive page, implement the requested inputs, results and actions directly. '
-    'Do not add animation, charts, presets, panels or explanatory documents unless explicitly requested '
-    'or needed to meet an acceptance criterion. Batch independent local checks instead of building a test framework.'
+    'Read the complete guidance; apply it within the user scope. Guide feature lists and examples, '
+    'even labelled mandatory, do not add requirements. Preserve prerequisites and safety/correctness. '
+    'Finish the required artifact and its checks; add optional features/documents only if needed or requested. '
+    'In a tool-code host, use one execution block for the final artifact write, available verification tool '
+    'and usage report: await the write; stop if it failed; await verification; parse its actual result; '
+    'report completed only if checks passed, otherwise report the observed failure. Do not return merely '
+    'the file-write receipt for another model turn. Use the host long-wait option for this block. '
+    'If no verifier is available, perform the required checks before reporting. Stop on unknown steps; '
+    'never claim completion from acquisition or replay an uncertain action.'
 )
+
+SCOPE_HINT = 'Read full guidance and preserve the user scope; acquisition is not execution.'
 
 TOOLS = [
     {'name': 'prepare_market_capability',
-     'description': 'When the current task needs a market plugin or MCP not yet connected, submit a concrete secret-free need. Jev selects from public metadata and returns one pinned setup preview or missing requirements. source optionally names the public marketplace, never a capability. For MCP Registry start with ONE precise functional keyword (prefer English for its name index), not a sentence or guessed product name. Up to four alternatives may be supplied only when needed; OR makes searches broader. Oversized or incomplete results are never used for selection. This chooses a setup candidate; actual MCP tools are checked after connection with a stricter confidence threshold. Nothing is executed or connected by preparation.',
+     'description': 'Find a public plugin or MCP for a concrete secret-free need. Returns a pinned preview or missing requirements. For already-authorized portable plugin guidance, set connect_guidance=true to prepare, connect and read it in one call. This shortcut never connects MCP services or executes package code. Otherwise inspect the preview before connect_market_capability. For MCP search use one functional keyword, preferably English; never guess a product name. Actual MCP tools are checked after connection. Selection grants no permission.',
      'inputSchema': {'type': 'object', 'properties': {
          'kind': {'type': 'string', 'enum': ['plugin', 'mcp']},
          'need': {'type': 'string', 'maxLength': 2000},
          'search': {'type': 'string', 'maxLength': 100},
          'source': {'type': 'string', 'maxLength': 220,
-                    'description': 'Optional registered marketplace ID, including github:owner/repository. Unregistered repositories are rejected.'}},
+                    'description': 'Optional registered marketplace ID, including github:owner/repository. Unregistered repositories are rejected.'},
+         'connect_guidance': {'type': 'boolean', 'default': False,
+                    'description': 'Only when the user has authorized task-scoped plugin guidance setup. Connects a fully validated guidance-only plan; other plans remain previews.'}},
          'required': ['kind', 'need'], 'additionalProperties': False},
      'annotations': {'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': True}},
     {'name': 'connect_market_capability',
-     'description': 'Apply the exact market setup preview within the user-authorized task. Installs the selected plugin package and registers its listed portable components in Backpack with backups; unavailable_components remain unavailable and are never emulated. MCP access is granted only to this connection. Skills use the existing project scope. For plugin guidance prefer include_guidance=true: after successful setup, return the complete bound Skill and one Jev-selected resource for the original need in this response, saving separate acquisition calls. Read these fully; do not reacquire returned content. This does not execute the task or report use. MCP uses acquire_mcp/invoke_mcp after connection. Reuse the same receipt to inspect completed setup; never replay an interrupted or unknown setup. Selection itself is not permission.',
+     'description': 'Connect the exact reviewed preview within user authorization, preserving backups and project/connection scope. Unsupported components remain unavailable. For plugins use include_guidance=true to return full bound guidance and a selected resource; do not reacquire returned content. MCP uses acquire_mcp/invoke_mcp after connection. Setup is not task execution or permission. Reuse completed receipts; interrupted or unknown setup requires reconciliation, never automatic replay.',
      'inputSchema': {'type': 'object', 'properties': {'selection': {'type': 'string'},
                      'include_guidance': {'type': 'boolean', 'default': False}},
                      'required': ['selection'], 'additionalProperties': False},
@@ -44,14 +48,13 @@ def tool_catalog(gateway):
     rows = [dict(row) for row in gateway.PERSISTENT_TOOLS]
     for row in rows:
         if row['name'] in {'acquire_skill', 'acquire_resource'}:
-            row['description'] += ' ' + APPLICATION_SCOPE
+            row['description'] += ' ' + SCOPE_HINT
         if row['name'] == 'acquire_skill':
             schema = row['inputSchema']
             row['inputSchema'] = {**schema, 'properties': {**schema['properties'], 'market_selection': {'type': 'string'}},
                 'required': [key for key in schema.get('required', []) if key != 'need'],
                 'anyOf': [{'required': ['need']}, {'required': ['market_selection']}]}
-            row['description'] += ' Standalone Skills are read on demand, including selected public-market guidance and resources; they do not require a plugin installation or registration in the host Agent. Read and follow the guidance; scripts still require their declared runtime. For a plugin component, first connect that plugin in Backpack, then pass market_selection from connect_market_capability to select only within its installed components.'
-            row['description'] += ' For the same prepared task, omit need to reuse its exact original need and validated component. Supply need only for a changed purpose, which requires a fresh fit check. Scope, package integrity, grants and current confidence threshold are checked again.'
+            row['description'] += ' Standalone Skills need no installation; scripts retain runtime prerequisites. Plugin components must be connected first: pass market_selection. Omit need to reuse the prepared task; a changed need gets a fresh fit check. Scope, integrity, grants and current threshold are rechecked.'
         if row['name'] == 'acquire_mcp':
             row['description'] += ' MCP services must be registered in Backpack before use: local services need dependencies installed in Backpack; remote services need a configured connection. Registration is not proof of a successful tool call.'
             row['description'] += ' If no connected capability fits and a public market capability may help the authorized task, use prepare_market_capability, then connect its reviewed setup preview and acquire again. A routing outage does not justify retrying execution.'
@@ -71,7 +74,13 @@ def dispatch(gateway, connection, reader, market, name, arguments):
     if not isinstance(arguments, dict):
         raise ValueError('invalid_arguments')
     if name == 'prepare_market_capability':
-        result = market.prepare(arguments)
+        body = dict(arguments)
+        connect_guidance = body.pop('connect_guidance', False)
+        if type(connect_guidance) is not bool or connect_guidance and body.get('kind') != 'plugin':
+            raise ValueError('invalid_arguments')
+        result = market.prepare(body)
+        if connect_guidance and result.get('status') == 'prepared':
+            result = connect_guidance_preview(gateway, connection, reader, market, result)
     elif name == 'connect_market_capability':
         if (set(arguments) - {'selection', 'include_guidance'} or 'selection' not in arguments
                 or not isinstance(arguments['selection'], str)
@@ -130,6 +139,34 @@ def dispatch(gateway, connection, reader, market, name, arguments):
     if not gateway.load_connection(connection['_descriptor'])['enabled']:
         raise ValueError('connection_disabled')
     return result
+
+
+def connect_guidance_preview(gateway, connection, reader, market, preview):
+    """Compose existing checked operations only for explicit guidance-only setup.
+
+    No routing shortcut: the prepared plan already passed the unchanged final
+    fit. Dependencies, servers and native components never enter this fast path.
+    """
+    selection = preview['selection']
+    try:
+        plan = market.load(selection)
+        if plan.get('status') != 'prepared':
+            raise ValueError('market_plan_changed_before_connect')
+        decisions = [r for r in plan.get('routing', []) if r.get('selection_stage') == 'plugin-ready']
+        decision = decisions[-1] if decisions else {}
+        if (plan.get('kind') != 'plugin' or len(plan.get('skills', [])) != 1 or plan.get('servers')
+                or decision.get('status') != 'selected'
+                or not .7 <= decision.get('minimum_confidence', 0) <= decision.get('confidence', 0) <= 1):
+            return {**preview, 'guidance_setup': 'preview_only'}
+        return dispatch(gateway, connection, reader, market, 'connect_market_capability',
+                        {'selection': selection, 'include_guidance': True})
+    except (OSError, ValueError, TypeError, RuntimeError, KeyError) as error:
+        # The caller has not seen the plan handle yet. Preserve it even when a
+        # later mutation may have happened; never silently re-prepare/reconnect.
+        return {'status': 'reconciliation_required', 'market_selection': selection,
+                'reason': str(error) if re.fullmatch('[a-z][a-z0-9_]{1,80}', str(error)) else type(error).__name__,
+                'execution': 'unknown',
+                'instruction': 'A setup preview was saved but connection was not confirmed. Inspect this exact plan and grants before continuing; do not prepare or connect again automatically.'}
 
 
 def serve(gateway, connection):
