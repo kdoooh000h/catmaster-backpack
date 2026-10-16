@@ -1,5 +1,19 @@
 # Public directory depth/width pilot
 
+The [dependency-scope/cost follow-up](../../docs/backpack-dependency-cost-2026-10-16.md)
+keeps adaptive traversal, current-step selection and all confidence gates. It
+clarifies package-audit operations in one third-layer scope and its parent copy,
+then separately tests a 0.35 versus 0.65 reading-cost stop at pools <=48. Seven
+needs (one old failure, six new) pass 5/7 baseline, 7/7 description-only and 6/7
+earlier-stop. Keep description-only as the isolated follow-up baseline: time is
+flat, tokens rise 9.11%, and overall omission-safe cost reduction is not achieved.
+The earlier-stop failure comes from a 99-candidate pool exceeding the 96 limit;
+that path never triggers early stopping. An exact offline receipt replay isolates
+score variation without adding model calls or replacing the live failure.
+Nine offline checks and all 102 receipt pairs reconcile. Use
+`dependency_experiment.py freeze/run` with the culture-scope bundle; the fixed cap
+is 147 calls / 420,000 tokens / 360 seconds, one pass, no retries. No daily change.
+
 The [culture-scope follow-up](../../docs/backpack-culture-scope-2026-10-16.md)
 adds source-grounded culture operations to one first-layer description, retaining
 current-step final selection, all memberships and the 0.7 gate. It retests the one
