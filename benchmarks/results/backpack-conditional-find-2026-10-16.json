@@ -1,0 +1,517 @@
+{
+  "version": 1,
+  "catalog_count": 45325,
+  "final_gate": 0.7,
+  "preflight": {
+    "rows": [
+      {
+        "case": "finance_packages_then_wiki",
+        "missing_required": [],
+        "reference_coverage_pass": true,
+        "final_payload_chars": 9554,
+        "status": "recalled",
+        "pool_size": 56,
+        "seconds": 0.014902500028256327,
+        "boundary_ties": 1
+      },
+      {
+        "case": "signals_then_finance_and_culture",
+        "missing_required": [],
+        "reference_coverage_pass": true,
+        "final_payload_chars": 11039,
+        "status": "recalled",
+        "pool_size": 55,
+        "seconds": 0.014100875006988645,
+        "boundary_ties": 2
+      },
+      {
+        "case": "channels_then_incident_and_wiki",
+        "missing_required": [],
+        "reference_coverage_pass": true,
+        "final_payload_chars": 8347,
+        "status": "recalled",
+        "pool_size": 41,
+        "seconds": 0.009993749990826473,
+        "boundary_ties": 0
+      },
+      {
+        "case": "borrowed_code_now_culture_welcome_later",
+        "missing_required": [],
+        "reference_coverage_pass": true,
+        "final_payload_chars": 8291,
+        "status": "recalled",
+        "pool_size": 45,
+        "seconds": 0.01043029100401327,
+        "boundary_ties": 1
+      },
+      {
+        "case": "cancel_finance_keep_discovery_jira",
+        "missing_required": [],
+        "reference_coverage_pass": true,
+        "final_payload_chars": 10590,
+        "status": "recalled",
+        "pool_size": 66,
+        "seconds": 0.027585458010435104,
+        "boundary_ties": 3
+      }
+    ],
+    "index_seconds": 0.3894261670066044,
+    "ready_for_live": true
+  },
+  "aggregates": {
+    "adaptive": {
+      "cases": 5,
+      "correct_current": 0,
+      "all_required_retained": 0,
+      "omission_safe_passes": 0,
+      "mean_jev_cli_seconds": 4.512704741786001,
+      "mean_local_search_seconds": 0,
+      "mean_route_wall_seconds": 4.608667916798732,
+      "mean_tokens": 26637.2,
+      "mean_calls": 7.6,
+      "mean_final_pool_size": 60.6
+    },
+    "conditional_find": {
+      "cases": 5,
+      "correct_current": 2,
+      "all_required_retained": 5,
+      "omission_safe_passes": 2,
+      "mean_jev_cli_seconds": 0.6301431081956252,
+      "mean_local_search_seconds": 0.015402574808103964,
+      "mean_route_wall_seconds": 0.6699396914104,
+      "mean_tokens": 4967,
+      "mean_calls": 1,
+      "mean_final_pool_size": 52.6
+    }
+  },
+  "rows": [
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "conditional_find",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "confluence-expert": null,
+        "dependency-auditor": null,
+        "saas-metrics-coach": null
+      },
+      "jev_cli_seconds": 0.733924540982116,
+      "local_search_seconds": 0.014902500028256327,
+      "route_wall_seconds": 0.7742182910442352,
+      "calls": 1,
+      "tokens": 5164,
+      "status": "abstain",
+      "choice": null,
+      "confidence": 0.25,
+      "final_pool_size": 56,
+      "raw_final_choice": "dependency-auditor",
+      "top_final_probabilities": [
+        [
+          "dependency-auditor",
+          0.26
+        ],
+        [
+          "finance-skills",
+          0.21000000000000002
+        ],
+        [
+          "none",
+          0.18000000000000002
+        ],
+        [
+          "confluence-expert",
+          0.14
+        ],
+        [
+          "saas-metrics-coach",
+          0.13
+        ]
+      ]
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "adaptive",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "confluence-expert": 4,
+        "dependency-auditor": 5,
+        "saas-metrics-coach": 6
+      },
+      "jev_cli_seconds": 5.081919876014581,
+      "local_search_seconds": 0,
+      "route_wall_seconds": 5.183219541999279,
+      "calls": 8,
+      "tokens": 40450,
+      "status": "unavailable",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 104,
+      "raw_final_choice": null,
+      "top_final_probabilities": []
+    },
+    {
+      "case": "signals_then_finance_and_culture",
+      "arm": "adaptive",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "culture-architect": 3,
+        "observability-designer": 2,
+        "saas-metrics-coach": 3
+      },
+      "jev_cli_seconds": 3.885093541961396,
+      "local_search_seconds": 0,
+      "route_wall_seconds": 3.9647670419944916,
+      "calls": 7,
+      "tokens": 18011,
+      "status": "abstain",
+      "choice": null,
+      "confidence": 0.34,
+      "final_pool_size": 44,
+      "raw_final_choice": "none",
+      "top_final_probabilities": [
+        [
+          "none",
+          0.35000000000000003
+        ],
+        [
+          "plugin-51a7ff5a08015dbd89ae",
+          0.25
+        ],
+        [
+          "plugin-5e5f94f99572b2e939a5",
+          0.14
+        ],
+        [
+          "plugin-5b74416679136093143b",
+          0.07
+        ],
+        [
+          "plugin-fcb9aff8d2773ab1746c",
+          0.06
+        ]
+      ]
+    },
+    {
+      "case": "signals_then_finance_and_culture",
+      "arm": "conditional_find",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "culture-architect": null,
+        "observability-designer": null,
+        "saas-metrics-coach": null
+      },
+      "jev_cli_seconds": 0.6774872079840861,
+      "local_search_seconds": 0.014100875006988645,
+      "route_wall_seconds": 0.7189481670211535,
+      "calls": 1,
+      "tokens": 5385,
+      "status": "abstain",
+      "choice": null,
+      "confidence": 0.51,
+      "final_pool_size": 55,
+      "raw_final_choice": "observability-designer",
+      "top_final_probabilities": [
+        [
+          "observability-designer",
+          0.52
+        ],
+        [
+          "none",
+          0.13
+        ],
+        [
+          "plugin-58f4550fe4e00aac1543",
+          0.09999999999999999
+        ],
+        [
+          "finance-skills",
+          0.09
+        ],
+        [
+          "slo-architect",
+          0.06999999999999999
+        ]
+      ]
+    },
+    {
+      "case": "channels_then_incident_and_wiki",
+      "arm": "conditional_find",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "first_lost": {
+        "channel-economics": null,
+        "confluence-expert": null,
+        "incident-commander": null
+      },
+      "jev_cli_seconds": 0.5587630420050118,
+      "local_search_seconds": 0.009993749990826473,
+      "route_wall_seconds": 0.5958896669908427,
+      "calls": 1,
+      "tokens": 3954,
+      "status": "selected",
+      "choice": "channel-economics",
+      "confidence": 0.99,
+      "final_pool_size": 41,
+      "raw_final_choice": "channel-economics",
+      "top_final_probabilities": [
+        [
+          "channel-economics",
+          0.99
+        ],
+        [
+          "skill-5a45aaa40613b33377a6",
+          0.01
+        ],
+        [
+          "plugin-da31be17ea6d12550c80",
+          0.0
+        ],
+        [
+          "plugin-94c53a5aab94973d6525",
+          0.0
+        ],
+        [
+          "plugin-9dff6ad6da61fa24dfbd",
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "channels_then_incident_and_wiki",
+      "arm": "adaptive",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "channel-economics": 4,
+        "confluence-expert": 4,
+        "incident-commander": 2
+      },
+      "jev_cli_seconds": 4.629807833960513,
+      "local_search_seconds": 0,
+      "route_wall_seconds": 4.749132458004169,
+      "calls": 8,
+      "tokens": 24004,
+      "status": "abstain",
+      "choice": null,
+      "confidence": 0.35,
+      "final_pool_size": 13,
+      "raw_final_choice": "revenue-operations",
+      "top_final_probabilities": [
+        [
+          "revenue-operations",
+          0.4
+        ],
+        [
+          "cmo-advisor",
+          0.3
+        ],
+        [
+          "cfo-advisor",
+          0.18
+        ],
+        [
+          "coo-advisor",
+          0.05
+        ],
+        [
+          "none",
+          0.05
+        ]
+      ]
+    },
+    {
+      "case": "borrowed_code_now_culture_welcome_later",
+      "arm": "adaptive",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "culture-architect": null,
+        "dependency-auditor": 2,
+        "email-sequence": 4
+      },
+      "jev_cli_seconds": 5.190262459014775,
+      "local_search_seconds": 0,
+      "route_wall_seconds": 5.3043455830193125,
+      "calls": 8,
+      "tokens": 33832,
+      "status": "unavailable",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 101,
+      "raw_final_choice": null,
+      "top_final_probabilities": []
+    },
+    {
+      "case": "borrowed_code_now_culture_welcome_later",
+      "arm": "conditional_find",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "first_lost": {
+        "culture-architect": null,
+        "dependency-auditor": null,
+        "email-sequence": null
+      },
+      "jev_cli_seconds": 0.6518530840112362,
+      "local_search_seconds": 0.01043029100401327,
+      "route_wall_seconds": 0.6854111659922637,
+      "calls": 1,
+      "tokens": 4352,
+      "status": "selected",
+      "choice": "dependency-auditor",
+      "confidence": 1.0,
+      "final_pool_size": 45,
+      "raw_final_choice": "dependency-auditor",
+      "top_final_probabilities": [
+        [
+          "dependency-auditor",
+          1.0
+        ],
+        [
+          "plugin-0f81de5c416b25372a7c",
+          0.0
+        ],
+        [
+          "plugin-5c0f83b37883e738dcf3",
+          0.0
+        ],
+        [
+          "registry-cf28129e4e29cc00efd3",
+          0.0
+        ],
+        [
+          "registry-8181b6a35bd12494b367",
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "cancel_finance_keep_discovery_jira",
+      "arm": "conditional_find",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "jira-expert": null,
+        "product-manager-toolkit": null
+      },
+      "jev_cli_seconds": 0.5286876659956761,
+      "local_search_seconds": 0.027585458010435104,
+      "route_wall_seconds": 0.5752311660035048,
+      "calls": 1,
+      "tokens": 5980,
+      "status": "abstain",
+      "choice": null,
+      "confidence": 0.53,
+      "final_pool_size": 66,
+      "raw_final_choice": "product-manager-toolkit",
+      "top_final_probabilities": [
+        [
+          "product-manager-toolkit",
+          0.54
+        ],
+        [
+          "jira-expert",
+          0.43
+        ],
+        [
+          "registry-4e26284672f1c0eccc1a",
+          0.02
+        ],
+        [
+          "registry-0758f8e89d15675d3399",
+          0.01
+        ],
+        [
+          "skill-909c2e7608e4353266f2",
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "cancel_finance_keep_discovery_jira",
+      "arm": "adaptive",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "first_lost": {
+        "jira-expert": 3,
+        "product-manager-toolkit": 3
+      },
+      "jev_cli_seconds": 3.7764399979787413,
+      "local_search_seconds": 0,
+      "route_wall_seconds": 3.8418749589764047,
+      "calls": 7,
+      "tokens": 16889,
+      "status": "selected",
+      "choice": "pm-skills",
+      "confidence": 0.71,
+      "final_pool_size": 41,
+      "raw_final_choice": "pm-skills",
+      "top_final_probabilities": [
+        [
+          "pm-skills",
+          0.72
+        ],
+        [
+          "atlassian-admin",
+          0.15
+        ],
+        [
+          "plugin-3c8acd8857ee3f962cd5",
+          0.08
+        ],
+        [
+          "cpo-advisor",
+          0.03
+        ],
+        [
+          "cpo-review",
+          0.01
+        ]
+      ]
+    }
+  ],
+  "calls": 43,
+  "known_tokens": 158021,
+  "index_seconds": 0.3894261670066044,
+  "limits": [
+    "Lexical coverage is not a semantic completeness guarantee.",
+    "The bilingual vocabulary and method are evaluated on known development needs, not a blind generalization test.",
+    "Main Agent, intent entry tokens and backend revision are unobservable.",
+    "One response can cross a pre-dispatch token cap; conservative estimated reserve also checked."
+  ],
+  "change_percent": {
+    "tokens": -81.35314522547415,
+    "calls": -86.8421052631579,
+    "jev_cli_seconds": -86.03624335621318,
+    "route_wall_seconds": -85.4634852520302
+  },
+  "semantic_scope": "Strict original-reference selection and intermediate retention on five known development needs; no business-task execution or proven capability equivalence.",
+  "sources": {
+    "public_enabled_source_candidates": 44949,
+    "historical_control_skills": 376,
+    "skill": 682,
+    "whole_plugin": 628,
+    "mcp": 44015,
+    "new_market_reads": 0
+  },
+  "verdict": "do_not_promote",
+  "no_daily_install_or_market_execution": true,
+  "protection": {
+    "observed_unchanged": true,
+    "file_count": 459,
+    "daily_install_written": false,
+    "other_upgrade_written": false
+  }
+}

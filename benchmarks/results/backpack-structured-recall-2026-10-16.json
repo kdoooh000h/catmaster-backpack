@@ -1,0 +1,1121 @@
+{
+  "version": 1,
+  "catalog_count": 45325,
+  "final_gate": 0.7,
+  "difference": "Only recall changes. Both use the identical current-step final, raw need, complete original descriptions, catalog ordering and 0.7 gate.",
+  "aggregates": {
+    "lexical_current": {
+      "cases": 6,
+      "correct_current": 0,
+      "all_required_retained": 0,
+      "omission_safe_pass": 0,
+      "calls": 6,
+      "tokens": 26346,
+      "means": {
+        "calls": 1,
+        "tokens": 4391,
+        "input_tokens": 3177,
+        "output_tokens": 1214,
+        "jev_cli_seconds": 0.5814926178281894,
+        "current_dispatch_wall_seconds": 0.6019486109968663,
+        "retrieval_seconds": 0.010482847171563966,
+        "selector_seconds": 0.6124314581684303,
+        "final_pool_size": 46.166666666666664
+      },
+      "median_selector_seconds": 0.5987208955048118
+    },
+    "structured_current": {
+      "cases": 6,
+      "correct_current": 5,
+      "all_required_retained": 6,
+      "omission_safe_pass": 5,
+      "calls": 6,
+      "tokens": 38908,
+      "means": {
+        "calls": 1,
+        "tokens": 6484.666666666667,
+        "input_tokens": 4883.5,
+        "output_tokens": 1601.1666666666667,
+        "jev_cli_seconds": 0.6060958336650705,
+        "current_dispatch_wall_seconds": 0.625143701331884,
+        "retrieval_seconds": 0.041768604171617575,
+        "selector_seconds": 0.6669123055035016,
+        "final_pool_size": 63.666666666666664
+      },
+      "median_selector_seconds": 0.6683272704831325
+    }
+  },
+  "strata": {
+    "old_failure": {
+      "lexical_current": {
+        "cases": 2,
+        "correct_current": 0,
+        "all_required_retained": 0,
+        "omission_safe_pass": 0,
+        "calls": 2,
+        "tokens": 9596,
+        "means": {
+          "calls": 1,
+          "tokens": 4798,
+          "input_tokens": 3464.5,
+          "output_tokens": 1333.5,
+          "jev_cli_seconds": 0.6005069164966699,
+          "current_dispatch_wall_seconds": 0.6200935829983791,
+          "retrieval_seconds": 0.008676770507008769,
+          "selector_seconds": 0.6287703535053879,
+          "final_pool_size": 51.5
+        },
+        "median_selector_seconds": 0.6287703535053879
+      },
+      "structured_current": {
+        "cases": 2,
+        "correct_current": 2,
+        "all_required_retained": 2,
+        "omission_safe_pass": 2,
+        "calls": 2,
+        "tokens": 14254,
+        "means": {
+          "calls": 1,
+          "tokens": 7127,
+          "input_tokens": 5406,
+          "output_tokens": 1721,
+          "jev_cli_seconds": 0.6477038544981042,
+          "current_dispatch_wall_seconds": 0.6630284374987241,
+          "retrieval_seconds": 0.03854172900901176,
+          "selector_seconds": 0.7015701665077358,
+          "final_pool_size": 69
+        },
+        "median_selector_seconds": 0.7015701665077358
+      }
+    },
+    "new": {
+      "lexical_current": {
+        "cases": 4,
+        "correct_current": 0,
+        "all_required_retained": 0,
+        "omission_safe_pass": 0,
+        "calls": 4,
+        "tokens": 16750,
+        "means": {
+          "calls": 1,
+          "tokens": 4187.5,
+          "input_tokens": 3033.25,
+          "output_tokens": 1154.25,
+          "jev_cli_seconds": 0.5719854684939492,
+          "current_dispatch_wall_seconds": 0.5928761249961099,
+          "retrieval_seconds": 0.011385885503841564,
+          "selector_seconds": 0.6042620104999514,
+          "final_pool_size": 43.5
+        },
+        "median_selector_seconds": 0.5608278545114445
+      },
+      "structured_current": {
+        "cases": 4,
+        "correct_current": 3,
+        "all_required_retained": 4,
+        "omission_safe_pass": 3,
+        "calls": 4,
+        "tokens": 24654,
+        "means": {
+          "calls": 1,
+          "tokens": 6163.5,
+          "input_tokens": 4622.25,
+          "output_tokens": 1541.25,
+          "jev_cli_seconds": 0.5852918232485536,
+          "current_dispatch_wall_seconds": 0.6062013332484639,
+          "retrieval_seconds": 0.043382041752920486,
+          "selector_seconds": 0.6495833750013844,
+          "final_pool_size": 61
+        },
+        "median_selector_seconds": 0.639880937495036
+      }
+    }
+  },
+  "rows": [
+    {
+      "case": "new_word_now_spreadsheet_later",
+      "arm": "structured_current",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 6331,
+      "jev_cli_seconds": 0.6646138340001926,
+      "current_dispatch_wall_seconds": 0.6730271669803187,
+      "retrieval_seconds": 0.03341204201569781,
+      "retrieval_basis": "unchanged_prior_recall_historical_query_time",
+      "selector_seconds": 0.7064392089960165,
+      "status": "selected",
+      "choice": "skill-f28f584d1874df3e7ad9",
+      "raw_choice": "skill-f28f584d1874df3e7ad9",
+      "confidence": 0.97,
+      "final_pool_size": 58,
+      "input_tokens": 4894,
+      "output_tokens": 1437,
+      "expected_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "probability": 0.97
+        },
+        {
+          "id": "registry-598d12e01edba238c5b8",
+          "name": "KitchenSink4Word",
+          "kind": "mcp",
+          "probability": 0.02
+        },
+        {
+          "id": "registry-1aabe19a537028f72f15",
+          "name": "Word Document Operations",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "new_word_now_spreadsheet_later",
+      "arm": "lexical_current",
+      "stratum": "old_failure",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 4200,
+      "jev_cli_seconds": 0.6052304999902844,
+      "current_dispatch_wall_seconds": 0.620947832998354,
+      "retrieval_seconds": 0.009087250014999881,
+      "retrieval_basis": "unchanged_prior_recall_historical_query_time",
+      "selector_seconds": 0.6300350830133539,
+      "status": "selected",
+      "choice": "registry-598d12e01edba238c5b8",
+      "raw_choice": "registry-598d12e01edba238c5b8",
+      "confidence": 0.71,
+      "final_pool_size": 43,
+      "input_tokens": 3098,
+      "output_tokens": 1102,
+      "expected_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "registry-598d12e01edba238c5b8",
+          "name": "KitchenSink4Word",
+          "kind": "mcp",
+          "probability": 0.72
+        },
+        {
+          "id": "registry-6de3e41c0f6e4b3d9fe9",
+          "name": "stagenth · 文档生成",
+          "kind": "mcp",
+          "probability": 0.15
+        },
+        {
+          "id": "registry-dd46ab4c668db06c594f",
+          "name": "io.github.jackdark425/aigroup-mdtoword-mcp",
+          "kind": "mcp",
+          "probability": 0.13
+        },
+        {
+          "id": "registry-2ec65b5d2d3f582e2ec1",
+          "name": "Teamwork",
+          "kind": "mcp",
+          "probability": 0.0
+        },
+        {
+          "id": "registry-40ded6d5910ba99ab47f",
+          "name": "MemeStack",
+          "kind": "mcp",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "new_spreadsheet_now_wiki_later",
+      "arm": "lexical_current",
+      "stratum": "old_failure",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 5396,
+      "jev_cli_seconds": 0.5957833330030553,
+      "current_dispatch_wall_seconds": 0.6192393329984043,
+      "retrieval_seconds": 0.008266290999017656,
+      "retrieval_basis": "unchanged_prior_recall_historical_query_time",
+      "selector_seconds": 0.6275056239974219,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "registry-47575a64b62e443cb772",
+      "confidence": 0.46,
+      "final_pool_size": 60,
+      "input_tokens": 3831,
+      "output_tokens": 1565,
+      "expected_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "pending_ids": [
+        "confluence-expert"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "registry-47575a64b62e443cb772",
+          "name": "LogiSheets",
+          "kind": "mcp",
+          "probability": 0.47000000000000003
+        },
+        {
+          "id": "registry-0e909b270b5ce2f27a1d",
+          "name": "stagenth · Excel 数据可视化",
+          "kind": "mcp",
+          "probability": 0.32
+        },
+        {
+          "id": "registry-4848a6a7f757602f1424",
+          "name": "io.github.theluckystrike/sheets",
+          "kind": "mcp",
+          "probability": 0.09
+        },
+        {
+          "id": "registry-0a553209c13c5bf0c6ab",
+          "name": "io.github.theluckystrike/excel-spreadsheet-xlsx-csv",
+          "kind": "mcp",
+          "probability": 0.05
+        },
+        {
+          "id": "registry-9657cb49a92a68d8d37e",
+          "name": "Ledgermoor Table to Excel",
+          "kind": "mcp",
+          "probability": 0.04
+        }
+      ]
+    },
+    {
+      "case": "new_spreadsheet_now_wiki_later",
+      "arm": "structured_current",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 7923,
+      "jev_cli_seconds": 0.6307938749960158,
+      "current_dispatch_wall_seconds": 0.6530297080171295,
+      "retrieval_seconds": 0.043671416002325714,
+      "retrieval_basis": "unchanged_prior_recall_historical_query_time",
+      "selector_seconds": 0.6967011240194552,
+      "status": "selected",
+      "choice": "skill-9a370bf7a61ed1d8e537",
+      "raw_choice": "skill-9a370bf7a61ed1d8e537",
+      "confidence": 0.96,
+      "final_pool_size": 80,
+      "input_tokens": 5918,
+      "output_tokens": 2005,
+      "expected_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "pending_ids": [
+        "confluence-expert"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "probability": 0.96
+        },
+        {
+          "id": "registry-0e909b270b5ce2f27a1d",
+          "name": "stagenth · Excel 数据可视化",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "registry-47575a64b62e443cb772",
+          "name": "LogiSheets",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "registry-0a553209c13c5bf0c6ab",
+          "name": "io.github.theluckystrike/excel-spreadsheet-xlsx-csv",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "registry-4848a6a7f757602f1424",
+          "name": "io.github.theluckystrike/sheets",
+          "kind": "mcp",
+          "probability": 0.01
+        }
+      ]
+    },
+    {
+      "case": "new_pdf_ocr_then_spreadsheet",
+      "arm": "structured_current",
+      "stratum": "new",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 6250,
+      "jev_cli_seconds": 0.562918334006099,
+      "current_dispatch_wall_seconds": 0.5853815420123283,
+      "retrieval_seconds": 0.04143741700681858,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.6268189590191469,
+      "status": "selected",
+      "choice": "skill-c0db752739b0b1bd529f",
+      "raw_choice": "skill-c0db752739b0b1bd529f",
+      "confidence": 0.75,
+      "final_pool_size": 60,
+      "input_tokens": 4702,
+      "output_tokens": 1548,
+      "expected_ids": [
+        "skill-c0db752739b0b1bd529f"
+      ],
+      "pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "skill-c0db752739b0b1bd529f",
+          "name": "pdf",
+          "kind": "skill",
+          "probability": 0.75
+        },
+        {
+          "id": "registry-f8dbede9b092084d11b0",
+          "name": "DeepSeek PDF Reader",
+          "kind": "mcp",
+          "probability": 0.06999999999999999
+        },
+        {
+          "id": "registry-e684da29313d2d37a401",
+          "name": "TruePath PDF",
+          "kind": "mcp",
+          "probability": 0.060000000000000005
+        },
+        {
+          "id": "registry-eef34de576955361dded",
+          "name": "PDF Text Extractor",
+          "kind": "mcp",
+          "probability": 0.060000000000000005
+        },
+        {
+          "id": "registry-44dd896e6a91843ef76e",
+          "name": "Papyrio PDF Tools",
+          "kind": "mcp",
+          "probability": 0.04
+        }
+      ]
+    },
+    {
+      "case": "new_pdf_ocr_then_spreadsheet",
+      "arm": "lexical_current",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 4334,
+      "jev_cli_seconds": 0.5173413749726024,
+      "current_dispatch_wall_seconds": 0.5364156670111697,
+      "retrieval_seconds": 0.015303874999517575,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.5517195420106873,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "registry-eef34de576955361dded",
+      "confidence": 0.53,
+      "final_pool_size": 44,
+      "input_tokens": 3158,
+      "output_tokens": 1176,
+      "expected_ids": [
+        "skill-c0db752739b0b1bd529f"
+      ],
+      "pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "registry-eef34de576955361dded",
+          "name": "PDF Text Extractor",
+          "kind": "mcp",
+          "probability": 0.54
+        },
+        {
+          "id": "registry-44dd896e6a91843ef76e",
+          "name": "Papyrio PDF Tools",
+          "kind": "mcp",
+          "probability": 0.34
+        },
+        {
+          "id": "registry-94e70248ebc747d56585",
+          "name": "PDF Kit",
+          "kind": "mcp",
+          "probability": 0.05
+        },
+        {
+          "id": "registry-f8512eba608353053b57",
+          "name": "DocKit",
+          "kind": "mcp",
+          "probability": 0.04
+        },
+        {
+          "id": "registry-d74f419a92954a0168ce",
+          "name": "PDF Samenvoegen",
+          "kind": "mcp",
+          "probability": 0.01
+        }
+      ]
+    },
+    {
+      "case": "new_slides_then_word_handout",
+      "arm": "lexical_current",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 3504,
+      "jev_cli_seconds": 0.7442962079949211,
+      "current_dispatch_wall_seconds": 0.7649341659853235,
+      "retrieval_seconds": 0.0031246250146068633,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.7680587909999304,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "registry-c36886c829e9850f4c77",
+      "confidence": 0.43,
+      "final_pool_size": 33,
+      "input_tokens": 2621,
+      "output_tokens": 883,
+      "expected_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "registry-c36886c829e9850f4c77",
+          "name": "Arcdeck",
+          "kind": "mcp",
+          "probability": 0.45
+        },
+        {
+          "id": "registry-b429279ba028a9ee3394",
+          "name": "Plus AI",
+          "kind": "mcp",
+          "probability": 0.36
+        },
+        {
+          "id": "registry-3db589d75d9df50af15f",
+          "name": "Google Slides MCP",
+          "kind": "mcp",
+          "probability": 0.12
+        },
+        {
+          "id": "registry-6de3e41c0f6e4b3d9fe9",
+          "name": "stagenth · 文档生成",
+          "kind": "mcp",
+          "probability": 0.03
+        },
+        {
+          "id": "registry-3e5bdc5fcecca1721c59",
+          "name": "ai.presentations/presentations-ai",
+          "kind": "mcp",
+          "probability": 0.02
+        }
+      ]
+    },
+    {
+      "case": "new_slides_then_word_handout",
+      "arm": "structured_current",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 5493,
+      "jev_cli_seconds": 0.5901604169921484,
+      "current_dispatch_wall_seconds": 0.6095327500079293,
+      "retrieval_seconds": 0.0253272500121966,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.6348600000201259,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "skill-91d13b46fe5873284eee",
+      "confidence": 0.51,
+      "final_pool_size": 48,
+      "input_tokens": 4280,
+      "output_tokens": 1213,
+      "expected_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.52
+        },
+        {
+          "id": "plugin-6240c030a9c65e80db06",
+          "name": "pptx-deck-creation",
+          "kind": "plugin",
+          "probability": 0.19
+        },
+        {
+          "id": "registry-b429279ba028a9ee3394",
+          "name": "Plus AI",
+          "kind": "mcp",
+          "probability": 0.19
+        },
+        {
+          "id": "registry-c36886c829e9850f4c77",
+          "name": "Arcdeck",
+          "kind": "mcp",
+          "probability": 0.09
+        },
+        {
+          "id": "registry-6de3e41c0f6e4b3d9fe9",
+          "name": "stagenth · 文档生成",
+          "kind": "mcp",
+          "probability": 0.01
+        }
+      ]
+    },
+    {
+      "case": "new_api_review_then_pdf",
+      "arm": "structured_current",
+      "stratum": "new",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 6432,
+      "jev_cli_seconds": 0.6151200419990346,
+      "current_dispatch_wall_seconds": 0.6347899579850491,
+      "retrieval_seconds": 0.05696270801126957,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.6917526659963187,
+      "status": "selected",
+      "choice": "api-design-reviewer",
+      "raw_choice": "api-design-reviewer",
+      "confidence": 1.0,
+      "final_pool_size": 72,
+      "input_tokens": 4625,
+      "output_tokens": 1807,
+      "expected_ids": [
+        "api-design-reviewer"
+      ],
+      "pending_ids": [
+        "skill-c0db752739b0b1bd529f"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "api-design-reviewer",
+          "name": "api-design-reviewer",
+          "kind": "skill",
+          "probability": 1.0
+        },
+        {
+          "id": "skill-909c2e7608e4353266f2",
+          "name": "web-design-guidelines",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-40ab60936583d191b9c3",
+          "name": "canvas-design",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-c0db752739b0b1bd529f",
+          "name": "pdf",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "new_api_review_then_pdf",
+      "arm": "lexical_current",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 4929,
+      "jev_cli_seconds": 0.5240790829993784,
+      "current_dispatch_wall_seconds": 0.5466730420012027,
+      "retrieval_seconds": 0.02326312501099892,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.5699361670122016,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "registry-3ee55236c7c89c476eab",
+      "confidence": 0.47,
+      "final_pool_size": 55,
+      "input_tokens": 3494,
+      "output_tokens": 1435,
+      "expected_ids": [
+        "api-design-reviewer"
+      ],
+      "pending_ids": [
+        "skill-c0db752739b0b1bd529f"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "registry-3ee55236c7c89c476eab",
+          "name": "MCP API Guardian",
+          "kind": "mcp",
+          "probability": 0.48
+        },
+        {
+          "id": "registry-bcc7e6e93776e0963b32",
+          "name": "oasdiff",
+          "kind": "mcp",
+          "probability": 0.3
+        },
+        {
+          "id": "registry-b00b55878fa76af03d36",
+          "name": "monit.rs",
+          "kind": "mcp",
+          "probability": 0.12
+        },
+        {
+          "id": "registry-5338a991bcb6a013d6fa",
+          "name": "io.github.sethclawd-prog/schemaguard",
+          "kind": "mcp",
+          "probability": 0.09
+        },
+        {
+          "id": "none",
+          "name": null,
+          "kind": null,
+          "probability": 0.01
+        }
+      ]
+    },
+    {
+      "case": "new_code_review_then_slides",
+      "arm": "lexical_current",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "calls": 1,
+      "tokens": 3983,
+      "jev_cli_seconds": 0.5022252080088947,
+      "current_dispatch_wall_seconds": 0.5234816249867436,
+      "retrieval_seconds": 0.0038519169902428985,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.5273335419769865,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "registry-d8180cd6576b16d9d27b",
+      "confidence": 0.63,
+      "final_pool_size": 42,
+      "input_tokens": 2860,
+      "output_tokens": 1123,
+      "expected_ids": [
+        "code-reviewer"
+      ],
+      "pending_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "registry-d8180cd6576b16d9d27b",
+          "name": "io.github.ejfkdev/zread-mcp",
+          "kind": "mcp",
+          "probability": 0.64
+        },
+        {
+          "id": "registry-043dde80e8f04e6a20ad",
+          "name": "DWAI IDE Bridge",
+          "kind": "mcp",
+          "probability": 0.19
+        },
+        {
+          "id": "none",
+          "name": null,
+          "kind": null,
+          "probability": 0.15000000000000002
+        },
+        {
+          "id": "registry-e3ba5f478677512f8abc",
+          "name": "STL solid/header check, file discarded",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "registry-f02540883143d4443344",
+          "name": "Excel & CSV to JSON (Apify Actor)",
+          "kind": "mcp",
+          "probability": 0.01
+        }
+      ]
+    },
+    {
+      "case": "new_code_review_then_slides",
+      "arm": "structured_current",
+      "stratum": "new",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "calls": 1,
+      "tokens": 6479,
+      "jev_cli_seconds": 0.5729684999969322,
+      "current_dispatch_wall_seconds": 0.595101082988549,
+      "retrieval_seconds": 0.0498007919813972,
+      "retrieval_basis": "fresh_shared_lexical_recall",
+      "selector_seconds": 0.6449018749699462,
+      "status": "selected",
+      "choice": "code-reviewer",
+      "raw_choice": "code-reviewer",
+      "confidence": 1.0,
+      "final_pool_size": 64,
+      "input_tokens": 4882,
+      "output_tokens": 1597,
+      "expected_ids": [
+        "code-reviewer"
+      ],
+      "pending_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "top_choice_probabilities": [
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "probability": 1.0
+        },
+        {
+          "id": "skill-d1e380f3cfc252b45879",
+          "name": "azure-mgmt-applicationinsights-dotnet",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    }
+  ],
+  "reference_coverage": {
+    "new_word_now_spreadsheet_later": {
+      "structured_current": {
+        "required": 2,
+        "retained": 2,
+        "pending_required": 1,
+        "pending_retained": 1,
+        "missing_ids": []
+      },
+      "lexical_current": {
+        "required": 2,
+        "retained": 0,
+        "pending_required": 1,
+        "pending_retained": 0,
+        "missing_ids": [
+          "skill-9a370bf7a61ed1d8e537",
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      }
+    },
+    "new_spreadsheet_now_wiki_later": {
+      "lexical_current": {
+        "required": 2,
+        "retained": 1,
+        "pending_required": 1,
+        "pending_retained": 1,
+        "missing_ids": [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      },
+      "structured_current": {
+        "required": 2,
+        "retained": 2,
+        "pending_required": 1,
+        "pending_retained": 1,
+        "missing_ids": []
+      }
+    },
+    "new_pdf_ocr_then_spreadsheet": {
+      "structured_current": {
+        "required": 2,
+        "retained": 2,
+        "pending_required": 1,
+        "pending_retained": 1,
+        "missing_ids": []
+      },
+      "lexical_current": {
+        "required": 2,
+        "retained": 0,
+        "pending_required": 1,
+        "pending_retained": 0,
+        "missing_ids": [
+          "skill-9a370bf7a61ed1d8e537",
+          "skill-c0db752739b0b1bd529f"
+        ]
+      }
+    },
+    "new_slides_then_word_handout": {
+      "lexical_current": {
+        "required": 2,
+        "retained": 0,
+        "pending_required": 1,
+        "pending_retained": 0,
+        "missing_ids": [
+          "skill-91d13b46fe5873284eee",
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      },
+      "structured_current": {
+        "required": 2,
+        "retained": 2,
+        "pending_required": 1,
+        "pending_retained": 1,
+        "missing_ids": []
+      }
+    },
+    "new_api_review_then_pdf": {
+      "structured_current": {
+        "required": 2,
+        "retained": 2,
+        "pending_required": 1,
+        "pending_retained": 1,
+        "missing_ids": []
+      },
+      "lexical_current": {
+        "required": 2,
+        "retained": 0,
+        "pending_required": 1,
+        "pending_retained": 0,
+        "missing_ids": [
+          "api-design-reviewer",
+          "skill-c0db752739b0b1bd529f"
+        ]
+      }
+    },
+    "new_code_review_then_slides": {
+      "lexical_current": {
+        "required": 2,
+        "retained": 0,
+        "pending_required": 1,
+        "pending_retained": 0,
+        "missing_ids": [
+          "code-reviewer",
+          "skill-91d13b46fe5873284eee"
+        ]
+      },
+      "structured_current": {
+        "required": 2,
+        "retained": 2,
+        "pending_required": 1,
+        "pending_retained": 1,
+        "missing_ids": []
+      }
+    }
+  },
+  "calls": 12,
+  "known_tokens": 65254,
+  "index_seconds": {
+    "lexical": 0.5323358750029001,
+    "additional_structured": 3.9136359580152202
+  },
+  "change_percent": {
+    "calls": 0.0,
+    "tokens": 47.68086236999925,
+    "input_tokens": 53.71419578218446,
+    "output_tokens": 31.891817682591995,
+    "jev_cli_seconds": 4.231045258798183,
+    "current_dispatch_wall_seconds": 3.853333974241613,
+    "retrieval_seconds": 298.447134523912,
+    "selector_seconds": 8.895827705847204,
+    "final_pool_size": 37.90613718411553
+  },
+  "source_sha256": {
+    "benchmarks/directory-depth/conditional_experiment.py": "127329b23bad4205c15e98194d31cc7e6836178af2a62c56b376d322c2f184f1",
+    "benchmarks/directory-depth/conditional_search.py": "9e0fcdf32192e40644ae5ab14324f0cbca33a73e7d033b450aa7d67f819117f8",
+    "benchmarks/directory-depth/merged_experiment.py": "0031b0a778745d990936c29795d8c1f3088c55d2b2617850a8a3cd1931d8dcea",
+    "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+    "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+    "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+    "benchmarks/directory-depth/conditional_current_experiment.py": "e78ff50ce20958f1a552023562c758db7a0a066622b05213f32a31572604c0b4",
+    "benchmarks/directory-depth/conditional_current.py": "6e2ea31c08d81eee668a092ef1b7afa32ea13ef43fdf588ceae00dbdb0f81549",
+    "benchmarks/directory-depth/conditional_current_cases.json": "3e9f2c4dfae68204ea512e997ae3250969e2f41dfb37fbdd8cd052d914951135",
+    "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+    "benchmarks/directory-depth/structured_recall_experiment.py": "2b36d545cc6a92203be841dd36e7b37db938ce59dda4eeb9556239c93c25a1c8",
+    "benchmarks/directory-depth/structured_recall.py": "22d14c59943a6bd98a32e6b19e60053a396b5374a881ccadcf34838decf9a056",
+    "benchmarks/directory-depth/structured_recall_cases.json": "8abf9901ce294e5159081156419f9799f3a6fa478d3d272a0edd88660e60d16d"
+  },
+  "catalog_sha256": "64bc3d608649768fc3117e6a4ed4eb5e32278a3ae540f23bd2a568aa7bd7e57a",
+  "frozen_cases_sha256": "a4677befb540f6cbd102ab256276fffb6fd3c6a19a579ef957c4a72ea4fd8d0a",
+  "preflight": {
+    "rows": [
+      {
+        "case": "new_word_now_spreadsheet_later",
+        "missing_required": {
+          "lexical_current": [
+            "skill-9a370bf7a61ed1d8e537",
+            "skill-f28f584d1874df3e7ad9"
+          ],
+          "structured_current": []
+        },
+        "valid_for_paired_dispatch": true,
+        "pool_sizes": {
+          "lexical_current": 43,
+          "structured_current": 58
+        },
+        "added": 15,
+        "augmentation_seconds": 0.024324792000697926
+      },
+      {
+        "case": "new_spreadsheet_now_wiki_later",
+        "missing_required": {
+          "lexical_current": [
+            "skill-9a370bf7a61ed1d8e537"
+          ],
+          "structured_current": []
+        },
+        "valid_for_paired_dispatch": true,
+        "pool_sizes": {
+          "lexical_current": 60,
+          "structured_current": 80
+        },
+        "added": 20,
+        "augmentation_seconds": 0.03540512500330806
+      },
+      {
+        "case": "new_pdf_ocr_then_spreadsheet",
+        "missing_required": {
+          "lexical_current": [
+            "skill-9a370bf7a61ed1d8e537",
+            "skill-c0db752739b0b1bd529f"
+          ],
+          "structured_current": []
+        },
+        "valid_for_paired_dispatch": true,
+        "pool_sizes": {
+          "lexical_current": 44,
+          "structured_current": 60
+        },
+        "added": 16,
+        "augmentation_seconds": 0.026133542007301003
+      },
+      {
+        "case": "new_slides_then_word_handout",
+        "missing_required": {
+          "lexical_current": [
+            "skill-91d13b46fe5873284eee",
+            "skill-f28f584d1874df3e7ad9"
+          ],
+          "structured_current": []
+        },
+        "valid_for_paired_dispatch": true,
+        "pool_sizes": {
+          "lexical_current": 33,
+          "structured_current": 48
+        },
+        "added": 15,
+        "augmentation_seconds": 0.022202624997589737
+      },
+      {
+        "case": "new_api_review_then_pdf",
+        "missing_required": {
+          "lexical_current": [
+            "api-design-reviewer",
+            "skill-c0db752739b0b1bd529f"
+          ],
+          "structured_current": []
+        },
+        "valid_for_paired_dispatch": true,
+        "pool_sizes": {
+          "lexical_current": 55,
+          "structured_current": 72
+        },
+        "added": 17,
+        "augmentation_seconds": 0.03369958300027065
+      },
+      {
+        "case": "new_code_review_then_slides",
+        "missing_required": {
+          "lexical_current": [
+            "code-reviewer",
+            "skill-91d13b46fe5873284eee"
+          ],
+          "structured_current": []
+        },
+        "valid_for_paired_dispatch": true,
+        "pool_sizes": {
+          "lexical_current": 42,
+          "structured_current": 64
+        },
+        "added": 22,
+        "augmentation_seconds": 0.0459488749911543
+      }
+    ],
+    "ready": true,
+    "candidate_reference_coverage": true
+  },
+  "limits": [
+    "Two known failures plus four author-written combinations, one paired pass; not blind population accuracy or task execution. Additive recall has no general completeness proof. No daily changes or retries.",
+    "Actual Jev usage and fresh final-dispatch wall times. Warm selector adds stored query time; original two baseline query times are historical. Index builds separate. Root Agent costs and backend model revision unobservable.",
+    "Strict frozen reference coverage, not proof that recalled alternatives are incapable or that every equivalent capability survives.",
+    "The complete recalled pool remains available; no semantic later-only label or runtime execution is claimed.",
+    "This combined treatment includes facets, generic-name anchors and per-kind supplementary slots; individual-factor effects are not isolated.",
+    "Four public publisher Skills and two historical control Skills are current references. No public plugin/MCP task is executed."
+  ],
+  "verdict": "do_not_promote"
+}

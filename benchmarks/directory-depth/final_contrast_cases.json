@@ -1,0 +1,26 @@
+{
+  "scope": "Three author-written new combinations, frozen before recall. Metadata selection only; no installed readiness or execution is claimed.",
+  "cases": [
+    {
+      "id": "new_reference_layout_then_handout",
+      "need": "当前先为虚构产品建立一套可复用的演示文稿制作流程：参考材料只读分析，先明确每页的版式规格和元素坐标，再制作可编辑的 PowerPoint，并设置交付前的质量检查。随后把流程整理成带目录和页码的 Word 操作手册。先完成制稿流程，再写手册，不修改参考文件，不发送材料。",
+      "expected_ids": ["plugin-6240c030a9c65e80db06"],
+      "pending_ids": ["skill-f28f584d1874df3e7ad9"],
+      "control": false
+    },
+    {
+      "id": "new_spec_clients_then_quality_review",
+      "need": "现在先根据虚构服务的 OpenAPI 或 GraphQL 规范生成带类型的 SDK、命令行 CLI 和 MCP 服务端，三种接口都要有，规范更新后也要保持同步。生成后再审查代码复杂度、SOLID 违规和代码异味，输出质量报告。当前优先生成接口，不连接生产服务，也不发布软件。",
+      "expected_ids": ["registry-50bfdaaadf560eff99de"],
+      "pending_ids": ["code-reviewer"],
+      "control": false
+    },
+    {
+      "id": "new_word_revisions_then_pdf_forms",
+      "need": "先处理一份虚构的 Word 模板：查找替换旧称谓，插入新图片，整理 tracked changes 和批注，保持文档可编辑。之后填写配套 PDF 表单并设置密码保护。当前先改模板，两个文件都要保留，不上传或发送，不需要生成电子表格。",
+      "expected_ids": ["skill-f28f584d1874df3e7ad9"],
+      "pending_ids": ["skill-c0db752739b0b1bd529f"],
+      "control": false
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "cases": [
+    {
+      "id": "new_pdf_ocr_then_spreadsheet",
+      "need": "当前先处理两份虚构的扫描版 PDF：识别页面文字，使文件可以搜索，再合并成一份 PDF。下一步把提取出的虚构费用明细整理成带合计公式的电子表格。先交可搜索的合并文档，再交工作簿；不访问真实资料，也不发送文件。",
+      "expected_ids": ["skill-c0db752739b0b1bd529f"],
+      "pending_ids": ["skill-9a370bf7a61ed1d8e537"],
+      "control": false
+    },
+    {
+      "id": "new_slides_then_word_handout",
+      "need": "先根据虚构的培训大纲制作一份演示文稿，页面可以编辑，并附讲者备注和统一版式。完成后再制作配套的 Word 文档，包含分级标题、目录和页码。现在优先做演示文稿，两份成果都需要，不发送给任何人。",
+      "expected_ids": ["skill-91d13b46fe5873284eee"],
+      "pending_ids": ["skill-f28f584d1874df3e7ad9"],
+      "control": false
+    },
+    {
+      "id": "new_api_review_then_pdf",
+      "need": "后续需要把结论排版成 PDF，但当前先审查一份虚构 REST API 的接口设计：检查端点命名和版本约定，对比新旧 OpenAPI 规范找出 breaking changes，给出设计评分和改进清单。先完成接口审查，再生成文档，不访问线上服务。",
+      "expected_ids": ["api-design-reviewer"],
+      "pending_ids": ["skill-c0db752739b0b1bd529f"],
+      "control": false
+    },
+    {
+      "id": "new_code_review_then_slides",
+      "need": "当前先审查一份虚构 Python 项目的拉取请求，分析复杂度、SOLID 违规和代码异味，整理代码质量审查报告。之后把主要发现制作成带讲者备注的幻灯片；原计划的表格清洗取消。先审查代码，再做汇报材料，不修改真实仓库。",
+      "expected_ids": ["code-reviewer"],
+      "pending_ids": ["skill-91d13b46fe5873284eee"],
+      "forbidden_current_ids": ["skill-9a370bf7a61ed1d8e537"],
+      "control": false
+    }
+  ]
+}

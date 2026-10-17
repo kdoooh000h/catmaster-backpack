@@ -1,0 +1,2000 @@
+{
+  "version": 1,
+  "scope": "New public-directory requests plus selected pinned Skill script/guidance use; no installed gateway or MCP acceptance.",
+  "plan": {
+    "version": 1,
+    "arms": [
+      "adaptive",
+      "compact_global"
+    ],
+    "case_order": [
+      "quote_new_work",
+      "cancel_new_work",
+      "zh_data_profile",
+      "mix_api_contract",
+      "syn_release_notes",
+      "zh_query_join",
+      "mix_accessibility",
+      "zh_copy_polish",
+      "syn_meeting_actions",
+      "zh_research_brief",
+      "mix_design_tokens",
+      "syn_corrective_actions",
+      "mix_retention_cohorts",
+      "multi_quality_then_query"
+    ],
+    "repetitions": 1,
+    "source_commit": "19392f7a08264ed00486a251f5b2098321771f94",
+    "source_catalog_count": 376,
+    "tree_sha256": "c3859f9c159b77baf32a10439ca7375affb60e6c8d2ab3313703aeaa1bb10970",
+    "baseline_plan_sha256": "268242718b3187cd7b069d3ca236d620a1722ea0f7b785c7e2869d3d4f7dca09",
+    "same_query": true,
+    "same_full_final_descriptions": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "max_calls": 180,
+    "max_known_tokens": 350000,
+    "max_seconds": 360,
+    "timeout_seconds": 15,
+    "provider": "typesafe",
+    "attempts": 1,
+    "ordering": "controls first; alternate arm order by case; fresh stateless requests",
+    "acceptance": "Record all semantic failures without tuning; only passing selected tasks may proceed to artifact use. Stop whole run on transport, missing usage, malformed output or budget.",
+    "execution_sample_cases": [
+      "zh_data_profile",
+      "mix_api_contract",
+      "syn_release_notes",
+      "zh_query_join"
+    ],
+    "execution_scope": "Use selected pinned public Skill guidance in isolated local fixtures; no native installation, market connection, MCP service or business account execution.",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+      "benchmarks/directory-depth/expanded_experiment.py": "bff01ab4da9090932e8fb1ae9bb7150ea80e42cd757cf39b65583df1650f6eec",
+      "benchmarks/directory-depth/expanded_cases.json": "6712d6909d27b6035d4e12ad2082165b5e25fa3fa9b63e20238777f23e7f45e9"
+    },
+    "input_sha256": {
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "cases.json": "038d70d56be064744f1b242a5296cacc9bc1875e097581f884bcbd3c22f95526",
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "nodes.json": "52326ec32b7326872e68d464e14c09a5583fc07b951e2551a7d4e8e0248a592f"
+    }
+  },
+  "stop": "completed",
+  "actual_calls": 100,
+  "known_tokens": 169047,
+  "input_tokens": 149530,
+  "output_tokens": 19517,
+  "all_attempt_usage_reported": true,
+  "wall_seconds": 70.24982450000243,
+  "complete_pairs": [
+    [
+      "cancel_new_work",
+      0
+    ],
+    [
+      "mix_accessibility",
+      0
+    ],
+    [
+      "mix_api_contract",
+      0
+    ],
+    [
+      "mix_design_tokens",
+      0
+    ],
+    [
+      "mix_retention_cohorts",
+      0
+    ],
+    [
+      "multi_quality_then_query",
+      0
+    ],
+    [
+      "quote_new_work",
+      0
+    ],
+    [
+      "syn_corrective_actions",
+      0
+    ],
+    [
+      "syn_meeting_actions",
+      0
+    ],
+    [
+      "syn_release_notes",
+      0
+    ],
+    [
+      "zh_copy_polish",
+      0
+    ],
+    [
+      "zh_data_profile",
+      0
+    ],
+    [
+      "zh_query_join",
+      0
+    ],
+    [
+      "zh_research_brief",
+      0
+    ]
+  ],
+  "by_arm": {
+    "adaptive": {
+      "count": 14,
+      "omission_safe_successes": 13,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.6064848156425535,
+      "mean_tokens": 7051.428571428572,
+      "mean_calls": 3.7857142857142856
+    },
+    "compact_global": {
+      "count": 14,
+      "omission_safe_successes": 11,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.409160104214347,
+      "mean_tokens": 5023.357142857143,
+      "mean_calls": 3.357142857142857
+    }
+  },
+  "positive_by_arm": {
+    "adaptive": {
+      "count": 12,
+      "omission_safe_successes": 11,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.8837790591666512,
+      "mean_tokens": 7941.833333333333,
+      "mean_calls": 4.166666666666667
+    },
+    "compact_global": {
+      "count": 12,
+      "omission_safe_successes": 9,
+      "wrong_accepts": 1,
+      "mean_seconds": 2.6570911320013693,
+      "mean_tokens": 5606.416666666667,
+      "mean_calls": 3.6666666666666665
+    }
+  },
+  "control_by_arm": {
+    "adaptive": {
+      "count": 2,
+      "omission_safe_successes": 2,
+      "wrong_accepts": 0,
+      "mean_seconds": 0.9427193544979673,
+      "mean_tokens": 1709,
+      "mean_calls": 1.5
+    },
+    "compact_global": {
+      "count": 2,
+      "omission_safe_successes": 2,
+      "wrong_accepts": 0,
+      "mean_seconds": 0.9215739374922123,
+      "mean_tokens": 1525,
+      "mean_calls": 1.5
+    }
+  },
+  "by_repetition": {
+    "0": {
+      "adaptive": {
+        "count": 14,
+        "omission_safe_successes": 13,
+        "wrong_accepts": 1,
+        "mean_seconds": 2.6064848156425535,
+        "mean_tokens": 7051.428571428572,
+        "mean_calls": 3.7857142857142856
+      },
+      "compact_global": {
+        "count": 14,
+        "omission_safe_successes": 11,
+        "wrong_accepts": 1,
+        "mean_seconds": 2.409160104214347,
+        "mean_tokens": 5023.357142857143,
+        "mean_calls": 3.357142857142857
+      }
+    }
+  },
+  "by_case": {
+    "quote_new_work": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 1.1864077500067651,
+        "mean_tokens": 2337,
+        "mean_calls": 2
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 1.2001842499885242,
+        "mean_tokens": 2107,
+        "mean_calls": 2
+      }
+    },
+    "cancel_new_work": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 0.6990309589891694,
+        "mean_tokens": 1081,
+        "mean_calls": 1
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 0.6429636249959003,
+        "mean_tokens": 943,
+        "mean_calls": 1
+      }
+    },
+    "zh_data_profile": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.520845166989602,
+        "mean_tokens": 8139,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 0,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.3455610829987563,
+        "mean_tokens": 3211,
+        "mean_calls": 2
+      }
+    },
+    "mix_api_contract": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.631218624999747,
+        "mean_tokens": 8622,
+        "mean_calls": 5
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.260808250022819,
+        "mean_tokens": 5975,
+        "mean_calls": 4
+      }
+    },
+    "syn_release_notes": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.7628424169961363,
+        "mean_tokens": 5733,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.988759291998576,
+        "mean_tokens": 5181,
+        "mean_calls": 4
+      }
+    },
+    "zh_query_join": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.629424124985235,
+        "mean_tokens": 7866,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.085104291996686,
+        "mean_tokens": 6611,
+        "mean_calls": 4
+      }
+    },
+    "mix_accessibility": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.287459665996721,
+        "mean_tokens": 9224,
+        "mean_calls": 5
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.1513442090072203,
+        "mean_tokens": 5030,
+        "mean_calls": 4
+      }
+    },
+    "zh_copy_polish": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.111781957995845,
+        "mean_tokens": 7583,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.4145855419919826,
+        "mean_tokens": 6156,
+        "mean_calls": 4
+      }
+    },
+    "syn_meeting_actions": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.2333511670003645,
+        "mean_tokens": 9595,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 0,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.0944096670136787,
+        "mean_tokens": 5448,
+        "mean_calls": 4
+      }
+    },
+    "zh_research_brief": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 0,
+        "wrong_accepts": 1,
+        "mean_seconds": 2.1995394170226064,
+        "mean_tokens": 7603,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 0,
+        "wrong_accepts": 1,
+        "mean_seconds": 2.1066134159918875,
+        "mean_tokens": 4691,
+        "mean_calls": 4
+      }
+    },
+    "mix_design_tokens": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.2624715830024797,
+        "mean_tokens": 7887,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 1.6865087909973226,
+        "mean_tokens": 5179,
+        "mean_calls": 3
+      }
+    },
+    "syn_corrective_actions": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.126881709002191,
+        "mean_tokens": 8780,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.092194916011067,
+        "mean_tokens": 7411,
+        "mean_calls": 4
+      }
+    },
+    "mix_retention_cohorts": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.7453865840216167,
+        "mean_tokens": 7024,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 1.5862050839932635,
+        "mean_tokens": 5782,
+        "mean_calls": 3
+      }
+    },
+    "multi_quality_then_query": {
+      "adaptive": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.094146291987272,
+        "mean_tokens": 7246,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 1,
+        "omission_safe_successes": 1,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.072999041993171,
+        "mean_tokens": 6602,
+        "mean_calls": 4
+      }
+    }
+  },
+  "stage_usage": {
+    "adaptive": {
+      "directory_calls": 41,
+      "directory_input_tokens": 58234,
+      "directory_output_tokens": 8548,
+      "final_calls": 12,
+      "final_input_tokens": 29415,
+      "final_output_tokens": 2523
+    },
+    "compact_global": {
+      "final_calls": 11,
+      "final_input_tokens": 20710,
+      "final_output_tokens": 1837,
+      "directory_calls": 36,
+      "directory_input_tokens": 41171,
+      "directory_output_tokens": 6609
+    }
+  },
+  "rows": [
+    {
+      "case": "quote_new_work",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": true,
+      "seconds": 1.1864077500067651,
+      "calls": 2,
+      "known_tokens": 2337,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "quote_new_work",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": true,
+      "seconds": 1.2001842499885242,
+      "calls": 2,
+      "known_tokens": 2107,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "cancel_new_work",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": true,
+      "seconds": 0.6429636249959003,
+      "calls": 1,
+      "known_tokens": 943,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "cancel_new_work",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": true,
+      "seconds": 0.6990309589891694,
+      "calls": 1,
+      "known_tokens": 1081,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "zh_data_profile",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 4.520845166989602,
+      "calls": 4,
+      "known_tokens": 8139,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "data-quality-auditor",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 13
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 275
+        },
+        {
+          "offered": 13,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 151
+        },
+        {
+          "offered": 20,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 13
+        }
+      ]
+    },
+    {
+      "case": "zh_data_profile",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.3455610829987563,
+      "calls": 2,
+      "known_tokens": 3211,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        false
+      ],
+      "first_omission_stage": 2,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 275
+        },
+        {
+          "offered": 13,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "mix_api_contract",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 4.260808250022819,
+      "calls": 4,
+      "known_tokens": 5975,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "api-design-reviewer",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 9
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 207
+        },
+        {
+          "offered": 10,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 142
+        },
+        {
+          "offered": 18,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 9
+        }
+      ]
+    },
+    {
+      "case": "mix_api_contract",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 4.631218624999747,
+      "calls": 5,
+      "known_tokens": 8622,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "api-design-reviewer",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 10
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 207
+        },
+        {
+          "offered": 10,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 159
+        },
+        {
+          "offered": 21,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 30
+        },
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 10
+        }
+      ]
+    },
+    {
+      "case": "syn_release_notes",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.7628424169961363,
+      "calls": 4,
+      "known_tokens": 5733,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "changelog-generator",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 9
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 175
+        },
+        {
+          "offered": 7,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 89
+        },
+        {
+          "offered": 11,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 9
+        }
+      ]
+    },
+    {
+      "case": "syn_release_notes",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 4.988759291998576,
+      "calls": 4,
+      "known_tokens": 5181,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "changelog-generator",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 9
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 175
+        },
+        {
+          "offered": 7,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 89
+        },
+        {
+          "offered": 11,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 9
+        }
+      ]
+    },
+    {
+      "case": "zh_query_join",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.085104291996686,
+      "calls": 4,
+      "known_tokens": 6611,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "sql-database-assistant",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 142
+        },
+        {
+          "offered": 18,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 21
+        }
+      ]
+    },
+    {
+      "case": "zh_query_join",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.629424124985235,
+      "calls": 4,
+      "known_tokens": 7866,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "sql-database-assistant",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 223
+        },
+        {
+          "offered": 8,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 142
+        },
+        {
+          "offered": 18,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 21
+        }
+      ]
+    },
+    {
+      "case": "mix_accessibility",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.287459665996721,
+      "calls": 5,
+      "known_tokens": 9224,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "a11y-audit",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 175
+        },
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 151
+        },
+        {
+          "offered": 20,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 25
+        },
+        {
+          "offered": 4,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 25
+        }
+      ]
+    },
+    {
+      "case": "mix_accessibility",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.1513442090072203,
+      "calls": 4,
+      "known_tokens": 5030,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "a11y-audit",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 13
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 175
+        },
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 53
+        },
+        {
+          "offered": 7,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 13
+        }
+      ]
+    },
+    {
+      "case": "zh_copy_polish",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.4145855419919826,
+      "calls": 4,
+      "known_tokens": 6156,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "copy-editing",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 244
+        },
+        {
+          "offered": 11,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 49
+        },
+        {
+          "offered": 5,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 15
+        }
+      ]
+    },
+    {
+      "case": "zh_copy_polish",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.111781957995845,
+      "calls": 4,
+      "known_tokens": 7583,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "copy-editing",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 20
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 270
+        },
+        {
+          "offered": 13,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 54
+        },
+        {
+          "offered": 5,
+          "retained": 1,
+          "carried": 1,
+          "pool_size": 20
+        }
+      ]
+    },
+    {
+      "case": "syn_meeting_actions",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.2333511670003645,
+      "calls": 4,
+      "known_tokens": 9595,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "meetings",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 28
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 249
+        },
+        {
+          "offered": 11,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 28
+        },
+        {
+          "offered": 4,
+          "retained": 4,
+          "carried": 1,
+          "pool_size": 28
+        }
+      ]
+    },
+    {
+      "case": "syn_meeting_actions",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.0944096670136787,
+      "calls": 4,
+      "known_tokens": 5448,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": false,
+      "result": {
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.39,
+        "stop_reason": "small_pool",
+        "final_pool_size": 5
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 249
+        },
+        {
+          "offered": 11,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 28
+        },
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 5
+        }
+      ]
+    },
+    {
+      "case": "zh_research_brief",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.1066134159918875,
+      "calls": 4,
+      "known_tokens": 4691,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": true,
+      "result": {
+        "status": "selected",
+        "choice": "deepread",
+        "confidence": 0.86,
+        "stop_reason": "small_pool",
+        "final_pool_size": 5
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 58
+        },
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 32
+        },
+        {
+          "offered": 7,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 5
+        }
+      ]
+    },
+    {
+      "case": "zh_research_brief",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.1995394170226064,
+      "calls": 4,
+      "known_tokens": 7603,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": true,
+      "result": {
+        "status": "selected",
+        "choice": "deepread",
+        "confidence": 0.93,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 207
+        },
+        {
+          "offered": 10,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 32
+        },
+        {
+          "offered": 5,
+          "retained": 2,
+          "carried": 1,
+          "pool_size": 15
+        }
+      ]
+    },
+    {
+      "case": "mix_design_tokens",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.2624715830024797,
+      "calls": 4,
+      "known_tokens": 7887,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "ui-design-system",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 14
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 207
+        },
+        {
+          "offered": 10,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 159
+        },
+        {
+          "offered": 21,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 14
+        }
+      ]
+    },
+    {
+      "case": "mix_design_tokens",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 1.6865087909973226,
+      "calls": 3,
+      "known_tokens": 5179,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "ui-design-system",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 17
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 207
+        },
+        {
+          "offered": 10,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 17
+        }
+      ]
+    },
+    {
+      "case": "syn_corrective_actions",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.092194916011067,
+      "calls": 4,
+      "known_tokens": 7411,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "capa-officer",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 5,
+          "carried": 0,
+          "pool_size": 307
+        },
+        {
+          "offered": 16,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 34
+        },
+        {
+          "offered": 7,
+          "retained": 3,
+          "carried": 1,
+          "pool_size": 15
+        }
+      ]
+    },
+    {
+      "case": "syn_corrective_actions",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.126881709002191,
+      "calls": 4,
+      "known_tokens": 8780,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "capa-officer",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 23
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 5,
+          "carried": 0,
+          "pool_size": 307
+        },
+        {
+          "offered": 16,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 34
+        },
+        {
+          "offered": 5,
+          "retained": 3,
+          "carried": 2,
+          "pool_size": 23
+        }
+      ]
+    },
+    {
+      "case": "mix_retention_cohorts",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.7453865840216167,
+      "calls": 4,
+      "known_tokens": 7024,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "product-analytics",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 16
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 281
+        },
+        {
+          "offered": 14,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 27
+        },
+        {
+          "offered": 3,
+          "retained": 1,
+          "carried": 2,
+          "pool_size": 16
+        }
+      ]
+    },
+    {
+      "case": "mix_retention_cohorts",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 1.5862050839932635,
+      "calls": 3,
+      "known_tokens": 5782,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "product-analytics",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 22
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 181
+        },
+        {
+          "offered": 7,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 22
+        }
+      ]
+    },
+    {
+      "case": "multi_quality_then_query",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.072999041993171,
+      "calls": 4,
+      "known_tokens": 6602,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "data-quality-auditor",
+        "confidence": 0.85,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 142
+        },
+        {
+          "offered": 18,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 21
+        }
+      ]
+    },
+    {
+      "case": "multi_quality_then_query",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.094146291987272,
+      "calls": 4,
+      "known_tokens": 7246,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "data-quality-auditor",
+        "confidence": 0.86,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 142
+        },
+        {
+          "offered": 18,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 21
+        }
+      ]
+    }
+  ],
+  "repeat_variation": {
+    "identical_input_groups": 3,
+    "groups_with_score_change": 1,
+    "groups_with_retained_set_change": 0
+  },
+  "unreconciled_requests": [],
+  "error_receipts": [],
+  "protected_paths_checked": 236,
+  "protected_files_unchanged": true,
+  "protected_changed_count": 0,
+  "source_summary_sha256": "407ae41b291178d7956ee231bef66477fc2fbaaa320715c605bd07e5137a1a28",
+  "limitations": [
+    "One frozen pass on 14 new requests; tests authored by the same evaluator with public metadata available. Not an independent blind evaluation.",
+    "Both semantic failures and successes remain in the denominator. Whole-set lower cost includes early failures and is not a quality-equivalent improvement.",
+    "Both-pass cost subset is posthoc descriptive evidence, not a replacement benchmark.",
+    "Research task selected deepread in both arms; it may help, but required research-summarizer was excluded, so the predeclared omission rule fails.",
+    "No selector parameters, thresholds or descriptions were changed after the new cases ran; no retry of model decisions.",
+    "Three selected Skill artifacts were checked locally; API example flags needed correction from observed argparse errors. Failed data-quality selection was not bypassed.",
+    "Skill sources came from the pinned public benchmark archive after selection, not the installed Backpack acquisition gateway. Market installation, plugin/MCP execution and native-agent end-to-end costs are not tested.",
+    "Jev tokens are reported; root task reasoning time/tokens and monetary cost remain unobservable.",
+    "No daily catalog, lifecycle, native cache or installation promotion."
+  ],
+  "reduction_percent": {
+    "mean_tokens": 28.76114262560777,
+    "mean_seconds": 7.5705298662774645,
+    "mean_calls": 11.32075471698113
+  },
+  "candidate_eligible": false,
+  "both_pass_cases": [
+    "quote_new_work",
+    "cancel_new_work",
+    "mix_api_contract",
+    "syn_release_notes",
+    "zh_query_join",
+    "mix_accessibility",
+    "zh_copy_polish",
+    "mix_design_tokens",
+    "syn_corrective_actions",
+    "mix_retention_cohorts",
+    "multi_quality_then_query"
+  ],
+  "both_pass_metrics": {
+    "adaptive": {
+      "count": 11,
+      "omission_safe_successes": 11,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.5033683334530163,
+      "mean_tokens": 6671.181818181818,
+      "mean_calls": 3.727272727272727
+    },
+    "compact_global": {
+      "count": 11,
+      "omission_safe_successes": 11,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.380150662999685,
+      "mean_tokens": 5179.727272727273,
+      "mean_calls": 3.3636363636363638
+    }
+  },
+  "failures": [
+    {
+      "case": "zh_data_profile",
+      "arm": "compact_global",
+      "expected_current": [
+        "data-quality-auditor"
+      ],
+      "required_later": [],
+      "first_omission_stage": 2,
+      "scores_at_omission": [
+        {
+          "node": "domain:engineering",
+          "depth": 2,
+          "score": 0.27
+        }
+      ],
+      "status": "none",
+      "selected": null,
+      "confidence": null
+    },
+    {
+      "case": "syn_meeting_actions",
+      "arm": "compact_global",
+      "expected_current": [
+        "meetings"
+      ],
+      "required_later": [],
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:productivity:nb",
+          "depth": 3,
+          "score": 0.27
+        }
+      ],
+      "status": "abstain",
+      "selected": null,
+      "confidence": 0.39
+    },
+    {
+      "case": "zh_research_brief",
+      "arm": "compact_global",
+      "expected_current": [
+        "research-summarizer"
+      ],
+      "required_later": [],
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:product-team:topic0",
+          "depth": 3,
+          "score": 0.36
+        }
+      ],
+      "status": "selected",
+      "selected": "deepread",
+      "confidence": 0.86
+    },
+    {
+      "case": "zh_research_brief",
+      "arm": "adaptive",
+      "expected_current": [
+        "research-summarizer"
+      ],
+      "required_later": [],
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:product-team:topic0",
+          "depth": 3,
+          "score": 0.37
+        }
+      ],
+      "status": "selected",
+      "selected": "deepread",
+      "confidence": 0.93
+    }
+  ],
+  "actual_use": {
+    "planned": 4,
+    "selected_and_executed": 3,
+    "completed_artifacts": 3,
+    "selection_failure_skipped": [
+      "zh_data_profile"
+    ],
+    "documented_command_failures": 3,
+    "unexpected_unknown_outcomes": 0,
+    "script_seconds_including_argument_failures": 1.3699524589756038,
+    "query_seconds": 0.0005439579836092889,
+    "root_reasoning_tokens": null,
+    "root_wall_time": null,
+    "cases": [
+      {
+        "case": "mix_api_contract",
+        "status": "completed_after_observed_argument_error",
+        "checks": {
+          "breaking_changes": 6,
+          "lint_issues": 12,
+          "grade": "F",
+          "original_specs_unchanged": true
+        },
+        "limitation": "Original Skill examples use unsupported -o; switched to documented --output after known no-effect argparse errors."
+      },
+      {
+        "case": "syn_release_notes",
+        "status": "completed",
+        "checks": {
+          "valid_commits": 5,
+          "next_version": "2.0.0",
+          "all_commit_ids_traceable": true,
+          "no_release_or_repository_mutation": true
+        }
+      },
+      {
+        "case": "zh_query_join",
+        "status": "completed",
+        "checks": {
+          "rows": [
+            [
+              1,
+              "北星",
+              1500
+            ],
+            [
+              2,
+              "岚",
+              700
+            ],
+            [
+              3,
+              "青叶",
+              0
+            ]
+          ],
+          "database_unchanged": true,
+          "original_optimizer_executed": true
+        }
+      }
+    ],
+    "acquisition_scope": "Only Jev-selected pinned public source entries from the verified benchmark archive; no installed Backpack public gateway, market setup or MCP invocation.",
+    "receipts": [
+      {
+        "name": "lint",
+        "case": "mix_api_contract",
+        "returncode": 2,
+        "seconds": 0.21090212499257177,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "breaking",
+        "case": "mix_api_contract",
+        "returncode": 2,
+        "seconds": 0.23924129200167954,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "score",
+        "case": "mix_api_contract",
+        "returncode": 2,
+        "seconds": 0.21508391699171625,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "commit-lint",
+        "case": "syn_release_notes",
+        "returncode": 0,
+        "seconds": 0.19514420899213292,
+        "stdout_sha256": "516537f1311d81eeacc7c050e199c4a8993af59845bc5a3fd6719fbae0d295ed"
+      },
+      {
+        "name": "bump",
+        "case": "syn_release_notes",
+        "returncode": 0,
+        "seconds": 0.14793716699932702,
+        "stdout_sha256": "07d6fc3a1530703d0f99a01fbae14502574e27e542802bf9a02abaa6a236b787"
+      },
+      {
+        "name": "changelog",
+        "case": "syn_release_notes",
+        "returncode": 0,
+        "seconds": 0.1617685000237543,
+        "stdout_sha256": "3dcd4af7cb3a4e06fc146154d32ca1e4c06771bb9d5b58a539844000e9fa5270"
+      },
+      {
+        "case": "mix_api_contract",
+        "name": "lint-supported-args",
+        "returncode": 0,
+        "seconds": 0.052711958007421345,
+        "stdout_sha256": "59c1b605e3944ade72d0ce7d41d81464f559bb458c509c5f3522c1929d075fa1"
+      },
+      {
+        "case": "mix_api_contract",
+        "name": "breaking-supported-args",
+        "returncode": 1,
+        "seconds": 0.05239933298435062,
+        "stdout_sha256": "e404c54a1c374b7881cd206a3516237f5123d8a9b243ae198c469b6631b33976"
+      },
+      {
+        "case": "mix_api_contract",
+        "name": "score-supported-args",
+        "returncode": 1,
+        "seconds": 0.05068250000476837,
+        "stdout_sha256": "1f16e908d0e60947a196a038b8a1a89df0d9a4445293bc3ab3e29dc7b38243b5"
+      },
+      {
+        "case": "zh_query_join",
+        "name": "optimizer",
+        "returncode": 0,
+        "seconds": 0.044081457977881655,
+        "stdout_sha256": "ac088862f2aaec129af48425591748299b635d8ede560ffca6a2c6bd970f127f"
+      }
+    ],
+    "output_hashes": {
+      "release-notes.md": "0c619bacfb3e5f6ca0d85012dff2c9c44f5574d57415d541f615ac452613ac98",
+      "query.sql": "b3fa7426388cc12a34e1b1bec4821d767aa08982db0d41bf047ee48f92ff8aa3",
+      "api-review.md": "3d8e5742fa6bbcaebcc3ad06177c407dc402c9d98379249286687591819b3689",
+      "query.md": "b4fab3bc3e8a6485b48a4622cb3ebad466215addd6f515c9549ce725df705018"
+    }
+  }
+}

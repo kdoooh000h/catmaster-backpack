@@ -1,0 +1,4 @@
+# Optional isolated benchmark environment. Not a daily-runtime dependency.
+sentence-transformers==6.1.0
+torch==2.14.1
+numpy==2.5.4

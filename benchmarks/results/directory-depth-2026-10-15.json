@@ -1,0 +1,1653 @@
+{
+  "version": 1,
+  "scope": "public routing experiment; no capability execution or daily deployment",
+  "source": {
+    "version": 1,
+    "kind": "large_public_skill_catalog",
+    "source_kind": "public",
+    "repo": "alirezarezvani/claude-skills",
+    "commit": "19392f7a08264ed00486a251f5b2098321771f94",
+    "catalog_count": 376,
+    "canonical_count": 388,
+    "native_domain_count": 20,
+    "archive_skill_path_count": 846,
+    "excluded_hidden_host_path_count": 458,
+    "exact_duplicate_groups": 12,
+    "same_name_groups": 14,
+    "same_name_distinct_content_names": [
+      "run",
+      "handoff"
+    ],
+    "catalog_order": "first occurrence in lexicographically sorted canonical upstream paths",
+    "catalog_raw_policy": "same independent deduplicated rows as CATALOG.json",
+    "archive_sha256": "30ce857856ee03a5940b1382e56ca1f9b209028f1e2d8087b7a71bf6705c23c9"
+  },
+  "frozen_plan": {
+    "version": 1,
+    "arms": {
+      "human2": null,
+      "depth2_end24": [
+        4,
+        2
+      ],
+      "depth2_end6": [
+        6,
+        2
+      ],
+      "depth3_end6": [
+        6,
+        3
+      ],
+      "depth4_end6": [
+        6,
+        4
+      ],
+      "depth6_end6": [
+        6,
+        6
+      ]
+    },
+    "case_ids": [
+      "zh_llm_cost",
+      "zh_vendor_scorecard",
+      "syn_custom_controller",
+      "syn_upgrade_moment",
+      "mix_financial_model",
+      "mix_multi_jira_then_qms",
+      "zh_quote_control",
+      "mix_cancel_control"
+    ],
+    "provider": "typesafe",
+    "call_timeout_seconds": 15,
+    "max_calls": 200,
+    "max_seconds": 900,
+    "max_known_tokens": 300000,
+    "budget_note": "Check known tokens before each call; one in-flight response may cross the cap. Missing usage is unknown.",
+    "directory_threshold": 0.1,
+    "final_threshold": 0.7,
+    "final_limit": 96,
+    "node_limit": 192,
+    "order": "rotate arms by case index",
+    "attempts_per_stage": 1,
+    "stopping": "stop entire pilot on transport/malformed outcome or budget; never retry",
+    "acceptance": "Compare final current-first choice and retention of all current/pending gold separately; no winner with observed omissions.",
+    "limitations": "8-case pilot; Jev routing only, no task execution; human vs lexical trees confound topology and summaries; H6 arms isolate expansion depth.",
+    "tree_hashes": {
+      "4": "adaf60ebb0371d3c6425c0f9f1f8095d5741533a2fea9e90b83d600dd7742530",
+      "5": "b0b21c4c6f3a17844fa1e122318a85c246df2aea4f2e12f5d2f0c9c01b88e531",
+      "6": "4127849ee4e82b99e7b6212fd710064f720908ac327609e66540f7ff626ce0a6"
+    },
+    "human_tree_hash": "16396245d4eb48b03bacc77a4c9d1f19c81141f675c8b2a4493185ad4ebdf36e",
+    "runner_sha256": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+    "frozen_sha256": {
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "taxonomy.json": "db8ad06e5d998fa29586a9b2a69423e93def0d22d5b50d3679d02d07db0edf96",
+      "cases.json": "fa499f9bb614da158e197e068af60c40a2e87932aa6ff27523b9692ac5f65355",
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "provenance.json": "f21f45cf3421cb98e8adaa8ce32e944a9aa6d34f4d11446113466ef8b5feb166",
+      "structure.json": "1f7b933586089251bb20cf1cc9bf2a51f7a97356ee6b56cc2a117b197df046ba"
+    }
+  },
+  "plan_file_sha256": "9295d3abef26ccdb81208443a66e5feee4d23d988f13df2a77a0727e266e29ce",
+  "raw_summary_sha256": "0a537f9aeac2f8bc7e3903d425cb3b4b064289803a4bfbd433cbc2069ce7a994",
+  "stop": "budget_or_provider_failure",
+  "planned_cases": 8,
+  "common_completed_cases": [
+    "zh_llm_cost",
+    "zh_vendor_scorecard",
+    "syn_custom_controller"
+  ],
+  "actual_calls": 64,
+  "known_tokens": 309129,
+  "input_tokens": 282248,
+  "output_tokens": 26881,
+  "usage_complete_for_attempts": true,
+  "sum_row_seconds": 64.25613966601668,
+  "final_choice_calls": 0,
+  "by_arm_common_cases": {
+    "human2": {
+      "case_count": 3,
+      "final_choice_successes": 0,
+      "all_required_retained_cases": 3,
+      "omission_safe_successes": 0,
+      "mean_seconds": 2.7222477363441917,
+      "mean_tokens": 5165.666666666667,
+      "mean_calls": 2,
+      "terminal_pool_sizes": [
+        352,
+        364,
+        338
+      ],
+      "statuses": {
+        "final_limit": 3
+      }
+    },
+    "depth2_end24": {
+      "case_count": 3,
+      "final_choice_successes": 0,
+      "all_required_retained_cases": 3,
+      "omission_safe_successes": 0,
+      "mean_seconds": 1.5753783886611927,
+      "mean_tokens": 4821.666666666667,
+      "mean_calls": 2,
+      "terminal_pool_sizes": [
+        376,
+        376,
+        376
+      ],
+      "statuses": {
+        "final_limit": 3
+      }
+    },
+    "depth2_end6": {
+      "case_count": 3,
+      "final_choice_successes": 0,
+      "all_required_retained_cases": 3,
+      "omission_safe_successes": 0,
+      "mean_seconds": 2.034520055332299,
+      "mean_tokens": 14341.666666666666,
+      "mean_calls": 2,
+      "terminal_pool_sizes": [
+        376,
+        365,
+        376
+      ],
+      "statuses": {
+        "final_limit": 3
+      }
+    },
+    "depth3_end6": {
+      "case_count": 3,
+      "final_choice_successes": 0,
+      "all_required_retained_cases": 3,
+      "omission_safe_successes": 0,
+      "mean_seconds": 2.8301768610059903,
+      "mean_tokens": 17117,
+      "mean_calls": 3,
+      "terminal_pool_sizes": [
+        376,
+        365,
+        376
+      ],
+      "statuses": {
+        "final_limit": 3
+      }
+    },
+    "depth4_end6": {
+      "case_count": 3,
+      "final_choice_successes": 0,
+      "all_required_retained_cases": 3,
+      "omission_safe_successes": 0,
+      "mean_seconds": 3.9835206386633217,
+      "mean_tokens": 22123.333333333332,
+      "mean_calls": 4,
+      "terminal_pool_sizes": [
+        376,
+        365,
+        376
+      ],
+      "statuses": {
+        "final_limit": 3
+      }
+    },
+    "depth6_end6": {
+      "case_count": 3,
+      "final_choice_successes": 0,
+      "all_required_retained_cases": 3,
+      "omission_safe_successes": 0,
+      "mean_seconds": 6.123491652998685,
+      "mean_tokens": 26521,
+      "mean_calls": 6,
+      "terminal_pool_sizes": [
+        376,
+        365,
+        376
+      ],
+      "statuses": {
+        "final_limit": 3
+      }
+    }
+  },
+  "structure_oracle_only": {
+    "human2": {
+      "directory_layers": 2,
+      "max_calls": 3,
+      "cuts": [
+        1,
+        2
+      ],
+      "mean_directory_cards_oracle": 9.707446808510639,
+      "mean_directory_characters_oracle": 7550.521276595745,
+      "mean_final_candidates_oracle": 43.87765957446808,
+      "max_final_candidates_oracle": 89,
+      "coverage": 376
+    },
+    "height4_layers1": {
+      "directory_layers": 1,
+      "max_calls": 2,
+      "cuts": [
+        4
+      ],
+      "mean_directory_cards_oracle": 16.0,
+      "mean_directory_characters_oracle": 14410.0,
+      "mean_final_candidates_oracle": 23.51063829787234,
+      "max_final_candidates_oracle": 24,
+      "coverage": 376
+    },
+    "height4_layers2": {
+      "directory_layers": 2,
+      "max_calls": 3,
+      "cuts": [
+        2,
+        4
+      ],
+      "mean_directory_cards_oracle": 8.0,
+      "mean_directory_characters_oracle": 7645.75,
+      "mean_final_candidates_oracle": 23.51063829787234,
+      "max_final_candidates_oracle": 24,
+      "coverage": 376
+    },
+    "height4_layers3": {
+      "directory_layers": 3,
+      "max_calls": 4,
+      "cuts": [
+        2,
+        3,
+        4
+      ],
+      "mean_directory_cards_oracle": 8.0,
+      "mean_directory_characters_oracle": 7762.125,
+      "mean_final_candidates_oracle": 23.51063829787234,
+      "max_final_candidates_oracle": 24,
+      "coverage": 376
+    },
+    "height4_layers4": {
+      "directory_layers": 4,
+      "max_calls": 5,
+      "cuts": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "mean_directory_cards_oracle": 8.0,
+      "mean_directory_characters_oracle": 7883.625,
+      "mean_final_candidates_oracle": 23.51063829787234,
+      "max_final_candidates_oracle": 24,
+      "coverage": 376
+    },
+    "height5_layers1": {
+      "directory_layers": 1,
+      "max_calls": 2,
+      "cuts": [
+        5
+      ],
+      "mean_directory_cards_oracle": 32.0,
+      "mean_directory_characters_oracle": 27199.0,
+      "mean_final_candidates_oracle": 11.76595744680851,
+      "max_final_candidates_oracle": 12,
+      "coverage": 376
+    },
+    "height5_layers2": {
+      "directory_layers": 2,
+      "max_calls": 3,
+      "cuts": [
+        3,
+        5
+      ],
+      "mean_directory_cards_oracle": 12.0,
+      "mean_directory_characters_oracle": 11031.0,
+      "mean_final_candidates_oracle": 11.76595744680851,
+      "max_final_candidates_oracle": 12,
+      "coverage": 376
+    },
+    "height5_layers3": {
+      "directory_layers": 3,
+      "max_calls": 4,
+      "cuts": [
+        2,
+        4,
+        5
+      ],
+      "mean_directory_cards_oracle": 10.0,
+      "mean_directory_characters_oracle": 9359.896276595744,
+      "mean_final_candidates_oracle": 11.76595744680851,
+      "max_final_candidates_oracle": 12,
+      "coverage": 376
+    },
+    "height5_layers4": {
+      "directory_layers": 4,
+      "max_calls": 5,
+      "cuts": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "mean_directory_cards_oracle": 10.0,
+      "mean_directory_characters_oracle": 9476.271276595744,
+      "mean_final_candidates_oracle": 11.76595744680851,
+      "max_final_candidates_oracle": 12,
+      "coverage": 376
+    },
+    "height5_layers5": {
+      "directory_layers": 5,
+      "max_calls": 6,
+      "cuts": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "mean_directory_cards_oracle": 10.0,
+      "mean_directory_characters_oracle": 9597.771276595744,
+      "mean_final_candidates_oracle": 11.76595744680851,
+      "max_final_candidates_oracle": 12,
+      "coverage": 376
+    },
+    "height6_layers1": {
+      "directory_layers": 1,
+      "max_calls": 2,
+      "cuts": [
+        6
+      ],
+      "mean_directory_cards_oracle": 64.0,
+      "mean_directory_characters_oracle": 51999.0,
+      "mean_final_candidates_oracle": 5.8936170212765955,
+      "max_final_candidates_oracle": 6,
+      "coverage": 376
+    },
+    "height6_layers2": {
+      "directory_layers": 2,
+      "max_calls": 3,
+      "cuts": [
+        3,
+        6
+      ],
+      "mean_directory_cards_oracle": 16.0,
+      "mean_directory_characters_oracle": 14131.0,
+      "mean_final_candidates_oracle": 5.8936170212765955,
+      "max_final_candidates_oracle": 6,
+      "coverage": 376
+    },
+    "height6_layers3": {
+      "directory_layers": 3,
+      "max_calls": 4,
+      "cuts": [
+        2,
+        4,
+        6
+      ],
+      "mean_directory_cards_oracle": 12.0,
+      "mean_directory_characters_oracle": 10910.148936170213,
+      "mean_final_candidates_oracle": 5.8936170212765955,
+      "max_final_candidates_oracle": 6,
+      "coverage": 376
+    },
+    "height6_layers4": {
+      "directory_layers": 4,
+      "max_calls": 5,
+      "cuts": [
+        2,
+        3,
+        5,
+        6
+      ],
+      "mean_directory_cards_oracle": 12.0,
+      "mean_directory_characters_oracle": 11000.563829787234,
+      "mean_final_candidates_oracle": 5.8936170212765955,
+      "max_final_candidates_oracle": 6,
+      "coverage": 376
+    },
+    "height6_layers5": {
+      "directory_layers": 5,
+      "max_calls": 6,
+      "cuts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mean_directory_cards_oracle": 12.0,
+      "mean_directory_characters_oracle": 11116.08510638298,
+      "mean_final_candidates_oracle": 5.8936170212765955,
+      "max_final_candidates_oracle": 6,
+      "coverage": 376
+    },
+    "height6_layers6": {
+      "directory_layers": 6,
+      "max_calls": 7,
+      "cuts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mean_directory_cards_oracle": 12.0,
+      "mean_directory_characters_oracle": 11237.58510638298,
+      "mean_final_candidates_oracle": 5.8936170212765955,
+      "max_final_candidates_oracle": 6,
+      "coverage": 376
+    }
+  },
+  "rows": [
+    {
+      "case": "zh_llm_cost",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "human2",
+      "seconds": 1.6401696669927333,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 5175,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 6,
+          "pool_size": 376
+        },
+        {
+          "offered": 20,
+          "retained": 17,
+          "pool_size": 352
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth2_end24",
+      "seconds": 1.5874148329894524,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 4831,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth2_end6",
+      "seconds": 1.792087707988685,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 14351,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth3_end6",
+      "seconds": 2.261576167016756,
+      "calls": 3,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 17131,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth4_end6",
+      "seconds": 2.7455782080069184,
+      "calls": 4,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 22142,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 32,
+          "retained": 32,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth6_end6",
+      "seconds": 4.136543125001481,
+      "calls": 6,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 26549,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 2,
+          "retained": 2,
+          "pool_size": 376
+        },
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        },
+        {
+          "offered": 32,
+          "retained": 32,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth2_end24",
+      "seconds": 1.407422249991214,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 4809,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth2_end6",
+      "seconds": 2.125560166023206,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 14329,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 62,
+          "pool_size": 365
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth3_end6",
+      "seconds": 2.5263899579877034,
+      "calls": 3,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 17098,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 62,
+          "pool_size": 365
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth4_end6",
+      "seconds": 3.085190291982144,
+      "calls": 4,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 22098,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 32,
+          "retained": 32,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 62,
+          "pool_size": 365
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "depth6_end6",
+      "seconds": 5.488593749993015,
+      "calls": 6,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 26483,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 2,
+          "retained": 2,
+          "pool_size": 376
+        },
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        },
+        {
+          "offered": 32,
+          "retained": 32,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 62,
+          "pool_size": 365
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "stratum": "chinese",
+      "control": false,
+      "arm": "human2",
+      "seconds": 4.69067150002229,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 5153,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 6,
+          "pool_size": 376
+        },
+        {
+          "offered": 20,
+          "retained": 18,
+          "pool_size": 364
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth2_end6",
+      "seconds": 2.185912291985005,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 14345,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth3_end6",
+      "seconds": 3.702564458013512,
+      "calls": 3,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 17122,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth4_end6",
+      "seconds": 6.119793416000903,
+      "calls": 4,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 22130,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 32,
+          "retained": 32,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth6_end6",
+      "seconds": 8.74533808400156,
+      "calls": 6,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 26531,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 2,
+          "retained": 2,
+          "pool_size": 376
+        },
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        },
+        {
+          "offered": 32,
+          "retained": 32,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 64,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "human2",
+      "seconds": 1.8359020420175511,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 5169,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 6,
+          "pool_size": 376
+        },
+        {
+          "offered": 20,
+          "retained": 15,
+          "pool_size": 338
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth2_end24",
+      "seconds": 1.7312980830029119,
+      "calls": 2,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 4825,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        }
+      ]
+    },
+    {
+      "case": "syn_upgrade_moment",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth3_end6",
+      "seconds": 2.945731459010858,
+      "calls": 3,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 17107,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 16,
+          "retained": 16,
+          "pool_size": 376
+        },
+        {
+          "offered": 64,
+          "retained": 63,
+          "pool_size": 370
+        }
+      ]
+    },
+    {
+      "case": "syn_upgrade_moment",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth4_end6",
+      "seconds": 3.502346374996705,
+      "calls": 4,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 21751,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "final_limit",
+      "stages": [
+        {
+          "offered": 4,
+          "retained": 4,
+          "pool_size": 376
+        },
+        {
+          "offered": 8,
+          "retained": 8,
+          "pool_size": 376
+        },
+        {
+          "offered": 32,
+          "retained": 31,
+          "pool_size": 364
+        },
+        {
+          "offered": 62,
+          "retained": 62,
+          "pool_size": 364
+        }
+      ]
+    },
+    {
+      "case": "syn_upgrade_moment",
+      "stratum": "synonym",
+      "control": false,
+      "arm": "depth6_end6",
+      "seconds": 5.5832992075011134e-05,
+      "calls": 0,
+      "passed": false,
+      "all_required_retained": null,
+      "omission_safe_pass": false,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "known_tokens": 0,
+      "usage_complete": true,
+      "status": "unavailable",
+      "reason": "experiment_budget_stop",
+      "stages": []
+    }
+  ],
+  "counterfactuals_diagnostic_only": [
+    {
+      "threshold": 0.3,
+      "arm": "human2",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 207
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 73
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": true,
+          "terminal_pool_size": 143
+        }
+      ]
+    },
+    {
+      "threshold": 0.3,
+      "arm": "depth2_end24",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 376
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 330
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": true,
+          "terminal_pool_size": 376
+        }
+      ]
+    },
+    {
+      "threshold": 0.3,
+      "arm": "depth2_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 325
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 229
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": true,
+          "terminal_pool_size": 319
+        }
+      ]
+    },
+    {
+      "threshold": 0.3,
+      "arm": "depth3_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 325
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 200
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": true,
+          "terminal_pool_size": 313
+        }
+      ]
+    },
+    {
+      "threshold": 0.3,
+      "arm": "depth4_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 324
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 212
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 295
+        }
+      ]
+    },
+    {
+      "threshold": 0.3,
+      "arm": "depth6_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 313
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 223
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 295
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "arm": "human2",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 142
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 7
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "arm": "depth2_end24",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 211
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": true,
+          "terminal_pool_size": 236
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "arm": "depth2_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 47
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 53
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "arm": "depth3_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 59
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 53
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "arm": "depth4_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 11
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 41
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "arm": "depth6_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": true,
+          "terminal_pool_size": 29
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 29
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "arm": "human2",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "arm": "depth2_end24",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "arm": "depth2_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "arm": "depth3_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "arm": "depth4_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "arm": "depth6_end6",
+      "rows": [
+        {
+          "case": "zh_llm_cost",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "zh_vendor_scorecard",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        },
+        {
+          "case": "syn_custom_controller",
+          "all_required_retained": false,
+          "terminal_pool_size": 0
+        }
+      ]
+    }
+  ],
+  "counterfactual_limit": "Threshold sweep reuses recorded scores. Different offered batches can change model scores; no final choices, live accuracy or live cost inferred.",
+  "verdict": "No eligible winner; overly permissive early retention and weak summaries prevent narrowing. More layers increased observed cost; depth alone was not isolated from pruning failure.",
+  "unmeasured": [
+    "final .7 choice accuracy",
+    "negative controls",
+    "mixed-language cases",
+    "pending-action case",
+    "main Agent end-to-end latency/tokens",
+    "monetary cost",
+    "model/server revision"
+  ]
+}

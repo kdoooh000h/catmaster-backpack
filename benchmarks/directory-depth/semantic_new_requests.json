@@ -1,0 +1,61 @@
+{
+  "scope": "New ordinary strings fixed before reference inspection and semantic retrieval; no target capability names. Product/format names are context.",
+  "cases": [
+    {
+      "id": "new_finance_runway_then_slides",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "need": "先根据虚构公司的月度收入、固定成本和现金余额，评估还能经营多久，列出乐观和保守两种情景及风险；之后把分析做成带讲者备注的演示文稿。现在先分析经营数字，不接入真实账户。",
+      "current_requirement": "Analyze company financial health, runway and scenarios",
+      "later_requirements": [
+        "Create a presentation with speaker notes"
+      ]
+    },
+    {
+      "id": "new_api_contract_then_handbook",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "need": "当前先审查虚构的 OpenAPI 合同，检查 endpoint 命名、请求响应结构和 breaking changes，给出可操作的改进建议；之后写成有目录的 Word 接入手册。只看接口定义，不实现服务。",
+      "current_requirement": "Review API contract consistency and breaking changes",
+      "later_requirements": [
+        "Create a formatted Word handbook"
+      ]
+    },
+    {
+      "id": "new_incident_response_playbook",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "need": "为虚构服务写一套出故障时的应对办法：怎样判定严重程度、安排值班响应、恢复服务，以及事后怎样复盘。当前只制定应急流程，不实际连接或操作线上系统。",
+      "current_requirement": "Incident severity, response, recovery and postmortem planning",
+      "later_requirements": []
+    },
+    {
+      "id": "new_translation_then_accessibility",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "need": "先为虚构网站设计 localization 方案，把界面文案和日期数字格式适配不同地区，考虑 RTL 布局与语言切换；之后检查页面的键盘操作和读屏提示。现在优先国际化方案，不发布网站。",
+      "current_requirement": "Website internationalization localization RTL and locale formatting",
+      "later_requirements": [
+        "Audit web accessibility"
+      ]
+    },
+    {
+      "id": "new_scholarly_paper_lookup",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "need": "先检索公开的机器学习论文，按主题找到相关文献，读取摘要并列出作者、发表时间和原文链接。当前只查公开学术资料，不登录、不发送邮件，也不编造引用。",
+      "current_requirement": "Search public scholarly papers and read abstracts with metadata",
+      "later_requirements": []
+    },
+    {
+      "id": "new_forecast_then_sheet",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "need": "先查询一个城市未来几天的气温、降雨概率和风速，把不同日期的预报整理清楚；之后做成能继续编辑的电子表格。现在先取得天气数据，不创建提醒。",
+      "current_requirement": "Retrieve multi-day weather forecast including precipitation and wind",
+      "later_requirements": [
+        "Create an editable spreadsheet"
+      ]
+    }
+  ]
+}

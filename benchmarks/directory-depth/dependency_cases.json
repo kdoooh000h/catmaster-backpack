@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "scope": "Six new author-written multi-task needs, frozen before any live outcome; the sole prior failure is copied unchanged by the freezer.",
+  "cases": [
+    {"id":"wiki_then_package_risks","stratum":"chinese","need":"为虚构项目先规划 Confluence 的页面层级、权限、模板宏和内容复审；随后必须审查演示仓库第三方软件包的已知漏洞、开源许可证冲突与间接依赖风险，列出安全升级路线。当前先交知识库方案，两步都要完成，不访问站点，也不更新软件包。","expected_ids":["confluence-expert"],"pending_ids":["dependency-auditor"],"control":false},
+    {"id":"accounts_then_license_chain","stratum":"mixed","need":"这次两项都要交：先给虚构 SaaS 客户账户做 weighted health score、流失风险分层和扩展机会建议；再检查演示代码库第三方包的 CVE、license conflicts 与 transitive dependency 风险，并规划安全升级。当前只完成账户分析，依赖审查随后也必须做，不联系客户、不安装软件包。","expected_ids":["customer-success-manager"],"pending_ids":["dependency-auditor"],"control":false},
+    {"id":"welcome_then_borrowed_packages","stratum":"synonym","need":"先为已同意接收邮件的演示新用户设计从欢迎到激活的连续邮件及发送间隔；之后必须检查代码里借来的开源包有没有已知安全缺陷、授权条款打架，以及它们再带进来的其他包的风险，给出稳妥升级顺序。现在先做邮件方案，两件事都不能漏，不发送邮件，不改动依赖。","expected_ids":["email-sequence"],"pending_ids":["dependency-auditor"],"control":false},
+    {"id":"finance_packages_then_wiki","stratum":"mixed","need":"虚构公司的演示任务分三步：当前先根据订阅收入和客户数字计算 MRR、NRR、CAC/LTV，解释整体经营健康度；第二步必须审查演示仓库的漏洞、许可证冲突、传递依赖风险和安全升级路径；第三步必须规划 Confluence 页面层级、权限、模板宏与归档来保存结论。三步按顺序完成，只分析，不改包或登录站点。","expected_ids":["saas-metrics-coach"],"pending_ids":["dependency-auditor","confluence-expert"],"control":false},
+    {"id":"packages_now_then_channels","stratum":"mixed","need":"直销与伙伴渠道的真实利润、完整服务成本和渠道配比也必须核算，但放第二步。现在先审计演示软件项目第三方包的漏洞、license 兼容性和依赖链风险，给出 safe upgrade 计划。两项都要交，当前先做依赖审查，不升级任何包，不联系合作伙伴。","expected_ids":["dependency-auditor"],"pending_ids":["channel-economics"],"control":false},
+    {"id":"cancel_packages_keep_signals_accounts","stratum":"chinese","need":"取消之前的开源包漏洞、许可证和依赖链审查，本轮不要做这项。仍须完成两项演示分析：当前先设计服务指标、日志、追踪关联、服务目标与告警降噪；之后再给虚构客户账户做加权健康评分、流失分层和扩展机会建议。按这个顺序交付，不连接生产系统、不联系客户。","expected_ids":["observability-designer"],"pending_ids":["customer-success-manager"],"forbidden_current_ids":["dependency-auditor"],"control":false}
+  ]
+}

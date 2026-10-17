@@ -1,0 +1,1975 @@
+{
+  "version": 1,
+  "scope": "Isolated public directory selection; no daily installation, private catalog or lifecycle changes.",
+  "plan": {
+    "version": 1,
+    "arms": [
+      "baseline",
+      "described",
+      "early_stop"
+    ],
+    "case_count": 7,
+    "repetitions": 1,
+    "case_order": [
+      "culture_now_then_dependencies",
+      "wiki_then_package_risks",
+      "accounts_then_license_chain",
+      "welcome_then_borrowed_packages",
+      "finance_packages_then_wiki",
+      "packages_now_then_channels",
+      "cancel_packages_keep_signals_accounts"
+    ],
+    "original_failed_case_ids": [
+      "culture_now_then_dependencies"
+    ],
+    "baseline_plan_sha256": "3978c64c4d11bf2837c35677ff3c4646bebcb78fcaa30b6aa02e0e8e3c1818a7",
+    "baseline_results_sha256": "9cf9e6fc2582e9d2acb45d93f4122af2d5cee3331003d6671247bc939c019141",
+    "base_commit": "eebb3c04b4722728798021930d87beb88009eadc",
+    "same_original_failed_need_and_gold": true,
+    "same_membership": true,
+    "same_final_question_and_full_descriptions": true,
+    "first_layer_culture_repair_preserved": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "max_boundary_calls_per_task": 0,
+    "carry_limit": 8,
+    "adaptive_target": 24,
+    "final_limit": 96,
+    "max_rounds": 6,
+    "reading_cost_ratio": {
+      "baseline": 0.65,
+      "described": 0.65,
+      "early_stop": 0.35
+    },
+    "reading_cost_pool_limit": 48,
+    "max_calls": 147,
+    "max_known_tokens": 420000,
+    "max_seconds": 360,
+    "timeout_seconds": 15,
+    "provider": "typesafe",
+    "attempts": 1,
+    "ordering": "Original failure then six new cases; rotate three fresh arms by case; one pass.",
+    "scope": "Isolated public directory selection; no daily installation, private catalog or lifecycle changes.",
+    "changes": {
+      "baseline": "Current-step selection plus previous culture repair, unchanged.",
+      "described": "Clarify package vulnerabilities, licenses, transitive risk and upgrade planning in the third-layer scope and its embedded parent copy.",
+      "early_stop": "Same clarified scopes; lower only the reading-cost stopping ratio from .65 to .35 when the retained pool is at most 48. Keep the whole retained pool for final selection."
+    },
+    "scope_evidence": {
+      "node": "domain:engineering:topic7",
+      "parent": "domain:engineering",
+      "before": "Audit dependencies and unsafe code patterns; manage environment secrets and vault infrastructure; verify release readiness.",
+      "after": "Audit third-party software packages for known vulnerabilities, license conflicts and transitive dependency risks; plan safe upgrade paths. Also detect unsafe code patterns, manage environment secrets and vault infrastructure, and verify release readiness.",
+      "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+      "source_description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+    },
+    "acceptance": "Candidate must select every current reference at >=0.7 and retain every current/later reference throughout all seven cases. Cost preference applies only among all-pass arms. All semantic failures remain; no retries, tuning or passed-need replay.",
+    "token_cap": "Check before dispatch; one response may cross it. Stop on transport, missing usage, malformed output or exhausted budget.",
+    "limitations": "One known failure and six author-written combinations, one pass without independent blind review. The earlier stopping heuristic is calibrated from prior traces, not proven optimal. Selection only, no business execution or population accuracy claim.",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+      "benchmarks/directory-depth/expanded_experiment.py": "bff01ab4da9090932e8fb1ae9bb7150ea80e42cd757cf39b65583df1650f6eec",
+      "benchmarks/directory-depth/expanded_cases.json": "6712d6909d27b6035d4e12ad2082165b5e25fa3fa9b63e20238777f23e7f45e9",
+      "benchmarks/directory-depth/adaptive_repair.py": "5cfb14f71b07a8200a951c8cbe7eb9a535c582e05df2f023dc83025e27037979",
+      "benchmarks/directory-depth/repair_experiment.py": "cdf8b0541ac162c1dca06970365cb9b586583dca4a5200d1da8e4e879f292519",
+      "benchmarks/directory-depth/slim_experiment.py": "ce7bb8ce3de60f5d42cb9182c82e595da7a9dc5f1fd1baabd7aece370cc72044",
+      "benchmarks/directory-depth/breadth_experiment.py": "47081cae41bb2ee631689c49297ac9a291669269c9adc2655bece144b4d66982",
+      "benchmarks/directory-depth/breadth_cases.json": "69e3117dd7ca6371684d6aea9b64a8b6bf22673bb61d24edca84626f2f22b6c9",
+      "benchmarks/directory-depth/large_public_cases.json": "a8dfc3b7f6b30bd87b897effe16c3b188b85655d77cc2021c006339848ff2560",
+      "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+      "benchmarks/directory-depth/current_step_experiment.py": "cb0627cc7cd2effd08045677c1bddc321436a8201a71e2af4da850e3594510f9",
+      "benchmarks/directory-depth/current_step_cases.json": "fd34a3bb9210c5a5aaec98e8670921068cf56d7f430463a121146ed812f218a8",
+      "benchmarks/directory-depth/culture_scope.py": "8c8f8e919a968c933aca6e78330fb8dbe3afb3c5da49feedf069e818b014b45a",
+      "benchmarks/directory-depth/culture_scope_experiment.py": "903b5113e5ca4285b309a7a9051c87ff15fe6fe651f45d90b300bfed58e309db",
+      "benchmarks/directory-depth/culture_scope_cases.json": "93e6a1d7f223e88ca9ffdd5a963371ebc957e4f19f28508957e1826280e62244",
+      "benchmarks/directory-depth/dependency_scope.py": "b63f21959200ead57e504250d00cea7460f05160f8a1ad61d62ba39ca47bcfad",
+      "benchmarks/directory-depth/dependency_selection.py": "e1f98a2f550fb2d605eeb23108fdfce695b7cb7106e14eec611d4a16729f72c8",
+      "benchmarks/directory-depth/dependency_experiment.py": "f0cd28524bd026f30d88c6105b1e3433045ce7bb88600e54349b1965a1486270",
+      "benchmarks/directory-depth/dependency_cases.json": "437cc2a5d5c81ba20454025ce1b4a083b0a8f215668a83f22122251f220ef678",
+      "benchmarks/directory-depth/adaptive_early_stop.py": "df9f324f24ff41314f48d7d2905a51f5adf7667854b0da5662068490c6f85e4f"
+    },
+    "input_sha256": {
+      "candidate-nodes.json": "e45570315dec74021f68f765ca08e0a5446b7dd9f7f466ac2d4c215f4caa95da",
+      "repaired-nodes.json": "4c6df2621938559e41613a7abe5827ad4db2b4170cc118879e1bde1bd9f6b56e",
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "cases.json": "7ea76a5327e14e2e2e2562d3c9fd19813183b560adfda2ad843acb7fb18d1dfe",
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "nodes.json": "52326ec32b7326872e68d464e14c09a5583fc07b951e2551a7d4e8e0248a592f"
+    }
+  },
+  "stop": "completed",
+  "complete_cases": 7,
+  "all_cases_complete": true,
+  "actual_calls": 102,
+  "known_tokens": 373021,
+  "wall_seconds": 60.87544233398512,
+  "usage_complete": true,
+  "unresolved": [],
+  "errors": [],
+  "by_arm": {
+    "baseline": {
+      "count": 7,
+      "omission_safe_successes": 5,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.9205603987128206,
+      "mean_tokens": 17296.428571428572,
+      "mean_calls": 4.857142857142857
+    },
+    "described": {
+      "count": 7,
+      "omission_safe_successes": 7,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.9203779938564236,
+      "mean_tokens": 18871.85714285714,
+      "mean_calls": 5
+    },
+    "early_stop": {
+      "count": 7,
+      "omission_safe_successes": 6,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.85211880942474,
+      "mean_tokens": 17120.428571428572,
+      "mean_calls": 4.714285714285714
+    }
+  },
+  "complete_case_ids": [
+    "culture_now_then_dependencies",
+    "wiki_then_package_risks",
+    "accounts_then_license_chain",
+    "welcome_then_borrowed_packages",
+    "finance_packages_then_wiki",
+    "packages_now_then_channels",
+    "cancel_packages_keep_signals_accounts"
+  ],
+  "complete_case_metrics": {
+    "baseline": {
+      "count": 7,
+      "omission_safe_successes": 5,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.9205603987128206,
+      "mean_tokens": 17296.428571428572,
+      "mean_calls": 4.857142857142857
+    },
+    "described": {
+      "count": 7,
+      "omission_safe_successes": 7,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.9203779938564236,
+      "mean_tokens": 18871.85714285714,
+      "mean_calls": 5
+    },
+    "early_stop": {
+      "count": 7,
+      "omission_safe_successes": 6,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.85211880942474,
+      "mean_tokens": 17120.428571428572,
+      "mean_calls": 4.714285714285714
+    }
+  },
+  "case_progress": {
+    "culture_now_then_dependencies": {
+      "baseline": "completed",
+      "described": "completed",
+      "early_stop": "completed"
+    },
+    "wiki_then_package_risks": {
+      "baseline": "completed",
+      "described": "completed",
+      "early_stop": "completed"
+    },
+    "accounts_then_license_chain": {
+      "baseline": "completed",
+      "described": "completed",
+      "early_stop": "completed"
+    },
+    "welcome_then_borrowed_packages": {
+      "baseline": "completed",
+      "described": "completed",
+      "early_stop": "completed"
+    },
+    "finance_packages_then_wiki": {
+      "baseline": "completed",
+      "described": "completed",
+      "early_stop": "completed"
+    },
+    "packages_now_then_channels": {
+      "baseline": "completed",
+      "described": "completed",
+      "early_stop": "completed"
+    },
+    "cancel_packages_keep_signals_accounts": {
+      "baseline": "completed",
+      "described": "completed",
+      "early_stop": "completed"
+    }
+  },
+  "positive_by_arm": {
+    "baseline": {
+      "count": 7,
+      "omission_safe_successes": 5,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.9205603987128206,
+      "mean_tokens": 17296.428571428572,
+      "mean_calls": 4.857142857142857
+    },
+    "described": {
+      "count": 7,
+      "omission_safe_successes": 7,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.9203779938564236,
+      "mean_tokens": 18871.85714285714,
+      "mean_calls": 5
+    },
+    "early_stop": {
+      "count": 7,
+      "omission_safe_successes": 6,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.85211880942474,
+      "mean_tokens": 17120.428571428572,
+      "mean_calls": 4.714285714285714
+    }
+  },
+  "candidate_eligible_on_this_regression": {
+    "described": true,
+    "early_stop": false
+  },
+  "change_vs_baseline_percent": {
+    "baseline": {
+      "mean_tokens": 0.0,
+      "mean_seconds": 0.0,
+      "mean_calls": 0.0
+    },
+    "described": {
+      "mean_tokens": 9.10840388189138,
+      "mean_seconds": -0.006245543029259615,
+      "mean_calls": 2.941176470588247
+    },
+    "early_stop": {
+      "mean_tokens": -1.0175511046871755,
+      "mean_seconds": -2.3434402972198343,
+      "mean_calls": -2.941176470588225
+    }
+  },
+  "stage_usage": {
+    "described": {
+      "directory_calls": 28.0,
+      "directory_tokens": 83297.0,
+      "directory_seconds": 15.787501792045077,
+      "final_calls": 7.0,
+      "final_tokens": 48806.0,
+      "final_seconds": 4.544669331953628
+    },
+    "early_stop": {
+      "final_calls": 6.0,
+      "final_tokens": 38198.0,
+      "final_seconds": 4.026597625983413,
+      "directory_calls": 27.0,
+      "directory_tokens": 81645.0,
+      "directory_seconds": 15.819921586138662
+    },
+    "baseline": {
+      "directory_calls": 28.0,
+      "directory_tokens": 84623.0,
+      "directory_seconds": 16.226359126885654,
+      "final_calls": 6.0,
+      "final_tokens": 36452.0,
+      "final_seconds": 4.103044791991124
+    }
+  },
+  "boundary_reviews": [],
+  "failures": [
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "baseline",
+      "first_omission_stage": 3,
+      "scores_at_omission": [
+        {
+          "node": "domain:engineering:topic7",
+          "score": 0.39
+        },
+        {
+          "node": "domain:c-level-advisor:topic3",
+          "score": 0.96
+        }
+      ],
+      "selected": "culture-architect",
+      "confidence": 1.0,
+      "status": "selected"
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "early_stop",
+      "first_omission_stage": null,
+      "scores_at_omission": [],
+      "selected": null,
+      "confidence": null,
+      "status": "unavailable"
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "baseline",
+      "first_omission_stage": null,
+      "scores_at_omission": [],
+      "selected": null,
+      "confidence": null,
+      "status": "unavailable"
+    }
+  ],
+  "rows": [
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.737677083001472,
+      "calls": 5,
+      "known_tokens": 13873,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "first_omission_stage": 3,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "culture-architect",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 34
+      },
+      "stages": [
+        {
+          "pool_size": 275,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 145,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 39,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 34,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.9488332079781685,
+      "calls": 5,
+      "known_tokens": 14485,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "culture-architect",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 39
+      },
+      "stages": [
+        {
+          "pool_size": 275,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 145,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 44,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 39,
+          "offered": 4,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "culture_now_then_dependencies",
+      "arm": "early_stop",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.278710415994283,
+      "calls": 4,
+      "known_tokens": 12889,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "culture-architect",
+        "confidence": 1.0,
+        "stop_reason": "estimated_reading_cost",
+        "final_pool_size": 44
+      },
+      "stages": [
+        {
+          "pool_size": 275,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 145,
+          "offered": 13,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 44,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "wiki_then_package_risks",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6267783750081435,
+      "calls": 5,
+      "known_tokens": 14341,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "confluence-expert",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 26
+      },
+      "stages": [
+        {
+          "pool_size": 233,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 160,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 51,
+          "offered": 22,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 26,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "wiki_then_package_risks",
+      "arm": "early_stop",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.8081632499815896,
+      "calls": 5,
+      "known_tokens": 14830,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "confluence-expert",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 31
+      },
+      "stages": [
+        {
+          "pool_size": 233,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 160,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 51,
+          "offered": 22,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 31,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "wiki_then_package_risks",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.940011124999728,
+      "calls": 5,
+      "known_tokens": 15231,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "confluence-expert",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 26
+      },
+      "stages": [
+        {
+          "pool_size": 233,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 160,
+          "offered": 12,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 63,
+          "offered": 22,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 26,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "accounts_then_license_chain",
+      "arm": "early_stop",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.7201929170114454,
+      "calls": 5,
+      "known_tokens": 18702,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "customer-success-manager",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 41
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 243,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 78,
+          "offered": 30,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 41,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "accounts_then_license_chain",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.8042559169989545,
+      "calls": 5,
+      "known_tokens": 18171,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "customer-success-manager",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 41
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 226,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 71,
+          "offered": 27,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 41,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "accounts_then_license_chain",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.937572208000347,
+      "calls": 5,
+      "known_tokens": 17865,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "customer-success-manager",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 41
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 209,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 71,
+          "offered": 24,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 41,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "welcome_then_borrowed_packages",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.290884999994887,
+      "calls": 5,
+      "known_tokens": 21034,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "email-sequence",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 58
+      },
+      "stages": [
+        {
+          "pool_size": 302,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 223,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 95,
+          "offered": 28,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "welcome_then_borrowed_packages",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.9017716250091325,
+      "calls": 5,
+      "known_tokens": 20728,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "email-sequence",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 58
+      },
+      "stages": [
+        {
+          "pool_size": 302,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 206,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 95,
+          "offered": 25,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "welcome_then_borrowed_packages",
+      "arm": "early_stop",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1333400000003166,
+      "calls": 5,
+      "known_tokens": 21078,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "email-sequence",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 58
+      },
+      "stages": [
+        {
+          "pool_size": 302,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 223,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 95,
+          "offered": 28,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 58,
+          "offered": 10,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1630130000121426,
+      "calls": 5,
+      "known_tokens": 28656,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "saas-metrics-coach",
+        "confidence": 0.96,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 93
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 264,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 144,
+          "offered": 32,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 93,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "early_stop",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.2157505829818547,
+      "calls": 4,
+      "known_tokens": 16870,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "unavailable",
+        "reason": "final_limit"
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 264,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 150,
+          "offered": 32,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 99,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.3602584160107654,
+      "calls": 4,
+      "known_tokens": 16826,
+      "usage_complete": true,
+      "passed": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "unavailable",
+        "reason": "final_limit"
+      },
+      "stages": [
+        {
+          "pool_size": 376,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 264,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 150,
+          "offered": 32,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 99,
+          "offered": 16,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "packages_now_then_channels",
+      "arm": "early_stop",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.738398374989629,
+      "calls": 5,
+      "known_tokens": 17770,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 49
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 176,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 72,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 49,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "packages_now_then_channels",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1522734579921234,
+      "calls": 5,
+      "known_tokens": 17726,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 49
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 176,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 72,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 49,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "packages_now_then_channels",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.1363862499711104,
+      "calls": 5,
+      "known_tokens": 17770,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "dependency-auditor",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 49
+      },
+      "stages": [
+        {
+          "pool_size": 350,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 176,
+          "offered": 17,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 72,
+          "offered": 20,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 49,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "cancel_packages_keep_signals_accounts",
+      "arm": "baseline",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.158561791991815,
+      "calls": 5,
+      "known_tokens": 18214,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "observability-designer",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 52
+      },
+      "stages": [
+        {
+          "pool_size": 324,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 217,
+          "offered": 15,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 72,
+          "offered": 25,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 52,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "cancel_packages_keep_signals_accounts",
+      "arm": "described",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.728291291015921,
+      "calls": 5,
+      "known_tokens": 18258,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "observability-designer",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 52
+      },
+      "stages": [
+        {
+          "pool_size": 324,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 217,
+          "offered": 15,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 72,
+          "offered": 25,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 52,
+          "offered": 8,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    },
+    {
+      "case": "cancel_packages_keep_signals_accounts",
+      "arm": "early_stop",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.070276125014061,
+      "calls": 5,
+      "known_tokens": 17704,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "observability-designer",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 52
+      },
+      "stages": [
+        {
+          "pool_size": 324,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 217,
+          "offered": 15,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 63,
+          "offered": 25,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        },
+        {
+          "pool_size": 52,
+          "offered": 6,
+          "boundary": [],
+          "reviewed": [],
+          "recovered": [],
+          "review_skipped": null
+        }
+      ]
+    }
+  ],
+  "identical_request_groups_with_score_variation": 26,
+  "protected_paths_checked": 354,
+  "protected_files_unchanged": true,
+  "source_summary_sha256": "70cffe0da27c41f1f3d45f10ffb6aa2bb6cfa8524c5f8a50a65ab04d2f4fd1dd",
+  "budget_extension": null,
+  "limitations": [
+    "One known failure and six author-written combinations, one pass without independent blind review. The earlier stopping heuristic is calibrated from prior traces, not proven optimal. Selection only, no business execution or population accuracy claim.",
+    "All failures remain in primary denominators. Two final-limit failures incur no final-model call, so their lower cost is not completion-equivalent savings.",
+    "Original missing target improves from .39 to .43 against the unchanged .4 threshold in this pass; its narrow margin and sampling variation do not establish universal stability.",
+    "The finance early_stop failure occurs without triggering the earlier stop. A .38/.41 directory-score variation retains six extra members. The exact saved-request replay is offline analysis, not a new live pass or an additional accuracy sample.",
+    "The three-arm comparison isolates description repair from the cost-stop parameter in source, but independently sampled directory responses still differ. One pass is not independent blind validation or a stable latency claim.",
+    "Only Jev selector time and reported tokens are measured. Root reasoning and intent-entry cost, complete business-task cost, backend model revision and monetary charges are unobservable in these metrics.",
+    "At verification all 354 release/configuration files, 232 main-worktree files and 224 lifecycle-worktree files, their HEADs and Git status match the fresh start snapshots. These are time-bounded observations.",
+    "No installation, activation, private-catalog mutation, lifecycle modification, business execution or network replay of passed needs."
+  ],
+  "cases": [
+    {
+      "id": "culture_now_then_dependencies",
+      "stratum": "chinese",
+      "need": "演示仓库依赖的安全漏洞、许可证和间接依赖风险也需要审查，但排在下一步。当前先为虚构合并团队设计共同价值观、可观察的行为准则、跨团队文化仪式与文化健康评估，处理两组习惯冲突。两步都必须交付，先做文化方案，不调整人员或软件包。",
+      "expected_ids": [
+        "culture-architect"
+      ],
+      "pending_ids": [
+        "dependency-auditor"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "culture-architect",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/c-level-advisor/skills/culture-architect/SKILL.md",
+          "description": "Build, measure, and evolve company culture as operational behavior — not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health assessment, and cultural rituals by stage. Use when building company values, assessing culture health, designing cultural rituals, creating culture codes, handling culture clashes, or when user mentions culture, values, culture debt, founder culture, or culture code."
+        },
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        }
+      ]
+    },
+    {
+      "id": "wiki_then_package_risks",
+      "stratum": "chinese",
+      "need": "为虚构项目先规划 Confluence 的页面层级、权限、模板宏和内容复审；随后必须审查演示仓库第三方软件包的已知漏洞、开源许可证冲突与间接依赖风险，列出安全升级路线。当前先交知识库方案，两步都要完成，不访问站点，也不更新软件包。",
+      "expected_ids": [
+        "confluence-expert"
+      ],
+      "pending_ids": [
+        "dependency-auditor"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "confluence-expert",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/confluence-expert/SKILL.md",
+          "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, and documentation. Configures space permissions and hierarchies, creates page templates with macros, sets up documentation taxonomies, designs page layouts, and manages content governance. Use when users need to build or restructure a Confluence space, design page hierarchies with permission structures, author or standardise documentation templates, embed Jira reports in pages, run knowledge base audits, or establish documentation standards and collaborative workflows."
+        },
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        }
+      ]
+    },
+    {
+      "id": "accounts_then_license_chain",
+      "stratum": "mixed",
+      "need": "这次两项都要交：先给虚构 SaaS 客户账户做 weighted health score、流失风险分层和扩展机会建议；再检查演示代码库第三方包的 CVE、license conflicts 与 transitive dependency 风险，并规划安全升级。当前只完成账户分析，依赖审查随后也必须做，不联系客户、不安装软件包。",
+      "expected_ids": [
+        "customer-success-manager"
+      ],
+      "pending_ids": [
+        "dependency-auditor"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "customer-success-manager",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/business-growth/skills/customer-success-manager/SKILL.md",
+          "description": "Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success. Use when analyzing customer accounts, reviewing retention metrics, scoring at-risk customers, or when the user mentions churn, customer health scores, upsell opportunities, expansion revenue, retention analysis, or customer analytics. Runs three Python CLI tools to produce deterministic health scores, churn risk tiers, and prioritized expansion recommendations across Enterprise, Mid-Market, and SMB segments."
+        },
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        }
+      ]
+    },
+    {
+      "id": "welcome_then_borrowed_packages",
+      "stratum": "synonym",
+      "need": "先为已同意接收邮件的演示新用户设计从欢迎到激活的连续邮件及发送间隔；之后必须检查代码里借来的开源包有没有已知安全缺陷、授权条款打架，以及它们再带进来的其他包的风险，给出稳妥升级顺序。现在先做邮件方案，两件事都不能漏，不发送邮件，不改动依赖。",
+      "expected_ids": [
+        "email-sequence"
+      ],
+      "pending_ids": [
+        "dependency-auditor"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "email-sequence",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/marketing-skill/skills/email-sequence/SKILL.md",
+          "description": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \"email sequence,\" \"drip campaign,\" \"nurture sequence,\" \"onboarding emails,\" \"welcome sequence,\" \"re-engagement emails,\" \"email automation,\" or \"lifecycle emails.\" For in-app onboarding, see onboarding-cro."
+        },
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        }
+      ]
+    },
+    {
+      "id": "finance_packages_then_wiki",
+      "stratum": "mixed",
+      "need": "虚构公司的演示任务分三步：当前先根据订阅收入和客户数字计算 MRR、NRR、CAC/LTV，解释整体经营健康度；第二步必须审查演示仓库的漏洞、许可证冲突、传递依赖风险和安全升级路径；第三步必须规划 Confluence 页面层级、权限、模板宏与归档来保存结论。三步按顺序完成，只分析，不改包或登录站点。",
+      "expected_ids": [
+        "saas-metrics-coach"
+      ],
+      "pending_ids": [
+        "dependency-auditor",
+        "confluence-expert"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "saas-metrics-coach",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/finance/skills/saas-metrics-coach/SKILL.md",
+          "description": "SaaS financial health advisor. Use when a user shares revenue or customer numbers, or mentions ARR, MRR, churn, LTV, CAC, NRR, or asks how their SaaS business is doing."
+        },
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        },
+        {
+          "id": "confluence-expert",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/confluence-expert/SKILL.md",
+          "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, and documentation. Configures space permissions and hierarchies, creates page templates with macros, sets up documentation taxonomies, designs page layouts, and manages content governance. Use when users need to build or restructure a Confluence space, design page hierarchies with permission structures, author or standardise documentation templates, embed Jira reports in pages, run knowledge base audits, or establish documentation standards and collaborative workflows."
+        }
+      ]
+    },
+    {
+      "id": "packages_now_then_channels",
+      "stratum": "mixed",
+      "need": "直销与伙伴渠道的真实利润、完整服务成本和渠道配比也必须核算，但放第二步。现在先审计演示软件项目第三方包的漏洞、license 兼容性和依赖链风险，给出 safe upgrade 计划。两项都要交，当前先做依赖审查，不升级任何包，不联系合作伙伴。",
+      "expected_ids": [
+        "dependency-auditor"
+      ],
+      "pending_ids": [
+        "channel-economics"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "dependency-auditor",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/dependency-auditor/SKILL.md",
+          "description": "Audit and manage dependencies across multi-language projects. Identifies vulnerabilities, license conflicts, transitive dependency risks, and safe-upgrade paths. Use when auditing third-party packages before release, investigating a CVE, planning a major version bump, or running a license-compliance review. Examples: 'audit our npm dependencies', 'do we have GPL contamination', 'plan the upgrade to React 19'."
+        },
+        {
+          "id": "channel-economics",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/commercial/skills/channel-economics/SKILL.md",
+          "description": "Use when reviewing or rebalancing direct vs. partner-led channel economics — computing fully-loaded cost-to-serve per channel, channel ROI with cash / LTV / marginal lenses, and optimal channel mix subject to constraints. For Head of Commercial, RevOps, and VP Sales doing quarterly channel review when pipeline is mixed (e.g., 60% direct + 40% partner-led) and nobody actually knows which channel makes money after CAC, support load, partner discount, deal-velocity differences, retention differential, and overhead allocation are all loaded in. Outputs cost to serve, channel ROI verdicts (DOUBLE-DOWN / MAINTAIN / DEFUND / EXIT), a sensitivity-tested channel-mix recommendation, and the diminishing-returns inflection (e.g., 'which channel actually makes money — direct or partner?')."
+        }
+      ]
+    },
+    {
+      "id": "cancel_packages_keep_signals_accounts",
+      "stratum": "chinese",
+      "need": "取消之前的开源包漏洞、许可证和依赖链审查，本轮不要做这项。仍须完成两项演示分析：当前先设计服务指标、日志、追踪关联、服务目标与告警降噪；之后再给虚构客户账户做加权健康评分、流失分层和扩展机会建议。按这个顺序交付，不连接生产系统、不联系客户。",
+      "expected_ids": [
+        "observability-designer"
+      ],
+      "pending_ids": [
+        "customer-success-manager"
+      ],
+      "forbidden_current_ids": [
+        "dependency-auditor"
+      ],
+      "control": false,
+      "gold_sources": [
+        {
+          "id": "observability-designer",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/skills/observability-designer/SKILL.md",
+          "description": "Design production-ready observability strategies combining metrics, logs, and traces. Includes SLI/SLO design, golden-signals monitoring, alert optimization. Use when adding observability to a new service, refactoring alerting that is too noisy, or designing an SLO program before scaling production load."
+        },
+        {
+          "id": "customer-success-manager",
+          "source": "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/business-growth/skills/customer-success-manager/SKILL.md",
+          "description": "Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success. Use when analyzing customer accounts, reviewing retention metrics, scoring at-risk customers, or when the user mentions churn, customer health scores, upsell opportunities, expansion revenue, retention analysis, or customer analytics. Runs three Python CLI tools to produce deterministic health scores, churn risk tiers, and prioritized expansion recommendations across Enterprise, Mid-Market, and SMB segments."
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "frozen_inputs_and_sources_match": true,
+    "only_dependency_scope_and_embedded_copy_changed": true,
+    "memberships_and_culture_repair_preserved": true,
+    "offline_checks": 9,
+    "previously_passed_needs_replayed": 0,
+    "original_failed_case_exactly_preserved": true,
+    "live_rows": 21,
+    "receipt_pairs": 102,
+    "final_calls": 19,
+    "known_tokens": 373021,
+    "wall_seconds": 60.87544233398512,
+    "raw_needs_and_final_questions_and_full_descriptions_preserved": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "protected_files": 354,
+    "other_worktrees": {
+      "main": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "snapshotted_files": 232,
+        "changed_paths": [],
+        "added_paths": []
+      },
+      "lifecycle": {
+        "head_unchanged": true,
+        "status_unchanged": true,
+        "snapshotted_files": 224,
+        "changed_paths": [],
+        "added_paths": []
+      }
+    },
+    "changed_protected_path_count": 0
+  },
+  "by_arm_details": {
+    "baseline": {
+      "current_reference_accepted": 6,
+      "all_required_retained": 6,
+      "median_seconds": 2.940011124999728,
+      "total_tokens": 121075,
+      "total_calls": 34,
+      "final_limit_failures": 1,
+      "early_cost_stops": 0
+    },
+    "described": {
+      "current_reference_accepted": 7,
+      "all_required_retained": 7,
+      "median_seconds": 2.937572208000347,
+      "total_tokens": 132103,
+      "total_calls": 35,
+      "final_limit_failures": 0,
+      "early_cost_stops": 0
+    },
+    "early_stop": {
+      "current_reference_accepted": 6,
+      "all_required_retained": 7,
+      "median_seconds": 2.8081632499815896,
+      "total_tokens": 119843,
+      "total_calls": 33,
+      "final_limit_failures": 1,
+      "early_cost_stops": 1
+    }
+  },
+  "common_passing_subset": {
+    "post_hoc": true,
+    "case_ids": [
+      "wiki_then_package_risks",
+      "accounts_then_license_chain",
+      "welcome_then_borrowed_packages",
+      "packages_now_then_channels",
+      "cancel_packages_keep_signals_accounts"
+    ],
+    "does_not_replace_primary_denominators": true,
+    "by_arm": {
+      "baseline": {
+        "total_tokens": 90376,
+        "total_seconds": 15.345987291977508
+      },
+      "described": {
+        "total_tokens": 88962,
+        "total_seconds": 14.330799749004655
+      },
+      "early_stop": {
+        "total_tokens": 90084,
+        "total_seconds": 15.470370666997042
+      }
+    }
+  },
+  "offline_replay": {
+    "kind": "offline_exact_request_replay",
+    "case": "finance_packages_then_wiki",
+    "source_arm": "described",
+    "counterfactual_arm": "early_stop",
+    "network_calls": 0,
+    "same_spec_and_state_for_every_replayed_stage": true,
+    "replayed_stages": [
+      "directory-0",
+      "directory-1",
+      "directory-2",
+      "directory-3",
+      "final"
+    ],
+    "result_equals_described": true,
+    "interpretation": "The earlier stopping condition never triggers for this wide path. Its separate live failure reflects different directory scores/candidate pools, not a fired early-stop condition. This replay is not another live pass or an accuracy sample."
+  },
+  "original_failure_observation": {
+    "baseline": {
+      "dependency_third_level_score": 0.39,
+      "pool_sizes": [
+        275,
+        145,
+        39,
+        34
+      ],
+      "current_confidence": 1.0
+    },
+    "described": {
+      "dependency_third_level_score": 0.43,
+      "pool_sizes": [
+        275,
+        145,
+        44,
+        39
+      ],
+      "current_confidence": 1.0
+    },
+    "early_stop": {
+      "dependency_third_level_score": 0.43,
+      "pool_sizes": [
+        275,
+        145,
+        44
+      ],
+      "current_confidence": 1.0
+    }
+  },
+  "new_limit_failure": {
+    "case": "finance_packages_then_wiki",
+    "limit": 96,
+    "last_pool_sizes": {
+      "baseline": 99,
+      "described": 93,
+      "early_stop": 99
+    },
+    "extra_node": "domain:product-team:topic0",
+    "extra_members": 6,
+    "directory_threshold": 0.4,
+    "scores": {
+      "described": 0.38,
+      "early_stop": 0.41
+    },
+    "early_stop_condition_triggered": false,
+    "all_required_targets_retained": true,
+    "retry_performed": false
+  },
+  "preferred_candidate_on_this_batch": "described",
+  "overall_cost_reduction_achieved": false,
+  "conclusion": "Description-only repair passes all seven current/later-reference cases, improving 5/7 to 7/7 at unchanged confidence gates. Mean selector time is flat and tokens rise 9.11%. Earlier stopping passes 6/7 and is not preferred despite a cheaper original failure case. Keep description repair as the isolated follow-up baseline; overall omission-safe cost reduction is not yet achieved."
+}

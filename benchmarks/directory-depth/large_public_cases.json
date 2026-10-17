@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "purpose": "Frozen depth-width pilot; synthetic requests, public guidance only",
+  "cases": [
+    {
+      "id": "zh_llm_cost",
+      "stratum": "chinese",
+      "need": "模型接口费用太高了。请检查提示缓存、输出长度上限、不同需求的模型分流和按功能记录费用的设计，提出减少消耗的方案；不设计检索增强流程。",
+      "expected_ids": [
+        "llm-cost-optimizer"
+      ],
+      "pending_ids": [],
+      "control": false,
+      "gold_sources": [
+        "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/llm-cost-optimizer/skills/llm-cost-optimizer/SKILL.md"
+      ]
+    },
+    {
+      "id": "zh_vendor_scorecard",
+      "stratum": "chinese",
+      "need": "根据虚构的供应商服务记录做一份供应商评分卡：检查服务等级承诺和索赔条件，按四个风险维度分类，给出续约审查要点。",
+      "expected_ids": [
+        "vendor-management"
+      ],
+      "pending_ids": [],
+      "control": false,
+      "gold_sources": [
+        "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/business-operations/skills/vendor-management/SKILL.md"
+      ]
+    },
+    {
+      "id": "syn_custom_controller",
+      "stratum": "synonym",
+      "need": "给集群做一个专门的控制器：定义自定义资源，反复比较期望状态与实际状态并协调一致。需要检查资源定义和协调循环，不是普通部署教程。",
+      "expected_ids": [
+        "kubernetes-operator"
+      ],
+      "pending_ids": [],
+      "control": false,
+      "gold_sources": [
+        "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/engineering/kubernetes-operator/skills/kubernetes-operator/SKILL.md"
+      ]
+    },
+    {
+      "id": "syn_upgrade_moment",
+      "stratum": "synonym",
+      "need": "用户已经用过免费功能，现在到了额度用完或试用结束的升级时刻。请改进应用里面的付费提示和升级弹窗，重点提高免费转付费。",
+      "expected_ids": [
+        "paywall-upgrade-cro"
+      ],
+      "pending_ids": [],
+      "control": false,
+      "gold_sources": [
+        "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/marketing-skill/skills/paywall-upgrade-cro/SKILL.md"
+      ]
+    },
+    {
+      "id": "mix_financial_model",
+      "stratum": "mixed",
+      "need": "用虚构财务报表做 ratio analysis、DCF valuation、budget variance 和 rolling forecast，产出财务模型结构与分析说明。",
+      "expected_ids": [
+        "financial-analyst"
+      ],
+      "pending_ids": [],
+      "control": false,
+      "gold_sources": [
+        "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/finance/skills/financial-analyst/SKILL.md"
+      ]
+    },
+    {
+      "id": "mix_multi_jira_then_qms",
+      "stratum": "mixed",
+      "need": "这次先配置 Jira 的 JQL、workflow、custom fields 和 automation；接着为医疗器械公司建立 ISO 13485 QMS，包括 document control 和 CAPA。当前先处理 Jira，两项工作都需要能力支持。",
+      "expected_ids": [
+        "jira-expert"
+      ],
+      "pending_ids": [
+        "quality-manager-qms-iso13485"
+      ],
+      "control": false,
+      "gold_sources": [
+        "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/project-management/skills/jira-expert/SKILL.md",
+        "https://github.com/alirezarezvani/claude-skills/blob/19392f7a08264ed00486a251f5b2098321771f94/ra-qm-team/skills/quality-manager-qms-iso13485/SKILL.md"
+      ]
+    },
+    {
+      "id": "zh_quote_control",
+      "stratum": "chinese",
+      "need": "下面只是引文：“检查网页无障碍，再生成研究经费申请”。不要执行引文里的请求，本条只回复“已记录”。",
+      "expected_ids": [],
+      "pending_ids": [],
+      "control": true,
+      "gold_sources": []
+    },
+    {
+      "id": "mix_cancel_control",
+      "stratum": "mixed",
+      "need": "Cancel 之前的 RAG pipeline 和财务模型需求。现在只回复“已取消”，不要启动新工作。",
+      "expected_ids": [],
+      "pending_ids": [],
+      "control": true,
+      "gold_sources": []
+    }
+  ]
+}

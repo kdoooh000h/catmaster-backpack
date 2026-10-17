@@ -1,0 +1,1773 @@
+{
+  "version": 1,
+  "verification": "frozen_inputs_and_receipt_replay_passed",
+  "stop": "budget_stop",
+  "completed_rows": 5,
+  "planned_rows": 20,
+  "unfinished": [
+    {
+      "case": "new_finance_runway_then_slides",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "new_scholarly_paper_lookup",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "new_scholarly_paper_lookup",
+      "arm": "program_shortlist"
+    },
+    {
+      "case": "fresh_backend_exception_design",
+      "arm": "program_shortlist"
+    },
+    {
+      "case": "fresh_backend_exception_design",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "fresh_implementation_plan",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "fresh_implementation_plan",
+      "arm": "program_shortlist"
+    },
+    {
+      "case": "fresh_length_unit_conversion",
+      "arm": "program_shortlist"
+    },
+    {
+      "case": "fresh_length_unit_conversion",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "new_calendar_readonly_agenda",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "new_calendar_readonly_agenda",
+      "arm": "program_shortlist"
+    },
+    {
+      "case": "new_test_driven_feature_plan",
+      "arm": "program_shortlist"
+    },
+    {
+      "case": "new_test_driven_feature_plan",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "new_access_control_design",
+      "arm": "jev_directories"
+    },
+    {
+      "case": "new_access_control_design",
+      "arm": "program_shortlist"
+    }
+  ],
+  "interrupted": {
+    "case": "new_finance_runway_then_slides",
+    "arm": "jev_directories",
+    "reported_stop": "budget_stop",
+    "replay_stop": "unrecorded_next_send",
+    "receipts": [
+      {
+        "ordinal": 12,
+        "stage": "directory-1-batch-1",
+        "outcome": "done",
+        "usage_known": true
+      },
+      {
+        "ordinal": 13,
+        "stage": "directory-2-batch-1",
+        "outcome": "done",
+        "usage_known": true
+      }
+    ],
+    "grade": "unobserved",
+    "first_omission_stage": "unobserved"
+  },
+  "groups": {
+    "failed": {
+      "arms": {
+        "program_shortlist": {
+          "completed_rows": 3,
+          "planned_rows": 7,
+          "known_positive_accuracy": {
+            "correct": 0,
+            "total": 3,
+            "rate": 0.0
+          },
+          "omission_safe_accuracy": {
+            "correct": 0,
+            "total": 3,
+            "rate": 0.0
+          },
+          "all_required_retained": {
+            "correct": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "later_group_coverage": {
+            "correct": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "primary_reference_coverage": {
+            "correct": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "status_counts": {
+            "abstain": 3
+          },
+          "calls": 3,
+          "tokens": 10742,
+          "input_tokens": 9206,
+          "output_tokens": 1536,
+          "warm_selector_seconds": 29.199274044047343,
+          "fresh_retrieval_seconds": 26.570176293025725,
+          "real_transport_seconds": 2.446266042010393,
+          "local_routing_seconds": 0.18283170901122503
+        },
+        "jev_directories": {
+          "completed_rows": 2,
+          "planned_rows": 7,
+          "known_positive_accuracy": {
+            "correct": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "omission_safe_accuracy": {
+            "correct": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "all_required_retained": {
+            "correct": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "later_group_coverage": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "primary_reference_coverage": {
+            "correct": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "status_counts": {
+            "unavailable": 2
+          },
+          "calls": 8,
+          "tokens": 205775,
+          "input_tokens": 198615,
+          "output_tokens": 7160,
+          "warm_selector_seconds": 19.72652445800486,
+          "fresh_retrieval_seconds": 0.0,
+          "real_transport_seconds": 16.49806120697758,
+          "local_routing_seconds": 3.2284632510272786
+        }
+      },
+      "paired_completed": {
+        "cases": 2,
+        "omission_safe_wins": {
+          "tie": 2
+        },
+        "arms": {
+          "program_shortlist": {
+            "completed_rows": 2,
+            "planned_rows": 2,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "all_required_retained": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "status_counts": {
+              "abstain": 2
+            },
+            "calls": 2,
+            "tokens": 7032,
+            "input_tokens": 6045,
+            "output_tokens": 987,
+            "warm_selector_seconds": 26.853825460013468,
+            "fresh_retrieval_seconds": 24.996685959020397,
+            "real_transport_seconds": 1.7493702500069048,
+            "local_routing_seconds": 0.1077692509861663
+          },
+          "jev_directories": {
+            "completed_rows": 2,
+            "planned_rows": 2,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "all_required_retained": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 2
+            },
+            "calls": 8,
+            "tokens": 205775,
+            "input_tokens": 198615,
+            "output_tokens": 7160,
+            "warm_selector_seconds": 19.72652445800486,
+            "fresh_retrieval_seconds": 0.0,
+            "real_transport_seconds": 16.49806120697758,
+            "local_routing_seconds": 3.2284632510272786
+          }
+        }
+      }
+    },
+    "new": {
+      "arms": {
+        "program_shortlist": {
+          "completed_rows": 0,
+          "planned_rows": 3,
+          "known_positive_accuracy": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "omission_safe_accuracy": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "all_required_retained": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "later_group_coverage": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "primary_reference_coverage": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "status_counts": {},
+          "calls": 0,
+          "tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "warm_selector_seconds": 0,
+          "fresh_retrieval_seconds": 0,
+          "real_transport_seconds": 0,
+          "local_routing_seconds": 0
+        },
+        "jev_directories": {
+          "completed_rows": 0,
+          "planned_rows": 3,
+          "known_positive_accuracy": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "omission_safe_accuracy": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "all_required_retained": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "later_group_coverage": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "primary_reference_coverage": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "status_counts": {},
+          "calls": 0,
+          "tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "warm_selector_seconds": 0,
+          "fresh_retrieval_seconds": 0,
+          "real_transport_seconds": 0,
+          "local_routing_seconds": 0
+        }
+      },
+      "paired_completed": {
+        "cases": 0,
+        "omission_safe_wins": {},
+        "arms": {
+          "program_shortlist": {
+            "completed_rows": 0,
+            "planned_rows": 0,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "all_required_retained": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "status_counts": {},
+            "calls": 0,
+            "tokens": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "warm_selector_seconds": 0,
+            "fresh_retrieval_seconds": 0,
+            "real_transport_seconds": 0,
+            "local_routing_seconds": 0
+          },
+          "jev_directories": {
+            "completed_rows": 0,
+            "planned_rows": 0,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "all_required_retained": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "status_counts": {},
+            "calls": 0,
+            "tokens": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "warm_selector_seconds": 0,
+            "fresh_retrieval_seconds": 0,
+            "real_transport_seconds": 0,
+            "local_routing_seconds": 0
+          }
+        }
+      }
+    },
+    "all": {
+      "arms": {
+        "program_shortlist": {
+          "completed_rows": 3,
+          "planned_rows": 10,
+          "known_positive_accuracy": {
+            "correct": 0,
+            "total": 3,
+            "rate": 0.0
+          },
+          "omission_safe_accuracy": {
+            "correct": 0,
+            "total": 3,
+            "rate": 0.0
+          },
+          "all_required_retained": {
+            "correct": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "later_group_coverage": {
+            "correct": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "primary_reference_coverage": {
+            "correct": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "status_counts": {
+            "abstain": 3
+          },
+          "calls": 3,
+          "tokens": 10742,
+          "input_tokens": 9206,
+          "output_tokens": 1536,
+          "warm_selector_seconds": 29.199274044047343,
+          "fresh_retrieval_seconds": 26.570176293025725,
+          "real_transport_seconds": 2.446266042010393,
+          "local_routing_seconds": 0.18283170901122503
+        },
+        "jev_directories": {
+          "completed_rows": 2,
+          "planned_rows": 10,
+          "known_positive_accuracy": {
+            "correct": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "omission_safe_accuracy": {
+            "correct": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "all_required_retained": {
+            "correct": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "later_group_coverage": {
+            "correct": 0,
+            "total": 0,
+            "rate": null
+          },
+          "primary_reference_coverage": {
+            "correct": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "status_counts": {
+            "unavailable": 2
+          },
+          "calls": 8,
+          "tokens": 205775,
+          "input_tokens": 198615,
+          "output_tokens": 7160,
+          "warm_selector_seconds": 19.72652445800486,
+          "fresh_retrieval_seconds": 0.0,
+          "real_transport_seconds": 16.49806120697758,
+          "local_routing_seconds": 3.2284632510272786
+        }
+      },
+      "paired_completed": {
+        "cases": 2,
+        "omission_safe_wins": {
+          "tie": 2
+        },
+        "arms": {
+          "program_shortlist": {
+            "completed_rows": 2,
+            "planned_rows": 2,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "all_required_retained": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "status_counts": {
+              "abstain": 2
+            },
+            "calls": 2,
+            "tokens": 7032,
+            "input_tokens": 6045,
+            "output_tokens": 987,
+            "warm_selector_seconds": 26.853825460013468,
+            "fresh_retrieval_seconds": 24.996685959020397,
+            "real_transport_seconds": 1.7493702500069048,
+            "local_routing_seconds": 0.1077692509861663
+          },
+          "jev_directories": {
+            "completed_rows": 2,
+            "planned_rows": 2,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 2,
+              "rate": 0.0
+            },
+            "all_required_retained": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 2
+            },
+            "calls": 8,
+            "tokens": 205775,
+            "input_tokens": 198615,
+            "output_tokens": 7160,
+            "warm_selector_seconds": 19.72652445800486,
+            "fresh_retrieval_seconds": 0.0,
+            "real_transport_seconds": 16.49806120697758,
+            "local_routing_seconds": 3.2284632510272786
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "case": "unseen_search_friendly_article",
+      "arm": "program_shortlist",
+      "stratum": "failed",
+      "status": "abstain",
+      "choice": null,
+      "confidence": null,
+      "correct_current": false,
+      "current_in_final_pool": false,
+      "later_group_coverage": [],
+      "missing_later_groups": [],
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "primary_current_in_final_pool": false,
+      "primary_later_in_pool": [],
+      "all_primary_references_retained": false,
+      "strict_pass": false,
+      "strict_anchor_pass": false,
+      "first_omission_stage": {
+        "current": "current_shortlist",
+        "later": [],
+        "primary_current": "current_shortlist",
+        "primary_later": []
+      },
+      "calls": 1,
+      "tokens": 3402,
+      "input_tokens": 2964,
+      "output_tokens": 438,
+      "warm_selector_seconds": 22.914844334038207,
+      "fresh_retrieval_seconds": 21.8823989170196,
+      "real_transport_seconds": 0.9915842080081347,
+      "local_routing_seconds": 0.04086120901047252,
+      "reached_final_classification": true,
+      "current_retained_at_last_observed_frontier": false
+    },
+    {
+      "case": "unseen_search_friendly_article",
+      "arm": "jev_directories",
+      "stratum": "failed",
+      "status": "unavailable",
+      "choice": null,
+      "confidence": null,
+      "correct_current": false,
+      "current_in_final_pool": true,
+      "later_group_coverage": [],
+      "missing_later_groups": [],
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "primary_current_in_final_pool": true,
+      "primary_later_in_pool": [],
+      "all_primary_references_retained": true,
+      "strict_pass": false,
+      "strict_anchor_pass": false,
+      "first_omission_stage": {
+        "current": null,
+        "later": [],
+        "primary_current": null,
+        "primary_later": []
+      },
+      "calls": 4,
+      "tokens": 98887,
+      "input_tokens": 95451,
+      "output_tokens": 3436,
+      "warm_selector_seconds": 9.247354499995708,
+      "fresh_retrieval_seconds": 0.0,
+      "real_transport_seconds": 8.305915583012393,
+      "local_routing_seconds": 0.9414389169833157,
+      "reached_final_classification": false,
+      "current_retained_at_last_observed_frontier": true
+    },
+    {
+      "case": "unseen_time_zone_conversion",
+      "arm": "jev_directories",
+      "stratum": "failed",
+      "status": "unavailable",
+      "choice": null,
+      "confidence": null,
+      "correct_current": false,
+      "current_in_final_pool": true,
+      "later_group_coverage": [],
+      "missing_later_groups": [],
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "primary_current_in_final_pool": true,
+      "primary_later_in_pool": [],
+      "all_primary_references_retained": true,
+      "strict_pass": false,
+      "strict_anchor_pass": false,
+      "first_omission_stage": {
+        "current": null,
+        "later": [],
+        "primary_current": null,
+        "primary_later": []
+      },
+      "calls": 4,
+      "tokens": 106888,
+      "input_tokens": 103164,
+      "output_tokens": 3724,
+      "warm_selector_seconds": 10.479169958009152,
+      "fresh_retrieval_seconds": 0.0,
+      "real_transport_seconds": 8.192145623965189,
+      "local_routing_seconds": 2.287024334043963,
+      "reached_final_classification": false,
+      "current_retained_at_last_observed_frontier": true
+    },
+    {
+      "case": "unseen_time_zone_conversion",
+      "arm": "program_shortlist",
+      "stratum": "failed",
+      "status": "abstain",
+      "choice": null,
+      "confidence": null,
+      "correct_current": false,
+      "current_in_final_pool": false,
+      "later_group_coverage": [],
+      "missing_later_groups": [],
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "primary_current_in_final_pool": false,
+      "primary_later_in_pool": [],
+      "all_primary_references_retained": false,
+      "strict_pass": false,
+      "strict_anchor_pass": false,
+      "first_omission_stage": {
+        "current": "current_shortlist",
+        "later": [],
+        "primary_current": "current_shortlist",
+        "primary_later": []
+      },
+      "calls": 1,
+      "tokens": 3630,
+      "input_tokens": 3081,
+      "output_tokens": 549,
+      "warm_selector_seconds": 3.9389811259752605,
+      "fresh_retrieval_seconds": 3.1142870420007966,
+      "real_transport_seconds": 0.7577860419987701,
+      "local_routing_seconds": 0.06690804197569378,
+      "reached_final_classification": true,
+      "current_retained_at_last_observed_frontier": false
+    },
+    {
+      "case": "new_finance_runway_then_slides",
+      "arm": "program_shortlist",
+      "stratum": "failed",
+      "status": "abstain",
+      "choice": null,
+      "confidence": null,
+      "correct_current": false,
+      "current_in_final_pool": true,
+      "later_group_coverage": [
+        true
+      ],
+      "missing_later_groups": [],
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "primary_current_in_final_pool": true,
+      "primary_later_in_pool": [
+        true
+      ],
+      "all_primary_references_retained": true,
+      "strict_pass": false,
+      "strict_anchor_pass": false,
+      "first_omission_stage": {
+        "current": null,
+        "later": [
+          null
+        ],
+        "primary_current": null,
+        "primary_later": [
+          null
+        ]
+      },
+      "calls": 1,
+      "tokens": 3710,
+      "input_tokens": 3161,
+      "output_tokens": 549,
+      "warm_selector_seconds": 2.345448584033875,
+      "fresh_retrieval_seconds": 1.573490334005328,
+      "real_transport_seconds": 0.6968957920034882,
+      "local_routing_seconds": 0.07506245802505873,
+      "reached_final_classification": true,
+      "current_retained_at_last_observed_frontier": true
+    }
+  ],
+  "trial_cost": {
+    "calls": 13,
+    "attempted_sends": 13,
+    "input_tokens": 246862,
+    "input_tokens_complete": true,
+    "output_tokens": 10126,
+    "output_tokens_complete": true,
+    "known_tokens": 256988,
+    "real_transport_seconds": 21.985931248986162,
+    "wall_seconds": 27.702114249987062
+  },
+  "cold_setup_seconds": {
+    "tree_load": 0.28655937500298023,
+    "tree_build": 25.678919,
+    "index_load_seconds": 49.4471399159811,
+    "dictionary_load_seconds": 3.1050223339989316,
+    "local_index_startup_seconds": 54.39596049999818
+  },
+  "limits": {
+    "directory_gate": 0.2,
+    "final_gate": 0.7,
+    "deadline_enforcement": "unobservable_from_receipts_without_clock_timestamps",
+    "runtime_readiness": "unobservable",
+    "backend_model_revision": "unobservable",
+    "accuracy_scope": "authored_known_positive_cases_only; incomplete arms excluded from accuracy denominators"
+  },
+  "context": {
+    "catalog_count": 45325,
+    "catalog_sha256": "64bc3d608649768fc3117e6a4ed4eb5e32278a3ae540f23bd2a568aa7bd7e57a",
+    "frozen_plan_sha256": "f1f8139b8475d63d277391fe12d040093de548cdad43fe1724a476c977bb4a26",
+    "case_fixture_sha256": "4d7bd665163cc6b87077ffd8311e0ce7ed4fcebfeaa338b7fb13e120397182be",
+    "tree_sha256": "9055aa04e2d2567bb031a86286f165a7827e448f87cbe27c5178f5e3d33bfb0a",
+    "tree_stats": {
+      "node_count": 4369,
+      "candidate_count": 45325,
+      "leaf_count": 4096,
+      "max_depth": 3,
+      "max_fanout": 16,
+      "min_leaf_size": 11,
+      "max_leaf_size": 12,
+      "max_card_chars": 1023,
+      "cards_over_target": 0
+    },
+    "frozen_cohort": {
+      "previous_failures": 7,
+      "new_requests": 3,
+      "previous_passes_excluded": 8,
+      "new_live_completed_pairs": 0
+    },
+    "local_precheck": {
+      "condition": "Local mocked tests, catalog structure, and gold oracle only; no Jev/network/provider calls",
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": true,
+      "test_log_sha256": "67c6923ab46e6caa9841334eb63b51ad28bcc83ef49b4e07b1c8f6999e69277e",
+      "structural_oracle_sha256": "9e03a8a9d3bdd977e4bccf6f52542495ee9cd28f22a288948eb27aa809f554bd",
+      "protected_check_sha256": "736ab200cc6fdc4c60531759078f2671ace057b085ad786a142527620a6697ba"
+    },
+    "interpretation": "Incomplete pilot. Two comparable old-failure pairs only; neither arm completed a valid current selection. Candidate preserved known current references in observed directories but never reached final classification. No accuracy gain or new-case result established. Do not promote.",
+    "timing_note": "Recorded composed selector includes freshly measured baseline retrieval. First baseline retrieval was21.882s; cause not isolated. Do not interpret aggregate time as steady-state speedup. Live cap excludes precomputed baseline retrieval.",
+    "measured_tokens": "Provider-reported Jev only; Main-Agent context, billing and backend revision unobservable.",
+    "original_published_scores": "unchanged; planning-reference addition prospective for both arms",
+    "budget_stop_check": {
+      "stage": "directory-2-batch-2",
+      "questions": 64,
+      "reserved_tokens": 50406,
+      "known_tokens": 256988,
+      "remaining_tokens": 43012
+    },
+    "gate_counterfactual": {
+      "condition": "Counterfactual gates applied to the same recorded answers, not fresh Jev decisions or semantic accuracy. Third directory level and final answers are unobserved. Not used to select or modify live routing. Call projections reserve one final and assume nonempty continuation; they do not establish a reachable final pool or actual call count. Empty branches have no final projection.",
+      "observations": [
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.2,
+          "second_gate": 0.2,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 139,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 2224,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 40,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.2,
+          "second_gate": 0.35,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 107,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 1712,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 32,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.2,
+          "second_gate": 0.5,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 61,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 976,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 21,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.2,
+          "second_gate": 0.65,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 25,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 400,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 12,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.2,
+          "second_gate": 0.8,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 2,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 32,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 6,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.35,
+          "second_gate": 0.2,
+          "root_kept": 9,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 114,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 1824,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 34,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.35,
+          "second_gate": 0.35,
+          "root_kept": 9,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 88,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 1408,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 27,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.35,
+          "second_gate": 0.5,
+          "root_kept": 9,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 50,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 800,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 18,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.35,
+          "second_gate": 0.65,
+          "root_kept": 9,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 20,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 320,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 10,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.35,
+          "second_gate": 0.8,
+          "root_kept": 9,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 2,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 32,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 6,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.5,
+          "second_gate": 0.2,
+          "root_kept": 6,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 79,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 1264,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 24,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.5,
+          "second_gate": 0.35,
+          "root_kept": 6,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 65,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 1040,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 21,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.5,
+          "second_gate": 0.5,
+          "root_kept": 6,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 40,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 640,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 14,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.5,
+          "second_gate": 0.65,
+          "root_kept": 6,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 16,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 256,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 8,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.5,
+          "second_gate": 0.8,
+          "root_kept": 6,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 2,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 32,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 5,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.65,
+          "second_gate": 0.2,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.65,
+          "second_gate": 0.35,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.65,
+          "second_gate": 0.5,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.65,
+          "second_gate": 0.65,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.65,
+          "second_gate": 0.8,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.8,
+          "second_gate": 0.2,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.8,
+          "second_gate": 0.35,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.8,
+          "second_gate": 0.5,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.8,
+          "second_gate": 0.65,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "root_gate": 0.8,
+          "second_gate": 0.8,
+          "root_kept": 0,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 0,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 0,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": null,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.2,
+          "second_gate": 0.2,
+          "root_kept": 12,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 136,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 2176,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 39,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.2,
+          "second_gate": 0.35,
+          "root_kept": 12,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 102,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 1632,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 31,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.2,
+          "second_gate": 0.5,
+          "root_kept": 12,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 62,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 992,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 21,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.2,
+          "second_gate": 0.65,
+          "root_kept": 12,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 20,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 320,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 10,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.2,
+          "second_gate": 0.8,
+          "root_kept": 12,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 10,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 160,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 8,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.35,
+          "second_gate": 0.2,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 126,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 2016,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 37,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.35,
+          "second_gate": 0.35,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 94,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 1504,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 29,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.35,
+          "second_gate": 0.5,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 59,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 944,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 20,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.35,
+          "second_gate": 0.65,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 18,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 288,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 10,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.35,
+          "second_gate": 0.8,
+          "root_kept": 11,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 10,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 160,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 8,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.5,
+          "second_gate": 0.2,
+          "root_kept": 4,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 43,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 688,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 14,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.5,
+          "second_gate": 0.35,
+          "root_kept": 4,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 33,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 528,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 12,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.5,
+          "second_gate": 0.5,
+          "root_kept": 4,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 25,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 400,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 10,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.5,
+          "second_gate": 0.65,
+          "root_kept": 4,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 14,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 224,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 7,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.5,
+          "second_gate": 0.8,
+          "root_kept": 4,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 8,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 128,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 5,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.65,
+          "second_gate": 0.2,
+          "root_kept": 3,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 29,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 464,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 11,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.65,
+          "second_gate": 0.35,
+          "root_kept": 3,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 21,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 336,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 9,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.65,
+          "second_gate": 0.5,
+          "root_kept": 3,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 17,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 272,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 8,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.65,
+          "second_gate": 0.65,
+          "root_kept": 3,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 13,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 208,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 7,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.65,
+          "second_gate": 0.8,
+          "root_kept": 3,
+          "root_group_coverage": [
+            true
+          ],
+          "second_kept": 8,
+          "second_group_coverage": [
+            true
+          ],
+          "third_frontier_questions": 128,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 5,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.8,
+          "second_gate": 0.2,
+          "root_kept": 1,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 9,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 144,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 6,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.8,
+          "second_gate": 0.35,
+          "root_kept": 1,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 5,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 80,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 5,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.8,
+          "second_gate": 0.5,
+          "root_kept": 1,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 4,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 64,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 4,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.8,
+          "second_gate": 0.65,
+          "root_kept": 1,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 4,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 64,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 4,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "root_gate": 0.8,
+          "second_gate": 0.8,
+          "root_kept": 1,
+          "root_group_coverage": [
+            false
+          ],
+          "second_kept": 4,
+          "second_group_coverage": [
+            false
+          ],
+          "third_frontier_questions": 64,
+          "terminal_success": "unobserved",
+          "calls_for_full_third_frontier_plus_reserved_final": 4,
+          "all_later_third_level_scores_and_final": "unobserved"
+        },
+        {
+          "case": "new_finance_runway_then_slides",
+          "root_gate": 0.2,
+          "second_gate": null,
+          "root_kept": 16,
+          "root_group_coverage": [
+            true,
+            true
+          ]
+        },
+        {
+          "case": "new_finance_runway_then_slides",
+          "root_gate": 0.35,
+          "second_gate": null,
+          "root_kept": 12,
+          "root_group_coverage": [
+            true,
+            true
+          ]
+        },
+        {
+          "case": "new_finance_runway_then_slides",
+          "root_gate": 0.5,
+          "second_gate": null,
+          "root_kept": 6,
+          "root_group_coverage": [
+            true,
+            true
+          ]
+        },
+        {
+          "case": "new_finance_runway_then_slides",
+          "root_gate": 0.65,
+          "second_gate": null,
+          "root_kept": 3,
+          "root_group_coverage": [
+            true,
+            false
+          ]
+        },
+        {
+          "case": "new_finance_runway_then_slides",
+          "root_gate": 0.8,
+          "second_gate": null,
+          "root_kept": 1,
+          "root_group_coverage": [
+            false,
+            false
+          ]
+        }
+      ]
+    },
+    "known_limits": {
+      "runtime_capability_execution": "not performed",
+      "final_gate_live_new_arm": "not reached; gate verified by mocks and source",
+      "later_completion_new_arm": "unobserved; finance root retained both but next frontier incomplete"
+    },
+    "protected_environment": {
+      "phase": "after-live",
+      "checked_files": 459,
+      "changes": [],
+      "unchanged": true
+    },
+    "raw_metric_note": "For unavailable results, current_in_final_pool and primary coverage mean the last retained frontier, never a classified final pool."
+  }
+}

@@ -1,0 +1,417 @@
+{
+  "version": 1,
+  "verdict": "reject_ranked_strategy_and_do_not_promote_merged_index",
+  "classification": {
+    "original_pending": 589,
+    "processed": 589,
+    "confidence_at_least_point_seven": 393,
+    "provisional_multi_label": 196,
+    "unindexed": 0,
+    "calls": 22,
+    "tokens": 378337,
+    "seconds": 16.207608082972
+  },
+  "registry": {
+    "complete": true,
+    "pagination_complete": true,
+    "pages": 446,
+    "rows": 44551,
+    "unique": 44551,
+    "conflicts": [],
+    "changed_names": [],
+    "error": null,
+    "next_cursor": null,
+    "requests": 412,
+    "reused_pages": 34,
+    "seconds": 615.1647355830064,
+    "limitation": "Cursor census across observation times, not a transactional snapshot; historical pages reused unchanged."
+  },
+  "rankings": {
+    "fresh_feeds": 19,
+    "feeds": 19,
+    "candidate_coverage": 802,
+    "growth_coverage": 756,
+    "missing_is_unknown": true,
+    "scope": "Repository stars/growth remain repository metrics; individual installs only join exact Skill identities."
+  },
+  "catalog": {
+    "total": 45325,
+    "kinds": {
+      "skill": 682,
+      "mcp": 44015,
+      "plugin": 628
+    },
+    "historical_control_skills": 376,
+    "enabled_public_source_candidates": 44949,
+    "plugin_internal_candidates": 0,
+    "broad_mcp_fallback_candidates": 19961,
+    "markets_merged": true,
+    "dedup": "programmatic"
+  },
+  "comparison": {
+    "aggregates": {
+      "baseline": {
+        "cases": 5,
+        "current_reference_matches": 0,
+        "omission_safe_passes": 0,
+        "mean_jev_cli_seconds": 5.060123816382839,
+        "mean_tokens": 27595.2,
+        "mean_calls": 8
+      },
+      "ranked": {
+        "cases": 5,
+        "current_reference_matches": 0,
+        "omission_safe_passes": 0,
+        "mean_jev_cli_seconds": 5.022042658214923,
+        "mean_tokens": 32788.4,
+        "mean_calls": 8.2
+      }
+    },
+    "rows": [
+      {
+        "case": "finance_packages_then_wiki",
+        "arm": "baseline",
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.24,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 47475,
+        "calls": 9,
+        "jev_cli_seconds": 5.843312584009254,
+        "final_pool": 96,
+        "first_lost_at_directory_stage": {
+          "saas-metrics-coach": 6,
+          "dependency-auditor": 4,
+          "confluence-expert": 4
+        },
+        "directory_pools": [
+          44639,
+          964,
+          798,
+          345,
+          198,
+          172,
+          107,
+          96
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "finance_packages_then_wiki",
+        "arm": "ranked",
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.37,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 53210,
+        "calls": 9,
+        "jev_cli_seconds": 5.777834374050144,
+        "final_pool": 90,
+        "first_lost_at_directory_stage": {
+          "saas-metrics-coach": 6,
+          "dependency-auditor": 4,
+          "confluence-expert": 4
+        },
+        "directory_pools": [
+          44639,
+          964,
+          793,
+          350,
+          192,
+          166,
+          101,
+          90
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "signals_then_finance_and_culture",
+        "arm": "ranked",
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.54,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 24702,
+        "calls": 8,
+        "jev_cli_seconds": 5.5969782920437865,
+        "final_pool": 33,
+        "first_lost_at_directory_stage": {
+          "observability-designer": 2,
+          "saas-metrics-coach": 3,
+          "culture-architect": 3
+        },
+        "directory_pools": [
+          42692,
+          606,
+          400,
+          184,
+          90,
+          71,
+          33
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "signals_then_finance_and_culture",
+        "arm": "baseline",
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.31,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 18011,
+        "calls": 7,
+        "jev_cli_seconds": 4.494969916035188,
+        "final_pool": 44,
+        "first_lost_at_directory_stage": {
+          "observability-designer": 2,
+          "saas-metrics-coach": 3,
+          "culture-architect": 3
+        },
+        "directory_pools": [
+          42692,
+          444,
+          309,
+          139,
+          65,
+          44
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "channels_then_incident_and_wiki",
+        "arm": "baseline",
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.44,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 23406,
+        "calls": 8,
+        "jev_cli_seconds": 5.397243247920414,
+        "final_pool": 13,
+        "first_lost_at_directory_stage": {
+          "channel-economics": 4,
+          "incident-commander": 2,
+          "confluence-expert": 4
+        },
+        "directory_pools": [
+          44629,
+          481,
+          432,
+          200,
+          118,
+          60,
+          13
+        ],
+        "reused_saved_stages": 6
+      },
+      {
+        "case": "channels_then_incident_and_wiki",
+        "arm": "ranked",
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.42,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 27088,
+        "calls": 8,
+        "jev_cli_seconds": 4.4849071240169,
+        "final_pool": 13,
+        "first_lost_at_directory_stage": {
+          "channel-economics": 4,
+          "incident-commander": 2,
+          "confluence-expert": 4
+        },
+        "directory_pools": [
+          44629,
+          481,
+          432,
+          200,
+          118,
+          75,
+          13
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "borrowed_code_now_culture_welcome_later",
+        "arm": "ranked",
+        "status": "selected",
+        "choice": "plugin-e563e1a3b5cf428960a5",
+        "confidence": 0.9,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 36054,
+        "calls": 9,
+        "jev_cli_seconds": 5.145106209005462,
+        "final_pool": 79,
+        "first_lost_at_directory_stage": {
+          "dependency-auditor": 2,
+          "culture-architect": 2,
+          "email-sequence": 2
+        },
+        "directory_pools": [
+          44639,
+          501,
+          357,
+          262,
+          186,
+          138,
+          105,
+          79
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "borrowed_code_now_culture_welcome_later",
+        "arm": "baseline",
+        "status": "abstain",
+        "choice": null,
+        "confidence": 0.68,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 31690,
+        "calls": 9,
+        "jev_cli_seconds": 5.688262166950153,
+        "final_pool": 72,
+        "first_lost_at_directory_stage": {
+          "dependency-auditor": 2,
+          "culture-architect": 2,
+          "email-sequence": 2
+        },
+        "directory_pools": [
+          44639,
+          501,
+          357,
+          262,
+          186,
+          138,
+          98,
+          72
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "cancel_finance_keep_discovery_jira",
+        "arm": "baseline",
+        "status": "selected",
+        "choice": "pm-skills",
+        "confidence": 0.77,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 17394,
+        "calls": 7,
+        "jev_cli_seconds": 3.8768311669991817,
+        "final_pool": 41,
+        "first_lost_at_directory_stage": {
+          "product-manager-toolkit": 3,
+          "jira-expert": 3
+        },
+        "directory_pools": [
+          30512,
+          444,
+          238,
+          105,
+          83,
+          41
+        ],
+        "reused_saved_stages": 0
+      },
+      {
+        "case": "cancel_finance_keep_discovery_jira",
+        "arm": "ranked",
+        "status": "selected",
+        "choice": "pm-skills",
+        "confidence": 0.87,
+        "current_reference_match": false,
+        "all_required_references_retained": false,
+        "omission_safe_pass": false,
+        "tokens": 22888,
+        "calls": 7,
+        "jev_cli_seconds": 4.105387291958323,
+        "final_pool": 41,
+        "first_lost_at_directory_stage": {
+          "product-manager-toolkit": 3,
+          "jira-expert": 3
+        },
+        "directory_pools": [
+          31698,
+          444,
+          223,
+          105,
+          83,
+          41
+        ],
+        "reused_saved_stages": 0
+      }
+    ],
+    "final_confidence": 0.7,
+    "raw_needs_unchanged": true,
+    "ranking_token_change_percent": 18.819214935930884,
+    "ranking_time_change_percent": -0.7525736434476626,
+    "time_basis": "sum of actual Jev CLI process receipts, excludes index preparation, local assembly and main Agent",
+    "baseline_scope": "Accepted adaptive gates/cost stop applied to the same new merged index; not the daily installed source-first route.",
+    "common_adaptations": [
+      "10-round allowance for the much larger index",
+      "Global <=96 condition before carrying small branches",
+      "Delivery distinction and specific child descriptors"
+    ],
+    "sample_limit": "Five author-written multi-step planning needs, one sample per arm; strict historical references, not universal capability-equivalence or task-execution accuracy."
+  },
+  "costs": {
+    "classification_calls": 22,
+    "classification_tokens": 378337,
+    "failed_preliminary_calls": 27,
+    "failed_preliminary_tokens": 261407,
+    "completed_comparison_calls": 81,
+    "completed_comparison_tokens": 301918,
+    "total_known_calls": 130,
+    "total_known_tokens": 941662,
+    "excluded_unobservable": [
+      "Main Agent tokens",
+      "intent entry tokens",
+      "backend model revision",
+      "monetary price"
+    ],
+    "budget_history": "Classification 300k conservative stop amended to 400k without replay; initial A/B 260k failed; corrected A/B 160k stopped and same-record completion amended to 350k, reusing six completed stages."
+  },
+  "verification": {
+    "offline_checks": 30,
+    "receipt_integrity": true,
+    "pending_unknown_sends": false,
+    "no_capability_execution": true,
+    "no_daily_upgrade": true
+  },
+  "evidence_hashes": {
+    "registry/summary.json": "64505203e4830e63778c7c124b32e004511061911d65f5f92440b23d6d14c63b",
+    "rankings/feeds-resolved.json": "6c1c7190b2cacfa0d8167d8c3c63bf29fbdd95a6f52e53a9a52a65c8b9c9d7d9",
+    "classification/completed.json": "ae3ad8f5fb8aa8cdeb2eadd3f61e9b61ff97a5ca9258e48064fe951e6e8a4a69",
+    "bundle-v2/plan.json": "5d46ac3241b7f0d690e0d7ddca36c9df2ca498739b0786c62d48d41d36e7f0f1",
+    "bundle-v2/source-lock.json": "5c67222a3d42dd82c348d66ec4e342dadff6af399c095e22f96d8420e56c5e03",
+    "live-v2/completed-summary.json": "b73dc4329e53da07c83443dd65b0f1bc0b6d7fabb359fb066970f554f47b0aaa"
+  },
+  "protection": {
+    "checked_files": 459,
+    "changes": []
+  },
+  "source_sha256": {
+    "benchmarks/directory-depth/complete_sources.py": "c7097cf9f017461e27abd8d560c3ef96ec2d310fba4277d3037f8b197e6dcd33",
+    "benchmarks/directory-depth/classify_merged.py": "333f65b79c66db55a60d494e1beca7cf695af9e30c026cd589e7fc1190c0aebc",
+    "benchmarks/directory-depth/merged_experiment.py": "0031b0a778745d990936c29795d8c1f3088c55d2b2617850a8a3cd1931d8dcea",
+    "benchmarks/directory-depth/resume_merged.py": "5933d6a1c62c81797f95c4a85435579538679fc37c81d90414a97a460db1ae59",
+    "benchmarks/directory-depth/analyze_merged_completion.py": "6248f0495b50f2bdfbfbce2cb4a4696a3598d09b0de10c98aaeafb20dc8349c0"
+  }
+}

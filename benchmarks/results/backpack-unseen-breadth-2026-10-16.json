@@ -1,0 +1,2233 @@
+{
+  "version": 1,
+  "catalog_count": 45325,
+  "final_gate": 0.7,
+  "difference": "Frozen selectors; same fresh alias-repaired recall, complete raw requests, compact descriptions, option order/IDs and 0.7 gate. Only existing literal evidence and coverage instruction differ.",
+  "aggregates": {
+    "compact": {
+      "cases": 12,
+      "measured_cases": 4,
+      "correct_current": 2,
+      "all_required_retained": 4,
+      "omission_safe_pass": 2,
+      "all_primary_references_retained": 4,
+      "strict_anchor_pass": 2,
+      "calls": 4,
+      "tokens": 14206,
+      "measured_means": {
+        "tokens": 3551.5,
+        "input_tokens": 3105.5,
+        "output_tokens": 446,
+        "jev_cli_seconds": 0.5817880000031437,
+        "current_dispatch_wall_seconds": 0.618515708243649,
+        "retrieval_seconds": 0.04291446874412941,
+        "selector_seconds": 0.6614301769877784,
+        "final_pool_size": 47.75,
+        "payload_chars": 9036
+      }
+    },
+    "coverage": {
+      "cases": 12,
+      "measured_cases": 4,
+      "correct_current": 2,
+      "all_required_retained": 4,
+      "omission_safe_pass": 2,
+      "all_primary_references_retained": 4,
+      "strict_anchor_pass": 2,
+      "calls": 4,
+      "tokens": 14621,
+      "measured_means": {
+        "tokens": 3655.25,
+        "input_tokens": 3209,
+        "output_tokens": 446.25,
+        "jev_cli_seconds": 0.5686044999965816,
+        "current_dispatch_wall_seconds": 0.6293858957433258,
+        "retrieval_seconds": 0.04291446874412941,
+        "selector_seconds": 0.6723003644874552,
+        "final_pool_size": 47.75,
+        "payload_chars": 9640
+      }
+    }
+  },
+  "strata": {
+    "kind_stratum": {
+      "mcp": {
+        "compact": {
+          "cases": 4,
+          "measured_cases": 0,
+          "correct_current": 0,
+          "all_required_retained": 0,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 0,
+          "strict_anchor_pass": 0,
+          "calls": 0,
+          "tokens": 0,
+          "measured_means": null
+        },
+        "coverage": {
+          "cases": 4,
+          "measured_cases": 0,
+          "correct_current": 0,
+          "all_required_retained": 0,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 0,
+          "strict_anchor_pass": 0,
+          "calls": 0,
+          "tokens": 0,
+          "measured_means": null
+        }
+      },
+      "plugin": {
+        "compact": {
+          "cases": 4,
+          "measured_cases": 1,
+          "correct_current": 0,
+          "all_required_retained": 1,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 1,
+          "strict_anchor_pass": 0,
+          "calls": 1,
+          "tokens": 3721,
+          "measured_means": {
+            "tokens": 3721,
+            "input_tokens": 3308,
+            "output_tokens": 413,
+            "jev_cli_seconds": 0.5452063750126399,
+            "current_dispatch_wall_seconds": 0.585998374997871,
+            "retrieval_seconds": 0.049090708984294906,
+            "selector_seconds": 0.6350890839821659,
+            "final_pool_size": 44,
+            "payload_chars": 9170
+          }
+        },
+        "coverage": {
+          "cases": 4,
+          "measured_cases": 1,
+          "correct_current": 0,
+          "all_required_retained": 1,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 1,
+          "strict_anchor_pass": 0,
+          "calls": 1,
+          "tokens": 3818,
+          "measured_means": {
+            "tokens": 3818,
+            "input_tokens": 3405,
+            "output_tokens": 413,
+            "jev_cli_seconds": 0.5572608749789651,
+            "current_dispatch_wall_seconds": 0.6190960000094492,
+            "retrieval_seconds": 0.049090708984294906,
+            "selector_seconds": 0.6681867089937441,
+            "final_pool_size": 44,
+            "payload_chars": 9748
+          }
+        }
+      },
+      "skill": {
+        "compact": {
+          "cases": 4,
+          "measured_cases": 3,
+          "correct_current": 2,
+          "all_required_retained": 3,
+          "omission_safe_pass": 2,
+          "all_primary_references_retained": 3,
+          "strict_anchor_pass": 2,
+          "calls": 3,
+          "tokens": 10485,
+          "measured_means": {
+            "tokens": 3495,
+            "input_tokens": 3038,
+            "output_tokens": 457,
+            "jev_cli_seconds": 0.5939818749999782,
+            "current_dispatch_wall_seconds": 0.629354819325575,
+            "retrieval_seconds": 0.04085572199740758,
+            "selector_seconds": 0.6702105413229825,
+            "final_pool_size": 49,
+            "payload_chars": 8991.333333333334
+          }
+        },
+        "coverage": {
+          "cases": 4,
+          "measured_cases": 3,
+          "correct_current": 2,
+          "all_required_retained": 3,
+          "omission_safe_pass": 2,
+          "all_primary_references_retained": 3,
+          "strict_anchor_pass": 2,
+          "calls": 3,
+          "tokens": 10803,
+          "measured_means": {
+            "tokens": 3601,
+            "input_tokens": 3143.6666666666665,
+            "output_tokens": 457.3333333333333,
+            "jev_cli_seconds": 0.5723857083357871,
+            "current_dispatch_wall_seconds": 0.6328158609879514,
+            "retrieval_seconds": 0.04085572199740758,
+            "selector_seconds": 0.6736715829853589,
+            "final_pool_size": 49,
+            "payload_chars": 9604
+          }
+        }
+      }
+    },
+    "language": {
+      "mixed": {
+        "compact": {
+          "cases": 4,
+          "measured_cases": 0,
+          "correct_current": 0,
+          "all_required_retained": 0,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 0,
+          "strict_anchor_pass": 0,
+          "calls": 0,
+          "tokens": 0,
+          "measured_means": null
+        },
+        "coverage": {
+          "cases": 4,
+          "measured_cases": 0,
+          "correct_current": 0,
+          "all_required_retained": 0,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 0,
+          "strict_anchor_pass": 0,
+          "calls": 0,
+          "tokens": 0,
+          "measured_means": null
+        }
+      },
+      "synonym": {
+        "compact": {
+          "cases": 4,
+          "measured_cases": 1,
+          "correct_current": 1,
+          "all_required_retained": 1,
+          "omission_safe_pass": 1,
+          "all_primary_references_retained": 1,
+          "strict_anchor_pass": 1,
+          "calls": 1,
+          "tokens": 4007,
+          "measured_means": {
+            "tokens": 4007,
+            "input_tokens": 3550,
+            "output_tokens": 457,
+            "jev_cli_seconds": 0.5587725829973351,
+            "current_dispatch_wall_seconds": 0.5960327909851912,
+            "retrieval_seconds": 0.041178958024829626,
+            "selector_seconds": 0.6372117490100209,
+            "final_pool_size": 49,
+            "payload_chars": 10932
+          }
+        },
+        "coverage": {
+          "cases": 4,
+          "measured_cases": 1,
+          "correct_current": 1,
+          "all_required_retained": 1,
+          "omission_safe_pass": 1,
+          "all_primary_references_retained": 1,
+          "strict_anchor_pass": 1,
+          "calls": 1,
+          "tokens": 4110,
+          "measured_means": {
+            "tokens": 4110,
+            "input_tokens": 3653,
+            "output_tokens": 457,
+            "jev_cli_seconds": 0.5435902080207597,
+            "current_dispatch_wall_seconds": 0.6076071249844972,
+            "retrieval_seconds": 0.041178958024829626,
+            "selector_seconds": 0.6487860830093268,
+            "final_pool_size": 49,
+            "payload_chars": 11534
+          }
+        }
+      },
+      "zh": {
+        "compact": {
+          "cases": 4,
+          "measured_cases": 3,
+          "correct_current": 1,
+          "all_required_retained": 3,
+          "omission_safe_pass": 1,
+          "all_primary_references_retained": 3,
+          "strict_anchor_pass": 1,
+          "calls": 3,
+          "tokens": 10199,
+          "measured_means": {
+            "tokens": 3399.6666666666665,
+            "input_tokens": 2957.3333333333335,
+            "output_tokens": 442.3333333333333,
+            "jev_cli_seconds": 0.5894598056717465,
+            "current_dispatch_wall_seconds": 0.6260100139964683,
+            "retrieval_seconds": 0.04349297231722934,
+            "selector_seconds": 0.6695029863136975,
+            "final_pool_size": 47.333333333333336,
+            "payload_chars": 8404
+          }
+        },
+        "coverage": {
+          "cases": 4,
+          "measured_cases": 3,
+          "correct_current": 1,
+          "all_required_retained": 3,
+          "omission_safe_pass": 1,
+          "all_primary_references_retained": 3,
+          "strict_anchor_pass": 1,
+          "calls": 3,
+          "tokens": 10511,
+          "measured_means": {
+            "tokens": 3503.6666666666665,
+            "input_tokens": 3061,
+            "output_tokens": 442.6666666666667,
+            "jev_cli_seconds": 0.5769425973218555,
+            "current_dispatch_wall_seconds": 0.6366454859962687,
+            "retrieval_seconds": 0.04349297231722934,
+            "selector_seconds": 0.6801384583134981,
+            "final_pool_size": 47.333333333333336,
+            "payload_chars": 9008.666666666666
+          }
+        }
+      }
+    },
+    "multitask": {
+      "False": {
+        "compact": {
+          "cases": 3,
+          "measured_cases": 1,
+          "correct_current": 0,
+          "all_required_retained": 1,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 1,
+          "strict_anchor_pass": 0,
+          "calls": 1,
+          "tokens": 2776,
+          "measured_means": {
+            "tokens": 2776,
+            "input_tokens": 2328,
+            "output_tokens": 448,
+            "jev_cli_seconds": 0.6788682500191499,
+            "current_dispatch_wall_seconds": 0.7266192079987377,
+            "retrieval_seconds": 0.046100332983769476,
+            "selector_seconds": 0.7727195409825072,
+            "final_pool_size": 48,
+            "payload_chars": 6551
+          }
+        },
+        "coverage": {
+          "cases": 3,
+          "measured_cases": 1,
+          "correct_current": 0,
+          "all_required_retained": 1,
+          "omission_safe_pass": 0,
+          "all_primary_references_retained": 1,
+          "strict_anchor_pass": 0,
+          "calls": 1,
+          "tokens": 2874,
+          "measured_means": {
+            "tokens": 2874,
+            "input_tokens": 2425,
+            "output_tokens": 449,
+            "jev_cli_seconds": 0.6188484169833828,
+            "current_dispatch_wall_seconds": 0.678961249999702,
+            "retrieval_seconds": 0.046100332983769476,
+            "selector_seconds": 0.7250615829834715,
+            "final_pool_size": 48,
+            "payload_chars": 7129
+          }
+        }
+      },
+      "True": {
+        "compact": {
+          "cases": 9,
+          "measured_cases": 3,
+          "correct_current": 2,
+          "all_required_retained": 3,
+          "omission_safe_pass": 2,
+          "all_primary_references_retained": 3,
+          "strict_anchor_pass": 2,
+          "calls": 3,
+          "tokens": 11430,
+          "measured_means": {
+            "tokens": 3810,
+            "input_tokens": 3364.6666666666665,
+            "output_tokens": 445.3333333333333,
+            "jev_cli_seconds": 0.549427916664475,
+            "current_dispatch_wall_seconds": 0.582481208325286,
+            "retrieval_seconds": 0.04185251399758272,
+            "selector_seconds": 0.6243337223228688,
+            "final_pool_size": 47.666666666666664,
+            "payload_chars": 9864.333333333334
+          }
+        },
+        "coverage": {
+          "cases": 9,
+          "measured_cases": 3,
+          "correct_current": 2,
+          "all_required_retained": 3,
+          "omission_safe_pass": 2,
+          "all_primary_references_retained": 3,
+          "strict_anchor_pass": 2,
+          "calls": 3,
+          "tokens": 11747,
+          "measured_means": {
+            "tokens": 3915.6666666666665,
+            "input_tokens": 3470.3333333333335,
+            "output_tokens": 445.3333333333333,
+            "jev_cli_seconds": 0.5518565276676478,
+            "current_dispatch_wall_seconds": 0.6128607776578671,
+            "retrieval_seconds": 0.04185251399758272,
+            "selector_seconds": 0.6547132916554498,
+            "final_pool_size": 47.666666666666664,
+            "payload_chars": 10477
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "case": "unseen_pdf_contract_register",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "multitask": true,
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "calls": 1,
+      "tokens": 3702,
+      "jev_cli_seconds": 0.5443047919834498,
+      "current_dispatch_wall_seconds": 0.565412458992796,
+      "retrieval_seconds": 0.035287874983623624,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.6007003339764196,
+      "status": "selected",
+      "choice": "skill-c0db752739b0b1bd529f",
+      "raw_choice": "skill-c0db752739b0b1bd529f",
+      "confidence": 0.95,
+      "final_pool_size": 50,
+      "acceptable_current_ids": [
+        "skill-c0db752739b0b1bd529f"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "skill-c0db752739b0b1bd529f",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "selected_kind": "skill",
+      "failure_stage": "none",
+      "input_tokens": 3236,
+      "output_tokens": 466,
+      "payload_chars": 9491,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-c0db752739b0b1bd529f",
+          "name": "pdf",
+          "kind": "skill",
+          "probability": 0.95
+        },
+        {
+          "id": "registry-ea4df46f7307769fa0cc",
+          "name": "io.github.theluckystrike/pdf",
+          "kind": "mcp",
+          "probability": 0.04
+        },
+        {
+          "id": "registry-f64de4f3ffde7c503585",
+          "name": "com.yaktool/pdf",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-a6ffacc2615e84851c4a",
+          "name": "azure-search-documents-ts",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "unseen_pdf_contract_register",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "multitask": true,
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "calls": 1,
+      "tokens": 3819,
+      "jev_cli_seconds": 0.5547185000032187,
+      "current_dispatch_wall_seconds": 0.6118792079796549,
+      "retrieval_seconds": 0.035287874983623624,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.6471670829632785,
+      "status": "selected",
+      "choice": "skill-c0db752739b0b1bd529f",
+      "raw_choice": "skill-c0db752739b0b1bd529f",
+      "confidence": 0.95,
+      "final_pool_size": 50,
+      "acceptable_current_ids": [
+        "skill-c0db752739b0b1bd529f"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "skill-c0db752739b0b1bd529f",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "selected_kind": "skill",
+      "failure_stage": "none",
+      "input_tokens": 3353,
+      "output_tokens": 466,
+      "payload_chars": 10149,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-c0db752739b0b1bd529f",
+          "name": "pdf",
+          "kind": "skill",
+          "probability": 0.95
+        },
+        {
+          "id": "registry-ea4df46f7307769fa0cc",
+          "name": "io.github.theluckystrike/pdf",
+          "kind": "mcp",
+          "probability": 0.04
+        },
+        {
+          "id": "registry-f64de4f3ffde7c503585",
+          "name": "com.yaktool/pdf",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-a6ffacc2615e84851c4a",
+          "name": "azure-search-documents-ts",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "unseen_quarterly_ledger_cleanup",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "synonym",
+      "multitask": true,
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "calls": 1,
+      "tokens": 4110,
+      "jev_cli_seconds": 0.5435902080207597,
+      "current_dispatch_wall_seconds": 0.6076071249844972,
+      "retrieval_seconds": 0.041178958024829626,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.6487860830093268,
+      "status": "selected",
+      "choice": "skill-9a370bf7a61ed1d8e537",
+      "raw_choice": "skill-9a370bf7a61ed1d8e537",
+      "confidence": 0.9,
+      "final_pool_size": 49,
+      "acceptable_current_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "skill-9a370bf7a61ed1d8e537",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "selected_kind": "skill",
+      "failure_stage": "none",
+      "input_tokens": 3653,
+      "output_tokens": 457,
+      "payload_chars": 11534,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "probability": 0.9
+        },
+        {
+          "id": "registry-8f94ad4f4ca50f892d66",
+          "name": "Excel MCP Server",
+          "kind": "mcp",
+          "probability": 0.06
+        },
+        {
+          "id": "registry-0a553209c13c5bf0c6ab",
+          "name": "io.github.theluckystrike/excel-spreadsheet-xlsx-csv",
+          "kind": "mcp",
+          "probability": 0.03
+        },
+        {
+          "id": "registry-0e909b270b5ce2f27a1d",
+          "name": "stagenth · Excel 数据可视化",
+          "kind": "mcp",
+          "probability": 0.01
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "unseen_quarterly_ledger_cleanup",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "synonym",
+      "multitask": true,
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "calls": 1,
+      "tokens": 4007,
+      "jev_cli_seconds": 0.5587725829973351,
+      "current_dispatch_wall_seconds": 0.5960327909851912,
+      "retrieval_seconds": 0.041178958024829626,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.6372117490100209,
+      "status": "selected",
+      "choice": "skill-9a370bf7a61ed1d8e537",
+      "raw_choice": "skill-9a370bf7a61ed1d8e537",
+      "confidence": 0.89,
+      "final_pool_size": 49,
+      "acceptable_current_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "skill-9a370bf7a61ed1d8e537",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "selected_kind": "skill",
+      "failure_stage": "none",
+      "input_tokens": 3550,
+      "output_tokens": 457,
+      "payload_chars": 10932,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "probability": 0.89
+        },
+        {
+          "id": "registry-0a553209c13c5bf0c6ab",
+          "name": "io.github.theluckystrike/excel-spreadsheet-xlsx-csv",
+          "kind": "mcp",
+          "probability": 0.060000000000000005
+        },
+        {
+          "id": "registry-8f94ad4f4ca50f892d66",
+          "name": "Excel MCP Server",
+          "kind": "mcp",
+          "probability": 0.05
+        },
+        {
+          "id": "skill-315bdf4658df5e411866",
+          "name": "azure-ai-translation-document-py",
+          "kind": "skill",
+          "probability": 0.0
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "unseen_local_modal_testing",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 6.458983989432454e-06,
+      "retrieval_seconds": 0.025472416979027912,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.025478875963017344,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 60,
+      "acceptable_current_ids": [
+        "skill-61da1b60bbd8685c59f0"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "skill-61da1b60bbd8685c59f0",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_local_modal_testing",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 3.308401210233569e-05,
+      "retrieval_seconds": 0.025472416979027912,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.025505500991130248,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 60,
+      "acceptable_current_ids": [
+        "skill-61da1b60bbd8685c59f0"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "skill-61da1b60bbd8685c59f0",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_dashboard_visual_design",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "multitask": false,
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "calls": 1,
+      "tokens": 2874,
+      "jev_cli_seconds": 0.6188484169833828,
+      "current_dispatch_wall_seconds": 0.678961249999702,
+      "retrieval_seconds": 0.046100332983769476,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.7250615829834715,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "plugin-89ed36124dacd77dfbfe",
+      "confidence": 0.33,
+      "final_pool_size": 48,
+      "acceptable_current_ids": [
+        "skill-2de4b5af3d3c22cbf259",
+        "skill-551f920fda36feb99cc6"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "skill-2de4b5af3d3c22cbf259",
+      "primary_pending_ids": [],
+      "selected_kind": null,
+      "failure_stage": "final",
+      "input_tokens": 2425,
+      "output_tokens": 449,
+      "payload_chars": 7129,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-2de4b5af3d3c22cbf259",
+          "name": "frontend-design",
+          "kind": "skill",
+          "probability": 0.34
+        },
+        {
+          "id": "plugin-89ed36124dacd77dfbfe",
+          "name": "frontend-mobile-development",
+          "kind": "plugin",
+          "probability": 0.34
+        },
+        {
+          "id": "skill-a49b5a91567345e90712",
+          "name": "web-artifacts-builder",
+          "kind": "skill",
+          "probability": 0.3
+        },
+        {
+          "id": "plugin-49af30a4f33b1e018cea",
+          "name": "hyperframes",
+          "kind": "plugin",
+          "probability": 0.02
+        },
+        {
+          "id": "skill-81111b300e2288ccc2f1",
+          "name": "deploy-to-vercel",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "unseen_dashboard_visual_design",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "multitask": false,
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "calls": 1,
+      "tokens": 2776,
+      "jev_cli_seconds": 0.6788682500191499,
+      "current_dispatch_wall_seconds": 0.7266192079987377,
+      "retrieval_seconds": 0.046100332983769476,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.7727195409825072,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "skill-2de4b5af3d3c22cbf259",
+      "confidence": 0.37,
+      "final_pool_size": 48,
+      "acceptable_current_ids": [
+        "skill-2de4b5af3d3c22cbf259",
+        "skill-551f920fda36feb99cc6"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "skill-2de4b5af3d3c22cbf259",
+      "primary_pending_ids": [],
+      "selected_kind": null,
+      "failure_stage": "final",
+      "input_tokens": 2328,
+      "output_tokens": 448,
+      "payload_chars": 6551,
+      "top_choice_probabilities": [
+        {
+          "id": "skill-2de4b5af3d3c22cbf259",
+          "name": "frontend-design",
+          "kind": "skill",
+          "probability": 0.38
+        },
+        {
+          "id": "plugin-89ed36124dacd77dfbfe",
+          "name": "frontend-mobile-development",
+          "kind": "plugin",
+          "probability": 0.34
+        },
+        {
+          "id": "skill-a49b5a91567345e90712",
+          "name": "web-artifacts-builder",
+          "kind": "skill",
+          "probability": 0.27
+        },
+        {
+          "id": "plugin-49af30a4f33b1e018cea",
+          "name": "hyperframes",
+          "kind": "plugin",
+          "probability": 0.01
+        },
+        {
+          "id": "skill-81111b300e2288ccc2f1",
+          "name": "deploy-to-vercel",
+          "kind": "skill",
+          "probability": 0.0
+        }
+      ]
+    },
+    {
+      "case": "unseen_accessibility_then_handbook",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "zh",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "calls": 1,
+      "tokens": 3721,
+      "jev_cli_seconds": 0.5452063750126399,
+      "current_dispatch_wall_seconds": 0.585998374997871,
+      "retrieval_seconds": 0.049090708984294906,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.6350890839821659,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "plugin-d3afb2208e4f83e5c520",
+      "confidence": 0.34,
+      "final_pool_size": 44,
+      "acceptable_current_ids": [
+        "plugin-d3afb2208e4f83e5c520",
+        "a11y-audit",
+        "registry-cb60b36a49dee4393bb4"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "plugin-d3afb2208e4f83e5c520",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "selected_kind": null,
+      "failure_stage": "final",
+      "input_tokens": 3308,
+      "output_tokens": 413,
+      "payload_chars": 9170,
+      "top_choice_probabilities": [
+        {
+          "id": "plugin-d3afb2208e4f83e5c520",
+          "name": "accessibility-compliance",
+          "kind": "plugin",
+          "probability": 0.35000000000000003
+        },
+        {
+          "id": "registry-955af86b605fef7ee4f3",
+          "name": "io.github.thegridwork/siteaudit",
+          "kind": "mcp",
+          "probability": 0.18000000000000002
+        },
+        {
+          "id": "registry-398e31b86c840a6fe7a7",
+          "name": "com.nexaaly/a11y-check",
+          "kind": "mcp",
+          "probability": 0.16
+        },
+        {
+          "id": "skill-551f920fda36feb99cc6",
+          "name": "frontend-design-review",
+          "kind": "skill",
+          "probability": 0.09
+        },
+        {
+          "id": "registry-8791dfdc2fbdbcd33366",
+          "name": "io.github.freshfos/dropcoin-a11y",
+          "kind": "mcp",
+          "probability": 0.07
+        }
+      ]
+    },
+    {
+      "case": "unseen_accessibility_then_handbook",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "zh",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "calls": 1,
+      "tokens": 3818,
+      "jev_cli_seconds": 0.5572608749789651,
+      "current_dispatch_wall_seconds": 0.6190960000094492,
+      "retrieval_seconds": 0.049090708984294906,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.6681867089937441,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "registry-398e31b86c840a6fe7a7",
+      "confidence": 0.27,
+      "final_pool_size": 44,
+      "acceptable_current_ids": [
+        "plugin-d3afb2208e4f83e5c520",
+        "a11y-audit",
+        "registry-cb60b36a49dee4393bb4"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "plugin-d3afb2208e4f83e5c520",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "selected_kind": null,
+      "failure_stage": "final",
+      "input_tokens": 3405,
+      "output_tokens": 413,
+      "payload_chars": 9748,
+      "top_choice_probabilities": [
+        {
+          "id": "registry-398e31b86c840a6fe7a7",
+          "name": "com.nexaaly/a11y-check",
+          "kind": "mcp",
+          "probability": 0.29000000000000004
+        },
+        {
+          "id": "plugin-d3afb2208e4f83e5c520",
+          "name": "accessibility-compliance",
+          "kind": "plugin",
+          "probability": 0.28
+        },
+        {
+          "id": "registry-955af86b605fef7ee4f3",
+          "name": "io.github.thegridwork/siteaudit",
+          "kind": "mcp",
+          "probability": 0.15000000000000002
+        },
+        {
+          "id": "registry-760a054c1279eb5e932e",
+          "name": "A11Y Toolkit",
+          "kind": "mcp",
+          "probability": 0.08
+        },
+        {
+          "id": "registry-8791dfdc2fbdbcd33366",
+          "name": "io.github.freshfos/dropcoin-a11y",
+          "kind": "mcp",
+          "probability": 0.06
+        }
+      ]
+    },
+    {
+      "case": "unseen_bug_root_cause_workflow",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 8.292001439258456e-06,
+      "retrieval_seconds": 0.029762791033135727,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.029771083034574986,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 56,
+      "acceptable_current_ids": [
+        "plugin-9221213abca765914373"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "plugin-9221213abca765914373",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_bug_root_cause_workflow",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 1.0707997716963291e-05,
+      "retrieval_seconds": 0.029762791033135727,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.02977349903085269,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 56,
+      "acceptable_current_ids": [
+        "plugin-9221213abca765914373"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "plugin-9221213abca765914373",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_kubernetes_release_plan",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 1.0208023013547063e-05,
+      "retrieval_seconds": 0.015727208025055006,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.015737416048068553,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 36,
+      "acceptable_current_ids": [
+        "plugin-d234e38b94a91ef65c51",
+        "helm-chart-builder"
+      ],
+      "pending_groups": [
+        [
+          "dependency-auditor",
+          "senior-secops",
+          "security-pen-testing"
+        ]
+      ],
+      "primary_current_id": "plugin-d234e38b94a91ef65c51",
+      "primary_pending_ids": [
+        "dependency-auditor"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_kubernetes_release_plan",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 7.583992555737495e-06,
+      "retrieval_seconds": 0.015727208025055006,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.015734792017610744,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 36,
+      "acceptable_current_ids": [
+        "plugin-d234e38b94a91ef65c51",
+        "helm-chart-builder"
+      ],
+      "pending_groups": [
+        [
+          "dependency-auditor",
+          "senior-secops",
+          "security-pen-testing"
+        ]
+      ],
+      "primary_current_id": "plugin-d234e38b94a91ef65c51",
+      "primary_pending_ids": [
+        "dependency-auditor"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_search_friendly_article",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "multitask": false,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 4.5419728849083185e-06,
+      "retrieval_seconds": 0.025434875016799197,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.025439416989684105,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 32,
+      "acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-9144a8b7803b10703efa",
+      "primary_pending_ids": [],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_search_friendly_article",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "multitask": false,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 4.1669991333037615e-06,
+      "retrieval_seconds": 0.025434875016799197,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.0254390420159325,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 32,
+      "acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-9144a8b7803b10703efa",
+      "primary_pending_ids": [],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_package_docs_then_review",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 0.00011241700849495828,
+      "retrieval_seconds": 0.030613375012762845,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.030725792021257803,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 58,
+      "acceptable_current_ids": [
+        "registry-b423e6fd7d18af4889fb"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b423e6fd7d18af4889fb",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_package_docs_then_review",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 7.499998901039362e-06,
+      "retrieval_seconds": 0.030613375012762845,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.030620875011663884,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 58,
+      "acceptable_current_ids": [
+        "registry-b423e6fd7d18af4889fb"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b423e6fd7d18af4889fb",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_browser_readonly_research",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 6.332993507385254e-06,
+      "retrieval_seconds": 0.04005104099633172,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.04005737398983911,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 50,
+      "acceptable_current_ids": [
+        "registry-78eb9cf9af75b00491be",
+        "registry-08d2b647940268abcf87",
+        "registry-d97da816f599cf9bf9de",
+        "registry-0ee639c00bc5907163cd",
+        "registry-c2785963a0e12d11d162",
+        "registry-4fbc9e99b1f04aa2ff15"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "registry-78eb9cf9af75b00491be",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_browser_readonly_research",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 5.665991920977831e-06,
+      "retrieval_seconds": 0.04005104099633172,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.0400567069882527,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 50,
+      "acceptable_current_ids": [
+        "registry-78eb9cf9af75b00491be",
+        "registry-08d2b647940268abcf87",
+        "registry-d97da816f599cf9bf9de",
+        "registry-0ee639c00bc5907163cd",
+        "registry-c2785963a0e12d11d162",
+        "registry-4fbc9e99b1f04aa2ff15"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "registry-78eb9cf9af75b00491be",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_public_repo_inventory",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 4.91601531393826e-06,
+      "retrieval_seconds": 0.022740290994988754,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.022745207010302693,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 42,
+      "acceptable_current_ids": [
+        "registry-b6faa9c4714f3d27494b",
+        "registry-225c7230d6eff499b98b",
+        "registry-3b4fcbaad9ac4056e2ab",
+        "registry-daad1ed4a29a69034465"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b6faa9c4714f3d27494b",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_public_repo_inventory",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "multitask": true,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 5.207984941080213e-06,
+      "retrieval_seconds": 0.022740290994988754,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.022745498979929835,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 42,
+      "acceptable_current_ids": [
+        "registry-b6faa9c4714f3d27494b",
+        "registry-225c7230d6eff499b98b",
+        "registry-3b4fcbaad9ac4056e2ab",
+        "registry-daad1ed4a29a69034465"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b6faa9c4714f3d27494b",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_time_zone_conversion",
+      "arm": "coverage",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "multitask": false,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 1.9579892978072166e-06,
+      "retrieval_seconds": 0.006647959002293646,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.0066499169915914536,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 11,
+      "acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-f76327aa6af982c2cb41",
+      "primary_pending_ids": [],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    },
+    {
+      "case": "unseen_time_zone_conversion",
+      "arm": "compact",
+      "stratum": "new",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "multitask": false,
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 1.5829864423722029e-06,
+      "retrieval_seconds": 0.006647959002293646,
+      "retrieval_basis": "fresh_shared_structured_recall_and_alias_repair",
+      "selector_seconds": 0.0066495419887360185,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 11,
+      "acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-f76327aa6af982c2cb41",
+      "primary_pending_ids": [],
+      "selected_kind": null,
+      "failure_stage": "recall",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "payload_chars": null,
+      "top_choice_probabilities": []
+    }
+  ],
+  "shared_reference_coverage": {
+    "unseen_pdf_contract_register": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_group_indices": [],
+      "primary_required": 2,
+      "primary_retained": 2,
+      "missing_primary_ids": [],
+      "facets": {
+        "objects": [
+          "pdf",
+          "spreadsheet"
+        ],
+        "actions": [
+          "calculate",
+          "search"
+        ],
+        "categories": [
+          "data",
+          "writing"
+        ]
+      },
+      "supplemental_query_count": 8
+    },
+    "unseen_quarterly_ledger_cleanup": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_group_indices": [],
+      "primary_required": 2,
+      "primary_retained": 2,
+      "missing_primary_ids": [],
+      "facets": {
+        "objects": [
+          "spreadsheet",
+          "word"
+        ],
+        "actions": [
+          "calculate",
+          "edit",
+          "format"
+        ],
+        "categories": [
+          "data",
+          "writing"
+        ]
+      },
+      "supplemental_query_count": 8
+    },
+    "unseen_local_modal_testing": {
+      "required": 2,
+      "retained": 0,
+      "pending_required": 1,
+      "pending_retained": 0,
+      "missing_group_indices": [
+        0,
+        1
+      ],
+      "primary_required": 2,
+      "primary_retained": 0,
+      "missing_primary_ids": [
+        "code-reviewer",
+        "skill-61da1b60bbd8685c59f0"
+      ],
+      "facets": {
+        "objects": [
+          "code"
+        ],
+        "actions": [
+          "read",
+          "review",
+          "validate"
+        ],
+        "categories": [
+          "data",
+          "operations",
+          "software"
+        ]
+      },
+      "supplemental_query_count": 4
+    },
+    "unseen_dashboard_visual_design": {
+      "required": 1,
+      "retained": 1,
+      "pending_required": 0,
+      "pending_retained": 0,
+      "missing_group_indices": [],
+      "primary_required": 1,
+      "primary_retained": 1,
+      "missing_primary_ids": [],
+      "facets": {
+        "objects": [
+          "database",
+          "website"
+        ],
+        "actions": [],
+        "categories": [
+          "data",
+          "software",
+          "visual"
+        ]
+      },
+      "supplemental_query_count": 8
+    },
+    "unseen_accessibility_then_handbook": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_group_indices": [],
+      "primary_required": 2,
+      "primary_retained": 2,
+      "missing_primary_ids": [],
+      "facets": {
+        "objects": [
+          "website",
+          "word"
+        ],
+        "actions": [
+          "compare",
+          "plan",
+          "review",
+          "validate"
+        ],
+        "categories": [
+          "software",
+          "visual",
+          "writing"
+        ]
+      },
+      "supplemental_query_count": 8
+    },
+    "unseen_bug_root_cause_workflow": {
+      "required": 2,
+      "retained": 1,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_group_indices": [
+        0
+      ],
+      "primary_required": 2,
+      "primary_retained": 1,
+      "missing_primary_ids": [
+        "plugin-9221213abca765914373"
+      ],
+      "facets": {
+        "objects": [
+          "observability",
+          "word"
+        ],
+        "actions": [
+          "format",
+          "validate"
+        ],
+        "categories": [
+          "operations",
+          "writing"
+        ]
+      },
+      "supplemental_query_count": 8
+    },
+    "unseen_kubernetes_release_plan": {
+      "required": 2,
+      "retained": 1,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_group_indices": [
+        0
+      ],
+      "primary_required": 2,
+      "primary_retained": 1,
+      "missing_primary_ids": [
+        "plugin-d234e38b94a91ef65c51"
+      ],
+      "facets": {
+        "objects": [],
+        "actions": [
+          "plan",
+          "review"
+        ],
+        "categories": [
+          "operations",
+          "security"
+        ]
+      },
+      "supplemental_query_count": 0
+    },
+    "unseen_search_friendly_article": {
+      "required": 1,
+      "retained": 0,
+      "pending_required": 0,
+      "pending_retained": 0,
+      "missing_group_indices": [
+        0
+      ],
+      "primary_required": 1,
+      "primary_retained": 0,
+      "missing_primary_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "facets": {
+        "objects": [],
+        "actions": [
+          "format",
+          "search"
+        ],
+        "categories": []
+      },
+      "supplemental_query_count": 0
+    },
+    "unseen_package_docs_then_review": {
+      "required": 2,
+      "retained": 0,
+      "pending_required": 1,
+      "pending_retained": 0,
+      "missing_group_indices": [
+        0,
+        1
+      ],
+      "primary_required": 2,
+      "primary_retained": 0,
+      "missing_primary_ids": [
+        "code-reviewer",
+        "registry-b423e6fd7d18af4889fb"
+      ],
+      "facets": {
+        "objects": [
+          "code"
+        ],
+        "actions": [
+          "edit",
+          "review"
+        ],
+        "categories": [
+          "software",
+          "writing"
+        ]
+      },
+      "supplemental_query_count": 4
+    },
+    "unseen_browser_readonly_research": {
+      "required": 2,
+      "retained": 1,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_group_indices": [
+        0
+      ],
+      "primary_required": 2,
+      "primary_retained": 1,
+      "missing_primary_ids": [
+        "registry-78eb9cf9af75b00491be"
+      ],
+      "facets": {
+        "objects": [
+          "spreadsheet",
+          "website"
+        ],
+        "actions": [
+          "edit",
+          "read"
+        ],
+        "categories": [
+          "data",
+          "software",
+          "visual"
+        ]
+      },
+      "supplemental_query_count": 8
+    },
+    "unseen_public_repo_inventory": {
+      "required": 2,
+      "retained": 1,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_group_indices": [
+        0
+      ],
+      "primary_required": 2,
+      "primary_retained": 1,
+      "missing_primary_ids": [
+        "registry-b6faa9c4714f3d27494b"
+      ],
+      "facets": {
+        "objects": [
+          "code"
+        ],
+        "actions": [
+          "read",
+          "review",
+          "search"
+        ],
+        "categories": [
+          "software"
+        ]
+      },
+      "supplemental_query_count": 4
+    },
+    "unseen_time_zone_conversion": {
+      "required": 1,
+      "retained": 0,
+      "pending_required": 0,
+      "pending_retained": 0,
+      "missing_group_indices": [
+        0
+      ],
+      "primary_required": 1,
+      "primary_retained": 0,
+      "missing_primary_ids": [
+        "registry-f76327aa6af982c2cb41"
+      ],
+      "facets": {
+        "objects": [],
+        "actions": [
+          "create"
+        ],
+        "categories": []
+      },
+      "supplemental_query_count": 0
+    }
+  },
+  "calls": 8,
+  "known_tokens": 28827,
+  "index_seconds": {
+    "lexical": 0.5794802920136135,
+    "structured": 3.8338359170011245
+  },
+  "coverage_change_percent": {
+    "compact": {
+      "tokens": 2.921300858792053,
+      "input_tokens": 3.3327966511028873,
+      "output_tokens": 0.05605381165918466,
+      "jev_cli_seconds": -2.2660316140055925,
+      "current_dispatch_wall_seconds": 1.7574634491570151,
+      "retrieval_seconds": 0.0,
+      "selector_seconds": 1.6434368853838421,
+      "final_pool_size": 0.0,
+      "payload_chars": 6.684373616644534
+    }
+  },
+  "source_sha256": {
+    "benchmarks/directory-depth/conditional_experiment.py": "127329b23bad4205c15e98194d31cc7e6836178af2a62c56b376d322c2f184f1",
+    "benchmarks/directory-depth/conditional_search.py": "9e0fcdf32192e40644ae5ab14324f0cbca33a73e7d033b450aa7d67f819117f8",
+    "benchmarks/directory-depth/merged_experiment.py": "0031b0a778745d990936c29795d8c1f3088c55d2b2617850a8a3cd1931d8dcea",
+    "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+    "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+    "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+    "benchmarks/directory-depth/conditional_current_experiment.py": "e78ff50ce20958f1a552023562c758db7a0a066622b05213f32a31572604c0b4",
+    "benchmarks/directory-depth/conditional_current.py": "6e2ea31c08d81eee668a092ef1b7afa32ea13ef43fdf588ceae00dbdb0f81549",
+    "benchmarks/directory-depth/conditional_current_cases.json": "3e9f2c4dfae68204ea512e997ae3250969e2f41dfb37fbdd8cd052d914951135",
+    "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+    "benchmarks/directory-depth/structured_recall_experiment.py": "2b36d545cc6a92203be841dd36e7b37db938ce59dda4eeb9556239c93c25a1c8",
+    "benchmarks/directory-depth/structured_recall.py": "22d14c59943a6bd98a32e6b19e60053a396b5374a881ccadcf34838decf9a056",
+    "benchmarks/directory-depth/structured_recall_cases.json": "8abf9901ce294e5159081156419f9799f3a6fa478d3d272a0edd88660e60d16d",
+    "benchmarks/directory-depth/final_contrast_experiment.py": "1dd12d439e1d717e1eff763ce65bd27ef46eec76cfb0afc8a6b0db23fffd22cf",
+    "benchmarks/directory-depth/final_contrast.py": "348fb93d990a149aa2a5ca93e4e3ed2795c66bf4b3d93a2172c8a2db1a7b26da",
+    "benchmarks/directory-depth/final_contrast_cases.json": "78c00e517700c67f7e161415e0b20ebf3720f899d3c5f618e42f1df70c8104c2",
+    "benchmarks/directory-depth/requirement_coverage_experiment.py": "c3196409062eb32b889dfe4d74907a56c710cd2d9948dbfce93e0d681dbd6a3a",
+    "benchmarks/directory-depth/requirement_coverage.py": "5626955c99e9682aa706fb1aad99a6e766d95e4b89db5023ab88fd1afc935954",
+    "benchmarks/directory-depth/unseen_breadth_experiment.py": "29cd98eb4d1361885501a15203cd4999999de842fd325395406e3f789c857cca",
+    "benchmarks/directory-depth/unseen_breadth_requests.json": "dc9623e2039c236bab9e60c815751fca40cd492c4dba8f1fe279bd50cb8d488f",
+    "benchmarks/directory-depth/unseen_breadth_references.json": "549e3dd05931abdc4e6f5dd41f1afa2e247ecb1e3be3d89fd8689e01acfd651b"
+  },
+  "catalog_sha256": "64bc3d608649768fc3117e6a4ed4eb5e32278a3ae540f23bd2a568aa7bd7e57a",
+  "cases_sha256": "f78446cd5aa0e5b8c9d0369fb8f836ef643723c8bd87d5d33055b6615c7471a3",
+  "preflight": {
+    "rows": [
+      {
+        "case": "unseen_pdf_contract_register",
+        "kind_stratum": "skill",
+        "language": "zh",
+        "missing_groups": [],
+        "missing_primary_ids": [],
+        "eligible_for_live": true,
+        "pool_size": 50,
+        "original_pool_size": 50,
+        "payload_chars": {
+          "compact": 9491,
+          "coverage": 10149
+        }
+      },
+      {
+        "case": "unseen_quarterly_ledger_cleanup",
+        "kind_stratum": "skill",
+        "language": "synonym",
+        "missing_groups": [],
+        "missing_primary_ids": [],
+        "eligible_for_live": true,
+        "pool_size": 49,
+        "original_pool_size": 42,
+        "payload_chars": {
+          "compact": 10932,
+          "coverage": 11534
+        }
+      },
+      {
+        "case": "unseen_local_modal_testing",
+        "kind_stratum": "skill",
+        "language": "mixed",
+        "missing_groups": [
+          0,
+          1
+        ],
+        "missing_primary_ids": [
+          "code-reviewer",
+          "skill-61da1b60bbd8685c59f0"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 60,
+        "original_pool_size": 60,
+        "payload_chars": {}
+      },
+      {
+        "case": "unseen_dashboard_visual_design",
+        "kind_stratum": "skill",
+        "language": "zh",
+        "missing_groups": [],
+        "missing_primary_ids": [],
+        "eligible_for_live": true,
+        "pool_size": 48,
+        "original_pool_size": 48,
+        "payload_chars": {
+          "compact": 6551,
+          "coverage": 7129
+        }
+      },
+      {
+        "case": "unseen_accessibility_then_handbook",
+        "kind_stratum": "plugin",
+        "language": "zh",
+        "missing_groups": [],
+        "missing_primary_ids": [],
+        "eligible_for_live": true,
+        "pool_size": 44,
+        "original_pool_size": 34,
+        "payload_chars": {
+          "compact": 9170,
+          "coverage": 9748
+        }
+      },
+      {
+        "case": "unseen_bug_root_cause_workflow",
+        "kind_stratum": "plugin",
+        "language": "synonym",
+        "missing_groups": [
+          0
+        ],
+        "missing_primary_ids": [
+          "plugin-9221213abca765914373"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 56,
+        "original_pool_size": 56,
+        "payload_chars": {}
+      },
+      {
+        "case": "unseen_kubernetes_release_plan",
+        "kind_stratum": "plugin",
+        "language": "mixed",
+        "missing_groups": [
+          0
+        ],
+        "missing_primary_ids": [
+          "plugin-d234e38b94a91ef65c51"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 36,
+        "original_pool_size": 36,
+        "payload_chars": {}
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "kind_stratum": "plugin",
+        "language": "synonym",
+        "missing_groups": [
+          0
+        ],
+        "missing_primary_ids": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 32,
+        "original_pool_size": 32,
+        "payload_chars": {}
+      },
+      {
+        "case": "unseen_package_docs_then_review",
+        "kind_stratum": "mcp",
+        "language": "mixed",
+        "missing_groups": [
+          0,
+          1
+        ],
+        "missing_primary_ids": [
+          "code-reviewer",
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 58,
+        "original_pool_size": 58,
+        "payload_chars": {}
+      },
+      {
+        "case": "unseen_browser_readonly_research",
+        "kind_stratum": "mcp",
+        "language": "zh",
+        "missing_groups": [
+          0
+        ],
+        "missing_primary_ids": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 50,
+        "original_pool_size": 50,
+        "payload_chars": {}
+      },
+      {
+        "case": "unseen_public_repo_inventory",
+        "kind_stratum": "mcp",
+        "language": "mixed",
+        "missing_groups": [
+          0
+        ],
+        "missing_primary_ids": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 42,
+        "original_pool_size": 42,
+        "payload_chars": {}
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "kind_stratum": "mcp",
+        "language": "synonym",
+        "missing_groups": [
+          0
+        ],
+        "missing_primary_ids": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "eligible_for_live": false,
+        "pool_size": 11,
+        "original_pool_size": 11,
+        "payload_chars": {}
+      }
+    ],
+    "eligible": 4,
+    "cases": 12
+  },
+  "limits": [
+    "Twelve author-written new requests fixed before reference inspection; not an independent blind holdout or proof of all equivalent capabilities. Public metadata selection only; no real capability execution or daily changes. Current strata use primary references; accepted alternatives can cross kinds.",
+    "Paired live-case means only, plus all-case call totals. All retrieval and final times fresh; index builds separate. Main Agent cost, money and backend revision unobservable.",
+    "All twelve new cases remain in accuracy denominators. Cost means cover only the same four live pairs; eight known recall failures receive no model calls.",
+    "Strict frozen-reference coverage does not prove every equivalent capability survives or that other candidates are incapable.",
+    "Selectors are unchanged from the two-failure repair. Both arms share fresh retrieval; only the previously defined evidence/coverage final treatment differs.",
+    "Skill/plugin/MCP strata refer to primary targets, not forced selection kinds. No MCP reaches live selection because all four fail reference coverage. No capability is installed or executed."
+  ],
+  "verdict": "do_not_promote"
+}

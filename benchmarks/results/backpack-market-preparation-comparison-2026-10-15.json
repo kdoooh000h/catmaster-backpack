@@ -1,0 +1,372 @@
+{
+  "schema": "market-preparation-comparison-v1",
+  "baseline_commit": "6cd2a8bffcba71ff88f89a200a7b76d61bdeded2",
+  "condition": "Three failed original prompts only, same native model/effort/360s budget; previous passes reused, no full six-task current-version rerun. Same plugin snapshots and initial 70 classification records; Registry live reads succeeded this time. No capability names supplied.",
+  "preparation": {
+    "old": {
+      "seconds": 59.6972291469574,
+      "jev_usage": {
+        "calls_expected": 41,
+        "calls_with_usage": 41,
+        "complete": true,
+        "input_tokens": 144154,
+        "output_tokens": 7644,
+        "known_total_tokens": 151798
+      }
+    },
+    "new": {
+      "seconds": 9.759028665997903,
+      "jev_usage": {
+        "calls_expected": 8,
+        "calls_with_usage": 8,
+        "complete": true,
+        "input_tokens": 41928,
+        "output_tokens": 5132,
+        "known_total_tokens": 47060
+      }
+    },
+    "business_replayed": false,
+    "qualification": "Same captured preparation request and initial corpus/cache; selection changed, single nonrandomized preflight. No native completed task rerun."
+  },
+  "cases": [
+    {
+      "case": "plugin-playground",
+      "old": {
+        "elapsed_seconds": 360.03,
+        "known_total_tokens": 46516,
+        "token_coverage_complete": false
+      },
+      "new": {
+        "elapsed_seconds": 360.01,
+        "known_total_tokens": 46619,
+        "token_coverage_complete": false,
+        "native_usage": {
+          "calls_expected": 1,
+          "calls_with_usage": 0,
+          "complete": false,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "known_total_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_accounting_complete": false,
+          "noncached_input_tokens": null,
+          "cache_write_input_tokens": 0
+        },
+        "jev_usage": {
+          "calls_expected": 10,
+          "calls_with_usage": 10,
+          "complete": true,
+          "input_tokens": 41470,
+          "output_tokens": 5149,
+          "known_total_tokens": 46619
+        },
+        "backpack_wait_seconds": 8.178
+      },
+      "acceptance": {
+        "strict_task_pass": false,
+        "artifact_created": true,
+        "native_checks_passed": 26,
+        "native_check_scope": "Node VM with simulated DOM/canvas/clipboard",
+        "real_browser_verified": false,
+        "reason": "360s native turn timeout, no completion receipt; desktop open returned no compatible executable. No alternate file-open path attempted."
+      },
+      "calls": [
+        {
+          "tool": "prepare_market_capability",
+          "seconds": 7.065,
+          "status": "prepared",
+          "search": "frontend",
+          "selected_name": "playground",
+          "preexisting_name": false
+        },
+        {
+          "tool": "connect_market_capability",
+          "seconds": 0.008,
+          "status": "connected",
+          "search": null,
+          "selected_name": "playground",
+          "preexisting_name": false
+        },
+        {
+          "tool": "acquire_skill",
+          "seconds": 0.012,
+          "status": "selected",
+          "search": null,
+          "selected_name": "playground",
+          "preexisting_name": false
+        },
+        {
+          "tool": "acquire_resource",
+          "seconds": 1.092,
+          "status": "selected",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        }
+      ]
+    },
+    {
+      "case": "mcp-time",
+      "old": {
+        "elapsed_seconds": 86.184,
+        "known_total_tokens": 55253,
+        "token_coverage_complete": true
+      },
+      "new": {
+        "elapsed_seconds": 237.456,
+        "known_total_tokens": 257409,
+        "token_coverage_complete": true,
+        "native_usage": {
+          "calls_expected": 1,
+          "calls_with_usage": 1,
+          "complete": true,
+          "input_tokens": 247966,
+          "output_tokens": 2649,
+          "known_total_tokens": 250615,
+          "cached_input_tokens": 231680,
+          "cache_accounting_complete": true,
+          "noncached_input_tokens": 16286,
+          "cache_write_input_tokens": 0
+        },
+        "jev_usage": {
+          "calls_expected": 9,
+          "calls_with_usage": 9,
+          "complete": true,
+          "input_tokens": 6274,
+          "output_tokens": 520,
+          "known_total_tokens": 6794
+        },
+        "backpack_wait_seconds": 113.72
+      },
+      "acceptance": {
+        "strict_task_pass": true,
+        "artifact_correct": true,
+        "new_capability": true,
+        "business_calls_completed": 2,
+        "checked": "Actual UTC offsets -240/+540 minutes, NY local09:00, Tokyo local22:00 on same date; independent local zoneinfo agrees. Underlying service tzdb version unavailable."
+      },
+      "calls": [
+        {
+          "tool": "acquire_mcp",
+          "seconds": 0.193,
+          "status": "none",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "prepare_market_capability",
+          "seconds": 58.479,
+          "status": "search_too_broad",
+          "search": "time",
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "prepare_market_capability",
+          "seconds": 45.458,
+          "status": "prepared",
+          "search": "timezone",
+          "selected_name": "io.github.MukundaKatta/timezone-mcp",
+          "preexisting_name": false
+        },
+        {
+          "tool": "connect_market_capability",
+          "seconds": 5.349,
+          "status": "connected",
+          "search": null,
+          "selected_name": "io.github.MukundaKatta/timezone-mcp",
+          "preexisting_name": false
+        },
+        {
+          "tool": "acquire_mcp",
+          "seconds": 2.052,
+          "status": "selected",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "invoke_mcp",
+          "seconds": 0.039,
+          "status": "completed",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "acquire_mcp",
+          "seconds": 2.125,
+          "status": "selected",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "invoke_mcp",
+          "seconds": 0.025,
+          "status": "completed",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        }
+      ]
+    },
+    {
+      "case": "mcp-memory",
+      "old": {
+        "elapsed_seconds": 113.048,
+        "known_total_tokens": 85645,
+        "token_coverage_complete": true
+      },
+      "new": {
+        "elapsed_seconds": 273.881,
+        "known_total_tokens": 421357,
+        "token_coverage_complete": true,
+        "native_usage": {
+          "calls_expected": 1,
+          "calls_with_usage": 1,
+          "complete": true,
+          "input_tokens": 339430,
+          "output_tokens": 2923,
+          "known_total_tokens": 342353,
+          "cached_input_tokens": 310272,
+          "cache_accounting_complete": true,
+          "noncached_input_tokens": 29158,
+          "cache_write_input_tokens": 0
+        },
+        "jev_usage": {
+          "calls_expected": 23,
+          "calls_with_usage": 23,
+          "complete": true,
+          "input_tokens": 75944,
+          "output_tokens": 3060,
+          "known_total_tokens": 79004
+        },
+        "backpack_wait_seconds": 122.057
+      },
+      "acceptance": {
+        "strict_task_pass": true,
+        "artifact_correct": true,
+        "new_capability": true,
+        "business_calls_completed": 4,
+        "writes": 1,
+        "checked": "Import four fictional nodes/three edges once, then independent node/neighborhood/edge reads; actual edges establish person and community. No uncertain business replay."
+      },
+      "calls": [
+        {
+          "tool": "acquire_mcp",
+          "seconds": 0.13,
+          "status": "none",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "prepare_market_capability",
+          "seconds": 54.754,
+          "status": "search_too_broad",
+          "search": "memory",
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "prepare_market_capability",
+          "seconds": 33.756,
+          "status": "prepared",
+          "search": "knowledge-graph",
+          "selected_name": "io.github.cunicopia-dev/knowledge-graph-rdbms",
+          "preexisting_name": false
+        },
+        {
+          "tool": "connect_market_capability",
+          "seconds": 7.749,
+          "status": "connected",
+          "search": null,
+          "selected_name": "io.github.cunicopia-dev/knowledge-graph-rdbms",
+          "preexisting_name": false
+        },
+        {
+          "tool": "acquire_mcp",
+          "seconds": 15.486,
+          "status": "selected",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "invoke_mcp",
+          "seconds": 0.03,
+          "status": "completed",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "acquire_mcp",
+          "seconds": 4.565,
+          "status": "selected",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "invoke_mcp",
+          "seconds": 0.109,
+          "status": "completed",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "acquire_mcp",
+          "seconds": 2.288,
+          "status": "selected",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "invoke_mcp",
+          "seconds": 0.018,
+          "status": "completed",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "acquire_mcp",
+          "seconds": 3.138,
+          "status": "selected",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        },
+        {
+          "tool": "invoke_mcp",
+          "seconds": 0.036,
+          "status": "completed",
+          "search": null,
+          "selected_name": null,
+          "preexisting_name": null
+        }
+      ]
+    }
+  ],
+  "native_elapsed_seconds": 871.347,
+  "native_and_jev_known_token_lower_bound": 725385,
+  "including_preflight_known_token_lower_bound": 772445,
+  "other_costs": "Root development, tool/browser/orchestration tokens excluded. HTML native usage missing. USD and actual model behind aliases unobservable.",
+  "checks": 169,
+  "source_delta_after_native_freeze": "Component size/reference limits now skip only that component and retain sibling candidates; uninspected per-package tail is labelled budget exhaustion. Regression tested, not triggered by these native cases.",
+  "daily_installation_changed": false,
+  "host_integrity": {
+    "protected_files_unchanged": true,
+    "public_inventory_unchanged": false,
+    "observed_added_public_names": [
+      "figma-code-workflows",
+      "figma-spec"
+    ],
+    "note": "Task did not operate on Figma; other installation record set unchanged. External host cache change origin not diagnosed or reverted. Tested new capability names unaffected."
+  }
+}

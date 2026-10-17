@@ -1,0 +1,749 @@
+{
+  "source_base": "d0e5421bc830882671d91812741e3aab18a7f2e4",
+  "final_confidence_floor": 0.7,
+  "stage": "plugin-ready",
+  "fixed_cases": "../market-blind/language-fit-cases.json",
+  "cheap_summary": {
+    "baseline": {
+      "cases": 10,
+      "correct": 6,
+      "positive_recalled": 2,
+      "positive_total": 6,
+      "false_acceptance": 0,
+      "negative_total": 4,
+      "selected_precision": 1.0,
+      "known_tokens": 14178,
+      "mean_seconds": 0.5223,
+      "requests": 10
+    },
+    "candidate": {
+      "cases": 10,
+      "correct": 10,
+      "positive_recalled": 6,
+      "positive_total": 6,
+      "false_acceptance": 0,
+      "negative_total": 4,
+      "selected_precision": 1.0,
+      "known_tokens": 15419,
+      "mean_seconds": 0.5403982208983507,
+      "requests": 10
+    }
+  },
+  "cheap_cases": [
+    {
+      "id": "original_zh",
+      "positive": true,
+      "partition": "development",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.66,
+        "seconds": 0.564,
+        "tokens": 1632
+      },
+      "candidate": {
+        "passed": true,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 1.0,
+            "probabilities": {
+              "yes": 1.0,
+              "no": 0.0
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.99,
+              "no": 0.01
+            }
+          }
+        },
+        "seconds": 0.5744004999869503,
+        "tokens": 1745
+      }
+    },
+    {
+      "id": "prior_generated_zh",
+      "positive": true,
+      "partition": "development",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.56,
+        "seconds": 0.528,
+        "tokens": 1625
+      },
+      "candidate": {
+        "passed": true,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.99,
+              "no": 0.01
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.99,
+              "no": 0.01
+            }
+          }
+        },
+        "seconds": 0.5531470830028411,
+        "tokens": 1738
+      }
+    },
+    {
+      "id": "synonym_zh",
+      "positive": true,
+      "partition": "held_out",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.6,
+        "seconds": 0.664,
+        "tokens": 1624
+      },
+      "candidate": {
+        "passed": true,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.99,
+              "no": 0.01
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.99,
+              "no": 0.01
+            }
+          }
+        },
+        "seconds": 0.5886903330101632,
+        "tokens": 1737
+      }
+    },
+    {
+      "id": "mixed_controls",
+      "positive": true,
+      "partition": "held_out",
+      "baseline": {
+        "passed": true,
+        "confidence": 0.74,
+        "seconds": 0.503,
+        "tokens": 1600
+      },
+      "candidate": {
+        "passed": true,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 1.0,
+            "probabilities": {
+              "yes": 1.0,
+              "no": 0.0
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.99,
+              "no": 0.01
+            }
+          }
+        },
+        "seconds": 0.5249365839990787,
+        "tokens": 1713
+      }
+    },
+    {
+      "id": "mixed_paraphrase",
+      "positive": true,
+      "partition": "held_out",
+      "baseline": {
+        "passed": true,
+        "confidence": 0.7,
+        "seconds": 0.487,
+        "tokens": 1617
+      },
+      "candidate": {
+        "passed": true,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 1.0,
+            "probabilities": {
+              "yes": 1.0,
+              "no": 0.0
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.96,
+            "probabilities": {
+              "yes": 0.98,
+              "no": 0.02
+            }
+          }
+        },
+        "seconds": 0.5243851249979343,
+        "tokens": 1730
+      }
+    },
+    {
+      "id": "short_zh",
+      "positive": true,
+      "partition": "held_out",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.6,
+        "seconds": 0.444,
+        "tokens": 1587
+      },
+      "candidate": {
+        "passed": true,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 1.0,
+            "probabilities": {
+              "yes": 1.0,
+              "no": 0.0
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.99,
+              "no": 0.01
+            }
+          }
+        },
+        "seconds": 0.521081624989165,
+        "tokens": 1700
+      }
+    },
+    {
+      "id": "negative_prose",
+      "positive": false,
+      "partition": "held_out",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.98,
+        "seconds": 0.519,
+        "tokens": 1558
+      },
+      "candidate": {
+        "passed": false,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "no",
+            "confidence": 0.98,
+            "probabilities": {
+              "yes": 0.01,
+              "no": 0.99
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.26,
+            "probabilities": {
+              "yes": 0.63,
+              "no": 0.37
+            }
+          }
+        },
+        "seconds": 0.5263259999919683,
+        "tokens": 1671
+      }
+    },
+    {
+      "id": "negative_native",
+      "positive": false,
+      "partition": "held_out",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.98,
+        "seconds": 0.521,
+        "tokens": 1568
+      },
+      "candidate": {
+        "passed": false,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "no",
+            "confidence": 0.96,
+            "probabilities": {
+              "yes": 0.02,
+              "no": 0.98
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.38,
+            "probabilities": {
+              "yes": 0.69,
+              "no": 0.31
+            }
+          }
+        },
+        "seconds": 0.5137092499935534,
+        "tokens": 1681
+      }
+    },
+    {
+      "id": "negative_service",
+      "positive": false,
+      "partition": "development",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.96,
+        "seconds": 0.532,
+        "tokens": 693
+      },
+      "candidate": {
+        "passed": false,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "no",
+            "confidence": 1.0,
+            "probabilities": {
+              "yes": 0.0,
+              "no": 1.0
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "no",
+            "confidence": 0.7,
+            "probabilities": {
+              "yes": 0.15,
+              "no": 0.85
+            }
+          }
+        },
+        "seconds": 0.5448812090035062,
+        "tokens": 863
+      }
+    },
+    {
+      "id": "negative_unrelated",
+      "positive": false,
+      "partition": "held_out",
+      "baseline": {
+        "passed": false,
+        "confidence": 0.96,
+        "seconds": 0.461,
+        "tokens": 674
+      },
+      "candidate": {
+        "passed": false,
+        "checks": {
+          "contribution": {
+            "type": "choice",
+            "choice": "no",
+            "confidence": 1.0,
+            "probabilities": {
+              "yes": 0.0,
+              "no": 1.0
+            }
+          },
+          "portable": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.18,
+            "probabilities": {
+              "yes": 0.59,
+              "no": 0.41
+            }
+          }
+        },
+        "seconds": 0.5324245000083465,
+        "tokens": 841
+      }
+    }
+  ],
+  "implementation_probes": [
+    {
+      "case": "original_zh",
+      "result": {
+        "status": "selected",
+        "skill": "guide",
+        "confidence": 0.98,
+        "attempts": 1,
+        "elapsed_seconds": 0.49,
+        "selection_stage": "plugin-ready",
+        "fit_checks": {
+          "contribution": {
+            "choice": "yes",
+            "confidence": 1.0
+          },
+          "portable": {
+            "choice": "yes",
+            "confidence": 0.98
+          }
+        }
+      },
+      "known_tokens": 1745,
+      "requests": 1
+    },
+    {
+      "case": "negative_service",
+      "result": {
+        "status": "none",
+        "skill": null,
+        "confidence": 0.72,
+        "attempts": 1,
+        "elapsed_seconds": 0.522,
+        "selection_stage": "plugin-ready",
+        "fit_checks": {
+          "contribution": {
+            "choice": "no",
+            "confidence": 1.0
+          },
+          "portable": {
+            "choice": "no",
+            "confidence": 0.72
+          }
+        }
+      },
+      "known_tokens": 863,
+      "requests": 1
+    },
+    {
+      "case": "useful_but_blocked",
+      "result": {
+        "status": "uncertain",
+        "skill": null,
+        "confidence": 0.48,
+        "attempts": 1,
+        "elapsed_seconds": 0.496,
+        "selection_stage": "plugin-ready",
+        "fit_checks": {
+          "contribution": {
+            "choice": "no",
+            "confidence": 0.48
+          },
+          "portable": {
+            "choice": "yes",
+            "confidence": 0.74
+          }
+        }
+      },
+      "known_tokens": 878,
+      "requests": 1
+    }
+  ],
+  "native": {
+    "case": "plugin-playground",
+    "status": "exited",
+    "returncode": 0,
+    "elapsed_seconds": 164.759,
+    "backpack_wait_seconds": 60.614,
+    "other_elapsed_seconds": 104.145,
+    "jev_elapsed_seconds": 6.027,
+    "host_operations": {
+      "mcp_tool_call": 4,
+      "command_execution": 0,
+      "file_change": 1
+    },
+    "native_turn_completed": 1,
+    "native_usage": {
+      "calls_expected": 1,
+      "calls_with_usage": 1,
+      "complete": true,
+      "input_tokens": 119520,
+      "output_tokens": 3409,
+      "known_total_tokens": 122929,
+      "cached_input_tokens": 103168,
+      "cache_accounting_complete": true,
+      "noncached_input_tokens": 16352,
+      "cache_write_input_tokens": 0
+    },
+    "native_session_usage": {
+      "input_tokens": 119520,
+      "cached_input_tokens": 103168,
+      "output_tokens": 3409,
+      "reasoning_output_tokens": 411,
+      "known_total_tokens": 122929,
+      "noncached_input_tokens": 16352,
+      "observed_usage_updates": 7,
+      "updates": [
+        {
+          "at": "2026-10-16T02:06:14.554Z",
+          "cumulative": {
+            "input_tokens": 12159,
+            "cached_input_tokens": 9600,
+            "output_tokens": 87,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 12159,
+            "cached_input_tokens": 9600,
+            "output_tokens": 87,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:06:27.741Z",
+          "cumulative": {
+            "input_tokens": 26371,
+            "cached_input_tokens": 21632,
+            "output_tokens": 214,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 14212,
+            "cached_input_tokens": 12032,
+            "output_tokens": 127,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:06:32.709Z",
+          "cumulative": {
+            "input_tokens": 41519,
+            "cached_input_tokens": 31232,
+            "output_tokens": 285,
+            "reasoning_output_tokens": 0
+          },
+          "last_request": {
+            "input_tokens": 15148,
+            "cached_input_tokens": 9600,
+            "output_tokens": 71,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:07:36.541Z",
+          "cumulative": {
+            "input_tokens": 58747,
+            "cached_input_tokens": 46208,
+            "output_tokens": 2875,
+            "reasoning_output_tokens": 242
+          },
+          "last_request": {
+            "input_tokens": 17228,
+            "cached_input_tokens": 14976,
+            "output_tokens": 2590,
+            "reasoning_output_tokens": 242
+          }
+        },
+        {
+          "at": "2026-10-16T02:08:32.383Z",
+          "cumulative": {
+            "input_tokens": 78589,
+            "cached_input_tokens": 63232,
+            "output_tokens": 3005,
+            "reasoning_output_tokens": 262
+          },
+          "last_request": {
+            "input_tokens": 19842,
+            "cached_input_tokens": 17024,
+            "output_tokens": 130,
+            "reasoning_output_tokens": 20
+          }
+        },
+        {
+          "at": "2026-10-16T02:08:37.971Z",
+          "cumulative": {
+            "input_tokens": 98952,
+            "cached_input_tokens": 82944,
+            "output_tokens": 3150,
+            "reasoning_output_tokens": 262
+          },
+          "last_request": {
+            "input_tokens": 20363,
+            "cached_input_tokens": 19712,
+            "output_tokens": 145,
+            "reasoning_output_tokens": 0
+          }
+        },
+        {
+          "at": "2026-10-16T02:08:48.672Z",
+          "cumulative": {
+            "input_tokens": 119520,
+            "cached_input_tokens": 103168,
+            "output_tokens": 3409,
+            "reasoning_output_tokens": 411
+          },
+          "last_request": {
+            "input_tokens": 20568,
+            "cached_input_tokens": 20224,
+            "output_tokens": 259,
+            "reasoning_output_tokens": 149
+          }
+        }
+      ],
+      "coverage": "Observed usage events only; an interrupted in-flight request may be missing."
+    },
+    "jev_usage": {
+      "calls_expected": 10,
+      "calls_with_usage": 10,
+      "complete": true,
+      "input_tokens": 41644,
+      "output_tokens": 5167,
+      "known_total_tokens": 46811
+    },
+    "native_transport_error_events": [],
+    "backpack_calls": [
+      {
+        "tool": "prepare_market_capability",
+        "elapsed_seconds": 8.338,
+        "status": "prepared",
+        "reason": null,
+        "is_error": false,
+        "need": "为学生制作可离线打开的单文件 HTML 交互学习页面：使用滑块调整弹簧刚度 k 和物体质量 m，实时显示带单位的参数及周期 T=2π√(m/k)，提供重置与复制当前配置 JSON，并检查计算和交互。需要适合小型交互教学网页的制作指导。",
+        "search": "interactive educational webpage",
+        "selected_name": "playground",
+        "preexisting_name": false,
+        "source": {
+          "kind": "plugin",
+          "market": "anthropic",
+          "repo": "anthropics/claude-plugins-official",
+          "commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "name": "playground",
+          "package_repo": "anthropics/claude-plugins-official",
+          "package_commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "package_path": "plugins/playground"
+        },
+        "components": {
+          "skills": [
+            "playground"
+          ],
+          "mcp": []
+        }
+      },
+      {
+        "tool": "connect_market_capability",
+        "elapsed_seconds": 1.498,
+        "status": "connected",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null,
+        "selected_name": "playground",
+        "preexisting_name": false,
+        "source": {
+          "commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "kind": "plugin",
+          "market": "anthropic",
+          "name": "playground",
+          "package_commit": "8f814f49002ff824e8a9ba43cf96112dc7f5948d",
+          "package_path": "plugins/playground",
+          "package_repo": "anthropics/claude-plugins-official",
+          "repo": "anthropics/claude-plugins-official"
+        },
+        "components": {
+          "skills": 1,
+          "mcp": 0
+        }
+      },
+      {
+        "tool": "verify_local_webpage",
+        "elapsed_seconds": 50.768,
+        "status": "passed",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null
+      },
+      {
+        "tool": "report_skill_use",
+        "elapsed_seconds": 0.01,
+        "status": "recorded",
+        "reason": null,
+        "is_error": false,
+        "need": null,
+        "search": null,
+        "reported_event": "completed"
+      }
+    ],
+    "known_total_tokens": 169740,
+    "token_coverage_complete": true,
+    "final_exists": true,
+    "output_files": [
+      "index.html"
+    ],
+    "acceptance": {
+      "passed": true,
+      "novel_public_plugin": true,
+      "capability_name_supplied": false,
+      "fixed_english_need": false,
+      "generated_need_language": "Chinese",
+      "real_browser_checks": [
+        "formula",
+        "sliders",
+        "reset",
+        "clipboard"
+      ],
+      "browser_scope": "localhost preview; external requests blocked; file scheme untested",
+      "native_usage_report": "recorded and persisted as completed",
+      "evaluator_repaired_usage_report": false
+    }
+  },
+  "previous_success": {
+    "native_seconds": 144.6,
+    "native_tokens": 123182,
+    "jev_tokens": 46414,
+    "known_total_tokens": 169596,
+    "backpack_calls": 4,
+    "native_version": "0.162.0-alpha.17.2",
+    "fixed_english_need": true
+  },
+  "previous_chinese_failure": {
+    "native_seconds": 57.977,
+    "known_total_tokens": 176781,
+    "final_confidence": 0.62,
+    "artifact_created": false
+  },
+  "current_native_version": "codex-cli 0.163.0-alpha.10.2",
+  "protection": {
+    "checked_paths": 6,
+    "changed_paths": [],
+    "public_installation_inventory_unchanged": true
+  },
+  "validation": {
+    "affected_tests_passed": 188,
+    "skipped": 0,
+    "provider": "jev-cli",
+    "legacy_http": "unchanged single-Choice protocol; new multilingual batch not exercised there"
+  },
+  "limitations": [
+    "Small fixed task-family sample; not global routing accuracy or proof of universal omission safety.",
+    "Single native run; CLI changed and English-summary constraint removed, so not a one-factor latency A/B.",
+    "Shared standalone runtime path reused, not a full byte-frozen runtime comparison.",
+    "Root orchestration and real browser controller token usage unobservable and not counted as zero.",
+    "Extra useful-but-blocked control was not accepted, but dimension labels were imperfect; confidence is not measured accuracy."
+  ],
+  "iteration_known_tokens": 202823,
+  "iteration_live_jev_calls": 33
+}

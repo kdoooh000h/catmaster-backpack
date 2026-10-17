@@ -1,0 +1,358 @@
+{
+  "date": "2026-10-15",
+  "scope": "One same-task native Codex regression, not an independent holdout or calibrated probability estimate. Capability family fixed, no capability names in ordinary prompts.",
+  "catalogs": {
+    "anthropic": 315,
+    "openai": 180,
+    "github:wshobson/agents": 94,
+    "github:trailofbits/skills": 44
+  },
+  "candidate_policy": {
+    "depth": "source / optional task category / capability; package component fit follows",
+    "directory_gate": 0.1,
+    "category_gate": 0.1,
+    "actual_fit_floor": 0.7,
+    "classification_gate": 0.4,
+    "pending_retained": true
+  },
+  "arms": {
+    "old": {
+      "strict_passes": 2,
+      "cases": [
+        {
+          "case": "skill-update",
+          "strict_pass": true,
+          "artifact_correct": true,
+          "elapsed_seconds": 65.289,
+          "backpack_wait_seconds": 3.848,
+          "native_tokens": 108429,
+          "native_input_tokens": 107290,
+          "native_output_tokens": 1139,
+          "cached_input_tokens": 91392,
+          "jev_tokens": 11558,
+          "jev_calls": 4,
+          "known_tokens_lower_bound": 119987,
+          "token_coverage_complete": true,
+          "selected_guidance": [
+            "internal-comms"
+          ],
+          "reason": null
+        },
+        {
+          "case": "skill-themes",
+          "strict_pass": false,
+          "artifact_correct": false,
+          "elapsed_seconds": 183.807,
+          "backpack_wait_seconds": 24.138,
+          "native_tokens": 147467,
+          "native_input_tokens": 144480,
+          "native_output_tokens": 2987,
+          "cached_input_tokens": 134144,
+          "jev_tokens": 15093,
+          "jev_calls": 6,
+          "known_tokens_lower_bound": 162560,
+          "token_coverage_complete": true,
+          "selected_guidance": [
+            "theme-factory"
+          ],
+          "reason": "required resources rejected/unreadable; incomplete artifact"
+        },
+        {
+          "case": "plugin-review",
+          "strict_pass": true,
+          "artifact_correct": true,
+          "elapsed_seconds": 231.181,
+          "backpack_wait_seconds": 17.899,
+          "native_tokens": 174673,
+          "native_input_tokens": 170102,
+          "native_output_tokens": 4571,
+          "cached_input_tokens": 149248,
+          "jev_tokens": 34198,
+          "jev_calls": 10,
+          "known_tokens_lower_bound": 208871,
+          "token_coverage_complete": true,
+          "selected_guidance": [
+            "systematic-debugging"
+          ],
+          "reason": null
+        },
+        {
+          "case": "plugin-playground",
+          "strict_pass": false,
+          "artifact_correct": false,
+          "elapsed_seconds": 360.03,
+          "backpack_wait_seconds": 13.07,
+          "native_tokens": null,
+          "native_input_tokens": null,
+          "native_output_tokens": null,
+          "cached_input_tokens": null,
+          "jev_tokens": 16508,
+          "jev_calls": 7,
+          "known_tokens_lower_bound": 16508,
+          "token_coverage_complete": false,
+          "selected_guidance": [
+            "playground"
+          ],
+          "reason": "360s native timeout without index.html; native usage unknown"
+        },
+        {
+          "case": "mcp-time",
+          "strict_pass": false,
+          "artifact_correct": false,
+          "elapsed_seconds": 103.795,
+          "backpack_wait_seconds": 26.189,
+          "native_tokens": 69526,
+          "native_input_tokens": 68029,
+          "native_output_tokens": 1497,
+          "cached_input_tokens": 61696,
+          "jev_tokens": 545,
+          "jev_calls": 1,
+          "known_tokens_lower_bound": 70071,
+          "token_coverage_complete": true,
+          "selected_guidance": [],
+          "reason": "official Registry search read failed; no real timezone call"
+        },
+        {
+          "case": "mcp-memory",
+          "strict_pass": false,
+          "artifact_correct": false,
+          "elapsed_seconds": 90.268,
+          "backpack_wait_seconds": 27.423,
+          "native_tokens": 54892,
+          "native_input_tokens": 53830,
+          "native_output_tokens": 1062,
+          "cached_input_tokens": 44288,
+          "jev_tokens": 616,
+          "jev_calls": 1,
+          "known_tokens_lower_bound": 55508,
+          "token_coverage_complete": true,
+          "selected_guidance": [],
+          "reason": "official Registry search read failed; no persisted graph/query"
+        }
+      ],
+      "summed_case_elapsed_seconds": 1034.37,
+      "known_tokens_lower_bound": 633505,
+      "complete_usage_cases": 5
+    },
+    "candidate": {
+      "strict_passes": 3,
+      "cases": [
+        {
+          "case": "skill-update",
+          "strict_pass": true,
+          "artifact_correct": true,
+          "elapsed_seconds": 86.29,
+          "backpack_wait_seconds": 10.223,
+          "native_tokens": 91568,
+          "native_input_tokens": 90393,
+          "native_output_tokens": 1175,
+          "cached_input_tokens": 74752,
+          "jev_tokens": 12479,
+          "jev_calls": 4,
+          "known_tokens_lower_bound": 104047,
+          "token_coverage_complete": true,
+          "selected_guidance": [
+            "internal-comms"
+          ],
+          "reason": null
+        },
+        {
+          "case": "skill-themes",
+          "strict_pass": true,
+          "artifact_correct": true,
+          "elapsed_seconds": 188.493,
+          "backpack_wait_seconds": 8.086,
+          "native_tokens": 165611,
+          "native_input_tokens": 162018,
+          "native_output_tokens": 3593,
+          "cached_input_tokens": 145024,
+          "jev_tokens": 19161,
+          "jev_calls": 10,
+          "known_tokens_lower_bound": 184772,
+          "token_coverage_complete": true,
+          "selected_guidance": [
+            "theme-factory"
+          ],
+          "reason": null
+        },
+        {
+          "case": "plugin-review",
+          "strict_pass": true,
+          "artifact_correct": true,
+          "elapsed_seconds": 271.493,
+          "backpack_wait_seconds": 59.857,
+          "native_tokens": 235827,
+          "native_input_tokens": 230962,
+          "native_output_tokens": 4865,
+          "cached_input_tokens": 206336,
+          "jev_tokens": 151798,
+          "jev_calls": 41,
+          "known_tokens_lower_bound": 387625,
+          "token_coverage_complete": true,
+          "selected_guidance": [
+            "python-testing-patterns"
+          ],
+          "reason": null
+        },
+        {
+          "case": "plugin-playground",
+          "strict_pass": false,
+          "artifact_correct": null,
+          "elapsed_seconds": 360.03,
+          "backpack_wait_seconds": 11.861,
+          "native_tokens": null,
+          "native_input_tokens": null,
+          "native_output_tokens": null,
+          "cached_input_tokens": null,
+          "jev_tokens": 46516,
+          "jev_calls": 10,
+          "known_tokens_lower_bound": 46516,
+          "token_coverage_complete": false,
+          "selected_guidance": [
+            "playground"
+          ],
+          "reason": "native Agent timed out at 360s before its self-check; output separately verified by root browser"
+        },
+        {
+          "case": "mcp-time",
+          "strict_pass": false,
+          "artifact_correct": false,
+          "elapsed_seconds": 86.184,
+          "backpack_wait_seconds": 25.247,
+          "native_tokens": 54692,
+          "native_input_tokens": 53628,
+          "native_output_tokens": 1064,
+          "cached_input_tokens": 34560,
+          "jev_tokens": 561,
+          "jev_calls": 1,
+          "known_tokens_lower_bound": 55253,
+          "token_coverage_complete": true,
+          "selected_guidance": [],
+          "reason": "official Registry search read failed; no real timezone call"
+        },
+        {
+          "case": "mcp-memory",
+          "strict_pass": false,
+          "artifact_correct": false,
+          "elapsed_seconds": 113.048,
+          "backpack_wait_seconds": 25.734,
+          "native_tokens": 84959,
+          "native_input_tokens": 83320,
+          "native_output_tokens": 1639,
+          "cached_input_tokens": 76672,
+          "jev_tokens": 686,
+          "jev_calls": 1,
+          "known_tokens_lower_bound": 85645,
+          "token_coverage_complete": true,
+          "selected_guidance": [],
+          "reason": "official Registry search failed; no graph save/query"
+        }
+      ],
+      "summed_case_elapsed_seconds": 1105.538,
+      "known_tokens_lower_bound": 863858,
+      "complete_usage_cases": 5
+    }
+  },
+  "complete_paired_token_cases": 5,
+  "complete_paired_old_tokens": 616997,
+  "complete_paired_new_tokens": 817342,
+  "complete_paired_token_change_pct": 32.47098446183693,
+  "diagnostics": [
+    {
+      "name": "candidate-native/skill-update",
+      "kind": "native",
+      "seconds": 64.569,
+      "tokens": 192708,
+      "coverage": true
+    },
+    {
+      "name": "candidate-v2-native/skill-update",
+      "kind": "native",
+      "seconds": 102.327,
+      "tokens": 120973,
+      "coverage": true
+    },
+    {
+      "name": "candidate-v2-native/skill-themes",
+      "kind": "native",
+      "seconds": 194.8,
+      "tokens": 205475,
+      "coverage": true
+    },
+    {
+      "name": "candidate-v2-native/plugin-review",
+      "kind": "native",
+      "seconds": 134.087,
+      "tokens": 194068,
+      "coverage": true
+    },
+    {
+      "name": "preflight-v4",
+      "kind": "preflight",
+      "seconds": 49.781797790987184,
+      "status": "none",
+      "tokens": 127623,
+      "coverage": true,
+      "jev_calls": 29,
+      "classification": {
+        "calls_expected": 4,
+        "calls_with_usage": 4,
+        "complete": true,
+        "input_tokens": 38182,
+        "output_tokens": 5100,
+        "known_total_tokens": 43282
+      },
+      "classification_jev_seconds": 6.248584270477295
+    },
+    {
+      "name": "preflight-v5",
+      "kind": "preflight",
+      "seconds": 96.44557866599644,
+      "status": "setup_required",
+      "tokens": 174394,
+      "coverage": true,
+      "jev_calls": 41,
+      "classification": {
+        "calls_expected": 9,
+        "calls_with_usage": 9,
+        "complete": true,
+        "input_tokens": 82776,
+        "output_tokens": 11099,
+        "known_total_tokens": 93875
+      },
+      "classification_jev_seconds": 21.611138105392456
+    },
+    {
+      "name": "preflight-v6",
+      "kind": "preflight",
+      "seconds": 63.88980124999944,
+      "status": "prepared",
+      "tokens": 286083,
+      "coverage": true,
+      "jev_calls": 74,
+      "classification": {
+        "calls_expected": 9,
+        "calls_with_usage": 9,
+        "complete": true,
+        "input_tokens": 82776,
+        "output_tokens": 11099,
+        "known_total_tokens": 93875
+      },
+      "classification_jev_seconds": 5.843733787536621
+    }
+  ],
+  "diagnostic_known_tokens": 1301324,
+  "known_experiment_tokens_lower_bound": 2798687,
+  "cost_usd": null,
+  "limitations": [
+    "Both HTML native turns hit the 360 second limit without native usage; total tokens are lower bounds.",
+    "Candidate starts with 70 public annotation records copied from separately billed preflight; this is a partial cache and additional classification remains in task totals.",
+    "Both MCP task families failed official Registry reads on this machine; real MCP selection/setup/invocation not exercised.",
+    "HTML controls/formula/copy/reset checked by root evaluator via loopback HTTP after native timeout. Direct file protocol blocked by browser tool, left unverified.",
+    "Shared standalone dependency was read-only but not byte-frozen; only old/new adapter modules were frozen. At most two native subjects ran concurrently.",
+    "Installed public-name audit is not an exhaustive whole-disk historical audit; semantic aliases are not fully ruled out.",
+    "No daily connection upgrade; root orchestration/tool/web/CUA usage excluded from known model totals."
+  ],
+  "final_source_delta": "After frozen v6 native runs, added inheritance of nondefault source directory floor and exclusion of saved/private metadata from new classification. Tested public 0.1/0.7 path unchanged; both protections unit-tested.",
+  "relevant_tests_passed": 163
+}

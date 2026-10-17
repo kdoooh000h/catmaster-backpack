@@ -1,0 +1,609 @@
+{
+  "version": 1,
+  "catalog_count": 45325,
+  "final_gate": 0.7,
+  "difference": "Replace only final instruction lead with the existing current_step.CURRENT_LEAD. Same raw need, full criteria, option order and pool.",
+  "aggregates": {
+    "conditional_baseline": {
+      "cases": 7,
+      "live_cases": 5,
+      "correct_current": 2,
+      "all_required_retained": 5,
+      "omission_safe_pass": 2,
+      "calls": 5,
+      "tokens": 23963,
+      "called_means": {
+        "tokens": 4792.6,
+        "calls": 1,
+        "jev_cli_seconds": 0.5657777330081444,
+        "current_dispatch_wall_seconds": 0.58494677519775,
+        "selector_seconds": 0.6004789000027813
+      }
+    },
+    "conditional_current": {
+      "cases": 7,
+      "live_cases": 5,
+      "correct_current": 5,
+      "all_required_retained": 5,
+      "omission_safe_pass": 5,
+      "calls": 5,
+      "tokens": 24371,
+      "called_means": {
+        "tokens": 4874.2,
+        "calls": 1,
+        "jev_cli_seconds": 0.6377040501974989,
+        "current_dispatch_wall_seconds": 0.6578336833976209,
+        "selector_seconds": 0.6733659998048097
+      }
+    }
+  },
+  "strata": {
+    "old_failure": {
+      "conditional_baseline": {
+        "cases": 3,
+        "live_cases": 3,
+        "correct_current": 0,
+        "all_required_retained": 3,
+        "omission_safe_pass": 0,
+        "calls": 3,
+        "tokens": 16528,
+        "called_means": {
+          "tokens": 5509.333333333333,
+          "calls": 1,
+          "jev_cli_seconds": 0.599804347002646,
+          "current_dispatch_wall_seconds": 0.6197190973325633,
+          "selector_seconds": 0.6385847780135615
+        }
+      },
+      "conditional_current": {
+        "cases": 3,
+        "live_cases": 3,
+        "correct_current": 3,
+        "all_required_retained": 3,
+        "omission_safe_pass": 3,
+        "calls": 3,
+        "tokens": 16774,
+        "called_means": {
+          "tokens": 5591.333333333333,
+          "calls": 1,
+          "jev_cli_seconds": 0.7099065556637166,
+          "current_dispatch_wall_seconds": 0.729550222332667,
+          "selector_seconds": 0.7484159860080885
+        }
+      }
+    },
+    "new": {
+      "conditional_baseline": {
+        "cases": 4,
+        "live_cases": 2,
+        "correct_current": 2,
+        "all_required_retained": 2,
+        "omission_safe_pass": 2,
+        "calls": 2,
+        "tokens": 7435,
+        "called_means": {
+          "tokens": 3717.5,
+          "calls": 1,
+          "jev_cli_seconds": 0.5147378120163921,
+          "current_dispatch_wall_seconds": 0.53278829199553,
+          "selector_seconds": 0.5433200829866109
+        }
+      },
+      "conditional_current": {
+        "cases": 4,
+        "live_cases": 2,
+        "correct_current": 2,
+        "all_required_retained": 2,
+        "omission_safe_pass": 2,
+        "calls": 2,
+        "tokens": 7597,
+        "called_means": {
+          "tokens": 3798.5,
+          "calls": 1,
+          "jev_cli_seconds": 0.5294002919981722,
+          "current_dispatch_wall_seconds": 0.5502588749950519,
+          "selector_seconds": 0.5607910204998916
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "conditional_current",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 5247,
+      "jev_cli_seconds": 0.6983201669936534,
+      "current_dispatch_wall_seconds": 0.7093131250003353,
+      "retrieval_seconds": 0.014902500028256327,
+      "retrieval_basis": "reused_unchanged_original_recall",
+      "selector_seconds": 0.7242173750128131,
+      "status": "selected",
+      "choice": "saas-metrics-coach",
+      "raw_choice": "saas-metrics-coach",
+      "confidence": 0.88,
+      "final_pool_size": 56,
+      "expected_ids": [
+        "saas-metrics-coach"
+      ],
+      "pending_ids": [
+        "dependency-auditor",
+        "confluence-expert"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "finance_packages_then_wiki",
+      "arm": "conditional_baseline",
+      "stratum": "old_failure",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 5163,
+      "jev_cli_seconds": 0.6441812080156524,
+      "current_dispatch_wall_seconds": 0.6662229590001516,
+      "retrieval_seconds": 0.014902500028256327,
+      "retrieval_basis": "reused_unchanged_original_recall",
+      "selector_seconds": 0.6811271670158021,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "finance-skills",
+      "confidence": 0.22,
+      "final_pool_size": 56,
+      "expected_ids": [
+        "saas-metrics-coach"
+      ],
+      "pending_ids": [
+        "dependency-auditor",
+        "confluence-expert"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "signals_then_finance_and_culture",
+      "arm": "conditional_baseline",
+      "stratum": "old_failure",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 5385,
+      "jev_cli_seconds": 0.6015003329957835,
+      "current_dispatch_wall_seconds": 0.6206403750111349,
+      "retrieval_seconds": 0.014100875006988645,
+      "retrieval_basis": "reused_unchanged_original_recall",
+      "selector_seconds": 0.6347435840289108,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "observability-designer",
+      "confidence": 0.5,
+      "final_pool_size": 55,
+      "expected_ids": [
+        "observability-designer"
+      ],
+      "pending_ids": [
+        "saas-metrics-coach",
+        "culture-architect"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "signals_then_finance_and_culture",
+      "arm": "conditional_current",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 5466,
+      "jev_cli_seconds": 0.5754187499987893,
+      "current_dispatch_wall_seconds": 0.6024021669873036,
+      "retrieval_seconds": 0.014100875006988645,
+      "retrieval_basis": "reused_unchanged_original_recall",
+      "selector_seconds": 0.6165078750054818,
+      "status": "selected",
+      "choice": "observability-designer",
+      "raw_choice": "observability-designer",
+      "confidence": 0.93,
+      "final_pool_size": 55,
+      "expected_ids": [
+        "observability-designer"
+      ],
+      "pending_ids": [
+        "saas-metrics-coach",
+        "culture-architect"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "cancel_finance_keep_discovery_jira",
+      "arm": "conditional_current",
+      "stratum": "old_failure",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 6061,
+      "jev_cli_seconds": 0.8559807499987073,
+      "current_dispatch_wall_seconds": 0.8769353750103619,
+      "retrieval_seconds": 0.027585458010435104,
+      "retrieval_basis": "reused_unchanged_original_recall",
+      "selector_seconds": 0.9045227080059703,
+      "status": "selected",
+      "choice": "product-manager-toolkit",
+      "raw_choice": "product-manager-toolkit",
+      "confidence": 0.98,
+      "final_pool_size": 66,
+      "expected_ids": [
+        "product-manager-toolkit"
+      ],
+      "pending_ids": [
+        "jira-expert"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "cancel_finance_keep_discovery_jira",
+      "arm": "conditional_baseline",
+      "stratum": "old_failure",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 5980,
+      "jev_cli_seconds": 0.553731499996502,
+      "current_dispatch_wall_seconds": 0.5722939579864033,
+      "retrieval_seconds": 0.027585458010435104,
+      "retrieval_basis": "reused_unchanged_original_recall",
+      "selector_seconds": 0.5998835829959717,
+      "status": "abstain",
+      "choice": null,
+      "raw_choice": "product-manager-toolkit",
+      "confidence": 0.55,
+      "final_pool_size": 66,
+      "expected_ids": [
+        "product-manager-toolkit"
+      ],
+      "pending_ids": [
+        "jira-expert"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "new_culture_now_signals_later",
+      "arm": "conditional_baseline",
+      "stratum": "new",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 3652,
+      "jev_cli_seconds": 0.5369377080060076,
+      "current_dispatch_wall_seconds": 0.5578559999994468,
+      "retrieval_seconds": 0.007931708008982241,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.5657909580040723,
+      "status": "selected",
+      "choice": "culture-architect",
+      "raw_choice": "culture-architect",
+      "confidence": 1.0,
+      "final_pool_size": 37,
+      "expected_ids": [
+        "culture-architect"
+      ],
+      "pending_ids": [
+        "observability-designer"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "new_culture_now_signals_later",
+      "arm": "conditional_current",
+      "stratum": "new",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 3733,
+      "jev_cli_seconds": 0.5286042090156116,
+      "current_dispatch_wall_seconds": 0.5517950000066776,
+      "retrieval_seconds": 0.007931708008982241,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.5597312920144759,
+      "status": "selected",
+      "choice": "culture-architect",
+      "raw_choice": "culture-architect",
+      "confidence": 1.0,
+      "final_pool_size": 37,
+      "expected_ids": [
+        "culture-architect"
+      ],
+      "pending_ids": [
+        "observability-designer"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "new_jira_now_finance_later",
+      "arm": "conditional_current",
+      "stratum": "new",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 3864,
+      "jev_cli_seconds": 0.5301963749807328,
+      "current_dispatch_wall_seconds": 0.5487227499834262,
+      "retrieval_seconds": 0.01312679098919034,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.5618507489853073,
+      "status": "selected",
+      "choice": "jira-expert",
+      "raw_choice": "jira-expert",
+      "confidence": 0.99,
+      "final_pool_size": 42,
+      "expected_ids": [
+        "jira-expert"
+      ],
+      "pending_ids": [
+        "saas-metrics-coach"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "new_jira_now_finance_later",
+      "arm": "conditional_baseline",
+      "stratum": "new",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "live_called": true,
+      "calls": 1,
+      "tokens": 3783,
+      "jev_cli_seconds": 0.49253791602677666,
+      "current_dispatch_wall_seconds": 0.5077205839916132,
+      "retrieval_seconds": 0.01312679098919034,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.5208492079691496,
+      "status": "selected",
+      "choice": "jira-expert",
+      "raw_choice": "jira-expert",
+      "confidence": 0.98,
+      "final_pool_size": 42,
+      "expected_ids": [
+        "jira-expert"
+      ],
+      "pending_ids": [
+        "saas-metrics-coach"
+      ],
+      "missing_ids": []
+    },
+    {
+      "case": "new_word_now_spreadsheet_later",
+      "arm": "conditional_baseline",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "live_called": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 1.591700129210949e-05,
+      "retrieval_seconds": 0.009087250014999881,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.009103375021368265,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 43,
+      "expected_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "missing_ids": [
+        "skill-9a370bf7a61ed1d8e537",
+        "skill-f28f584d1874df3e7ad9"
+      ]
+    },
+    {
+      "case": "new_word_now_spreadsheet_later",
+      "arm": "conditional_current",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "live_called": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 1.2707983842119575e-05,
+      "retrieval_seconds": 0.009087250014999881,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.009100208000745624,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 43,
+      "expected_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "missing_ids": [
+        "skill-9a370bf7a61ed1d8e537",
+        "skill-f28f584d1874df3e7ad9"
+      ]
+    },
+    {
+      "case": "new_spreadsheet_now_wiki_later",
+      "arm": "conditional_current",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "live_called": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 5.883298581466079e-05,
+      "retrieval_seconds": 0.008266290999017656,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.008326206996571273,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 60,
+      "expected_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "pending_ids": [
+        "confluence-expert"
+      ],
+      "missing_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ]
+    },
+    {
+      "case": "new_spreadsheet_now_wiki_later",
+      "arm": "conditional_baseline",
+      "stratum": "new",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "live_called": false,
+      "calls": 0,
+      "tokens": 0,
+      "jev_cli_seconds": 0,
+      "current_dispatch_wall_seconds": 1.8457998521625996e-05,
+      "retrieval_seconds": 0.008266290999017656,
+      "retrieval_basis": "new_shared_recall",
+      "selector_seconds": 0.008285165997222066,
+      "status": "preflight_failed",
+      "choice": null,
+      "raw_choice": null,
+      "confidence": null,
+      "final_pool_size": 60,
+      "expected_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "pending_ids": [
+        "confluence-expert"
+      ],
+      "missing_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ]
+    }
+  ],
+  "calls": 10,
+  "known_tokens": 48334,
+  "new_index_seconds": 0.48509166698204353,
+  "reference_coverage": {
+    "finance_packages_then_wiki": {
+      "required": 3,
+      "retained": 3,
+      "pending_required": 2,
+      "pending_retained": 2,
+      "missing_ids": []
+    },
+    "signals_then_finance_and_culture": {
+      "required": 3,
+      "retained": 3,
+      "pending_required": 2,
+      "pending_retained": 2,
+      "missing_ids": []
+    },
+    "cancel_finance_keep_discovery_jira": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_ids": []
+    },
+    "new_culture_now_signals_later": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_ids": []
+    },
+    "new_jira_now_finance_later": {
+      "required": 2,
+      "retained": 2,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_ids": []
+    },
+    "new_word_now_spreadsheet_later": {
+      "required": 2,
+      "retained": 0,
+      "pending_required": 1,
+      "pending_retained": 0,
+      "missing_ids": [
+        "skill-9a370bf7a61ed1d8e537",
+        "skill-f28f584d1874df3e7ad9"
+      ]
+    },
+    "new_spreadsheet_now_wiki_later": {
+      "required": 2,
+      "retained": 1,
+      "pending_required": 1,
+      "pending_retained": 1,
+      "missing_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ]
+    }
+  },
+  "change_percent_called_only": {
+    "tokens": 1.7026248800233512,
+    "calls": 0.0,
+    "jev_cli_seconds": 12.712822190250295,
+    "current_dispatch_wall_seconds": 12.46043422929044,
+    "selector_seconds": 12.13816169089219
+  },
+  "source_sha256": {
+    "benchmarks/directory-depth/conditional_experiment.py": "127329b23bad4205c15e98194d31cc7e6836178af2a62c56b376d322c2f184f1",
+    "benchmarks/directory-depth/conditional_search.py": "9e0fcdf32192e40644ae5ab14324f0cbca33a73e7d033b450aa7d67f819117f8",
+    "benchmarks/directory-depth/merged_experiment.py": "0031b0a778745d990936c29795d8c1f3088c55d2b2617850a8a3cd1931d8dcea",
+    "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+    "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+    "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+    "benchmarks/directory-depth/conditional_current_experiment.py": "e78ff50ce20958f1a552023562c758db7a0a066622b05213f32a31572604c0b4",
+    "benchmarks/directory-depth/conditional_current.py": "6e2ea31c08d81eee668a092ef1b7afa32ea13ef43fdf588ceae00dbdb0f81549",
+    "benchmarks/directory-depth/conditional_current_cases.json": "3e9f2c4dfae68204ea512e997ae3250969e2f41dfb37fbdd8cd052d914951135",
+    "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d"
+  },
+  "catalog_sha256": "64bc3d608649768fc3117e6a4ed4eb5e32278a3ae540f23bd2a568aa7bd7e57a",
+  "frozen_case_sha256": "bd21b209eee19e19b485fa5d149eccced69737898bc88098f7a5b202291d7a28",
+  "scope": "Three original failed needs and four new author-written combinations. No passed need rerun; no daily installation or capability execution.",
+  "limits": [
+    "Three known failed needs plus four author-written new combinations, one paired pass; not independent blind validation or business execution. No threshold reduction or retries.",
+    "Warm selector wall time includes retrieval and final local assembly; one-off index separate. Reused query duration is historical and explicitly marked. Main Agent and backend revision unobservable.",
+    "Known incomplete recalls are skipped before model dispatch and count as failures in the seven-case denominator.",
+    "Latency and token means compare only the same five live pairs; skipped rows do not lower these means.",
+    "Reference coverage is not proof that every equivalent capability is retained. Recalled alternatives have not been executed.",
+    "The complete recalled pool is preserved, not semantically relabeled as later-only capabilities.",
+    "All five live current references are historical control Skills; the two new public publisher references fail recall."
+  ],
+  "verdict": "do_not_promote"
+}

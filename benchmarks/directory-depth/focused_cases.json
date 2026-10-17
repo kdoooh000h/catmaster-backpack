@@ -1,0 +1,843 @@
+{
+  "reference_version": 2,
+  "criterion": "Metadata-level acquisition relevance, not proof every requested detail exists or task execution. Accept equivalent main-operation scope consistently; raw Jev partial/unknown outputs never pass the .7 current gate. Known primary anchors remain diagnostic; no exhaustive-recall claim.",
+  "cases": [
+    {
+      "id": "unseen_dashboard_visual_design",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "need": "把虚构的读书进度后台做成精致的前端页面：清晰的信息层级、舒服的字体和配色、能适应手机的卡片和空状态，尽量避免套模板的感觉。现在只需要界面实现，不接数据库，也不发布。",
+      "current_requirement": "Implement a polished distinctive responsive frontend interface",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "skill-2de4b5af3d3c22cbf259",
+        "skill-551f920fda36feb99cc6",
+        "plugin-6639b04b765c588d4313"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "skill-2de4b5af3d3c22cbf259",
+      "primary_pending_ids": [],
+      "rationale": "Both describe distinctive frontend design and visual quality; no database or deployment work is needed.",
+      "references": [
+        {
+          "id": "skill-2de4b5af3d3c22cbf259",
+          "name": "frontend-design",
+          "kind": "skill",
+          "description_sha256": "f6aca329665c9761de344b5e6dad22a0318b84a356c6f059d641dcb973bb62ec",
+          "historical_control": false
+        },
+        {
+          "id": "skill-551f920fda36feb99cc6",
+          "name": "frontend-design-review",
+          "kind": "skill",
+          "description_sha256": "7af6780091d9e003034281db8c0afdac3c8a1ee7ab8e0b0be58402d68dd9c767",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-6639b04b765c588d4313",
+          "name": "frontend-design",
+          "kind": "plugin",
+          "description_sha256": "ac12f0c96f772c918c171b68d45b29395884801d28fa20337b4d4c4590cbc936",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "skill-2de4b5af3d3c22cbf259",
+        "skill-551f920fda36feb99cc6"
+      ]
+    },
+    {
+      "id": "unseen_bug_root_cause_workflow",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "need": "虚构服务偶尔报错，日志里看不出直接原因。当前先建立一套排查流程：复现问题、追踪调用、逐步缩小故障范围并验证根因，避免凭感觉乱改。查清后再把结论整理成带页码的 Word 文档。现在优先定位故障。",
+      "current_requirement": "Systematic debugging and root-cause investigation workflow",
+      "later_requirements": [
+        "Create a formatted Word document"
+      ],
+      "acceptable_current_ids": [
+        "plugin-9221213abca765914373",
+        "plugin-32d0b1955c6fdb700d79",
+        "plugin-c77c3e3f827cb63f4009"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "plugin-9221213abca765914373",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "rationale": "The plugin owns interactive debugging and debugging workflows; detailed execution remains unverified.",
+      "references": [
+        {
+          "id": "plugin-9221213abca765914373",
+          "name": "debugging-toolkit",
+          "kind": "plugin",
+          "description_sha256": "3492cde7412e251b6bfe1e6c9f5cccae4058871fc0cd95bab963b2d0e7e5cf26",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-32d0b1955c6fdb700d79",
+          "name": "error-diagnostics",
+          "kind": "plugin",
+          "description_sha256": "91fe92f9f9f412b3ef81cfb4a7d2689ff19ab1a1c10a54e3b9227e4f0938f289",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-c77c3e3f827cb63f4009",
+          "name": "error-debugging",
+          "kind": "plugin",
+          "description_sha256": "e266c0e95a4ddd74b04fa6f8f6421581003e222f1e77ca1bb423e544aebc6d10",
+          "historical_control": false
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "description_sha256": "622e60ca3c82adf6866787ba2d255299582e9eac6a5dd450062dbf69be6f46b3",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "plugin-9221213abca765914373"
+      ]
+    },
+    {
+      "id": "unseen_search_friendly_article",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "need": "把一份虚构的园艺教程整理成方便读者搜索到的原创长文，先明确读者想解决的问题和检索词，再安排标题层次、摘要和文章结构，避免为了关键词生硬堆字。现在只写稿，不登录或发布。",
+      "current_requirement": "SEO-oriented article planning and content writing",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-9144a8b7803b10703efa",
+      "primary_pending_ids": [],
+      "rationale": "Whole plugin explicitly covers SEO content writing and planning; broad generic writing/repurposing is not presumed equivalent.",
+      "references": [
+        {
+          "id": "plugin-9144a8b7803b10703efa",
+          "name": "seo-content-creation",
+          "kind": "plugin",
+          "description_sha256": "e815346290be8282dd8e9c94147543db9d956bc2f4b642b8633444f749c16c1c",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ]
+    },
+    {
+      "id": "unseen_package_docs_then_review",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "need": "当前先查询 React 和 Next.js 的最新官方用法，找到与 app router 和 server components 相关的可引用代码示例，避免用过时 API。之后再审查虚构示例项目的代码质量。现在先查文档，不安装依赖或修改项目。",
+      "current_requirement": "Retrieve current library documentation and code examples",
+      "later_requirements": [
+        "Review code quality"
+      ],
+      "acceptable_current_ids": [
+        "registry-b423e6fd7d18af4889fb",
+        "plugin-07017404cb860aeacf3f"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b423e6fd7d18af4889fb",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "Current code documentation is the MCP scope; exact examples and runtime access are not executed here.",
+      "references": [
+        {
+          "id": "registry-b423e6fd7d18af4889fb",
+          "name": "Context7",
+          "kind": "mcp",
+          "description_sha256": "78988c5978fe87e2248f60c12598ab88cb8657c7147db5097987ccd9f8ed01c0",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-07017404cb860aeacf3f",
+          "name": "context7",
+          "kind": "plugin",
+          "description_sha256": "aa074f53ccbf060e742d5ed4605f51ec9ce49894132d35da7746c35ddc1ba299",
+          "historical_control": false
+        },
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b",
+          "historical_control": true
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-b423e6fd7d18af4889fb"
+      ]
+    },
+    {
+      "id": "unseen_browser_readonly_research",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "need": "先打开几页公开的活动介绍，读取网页和可点击元素，按页面上的导航查看日期、地点与票价，保存截图作为核对依据。然后把整理结果做成可编辑的电子表格。现在先读网页，不登录、不填表、不买票。",
+      "current_requirement": "Browser navigation and page inspection with screenshots",
+      "later_requirements": [
+        "Create an editable spreadsheet"
+      ],
+      "acceptable_current_ids": [
+        "registry-78eb9cf9af75b00491be",
+        "registry-08d2b647940268abcf87",
+        "registry-d97da816f599cf9bf9de",
+        "registry-0ee639c00bc5907163cd",
+        "registry-c2785963a0e12d11d162",
+        "registry-4fbc9e99b1f04aa2ff15",
+        "plugin-6c0eba332ce90eee0167"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "registry-78eb9cf9af75b00491be",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "rationale": "All listed MCPs describe interactive browser navigation/page state and screenshots; screenshot-only/fetch-only entries are not presumed equivalent.",
+      "references": [
+        {
+          "id": "registry-78eb9cf9af75b00491be",
+          "name": "Browser Automation",
+          "kind": "mcp",
+          "description_sha256": "ed81006f79980d0582a1f10c296f2faa3ab9856103cad216a342ecb7864cfe25",
+          "historical_control": false
+        },
+        {
+          "id": "registry-08d2b647940268abcf87",
+          "name": "ZennoPoster: browser in ProjectMaker",
+          "kind": "mcp",
+          "description_sha256": "746c47fd08793a1bb7dd74295fa7746009b54426dea1ad63e86ec4a0b58dc02c",
+          "historical_control": false
+        },
+        {
+          "id": "registry-d97da816f599cf9bf9de",
+          "name": "ZennoPoster: browsers of running tasks",
+          "kind": "mcp",
+          "description_sha256": "453056bed27afaeba623c2917f268aeec90f94dd0bf5edbb87e3459cd7394b1d",
+          "historical_control": false
+        },
+        {
+          "id": "registry-0ee639c00bc5907163cd",
+          "name": "io.github.browser-gateway/browser-gateway",
+          "kind": "mcp",
+          "description_sha256": "73bf56d2163e09060f54a16a3bee1d0de2b90e6ded3d2670c6e11ced216ffddd",
+          "historical_control": false
+        },
+        {
+          "id": "registry-c2785963a0e12d11d162",
+          "name": "io.github.serkan-ozal/browser-devtools-mcp",
+          "kind": "mcp",
+          "description_sha256": "67207ba837d71d9bbe87cf4fb4a191a7445e5a24f297543c6b1ee32a7ee23a19",
+          "historical_control": false
+        },
+        {
+          "id": "registry-4fbc9e99b1f04aa2ff15",
+          "name": "io.github.AlexKay28/clickcast",
+          "kind": "mcp",
+          "description_sha256": "9460e37fe2e45e1551831f76e4af54aa30f1c36ccd8497676efdc221d59a0978",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-6c0eba332ce90eee0167",
+          "name": "playwright",
+          "kind": "plugin",
+          "description_sha256": "e27667505204fae70e0445b90894408cb442b1fa5701cb054e86d86e82ddd538",
+          "historical_control": false
+        },
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "description_sha256": "efd008c86ccd7afe9019af48f04fcd5192414bef7f1f5c44d8454348db04ed2f",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-78eb9cf9af75b00491be",
+        "registry-08d2b647940268abcf87",
+        "registry-d97da816f599cf9bf9de",
+        "registry-0ee639c00bc5907163cd",
+        "registry-c2785963a0e12d11d162",
+        "registry-4fbc9e99b1f04aa2ff15"
+      ]
+    },
+    {
+      "id": "unseen_public_repo_inventory",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "need": "先读取一个公开 GitHub 仓库的 README、目录和近期 issues，查找与安装失败有关的讨论，并整理现有 pull requests 的状态。之后再审查其中一份虚构代码改动。当前只查询仓库，不提交、不评论。",
+      "current_requirement": "Read GitHub repository files issues and pull requests",
+      "later_requirements": [
+        "Review a code change"
+      ],
+      "acceptable_current_ids": [
+        "registry-b6faa9c4714f3d27494b",
+        "registry-225c7230d6eff499b98b",
+        "registry-3b4fcbaad9ac4056e2ab",
+        "registry-daad1ed4a29a69034465",
+        "registry-2c232b3774548274eaf9"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b6faa9c4714f3d27494b",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "GitHub repository/issue/PR access is explicitly the service scope; auth and actual access remain unverified.",
+      "references": [
+        {
+          "id": "registry-b6faa9c4714f3d27494b",
+          "name": "GitHub",
+          "kind": "mcp",
+          "description_sha256": "0831eb3a167a3041f5eab3c4a7bb4f857b8f33ec11b44ec31c3452caa4a259ba",
+          "historical_control": false
+        },
+        {
+          "id": "registry-225c7230d6eff499b98b",
+          "name": "GitHub",
+          "kind": "mcp",
+          "description_sha256": "27e89626c70df45e3228c4fd0b4271053e2a8d00a9eae0206fa1d549c72d9ea0",
+          "historical_control": false
+        },
+        {
+          "id": "registry-3b4fcbaad9ac4056e2ab",
+          "name": "GitHub",
+          "kind": "mcp",
+          "description_sha256": "5d3dded9e3504e78263148c043d4ae459a326bd17424f08d0fab6eb48f182657",
+          "historical_control": false
+        },
+        {
+          "id": "registry-daad1ed4a29a69034465",
+          "name": "Github",
+          "kind": "mcp",
+          "description_sha256": "6c94468d2a394f5795589c355056b6887f2282ede335dff87ea9bbca78ce54e9",
+          "historical_control": false
+        },
+        {
+          "id": "registry-2c232b3774548274eaf9",
+          "name": "GitHub (read-only)",
+          "kind": "mcp",
+          "description_sha256": "c20150aa9546f799d147e78ec73652189769cac59bd4ffbb5b09b40c98be083a",
+          "historical_control": false
+        },
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b",
+          "historical_control": true
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-b6faa9c4714f3d27494b",
+        "registry-225c7230d6eff499b98b",
+        "registry-3b4fcbaad9ac4056e2ab",
+        "registry-daad1ed4a29a69034465"
+      ]
+    },
+    {
+      "id": "unseen_time_zone_conversion",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "need": "把一场虚构会议的纽约上午九点换算成伦敦和东京的当地时间，要考虑指定日期的夏令时，并给出各城市时差。现在只做时间换算，不创建会议或发邀请。",
+      "current_requirement": "Date-aware time-zone conversion with daylight-saving rules",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-f76327aa6af982c2cb41",
+      "primary_pending_ids": [],
+      "rationale": "These descriptions explicitly pair time-zone conversion with DST rules/checks/facts; current-clock-only entries are excluded.",
+      "references": [
+        {
+          "id": "registry-f76327aa6af982c2cb41",
+          "name": "Epoch Calculator",
+          "kind": "mcp",
+          "description_sha256": "f400ad1cceef1a43f6fafeb1271bf6f7b05932e8f7161b14652e49d6adce4d83",
+          "historical_control": false
+        },
+        {
+          "id": "registry-86ad63c56f9551442ff6",
+          "name": "io.github.MukundaKatta/timezone-mcp",
+          "kind": "mcp",
+          "description_sha256": "1be80774b2ca057be5df291004315208b1835b8f50cdf7b47d557802590d0c7a",
+          "historical_control": false
+        },
+        {
+          "id": "registry-3774398e59b43a0aebaa",
+          "name": "io.github.theluckystrike/timezone",
+          "kind": "mcp",
+          "description_sha256": "1bbc07bf4929ecc001f60fbbd92e6b15da40c845540c1f4de0c6924e06048dbb",
+          "historical_control": false
+        },
+        {
+          "id": "registry-50887b8ae34ebfde3727",
+          "name": "io.github.theluckystrike/timezone-world-clock-meeting-slots-overlap-ics",
+          "kind": "mcp",
+          "description_sha256": "1bbc07bf4929ecc001f60fbbd92e6b15da40c845540c1f4de0c6924e06048dbb",
+          "historical_control": false
+        },
+        {
+          "id": "registry-6ae631b114ec4dcfd1e8",
+          "name": "pro.worldclock/time",
+          "kind": "mcp",
+          "description_sha256": "0aaf7123a5a2d3097ccf8ef8b9fa8c38fdc291468f45238ccb835c158250b0e4",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ]
+    },
+    {
+      "id": "new_finance_runway_then_slides",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "need": "先根据虚构公司的月度收入、固定成本和现金余额，评估还能经营多久，列出乐观和保守两种情景及风险；之后把分析做成带讲者备注的演示文稿。现在先分析经营数字，不接入真实账户。",
+      "current_requirement": "Analyze company financial health, runway and scenarios",
+      "later_requirements": [
+        "Create a presentation with speaker notes"
+      ],
+      "acceptable_current_ids": [
+        "financial-analyst",
+        "cfo-advisor"
+      ],
+      "pending_groups": [
+        [
+          "skill-91d13b46fe5873284eee"
+        ]
+      ],
+      "primary_current_id": "financial-analyst",
+      "primary_pending_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "rationale": "Financial forecasts and cash-flow analysis; later presentation speaker notes.",
+      "references": [
+        {
+          "id": "financial-analyst",
+          "name": "financial-analyst",
+          "kind": "skill",
+          "description_sha256": "30c40006ee7bd879e68cefd9aa2ec08beebfe730740f3c7d9cb0102dd4167cca",
+          "historical_control": true
+        },
+        {
+          "id": "cfo-advisor",
+          "name": "cfo-advisor",
+          "kind": "skill",
+          "description_sha256": "fac23a65106f6d31eb05a99d98df27995a9693cec9813294dcf7ed45db93eafb",
+          "historical_control": true
+        },
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "description_sha256": "0197a5fe5ea196e480d3fc7838335f8527bcf05ac4cb59d5211f88226c99b850",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "financial-analyst"
+      ]
+    },
+    {
+      "id": "new_scholarly_paper_lookup",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "need": "先检索公开的机器学习论文，按主题找到相关文献，读取摘要并列出作者、发表时间和原文链接。当前只查公开学术资料，不登录、不发送邮件，也不编造引用。",
+      "current_requirement": "Search public scholarly papers and read abstracts with metadata",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-0e262030f2280db7235b",
+        "registry-b0e31b6ac13290381d48",
+        "registry-7a2942ecf95602e3f188",
+        "registry-d1463a97f7fa1f38e1fb",
+        "registry-c9b5aa404f72f1b7f586",
+        "plugin-8d3d3d7218c16bc30700"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-0e262030f2280db7235b",
+      "primary_pending_ids": [],
+      "rationale": "Public academic search, paper details and metadata; reference alternatives are not exhaustive.",
+      "references": [
+        {
+          "id": "registry-0e262030f2280db7235b",
+          "name": "CLIO Arxiv",
+          "kind": "mcp",
+          "description_sha256": "b55d79eaf41bf75aa2ac3999abc39761d4881ecd470bd61a8073df31db90942d",
+          "historical_control": false
+        },
+        {
+          "id": "registry-b0e31b6ac13290381d48",
+          "name": "Paper Finder",
+          "kind": "mcp",
+          "description_sha256": "ae637bcd2dc1b6c93411dfa0d6595f9514bfeaf59ea468abcfce17600585daa8",
+          "historical_control": false
+        },
+        {
+          "id": "registry-7a2942ecf95602e3f188",
+          "name": "io.github.robertoyanguas-ops/arxiv-digest-mcp",
+          "kind": "mcp",
+          "description_sha256": "a3b2a9ce087ba2ef8c647b6d20c644ad1af0174312d12b843f993434c4ce5251",
+          "historical_control": false
+        },
+        {
+          "id": "registry-d1463a97f7fa1f38e1fb",
+          "name": "io.github.SMABoundless/semanticscholar",
+          "kind": "mcp",
+          "description_sha256": "d27b2adf00e34d7f11b0cb303e0266a3b3a7452b67b10de3281a0a802c26051c",
+          "historical_control": false
+        },
+        {
+          "id": "registry-c9b5aa404f72f1b7f586",
+          "name": "Semantic Scholar MCP Server",
+          "kind": "mcp",
+          "description_sha256": "af0c9fc1f48c99f6ea8e93b6fc76723e5f6f6ff7924fa1d256fe8b19c7ae0331",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-8d3d3d7218c16bc30700",
+          "name": "exa",
+          "kind": "plugin",
+          "description_sha256": "79e56dbd9bdd10e35dc2b989e09ae28be08978ab6fab7b32d39ab9e972ca28cc",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-0e262030f2280db7235b",
+        "registry-b0e31b6ac13290381d48",
+        "registry-7a2942ecf95602e3f188",
+        "registry-d1463a97f7fa1f38e1fb",
+        "registry-c9b5aa404f72f1b7f586"
+      ]
+    },
+    {
+      "id": "new_forecast_then_sheet",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "need": "先查询一个城市未来几天的气温、降雨概率和风速，把不同日期的预报整理清楚；之后做成能继续编辑的电子表格。现在先取得天气数据，不创建提醒。",
+      "current_requirement": "Retrieve multi-day weather forecast including precipitation and wind",
+      "later_requirements": [
+        "Create an editable spreadsheet"
+      ],
+      "acceptable_current_ids": [
+        "registry-2a63e0ac4cf6e3f8da5f",
+        "registry-1f05b3e78010b3e15ed8",
+        "registry-29a269f8e64d71925f35",
+        "registry-04180724d8de119205cf",
+        "registry-d5d2d6811eb7455b8324",
+        "registry-7c76d6f63c7c2070c140",
+        "registry-63114e8c41605b840a90"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "registry-2a63e0ac4cf6e3f8da5f",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "rationale": "Current and multi-day/hourly weather forecasting; individual variable support requires later tool inspection.",
+      "references": [
+        {
+          "id": "registry-2a63e0ac4cf6e3f8da5f",
+          "name": "Weather Forecast MCP",
+          "kind": "mcp",
+          "description_sha256": "e0fc19b7a650d33a23049e5a986e80edfa7509307bb5dbab3c03e694bdc2ba70",
+          "historical_control": false
+        },
+        {
+          "id": "registry-1f05b3e78010b3e15ed8",
+          "name": "Weather MCP",
+          "kind": "mcp",
+          "description_sha256": "a0b0f6ad4d07cdbfcb2006d97d1db49865f56ee4728170e1c408e05cd1ba0f2a",
+          "historical_control": false
+        },
+        {
+          "id": "registry-29a269f8e64d71925f35",
+          "name": "Open-Meteo Weather",
+          "kind": "mcp",
+          "description_sha256": "c92b22e00432a5c1232f87ad52e4196c3a27e22f3c51c36a6b95dc376edd332a",
+          "historical_control": false
+        },
+        {
+          "id": "registry-04180724d8de119205cf",
+          "name": "Weather API",
+          "kind": "mcp",
+          "description_sha256": "d5e32e90bdef2f07086989220f68837aa62ecd70d1a00c46fd0b115c7e6c9092",
+          "historical_control": false
+        },
+        {
+          "id": "registry-d5d2d6811eb7455b8324",
+          "name": "Weather & Climate Intelligence MCP",
+          "kind": "mcp",
+          "description_sha256": "5682bb003e1b6aff5859508e0171784b52fd47df297ca0830138e8fb5977cf9f",
+          "historical_control": false
+        },
+        {
+          "id": "registry-7c76d6f63c7c2070c140",
+          "name": "Weather Data MCP Server",
+          "kind": "mcp",
+          "description_sha256": "68516288d67c3b6dd54ac530fa93947595016468ed7751c3fbc1e2cbadcc4cbf",
+          "historical_control": false
+        },
+        {
+          "id": "registry-63114e8c41605b840a90",
+          "name": "io.github.jaredco-ai/weather-mcp-server",
+          "kind": "mcp",
+          "description_sha256": "77c46b6fce375188efdc69ce52e71c7886922e204ae582d136e8810dcfcdcc69",
+          "historical_control": false
+        },
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "description_sha256": "efd008c86ccd7afe9019af48f04fcd5192414bef7f1f5c44d8454348db04ed2f",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-2a63e0ac4cf6e3f8da5f",
+        "registry-1f05b3e78010b3e15ed8",
+        "registry-29a269f8e64d71925f35",
+        "registry-04180724d8de119205cf",
+        "registry-d5d2d6811eb7455b8324",
+        "registry-7c76d6f63c7c2070c140"
+      ]
+    },
+    {
+      "id": "fresh_backend_exception_design",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "need": "为虚构的 Python API 设计一套统一的异常处理方案：区分可重试错误和业务失败，明确 error response、日志关联与边界处理。当前先做后端设计，之后再审查示例代码。",
+      "stratum": "new",
+      "current_requirement": "Design backend error handling",
+      "later_requirements": [
+        "Review code quality"
+      ],
+      "acceptable_current_ids": [
+        "plugin-c0869c35643648b7dd0c"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "plugin-c0869c35643648b7dd0c",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "Broad package explicitly includes error handling; retry/business error response/logging details are unverified. Relevance reference only, same broad standard as prior controls.",
+      "references": [
+        {
+          "id": "plugin-c0869c35643648b7dd0c",
+          "name": "developer-essentials",
+          "kind": "plugin",
+          "description_sha256": "ff690c439a4937918c6bbd38ab8c762fee57cbebc5ba57d4c2abd4ec989d50d4",
+          "historical_control": false
+        },
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b",
+          "historical_control": true
+        }
+      ]
+    },
+    {
+      "id": "fresh_address_route_lookup",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "need": "先把两个公开地址转换成经纬度，再查两地驾车路线、距离和预计用时。当前只做地图资料查询，不打开导航、不保存个人位置，也不预订车辆。",
+      "stratum": "new",
+      "current_requirement": "Geocode addresses and retrieve driving directions",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-71d8245546049abe67b0",
+        "registry-43364ece9c5bce0124e1"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-71d8245546049abe67b0",
+      "primary_pending_ids": [],
+      "rationale": "Explicit geocoding and driving directions/routing; distance and duration outputs unverified. Relevance only, not full-task completion.",
+      "references": [
+        {
+          "id": "registry-71d8245546049abe67b0",
+          "name": "io.github.mrfentmen/openrouteservice-mcp",
+          "kind": "mcp",
+          "description_sha256": "2ab1c88e6ae6be4ecea9637f19c83c2c2cb53007f67c561fa44d690d89838521",
+          "historical_control": false
+        },
+        {
+          "id": "registry-43364ece9c5bce0124e1",
+          "name": "com.mcparmory/google-maps",
+          "kind": "mcp",
+          "description_sha256": "768bcfcbe8155b3ee2b9bbc1f12a9df47a8b8a612173304c7ff78baec7e5647b",
+          "historical_control": false
+        }
+      ]
+    },
+    {
+      "id": "fresh_implementation_plan",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "need": "把一个虚构的小型编程项目需求拆成可执行的实施步骤，说明先后依赖和每步的验收点。当前只做实施计划，不编写代码。",
+      "stratum": "new",
+      "current_requirement": "Plan implementation steps for a coding project",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "plugin-f7ae955a283d45cb58c6",
+        "plugin-a6366f8015661b276cfb"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-f7ae955a283d45cb58c6",
+      "primary_pending_ids": [],
+      "rationale": "Explicit agent planning and spec/plan workflow. Step dependencies and acceptance outputs remain unverified.",
+      "references": [
+        {
+          "id": "plugin-f7ae955a283d45cb58c6",
+          "name": "superpowers",
+          "kind": "plugin",
+          "description_sha256": "26be97479c992302039bcf0cafae2409a08ffb1e8615d421db47eb7036a63a0b",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-a6366f8015661b276cfb",
+          "name": "conductor",
+          "kind": "plugin",
+          "description_sha256": "1666dabb0aa6eacc0f950082f2c890e4125e001b4bb90fb429cca57f2ce7ee11",
+          "historical_control": false
+        }
+      ]
+    },
+    {
+      "id": "fresh_api_contract_plan",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "need": "为虚构的待办服务设计 REST API，说明资源、HTTP methods、status codes 和一致的错误返回。当前先做接口设计，之后再评审示例代码，不发布服务。",
+      "stratum": "new",
+      "current_requirement": "Design REST APIs before reviewing code",
+      "later_requirements": [
+        "Review code quality"
+      ],
+      "acceptable_current_ids": [
+        "senior-backend",
+        "plugin-a2bdbf2402434ed7ebd2"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "senior-backend",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "Explicit REST API design; HTTP/status/error conventions remain unverified. Historical senior-backend control labeled.",
+      "references": [
+        {
+          "id": "senior-backend",
+          "name": "senior-backend",
+          "kind": "skill",
+          "description_sha256": "4ebf1b6d32afe29b083f97051b0c056221c24679ec1c144bb70fb8ff8a8d387a",
+          "historical_control": true
+        },
+        {
+          "id": "plugin-a2bdbf2402434ed7ebd2",
+          "name": "api-scaffolding",
+          "kind": "plugin",
+          "description_sha256": "f3eff73fb51c78f5890dea957a5d0bc23af9fbf3dbb417fc60df4987dad10de0",
+          "historical_control": false
+        },
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b",
+          "historical_control": true
+        }
+      ]
+    },
+    {
+      "id": "fresh_length_unit_conversion",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "need": "把虚构路线的十二点五公里换算成英里，给出换算结果和单位。当前只做长度单位换算，不查询路线或安排出行。",
+      "stratum": "new",
+      "current_requirement": "Convert kilometers to miles",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-debcfdd9202ec1920e5a",
+        "registry-57b4d20a6526dde8fbff"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-debcfdd9202ec1920e5a",
+      "primary_pending_ids": [],
+      "rationale": "Exact conversion description and generic length conversion alternative; arithmetic and output have not been executed.",
+      "references": [
+        {
+          "id": "registry-debcfdd9202ec1920e5a",
+          "name": "Kilometers to miles",
+          "kind": "mcp",
+          "description_sha256": "295b4846c429c28307ee8dde44267f412e1a21a63368bc321f32bd19c2c92b3b",
+          "historical_control": false
+        },
+        {
+          "id": "registry-57b4d20a6526dde8fbff",
+          "name": "io.github.CSOAI-ORG/unit-converter-ai-mcp",
+          "kind": "mcp",
+          "description_sha256": "fcc852c4316a68fcb7a6ec6a8e388f3b3c0d25c44576792ac967494487cec7ee",
+          "historical_control": false
+        }
+      ]
+    }
+  ],
+  "excluded_before_retrieval": [
+    {
+      "id": "fresh_localization_style",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "need": "把一份虚构软件的英文帮助文案改成自然的简体中文，统一产品术语，保留占位符和快捷键，避免直译。当前先做本地化文案，不修改程序或发布。",
+      "reason": "No defensible software-copy localization guidance reference established; translation SDKs or placeholder checkers do not establish the main requested copywriting operation. Unscored source-metadata gap, not selector pass/failure."
+    }
+  ],
+  "review": "Prospective retrieval-informed alternatives reviewed independently before live calls. Old published scores remain unchanged. Broad detailed-feature gaps are recorded consistently, including new maps/error/REST references."
+}

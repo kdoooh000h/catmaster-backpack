@@ -1,0 +1,494 @@
+{
+  "scope": "Predeclared metadata-routing reference groups, frozen before retrieval. Alternatives are allowed across kinds; primary anchors separately preserve strict comparison. Not exhaustive equivalence or execution proof.",
+  "cases": [
+    {
+      "id": "unseen_pdf_contract_register",
+      "acceptable_current_ids": [
+        "skill-c0db752739b0b1bd529f"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "skill-c0db752739b0b1bd529f",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "rationale": "PDF metadata explicitly covers OCR and rotating pages; spreadsheet guidance covers later formulas.",
+      "references": [
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "efd008c86ccd7afe9019af48f04fcd5192414bef7f1f5c44d8454348db04ed2f"
+        },
+        {
+          "id": "skill-c0db752739b0b1bd529f",
+          "name": "pdf",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "d1906e2fc005cb80c70b054ca9a61cbcaa67f14c348463f18c7c3bd41e682d02"
+        }
+      ]
+    },
+    {
+      "id": "unseen_quarterly_ledger_cleanup",
+      "acceptable_current_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "skill-9a370bf7a61ed1d8e537",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "rationale": "Spreadsheet metadata covers malformed tabular data, restructuring, formulas and editable workbook output.",
+      "references": [
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "efd008c86ccd7afe9019af48f04fcd5192414bef7f1f5c44d8454348db04ed2f"
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "622e60ca3c82adf6866787ba2d255299582e9eac6a5dd450062dbf69be6f46b3"
+        }
+      ]
+    },
+    {
+      "id": "unseen_local_modal_testing",
+      "acceptable_current_ids": [
+        "skill-61da1b60bbd8685c59f0"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "skill-61da1b60bbd8685c59f0",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "Local Playwright testing, screenshots and browser logs are explicit.",
+      "references": [
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b"
+        },
+        {
+          "id": "skill-61da1b60bbd8685c59f0",
+          "name": "webapp-testing",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "05bd234ecb67739592cef6b1f23923e97dc7d527351dc64c0d98bcf2687d99cc"
+        }
+      ]
+    },
+    {
+      "id": "unseen_dashboard_visual_design",
+      "acceptable_current_ids": [
+        "skill-2de4b5af3d3c22cbf259",
+        "skill-551f920fda36feb99cc6"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "skill-2de4b5af3d3c22cbf259",
+      "primary_pending_ids": [],
+      "rationale": "Both describe distinctive frontend design and visual quality; no database or deployment work is needed.",
+      "references": [
+        {
+          "id": "skill-2de4b5af3d3c22cbf259",
+          "name": "frontend-design",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "f6aca329665c9761de344b5e6dad22a0318b84a356c6f059d641dcb973bb62ec"
+        },
+        {
+          "id": "skill-551f920fda36feb99cc6",
+          "name": "frontend-design-review",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "7af6780091d9e003034281db8c0afdac3c8a1ee7ab8e0b0be58402d68dd9c767"
+        }
+      ]
+    },
+    {
+      "id": "unseen_accessibility_then_handbook",
+      "acceptable_current_ids": [
+        "plugin-d3afb2208e4f83e5c520",
+        "a11y-audit",
+        "registry-cb60b36a49dee4393bb4"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "plugin-d3afb2208e4f83e5c520",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "rationale": "Accessibility audit and remediation are supported by the whole plugin and these two documented alternatives.",
+      "references": [
+        {
+          "id": "a11y-audit",
+          "name": "a11y-audit",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "d204404d9db757b17b394058f5e7245e711b5d50faab56329cd43e483652f360"
+        },
+        {
+          "id": "plugin-d3afb2208e4f83e5c520",
+          "name": "accessibility-compliance",
+          "kind": "plugin",
+          "historical_control": false,
+          "description_sha256": "33accd556c072637495bbb2beba600cf828bd0e1c7fb0a5bae8c5618c33df40d"
+        },
+        {
+          "id": "registry-cb60b36a49dee4393bb4",
+          "name": "Aether WCAG Scanner",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "40293b487dff37cd13dbcb60fb8689c944a47e95d220f8f5eda3ef4a87af3fc6"
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "622e60ca3c82adf6866787ba2d255299582e9eac6a5dd450062dbf69be6f46b3"
+        }
+      ]
+    },
+    {
+      "id": "unseen_bug_root_cause_workflow",
+      "acceptable_current_ids": [
+        "plugin-9221213abca765914373"
+      ],
+      "pending_groups": [
+        [
+          "skill-f28f584d1874df3e7ad9"
+        ]
+      ],
+      "primary_current_id": "plugin-9221213abca765914373",
+      "primary_pending_ids": [
+        "skill-f28f584d1874df3e7ad9"
+      ],
+      "rationale": "The plugin owns interactive debugging and debugging workflows; detailed execution remains unverified.",
+      "references": [
+        {
+          "id": "plugin-9221213abca765914373",
+          "name": "debugging-toolkit",
+          "kind": "plugin",
+          "historical_control": false,
+          "description_sha256": "3492cde7412e251b6bfe1e6c9f5cccae4058871fc0cd95bab963b2d0e7e5cf26"
+        },
+        {
+          "id": "skill-f28f584d1874df3e7ad9",
+          "name": "docx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "622e60ca3c82adf6866787ba2d255299582e9eac6a5dd450062dbf69be6f46b3"
+        }
+      ]
+    },
+    {
+      "id": "unseen_kubernetes_release_plan",
+      "acceptable_current_ids": [
+        "plugin-d234e38b94a91ef65c51",
+        "helm-chart-builder"
+      ],
+      "pending_groups": [
+        [
+          "dependency-auditor",
+          "senior-secops",
+          "security-pen-testing"
+        ]
+      ],
+      "primary_current_id": "plugin-d234e38b94a91ef65c51",
+      "primary_pending_ids": [
+        "dependency-auditor"
+      ],
+      "rationale": "The plugin covers Kubernetes manifests and operations; Helm chart guidance is an alternate route. Dependency/security references cover later package risks.",
+      "references": [
+        {
+          "id": "dependency-auditor",
+          "name": "dependency-auditor",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "8ce139a53159215655ab18fefd44ac054d2301063b8a8fb34d81c62878c7076a"
+        },
+        {
+          "id": "helm-chart-builder",
+          "name": "helm-chart-builder",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "35106635095cd2e866043aa3abfa29d7f78fff8c3e2e926eb85ec471ed249658"
+        },
+        {
+          "id": "plugin-d234e38b94a91ef65c51",
+          "name": "kubernetes-operations",
+          "kind": "plugin",
+          "historical_control": false,
+          "description_sha256": "355503a87273a3ca516d241f8d9d5c3d2c6d453f518ab778c4a7b661d33970dc"
+        },
+        {
+          "id": "security-pen-testing",
+          "name": "security-pen-testing",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "3d4f1861257f6f5ebed6dca3145dc708f42064252065aa632254592fa9cb1bc5"
+        },
+        {
+          "id": "senior-secops",
+          "name": "senior-secops",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "dc83e6c600ad4eff57c0d38881d9bf82bba4b9a9208c84d95512e14f9f2d0719"
+        }
+      ]
+    },
+    {
+      "id": "unseen_search_friendly_article",
+      "acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-9144a8b7803b10703efa",
+      "primary_pending_ids": [],
+      "rationale": "Whole plugin explicitly covers SEO content writing and planning; broad generic writing/repurposing is not presumed equivalent.",
+      "references": [
+        {
+          "id": "plugin-9144a8b7803b10703efa",
+          "name": "seo-content-creation",
+          "kind": "plugin",
+          "historical_control": false,
+          "description_sha256": "e815346290be8282dd8e9c94147543db9d956bc2f4b642b8633444f749c16c1c"
+        }
+      ]
+    },
+    {
+      "id": "unseen_package_docs_then_review",
+      "acceptable_current_ids": [
+        "registry-b423e6fd7d18af4889fb"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b423e6fd7d18af4889fb",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "Current code documentation is the MCP scope; exact examples and runtime access are not executed here.",
+      "references": [
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b"
+        },
+        {
+          "id": "registry-b423e6fd7d18af4889fb",
+          "name": "Context7",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "78988c5978fe87e2248f60c12598ab88cb8657c7147db5097987ccd9f8ed01c0"
+        }
+      ]
+    },
+    {
+      "id": "unseen_browser_readonly_research",
+      "acceptable_current_ids": [
+        "registry-78eb9cf9af75b00491be",
+        "registry-08d2b647940268abcf87",
+        "registry-d97da816f599cf9bf9de",
+        "registry-0ee639c00bc5907163cd",
+        "registry-c2785963a0e12d11d162",
+        "registry-4fbc9e99b1f04aa2ff15"
+      ],
+      "pending_groups": [
+        [
+          "skill-9a370bf7a61ed1d8e537"
+        ]
+      ],
+      "primary_current_id": "registry-78eb9cf9af75b00491be",
+      "primary_pending_ids": [
+        "skill-9a370bf7a61ed1d8e537"
+      ],
+      "rationale": "All listed MCPs describe interactive browser navigation/page state and screenshots; screenshot-only/fetch-only entries are not presumed equivalent.",
+      "references": [
+        {
+          "id": "registry-08d2b647940268abcf87",
+          "name": "ZennoPoster: browser in ProjectMaker",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "746c47fd08793a1bb7dd74295fa7746009b54426dea1ad63e86ec4a0b58dc02c"
+        },
+        {
+          "id": "registry-0ee639c00bc5907163cd",
+          "name": "io.github.browser-gateway/browser-gateway",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "73bf56d2163e09060f54a16a3bee1d0de2b90e6ded3d2670c6e11ced216ffddd"
+        },
+        {
+          "id": "registry-4fbc9e99b1f04aa2ff15",
+          "name": "io.github.AlexKay28/clickcast",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "9460e37fe2e45e1551831f76e4af54aa30f1c36ccd8497676efdc221d59a0978"
+        },
+        {
+          "id": "registry-78eb9cf9af75b00491be",
+          "name": "Browser Automation",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "ed81006f79980d0582a1f10c296f2faa3ab9856103cad216a342ecb7864cfe25"
+        },
+        {
+          "id": "registry-c2785963a0e12d11d162",
+          "name": "io.github.serkan-ozal/browser-devtools-mcp",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "67207ba837d71d9bbe87cf4fb4a191a7445e5a24f297543c6b1ee32a7ee23a19"
+        },
+        {
+          "id": "registry-d97da816f599cf9bf9de",
+          "name": "ZennoPoster: browsers of running tasks",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "453056bed27afaeba623c2917f268aeec90f94dd0bf5edbb87e3459cd7394b1d"
+        },
+        {
+          "id": "skill-9a370bf7a61ed1d8e537",
+          "name": "xlsx",
+          "kind": "skill",
+          "historical_control": false,
+          "description_sha256": "efd008c86ccd7afe9019af48f04fcd5192414bef7f1f5c44d8454348db04ed2f"
+        }
+      ]
+    },
+    {
+      "id": "unseen_public_repo_inventory",
+      "acceptable_current_ids": [
+        "registry-b6faa9c4714f3d27494b",
+        "registry-225c7230d6eff499b98b",
+        "registry-3b4fcbaad9ac4056e2ab",
+        "registry-daad1ed4a29a69034465"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "registry-b6faa9c4714f3d27494b",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "GitHub repository/issue/PR access is explicitly the service scope; auth and actual access remain unverified.",
+      "references": [
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "historical_control": true,
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b"
+        },
+        {
+          "id": "registry-225c7230d6eff499b98b",
+          "name": "GitHub",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "27e89626c70df45e3228c4fd0b4271053e2a8d00a9eae0206fa1d549c72d9ea0"
+        },
+        {
+          "id": "registry-3b4fcbaad9ac4056e2ab",
+          "name": "GitHub",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "5d3dded9e3504e78263148c043d4ae459a326bd17424f08d0fab6eb48f182657"
+        },
+        {
+          "id": "registry-b6faa9c4714f3d27494b",
+          "name": "GitHub",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "0831eb3a167a3041f5eab3c4a7bb4f857b8f33ec11b44ec31c3452caa4a259ba"
+        },
+        {
+          "id": "registry-daad1ed4a29a69034465",
+          "name": "Github",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "6c94468d2a394f5795589c355056b6887f2282ede335dff87ea9bbca78ce54e9"
+        }
+      ]
+    },
+    {
+      "id": "unseen_time_zone_conversion",
+      "acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-f76327aa6af982c2cb41",
+      "primary_pending_ids": [],
+      "rationale": "These descriptions explicitly pair time-zone conversion with DST rules/checks/facts; current-clock-only entries are excluded.",
+      "references": [
+        {
+          "id": "registry-3774398e59b43a0aebaa",
+          "name": "io.github.theluckystrike/timezone",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "1bbc07bf4929ecc001f60fbbd92e6b15da40c845540c1f4de0c6924e06048dbb"
+        },
+        {
+          "id": "registry-50887b8ae34ebfde3727",
+          "name": "io.github.theluckystrike/timezone-world-clock-meeting-slots-overlap-ics",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "1bbc07bf4929ecc001f60fbbd92e6b15da40c845540c1f4de0c6924e06048dbb"
+        },
+        {
+          "id": "registry-6ae631b114ec4dcfd1e8",
+          "name": "pro.worldclock/time",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "0aaf7123a5a2d3097ccf8ef8b9fa8c38fdc291468f45238ccb835c158250b0e4"
+        },
+        {
+          "id": "registry-86ad63c56f9551442ff6",
+          "name": "io.github.MukundaKatta/timezone-mcp",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "1be80774b2ca057be5df291004315208b1835b8f50cdf7b47d557802590d0c7a"
+        },
+        {
+          "id": "registry-f76327aa6af982c2cb41",
+          "name": "Epoch Calculator",
+          "kind": "mcp",
+          "historical_control": false,
+          "description_sha256": "f400ad1cceef1a43f6fafeb1271bf6f7b05932e8f7161b14652e49d6adce4d83"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "id": "new_culture_now_signals_later",
+      "need": "服务的 metrics、logs、traces 和 SLO 方案也必须交付，但排在第二步。现在先把虚构团队的共同价值观写成可观察行为，设计文化仪式和文化健康评估；先完成团队文化方案，再规划服务可观测性。只做演示方案，不调整人员或连接真实系统。",
+      "expected_ids": ["culture-architect"],
+      "pending_ids": ["observability-designer"],
+      "control": false
+    },
+    {
+      "id": "new_jira_now_finance_later",
+      "need": "这次开源包的漏洞和许可证检查取消。保留两个必须交付的方案：当前先设计 Jira 的 workflow、custom fields、JQL 查询和 dashboard，用来跟踪虚构项目；随后再依据虚构订阅收入分析 MRR、NRR、CAC/LTV 和整体经营健康。先交项目跟踪方案，再交财务分析，不修改线上项目。",
+      "expected_ids": ["jira-expert"],
+      "pending_ids": ["saas-metrics-coach"],
+      "forbidden_current_ids": ["dependency-auditor"],
+      "control": false
+    },
+    {
+      "id": "new_word_now_spreadsheet_later",
+      "need": "当前先把虚构项目的访谈纪要整理成正式的 Word（.docx）文档，包含分级标题、目录、页码和修订标记；第二步把虚构预算数据整理成 .xlsx 表格，设置公式和图表。后续表格也必须交付，先写文档再做表格，不访问真实数据或发送文件。",
+      "expected_ids": ["skill-f28f584d1874df3e7ad9"],
+      "pending_ids": ["skill-9a370bf7a61ed1d8e537"],
+      "control": false
+    },
+    {
+      "id": "new_spreadsheet_now_wiki_later",
+      "need": "后续必须规划 Confluence 页面的层级权限、模板宏和归档，来保存结果；当前先清理一份虚构 CSV 中错位的表头和杂乱行，生成带公式、格式和图表的 .xlsx 工作簿。先交电子表格，再做知识库方案；旧计划的 Word 文档不再需要，也不要登录真实站点。",
+      "expected_ids": ["skill-9a370bf7a61ed1d8e537"],
+      "pending_ids": ["confluence-expert"],
+      "forbidden_current_ids": ["skill-f28f584d1874df3e7ad9"],
+      "control": false
+    }
+  ]
+}

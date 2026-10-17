@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "scope": "Four new multi-task needs, written before live testing; capability IDs are evaluation-only.",
+  "cases": [
+    {"id":"signals_then_finance_and_culture","stratum":"chinese","need":"请完成虚构组织的三项方案：当前先把服务指标、日志和调用链串起来，设计 SLI/SLO、黄金信号与告警降噪；第二步依据订阅收入和客户数据分析 MRR、NRR、CAC/LTV 与公司经营健康；最后把团队价值观转成可观察行为，设计文化仪式与健康评估。三项都必须交付，按顺序做，只做演示分析，不连接真实系统或调整人员。","expected_ids":["observability-designer"],"pending_ids":["saas-metrics-coach","culture-architect"],"control":false},
+    {"id":"channels_then_incident_and_wiki","stratum":"mixed","need":"先交 direct 与 partner 渠道的 fully-loaded cost-to-serve、ROI 敏感性和渠道配比建议；随后为虚构故障做 severity 分级、跨团队响应与 故障事后复盘；第三步规划 Confluence 页面的层级权限、模板宏和归档规则，存放这些结论。三个交付都需要，当前只先核算渠道，不发通知、不登录站点。","expected_ids":["channel-economics"],"pending_ids":["incident-commander","confluence-expert"],"control":false},
+    {"id":"borrowed_code_now_culture_welcome_later","stratum":"synonym","need":"共同价值观、行为准则与文化健康评估，以及欢迎到激活的连续邮件和发送间隔，都要交，但排在后面。眼下先查演示代码借来的开源包：已知安全缺陷、授权条款冲突、包再带进来的其他包的风险，并给出稳妥升级顺序。按查包、团队文化、欢迎邮件的顺序完成三项，只做方案，不更新软件包或发送邮件。","expected_ids":["dependency-auditor"],"pending_ids":["culture-architect","email-sequence"],"control":false},
+    {"id":"cancel_finance_keep_discovery_jira","stratum":"mixed","need":"旧计划中的公司订阅财务分析和开源包 license/CVE 审查都取消，不要执行。保留两项：当前先综合访谈记录，用 RICE 给功能排序，形成 PRD 和产品发现计划；随后必须设计 Jira 的 workflow、custom fields、JQL 查询与 dashboard 来跟踪这些工作。先交产品方案再交跟踪方案，只用虚构材料，不改线上项目。","expected_ids":["product-manager-toolkit"],"pending_ids":["jira-expert"],"forbidden_current_ids":["saas-metrics-coach","dependency-auditor"],"control":false}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "scope": "Six new author-written multi-step needs; gold is frozen before live evaluation. Selection only, no capability execution.",
+  "cases": [
+    {"id":"multi_reverse_wiki_now","stratum":"mixed","need":"这份演示项目最终要把团队价值观变成可观察行为并建立文化健康评估；不过先后顺序是先规划 Confluence 的页面层级、权限、模板宏和复审归档，再开展价值观设计。当前只做知识库结构，后面的文化设计也必须保留，不访问实际站点。","expected_ids":["confluence-expert"],"pending_ids":["culture-architect"],"control":false},
+    {"id":"multi_reverse_finance_now","stratum":"chinese","need":"演示客户账户的加权健康分、流失风险分层和扩展机会都要做，但那是第二步。现在先根据全公司订阅收入与客户数字计算月度经常性收入、净收入留存和获客回报，解释公司经营健康度；两步都必须完成，不联系客户。","expected_ids":["saas-metrics-coach"],"pending_ids":["customer-success-manager"],"control":false},
+    {"id":"multi_study_then_documents","stratum":"mixed","need":"为虚构器械研究做两项连续工作：先设计前瞻性两组研究的主要和次要终点，估算 sample size、power 并评估可行性，交人工专家审阅；之后必须规划器械质量体系受控文件的版本、变更审批和留存规则。当前先交研究设计估算，不招募受试者或提交申报。","expected_ids":["clinical-research"],"pending_ids":["quality-documentation-manager"],"control":false},
+    {"id":"multi_charts_then_signals","stratum":"mixed","need":"演示服务上线准备有两步：先做 Helm chart 的 values.yaml、模板 helper、子图依赖和 lint 检查方案；随后必须设计 metrics、logs、traces 的关联、SLI/SLO 和降噪告警。当前先完成 chart 设计，两步都要交付，只在纸面规划，不连接集群。","expected_ids":["helm-chart-builder"],"pending_ids":["observability-designer"],"control":false},
+    {"id":"multi_welcome_then_channels","stratum":"synonym","need":"先给已同意接收邮件的虚构新订阅者设计从欢迎到激活的连续邮件，说明每封信的目的和发送节奏；之后还必须核算直销与合作伙伴渠道含获客、支持、折扣和间接费用的真实利润，并建议渠道配比。现在先做欢迎邮件方案，不发送邮件，两项都要完成。","expected_ids":["email-sequence"],"pending_ids":["channel-economics"],"control":false},
+    {"id":"multi_procurement_support_wiki","stratum":"mixed","need":"为虚构公司做三步运营整理，顺序不能倒：第一步审查重复 SaaS 采购、品类支出和续约集中，提出有风险兜底的供应商整合方案；第二步必须根据客服来量、工时和服务水平估算人手与排班缺口；第三步必须规划 Confluence 页面层级、权限、模板宏和归档流程来保存方案。当前先做采购审查，不取消订阅、不调班、不登录站点。","expected_ids":["procurement-optimizer"],"pending_ids":["capacity-planner","confluence-expert"],"control":false}
+  ]
+}

@@ -326,17 +326,150 @@ The current published measurements are the Hermes surface result in `benchmarks/
 
 ## Adapter Roadmap
 
-CatMaster Backpack is currently validated on Hermes Agent.
+The published comparative benchmarks cover Hermes Agent. Separate Codex public
+gateway samples and their limits are documented below.
 
 | Host | Current status | Next step |
 | --- | --- | --- |
 | Hermes Agent | Working runtime integration prototype | Continue hardening Tool Backpack and Skill Backpack runtime behavior. |
 | OpenCode | Portable protocol and skill package only | Add native lazy tool-surface support only if OpenCode exposes stable tool hooks. |
 | Claude Code | Portable protocol and skill package only | Keep Skill Backpack portable; add dynamic tool visibility only if host APIs support it. |
-| Codex-style runtimes | Portable protocol and skill package only | Add MCP or plugin integration only when the target Codex client documents the surface. |
+| Codex-style runtimes | Public MCP gateway extension for on-demand market Skills, portable plugins and MCP services | Requires an existing standalone runtime; verify the installed connection and each service's requirements. |
 | OpenClaw | Portable protocol and skill package only | Investigate Tool Search, plugin tools, and MCP before claiming runtime-level dynamic hiding. |
 
 Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet. The portable assets are useful as protocol, skill-tree, and adapter starting points; runtime-level dynamic tool hiding still depends on each host.
+
+The [Codex market connection guide](docs/codex-market-connect.md) describes
+receipt-based setup and direct use through Backpack. Native apps/hooks and missing
+credentials remain explicit setup requirements. See the
+[market validation record](docs/codex-market-connect-validation-2026-10-14.md)
+for actual samples; they do not establish universal marketplace compatibility.
+The subsequent [ordinary-request Agent pilot](docs/backpack-market-blind-validation-2026-10-14.md)
+completed the full new-capability path in 1/6 tasks and identified discovery and
+plugin-resource gaps. Named-service examples do not establish autonomous discovery.
+The [repair retest](docs/backpack-market-repair-validation-2026-10-14.md) reached
+2/6 complete tasks; it fixed plugin resource access and exercised improved market
+discovery, while final MCP confidence and native plugin requirements still blocked use.
+The [lifecycle and runtime retest](docs/backpack-market-lifecycle-validation-2026-10-14.md)
+adds external plugin sources, isolated PyPI setup and real npm entrypoint handling.
+Across the recorded revisions, 3/6 distinct tasks completed with new capabilities,
+including an actual timezone MCP call. This is cumulative coverage, not a single
+final-version benchmark; all 16 attempts and unresolved requirements are retained.
+The [remaining-failure repair and cost audit](docs/backpack-market-failure-repair-validation-2026-10-14.md)
+completed the theme task and a persistent MCP write/read chain without replaying
+the write. Cumulative coverage is 5/6. A new review plugin produced a correct
+artifact using an already installed Skill, so that case still fails the new-capability
+criterion. All 17 native attempts and separate candidate-diagnostic costs are retained;
+the daily installation has not been upgraded by this repair.
+The [public-plugin expansion retest](docs/backpack-public-plugin-expansion-validation-2026-10-15.md)
+completed the remaining review task using a new plugin and new Skill, bringing
+cumulative cross-version coverage to 6/6 without rerunning the five passed tasks.
+It adds two public publisher indexes and reuses bound full-guidance validation.
+The failed attempt and continuation are both counted; complete-flow time and
+tokens increased, while repeated guidance-selection calls were removed.
+
+The [market directory/description comparison](docs/backpack-market-directory-comparison-2026-10-15.md)
+adds task descriptions, publisher labels and bounded public metadata classification.
+In the six-task native regression, strict completion was 2/6 old versus 3/6 candidate;
+summed latency increased 6.88% and the five fully metered paired tasks used 32.47%
+more tokens. The HTML native turn timed out and both MCP searches failed on each
+side. This experimental strategy has not been promoted to the daily connection.
+
+The [merged-source directory preflight](docs/backpack-merged-source-preflight-2026-10-16.md)
+combines public markets by task category, keeps plugins whole, and programmatically
+merges five confirmed duplicate records into a 935-candidate snapshot. Ranking
+data, complete MCP coverage and missing classifications still prevent a meaningful
+live ranking comparison at that stage. The subsequent
+[completed five-need comparison](docs/backpack-merged-comparison-2026-10-16.md)
+adds all 589 index assignments, public ranking feeds and a completed MCP census.
+Both arms fail the omission-safe criterion on all five needs; ranking adds 18.82%
+tokens. The experimental merged index is not promoted to the daily installation.
+
+The [conditional find-style comparison](docs/backpack-conditional-find-2026-10-16.md)
+uses local per-clause bilingual retrieval before Jev, over the same 45,325-entry
+public snapshot. All current/later references survive on five known needs;
+strict final selection is 2/5 versus 0/5 for the adaptive directory control.
+Mean reported tokens fall 81.35%. Three low-confidence finals remain unresolved,
+so this experiment does not change the daily connection.
+
+The [one-call current-step follow-up](docs/backpack-conditional-current-2026-10-16.md)
+repairs all three original final-selection failures without another Jev call or
+a lower threshold. Strict success is 2/7 versus 5/7, including four new needs;
+two new document/spreadsheet needs fail retrieval before final selection. Mean
+tokens for the same five live pairs rise 1.70%, and measured final-dispatch time
+rises 12.46%. The remaining recall omissions prevent daily promotion.
+
+The [structured metadata recall follow-up](docs/backpack-structured-recall-2026-10-16.md)
+adds bilingual objects/actions and existing categories while retaining all
+lexical candidates. Both old document omissions pass; all 12 required references
+survive across six needs. Strict success is 0/6 versus 5/6: one new presentation
+final abstains at 0.51 despite retaining its correct target. Each need still uses
+one Jev call, but mean tokens rise 47.68% and warm selector time rises 8.90%.
+The remaining final-selection failure prevents daily promotion.
+
+The [typed final and compression follow-up](docs/backpack-final-contrast-2026-10-16.md)
+keeps recall fixed, distinguishes Skill/plugin/MCP modes and uses reversible
+short option IDs. All three arms pass 2/4 needs: presentation confidence remains
+below 0.7, and a new Word-manual expression misses a later reference offline.
+Across the same three dispatched needs, compact mean tokens fall 29.52%
+(6,146.3 to 4,332), while warm selector time rises 2.50%. This is a bounded
+token-saving result, without an accuracy gain or daily promotion.
+
+The [two-failure repair](docs/backpack-requirement-coverage-2026-10-16.md) restores
+the later Word reference through additive document-noun aliases and makes
+literal requirement details visible to the final selector. Both original needs
+pass at 0.78/0.99 with all four references retained and one Jev call per need.
+Against the prior final on the same repaired pools, strict success is 1/2 versus
+2/2; tokens rise 3.66% and measured warm time falls 6.40%. This small regression
+does not establish general accuracy or a stable speedup; daily runtime is unchanged.
+
+The [new-request breadth check](docs/backpack-unseen-breadth-2026-10-16.md) freezes
+those selectors and tests 12 new Chinese, synonym-oriented and mixed-language
+needs across Skill, whole-plugin and MCP targets. Both compact and coverage pass
+only 2/12: eight fail local reference coverage (including all four MCP needs),
+and two abstain below 0.7. Only 7/9 later requirements survive retrieval. Across
+the same four live pairs, coverage uses 2.92% more tokens and 1.64% more warm
+selector time. The prior two-case success does not generalize; no daily promotion
+or capability execution is claimed.
+
+The [general recall and independent-suitability follow-up](docs/backpack-semantic-recall-2026-10-16.md)
+tests only the ten failed needs plus five new ones. Additive name/description
+search and local multilingual semantic recall raise strict success from 1/15
+to 5/15, while all 10 later reference requirements survive. Three additional
+selections are plausible unlisted alternatives and receive no retroactive credit.
+Independent current-step Choices keep a 0.7 gate but assess suitability rather
+than unique-best confidence. Same-three-pair tokens rise 7.96x and warm selector
+time rises 41.22%; seven primary current references remain missing. This costly
+experimental candidate is not promoted; daily runtime remains unchanged.
+
+The [current-focused shortlist follow-up](docs/backpack-focused-current-2026-10-16.md)
+uses a general bilingual dictionary and current-step ranking, keeping later
+requirements in an additive reservoir. On the same eight fresh live pairs,
+tokens fall 85.10%, but warm selector time rises 23.82%. With prospective,
+predeclared equivalent-capability references, success is 7/15 versus 8/15;
+the new subset regresses from 3/5 to 2/5, and success with all known primary
+anchors retained falls from 5/15 to 2/15. All eight later requirements survive.
+The old published scores remain unchanged. This is metadata selection only;
+the candidate fails omission/time requirements and is not promoted.
+
+The [Jev-only directory pilot](docs/backpack-jev-only-directory-2026-10-16.md)
+removes programmatic request matching and starts from all 45,325 capabilities.
+On two completed old-failure pairs it preserves known targets through observed
+directories, but never reaches final classification and uses 29.26x the tokens.
+The frozen budget stops the pilot after 13 calls / 256,988 tokens; all three new
+requests remain unobserved. The final 0.7 gate stays unchanged. This directory
+organization is not promoted, and the daily runtime remains unchanged.
+
+The [authored taxonomy and Jev-classification pilot](docs/backpack-jev-semantic-taxonomy-2026-10-16.md)
+compares identical 240-record public subsets. Organization alone succeeds on
+1/10 requests versus 0/10 for balanced grouping; terminal unions remain too wide.
+A separately frozen 0.65 directory-gate suffix reaches final selection but
+passes only 2/5 completed requests before its inherited budget guard; four
+suffixes remain unobserved. Known current and required later references survive
+all observed pools. Three final choices favor generic specification planning
+over frozen specialist references; one reference has metadata-coverage ambiguity.
+Final confidence stays at least 0.7;
+84 affected checks pass. No daily-runtime change or promotion is made.
 
 ## Security Boundary
 

@@ -275,10 +275,11 @@ class PublicInstallerTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("## Adapter Roadmap", readme)
-        self.assertIn("CatMaster Backpack is currently validated on Hermes Agent", readme)
+        self.assertIn("The published comparative benchmarks cover Hermes Agent.", readme)
         self.assertIn("| OpenCode | Portable protocol and skill package only |", readme)
         self.assertIn("| Claude Code | Portable protocol and skill package only |", readme)
-        self.assertIn("| Codex-style runtimes | Portable protocol and skill package only |", readme)
+        self.assertIn("| Codex-style runtimes | Public MCP gateway extension", readme)
+        self.assertIn("Requires an existing standalone runtime", readme)
         self.assertIn("| OpenClaw | Portable protocol and skill package only |", readme)
         self.assertIn("Do not treat non-Hermes hosts as Hermes-equivalent lazy native tool runtimes yet", readme)
         self.assertNotIn("## Package Direction", readme)

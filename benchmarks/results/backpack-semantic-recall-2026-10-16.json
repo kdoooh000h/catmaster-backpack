@@ -1,0 +1,2002 @@
+{
+  "version": 1,
+  "final_gate": 0.7,
+  "catalog_count": 45325,
+  "aggregates": {
+    "baseline": {
+      "cases": 15,
+      "strict_pass": 1,
+      "omission_safe_pass": 1,
+      "all_required_retained": 3,
+      "all_primary_references_retained": 3,
+      "calls": 3,
+      "tokens": 8427,
+      "measured_cases": 3,
+      "measured_means": {
+        "tokens": 2809,
+        "input_tokens": 2465.3333333333335,
+        "output_tokens": 343.6666666666667,
+        "retrieval_seconds": 0.03795941730883593,
+        "dispatch_seconds": 0.5685374446620699,
+        "selector_seconds": 0.6064968619709058,
+        "final_pool_size": 36.333333333333336
+      }
+    },
+    "hybrid_independent": {
+      "cases": 15,
+      "strict_pass": 5,
+      "omission_safe_pass": 5,
+      "all_required_retained": 9,
+      "all_primary_references_retained": 8,
+      "calls": 8,
+      "tokens": 214169,
+      "measured_cases": 8,
+      "measured_means": {
+        "tokens": 26771.125,
+        "input_tokens": 22814,
+        "output_tokens": 3957.125,
+        "retrieval_seconds": 0.17436164111859398,
+        "dispatch_seconds": 0.8072811459969671,
+        "selector_seconds": 0.9816427871155611,
+        "final_pool_size": 106.75
+      }
+    }
+  },
+  "strata": {
+    "stratum": {
+      "failed": {
+        "baseline": {
+          "cases": 10,
+          "strict_pass": 0,
+          "omission_safe_pass": 0,
+          "all_required_retained": 2,
+          "all_primary_references_retained": 2,
+          "calls": 2,
+          "tokens": 6691,
+          "measured_cases": 2,
+          "measured_means": {
+            "tokens": 3345.5,
+            "input_tokens": 2915,
+            "output_tokens": 430.5,
+            "retrieval_seconds": 0.05270089698024094,
+            "dispatch_seconds": 0.5269837714877212,
+            "selector_seconds": 0.5796846684679622,
+            "final_pool_size": 46
+          }
+        },
+        "hybrid_independent": {
+          "cases": 10,
+          "strict_pass": 3,
+          "omission_safe_pass": 3,
+          "all_required_retained": 5,
+          "all_primary_references_retained": 5,
+          "calls": 5,
+          "tokens": 139052,
+          "measured_cases": 5,
+          "measured_means": {
+            "tokens": 27810.4,
+            "input_tokens": 23697.4,
+            "output_tokens": 4113,
+            "retrieval_seconds": 0.2100354675843846,
+            "dispatch_seconds": 0.8296019749948755,
+            "selector_seconds": 1.03963744257926,
+            "final_pool_size": 111
+          }
+        }
+      },
+      "new": {
+        "baseline": {
+          "cases": 5,
+          "strict_pass": 1,
+          "omission_safe_pass": 1,
+          "all_required_retained": 1,
+          "all_primary_references_retained": 1,
+          "calls": 1,
+          "tokens": 1736,
+          "measured_cases": 1,
+          "measured_means": {
+            "tokens": 1736,
+            "input_tokens": 1566,
+            "output_tokens": 170,
+            "retrieval_seconds": 0.008476457966025919,
+            "dispatch_seconds": 0.6516447910107672,
+            "selector_seconds": 0.6601212489767931,
+            "final_pool_size": 17
+          }
+        },
+        "hybrid_independent": {
+          "cases": 5,
+          "strict_pass": 2,
+          "omission_safe_pass": 2,
+          "all_required_retained": 4,
+          "all_primary_references_retained": 3,
+          "calls": 3,
+          "tokens": 75117,
+          "measured_cases": 3,
+          "measured_means": {
+            "tokens": 25039,
+            "input_tokens": 21341.666666666668,
+            "output_tokens": 3697.3333333333335,
+            "retrieval_seconds": 0.1149052636756096,
+            "dispatch_seconds": 0.7700797643337864,
+            "selector_seconds": 0.884985028009396,
+            "final_pool_size": 99.66666666666667
+          }
+        }
+      }
+    },
+    "kind_stratum": {
+      "mcp": {
+        "baseline": {
+          "cases": 6,
+          "strict_pass": 0,
+          "omission_safe_pass": 0,
+          "all_required_retained": 0,
+          "all_primary_references_retained": 0,
+          "calls": 0,
+          "tokens": 0,
+          "measured_cases": 0,
+          "measured_means": null
+        },
+        "hybrid_independent": {
+          "cases": 6,
+          "strict_pass": 0,
+          "omission_safe_pass": 0,
+          "all_required_retained": 2,
+          "all_primary_references_retained": 1,
+          "calls": 1,
+          "tokens": 26868,
+          "measured_cases": 1,
+          "measured_means": {
+            "tokens": 26868,
+            "input_tokens": 22907,
+            "output_tokens": 3961,
+            "retrieval_seconds": 0.16887075098929927,
+            "dispatch_seconds": 0.6710837080026977,
+            "selector_seconds": 0.8399544589919969,
+            "final_pool_size": 107
+          }
+        }
+      },
+      "plugin": {
+        "baseline": {
+          "cases": 5,
+          "strict_pass": 1,
+          "omission_safe_pass": 1,
+          "all_required_retained": 2,
+          "all_primary_references_retained": 2,
+          "calls": 2,
+          "tokens": 5554,
+          "measured_cases": 2,
+          "measured_means": {
+            "tokens": 2777,
+            "input_tokens": 2485.5,
+            "output_tokens": 291.5,
+            "retrieval_seconds": 0.03121958348492626,
+            "dispatch_seconds": 0.6009520624938887,
+            "selector_seconds": 0.6321716459788149,
+            "final_pool_size": 30.5
+          }
+        },
+        "hybrid_independent": {
+          "cases": 5,
+          "strict_pass": 3,
+          "omission_safe_pass": 3,
+          "all_required_retained": 3,
+          "all_primary_references_retained": 3,
+          "calls": 3,
+          "tokens": 66734,
+          "measured_cases": 3,
+          "measured_means": {
+            "tokens": 22244.666666666668,
+            "input_tokens": 19028.666666666668,
+            "output_tokens": 3216,
+            "retrieval_seconds": 0.11301925032360789,
+            "dispatch_seconds": 0.7285757503317049,
+            "selector_seconds": 0.8415950006553127,
+            "final_pool_size": 87
+          }
+        }
+      },
+      "skill": {
+        "baseline": {
+          "cases": 4,
+          "strict_pass": 0,
+          "omission_safe_pass": 0,
+          "all_required_retained": 1,
+          "all_primary_references_retained": 1,
+          "calls": 1,
+          "tokens": 2873,
+          "measured_cases": 1,
+          "measured_means": {
+            "tokens": 2873,
+            "input_tokens": 2425,
+            "output_tokens": 448,
+            "retrieval_seconds": 0.05143908495665528,
+            "dispatch_seconds": 0.5037082089984324,
+            "selector_seconds": 0.5551472939550877,
+            "final_pool_size": 48
+          }
+        },
+        "hybrid_independent": {
+          "cases": 4,
+          "strict_pass": 2,
+          "omission_safe_pass": 2,
+          "all_required_retained": 4,
+          "all_primary_references_retained": 4,
+          "calls": 4,
+          "tokens": 120567,
+          "measured_cases": 4,
+          "measured_means": {
+            "tokens": 30141.75,
+            "input_tokens": 25629.75,
+            "output_tokens": 4512,
+            "retrieval_seconds": 0.22174115674715722,
+            "dispatch_seconds": 0.9003595522444812,
+            "selector_seconds": 1.1221007089916384,
+            "final_pool_size": 121.5
+          }
+        }
+      }
+    },
+    "language": {
+      "mixed": {
+        "baseline": {
+          "cases": 5,
+          "strict_pass": 0,
+          "omission_safe_pass": 0,
+          "all_required_retained": 0,
+          "all_primary_references_retained": 0,
+          "calls": 0,
+          "tokens": 0,
+          "measured_cases": 0,
+          "measured_means": null
+        },
+        "hybrid_independent": {
+          "cases": 5,
+          "strict_pass": 3,
+          "omission_safe_pass": 3,
+          "all_required_retained": 4,
+          "all_primary_references_retained": 4,
+          "calls": 4,
+          "tokens": 120197,
+          "measured_cases": 4,
+          "measured_means": {
+            "tokens": 30049.25,
+            "input_tokens": 25584.75,
+            "output_tokens": 4464.5,
+            "retrieval_seconds": 0.23312097925372655,
+            "dispatch_seconds": 0.8717440519976662,
+            "selector_seconds": 1.1048650312513928,
+            "final_pool_size": 120.25
+          }
+        }
+      },
+      "synonym": {
+        "baseline": {
+          "cases": 5,
+          "strict_pass": 1,
+          "omission_safe_pass": 1,
+          "all_required_retained": 1,
+          "all_primary_references_retained": 1,
+          "calls": 1,
+          "tokens": 1736,
+          "measured_cases": 1,
+          "measured_means": {
+            "tokens": 1736,
+            "input_tokens": 1566,
+            "output_tokens": 170,
+            "retrieval_seconds": 0.008476457966025919,
+            "dispatch_seconds": 0.6516447910107672,
+            "selector_seconds": 0.6601212489767931,
+            "final_pool_size": 17
+          }
+        },
+        "hybrid_independent": {
+          "cases": 5,
+          "strict_pass": 1,
+          "omission_safe_pass": 1,
+          "all_required_retained": 1,
+          "all_primary_references_retained": 1,
+          "calls": 1,
+          "tokens": 13621,
+          "measured_cases": 1,
+          "measured_means": {
+            "tokens": 13621,
+            "input_tokens": 11629,
+            "output_tokens": 1992,
+            "retrieval_seconds": 0.07359774998622015,
+            "dispatch_seconds": 0.6536403339996468,
+            "selector_seconds": 0.727238083985867,
+            "final_pool_size": 54
+          }
+        }
+      },
+      "zh": {
+        "baseline": {
+          "cases": 5,
+          "strict_pass": 0,
+          "omission_safe_pass": 0,
+          "all_required_retained": 2,
+          "all_primary_references_retained": 2,
+          "calls": 2,
+          "tokens": 6691,
+          "measured_cases": 2,
+          "measured_means": {
+            "tokens": 3345.5,
+            "input_tokens": 2915,
+            "output_tokens": 430.5,
+            "retrieval_seconds": 0.05270089698024094,
+            "dispatch_seconds": 0.5269837714877212,
+            "selector_seconds": 0.5796846684679622,
+            "final_pool_size": 46
+          }
+        },
+        "hybrid_independent": {
+          "cases": 5,
+          "strict_pass": 1,
+          "omission_safe_pass": 1,
+          "all_required_retained": 4,
+          "all_primary_references_retained": 3,
+          "calls": 3,
+          "tokens": 80351,
+          "measured_cases": 3,
+          "measured_means": {
+            "tokens": 26783.666666666668,
+            "input_tokens": 22848,
+            "output_tokens": 3935.6666666666665,
+            "retrieval_seconds": 0.1296038206492085,
+            "dispatch_seconds": 0.7725442086618083,
+            "selector_seconds": 0.9021480293110168,
+            "final_pool_size": 106.33333333333333
+          }
+        }
+      }
+    }
+  },
+  "paired_cases": [
+    "new_incident_response_playbook",
+    "unseen_accessibility_then_handbook",
+    "unseen_dashboard_visual_design"
+  ],
+  "paired": {
+    "baseline": {
+      "cases": 3,
+      "strict_pass": 1,
+      "omission_safe_pass": 1,
+      "all_required_retained": 3,
+      "all_primary_references_retained": 3,
+      "calls": 3,
+      "tokens": 8427,
+      "measured_cases": 3,
+      "measured_means": {
+        "tokens": 2809,
+        "input_tokens": 2465.3333333333335,
+        "output_tokens": 343.6666666666667,
+        "retrieval_seconds": 0.03795941730883593,
+        "dispatch_seconds": 0.5685374446620699,
+        "selector_seconds": 0.6064968619709058,
+        "final_pool_size": 36.333333333333336
+      }
+    },
+    "hybrid_independent": {
+      "cases": 3,
+      "strict_pass": 2,
+      "omission_safe_pass": 2,
+      "all_required_retained": 3,
+      "all_primary_references_retained": 3,
+      "calls": 3,
+      "tokens": 67063,
+      "measured_cases": 3,
+      "measured_means": {
+        "tokens": 22354.333333333332,
+        "input_tokens": 19062.333333333332,
+        "output_tokens": 3292,
+        "retrieval_seconds": 0.11897183463831122,
+        "dispatch_seconds": 0.7375115143271008,
+        "selector_seconds": 0.856483348965412,
+        "final_pool_size": 89
+      }
+    }
+  },
+  "paired_change_percent": {
+    "tokens": 695.8110834223329,
+    "input_tokens": 673.2152514872904,
+    "output_tokens": 857.9049466537342,
+    "retrieval_seconds": 213.41849552210533,
+    "dispatch_seconds": 29.720833913668887,
+    "selector_seconds": 41.218100648062105,
+    "final_pool_size": 144.95412844036696
+  },
+  "reference_coverage": {
+    "unseen_local_modal_testing": {
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 0,
+        "primary_required": 2,
+        "primary_retained": 0,
+        "later_required": 1,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          0,
+          1
+        ],
+        "missing_primary": [
+          "code-reviewer",
+          "skill-61da1b60bbd8685c59f0"
+        ],
+        "eligible": false,
+        "pool_size": 60
+      },
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 2,
+        "primary_required": 2,
+        "primary_retained": 2,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 132
+      }
+    },
+    "unseen_dashboard_visual_design": {
+      "hybrid_independent": {
+        "required_groups": 1,
+        "retained_groups": 1,
+        "primary_required": 1,
+        "primary_retained": 1,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 109
+      },
+      "baseline": {
+        "required_groups": 1,
+        "retained_groups": 1,
+        "primary_required": 1,
+        "primary_retained": 1,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 48
+      }
+    },
+    "unseen_accessibility_then_handbook": {
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 2,
+        "primary_required": 2,
+        "primary_retained": 2,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 44
+      },
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 2,
+        "primary_required": 2,
+        "primary_retained": 2,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 104
+      }
+    },
+    "unseen_bug_root_cause_workflow": {
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "eligible": false,
+        "pool_size": 127
+      },
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9221213abca765914373"
+        ],
+        "eligible": false,
+        "pool_size": 56
+      }
+    },
+    "unseen_kubernetes_release_plan": {
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-d234e38b94a91ef65c51"
+        ],
+        "eligible": false,
+        "pool_size": 36
+      },
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 2,
+        "primary_required": 2,
+        "primary_retained": 2,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 103
+      }
+    },
+    "unseen_search_friendly_article": {
+      "hybrid_independent": {
+        "required_groups": 1,
+        "retained_groups": 0,
+        "primary_required": 1,
+        "primary_retained": 0,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "eligible": false,
+        "pool_size": 96
+      },
+      "baseline": {
+        "required_groups": 1,
+        "retained_groups": 0,
+        "primary_required": 1,
+        "primary_retained": 0,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "plugin-9144a8b7803b10703efa"
+        ],
+        "eligible": false,
+        "pool_size": 32
+      }
+    },
+    "unseen_package_docs_then_review": {
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 0,
+        "primary_required": 2,
+        "primary_retained": 0,
+        "later_required": 1,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          0,
+          1
+        ],
+        "missing_primary": [
+          "code-reviewer",
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "eligible": false,
+        "pool_size": 58
+      },
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b423e6fd7d18af4889fb"
+        ],
+        "eligible": false,
+        "pool_size": 147
+      }
+    },
+    "unseen_browser_readonly_research": {
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "eligible": false,
+        "pool_size": 125
+      },
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-78eb9cf9af75b00491be"
+        ],
+        "eligible": false,
+        "pool_size": 50
+      }
+    },
+    "unseen_public_repo_inventory": {
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-b6faa9c4714f3d27494b"
+        ],
+        "eligible": false,
+        "pool_size": 42
+      },
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 2,
+        "primary_required": 2,
+        "primary_retained": 2,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 107
+      }
+    },
+    "unseen_time_zone_conversion": {
+      "hybrid_independent": {
+        "required_groups": 1,
+        "retained_groups": 0,
+        "primary_required": 1,
+        "primary_retained": 0,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "eligible": false,
+        "pool_size": 50
+      },
+      "baseline": {
+        "required_groups": 1,
+        "retained_groups": 0,
+        "primary_required": 1,
+        "primary_retained": 0,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-f76327aa6af982c2cb41"
+        ],
+        "eligible": false,
+        "pool_size": 11
+      }
+    },
+    "new_finance_runway_then_slides": {
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "financial-analyst"
+        ],
+        "eligible": false,
+        "pool_size": 42
+      },
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 2,
+        "primary_required": 2,
+        "primary_retained": 2,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 106
+      }
+    },
+    "new_api_contract_then_handbook": {
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 2,
+        "primary_required": 2,
+        "primary_retained": 2,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 139
+      },
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          1
+        ],
+        "missing_primary": [
+          "skill-f28f584d1874df3e7ad9"
+        ],
+        "eligible": false,
+        "pool_size": 62
+      }
+    },
+    "new_incident_response_playbook": {
+      "baseline": {
+        "required_groups": 1,
+        "retained_groups": 1,
+        "primary_required": 1,
+        "primary_retained": 1,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 17
+      },
+      "hybrid_independent": {
+        "required_groups": 1,
+        "retained_groups": 1,
+        "primary_required": 1,
+        "primary_retained": 1,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [],
+        "missing_primary": [],
+        "eligible": true,
+        "pool_size": 54
+      }
+    },
+    "new_scholarly_paper_lookup": {
+      "hybrid_independent": {
+        "required_groups": 1,
+        "retained_groups": 1,
+        "primary_required": 1,
+        "primary_retained": 0,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [],
+        "missing_primary": [
+          "registry-0e262030f2280db7235b"
+        ],
+        "eligible": false,
+        "pool_size": 105
+      },
+      "baseline": {
+        "required_groups": 1,
+        "retained_groups": 0,
+        "primary_required": 1,
+        "primary_retained": 0,
+        "later_required": 0,
+        "later_retained": 0,
+        "later_primary_retained": 0,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-0e262030f2280db7235b"
+        ],
+        "eligible": false,
+        "pool_size": 47
+      }
+    },
+    "new_forecast_then_sheet": {
+      "baseline": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-2a63e0ac4cf6e3f8da5f"
+        ],
+        "eligible": false,
+        "pool_size": 40
+      },
+      "hybrid_independent": {
+        "required_groups": 2,
+        "retained_groups": 1,
+        "primary_required": 2,
+        "primary_retained": 1,
+        "later_required": 1,
+        "later_retained": 1,
+        "later_primary_retained": 1,
+        "missing_groups": [
+          0
+        ],
+        "missing_primary": [
+          "registry-2a63e0ac4cf6e3f8da5f"
+        ],
+        "eligible": false,
+        "pool_size": 90
+      }
+    }
+  },
+  "rows": [
+    {
+      "case": "unseen_local_modal_testing",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.02873316701152362,
+      "dispatch_seconds": 5.95799065195024e-06,
+      "selector_seconds": 0.02873912500217557,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 60,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_local_modal_testing",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "strict_pass": true,
+      "calls": 1,
+      "tokens": 32478,
+      "retrieval_seconds": 0.4689210000215098,
+      "dispatch_seconds": 1.231371332978597,
+      "selector_seconds": 1.7002923330001067,
+      "status": "selected",
+      "choice": "skill-61da1b60bbd8685c59f0",
+      "confidence": 0.95,
+      "final_pool_size": 132,
+      "input_tokens": 27567,
+      "output_tokens": 4911,
+      "selected_name": "webapp-testing",
+      "selected_kind": "skill",
+      "accepted_candidates": [
+        {
+          "id": "skill-61da1b60bbd8685c59f0",
+          "name": "webapp-testing",
+          "kind": "skill",
+          "choice": "current",
+          "confidence": 0.95,
+          "probabilities": {
+            "current": 0.97,
+            "partial": 0.03,
+            "other": 0.0
+          }
+        },
+        {
+          "id": "plugin-6c0eba332ce90eee0167",
+          "name": "playwright",
+          "kind": "plugin",
+          "choice": "current",
+          "confidence": 0.86,
+          "probabilities": {
+            "current": 0.91,
+            "partial": 0.09,
+            "other": 0.0
+          }
+        }
+      ],
+      "payload_chars": 101873,
+      "questions": 132
+    },
+    {
+      "case": "unseen_dashboard_visual_design",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 1,
+      "tokens": 26593,
+      "retrieval_seconds": 0.1469255859265104,
+      "dispatch_seconds": 0.7134679169976152,
+      "selector_seconds": 0.8603935029241256,
+      "status": "selected",
+      "choice": "plugin-6639b04b765c588d4313",
+      "confidence": 0.98,
+      "final_pool_size": 109,
+      "input_tokens": 22556,
+      "output_tokens": 4037,
+      "selected_name": "frontend-design",
+      "selected_kind": "plugin",
+      "accepted_candidates": [
+        {
+          "id": "plugin-6639b04b765c588d4313",
+          "name": "frontend-design",
+          "kind": "plugin",
+          "choice": "current",
+          "confidence": 0.98,
+          "probabilities": {
+            "current": 0.99,
+            "partial": 0.01,
+            "other": 0.0
+          }
+        },
+        {
+          "id": "skill-2de4b5af3d3c22cbf259",
+          "name": "frontend-design",
+          "kind": "skill",
+          "choice": "current",
+          "confidence": 0.72,
+          "probabilities": {
+            "current": 0.81,
+            "partial": 0.18,
+            "other": 0.01
+          }
+        }
+      ],
+      "payload_chars": 83644,
+      "questions": 109,
+      "unlisted_selection_description": "Create distinctive, production-grade frontend interfaces with high design quality. Generates creative, polished code that avoids generic AI aesthetics.",
+      "posthoc_note": "Outside frozen accepted set; descriptive plausibility is not retroactive benchmark credit or execution proof."
+    },
+    {
+      "case": "unseen_dashboard_visual_design",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 1,
+      "tokens": 2873,
+      "retrieval_seconds": 0.05143908495665528,
+      "dispatch_seconds": 0.5037082089984324,
+      "selector_seconds": 0.5551472939550877,
+      "status": "abstain",
+      "choice": null,
+      "confidence": 0.36,
+      "final_pool_size": 48,
+      "input_tokens": 2425,
+      "output_tokens": 448,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": [],
+      "payload_chars": 7129,
+      "questions": 1
+    },
+    {
+      "case": "unseen_accessibility_then_handbook",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "plugin",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 1,
+      "tokens": 3818,
+      "retrieval_seconds": 0.0539627090038266,
+      "dispatch_seconds": 0.5502593339770101,
+      "selector_seconds": 0.6042220429808367,
+      "status": "abstain",
+      "choice": null,
+      "confidence": 0.26,
+      "final_pool_size": 44,
+      "input_tokens": 3405,
+      "output_tokens": 413,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": [],
+      "payload_chars": 9748,
+      "questions": 1
+    },
+    {
+      "case": "unseen_accessibility_then_handbook",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "plugin",
+      "language": "zh",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "strict_pass": true,
+      "calls": 1,
+      "tokens": 26849,
+      "retrieval_seconds": 0.1363921680022031,
+      "dispatch_seconds": 0.8454262919840403,
+      "selector_seconds": 0.9818184599862434,
+      "status": "selected",
+      "choice": "plugin-d3afb2208e4f83e5c520",
+      "confidence": 0.8,
+      "final_pool_size": 104,
+      "input_tokens": 23002,
+      "output_tokens": 3847,
+      "selected_name": "accessibility-compliance",
+      "selected_kind": "plugin",
+      "accepted_candidates": [
+        {
+          "id": "plugin-d3afb2208e4f83e5c520",
+          "name": "accessibility-compliance",
+          "kind": "plugin",
+          "choice": "current",
+          "confidence": 0.8,
+          "probabilities": {
+            "current": 0.87,
+            "partial": 0.13,
+            "other": 0.0
+          }
+        }
+      ],
+      "payload_chars": 84434,
+      "questions": 104
+    },
+    {
+      "case": "unseen_bug_root_cause_workflow",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.13046737495460548,
+      "dispatch_seconds": 1.0916992323473096e-05,
+      "selector_seconds": 0.13047829194692895,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 127,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_bug_root_cause_workflow",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.03393550097825937,
+      "dispatch_seconds": 6.165995728224516e-06,
+      "selector_seconds": 0.033941666973987594,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 56,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_kubernetes_release_plan",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.01865854096831754,
+      "dispatch_seconds": 3.583991201594472e-06,
+      "selector_seconds": 0.018662124959519133,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 36,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_kubernetes_release_plan",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "strict_pass": true,
+      "calls": 1,
+      "tokens": 26264,
+      "retrieval_seconds": 0.12906783298240043,
+      "dispatch_seconds": 0.6866606250114273,
+      "selector_seconds": 0.8157284579938278,
+      "status": "selected",
+      "choice": "plugin-d234e38b94a91ef65c51",
+      "confidence": 0.86,
+      "final_pool_size": 103,
+      "input_tokens": 22455,
+      "output_tokens": 3809,
+      "selected_name": "kubernetes-operations",
+      "selected_kind": "plugin",
+      "accepted_candidates": [
+        {
+          "id": "plugin-d234e38b94a91ef65c51",
+          "name": "kubernetes-operations",
+          "kind": "plugin",
+          "choice": "current",
+          "confidence": 0.86,
+          "probabilities": {
+            "current": 0.91,
+            "partial": 0.09,
+            "other": 0.0
+          }
+        },
+        {
+          "id": "helm-chart-builder",
+          "name": "helm-chart-builder",
+          "kind": "skill",
+          "choice": "current",
+          "confidence": 0.77,
+          "probabilities": {
+            "current": 0.85,
+            "partial": 0.15,
+            "other": 0.0
+          }
+        }
+      ],
+      "payload_chars": 84166,
+      "questions": 103
+    },
+    {
+      "case": "unseen_search_friendly_article",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.23515124901314266,
+      "dispatch_seconds": 8.458009688183665e-06,
+      "selector_seconds": 0.23515970702283084,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 96,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_search_friendly_article",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.027807291015051305,
+      "dispatch_seconds": 3.082997864112258e-06,
+      "selector_seconds": 0.027810374012915418,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 32,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_package_docs_then_review",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.03341704103513621,
+      "dispatch_seconds": 4.6670029405504465e-06,
+      "selector_seconds": 0.03342170803807676,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 58,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_package_docs_then_review",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.19345933303702623,
+      "dispatch_seconds": 1.0457995813339949e-05,
+      "selector_seconds": 0.19346979103283957,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 147,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_browser_readonly_research",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.16990191699005663,
+      "dispatch_seconds": 3.0415976652875543e-05,
+      "selector_seconds": 0.1699323329667095,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 125,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_browser_readonly_research",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.0435256669879891,
+      "dispatch_seconds": 3.583991201594472e-06,
+      "selector_seconds": 0.04352925097919069,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 50,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_public_repo_inventory",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.027109542017569765,
+      "dispatch_seconds": 3.4999975468963385e-06,
+      "selector_seconds": 0.027113042015116662,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 42,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_public_repo_inventory",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "mcp",
+      "language": "mixed",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 1,
+      "tokens": 26868,
+      "retrieval_seconds": 0.16887075098929927,
+      "dispatch_seconds": 0.6710837080026977,
+      "selector_seconds": 0.8399544589919969,
+      "status": "selected",
+      "choice": "registry-2c232b3774548274eaf9",
+      "confidence": 0.95,
+      "final_pool_size": 107,
+      "input_tokens": 22907,
+      "output_tokens": 3961,
+      "selected_name": "GitHub (read-only)",
+      "selected_kind": "mcp",
+      "accepted_candidates": [
+        {
+          "id": "registry-2c232b3774548274eaf9",
+          "name": "GitHub (read-only)",
+          "kind": "mcp",
+          "choice": "current",
+          "confidence": 0.95,
+          "probabilities": {
+            "current": 0.97,
+            "partial": 0.03,
+            "other": 0.0
+          }
+        },
+        {
+          "id": "registry-daad1ed4a29a69034465",
+          "name": "Github",
+          "kind": "mcp",
+          "choice": "current",
+          "confidence": 0.88,
+          "probabilities": {
+            "current": 0.92,
+            "partial": 0.08,
+            "other": 0.0
+          }
+        },
+        {
+          "id": "registry-225c7230d6eff499b98b",
+          "name": "GitHub",
+          "kind": "mcp",
+          "choice": "current",
+          "confidence": 0.76,
+          "probabilities": {
+            "current": 0.84,
+            "partial": 0.16,
+            "other": 0.0
+          }
+        }
+      ],
+      "payload_chars": 83788,
+      "questions": 107,
+      "unlisted_selection_description": "Read-only GitHub repos, issues, PRs and commits, with tool descriptions tuned on a benchmark.",
+      "posthoc_note": "Outside frozen accepted set; descriptive plausibility is not retroactive benchmark credit or execution proof."
+    },
+    {
+      "case": "unseen_time_zone_conversion",
+      "stratum": "failed",
+      "arm": "hybrid_independent",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.0801305849745404,
+      "dispatch_seconds": 3.749999450519681e-06,
+      "selector_seconds": 0.08013433497399092,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 50,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "unseen_time_zone_conversion",
+      "stratum": "failed",
+      "arm": "baseline",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.011086750979302451,
+      "dispatch_seconds": 1.4579854905605316e-06,
+      "selector_seconds": 0.011088208964793012,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 11,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "new_finance_runway_then_slides",
+      "stratum": "new",
+      "arm": "baseline",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.021829540986800566,
+      "dispatch_seconds": 5.290989065542817e-06,
+      "selector_seconds": 0.02183483197586611,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 42,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "new_finance_runway_then_slides",
+      "stratum": "new",
+      "arm": "hybrid_independent",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 1,
+      "tokens": 26909,
+      "retrieval_seconds": 0.105493708018912,
+      "dispatch_seconds": 0.7587384170037694,
+      "selector_seconds": 0.8642321250226814,
+      "status": "selected",
+      "choice": "cfo-advisor",
+      "confidence": 0.85,
+      "final_pool_size": 106,
+      "input_tokens": 22986,
+      "output_tokens": 3923,
+      "selected_name": "cfo-advisor",
+      "selected_kind": "skill",
+      "accepted_candidates": [
+        {
+          "id": "cfo-advisor",
+          "name": "cfo-advisor",
+          "kind": "skill",
+          "choice": "current",
+          "confidence": 0.85,
+          "probabilities": {
+            "current": 0.9,
+            "partial": 0.1,
+            "other": 0.0
+          }
+        }
+      ],
+      "payload_chars": 84444,
+      "questions": 106,
+      "unlisted_selection_description": "Financial leadership for startups and scaling companies. Financial modeling, unit economics, fundraising strategy, cash management, and board financial packages. Use when building financial models, analyzing unit economics, planning fundraising, managing cash runway, preparing board materials, or when user mentions CFO, burn rate, runway, fundraising, unit economics, LTV, CAC, term sheets, or financial strategy.",
+      "posthoc_note": "Outside frozen accepted set; descriptive plausibility is not retroactive benchmark credit or execution proof."
+    },
+    {
+      "case": "new_api_contract_then_handbook",
+      "stratum": "new",
+      "arm": "hybrid_independent",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": true,
+      "strict_pass": true,
+      "calls": 1,
+      "tokens": 34587,
+      "retrieval_seconds": 0.16562433302169666,
+      "dispatch_seconds": 0.8978605419979431,
+      "selector_seconds": 1.0634848750196397,
+      "status": "selected",
+      "choice": "api-design-reviewer",
+      "confidence": 0.85,
+      "final_pool_size": 139,
+      "input_tokens": 29410,
+      "output_tokens": 5177,
+      "selected_name": "api-design-reviewer",
+      "selected_kind": "skill",
+      "accepted_candidates": [
+        {
+          "id": "api-design-reviewer",
+          "name": "api-design-reviewer",
+          "kind": "skill",
+          "choice": "current",
+          "confidence": 0.85,
+          "probabilities": {
+            "current": 0.9,
+            "partial": 0.1,
+            "other": 0.0
+          }
+        },
+        {
+          "id": "registry-3ee55236c7c89c476eab",
+          "name": "MCP API Guardian",
+          "kind": "mcp",
+          "choice": "current",
+          "confidence": 0.72,
+          "probabilities": {
+            "current": 0.81,
+            "partial": 0.19,
+            "other": 0.0
+          }
+        }
+      ],
+      "payload_chars": 107787,
+      "questions": 139
+    },
+    {
+      "case": "new_api_contract_then_handbook",
+      "stratum": "new",
+      "arm": "baseline",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.03619391500251368,
+      "dispatch_seconds": 4.958012141287327e-06,
+      "selector_seconds": 0.036198873014654964,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 62,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "new_incident_response_playbook",
+      "stratum": "new",
+      "arm": "baseline",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "strict_pass": true,
+      "calls": 1,
+      "tokens": 1736,
+      "retrieval_seconds": 0.008476457966025919,
+      "dispatch_seconds": 0.6516447910107672,
+      "selector_seconds": 0.6601212489767931,
+      "status": "selected",
+      "choice": "incident-commander",
+      "confidence": 0.95,
+      "final_pool_size": 17,
+      "input_tokens": 1566,
+      "output_tokens": 170,
+      "selected_name": "incident-commander",
+      "selected_kind": "skill",
+      "accepted_candidates": [],
+      "payload_chars": 4062,
+      "questions": 1
+    },
+    {
+      "case": "new_incident_response_playbook",
+      "stratum": "new",
+      "arm": "hybrid_independent",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "correct_current": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "all_primary_references_retained": true,
+      "strict_anchor_pass": false,
+      "strict_pass": true,
+      "calls": 1,
+      "tokens": 13621,
+      "retrieval_seconds": 0.07359774998622015,
+      "dispatch_seconds": 0.6536403339996468,
+      "selector_seconds": 0.727238083985867,
+      "status": "selected",
+      "choice": "incident-commander",
+      "confidence": 0.98,
+      "final_pool_size": 54,
+      "input_tokens": 11629,
+      "output_tokens": 1992,
+      "selected_name": "incident-commander",
+      "selected_kind": "skill",
+      "accepted_candidates": [
+        {
+          "id": "incident-commander",
+          "name": "incident-commander",
+          "kind": "skill",
+          "choice": "current",
+          "confidence": 0.98,
+          "probabilities": {
+            "current": 0.99,
+            "partial": 0.01,
+            "other": 0.0
+          }
+        }
+      ],
+      "payload_chars": 41534,
+      "questions": 54
+    },
+    {
+      "case": "new_scholarly_paper_lookup",
+      "stratum": "new",
+      "arm": "hybrid_independent",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": true,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.20480991594376974,
+      "dispatch_seconds": 9.874987881630659e-06,
+      "selector_seconds": 0.20481979093165137,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 105,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "new_scholarly_paper_lookup",
+      "stratum": "new",
+      "arm": "baseline",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.03657408297294751,
+      "dispatch_seconds": 1.09999964479357e-05,
+      "selector_seconds": 0.036585082969395444,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 47,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "new_forecast_then_sheet",
+      "stratum": "new",
+      "arm": "baseline",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.018268874002387747,
+      "dispatch_seconds": 4.0000013541430235e-06,
+      "selector_seconds": 0.01827287400374189,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 40,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    },
+    {
+      "case": "new_forecast_then_sheet",
+      "stratum": "new",
+      "arm": "hybrid_independent",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "correct_current": false,
+      "all_required_retained": false,
+      "omission_safe_pass": false,
+      "all_primary_references_retained": false,
+      "strict_anchor_pass": false,
+      "strict_pass": false,
+      "calls": 0,
+      "tokens": 0,
+      "retrieval_seconds": 0.11497962399153039,
+      "dispatch_seconds": 7.4160052463412285e-06,
+      "selector_seconds": 0.11498703999677673,
+      "status": "preflight_failed",
+      "choice": null,
+      "confidence": null,
+      "final_pool_size": 90,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "selected_name": null,
+      "selected_kind": null,
+      "accepted_candidates": []
+    }
+  ],
+  "calls": 11,
+  "tokens": 222596,
+  "source_sha256": {
+    "benchmarks/directory-depth/conditional_experiment.py": "127329b23bad4205c15e98194d31cc7e6836178af2a62c56b376d322c2f184f1",
+    "benchmarks/directory-depth/conditional_search.py": "9e0fcdf32192e40644ae5ab14324f0cbca33a73e7d033b450aa7d67f819117f8",
+    "benchmarks/directory-depth/merged_experiment.py": "0031b0a778745d990936c29795d8c1f3088c55d2b2617850a8a3cd1931d8dcea",
+    "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+    "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+    "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b",
+    "benchmarks/directory-depth/conditional_current_experiment.py": "e78ff50ce20958f1a552023562c758db7a0a066622b05213f32a31572604c0b4",
+    "benchmarks/directory-depth/conditional_current.py": "6e2ea31c08d81eee668a092ef1b7afa32ea13ef43fdf588ceae00dbdb0f81549",
+    "benchmarks/directory-depth/conditional_current_cases.json": "3e9f2c4dfae68204ea512e997ae3250969e2f41dfb37fbdd8cd052d914951135",
+    "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+    "benchmarks/directory-depth/structured_recall_experiment.py": "2b36d545cc6a92203be841dd36e7b37db938ce59dda4eeb9556239c93c25a1c8",
+    "benchmarks/directory-depth/structured_recall.py": "22d14c59943a6bd98a32e6b19e60053a396b5374a881ccadcf34838decf9a056",
+    "benchmarks/directory-depth/structured_recall_cases.json": "8abf9901ce294e5159081156419f9799f3a6fa478d3d272a0edd88660e60d16d",
+    "benchmarks/directory-depth/final_contrast_experiment.py": "1dd12d439e1d717e1eff763ce65bd27ef46eec76cfb0afc8a6b0db23fffd22cf",
+    "benchmarks/directory-depth/final_contrast.py": "348fb93d990a149aa2a5ca93e4e3ed2795c66bf4b3d93a2172c8a2db1a7b26da",
+    "benchmarks/directory-depth/final_contrast_cases.json": "78c00e517700c67f7e161415e0b20ebf3720f899d3c5f618e42f1df70c8104c2",
+    "benchmarks/directory-depth/requirement_coverage_experiment.py": "c3196409062eb32b889dfe4d74907a56c710cd2d9948dbfce93e0d681dbd6a3a",
+    "benchmarks/directory-depth/requirement_coverage.py": "5626955c99e9682aa706fb1aad99a6e766d95e4b89db5023ab88fd1afc935954",
+    "benchmarks/directory-depth/unseen_breadth_experiment.py": "29cd98eb4d1361885501a15203cd4999999de842fd325395406e3f789c857cca",
+    "benchmarks/directory-depth/unseen_breadth_requests.json": "dc9623e2039c236bab9e60c815751fca40cd492c4dba8f1fe279bd50cb8d488f",
+    "benchmarks/directory-depth/unseen_breadth_references.json": "549e3dd05931abdc4e6f5dd41f1afa2e247ecb1e3be3d89fd8689e01acfd651b",
+    "benchmarks/directory-depth/semantic_recall.py": "afc7b4cb1423e8d1c31c10ff9d4c33c41a88625debcabe527064c3dfec9a8a8c",
+    "benchmarks/directory-depth/semantic_index.py": "9953146a2e182278809bb47ffa2d5254d5aedad77c81fa52ae14be67cf3c24c5",
+    "benchmarks/directory-depth/independent_current.py": "28a918655036c6436097b391a9c668366f62df7563cec4300726cccb8f669a67",
+    "benchmarks/directory-depth/semantic_experiment.py": "9c814169ec03d916a80e5e1442103a3bba8c0976c3a3ae26ccaa3c3414d59fcd",
+    "benchmarks/directory-depth/semantic_new_requests.json": "ffc5eac49acc1dc417315c3d08fe8c046ead17a648b70089eb0e04c3f48df071",
+    "benchmarks/directory-depth/semantic_new_references.json": "c98ecd2c41bfc416fddbb3ecaecac202cb293bf9454dfbb6206aa681f29816ea"
+  },
+  "catalog_sha256": "64bc3d608649768fc3117e6a4ed4eb5e32278a3ae540f23bd2a568aa7bd7e57a",
+  "cases_sha256": "e180754241ec42b113db642b244163642e2368fa3325d86b6ef2dfd87f8a26bb",
+  "model": {
+    "repo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "download_seconds": 23.003598540992243
+  },
+  "model_files_sha256": {
+    "model.safetensors": "eaa086f0ffee582aeb45b36e34cdd1fe2d6de2bef61f8a559a1bbc9bd955917b",
+    "tokenizer_config.json": "5036ea374ffedd706e3bef33e2e0d6953cb868ef8a490e76e32ba0faa37a6b9b",
+    "special_tokens_map.json": "378eb3bf733eb16e65792d7e3fda5b8a4631387ca04d2015199c4d4f22ae554d",
+    "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+    "config.json": "6300193cb75e01cf80c96decef7187dfb33094d97cc1490b7ead6ff134476e4e",
+    "config_sentence_transformers.json": "b8c64b5cece00d8424b4896ea75b512b6008576088497609dfeb6bd63e6d36b8",
+    "tokenizer.json": "2c3387be76557bd40970cec13153b3bbf80407865484b209e655e5e4729076b8",
+    "sentence_bert_config.json": "70f4448f31320443fe3557cacea5abf2dcc4915dda8c80646bec9f3bb0aa5a1f",
+    "unigram.json": "71b44701d7efd054205115acfa6ef126c5d2f84bd3affe0c59e48163674d19a6",
+    "modules.json": "8f4b264b80206c830bebbdcae377e137925650a433b689343a63bdc9b3145460",
+    "1_Pooling/config.json": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+  },
+  "index_build_seconds": 115.5082644590002,
+  "index_load_seconds": 6.592768583010184,
+  "index_dimensions": [
+    45325,
+    384
+  ],
+  "index_vectors_sha256": "4923d26ded33deb70b0c301c0181bc6c642b95d352c0ba856da16ecde4f3f23e",
+  "per_kind": 3,
+  "excluded_before_testing": [
+    {
+      "id": "new_translation_then_accessibility",
+      "reason": "No defensible positive reference for the full localization-planning requirement in the inspected frozen metadata; not scored or sent."
+    }
+  ],
+  "limits": [
+    "baseline = previous alias/coverage selector; candidate = additive open lexical and local multilingual semantic recall plus independent current/partial/other Choices, batched once. Confidence now means suitability rather than unique-best separation; same numerical .7 is not a calibration equivalence.",
+    "All 15 cases remain in pass denominators; costs are separately reported for the same three live pairs and for all calls.",
+    "Five new scored requests; a sixth authored request was withheld before recall because no defensible full-scope positive reference was found.",
+    "Frozen alternatives are incomplete. Three selected unlisted alternatives appear relevant on post-hoc metadata review but receive no score change.",
+    "Historical control Skills remain explicit. Metadata selection is not installation, execution or readiness. No private or daily runtime changes.",
+    "Independent suitability confidence is not uniqueness confidence; the unchanged numeric .7 does not establish equivalent calibration.",
+    "Main-Agent usage, monetary cost and Jev backend revision are unobservable. Local-model setup and index construction are separate from warm selector timing."
+  ],
+  "verdict": "do_not_promote"
+}

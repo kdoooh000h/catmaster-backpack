@@ -1,0 +1,1850 @@
+{
+  "version": 1,
+  "scope": "Public Skill selector only; not capability execution or daily deployment.",
+  "plan": {
+    "version": 1,
+    "arms": [
+      "adaptive",
+      "compact_global"
+    ],
+    "case_order": [
+      "zh_quote_control",
+      "mix_cancel_control",
+      "zh_llm_cost",
+      "syn_custom_controller",
+      "syn_upgrade_moment",
+      "mix_multi_jira_then_qms",
+      "zh_vendor_scorecard",
+      "mix_financial_model"
+    ],
+    "repetitions": 2,
+    "source_catalog_count": 376,
+    "source_commit": "19392f7a08264ed00486a251f5b2098321771f94",
+    "tree_sha256": "c3859f9c159b77baf32a10439ca7375affb60e6c8d2ab3313703aeaa1bb10970",
+    "baseline_plan_sha256": "8e71073ffe24fc08b76771bbda55251a794e1741bdf39370268754395b539689",
+    "same_query": true,
+    "same_full_final_descriptions": true,
+    "directory_gates": [
+      0.2,
+      0.3,
+      0.4,
+      0.45
+    ],
+    "final_gate": 0.7,
+    "max_calls": 160,
+    "max_known_tokens": 260000,
+    "max_seconds": 300,
+    "timeout_seconds": 15,
+    "provider": "typesafe",
+    "attempts": 1,
+    "ordering": "two fresh repetitions; alternate arms by case and repetition",
+    "acceptance": "Stop after any candidate omission, wrong selection, negative-control failure, abstention or unavailable result. Never replay. Controls first. Compare all complete pairs, including failures.",
+    "token_cap": "Checked before each call; one response can cross it. Missing usage stops the experiment.",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b"
+    },
+    "input_sha256": {
+      "question.json": "3a2bc2e2fb5b8aa6e6c7e14ce0d262eea61690f0fbd38e7a39751b497fb8e785",
+      "cases.json": "cee2c4c5dfc32ae9ccb266bc29991f59a3627ad97974a56c74d9100e8f6f305e",
+      "catalog.json": "9bc3a9fc8de47096afd3723bc53ae25ff314df3a022e6ad127de9b1ae803ce56",
+      "nodes.json": "52326ec32b7326872e68d464e14c09a5583fc07b951e2551a7d4e8e0248a592f"
+    }
+  },
+  "stop": "completed",
+  "actual_calls": 120,
+  "known_tokens": 227091,
+  "input_tokens": 201345,
+  "output_tokens": 25746,
+  "all_attempt_usage_reported": true,
+  "wall_seconds": 103.2887498330092,
+  "complete_pairs": [
+    [
+      "mix_cancel_control",
+      0
+    ],
+    [
+      "mix_cancel_control",
+      1
+    ],
+    [
+      "mix_financial_model",
+      0
+    ],
+    [
+      "mix_financial_model",
+      1
+    ],
+    [
+      "mix_multi_jira_then_qms",
+      0
+    ],
+    [
+      "mix_multi_jira_then_qms",
+      1
+    ],
+    [
+      "syn_custom_controller",
+      0
+    ],
+    [
+      "syn_custom_controller",
+      1
+    ],
+    [
+      "syn_upgrade_moment",
+      0
+    ],
+    [
+      "syn_upgrade_moment",
+      1
+    ],
+    [
+      "zh_llm_cost",
+      0
+    ],
+    [
+      "zh_llm_cost",
+      1
+    ],
+    [
+      "zh_quote_control",
+      0
+    ],
+    [
+      "zh_quote_control",
+      1
+    ],
+    [
+      "zh_vendor_scorecard",
+      0
+    ],
+    [
+      "zh_vendor_scorecard",
+      1
+    ]
+  ],
+  "by_arm": {
+    "adaptive": {
+      "count": 16,
+      "omission_safe_successes": 16,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.426258333371152,
+      "mean_tokens": 9147.5625,
+      "mean_calls": 4.1875
+    },
+    "compact_global": {
+      "count": 16,
+      "omission_safe_successes": 16,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.0252468306207447,
+      "mean_tokens": 5045.625,
+      "mean_calls": 3.3125
+    }
+  },
+  "positive_by_arm": {
+    "adaptive": {
+      "count": 12,
+      "omission_safe_successes": 12,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.5552031771609713,
+      "mean_tokens": 10374.916666666666,
+      "mean_calls": 4.5
+    },
+    "compact_global": {
+      "count": 12,
+      "omission_safe_successes": 12,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.326927350496893,
+      "mean_tokens": 6135.333333333333,
+      "mean_calls": 3.9166666666666665
+    }
+  },
+  "control_by_arm": {
+    "adaptive": {
+      "count": 4,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 3.039423802001693,
+      "mean_tokens": 5465.5,
+      "mean_calls": 3.25
+    },
+    "compact_global": {
+      "count": 4,
+      "omission_safe_successes": 4,
+      "wrong_accepts": 0,
+      "mean_seconds": 2.120205270992301,
+      "mean_tokens": 1776.5,
+      "mean_calls": 1.5
+    }
+  },
+  "by_repetition": {
+    "0": {
+      "adaptive": {
+        "count": 8,
+        "omission_safe_successes": 8,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.0548648072472133,
+        "mean_tokens": 9354,
+        "mean_calls": 4.125
+      },
+      "compact_global": {
+        "count": 8,
+        "omission_safe_successes": 8,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.6254024113732157,
+        "mean_tokens": 5085.375,
+        "mean_calls": 3.375
+      }
+    },
+    "1": {
+      "adaptive": {
+        "count": 8,
+        "omission_safe_successes": 8,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.7976518594950903,
+        "mean_tokens": 8941.125,
+        "mean_calls": 4.25
+      },
+      "compact_global": {
+        "count": 8,
+        "omission_safe_successes": 8,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.4250912498682737,
+        "mean_tokens": 5005.875,
+        "mean_calls": 3.25
+      }
+    }
+  },
+  "by_case": {
+    "zh_quote_control": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.0495707920053974,
+        "mean_tokens": 5500,
+        "mean_calls": 3.5
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 0.7600586460030172,
+        "mean_tokens": 955,
+        "mean_calls": 1
+      }
+    },
+    "mix_cancel_control": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.0292768119979883,
+        "mean_tokens": 5431,
+        "mean_calls": 3
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.4803518959815847,
+        "mean_tokens": 2598,
+        "mean_calls": 2
+      }
+    },
+    "zh_llm_cost": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.420432666505803,
+        "mean_tokens": 16068,
+        "mean_calls": 5
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.584731916504097,
+        "mean_tokens": 7220,
+        "mean_calls": 4
+      }
+    },
+    "syn_custom_controller": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.655228978983359,
+        "mean_tokens": 9151.5,
+        "mean_calls": 5
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 4.3893658540036995,
+        "mean_tokens": 7169,
+        "mean_calls": 4
+      }
+    },
+    "syn_upgrade_moment": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.6237712089932756,
+        "mean_tokens": 14161,
+        "mean_calls": 5
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.695709812498535,
+        "mean_tokens": 7997,
+        "mean_calls": 5
+      }
+    },
+    "mix_multi_jira_then_qms": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.553604020999046,
+        "mean_tokens": 10641,
+        "mean_calls": 5
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 3.380825707994518,
+        "mean_tokens": 6888,
+        "mean_calls": 4.5
+      }
+    },
+    "zh_vendor_scorecard": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.7366646044829395,
+        "mean_tokens": 7835,
+        "mean_calls": 4
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 1.990771416487405,
+        "mean_tokens": 4290,
+        "mean_calls": 3
+      }
+    },
+    "mix_financial_model": {
+      "adaptive": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 2.341517583001405,
+        "mean_tokens": 4393,
+        "mean_calls": 3
+      },
+      "compact_global": {
+        "count": 2,
+        "omission_safe_successes": 2,
+        "wrong_accepts": 0,
+        "mean_seconds": 1.9201593954931013,
+        "mean_tokens": 3248,
+        "mean_calls": 3
+      }
+    }
+  },
+  "stage_usage": {
+    "adaptive": {
+      "final_calls": 16,
+      "final_input_tokens": 58448,
+      "final_output_tokens": 4603,
+      "directory_calls": 51,
+      "directory_input_tokens": 72407,
+      "directory_output_tokens": 10903
+    },
+    "compact_global": {
+      "directory_calls": 41,
+      "directory_input_tokens": 48463,
+      "directory_output_tokens": 8424,
+      "final_calls": 12,
+      "final_input_tokens": 22027,
+      "final_output_tokens": 1816
+    }
+  },
+  "rows": [
+    {
+      "case": "zh_quote_control",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": true,
+      "seconds": 2.062665375007782,
+      "calls": 3,
+      "known_tokens": 5228,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 0.95,
+        "stop_reason": "small_pool",
+        "final_pool_size": 12
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 175
+        },
+        {
+          "offered": 7,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 12
+        }
+      ]
+    },
+    {
+      "case": "zh_quote_control",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": true,
+      "seconds": 0.7460753339983057,
+      "calls": 1,
+      "known_tokens": 955,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "mix_cancel_control",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": true,
+      "seconds": 1.8606101669720374,
+      "calls": 2,
+      "known_tokens": 2598,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 223
+        },
+        {
+          "offered": 8,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "mix_cancel_control",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": true,
+      "seconds": 2.3226599160116166,
+      "calls": 3,
+      "known_tokens": 6087,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 13
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 223
+        },
+        {
+          "offered": 8,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 13
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.5850334580172785,
+      "calls": 5,
+      "known_tokens": 16925,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "llm-cost-optimizer",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 66
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 255
+        },
+        {
+          "offered": 11,
+          "retained": 6,
+          "carried": 0,
+          "pool_size": 195
+        },
+        {
+          "offered": 22,
+          "retained": 9,
+          "carried": 3,
+          "pool_size": 92
+        },
+        {
+          "offered": 8,
+          "retained": 3,
+          "carried": 8,
+          "pool_size": 66
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.4090937080036383,
+      "calls": 4,
+      "known_tokens": 7220,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "llm-cost-optimizer",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 10
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 255
+        },
+        {
+          "offered": 11,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 20,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 10
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.0346638330083806,
+      "calls": 4,
+      "known_tokens": 7169,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "kubernetes-operator",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 22
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 143
+        },
+        {
+          "offered": 18,
+          "retained": 2,
+          "carried": 1,
+          "pool_size": 22
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.7667570829798933,
+      "calls": 5,
+      "known_tokens": 9562,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "kubernetes-operator",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 23
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 143
+        },
+        {
+          "offered": 18,
+          "retained": 5,
+          "carried": 1,
+          "pool_size": 49
+        },
+        {
+          "offered": 8,
+          "retained": 3,
+          "carried": 2,
+          "pool_size": 23
+        }
+      ]
+    },
+    {
+      "case": "syn_upgrade_moment",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.397471584001323,
+      "calls": 5,
+      "known_tokens": 14161,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "paywall-upgrade-cro",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 55
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 250
+        },
+        {
+          "offered": 11,
+          "retained": 5,
+          "carried": 0,
+          "pool_size": 132
+        },
+        {
+          "offered": 15,
+          "retained": 5,
+          "carried": 2,
+          "pool_size": 61
+        },
+        {
+          "offered": 4,
+          "retained": 3,
+          "carried": 5,
+          "pool_size": 55
+        }
+      ]
+    },
+    {
+      "case": "syn_upgrade_moment",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.9744032500020694,
+      "calls": 5,
+      "known_tokens": 7997,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "paywall-upgrade-cro",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 8
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 250
+        },
+        {
+          "offered": 11,
+          "retained": 5,
+          "carried": 0,
+          "pool_size": 132
+        },
+        {
+          "offered": 19,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 40
+        },
+        {
+          "offered": 8,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 8
+        }
+      ]
+    },
+    {
+      "case": "mix_multi_jira_then_qms",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.774656458001118,
+      "calls": 5,
+      "known_tokens": 7206,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "jira-expert",
+        "confidence": 0.89,
+        "stop_reason": "small_pool",
+        "final_pool_size": 15
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 201
+        },
+        {
+          "offered": 9,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 36
+        },
+        {
+          "offered": 7,
+          "retained": 5,
+          "carried": 1,
+          "pool_size": 25
+        },
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 3,
+          "pool_size": 15
+        }
+      ]
+    },
+    {
+      "case": "mix_multi_jira_then_qms",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 3.717213500000071,
+      "calls": 5,
+      "known_tokens": 10641,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "jira-expert",
+        "confidence": 0.8,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 201
+        },
+        {
+          "offered": 9,
+          "retained": 6,
+          "carried": 0,
+          "pool_size": 178
+        },
+        {
+          "offered": 25,
+          "retained": 6,
+          "carried": 1,
+          "pool_size": 36
+        },
+        {
+          "offered": 2,
+          "retained": 0,
+          "carried": 6,
+          "pool_size": 25
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.9552788339788094,
+      "calls": 4,
+      "known_tokens": 7835,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "vendor-management",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 158
+        },
+        {
+          "offered": 12,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 56
+        },
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 1,
+          "pool_size": 21
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.109714582999004,
+      "calls": 3,
+      "known_tokens": 4290,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "vendor-management",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 7
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 126
+        },
+        {
+          "offered": 9,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 7
+        }
+      ]
+    },
+    {
+      "case": "mix_financial_model",
+      "arm": "compact_global",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.094001958001172,
+      "calls": 3,
+      "known_tokens": 3248,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "financial-analyst",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 5
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 100
+        },
+        {
+          "offered": 7,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 5
+        }
+      ]
+    },
+    {
+      "case": "mix_financial_model",
+      "arm": "adaptive",
+      "repetition": 0,
+      "control": false,
+      "seconds": 2.6318387079809327,
+      "calls": 3,
+      "known_tokens": 4393,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "financial-analyst",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 5
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 249
+        },
+        {
+          "offered": 11,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 5
+        }
+      ]
+    },
+    {
+      "case": "zh_quote_control",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": true,
+      "seconds": 0.7740419580077287,
+      "calls": 1,
+      "known_tokens": 955,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "zh_quote_control",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": true,
+      "seconds": 4.036476209003013,
+      "calls": 4,
+      "known_tokens": 5772,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 0.94,
+        "stop_reason": "small_pool",
+        "final_pool_size": 6
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 175
+        },
+        {
+          "offered": 7,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 65
+        },
+        {
+          "offered": 9,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 6
+        }
+      ]
+    },
+    {
+      "case": "mix_cancel_control",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": true,
+      "seconds": 3.73589370798436,
+      "calls": 3,
+      "known_tokens": 4775,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none",
+        "choice": "none",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 7
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 223
+        },
+        {
+          "offered": 8,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 7
+        }
+      ]
+    },
+    {
+      "case": "mix_cancel_control",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": true,
+      "seconds": 5.100093624991132,
+      "calls": 2,
+      "known_tokens": 2598,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": null,
+      "omission_safe_pass": true,
+      "retention_by_stage": [],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "none"
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 223
+        },
+        {
+          "offered": 8,
+          "retained": 0,
+          "carried": 0,
+          "pool_size": 0
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": false,
+      "seconds": 5.760370125004556,
+      "calls": 4,
+      "known_tokens": 7220,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "llm-cost-optimizer",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 10
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 255
+        },
+        {
+          "offered": 11,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 20,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 10
+        }
+      ]
+    },
+    {
+      "case": "zh_llm_cost",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": false,
+      "seconds": 5.255831874994328,
+      "calls": 5,
+      "known_tokens": 15211,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "llm-cost-optimizer",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 51
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 255
+        },
+        {
+          "offered": 11,
+          "retained": 5,
+          "carried": 0,
+          "pool_size": 190
+        },
+        {
+          "offered": 22,
+          "retained": 7,
+          "carried": 2,
+          "pool_size": 72
+        },
+        {
+          "offered": 8,
+          "retained": 4,
+          "carried": 5,
+          "pool_size": 51
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": false,
+      "seconds": 5.5437008749868255,
+      "calls": 5,
+      "known_tokens": 8741,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "kubernetes-operator",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 16
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 143
+        },
+        {
+          "offered": 18,
+          "retained": 4,
+          "carried": 1,
+          "pool_size": 42
+        },
+        {
+          "offered": 8,
+          "retained": 3,
+          "carried": 1,
+          "pool_size": 16
+        }
+      ]
+    },
+    {
+      "case": "syn_custom_controller",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": false,
+      "seconds": 5.744067874999018,
+      "calls": 4,
+      "known_tokens": 7169,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "kubernetes-operator",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 22
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 149
+        },
+        {
+          "offered": 4,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 143
+        },
+        {
+          "offered": 18,
+          "retained": 2,
+          "carried": 1,
+          "pool_size": 22
+        }
+      ]
+    },
+    {
+      "case": "syn_upgrade_moment",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": false,
+      "seconds": 3.4170163749950007,
+      "calls": 5,
+      "known_tokens": 7997,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "paywall-upgrade-cro",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 8
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 250
+        },
+        {
+          "offered": 11,
+          "retained": 5,
+          "carried": 0,
+          "pool_size": 132
+        },
+        {
+          "offered": 19,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 40
+        },
+        {
+          "offered": 8,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 8
+        }
+      ]
+    },
+    {
+      "case": "syn_upgrade_moment",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": false,
+      "seconds": 3.850070833985228,
+      "calls": 5,
+      "known_tokens": 14161,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "paywall-upgrade-cro",
+        "confidence": 1.0,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 55
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 250
+        },
+        {
+          "offered": 11,
+          "retained": 5,
+          "carried": 0,
+          "pool_size": 132
+        },
+        {
+          "offered": 15,
+          "retained": 5,
+          "carried": 2,
+          "pool_size": 61
+        },
+        {
+          "offered": 4,
+          "retained": 3,
+          "carried": 5,
+          "pool_size": 55
+        }
+      ]
+    },
+    {
+      "case": "mix_multi_jira_then_qms",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": false,
+      "seconds": 3.3899945419980213,
+      "calls": 5,
+      "known_tokens": 10641,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "jira-expert",
+        "confidence": 0.83,
+        "stop_reason": "terminal_categories",
+        "final_pool_size": 25
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 201
+        },
+        {
+          "offered": 9,
+          "retained": 6,
+          "carried": 0,
+          "pool_size": 178
+        },
+        {
+          "offered": 25,
+          "retained": 6,
+          "carried": 1,
+          "pool_size": 36
+        },
+        {
+          "offered": 2,
+          "retained": 0,
+          "carried": 6,
+          "pool_size": 25
+        }
+      ]
+    },
+    {
+      "case": "mix_multi_jira_then_qms",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": false,
+      "seconds": 2.9869949579879176,
+      "calls": 4,
+      "known_tokens": 6570,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "jira-expert",
+        "confidence": 0.83,
+        "stop_reason": "small_pool",
+        "final_pool_size": 20
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 201
+        },
+        {
+          "offered": 9,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 36
+        },
+        {
+          "offered": 7,
+          "retained": 4,
+          "carried": 1,
+          "pool_size": 20
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": false,
+      "seconds": 1.871828249975806,
+      "calls": 3,
+      "known_tokens": 4290,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "vendor-management",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 7
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 126
+        },
+        {
+          "offered": 9,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 7
+        }
+      ]
+    },
+    {
+      "case": "zh_vendor_scorecard",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": false,
+      "seconds": 2.5180503749870695,
+      "calls": 4,
+      "known_tokens": 7835,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "vendor-management",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 21
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 4,
+          "carried": 0,
+          "pool_size": 158
+        },
+        {
+          "offered": 12,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 56
+        },
+        {
+          "offered": 6,
+          "retained": 1,
+          "carried": 1,
+          "pool_size": 21
+        }
+      ]
+    },
+    {
+      "case": "mix_financial_model",
+      "arm": "adaptive",
+      "repetition": 1,
+      "control": false,
+      "seconds": 2.0511964580218773,
+      "calls": 3,
+      "known_tokens": 4393,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "financial-analyst",
+        "confidence": 1.0,
+        "stop_reason": "small_pool",
+        "final_pool_size": 5
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 3,
+          "carried": 0,
+          "pool_size": 249
+        },
+        {
+          "offered": 11,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 5
+        }
+      ]
+    },
+    {
+      "case": "mix_financial_model",
+      "arm": "compact_global",
+      "repetition": 1,
+      "control": false,
+      "seconds": 1.7463168329850305,
+      "calls": 3,
+      "known_tokens": 3248,
+      "usage_complete": true,
+      "passed": true,
+      "all_required_retained": true,
+      "omission_safe_pass": true,
+      "retention_by_stage": [
+        true,
+        true
+      ],
+      "first_omission_stage": null,
+      "wrong_accept": false,
+      "result": {
+        "status": "selected",
+        "choice": "financial-analyst",
+        "confidence": 0.99,
+        "stop_reason": "small_pool",
+        "final_pool_size": 5
+      },
+      "stages": [
+        {
+          "offered": 6,
+          "retained": 2,
+          "carried": 0,
+          "pool_size": 100
+        },
+        {
+          "offered": 7,
+          "retained": 1,
+          "carried": 0,
+          "pool_size": 5
+        }
+      ]
+    }
+  ],
+  "repeat_variation": {
+    "identical_input_groups": 53,
+    "groups_with_score_change": 47,
+    "groups_with_retained_set_change": 7
+  },
+  "unreconciled_requests": [],
+  "error_receipts": [],
+  "protected_paths_checked": 121,
+  "protected_files_unchanged": true,
+  "protected_changed_count": 0,
+  "source_summary_sha256": "5b1bb891d28ec57d3634091df1374ad9106ca1cad5b86e4d8f52f1aa34f525ba",
+  "limitations": [
+    "Two repetitions of eight familiar cases, not unseen generalization.",
+    "Combined card compaction and global stopping experiment; no individual-factor ablation.",
+    "Score variation and network latency remain; no statistical significance claim.",
+    "Final descriptions, questions, coverage and gates unchanged; node prompt semantics clarified.",
+    "Token usage excludes root coordination; monetary cost and backend model revision unobservable.",
+    "No real plugin/MCP execution or daily lifecycle modification."
+  ],
+  "reduction_percent": {
+    "mean_tokens": 44.8418636112079,
+    "mean_seconds": 11.704065010061438,
+    "mean_calls": 20.895522388059707
+  }
+}
