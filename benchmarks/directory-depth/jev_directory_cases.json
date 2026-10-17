@@ -1,0 +1,608 @@
+{
+  "reference_version": 3,
+  "criterion": "Metadata-level acquisition relevance with frozen known-positive current/later equivalents, not exhaustive negatives or execution proof. Unlisted selections fail known-reference score but semantic correctness remains unadjudicated. No gold controls dispatch; only post-call grading.",
+  "previous_reference_version": 2,
+  "scope": "Exactly7 previous focused failures plus3 new ordinary requests,8 previous passes excluded. Reference planning addition is prospective and applied to both arms; published old scores unchanged.",
+  "cases": [
+    {
+      "id": "unseen_search_friendly_article",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "need": "把一份虚构的园艺教程整理成方便读者搜索到的原创长文，先明确读者想解决的问题和检索词，再安排标题层次、摘要和文章结构，避免为了关键词生硬堆字。现在只写稿，不登录或发布。",
+      "current_requirement": "SEO-oriented article planning and content writing",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-9144a8b7803b10703efa",
+      "primary_pending_ids": [],
+      "rationale": "Whole plugin explicitly covers SEO content writing and planning; broad generic writing/repurposing is not presumed equivalent.",
+      "references": [
+        {
+          "id": "plugin-9144a8b7803b10703efa",
+          "name": "seo-content-creation",
+          "kind": "plugin",
+          "description_sha256": "e815346290be8282dd8e9c94147543db9d956bc2f4b642b8633444f749c16c1c",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ],
+      "previous_acceptable_current_ids": [
+        "plugin-9144a8b7803b10703efa"
+      ]
+    },
+    {
+      "id": "unseen_time_zone_conversion",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "need": "把一场虚构会议的纽约上午九点换算成伦敦和东京的当地时间，要考虑指定日期的夏令时，并给出各城市时差。现在只做时间换算，不创建会议或发邀请。",
+      "current_requirement": "Date-aware time-zone conversion with daylight-saving rules",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-f76327aa6af982c2cb41",
+      "primary_pending_ids": [],
+      "rationale": "These descriptions explicitly pair time-zone conversion with DST rules/checks/facts; current-clock-only entries are excluded.",
+      "references": [
+        {
+          "id": "registry-f76327aa6af982c2cb41",
+          "name": "Epoch Calculator",
+          "kind": "mcp",
+          "description_sha256": "f400ad1cceef1a43f6fafeb1271bf6f7b05932e8f7161b14652e49d6adce4d83",
+          "historical_control": false
+        },
+        {
+          "id": "registry-86ad63c56f9551442ff6",
+          "name": "io.github.MukundaKatta/timezone-mcp",
+          "kind": "mcp",
+          "description_sha256": "1be80774b2ca057be5df291004315208b1835b8f50cdf7b47d557802590d0c7a",
+          "historical_control": false
+        },
+        {
+          "id": "registry-3774398e59b43a0aebaa",
+          "name": "io.github.theluckystrike/timezone",
+          "kind": "mcp",
+          "description_sha256": "1bbc07bf4929ecc001f60fbbd92e6b15da40c845540c1f4de0c6924e06048dbb",
+          "historical_control": false
+        },
+        {
+          "id": "registry-50887b8ae34ebfde3727",
+          "name": "io.github.theluckystrike/timezone-world-clock-meeting-slots-overlap-ics",
+          "kind": "mcp",
+          "description_sha256": "1bbc07bf4929ecc001f60fbbd92e6b15da40c845540c1f4de0c6924e06048dbb",
+          "historical_control": false
+        },
+        {
+          "id": "registry-6ae631b114ec4dcfd1e8",
+          "name": "pro.worldclock/time",
+          "kind": "mcp",
+          "description_sha256": "0aaf7123a5a2d3097ccf8ef8b9fa8c38fdc291468f45238ccb835c158250b0e4",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ],
+      "previous_acceptable_current_ids": [
+        "registry-f76327aa6af982c2cb41",
+        "registry-86ad63c56f9551442ff6",
+        "registry-3774398e59b43a0aebaa",
+        "registry-50887b8ae34ebfde3727",
+        "registry-6ae631b114ec4dcfd1e8"
+      ]
+    },
+    {
+      "id": "new_finance_runway_then_slides",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "need": "先根据虚构公司的月度收入、固定成本和现金余额，评估还能经营多久，列出乐观和保守两种情景及风险；之后把分析做成带讲者备注的演示文稿。现在先分析经营数字，不接入真实账户。",
+      "current_requirement": "Analyze company financial health, runway and scenarios",
+      "later_requirements": [
+        "Create a presentation with speaker notes"
+      ],
+      "acceptable_current_ids": [
+        "financial-analyst",
+        "cfo-advisor"
+      ],
+      "pending_groups": [
+        [
+          "skill-91d13b46fe5873284eee"
+        ]
+      ],
+      "primary_current_id": "financial-analyst",
+      "primary_pending_ids": [
+        "skill-91d13b46fe5873284eee"
+      ],
+      "rationale": "Financial forecasts and cash-flow analysis; later presentation speaker notes.",
+      "references": [
+        {
+          "id": "financial-analyst",
+          "name": "financial-analyst",
+          "kind": "skill",
+          "description_sha256": "30c40006ee7bd879e68cefd9aa2ec08beebfe730740f3c7d9cb0102dd4167cca",
+          "historical_control": true
+        },
+        {
+          "id": "cfo-advisor",
+          "name": "cfo-advisor",
+          "kind": "skill",
+          "description_sha256": "fac23a65106f6d31eb05a99d98df27995a9693cec9813294dcf7ed45db93eafb",
+          "historical_control": true
+        },
+        {
+          "id": "skill-91d13b46fe5873284eee",
+          "name": "pptx",
+          "kind": "skill",
+          "description_sha256": "0197a5fe5ea196e480d3fc7838335f8527bcf05ac4cb59d5211f88226c99b850",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "financial-analyst"
+      ],
+      "previous_acceptable_current_ids": [
+        "financial-analyst",
+        "cfo-advisor"
+      ]
+    },
+    {
+      "id": "new_scholarly_paper_lookup",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "need": "先检索公开的机器学习论文，按主题找到相关文献，读取摘要并列出作者、发表时间和原文链接。当前只查公开学术资料，不登录、不发送邮件，也不编造引用。",
+      "current_requirement": "Search public scholarly papers and read abstracts with metadata",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-0e262030f2280db7235b",
+        "registry-b0e31b6ac13290381d48",
+        "registry-7a2942ecf95602e3f188",
+        "registry-d1463a97f7fa1f38e1fb",
+        "registry-c9b5aa404f72f1b7f586",
+        "plugin-8d3d3d7218c16bc30700"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-0e262030f2280db7235b",
+      "primary_pending_ids": [],
+      "rationale": "Public academic search, paper details and metadata; reference alternatives are not exhaustive.",
+      "references": [
+        {
+          "id": "registry-0e262030f2280db7235b",
+          "name": "CLIO Arxiv",
+          "kind": "mcp",
+          "description_sha256": "b55d79eaf41bf75aa2ac3999abc39761d4881ecd470bd61a8073df31db90942d",
+          "historical_control": false
+        },
+        {
+          "id": "registry-b0e31b6ac13290381d48",
+          "name": "Paper Finder",
+          "kind": "mcp",
+          "description_sha256": "ae637bcd2dc1b6c93411dfa0d6595f9514bfeaf59ea468abcfce17600585daa8",
+          "historical_control": false
+        },
+        {
+          "id": "registry-7a2942ecf95602e3f188",
+          "name": "io.github.robertoyanguas-ops/arxiv-digest-mcp",
+          "kind": "mcp",
+          "description_sha256": "a3b2a9ce087ba2ef8c647b6d20c644ad1af0174312d12b843f993434c4ce5251",
+          "historical_control": false
+        },
+        {
+          "id": "registry-d1463a97f7fa1f38e1fb",
+          "name": "io.github.SMABoundless/semanticscholar",
+          "kind": "mcp",
+          "description_sha256": "d27b2adf00e34d7f11b0cb303e0266a3b3a7452b67b10de3281a0a802c26051c",
+          "historical_control": false
+        },
+        {
+          "id": "registry-c9b5aa404f72f1b7f586",
+          "name": "Semantic Scholar MCP Server",
+          "kind": "mcp",
+          "description_sha256": "af0c9fc1f48c99f6ea8e93b6fc76723e5f6f6ff7924fa1d256fe8b19c7ae0331",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-8d3d3d7218c16bc30700",
+          "name": "exa",
+          "kind": "plugin",
+          "description_sha256": "79e56dbd9bdd10e35dc2b989e09ae28be08978ab6fab7b32d39ab9e972ca28cc",
+          "historical_control": false
+        }
+      ],
+      "stratum": "failed",
+      "legacy_acceptable_current_ids": [
+        "registry-0e262030f2280db7235b",
+        "registry-b0e31b6ac13290381d48",
+        "registry-7a2942ecf95602e3f188",
+        "registry-d1463a97f7fa1f38e1fb",
+        "registry-c9b5aa404f72f1b7f586"
+      ],
+      "previous_acceptable_current_ids": [
+        "registry-0e262030f2280db7235b",
+        "registry-b0e31b6ac13290381d48",
+        "registry-7a2942ecf95602e3f188",
+        "registry-d1463a97f7fa1f38e1fb",
+        "registry-c9b5aa404f72f1b7f586",
+        "plugin-8d3d3d7218c16bc30700"
+      ]
+    },
+    {
+      "id": "fresh_backend_exception_design",
+      "kind_stratum": "plugin",
+      "language": "mixed",
+      "need": "为虚构的 Python API 设计一套统一的异常处理方案：区分可重试错误和业务失败，明确 error response、日志关联与边界处理。当前先做后端设计，之后再审查示例代码。",
+      "stratum": "failed",
+      "current_requirement": "Design backend error handling",
+      "later_requirements": [
+        "Review code quality"
+      ],
+      "acceptable_current_ids": [
+        "plugin-c0869c35643648b7dd0c"
+      ],
+      "pending_groups": [
+        [
+          "code-reviewer"
+        ]
+      ],
+      "primary_current_id": "plugin-c0869c35643648b7dd0c",
+      "primary_pending_ids": [
+        "code-reviewer"
+      ],
+      "rationale": "Broad package explicitly includes error handling; retry/business error response/logging details are unverified. Relevance reference only, same broad standard as prior controls.",
+      "references": [
+        {
+          "id": "plugin-c0869c35643648b7dd0c",
+          "name": "developer-essentials",
+          "kind": "plugin",
+          "description_sha256": "ff690c439a4937918c6bbd38ab8c762fee57cbebc5ba57d4c2abd4ec989d50d4",
+          "historical_control": false
+        },
+        {
+          "id": "code-reviewer",
+          "name": "code-reviewer",
+          "kind": "skill",
+          "description_sha256": "ad9fc68f5e857ec5a9200539a06177e6f01aba736706f7a88149fb09b3e3f79b",
+          "historical_control": true
+        }
+      ],
+      "previous_acceptable_current_ids": [
+        "plugin-c0869c35643648b7dd0c"
+      ]
+    },
+    {
+      "id": "fresh_implementation_plan",
+      "kind_stratum": "skill",
+      "language": "zh",
+      "need": "把一个虚构的小型编程项目需求拆成可执行的实施步骤，说明先后依赖和每步的验收点。当前只做实施计划，不编写代码。",
+      "stratum": "failed",
+      "current_requirement": "Plan implementation steps for a coding project",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "plugin-f7ae955a283d45cb58c6",
+        "plugin-a6366f8015661b276cfb",
+        "spec-driven-workflow"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-f7ae955a283d45cb58c6",
+      "primary_pending_ids": [],
+      "rationale": "Explicit agent planning and spec/plan workflow. Step dependencies and acceptance outputs remain unverified. Prospective v3 adds spec-driven-workflow after independent metadata review: explicit planning before implementation and acceptance criteria; old score unchanged.",
+      "references": [
+        {
+          "id": "plugin-f7ae955a283d45cb58c6",
+          "name": "superpowers",
+          "kind": "plugin",
+          "description_sha256": "26be97479c992302039bcf0cafae2409a08ffb1e8615d421db47eb7036a63a0b",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-a6366f8015661b276cfb",
+          "name": "conductor",
+          "kind": "plugin",
+          "description_sha256": "1666dabb0aa6eacc0f950082f2c890e4125e001b4bb90fb429cca57f2ce7ee11",
+          "historical_control": false
+        },
+        {
+          "id": "spec-driven-workflow",
+          "name": "spec-driven-workflow",
+          "kind": "skill",
+          "description_sha256": "aa92de224b7a2708428c1658a9ef5469caa7d271ee304eef1391036a108ef097",
+          "historical_control": true
+        }
+      ],
+      "previous_acceptable_current_ids": [
+        "plugin-f7ae955a283d45cb58c6",
+        "plugin-a6366f8015661b276cfb"
+      ]
+    },
+    {
+      "id": "fresh_length_unit_conversion",
+      "kind_stratum": "mcp",
+      "language": "synonym",
+      "need": "把虚构路线的十二点五公里换算成英里，给出换算结果和单位。当前只做长度单位换算，不查询路线或安排出行。",
+      "stratum": "failed",
+      "current_requirement": "Convert kilometers to miles",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-debcfdd9202ec1920e5a",
+        "registry-57b4d20a6526dde8fbff"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-debcfdd9202ec1920e5a",
+      "primary_pending_ids": [],
+      "rationale": "Exact conversion description and generic length conversion alternative; arithmetic and output have not been executed.",
+      "references": [
+        {
+          "id": "registry-debcfdd9202ec1920e5a",
+          "name": "Kilometers to miles",
+          "kind": "mcp",
+          "description_sha256": "295b4846c429c28307ee8dde44267f412e1a21a63368bc321f32bd19c2c92b3b",
+          "historical_control": false
+        },
+        {
+          "id": "registry-57b4d20a6526dde8fbff",
+          "name": "io.github.CSOAI-ORG/unit-converter-ai-mcp",
+          "kind": "mcp",
+          "description_sha256": "fcc852c4316a68fcb7a6ec6a8e388f3b3c0d25c44576792ac967494487cec7ee",
+          "historical_control": false
+        }
+      ],
+      "previous_acceptable_current_ids": [
+        "registry-debcfdd9202ec1920e5a",
+        "registry-57b4d20a6526dde8fbff"
+      ]
+    },
+    {
+      "id": "new_calendar_readonly_agenda",
+      "kind_stratum": "mcp",
+      "language": "zh",
+      "need": "读取虚构日历里下周已经安排好的事件，按每天列出时间、标题和地点。当前只查看日程，不新建、修改或发送邀请。",
+      "stratum": "new",
+      "current_requirement": "Read existing calendar events for a date range",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "registry-8bffdb9e729804c729f4",
+        "registry-a6808760c0c580e63bf1",
+        "registry-9d080e92f27edd5630a1",
+        "registry-f73fcfd445fb2449c02f",
+        "registry-9fd34746469b74445553",
+        "registry-772bf050cc2c80570fcf",
+        "registry-de28599c8e14c325a374",
+        "registry-49f0cd6c0460076970c6",
+        "registry-4ee8e49177c8197d7a32",
+        "registry-81f05b35258ce6580c85",
+        "registry-b2b8dff05374a3200f7d",
+        "plugin-4590f57eddec4df807ac",
+        "plugin-1d2183055a642c9807e8"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "registry-8bffdb9e729804c729f4",
+      "primary_pending_ids": [],
+      "rationale": "Explicit reading/listing calendar events and schedules. Exact time/title/location fields, daily presentation, credentials, fictional calendar access and read-only execution remain unverified. Read relevance grants no write permission.",
+      "references": [
+        {
+          "id": "registry-8bffdb9e729804c729f4",
+          "name": "Apple Calendar",
+          "kind": "mcp",
+          "description_sha256": "e04f112c827f02d25f31fb7fd8e36e47bfe99e8c814a498936b848e59251da6f",
+          "historical_control": false
+        },
+        {
+          "id": "registry-a6808760c0c580e63bf1",
+          "name": "com.mintmcp/gcal",
+          "kind": "mcp",
+          "description_sha256": "0082c53da380c25350d314d02e55371df97f1843d08dd16f72bef57d122b5c70",
+          "historical_control": false
+        },
+        {
+          "id": "registry-9d080e92f27edd5630a1",
+          "name": "com.mintmcp/outlook-calendar",
+          "kind": "mcp",
+          "description_sha256": "7e84632b4761202c2d4d30b1dbbb15302ecdb124aa83c4f8d2c42a8f7bdceadb",
+          "historical_control": false
+        },
+        {
+          "id": "registry-f73fcfd445fb2449c02f",
+          "name": "io.github.theluckystrike/calendar-ics-reader-events-freebusy-conflicts",
+          "kind": "mcp",
+          "description_sha256": "70858ad56af33534ca7bf2157446111c32e9c7b70e3c81e1bccd4d3d7a872318",
+          "historical_control": false
+        },
+        {
+          "id": "registry-9fd34746469b74445553",
+          "name": "com.bestremotetools/calendar-ics-events-free-busy",
+          "kind": "mcp",
+          "description_sha256": "daab9adb54ecd8faa310c9f89d652209aa6618b469d442168e22f15b9374d29d",
+          "historical_control": false
+        },
+        {
+          "id": "registry-772bf050cc2c80570fcf",
+          "name": "Google Calendar",
+          "kind": "mcp",
+          "description_sha256": "002e7a51b770e30c32de01313dca7510b078882dcb074b3874ec0ddc7fcef2a4",
+          "historical_control": false
+        },
+        {
+          "id": "registry-de28599c8e14c325a374",
+          "name": "Apple Calendar",
+          "kind": "mcp",
+          "description_sha256": "50e540bc877feb01af5cf0559889e09e10b0b6b1a297c7ea85718b99568cf464",
+          "historical_control": false
+        },
+        {
+          "id": "registry-49f0cd6c0460076970c6",
+          "name": "iCloud Calendar (CalDAV)",
+          "kind": "mcp",
+          "description_sha256": "07b1c8347719ea9079786024624c4a9ea707943ece2ddba31e3906e4b4b51e35",
+          "historical_control": false
+        },
+        {
+          "id": "registry-4ee8e49177c8197d7a32",
+          "name": "Microsoft 365 Calendar",
+          "kind": "mcp",
+          "description_sha256": "91b39eb3e825fd04f9e342c8cd43aa335fa51898221b2277d8eee59fed8c30fc",
+          "historical_control": false
+        },
+        {
+          "id": "registry-81f05b35258ce6580c85",
+          "name": "Calendar.app",
+          "kind": "mcp",
+          "description_sha256": "5669e3a7dcfecb2134ccae436acfd261291bf5c9276d2ec36a998078c399d5ff",
+          "historical_control": false
+        },
+        {
+          "id": "registry-b2b8dff05374a3200f7d",
+          "name": "Mac Calendar MCP",
+          "kind": "mcp",
+          "description_sha256": "c6af6853c6af96be8841b21b3d0b7a858358f0352cfb123a1560cd92b4cb4fe3",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-4590f57eddec4df807ac",
+          "name": "google-calendar",
+          "kind": "plugin",
+          "description_sha256": "14df668539e9b307fcf067a3a363a8fc01fd9f1dba25a507c35a17053c8e676b",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-1d2183055a642c9807e8",
+          "name": "outlook-calendar",
+          "kind": "plugin",
+          "description_sha256": "de0ec3ca9b20c81c9d7bb9b4089f17722ab44a2fd8815e1f9f975a7cffdc3c40",
+          "historical_control": false
+        }
+      ]
+    },
+    {
+      "id": "new_test_driven_feature_plan",
+      "kind_stratum": "skill",
+      "language": "mixed",
+      "need": "给虚构的购物车功能制定 test-first 的开发流程：先写会失败的测试，再做最小实现，最后重构。当前先确定 TDD 步骤，不直接改文件。",
+      "stratum": "new",
+      "current_requirement": "Guide a test-first red-green-refactor development workflow",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "tdd-guide",
+        "plugin-c81268d4d96656620146",
+        "plugin-f7ae955a283d45cb58c6",
+        "plugin-f2ae07828ffe16a88cc6",
+        "plugin-adf67f7a33ff756a7859"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "tdd-guide",
+      "primary_pending_ids": [],
+      "rationale": "Explicit TDD or red-green-refactor support; no generic testing/spec-first equivalence assumed. Shopping-cart-specific plan and steps have not been produced.",
+      "references": [
+        {
+          "id": "tdd-guide",
+          "name": "tdd-guide",
+          "kind": "skill",
+          "description_sha256": "34d11a2c63efbf01c3b5f742b2a7e24f8819db29b82b75e2645add1cdd9d321e",
+          "historical_control": true
+        },
+        {
+          "id": "plugin-c81268d4d96656620146",
+          "name": "tdd-workflows",
+          "kind": "plugin",
+          "description_sha256": "61da61b7ac2d2584edd79b6e21e376eabae6664afc53eb5bf13acee5011c76e0",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-f7ae955a283d45cb58c6",
+          "name": "superpowers",
+          "kind": "plugin",
+          "description_sha256": "26be97479c992302039bcf0cafae2409a08ffb1e8615d421db47eb7036a63a0b",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-f2ae07828ffe16a88cc6",
+          "name": "superpowers",
+          "kind": "plugin",
+          "description_sha256": "1fabe2ed9c13877a41054df3ff71bb1dff58d9945cf387d8bfdb88d25dc1d862",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-adf67f7a33ff756a7859",
+          "name": "mattpocock-skills",
+          "kind": "plugin",
+          "description_sha256": "3004067072ca17551e6414c359352acda0266adb3d673f0638371862834f4918",
+          "historical_control": false
+        }
+      ]
+    },
+    {
+      "id": "new_access_control_design",
+      "kind_stratum": "plugin",
+      "language": "synonym",
+      "need": "为虚构后台梳理登录后的访问控制方案，区分谁能看、谁能改和谁能管理，检查越权风险。当前先规划认证与授权，不连接真实账号或改线上系统。",
+      "stratum": "new",
+      "current_requirement": "Plan application authentication authorization and access control",
+      "later_requirements": [],
+      "acceptable_current_ids": [
+        "plugin-9dff6ad6da61fa24dfbd",
+        "plugin-04ba40900c2091cf9117",
+        "plugin-81c74fedf0c78bc4b289",
+        "plugin-091b5d166ed4fbf8be08"
+      ],
+      "pending_groups": [],
+      "primary_current_id": "plugin-9dff6ad6da61fa24dfbd",
+      "primary_pending_ids": [],
+      "rationale": "Explicit authentication/authorization patterns and access-control/RBAC guidance. Vendor/framework scope remains visible; permission matrices and privilege-escalation analysis remain unverified.",
+      "references": [
+        {
+          "id": "plugin-9dff6ad6da61fa24dfbd",
+          "name": "backend-api-security",
+          "kind": "plugin",
+          "description_sha256": "205a12dd6ad66d96a9dcb2d4e01b982fedb381d82134964d4d5ce6a598e45654",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-04ba40900c2091cf9117",
+          "name": "auth0",
+          "kind": "plugin",
+          "description_sha256": "abc3f601c4ce83da87bc7061911355abd1ac6daeeb2981a0e49f0a2c8cd33e54",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-81c74fedf0c78bc4b289",
+          "name": "workos",
+          "kind": "plugin",
+          "description_sha256": "833b6454a8fcd6ca9d01536020b668a476ae0671acc5f23c5c697068ca6aa7c7",
+          "historical_control": false
+        },
+        {
+          "id": "plugin-091b5d166ed4fbf8be08",
+          "name": "duende-skills",
+          "kind": "plugin",
+          "description_sha256": "b2a27fc35e5d022c41a6050b4801826486fd71a5667e2e5fc3e3b00f6c530b9d",
+          "historical_control": false
+        }
+      ]
+    }
+  ],
+  "excluded_previous_passes": [
+    "fresh_address_route_lookup",
+    "fresh_api_contract_plan",
+    "new_forecast_then_sheet",
+    "unseen_browser_readonly_research",
+    "unseen_bug_root_cause_workflow",
+    "unseen_dashboard_visual_design",
+    "unseen_package_docs_then_review",
+    "unseen_public_repo_inventory"
+  ],
+  "review": "Read-only independent source-metadata review before any new-tree live calls. New request strings fixed before reference inspection. No after-call reference rescue."
+}

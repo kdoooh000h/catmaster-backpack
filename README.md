@@ -452,6 +452,14 @@ anchors retained falls from 5/15 to 2/15. All eight later requirements survive.
 The old published scores remain unchanged. This is metadata selection only;
 the candidate fails omission/time requirements and is not promoted.
 
+The [Jev-only directory pilot](docs/backpack-jev-only-directory-2026-10-16.md)
+removes programmatic request matching and starts from all 45,325 capabilities.
+On two completed old-failure pairs it preserves known targets through observed
+directories, but never reaches final classification and uses 29.26x the tokens.
+The frozen budget stops the pilot after 13 calls / 256,988 tokens; all three new
+requests remain unobserved. The final 0.7 gate stays unchanged. This directory
+organization is not promoted, and the daily runtime remains unchanged.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
