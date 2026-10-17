@@ -1,0 +1,212 @@
+{
+  "reference_version": 2,
+  "basis": "Local development on10 prior failures. Same prospective references for both pilots; no gold enters ranker. No Jev calls. RRF12 retains8/10 current groups, per-route3 retains6/10. RRF12 chosen for bounded live exploration before seeing new-case retrieval; both fail no-omission and are ineligible for daily promotion.",
+  "dictionary": {
+    "source": "https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz",
+    "sha256": "0d47823e96dd01c892a28499a9f915879505a823e494752a703198dce9f741b2",
+    "compressed_sha256": "7f6a41c08b94160d7ea128b3aebc842513ef31866e09041e793e741349ae7689",
+    "bytes": 9865893,
+    "seconds": 1.9941042499849573,
+    "license": "CC BY-SA 4.0",
+    "attribution": "CC-CEDICT, MDBG and contributors",
+    "changes": "Unmodified downloaded text; no dictionary entries added"
+  },
+  "pilots": [
+    {
+      "strategy": "rrf_global_12_development_best_still_omits_2",
+      "cases": 10,
+      "current_equivalent_retained": 8,
+      "primary_current_retained": 2,
+      "rows": [
+        {
+          "case": "unseen_dashboard_visual_design",
+          "shortlist_size": 12,
+          "pool_size": 210,
+          "current_equivalent_retained": true,
+          "primary_current_retained": true,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "unseen_bug_root_cause_workflow",
+          "shortlist_size": 14,
+          "pool_size": 225,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "shortlist_size": 12,
+          "pool_size": 210,
+          "current_equivalent_retained": false,
+          "primary_current_retained": false,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "unseen_package_docs_then_review",
+          "shortlist_size": 12,
+          "pool_size": 243,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_browser_readonly_research",
+          "shortlist_size": 16,
+          "pool_size": 228,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_public_repo_inventory",
+          "shortlist_size": 15,
+          "pool_size": 222,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "shortlist_size": 15,
+          "pool_size": 161,
+          "current_equivalent_retained": false,
+          "primary_current_retained": false,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "new_finance_runway_then_slides",
+          "shortlist_size": 15,
+          "pool_size": 210,
+          "current_equivalent_retained": true,
+          "primary_current_retained": true,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "new_scholarly_paper_lookup",
+          "shortlist_size": 17,
+          "pool_size": 210,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "new_forecast_then_sheet",
+          "shortlist_size": 13,
+          "pool_size": 203,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        }
+      ]
+    },
+    {
+      "strategy": "per_route_3_rejected_lower_coverage",
+      "cases": 10,
+      "current_equivalent_retained": 6,
+      "primary_current_retained": 2,
+      "rows": [
+        {
+          "case": "unseen_dashboard_visual_design",
+          "shortlist_size": 28,
+          "pool_size": 259,
+          "current_equivalent_retained": true,
+          "primary_current_retained": true,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "unseen_bug_root_cause_workflow",
+          "shortlist_size": 26,
+          "pool_size": 266,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_search_friendly_article",
+          "shortlist_size": 24,
+          "pool_size": 251,
+          "current_equivalent_retained": false,
+          "primary_current_retained": false,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "unseen_package_docs_then_review",
+          "shortlist_size": 25,
+          "pool_size": 284,
+          "current_equivalent_retained": false,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_browser_readonly_research",
+          "shortlist_size": 25,
+          "pool_size": 272,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_public_repo_inventory",
+          "shortlist_size": 22,
+          "pool_size": 240,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "unseen_time_zone_conversion",
+          "shortlist_size": 23,
+          "pool_size": 201,
+          "current_equivalent_retained": false,
+          "primary_current_retained": false,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "new_finance_runway_then_slides",
+          "shortlist_size": 25,
+          "pool_size": 244,
+          "current_equivalent_retained": true,
+          "primary_current_retained": true,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        },
+        {
+          "case": "new_scholarly_paper_lookup",
+          "shortlist_size": 23,
+          "pool_size": 237,
+          "current_equivalent_retained": false,
+          "primary_current_retained": false,
+          "later_groups_retained": 0,
+          "later_groups_required": 0
+        },
+        {
+          "case": "new_forecast_then_sheet",
+          "shortlist_size": 24,
+          "pool_size": 221,
+          "current_equivalent_retained": true,
+          "primary_current_retained": false,
+          "later_groups_retained": 1,
+          "later_groups_required": 1
+        }
+      ]
+    }
+  ]
+}

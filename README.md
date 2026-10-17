@@ -442,6 +442,16 @@ than unique-best confidence. Same-three-pair tokens rise 7.96x and warm selector
 time rises 41.22%; seven primary current references remain missing. This costly
 experimental candidate is not promoted; daily runtime remains unchanged.
 
+The [current-focused shortlist follow-up](docs/backpack-focused-current-2026-10-16.md)
+uses a general bilingual dictionary and current-step ranking, keeping later
+requirements in an additive reservoir. On the same eight fresh live pairs,
+tokens fall 85.10%, but warm selector time rises 23.82%. With prospective,
+predeclared equivalent-capability references, success is 7/15 versus 8/15;
+the new subset regresses from 3/5 to 2/5, and success with all known primary
+anchors retained falls from 5/15 to 2/15. All eight later requirements survive.
+The old published scores remain unchanged. This is metadata selection only;
+the candidate fails omission/time requirements and is not promoted.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.
