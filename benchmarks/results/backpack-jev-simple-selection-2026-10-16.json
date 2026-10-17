@@ -175,7 +175,7 @@
     "Single final selector package changes prompt, representation and Choice structure; not an isolated call-count or ranking ablation.",
     "Both old and new use one final request per case.",
     "All three are previously exposed failures in an enriched 240-record sample of a 45,325-record merged public catalog.",
-    "Frozen reference list is not exhaustive: new top TDD and security candidates explicitly match subject but are absent from acceptable lists; both abstain below .7 so no post-hoc pass is awarded.",
+    "Corrected reference audit: both top TDD and security candidates are present in the frozen acceptable lists. A deduplicated display was misread. Both still abstain below .7; the original 0/3 scores are unchanged.",
     "Backend reference ambiguity remains: broad backend design vs a package naming error handling, neither proves every task detail.",
     "Direct/frequent shortcut integration and actual capability execution were not exercised."
   ],

@@ -51,11 +51,11 @@ plausible options retain substantial probability: access control assigns .34 to
 `senior-backend`, and TDD assigns .31 to `tdd-guide`. Comparative certainty remains
 below .7. No probabilities are summed, renormalized or promoted to force acceptance.
 
-There is also a reference-set limitation. The frozen acceptable lists omit these
-two newly leading, apparently relevant plugins. They still abstain, so expanding
-those lists would not turn this run into passes. Keep the original scores and audit
-reference completeness separately before a broader evaluation. The exception case
-also remains ambiguous: the reference package names error handling, while the selected
+Correction from the subsequent reference audit: **both leading plugins are already
+in the frozen acceptable lists**. An earlier description of this result incorrectly
+read a deduplicated display as missing reference entries. No labels need changing;
+both candidates still abstain, and the original **0/3** score is unchanged.
+The exception case remains ambiguous: the reference package names error handling, while the selected
 Skill names backend/API design; neither short description establishes every requested
 retry/logging detail. A failed frozen score is not proof that every alternative is wrong.
 

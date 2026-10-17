@@ -1,0 +1,111 @@
+{
+  "verification": "exact_cached_ranking_and_new_fit_replay",
+  "stop": "completed",
+  "rows": [
+    {
+      "case": "new_access_control_design",
+      "selected": "plugin-9dff6ad6da61fa24dfbd",
+      "selected_by_original_reference": true,
+      "highest_probability_candidate_qualified": true,
+      "ranking_confidence": 0.51,
+      "fit_confidence": 0.7,
+      "fit_judgment": {
+        "choice": "current",
+        "confidence": 0.7,
+        "probabilities": {
+          "current": 0.8,
+          "partial": 0.18,
+          "other": 0.02
+        }
+      },
+      "ranking_pool_size": 113,
+      "whole_pool_retained": true,
+      "known_references_retained": true,
+      "fresh_fit_tokens": 721,
+      "cached_rank_tokens": 11713,
+      "fresh_fit_seconds": 1.1622037920169532,
+      "cached_rank_seconds": 0.7897239169979002
+    },
+    {
+      "case": "new_test_driven_feature_plan",
+      "selected": null,
+      "selected_by_original_reference": false,
+      "highest_probability_candidate_qualified": false,
+      "ranking_confidence": 0.62,
+      "fit_confidence": 0.58,
+      "fit_judgment": {
+        "choice": "current",
+        "confidence": 0.58,
+        "probabilities": {
+          "current": 0.72,
+          "partial": 0.26,
+          "other": 0.02
+        }
+      },
+      "ranking_pool_size": 91,
+      "whole_pool_retained": true,
+      "known_references_retained": true,
+      "fresh_fit_tokens": 713,
+      "cached_rank_tokens": 10032,
+      "fresh_fit_seconds": 0.732106790994294,
+      "cached_rank_seconds": 0.6364346670161467
+    }
+  ],
+  "fresh_cost": {
+    "calls": 2,
+    "attempted_sends": 2,
+    "input_tokens": 1356,
+    "input_tokens_complete": true,
+    "output_tokens": 78,
+    "output_tokens_complete": true,
+    "known_tokens": 1434,
+    "wall_seconds": 9.73498412501067,
+    "real_transport_seconds": 1.8943105830112472
+  },
+  "unfinished": [],
+  "qualification": "Two exposed ranking failures; fresh suitability only, no acquisition/execution or fresh end-to-end timing; original gold unchanged.",
+  "comparison": {
+    "prior_rank_only": {
+      "qualified": 0,
+      "tokens": 21745,
+      "calls": 2,
+      "transport_seconds": 1.426158584014047
+    },
+    "rank_plus_fit_composite": {
+      "qualified": 1,
+      "tokens": 23179,
+      "calls": 4,
+      "transport_seconds": 3.320469167025294
+    },
+    "original_reference_passes": {
+      "prior": 0,
+      "new": 1
+    },
+    "fresh_new_calls": 2,
+    "fresh_new_tokens": 1434,
+    "extra_token_percent": 6.594619452747757
+  },
+  "limitations": [
+    "Both ranking leaders are already in the frozen acceptable-current lists. No label edits: original-reference passes improve from 0/2 to 1/2.",
+    "Eligibility is not execution success or measured accuracy. Two previously exposed cases have no separate later requirement groups; full-pool retention is verified.",
+    "Candidate with current fit below .7 remains abstained; no second-candidate retry, but all candidates are retained.",
+    "Cached rank plus fresh fit is composite accounting, not fresh end-to-end latency.",
+    "Fresh runner wall includes repeated frozen-file integrity checks; transport time is reported separately.",
+    "Final semantic gate retains old independent current/partial/other definitions and raw .7 confidence, not a .7 Noul probability.",
+    "Runtime installation, capability acquisition/execution and unchanged passed cases were not exercised."
+  ],
+  "source_files": [
+    "benchmarks/preferred_capability_selector.py",
+    "benchmarks/preferred_fit_pilot.py"
+  ],
+  "offline_tests_passed": 8,
+  "reference_audit": {
+    "new_access_control_design": true,
+    "new_test_driven_feature_plan": true,
+    "correction": "Previous commentary/report misread a deduplicated display as missing references; original labels and prior 0/3 score were correct."
+  },
+  "preservation": {
+    "tracked_paths": 459,
+    "changed_paths_or_repo_state": []
+  }
+}
