@@ -1,0 +1,3822 @@
+{
+  "organization_comparison": {
+    "version": 1,
+    "verification": "frozen_inputs_and_exact_receipt_replay_passed",
+    "build": {
+      "stop": "completed",
+      "replay_stop": null,
+      "cost": {
+        "calls": 11,
+        "attempted_sends": 11,
+        "input_tokens": 116456,
+        "input_tokens_complete": true,
+        "output_tokens": 27445,
+        "output_tokens_complete": true,
+        "known_tokens": 143901,
+        "wall_seconds": 16.201485708996188,
+        "real_transport_seconds": 15.527120543003548
+      }
+    },
+    "phases": {
+      "failed": {
+        "stop": "completed",
+        "cost": {
+          "calls": 15,
+          "attempted_sends": 15,
+          "input_tokens": 72246,
+          "input_tokens_complete": true,
+          "output_tokens": 7041,
+          "output_tokens_complete": true,
+          "known_tokens": 79287,
+          "wall_seconds": 23.594180584012065,
+          "real_transport_seconds": 23.349875248997705
+        },
+        "interrupted": null,
+        "unfinished": []
+      },
+      "new": {
+        "stop": "completed",
+        "cost": {
+          "calls": 6,
+          "attempted_sends": 6,
+          "input_tokens": 22835,
+          "input_tokens_complete": true,
+          "output_tokens": 1320,
+          "output_tokens_complete": true,
+          "known_tokens": 24155,
+          "wall_seconds": 4.86283545801416,
+          "real_transport_seconds": 4.8228276659792755
+        },
+        "interrupted": null,
+        "unfinished": []
+      }
+    },
+    "groups": {
+      "failed": {
+        "arms": {
+          "balanced": {
+            "completed_rows": 7,
+            "planned_rows": 7,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 7,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 7,
+              "rate": 0.0
+            },
+            "current_retained_pool_coverage": {
+              "correct": 7,
+              "total": 7,
+              "rate": 1.0
+            },
+            "reached_final_rows": 0,
+            "actual_final_pool_current_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "actual_final_pool_later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "primary_reference_coverage": {
+              "correct": 7,
+              "total": 7,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 7
+            },
+            "calls": 7,
+            "input_tokens": 31579,
+            "output_tokens": 1981,
+            "known_tokens": 33560,
+            "wall_seconds": 11.692293914995389
+          },
+          "semantic": {
+            "completed_rows": 7,
+            "planned_rows": 7,
+            "known_positive_accuracy": {
+              "correct": 1,
+              "total": 7,
+              "rate": 0.14285714285714285
+            },
+            "omission_safe_accuracy": {
+              "correct": 1,
+              "total": 7,
+              "rate": 0.14285714285714285
+            },
+            "current_retained_pool_coverage": {
+              "correct": 7,
+              "total": 7,
+              "rate": 1.0
+            },
+            "reached_final_rows": 1,
+            "actual_final_pool_current_coverage": {
+              "correct": 1,
+              "total": 1,
+              "rate": 1.0
+            },
+            "actual_final_pool_later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "primary_reference_coverage": {
+              "correct": 7,
+              "total": 7,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 6,
+              "selected": 1
+            },
+            "calls": 8,
+            "input_tokens": 40667,
+            "output_tokens": 5060,
+            "known_tokens": 45727,
+            "wall_seconds": 11.864358499035006
+          }
+        },
+        "paired_completed": {
+          "cases": 7,
+          "omission_safe_wins": {
+            "tie": 6,
+            "semantic": 1
+          },
+          "arms": {
+            "balanced": {
+              "completed_rows": 7,
+              "planned_rows": 7,
+              "known_positive_accuracy": {
+                "correct": 0,
+                "total": 7,
+                "rate": 0.0
+              },
+              "omission_safe_accuracy": {
+                "correct": 0,
+                "total": 7,
+                "rate": 0.0
+              },
+              "current_retained_pool_coverage": {
+                "correct": 7,
+                "total": 7,
+                "rate": 1.0
+              },
+              "reached_final_rows": 0,
+              "actual_final_pool_current_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "actual_final_pool_later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "later_group_coverage": {
+                "correct": 2,
+                "total": 2,
+                "rate": 1.0
+              },
+              "primary_reference_coverage": {
+                "correct": 7,
+                "total": 7,
+                "rate": 1.0
+              },
+              "status_counts": {
+                "unavailable": 7
+              },
+              "calls": 7,
+              "input_tokens": 31579,
+              "output_tokens": 1981,
+              "known_tokens": 33560,
+              "wall_seconds": 11.692293914995389
+            },
+            "semantic": {
+              "completed_rows": 7,
+              "planned_rows": 7,
+              "known_positive_accuracy": {
+                "correct": 1,
+                "total": 7,
+                "rate": 0.14285714285714285
+              },
+              "omission_safe_accuracy": {
+                "correct": 1,
+                "total": 7,
+                "rate": 0.14285714285714285
+              },
+              "current_retained_pool_coverage": {
+                "correct": 7,
+                "total": 7,
+                "rate": 1.0
+              },
+              "reached_final_rows": 1,
+              "actual_final_pool_current_coverage": {
+                "correct": 1,
+                "total": 1,
+                "rate": 1.0
+              },
+              "actual_final_pool_later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "later_group_coverage": {
+                "correct": 2,
+                "total": 2,
+                "rate": 1.0
+              },
+              "primary_reference_coverage": {
+                "correct": 7,
+                "total": 7,
+                "rate": 1.0
+              },
+              "status_counts": {
+                "unavailable": 6,
+                "selected": 1
+              },
+              "calls": 8,
+              "input_tokens": 40667,
+              "output_tokens": 5060,
+              "known_tokens": 45727,
+              "wall_seconds": 11.864358499035006
+            }
+          }
+        }
+      },
+      "new": {
+        "arms": {
+          "balanced": {
+            "completed_rows": 3,
+            "planned_rows": 3,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 3,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 3,
+              "rate": 0.0
+            },
+            "current_retained_pool_coverage": {
+              "correct": 3,
+              "total": 3,
+              "rate": 1.0
+            },
+            "reached_final_rows": 0,
+            "actual_final_pool_current_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "actual_final_pool_later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 3,
+              "total": 3,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 3
+            },
+            "calls": 3,
+            "input_tokens": 13507,
+            "output_tokens": 849,
+            "known_tokens": 14356,
+            "wall_seconds": 2.4593577500490937
+          },
+          "semantic": {
+            "completed_rows": 3,
+            "planned_rows": 3,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 3,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 3,
+              "rate": 0.0
+            },
+            "current_retained_pool_coverage": {
+              "correct": 3,
+              "total": 3,
+              "rate": 1.0
+            },
+            "reached_final_rows": 0,
+            "actual_final_pool_current_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "actual_final_pool_later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "primary_reference_coverage": {
+              "correct": 3,
+              "total": 3,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 3
+            },
+            "calls": 3,
+            "input_tokens": 9328,
+            "output_tokens": 471,
+            "known_tokens": 9799,
+            "wall_seconds": 2.3963140409905463
+          }
+        },
+        "paired_completed": {
+          "cases": 3,
+          "omission_safe_wins": {
+            "tie": 3
+          },
+          "arms": {
+            "balanced": {
+              "completed_rows": 3,
+              "planned_rows": 3,
+              "known_positive_accuracy": {
+                "correct": 0,
+                "total": 3,
+                "rate": 0.0
+              },
+              "omission_safe_accuracy": {
+                "correct": 0,
+                "total": 3,
+                "rate": 0.0
+              },
+              "current_retained_pool_coverage": {
+                "correct": 3,
+                "total": 3,
+                "rate": 1.0
+              },
+              "reached_final_rows": 0,
+              "actual_final_pool_current_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "actual_final_pool_later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "primary_reference_coverage": {
+                "correct": 3,
+                "total": 3,
+                "rate": 1.0
+              },
+              "status_counts": {
+                "unavailable": 3
+              },
+              "calls": 3,
+              "input_tokens": 13507,
+              "output_tokens": 849,
+              "known_tokens": 14356,
+              "wall_seconds": 2.4593577500490937
+            },
+            "semantic": {
+              "completed_rows": 3,
+              "planned_rows": 3,
+              "known_positive_accuracy": {
+                "correct": 0,
+                "total": 3,
+                "rate": 0.0
+              },
+              "omission_safe_accuracy": {
+                "correct": 0,
+                "total": 3,
+                "rate": 0.0
+              },
+              "current_retained_pool_coverage": {
+                "correct": 3,
+                "total": 3,
+                "rate": 1.0
+              },
+              "reached_final_rows": 0,
+              "actual_final_pool_current_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "actual_final_pool_later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "primary_reference_coverage": {
+                "correct": 3,
+                "total": 3,
+                "rate": 1.0
+              },
+              "status_counts": {
+                "unavailable": 3
+              },
+              "calls": 3,
+              "input_tokens": 9328,
+              "output_tokens": 471,
+              "known_tokens": 9799,
+              "wall_seconds": 2.3963140409905463
+            }
+          }
+        }
+      },
+      "all": {
+        "arms": {
+          "balanced": {
+            "completed_rows": 10,
+            "planned_rows": 10,
+            "known_positive_accuracy": {
+              "correct": 0,
+              "total": 10,
+              "rate": 0.0
+            },
+            "omission_safe_accuracy": {
+              "correct": 0,
+              "total": 10,
+              "rate": 0.0
+            },
+            "current_retained_pool_coverage": {
+              "correct": 10,
+              "total": 10,
+              "rate": 1.0
+            },
+            "reached_final_rows": 0,
+            "actual_final_pool_current_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "actual_final_pool_later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "primary_reference_coverage": {
+              "correct": 10,
+              "total": 10,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 10
+            },
+            "calls": 10,
+            "input_tokens": 45086,
+            "output_tokens": 2830,
+            "known_tokens": 47916,
+            "wall_seconds": 14.151651665044483
+          },
+          "semantic": {
+            "completed_rows": 10,
+            "planned_rows": 10,
+            "known_positive_accuracy": {
+              "correct": 1,
+              "total": 10,
+              "rate": 0.1
+            },
+            "omission_safe_accuracy": {
+              "correct": 1,
+              "total": 10,
+              "rate": 0.1
+            },
+            "current_retained_pool_coverage": {
+              "correct": 10,
+              "total": 10,
+              "rate": 1.0
+            },
+            "reached_final_rows": 1,
+            "actual_final_pool_current_coverage": {
+              "correct": 1,
+              "total": 1,
+              "rate": 1.0
+            },
+            "actual_final_pool_later_group_coverage": {
+              "correct": 0,
+              "total": 0,
+              "rate": null
+            },
+            "later_group_coverage": {
+              "correct": 2,
+              "total": 2,
+              "rate": 1.0
+            },
+            "primary_reference_coverage": {
+              "correct": 10,
+              "total": 10,
+              "rate": 1.0
+            },
+            "status_counts": {
+              "unavailable": 9,
+              "selected": 1
+            },
+            "calls": 11,
+            "input_tokens": 49995,
+            "output_tokens": 5531,
+            "known_tokens": 55526,
+            "wall_seconds": 14.260672540025553
+          }
+        },
+        "paired_completed": {
+          "cases": 10,
+          "omission_safe_wins": {
+            "tie": 9,
+            "semantic": 1
+          },
+          "arms": {
+            "balanced": {
+              "completed_rows": 10,
+              "planned_rows": 10,
+              "known_positive_accuracy": {
+                "correct": 0,
+                "total": 10,
+                "rate": 0.0
+              },
+              "omission_safe_accuracy": {
+                "correct": 0,
+                "total": 10,
+                "rate": 0.0
+              },
+              "current_retained_pool_coverage": {
+                "correct": 10,
+                "total": 10,
+                "rate": 1.0
+              },
+              "reached_final_rows": 0,
+              "actual_final_pool_current_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "actual_final_pool_later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "later_group_coverage": {
+                "correct": 2,
+                "total": 2,
+                "rate": 1.0
+              },
+              "primary_reference_coverage": {
+                "correct": 10,
+                "total": 10,
+                "rate": 1.0
+              },
+              "status_counts": {
+                "unavailable": 10
+              },
+              "calls": 10,
+              "input_tokens": 45086,
+              "output_tokens": 2830,
+              "known_tokens": 47916,
+              "wall_seconds": 14.151651665044483
+            },
+            "semantic": {
+              "completed_rows": 10,
+              "planned_rows": 10,
+              "known_positive_accuracy": {
+                "correct": 1,
+                "total": 10,
+                "rate": 0.1
+              },
+              "omission_safe_accuracy": {
+                "correct": 1,
+                "total": 10,
+                "rate": 0.1
+              },
+              "current_retained_pool_coverage": {
+                "correct": 10,
+                "total": 10,
+                "rate": 1.0
+              },
+              "reached_final_rows": 1,
+              "actual_final_pool_current_coverage": {
+                "correct": 1,
+                "total": 1,
+                "rate": 1.0
+              },
+              "actual_final_pool_later_group_coverage": {
+                "correct": 0,
+                "total": 0,
+                "rate": null
+              },
+              "later_group_coverage": {
+                "correct": 2,
+                "total": 2,
+                "rate": 1.0
+              },
+              "primary_reference_coverage": {
+                "correct": 10,
+                "total": 10,
+                "rate": 1.0
+              },
+              "status_counts": {
+                "unavailable": 9,
+                "selected": 1
+              },
+              "calls": 11,
+              "input_tokens": 49995,
+              "output_tokens": 5531,
+              "known_tokens": 55526,
+              "wall_seconds": 14.260672540025553
+            }
+          }
+        }
+      }
+    },
+    "rows": [
+      {
+        "case": "unseen_search_friendly_article",
+        "arm": "balanced",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 195,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 195,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4527,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4810,
+        "wall_seconds": 1.121398124989355
+      },
+      {
+        "case": "unseen_search_friendly_article",
+        "arm": "semantic",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 131,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 131,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3134,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3291,
+        "wall_seconds": 0.8702362079930026
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "arm": "semantic",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 238,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 238,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3118,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3275,
+        "wall_seconds": 1.1038157909933943
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "arm": "balanced",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 195,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 195,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4511,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4794,
+        "wall_seconds": 1.1519617080048192
+      },
+      {
+        "case": "new_finance_runway_then_slides",
+        "arm": "balanced",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [
+          true
+        ],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [
+          true
+        ],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 210,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 210,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4526,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4809,
+        "wall_seconds": 4.225841000006767
+      },
+      {
+        "case": "new_finance_runway_then_slides",
+        "arm": "semantic",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [
+          true
+        ],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [
+          true
+        ],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 240,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 240,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3133,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3290,
+        "wall_seconds": 1.7852802500128746
+      },
+      {
+        "case": "new_scholarly_paper_lookup",
+        "arm": "semantic",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 235,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 235,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3121,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3278,
+        "wall_seconds": 1.8031434169970453
+      },
+      {
+        "case": "new_scholarly_paper_lookup",
+        "arm": "balanced",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 195,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 195,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4514,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4797,
+        "wall_seconds": 0.8963844579993747
+      },
+      {
+        "case": "fresh_backend_exception_design",
+        "arm": "balanced",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [
+          true
+        ],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [
+          true
+        ],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 225,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 225,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4511,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4794,
+        "wall_seconds": 1.8597436659911182
+      },
+      {
+        "case": "fresh_backend_exception_design",
+        "arm": "semantic",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [
+          true
+        ],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [
+          true
+        ],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 211,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 211,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3118,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3275,
+        "wall_seconds": 2.5266270830179565
+      },
+      {
+        "case": "fresh_implementation_plan",
+        "arm": "semantic",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 238,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 238,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3104,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3261,
+        "wall_seconds": 1.086543375015026
+      },
+      {
+        "case": "fresh_implementation_plan",
+        "arm": "balanced",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 240,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 240,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4497,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4780,
+        "wall_seconds": 1.311989874986466
+      },
+      {
+        "case": "fresh_length_unit_conversion",
+        "arm": "balanced",
+        "stratum": "failed",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 135,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 135,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4493,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4776,
+        "wall_seconds": 1.124975083017489
+      },
+      {
+        "case": "fresh_length_unit_conversion",
+        "arm": "semantic",
+        "stratum": "failed",
+        "status": "selected",
+        "choice": "registry-debcfdd9202ec1920e5a",
+        "confidence": 0.97,
+        "correct_current": true,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": true,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": true,
+        "strict_anchor_pass": true,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 107,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          },
+          {
+            "stage": "final_pool",
+            "ordinal": 2,
+            "pool_size": 107,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": true,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 107,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": {
+          "stage": "final_pool",
+          "ordinal": 2,
+          "pool_size": 107,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "calls": 2,
+        "input_tokens": 21939,
+        "input_tokens_complete": true,
+        "output_tokens": 4118,
+        "output_tokens_complete": true,
+        "known_tokens": 26057,
+        "wall_seconds": 2.688712375005707
+      },
+      {
+        "case": "new_calendar_readonly_agenda",
+        "arm": "semantic",
+        "stratum": "new",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 155,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 155,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3102,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3259,
+        "wall_seconds": 0.7776874169940129
+      },
+      {
+        "case": "new_calendar_readonly_agenda",
+        "arm": "balanced",
+        "stratum": "new",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 165,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 165,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4495,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4778,
+        "wall_seconds": 0.6655447500234004
+      },
+      {
+        "case": "new_test_driven_feature_plan",
+        "arm": "balanced",
+        "stratum": "new",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 225,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 225,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4503,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4786,
+        "wall_seconds": 0.936336000013398
+      },
+      {
+        "case": "new_test_driven_feature_plan",
+        "arm": "semantic",
+        "stratum": "new",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 211,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 211,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3110,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3267,
+        "wall_seconds": 0.6747619579837192
+      },
+      {
+        "case": "new_access_control_design",
+        "arm": "semantic",
+        "stratum": "new",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 211,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 211,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 3116,
+        "input_tokens_complete": true,
+        "output_tokens": 157,
+        "output_tokens_complete": true,
+        "known_tokens": 3273,
+        "wall_seconds": 0.9438646660128143
+      },
+      {
+        "case": "new_access_control_design",
+        "arm": "balanced",
+        "stratum": "new",
+        "status": "unavailable",
+        "choice": null,
+        "confidence": null,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 210,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": false,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 210,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": null,
+        "calls": 1,
+        "input_tokens": 4509,
+        "input_tokens_complete": true,
+        "output_tokens": 283,
+        "output_tokens_complete": true,
+        "known_tokens": 4792,
+        "wall_seconds": 0.8574770000122953
+      }
+    ],
+    "online_cost": {
+      "calls": 21,
+      "attempted_sends": 21,
+      "input_tokens": 95081,
+      "output_tokens": 8361,
+      "known_tokens": 103442,
+      "real_transport_seconds": 28.17270291497698,
+      "input_tokens_complete": true,
+      "output_tokens_complete": true,
+      "wall_seconds": 28.457016042026225
+    },
+    "cold_balanced_build_seconds": 0.024268666020361707,
+    "token_break_even_additional_cases": null,
+    "limits": {
+      "build": {
+        "max_calls": 64,
+        "max_tokens": 240000,
+        "max_seconds": 180,
+        "call_timeout_seconds": 20
+      },
+      "online_shared_across_phases": {
+        "max_calls": 64,
+        "max_tokens": 240000,
+        "max_seconds": 240,
+        "call_timeout_seconds": 20
+      },
+      "directory_gate": 0.2,
+      "final_gate": 0.7,
+      "final_limit": 128,
+      "question_batch": 64,
+      "per_need_max_calls": 8,
+      "build_batch_size": 32,
+      "build_max_payload_bytes": 64000,
+      "build_split_above": 128,
+      "attempts": 1,
+      "retries": 0
+    },
+    "qualifications": {
+      "full_catalog_scaling": "unverified",
+      "backend_model_revision": "unobservable",
+      "runtime_readiness": "unobservable",
+      "deadline_provenance": "recorded_local_elapsed_timestamps",
+      "interrupted_grades": "unobserved; excluded from observed accuracy denominators",
+      "break_even": "token-only estimate from completed pairs; accuracy and future workload may differ"
+    }
+  },
+  "organization_diagnostics": {
+    "condition": "read-only counterfactual on already answered root scores, not live accuracy; thresholds chosen from these would require separate fresh frozen validation",
+    "final_gate_unchanged": 0.7,
+    "roots_already_terminal": true,
+    "no_new_model_calls": true,
+    "summary": {
+      "failed": [
+        {
+          "gate": 0.2,
+          "rows": 7,
+          "current_retained": 7,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 7,
+          "known_coverage_and_final_size": 1,
+          "mean_pool_size": 200.0
+        },
+        {
+          "gate": 0.35,
+          "rows": 7,
+          "current_retained": 7,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 7,
+          "known_coverage_and_final_size": 5,
+          "mean_pool_size": 119.28571428571429
+        },
+        {
+          "gate": 0.5,
+          "rows": 7,
+          "current_retained": 7,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 7,
+          "known_coverage_and_final_size": 5,
+          "mean_pool_size": 78.14285714285714
+        },
+        {
+          "gate": 0.65,
+          "rows": 7,
+          "current_retained": 7,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 7,
+          "known_coverage_and_final_size": 7,
+          "mean_pool_size": 61.57142857142857
+        },
+        {
+          "gate": 0.8,
+          "rows": 7,
+          "current_retained": 7,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 7,
+          "known_coverage_and_final_size": 7,
+          "mean_pool_size": 54.42857142857143
+        }
+      ],
+      "new": [
+        {
+          "gate": 0.2,
+          "rows": 3,
+          "current_retained": 3,
+          "later_groups_retained": 0,
+          "later_groups": 0,
+          "all_primary_retained": 3,
+          "known_coverage_and_final_size": 0,
+          "mean_pool_size": 192.33333333333334
+        },
+        {
+          "gate": 0.35,
+          "rows": 3,
+          "current_retained": 3,
+          "later_groups_retained": 0,
+          "later_groups": 0,
+          "all_primary_retained": 3,
+          "known_coverage_and_final_size": 1,
+          "mean_pool_size": 128.66666666666666
+        },
+        {
+          "gate": 0.5,
+          "rows": 3,
+          "current_retained": 3,
+          "later_groups_retained": 0,
+          "later_groups": 0,
+          "all_primary_retained": 3,
+          "known_coverage_and_final_size": 1,
+          "mean_pool_size": 110.0
+        },
+        {
+          "gate": 0.65,
+          "rows": 3,
+          "current_retained": 3,
+          "later_groups_retained": 0,
+          "later_groups": 0,
+          "all_primary_retained": 3,
+          "known_coverage_and_final_size": 3,
+          "mean_pool_size": 88.0
+        },
+        {
+          "gate": 0.8,
+          "rows": 3,
+          "current_retained": 3,
+          "later_groups_retained": 0,
+          "later_groups": 0,
+          "all_primary_retained": 3,
+          "known_coverage_and_final_size": 3,
+          "mean_pool_size": 70.0
+        }
+      ],
+      "all": [
+        {
+          "gate": 0.2,
+          "rows": 10,
+          "current_retained": 10,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 10,
+          "known_coverage_and_final_size": 1,
+          "mean_pool_size": 197.7
+        },
+        {
+          "gate": 0.35,
+          "rows": 10,
+          "current_retained": 10,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 10,
+          "known_coverage_and_final_size": 6,
+          "mean_pool_size": 122.1
+        },
+        {
+          "gate": 0.5,
+          "rows": 10,
+          "current_retained": 10,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 10,
+          "known_coverage_and_final_size": 6,
+          "mean_pool_size": 87.7
+        },
+        {
+          "gate": 0.65,
+          "rows": 10,
+          "current_retained": 10,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 10,
+          "known_coverage_and_final_size": 10,
+          "mean_pool_size": 69.5
+        },
+        {
+          "gate": 0.8,
+          "rows": 10,
+          "current_retained": 10,
+          "later_groups_retained": 2,
+          "later_groups": 2,
+          "all_primary_retained": 10,
+          "known_coverage_and_final_size": 10,
+          "mean_pool_size": 59.1
+        }
+      ]
+    },
+    "rows": [
+      {
+        "case": "unseen_search_friendly_article",
+        "stratum": "failed",
+        "root_probabilities": {
+          "n.root/software": 0.09,
+          "n.root/information": 0.54,
+          "n.root/content": 0.98,
+          "n.root/analysis": 0.16,
+          "n.root/office": 0.47,
+          "n.root/media": 0.15,
+          "n.root/operations": 0.28,
+          "n.root/specialized": 0.8,
+          "n.unknown": 0.25
+        },
+        "primary_memberships": {
+          "plugin-9144a8b7803b10703efa": {
+            "name": "seo-content-creation",
+            "primary_root": "content",
+            "primary_confidence": 1.0,
+            "global_unknown": false,
+            "supported_roots": [
+              "content"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 131,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/content",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 72,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/content",
+              "n.root/office",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 44,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/content",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 22,
+            "kept_roots": [
+              "n.root/content",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 22,
+            "kept_roots": [
+              "n.root/content",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "unseen_time_zone_conversion",
+        "stratum": "failed",
+        "root_probabilities": {
+          "n.root/software": 0.21,
+          "n.root/information": 0.61,
+          "n.root/content": 0.2,
+          "n.root/analysis": 0.97,
+          "n.root/office": 0.2,
+          "n.root/media": 0.04,
+          "n.root/operations": 0.42,
+          "n.root/specialized": 0.37,
+          "n.unknown": 0.29
+        },
+        "primary_memberships": {
+          "registry-f76327aa6af982c2cb41": {
+            "name": "Epoch Calculator",
+            "primary_root": "analysis",
+            "primary_confidence": 0.92,
+            "global_unknown": false,
+            "supported_roots": [
+              "analysis"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 238,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 101,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/analysis",
+              "n.root/operations",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 53,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/analysis"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 31,
+            "kept_roots": [
+              "n.root/analysis"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 31,
+            "kept_roots": [
+              "n.root/analysis"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "new_finance_runway_then_slides",
+        "stratum": "failed",
+        "root_probabilities": {
+          "n.root/software": 0.2,
+          "n.root/information": 0.28,
+          "n.root/content": 0.73,
+          "n.root/analysis": 0.98,
+          "n.root/office": 0.9,
+          "n.root/media": 0.83,
+          "n.root/operations": 0.49,
+          "n.root/specialized": 0.73,
+          "n.unknown": 0.27
+        },
+        "primary_memberships": {
+          "financial-analyst": {
+            "name": "financial-analyst",
+            "primary_root": "analysis",
+            "primary_confidence": 1.0,
+            "global_unknown": false,
+            "supported_roots": [
+              "analysis"
+            ]
+          },
+          "skill-91d13b46fe5873284eee": {
+            "name": "pptx",
+            "primary_root": "office",
+            "primary_confidence": 1.0,
+            "global_unknown": false,
+            "supported_roots": [
+              "office"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 240,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/media",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 115,
+            "kept_roots": [
+              "n.root/content",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/media",
+              "n.root/operations",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 83,
+            "kept_roots": [
+              "n.root/content",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/media",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 83,
+            "kept_roots": [
+              "n.root/content",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/media",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 61,
+            "kept_roots": [
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/media"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "new_scholarly_paper_lookup",
+        "stratum": "failed",
+        "root_probabilities": {
+          "n.root/software": 0.21,
+          "n.root/information": 0.98,
+          "n.root/content": 0.18,
+          "n.root/analysis": 0.36,
+          "n.root/office": 0.22,
+          "n.root/media": 0.05,
+          "n.root/operations": 0.8,
+          "n.root/specialized": 0.45,
+          "n.unknown": 0.26
+        },
+        "primary_memberships": {
+          "registry-0e262030f2280db7235b": {
+            "name": "CLIO Arxiv",
+            "primary_root": "information",
+            "primary_confidence": 0.99,
+            "global_unknown": false,
+            "supported_roots": [
+              "information"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 235,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 101,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/analysis",
+              "n.root/operations",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 54,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/operations"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 54,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/operations"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 54,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/operations"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "fresh_backend_exception_design",
+        "stratum": "failed",
+        "root_probabilities": {
+          "n.root/software": 0.97,
+          "n.root/information": 0.69,
+          "n.root/content": 0.53,
+          "n.root/analysis": 0.14,
+          "n.root/office": 0.21,
+          "n.root/media": 0.04,
+          "n.root/operations": 0.38,
+          "n.root/specialized": 0.63,
+          "n.unknown": 0.28
+        },
+        "primary_memberships": {
+          "plugin-c0869c35643648b7dd0c": {
+            "name": "developer-essentials",
+            "primary_root": "software",
+            "primary_confidence": 0.95,
+            "global_unknown": false,
+            "supported_roots": [
+              "software"
+            ]
+          },
+          "code-reviewer": {
+            "name": "code-reviewer",
+            "primary_root": "software",
+            "primary_confidence": 1.0,
+            "global_unknown": false,
+            "supported_roots": [
+              "software"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 211,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 167,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/operations",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 135,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 113,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 91,
+            "kept_roots": [
+              "n.root/software"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [
+              true
+            ],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "fresh_implementation_plan",
+        "stratum": "failed",
+        "root_probabilities": {
+          "n.root/software": 0.97,
+          "n.root/information": 0.6,
+          "n.root/content": 0.78,
+          "n.root/analysis": 0.37,
+          "n.root/office": 0.6,
+          "n.root/media": 0.14,
+          "n.root/operations": 0.4,
+          "n.root/specialized": 0.49,
+          "n.unknown": 0.21
+        },
+        "primary_memberships": {
+          "plugin-f7ae955a283d45cb58c6": {
+            "name": "superpowers",
+            "primary_root": "software",
+            "primary_confidence": 0.97,
+            "global_unknown": false,
+            "supported_roots": [
+              "software"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 238,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 226,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 147,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/office"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 97,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/content"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 91,
+            "kept_roots": [
+              "n.root/software"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "fresh_length_unit_conversion",
+        "stratum": "failed",
+        "root_probabilities": {
+          "n.root/software": 0.16,
+          "n.root/information": 0.43,
+          "n.root/content": 0.18,
+          "n.root/analysis": 0.98,
+          "n.root/office": 0.15,
+          "n.root/media": 0.04,
+          "n.root/operations": 0.17,
+          "n.root/specialized": 0.32,
+          "n.unknown": 0.26
+        },
+        "primary_memberships": {
+          "registry-debcfdd9202ec1920e5a": {
+            "name": "Kilometers to miles",
+            "primary_root": "analysis",
+            "primary_confidence": 1.0,
+            "global_unknown": false,
+            "supported_roots": [
+              "analysis"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 107,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/analysis",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 53,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/analysis"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 31,
+            "kept_roots": [
+              "n.root/analysis"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 31,
+            "kept_roots": [
+              "n.root/analysis"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 31,
+            "kept_roots": [
+              "n.root/analysis"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "new_calendar_readonly_agenda",
+        "stratum": "new",
+        "root_probabilities": {
+          "n.root/software": 0.17,
+          "n.root/information": 0.32,
+          "n.root/content": 0.12,
+          "n.root/analysis": 0.32,
+          "n.root/office": 0.95,
+          "n.root/media": 0.05,
+          "n.root/operations": 0.75,
+          "n.root/specialized": 0.25,
+          "n.unknown": 0.28
+        },
+        "primary_memberships": {
+          "registry-8bffdb9e729804c729f4": {
+            "name": "Apple Calendar",
+            "primary_root": "office",
+            "primary_confidence": 0.94,
+            "global_unknown": false,
+            "supported_roots": [
+              "office"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 155,
+            "kept_roots": [
+              "n.root/information",
+              "n.root/analysis",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 60,
+            "kept_roots": [
+              "n.root/office",
+              "n.root/operations"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 60,
+            "kept_roots": [
+              "n.root/office",
+              "n.root/operations"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 60,
+            "kept_roots": [
+              "n.root/office",
+              "n.root/operations"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 28,
+            "kept_roots": [
+              "n.root/office"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "new_test_driven_feature_plan",
+        "stratum": "new",
+        "root_probabilities": {
+          "n.root/software": 0.97,
+          "n.root/information": 0.57,
+          "n.root/content": 0.6,
+          "n.root/analysis": 0.17,
+          "n.root/office": 0.37,
+          "n.root/media": 0.06,
+          "n.root/operations": 0.23,
+          "n.root/specialized": 0.55,
+          "n.unknown": 0.26
+        },
+        "primary_memberships": {
+          "tdd-guide": {
+            "name": "tdd-guide",
+            "primary_root": "software",
+            "primary_confidence": 1.0,
+            "global_unknown": false,
+            "supported_roots": [
+              "software"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 211,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 163,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/office",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 135,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 91,
+            "kept_roots": [
+              "n.root/software"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 91,
+            "kept_roots": [
+              "n.root/software"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      },
+      {
+        "case": "new_access_control_design",
+        "stratum": "new",
+        "root_probabilities": {
+          "n.root/software": 0.96,
+          "n.root/information": 0.7,
+          "n.root/content": 0.5,
+          "n.root/analysis": 0.13,
+          "n.root/office": 0.41,
+          "n.root/media": 0.07,
+          "n.root/operations": 0.34,
+          "n.root/specialized": 0.61,
+          "n.unknown": 0.25
+        },
+        "primary_memberships": {
+          "plugin-9dff6ad6da61fa24dfbd": {
+            "name": "backend-api-security",
+            "primary_root": "software",
+            "primary_confidence": 0.99,
+            "global_unknown": false,
+            "supported_roots": [
+              "software"
+            ]
+          }
+        },
+        "counterfactual_gate_sweep": [
+          {
+            "gate": 0.2,
+            "pool_size": 211,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/office",
+              "n.root/operations",
+              "n.root/specialized",
+              "n.unknown"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.35,
+            "pool_size": 163,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/office",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.5,
+            "pool_size": 135,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information",
+              "n.root/content",
+              "n.root/specialized"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": false
+          },
+          {
+            "gate": 0.65,
+            "pool_size": 113,
+            "kept_roots": [
+              "n.root/software",
+              "n.root/information"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          },
+          {
+            "gate": 0.8,
+            "pool_size": 91,
+            "kept_roots": [
+              "n.root/software"
+            ],
+            "current_reference_retained": true,
+            "later_reference_groups_retained": [],
+            "all_primary_retained": true,
+            "known_coverage_and_final_size": true
+          }
+        ]
+      }
+    ]
+  },
+  "build_structure": {
+    "node_count": 10,
+    "candidate_count": 240,
+    "leaf_count": 9,
+    "max_depth": 1,
+    "max_fanout": 9,
+    "min_leaf_size": 2,
+    "max_leaf_size": 91,
+    "leaf_memberships": 279,
+    "split_roots": [],
+    "deferred_roots": [
+      "software",
+      "information",
+      "content",
+      "analysis",
+      "office",
+      "media",
+      "operations",
+      "specialized"
+    ],
+    "overlapping_candidates": 39,
+    "extra_leaf_memberships": 39
+  },
+  "sample": {
+    "source_catalog_count": 45325,
+    "sample_count": 240,
+    "kind_counts": {
+      "skill": 80,
+      "plugin": 80,
+      "mcp": 80
+    },
+    "known_reference_ids": 43,
+    "catalog_only_neighbors": 24,
+    "enriched_not_population_weighted": true,
+    "new_requests_not_blind": true
+  },
+  "low_cost_preflight": {
+    "condition": "mock_no_cross_domain_memberships_not_semantic_accuracy_or_actual_usage",
+    "sample_count": 240,
+    "total_payload_bytes": 308368,
+    "sum_conservative_send_reservations": 212586,
+    "max_payload_bytes": 49688,
+    "stats": {
+      "node_count": 9,
+      "candidate_count": 240,
+      "leaf_count": 8,
+      "max_depth": 1,
+      "max_fanout": 8,
+      "min_leaf_size": 30,
+      "max_leaf_size": 30,
+      "leaf_memberships": 240,
+      "split_roots": [],
+      "deferred_roots": [
+        "software",
+        "information",
+        "content",
+        "analysis",
+        "office",
+        "media",
+        "operations",
+        "specialized"
+      ],
+      "overlapping_candidates": 0,
+      "extra_leaf_memberships": 0
+    }
+  },
+  "reproducibility": {
+    "original_plan_sha256": "4cb26f9b40a04ac2c9478c6ed0345df7ed333b7c3faebb909f2c883a14f5a84f",
+    "source_sha256": {
+      "benchmarks/directory-depth/adaptive_catalog.py": "c5a0deda488229647886a5b6187017fa602533f4b72a5f3255949a652738ccb0",
+      "benchmarks/directory-depth/adaptive_cost.py": "31881729016c6bd1fcd3087355adb13045895563028926b30e5f2911a4563a3b",
+      "benchmarks/directory-depth/adaptive_cost_experiment.py": "5255dc0b8518338bf6acfab97911575d615d58fbf89fd9badad8e26c3dba3fa0",
+      "benchmarks/directory-depth/adaptive_early_stop.py": "df9f324f24ff41314f48d7d2905a51f5adf7667854b0da5662068490c6f85e4f",
+      "benchmarks/directory-depth/adaptive_experiment.py": "e58c84929fe47741c787b2c9f87e625d2b69a0b2518949d77b3fcfaab400d1fe",
+      "benchmarks/directory-depth/adaptive_repair.py": "5cfb14f71b07a8200a951c8cbe7eb9a535c582e05df2f023dc83025e27037979",
+      "benchmarks/directory-depth/adaptive_threshold.py": "fd58b833f00f020336a646b4ba29d61e986f7b8efd59a26e84c4421ba690a4f5",
+      "benchmarks/directory-depth/analyze.py": "0911da65044d743310d1cb333c9dd8155866a4c12007ab8f88a50b547582984b",
+      "benchmarks/directory-depth/analyze_adaptive.py": "bd9b018f3de1f6704967d6adcad69abd7e564db951601c737788731f832be8c6",
+      "benchmarks/directory-depth/analyze_adaptive_cost.py": "02b31531c1a88921066ad9175dab1f4275a8ee8d4a4a1b94482e3104606b98c1",
+      "benchmarks/directory-depth/analyze_conditional.py": "c69676425bd37511c03a954884c6e4b8bdaceb3bdab19c8a7b7da594e6571f61",
+      "benchmarks/directory-depth/analyze_conditional_current.py": "6f330e3910f574210a963f0f73679a8bd2ca3c09907187f4e897315955cbcb0f",
+      "benchmarks/directory-depth/analyze_expanded.py": "86f828a7cb81abaf5684f87fa80655960e49101d9d0f45fec37a6915fe303ac7",
+      "benchmarks/directory-depth/analyze_final_contrast.py": "04adea10e7948beac10cb475b319e88ad1a035a0b547498829d5a4a93ca3f08a",
+      "benchmarks/directory-depth/analyze_focused.py": "d37bcfb4803a035935a3b05346926147ddc579ecc8c21b6b02d5987cbc39732b",
+      "benchmarks/directory-depth/analyze_merged_completion.py": "6248f0495b50f2bdfbfbce2cb4a4696a3598d09b0de10c98aaeafb20dc8349c0",
+      "benchmarks/directory-depth/analyze_repair.py": "51681199b5a0adb1e305a9ee2db6a9a794dd21b19244e41b4bda2d5a41b1eba3",
+      "benchmarks/directory-depth/analyze_requirement_coverage.py": "fa92989b41e23681387a4c74a8045cda4dd2b40a9033737759d57a80a3a228b6",
+      "benchmarks/directory-depth/analyze_semantic_experiment.py": "ebdd6788b7a8702d05f9f9789471265f4f1d3fd3dc4eafbef8badab24c178227",
+      "benchmarks/directory-depth/analyze_source_preflight.py": "b54b25f765d485160d06b132f73ca15f6d90dacc1929ec2855d5fc66dd2dda7b",
+      "benchmarks/directory-depth/analyze_structured_recall.py": "507bc75d4f629dcb831e2ffb9f8f81f08bc68f91a5cc071b371a28426e258b11",
+      "benchmarks/directory-depth/analyze_threshold.py": "466cf57003a94c437d072ff70bbdd03bb431c408f4984c7171683ee349475aec",
+      "benchmarks/directory-depth/analyze_unseen_breadth.py": "ec9a6424d9628d2b2c650c6e2240306fe9bf47d27e476cab2d2164d6a47c2620",
+      "benchmarks/directory-depth/bilingual_terms.py": "d2d37fe11f5e4cc7cbf3565b385e4f667f8bcd233dff2e6f46eb9eda1f23ae45",
+      "benchmarks/directory-depth/breadth_cases.json": "69e3117dd7ca6371684d6aea9b64a8b6bf22673bb61d24edca84626f2f22b6c9",
+      "benchmarks/directory-depth/breadth_experiment.py": "47081cae41bb2ee631689c49297ac9a291669269c9adc2655bece144b4d66982",
+      "benchmarks/directory-depth/classify_merged.py": "333f65b79c66db55a60d494e1beca7cf695af9e30c026cd589e7fc1190c0aebc",
+      "benchmarks/directory-depth/complete_sources.py": "c7097cf9f017461e27abd8d560c3ef96ec2d310fba4277d3037f8b197e6dcd33",
+      "benchmarks/directory-depth/conditional_current.py": "6e2ea31c08d81eee668a092ef1b7afa32ea13ef43fdf588ceae00dbdb0f81549",
+      "benchmarks/directory-depth/conditional_current_cases.json": "3e9f2c4dfae68204ea512e997ae3250969e2f41dfb37fbdd8cd052d914951135",
+      "benchmarks/directory-depth/conditional_current_experiment.py": "e78ff50ce20958f1a552023562c758db7a0a066622b05213f32a31572604c0b4",
+      "benchmarks/directory-depth/conditional_experiment.py": "127329b23bad4205c15e98194d31cc7e6836178af2a62c56b376d322c2f184f1",
+      "benchmarks/directory-depth/conditional_search.py": "9e0fcdf32192e40644ae5ab14324f0cbca33a73e7d033b450aa7d67f819117f8",
+      "benchmarks/directory-depth/culture_scope.py": "8c8f8e919a968c933aca6e78330fb8dbe3afb3c5da49feedf069e818b014b45a",
+      "benchmarks/directory-depth/culture_scope_cases.json": "93e6a1d7f223e88ca9ffdd5a963371ebc957e4f19f28508957e1826280e62244",
+      "benchmarks/directory-depth/culture_scope_experiment.py": "903b5113e5ca4285b309a7a9051c87ff15fe6fe651f45d90b300bfed58e309db",
+      "benchmarks/directory-depth/current_step.py": "03f1112b7e0e29059bb4ad8c9295aee851e5ef9b640894b51284163b26e8473d",
+      "benchmarks/directory-depth/current_step_cases.json": "fd34a3bb9210c5a5aaec98e8670921068cf56d7f430463a121146ed812f218a8",
+      "benchmarks/directory-depth/current_step_experiment.py": "cb0627cc7cd2effd08045677c1bddc321436a8201a71e2af4da850e3594510f9",
+      "benchmarks/directory-depth/dependency_cases.json": "437cc2a5d5c81ba20454025ce1b4a083b0a8f215668a83f22122251f220ef678",
+      "benchmarks/directory-depth/dependency_experiment.py": "f0cd28524bd026f30d88c6105b1e3433045ce7bb88600e54349b1965a1486270",
+      "benchmarks/directory-depth/dependency_scope.py": "b63f21959200ead57e504250d00cea7460f05160f8a1ad61d62ba39ca47bcfad",
+      "benchmarks/directory-depth/dependency_selection.py": "e1f98a2f550fb2d605eeb23108fdfce695b7cb7106e14eec611d4a16729f72c8",
+      "benchmarks/directory-depth/expanded_cases.json": "6712d6909d27b6035d4e12ad2082165b5e25fa3fa9b63e20238777f23e7f45e9",
+      "benchmarks/directory-depth/expanded_experiment.py": "bff01ab4da9090932e8fb1ae9bb7150ea80e42cd757cf39b65583df1650f6eec",
+      "benchmarks/directory-depth/experiment.py": "fe213f9a6cd85a056d03b1d03815ed5870b7cab9117144b6be4e1287906c00a1",
+      "benchmarks/directory-depth/final_contrast.py": "348fb93d990a149aa2a5ca93e4e3ed2795c66bf4b3d93a2172c8a2db1a7b26da",
+      "benchmarks/directory-depth/final_contrast_cases.json": "78c00e517700c67f7e161415e0b20ebf3720f899d3c5f618e42f1df70c8104c2",
+      "benchmarks/directory-depth/final_contrast_experiment.py": "1dd12d439e1d717e1eff763ce65bd27ef46eec76cfb0afc8a6b0db23fffd22cf",
+      "benchmarks/directory-depth/focused_cases.json": "4e7a299ca7b89d0c4bf4007d2e8c728f6a0a03e9425fe0540c4d6f534f133270",
+      "benchmarks/directory-depth/focused_current.py": "eeaa496bd58ac07cc29ee11f8707758fc351b16555ca2522740dc3c19e797d76",
+      "benchmarks/directory-depth/focused_experiment.py": "b46debcc9e5ccd2cf24e44ae900d38ce794cfb3c2e4efb529d6e86c2ff246df9",
+      "benchmarks/directory-depth/independent_current.py": "28a918655036c6436097b391a9c668366f62df7563cec4300726cccb8f669a67",
+      "benchmarks/directory-depth/jev_directory_analyze.py": "30220570c223437d222846e46049fd80a18798a866948d61dd0d99b3e0149faf",
+      "benchmarks/directory-depth/jev_directory_cases.json": "4d7bd665163cc6b87077ffd8311e0ce7ed4fcebfeaa338b7fb13e120397182be",
+      "benchmarks/directory-depth/jev_directory_experiment.py": "5dd7e96a10d4f98c0e3e6e0600a42bf8317deaa7132865dd2fc244a5bff908c4",
+      "benchmarks/directory-depth/jev_directory_route.py": "c4c9bf5c5489e4110d06a5b3968168ca377bffe839aff64c46490d3e9ccb4569",
+      "benchmarks/directory-depth/jev_directory_tree.py": "9922ed433e8f5a9330f207aa3129a3b47cf591b21fe83cd93130562a26db2968",
+      "benchmarks/directory-depth/jev_taxonomy.json": "bccb094902dfbb3819d02a33793a2222307851d69ba15a8b9ee9721138e36c70",
+      "benchmarks/directory-depth/jev_taxonomy_build.py": "8123d1e2473d8d6e49d7f7cb12f2cd4bba5f2cc76cd43835cb4b1a4e589c348c",
+      "benchmarks/directory-depth/jev_taxonomy_experiment.py": "c14d6f982024ffa214c7e60ee0dd247275cb2714992a15fc684c3b33107a698a",
+      "benchmarks/directory-depth/large_public_cases.json": "a8dfc3b7f6b30bd87b897effe16c3b188b85655d77cc2021c006339848ff2560",
+      "benchmarks/directory-depth/merged_catalog.py": "e60baffde7f90bd29901823c66c529d4d88cfa03aaba4dcb790defc526190047",
+      "benchmarks/directory-depth/merged_experiment.py": "0031b0a778745d990936c29795d8c1f3088c55d2b2617850a8a3cd1931d8dcea",
+      "benchmarks/directory-depth/prepare.py": "0e6ee116226a42b665f238c83b23c7c580432091d5ff4131a328b16ff82f30d3",
+      "benchmarks/directory-depth/ranking_policy.py": "3fa69269d26fb790aebbbb76f5bfed8f11e833f092cc2f0bbe072aad780ca0e6",
+      "benchmarks/directory-depth/repair_experiment.py": "cdf8b0541ac162c1dca06970365cb9b586583dca4a5200d1da8e4e879f292519",
+      "benchmarks/directory-depth/requirement_coverage.py": "5626955c99e9682aa706fb1aad99a6e766d95e4b89db5023ab88fd1afc935954",
+      "benchmarks/directory-depth/requirement_coverage_experiment.py": "c3196409062eb32b889dfe4d74907a56c710cd2d9948dbfce93e0d681dbd6a3a",
+      "benchmarks/directory-depth/resume_merged.py": "5933d6a1c62c81797f95c4a85435579538679fc37c81d90414a97a460db1ae59",
+      "benchmarks/directory-depth/resume_repair.py": "5bbdd1598a92b9e5f2af0cd91fbddddf63aa2fc4dfc951a2f4f848049e841b7d",
+      "benchmarks/directory-depth/semantic_experiment.py": "9c814169ec03d916a80e5e1442103a3bba8c0976c3a3ae26ccaa3c3414d59fcd",
+      "benchmarks/directory-depth/semantic_index.py": "9953146a2e182278809bb47ffa2d5254d5aedad77c81fa52ae14be67cf3c24c5",
+      "benchmarks/directory-depth/semantic_recall.py": "afc7b4cb1423e8d1c31c10ff9d4c33c41a88625debcabe527064c3dfec9a8a8c",
+      "benchmarks/directory-depth/slim_experiment.py": "ce7bb8ce3de60f5d42cb9182c82e595da7a9dc5f1fd1baabd7aece370cc72044",
+      "benchmarks/directory-depth/source_preflight.py": "4ad54889f1e0c172772ba138772316d73b4fd80cea9c2d6a72a46e1a0859593c",
+      "benchmarks/directory-depth/structured_recall.py": "22d14c59943a6bd98a32e6b19e60053a396b5374a881ccadcf34838decf9a056",
+      "benchmarks/directory-depth/structured_recall_cases.json": "8abf9901ce294e5159081156419f9799f3a6fa478d3d272a0edd88660e60d16d",
+      "benchmarks/directory-depth/structured_recall_experiment.py": "2b36d545cc6a92203be841dd36e7b37db938ce59dda4eeb9556239c93c25a1c8",
+      "benchmarks/directory-depth/threshold_cases.json": "d4b6762386cb0291ddffd9a7bb6008c7f82972858d9bc5ed9360a7f7fdf2120c",
+      "benchmarks/directory-depth/threshold_experiment.py": "c1466e962a03a4f26d8b8e6c49beae235b1a78355b740849d5e605bbe361ef65",
+      "benchmarks/directory-depth/unseen_breadth_experiment.py": "29cd98eb4d1361885501a15203cd4999999de842fd325395406e3f789c857cca",
+      "core/jev_hierarchy_provider.py": "41836d52ecfe9663d0ee361cecb1945f33be1d835e54e0432e833a27cfc6245b"
+    },
+    "source_catalog_sha256": "64bc3d608649768fc3117e6a4ed4eb5e32278a3ae540f23bd2a568aa7bd7e57a",
+    "suffix_plan_sha256": "8d91513d24eed3cbcd835431181042e0479d2b48f41f900ed38f3b38f501bf2c",
+    "suffix_source_sha256": "06594196cc889282487a7a1cea9b5bd57f39618b1e1050e8dbb537fc480c23b2"
+  },
+  "verification": {
+    "taxonomy_tests": 37,
+    "unchanged_directory_tests": 38,
+    "protected_preflight_files": 459,
+    "independent_results_audit": "read-only receipts and final-pool audit; no model calls",
+    "daily_routing_changed": false,
+    "actual_capability_execution": "unverified",
+    "suffix_tests": 9,
+    "protected_post_test_files": 459,
+    "protected_worktree_head_and_status": "unchanged",
+    "independent_suffix_audit": "five raw answer maps, frozen current/later coverage, budget guard, cost and incomplete scope checked read-only"
+  },
+  "separate_gate_suffix": {
+    "verification": "locked_inputs_and_exact_cached_prefix_suffix_replay_passed",
+    "gate": 0.65,
+    "final_gate": 0.7,
+    "stop": "budget_stop",
+    "rows": [
+      {
+        "case": "fresh_backend_exception_design",
+        "arm": "semantic-suffix",
+        "stratum": "failed",
+        "status": "selected",
+        "choice": "spec-driven-workflow",
+        "confidence": 0.77,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [
+          true
+        ],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [
+          true
+        ],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 113,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          },
+          {
+            "stage": "final_pool",
+            "ordinal": 2,
+            "pool_size": 113,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          }
+        ],
+        "reached_final": true,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 113,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "actual_final_pool": {
+          "stage": "final_pool",
+          "ordinal": 2,
+          "pool_size": 113,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "calls": 1,
+        "input_tokens": 21243,
+        "input_tokens_complete": true,
+        "output_tokens": 4189,
+        "output_tokens_complete": true,
+        "known_tokens": 25432,
+        "wall_seconds": 0.9692687090137042,
+        "cached_prefix_cost": {
+          "calls": 1,
+          "input_tokens": 3118,
+          "input_tokens_complete": true,
+          "output_tokens": 157,
+          "output_tokens_complete": true,
+          "known_tokens": 3275,
+          "historical_transport_seconds": 2.5122970420052297
+        },
+        "composite_calls": 2,
+        "composite_known_tokens": 28707
+      },
+      {
+        "case": "new_access_control_design",
+        "arm": "semantic-suffix",
+        "stratum": "new",
+        "status": "selected",
+        "choice": "spec-driven-workflow",
+        "confidence": 0.7,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 113,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          },
+          {
+            "stage": "final_pool",
+            "ordinal": 2,
+            "pool_size": 113,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": true,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 113,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": {
+          "stage": "final_pool",
+          "ordinal": 2,
+          "pool_size": 113,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "calls": 1,
+        "input_tokens": 21241,
+        "input_tokens_complete": true,
+        "output_tokens": 4189,
+        "output_tokens_complete": true,
+        "known_tokens": 25430,
+        "wall_seconds": 0.8773524579883087,
+        "cached_prefix_cost": {
+          "calls": 1,
+          "input_tokens": 3116,
+          "input_tokens_complete": true,
+          "output_tokens": 157,
+          "output_tokens_complete": true,
+          "known_tokens": 3273,
+          "historical_transport_seconds": 0.9398968330060598
+        },
+        "composite_calls": 2,
+        "composite_known_tokens": 28703
+      },
+      {
+        "case": "fresh_implementation_plan",
+        "arm": "semantic-suffix",
+        "stratum": "failed",
+        "status": "selected",
+        "choice": "spec-driven-workflow",
+        "confidence": 0.97,
+        "correct_current": true,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": true,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": true,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 97,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          },
+          {
+            "stage": "final_pool",
+            "ordinal": 2,
+            "pool_size": 97,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": true,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 97,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": {
+          "stage": "final_pool",
+          "ordinal": 2,
+          "pool_size": 97,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "calls": 1,
+        "input_tokens": 18902,
+        "input_tokens_complete": true,
+        "output_tokens": 3583,
+        "output_tokens_complete": true,
+        "known_tokens": 22485,
+        "wall_seconds": 0.932654125004774,
+        "cached_prefix_cost": {
+          "calls": 1,
+          "input_tokens": 3104,
+          "input_tokens_complete": true,
+          "output_tokens": 157,
+          "output_tokens_complete": true,
+          "known_tokens": 3261,
+          "historical_transport_seconds": 1.070948791981209
+        },
+        "composite_calls": 2,
+        "composite_known_tokens": 25746
+      },
+      {
+        "case": "new_test_driven_feature_plan",
+        "arm": "semantic-suffix",
+        "stratum": "new",
+        "status": "selected",
+        "choice": "spec-driven-workflow",
+        "confidence": 0.94,
+        "correct_current": false,
+        "current_in_final_pool": true,
+        "later_group_coverage": [],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": false,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [],
+        "all_primary_references_retained": true,
+        "strict_pass": false,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 91,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          },
+          {
+            "stage": "final_pool",
+            "ordinal": 2,
+            "pool_size": 91,
+            "current_covered": true,
+            "later_covered": [],
+            "primary_current_covered": true,
+            "primary_later_covered": []
+          }
+        ],
+        "reached_final": true,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 91,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "actual_final_pool": {
+          "stage": "final_pool",
+          "ordinal": 2,
+          "pool_size": 91,
+          "current_covered": true,
+          "later_covered": [],
+          "primary_current_covered": true,
+          "primary_later_covered": []
+        },
+        "calls": 1,
+        "input_tokens": 17718,
+        "input_tokens_complete": true,
+        "output_tokens": 3361,
+        "output_tokens_complete": true,
+        "known_tokens": 21079,
+        "wall_seconds": 0.7405042090103962,
+        "cached_prefix_cost": {
+          "calls": 1,
+          "input_tokens": 3110,
+          "input_tokens_complete": true,
+          "output_tokens": 157,
+          "output_tokens_complete": true,
+          "known_tokens": 3267,
+          "historical_transport_seconds": 0.6693700000178069
+        },
+        "composite_calls": 2,
+        "composite_known_tokens": 24346
+      },
+      {
+        "case": "new_finance_runway_then_slides",
+        "arm": "semantic-suffix",
+        "stratum": "failed",
+        "status": "selected",
+        "choice": "cfo-advisor",
+        "confidence": 0.88,
+        "correct_current": true,
+        "current_in_final_pool": true,
+        "later_group_coverage": [
+          true
+        ],
+        "missing_later_groups": [],
+        "all_required_retained": true,
+        "omission_safe_pass": true,
+        "primary_current_in_final_pool": true,
+        "primary_later_in_pool": [
+          true
+        ],
+        "all_primary_references_retained": true,
+        "strict_pass": true,
+        "strict_anchor_pass": false,
+        "observed_pools": [
+          {
+            "stage": "directory",
+            "ordinal": 1,
+            "pool_size": 83,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          },
+          {
+            "stage": "final_pool",
+            "ordinal": 2,
+            "pool_size": 83,
+            "current_covered": true,
+            "later_covered": [
+              true
+            ],
+            "primary_current_covered": true,
+            "primary_later_covered": [
+              true
+            ]
+          }
+        ],
+        "reached_final": true,
+        "last_frontier": {
+          "stage": "directory",
+          "ordinal": 1,
+          "pool_size": 83,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "actual_final_pool": {
+          "stage": "final_pool",
+          "ordinal": 2,
+          "pool_size": 83,
+          "current_covered": true,
+          "later_covered": [
+            true
+          ],
+          "primary_current_covered": true,
+          "primary_later_covered": [
+            true
+          ]
+        },
+        "calls": 1,
+        "input_tokens": 15306,
+        "input_tokens_complete": true,
+        "output_tokens": 3065,
+        "output_tokens_complete": true,
+        "known_tokens": 18371,
+        "wall_seconds": 0.8360238749883138,
+        "cached_prefix_cost": {
+          "calls": 1,
+          "input_tokens": 3133,
+          "input_tokens_complete": true,
+          "output_tokens": 157,
+          "output_tokens_complete": true,
+          "known_tokens": 3290,
+          "historical_transport_seconds": 1.7704212910030037
+        },
+        "composite_calls": 2,
+        "composite_known_tokens": 21661
+      }
+    ],
+    "groups": {
+      "failed": {
+        "completed_rows": 3,
+        "planned_rows": 6,
+        "known_positive_accuracy": {
+          "correct": 2,
+          "total": 3,
+          "rate": 0.6666666666666666
+        },
+        "omission_safe_accuracy": {
+          "correct": 2,
+          "total": 3,
+          "rate": 0.6666666666666666
+        },
+        "current_retained_pool_coverage": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "reached_final_rows": 3,
+        "actual_final_pool_current_coverage": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "actual_final_pool_later_group_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "later_group_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "primary_reference_coverage": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "status_counts": {
+          "selected": 3
+        },
+        "calls": 3,
+        "input_tokens": 55451,
+        "output_tokens": 10837,
+        "known_tokens": 66288,
+        "wall_seconds": 2.737946709006792
+      },
+      "new": {
+        "completed_rows": 2,
+        "planned_rows": 3,
+        "known_positive_accuracy": {
+          "correct": 0,
+          "total": 2,
+          "rate": 0.0
+        },
+        "omission_safe_accuracy": {
+          "correct": 0,
+          "total": 2,
+          "rate": 0.0
+        },
+        "current_retained_pool_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "reached_final_rows": 2,
+        "actual_final_pool_current_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "actual_final_pool_later_group_coverage": {
+          "correct": 0,
+          "total": 0,
+          "rate": null
+        },
+        "later_group_coverage": {
+          "correct": 0,
+          "total": 0,
+          "rate": null
+        },
+        "primary_reference_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "status_counts": {
+          "selected": 2
+        },
+        "calls": 2,
+        "input_tokens": 38959,
+        "output_tokens": 7550,
+        "known_tokens": 46509,
+        "wall_seconds": 1.617856666998705
+      },
+      "all": {
+        "completed_rows": 5,
+        "planned_rows": 9,
+        "known_positive_accuracy": {
+          "correct": 2,
+          "total": 5,
+          "rate": 0.4
+        },
+        "omission_safe_accuracy": {
+          "correct": 2,
+          "total": 5,
+          "rate": 0.4
+        },
+        "current_retained_pool_coverage": {
+          "correct": 5,
+          "total": 5,
+          "rate": 1.0
+        },
+        "reached_final_rows": 5,
+        "actual_final_pool_current_coverage": {
+          "correct": 5,
+          "total": 5,
+          "rate": 1.0
+        },
+        "actual_final_pool_later_group_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "later_group_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0
+        },
+        "primary_reference_coverage": {
+          "correct": 5,
+          "total": 5,
+          "rate": 1.0
+        },
+        "status_counts": {
+          "selected": 5
+        },
+        "calls": 5,
+        "input_tokens": 94410,
+        "output_tokens": 18387,
+        "known_tokens": 112797,
+        "wall_seconds": 4.355803376005497
+      }
+    },
+    "unfinished": [
+      "new_calendar_readonly_agenda",
+      "new_scholarly_paper_lookup",
+      "unseen_time_zone_conversion",
+      "unseen_search_friendly_article"
+    ],
+    "interrupted": {
+      "case": "new_calendar_readonly_agenda",
+      "arm": "semantic-suffix",
+      "grade": "unobserved",
+      "replay_stop": "unrecorded_next_send"
+    },
+    "skipped": [
+      {
+        "case": "fresh_length_unit_conversion",
+        "reason": "already observed omission-safe semantic pass at .2",
+        "gate_065_result": "unverified"
+      }
+    ],
+    "marginal_suffix_cost": {
+      "calls": 5,
+      "attempted_sends": 5,
+      "input_tokens": 94410,
+      "input_tokens_complete": true,
+      "output_tokens": 18387,
+      "output_tokens_complete": true,
+      "known_tokens": 112797,
+      "wall_seconds": 4.3814391670166515,
+      "real_transport_seconds": 4.3182807929988485
+    },
+    "original_online_cost": {
+      "calls": 21,
+      "attempted_sends": 21,
+      "input_tokens": 95081,
+      "output_tokens": 8361,
+      "known_tokens": 103442,
+      "real_transport_seconds": 28.17270291497698,
+      "input_tokens_complete": true,
+      "output_tokens_complete": true,
+      "wall_seconds": 28.457016042026225
+    },
+    "full_online_experiment_cost": {
+      "calls": 26,
+      "attempted_sends": 26,
+      "input_tokens": 189491,
+      "output_tokens": 26748,
+      "known_tokens": 216239,
+      "real_transport_seconds": 32.49098370797583,
+      "wall_seconds": 32.83845520904288,
+      "input_tokens_complete": true,
+      "output_tokens_complete": true
+    },
+    "original_offline_build_cost": {
+      "calls": 11,
+      "attempted_sends": 11,
+      "input_tokens": 116456,
+      "input_tokens_complete": true,
+      "output_tokens": 27445,
+      "output_tokens_complete": true,
+      "known_tokens": 143901,
+      "wall_seconds": 16.201485708996188,
+      "real_transport_seconds": 15.527120543003548
+    },
+    "full_experiment_cost_including_offline_build": {
+      "calls": 37,
+      "attempted_sends": 37,
+      "input_tokens": 305947,
+      "output_tokens": 54193,
+      "known_tokens": 360140,
+      "real_transport_seconds": 48.01810425097938,
+      "wall_seconds": 49.039940918039065,
+      "input_tokens_complete": true,
+      "output_tokens_complete": true
+    },
+    "completed_composite_cost": {
+      "calls": 10,
+      "known_tokens": 129163
+    },
+    "qualifications": {
+      "prefix": "historical root judgments reused exactly; no root reruns",
+      "latency": "New suffix wall time excludes cached prefix; no fresh end-to-end latency measured.",
+      "skipped": "Original .2 pass is excluded and unverified at .65.",
+      "new": "Three new cases were previously exposed; this is not unseen validation.",
+      "comparison": "Gate and suffix policy changed; no organization-only advantage established.",
+      "backend_model_revision": "unobservable",
+      "full_catalog_scaling": "unverified"
+    }
+  },
+  "suffix_failure_diagnostics": [
+    {
+      "case": "fresh_backend_exception_design",
+      "selected_id": "spec-driven-workflow",
+      "selected_answer": {
+        "type": "choice",
+        "choice": "current",
+        "confidence": 0.77,
+        "probabilities": {
+          "current": 0.85,
+          "partial": 0.12,
+          "other": 0.03
+        }
+      },
+      "primary_reference_id": "plugin-c0869c35643648b7dd0c",
+      "primary_reference_answer": {
+        "type": "choice",
+        "choice": "partial",
+        "confidence": 0.55,
+        "probabilities": {
+          "current": 0.27,
+          "partial": 0.7,
+          "other": 0.03
+        }
+      }
+    },
+    {
+      "case": "new_access_control_design",
+      "selected_id": "spec-driven-workflow",
+      "selected_answer": {
+        "type": "choice",
+        "choice": "current",
+        "confidence": 0.7,
+        "probabilities": {
+          "current": 0.8,
+          "partial": 0.17,
+          "other": 0.03
+        }
+      },
+      "primary_reference_id": "plugin-9dff6ad6da61fa24dfbd",
+      "primary_reference_answer": {
+        "type": "choice",
+        "choice": "current",
+        "confidence": 0.61,
+        "probabilities": {
+          "current": 0.74,
+          "partial": 0.24,
+          "other": 0.02
+        }
+      }
+    },
+    {
+      "case": "new_test_driven_feature_plan",
+      "selected_id": "spec-driven-workflow",
+      "selected_answer": {
+        "type": "choice",
+        "choice": "current",
+        "confidence": 0.94,
+        "probabilities": {
+          "current": 0.96,
+          "partial": 0.03,
+          "other": 0.01
+        }
+      },
+      "primary_reference_id": "tdd-guide",
+      "primary_reference_answer": {
+        "type": "choice",
+        "choice": "current",
+        "confidence": 0.88,
+        "probabilities": {
+          "current": 0.92,
+          "partial": 0.07,
+          "other": 0.01
+        }
+      }
+    }
+  ],
+  "suffix_diagnosis_qualifications": {
+    "tdd": "confidence ordering between two accepted current candidates",
+    "access_control": "specialists classified current below final .7, not only ordering",
+    "exception_design": "metadata names error handling but not all retry/logging details; partial is defensible and frozen reference coverage uncertain",
+    "generalization": "cost-ordered exposed subset; no general bias established"
+  }
+}

@@ -460,6 +460,17 @@ The frozen budget stops the pilot after 13 calls / 256,988 tokens; all three new
 requests remain unobserved. The final 0.7 gate stays unchanged. This directory
 organization is not promoted, and the daily runtime remains unchanged.
 
+The [authored taxonomy and Jev-classification pilot](docs/backpack-jev-semantic-taxonomy-2026-10-16.md)
+compares identical 240-record public subsets. Organization alone succeeds on
+1/10 requests versus 0/10 for balanced grouping; terminal unions remain too wide.
+A separately frozen 0.65 directory-gate suffix reaches final selection but
+passes only 2/5 completed requests before its inherited budget guard; four
+suffixes remain unobserved. Known current and required later references survive
+all observed pools. Three final choices favor generic specification planning
+over frozen specialist references; one reference has metadata-coverage ambiguity.
+Final confidence stays at least 0.7;
+84 affected checks pass. No daily-runtime change or promotion is made.
+
 ## Security Boundary
 
 CatMaster Backpack does not execute installs or uninstalls by default. Tool changes use `backpack-manager`, require official-source verification, and ask for confirmation. Skill changes go through managed skill-tree commands and should run verification before use. Explicit catalog-mode requests can return compact catalogs without exposing every tool or skill at startup.

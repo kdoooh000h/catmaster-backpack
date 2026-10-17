@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "roots": [
+    {
+      "id": "software",
+      "name": "软件开发与维护 / Software engineering",
+      "description": "Design, plan, implement, debug, test or review software and its application security. 软件方案、编程、测试、代码与依赖审查。 Retrieving documentation alone belongs to information; operating deployed systems belongs to operations.",
+      "children": [
+        {
+          "id": "design_planning",
+          "name": "软件方案与实现计划 / Software design and planning",
+          "description": "Translate software requirements into architecture, implementation steps, API/data/error behavior and engineering plans. Includes design guidance; distinguishes business planning and listing existing work tickets."
+        },
+        {
+          "id": "implementation_testing",
+          "name": "实现、调试与测试 / Implementation, debugging and testing",
+          "description": "Implement or repair frontend/backend/app code, debug failures, test first, refactor and verify software behavior. 指导与执行均可；documentation lookup alone is a different purpose."
+        },
+        {
+          "id": "review_security",
+          "name": "代码、依赖与应用安全 / Code, dependency and application security review",
+          "description": "Review code quality, dependencies, vulnerabilities and software authentication/authorization design. Includes access-control design guidance; running account administration is a different operation."
+        }
+      ]
+    },
+    {
+      "id": "information",
+      "name": "资料检索与研究 / Information and research",
+      "description": "Find or read existing information, evidence, publications and technical documentation. 搜索资料与核对来源。 Writing original content, implementing code and clicking through browser workflows have separate purposes.",
+      "children": [
+        {
+          "id": "scholarly",
+          "name": "论文与学术证据 / Scholarly search",
+          "description": "Discover research papers, scientific publications, citations and scholarly evidence. Existing literature retrieval; distinguishes original promotional writing and general browser operation."
+        },
+        {
+          "id": "web_knowledge",
+          "name": "网页与通用知识 / Web information and knowledge",
+          "description": "Search/read web pages, factual knowledge, reference material and public information sources. Reading existing information; interactive UI workflows and specialized SDK documentation are separately identified."
+        },
+        {
+          "id": "developer_docs",
+          "name": "开发文档与 API 资料 / Developer documentation",
+          "description": "Retrieve framework, library, API and SDK documentation, versions and examples. 获取开发资料；this alone does not assert implementation, debugging or code-review support."
+        }
+      ]
+    },
+    {
+      "id": "content",
+      "name": "写作、传播与语言 / Writing, communication and language",
+      "description": "Plan, draft, edit, translate or adapt original textual communication for an audience. 写稿、内容规划、营销和本地化。 Retrieving existing sources and sending through an account are separate functions.",
+      "children": [
+        {
+          "id": "articles",
+          "name": "文章与搜索内容 / Articles and search-oriented content",
+          "description": "Plan/write/edit articles, tutorials and other long-form content, including reader intent, SEO content structure and headings. Content creation; distinguishes only fetching search results or keyword data."
+        },
+        {
+          "id": "language_copy",
+          "name": "文案、翻译与本地化 / Copy, translation and localization",
+          "description": "Draft or adapt messages, copy and multilingual text, tone and audience wording. Textual guidance or production; no account sending or software translation features are inferred."
+        },
+        {
+          "id": "marketing_business",
+          "name": "营销与商业表达 / Marketing and business communication",
+          "description": "Prepare marketing campaigns, product/brand messaging and business communications for audiences. Creative or strategic communication; financial calculations and account transactions have separate purposes."
+        }
+      ]
+    },
+    {
+      "id": "analysis",
+      "name": "计算、数据与财务 / Computation, data and finance",
+      "description": "Calculate quantities, convert units/times, analyze data or evaluate financial conditions. 数值换算、统计分析、经营数字与风险。 Formatting output files or changing account balances is a separate operation.",
+      "children": [
+        {
+          "id": "calculation_conversion",
+          "name": "计算与换算 / Calculation and conversion",
+          "description": "Compute mathematical results and convert units, dates or time zones, including date-aware daylight-saving rules when explicitly supported. 时间换算；calendar event creation and invitation sending are separate."
+        },
+        {
+          "id": "finance",
+          "name": "财务评估与情景分析 / Financial evaluation and scenarios",
+          "description": "Analyze financial statements, cash, costs, runway, forecasts, scenarios and financial risks. Includes analytical guidance; no real accounts, billing actions or missing financial features are implied."
+        },
+        {
+          "id": "data",
+          "name": "数据与统计分析 / Data and statistical analysis",
+          "description": "Process/explore datasets, query analytical data, derive statistics and interpret charts or tables. Data analysis purpose; spreadsheet/document formatting and generic database connection are separately identified."
+        }
+      ]
+    },
+    {
+      "id": "office",
+      "name": "办公产物与日程沟通 / Office artifacts and coordination",
+      "description": "Create or manipulate documents, spreadsheets, presentations, calendars, messages and work records. 办公文件、日程与协作。 Keep artifact/account operations distinct from analyzing their subject matter or merely drafting text.",
+      "children": [
+        {
+          "id": "documents_sheets",
+          "name": "文档、表格与 PDF / Documents, spreadsheets and PDF",
+          "description": "Create/edit/format or transform document, spreadsheet and PDF artifacts, including supported spreadsheet formulas. 文件操作与排版；do not infer financial analysis merely from spreadsheet access."
+        },
+        {
+          "id": "presentations",
+          "name": "演示文稿 / Presentations",
+          "description": "Create/edit slides, presentation layouts and supported speaker notes. 演示产物；this purpose differs from producing the underlying research or numerical analysis."
+        },
+        {
+          "id": "coordination",
+          "name": "日历、消息与任务 / Calendars, messages and tasks",
+          "description": "Read or manage calendars, agendas, events, messages, invitations and task records, according to explicit supported actions. 区分查看与写入；time-zone arithmetic and drafting prose alone are separate functions."
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "name": "视觉与音视频 / Visual and audiovisual media",
+      "description": "Design, create, edit or transform visual, audio and video media. 设计、图像、音频与视频。 Software UI implementation belongs to engineering, while making its visual design belongs here.",
+      "children": [
+        {
+          "id": "visual",
+          "name": "视觉设计与图像 / Visual design and images",
+          "description": "Create/edit graphic design, UI visuals, images, illustrations, layouts and visual assets. Design guidance or execution; converting a design into working software is separately identified."
+        },
+        {
+          "id": "audio_video",
+          "name": "音频与视频 / Audio and video",
+          "description": "Create/edit/transcribe or transform audio, speech, music and video assets when stated in metadata. 媒体处理；do not infer content publishing, account access or unsupported generation features."
+        }
+      ]
+    },
+    {
+      "id": "operations",
+      "name": "系统、浏览器与服务操作 / Systems, browsers and service operations",
+      "description": "Operate software environments, files, networks, browser interfaces and service connections. 系统环境与应用操作。 Prefer a service's explicit user-facing purpose when known; generic connectivity does not prove all downstream capabilities.",
+      "children": [
+        {
+          "id": "browser",
+          "name": "浏览器交互 / Browser interaction",
+          "description": "Navigate, click, enter data and inspect actual web-interface behavior with browser automation. 真实页面操作；fetching/searching information alone is separately identified."
+        },
+        {
+          "id": "systems_files",
+          "name": "系统、文件与部署 / Systems, files and deployment",
+          "description": "Operate local/remote files, shells, runtime environments, infrastructure, networks, deployments and services. 运维与环境操作；application logic design or implementation has a separate purpose."
+        },
+        {
+          "id": "service_connections",
+          "name": "通用应用与服务连接 / General application and service connections",
+          "description": "Connect/access external applications, APIs and databases where only general integration is described. Preserve limitations; do not turn a generic connector into every possible domain capability."
+        }
+      ]
+    },
+    {
+      "id": "specialized",
+      "name": "专业领域与互动体验 / Specialized domains and interactive experiences",
+      "description": "Apply domain-specific expertise or provide entertainment/interactive experiences outside the named general-purpose operations. 行业、文化、教育及互动用途；specific retrieval, writing or computation remains classifiable by its operation.",
+      "children": [
+        {
+          "id": "domain_guidance",
+          "name": "专业指导与学习 / Domain guidance and learning",
+          "description": "Provide specialized professional, cultural, educational or domain reasoning guidance not covered by the general-purpose functions. Do not infer professional qualifications or execution authority."
+        },
+        {
+          "id": "interactive",
+          "name": "游戏与互动体验 / Games and interactive experiences",
+          "description": "Provide games, simulations, characters, role-play and interactive entertainment experiences. 使用互动体验；developing the underlying application is a software-engineering purpose."
+        }
+      ]
+    }
+  ]
+}
