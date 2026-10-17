@@ -1,0 +1,200 @@
+{
+  "verification": "locked_inputs_exact_final_payload_and_result_replay",
+  "stop": "completed",
+  "rows": [
+    {
+      "case": "fresh_backend_exception_design",
+      "pool_size": 113,
+      "old_choice": "spec-driven-workflow",
+      "new_choice": "senior-backend",
+      "old_confidence": 0.77,
+      "new_confidence": 0.83,
+      "old_pass": false,
+      "new_pass": false,
+      "current_in_pool": true,
+      "later_group_coverage": [
+        true
+      ],
+      "all_references_retained": true,
+      "old_tokens": 25432,
+      "new_tokens": 11715,
+      "old_transport_seconds": 0.9609680419962388,
+      "new_transport_seconds": 0.7196492089715321
+    },
+    {
+      "case": "new_access_control_design",
+      "pool_size": 113,
+      "old_choice": "spec-driven-workflow",
+      "new_choice": null,
+      "old_confidence": 0.7,
+      "new_confidence": 0.51,
+      "old_pass": false,
+      "new_pass": false,
+      "current_in_pool": true,
+      "later_group_coverage": [],
+      "all_references_retained": true,
+      "old_tokens": 25430,
+      "new_tokens": 11713,
+      "old_transport_seconds": 0.8688425839936826,
+      "new_transport_seconds": 0.7897239169979002
+    },
+    {
+      "case": "new_test_driven_feature_plan",
+      "pool_size": 91,
+      "old_choice": "spec-driven-workflow",
+      "new_choice": null,
+      "old_confidence": 0.94,
+      "new_confidence": 0.62,
+      "old_pass": false,
+      "new_pass": false,
+      "current_in_pool": true,
+      "later_group_coverage": [],
+      "all_references_retained": true,
+      "old_tokens": 21079,
+      "new_tokens": 10032,
+      "old_transport_seconds": 0.7345585000002757,
+      "new_transport_seconds": 0.6364346670161467
+    }
+  ],
+  "totals": {
+    "old_pass": 0,
+    "new_pass": 0,
+    "old_tokens": 71941,
+    "new_tokens": 33460,
+    "old_transport_seconds": 2.564369125990197,
+    "new_transport_seconds": 2.145807792985579
+  },
+  "new_cost": {
+    "calls": 3,
+    "attempted_sends": 3,
+    "input_tokens": 30522,
+    "input_tokens_complete": true,
+    "output_tokens": 2938,
+    "output_tokens_complete": true,
+    "known_tokens": 33460,
+    "wall_seconds": 2.1708489589800593,
+    "real_transport_seconds": 2.145807792985579
+  },
+  "unfinished": [],
+  "policy": {
+    "final_gate": 0.7,
+    "final_limit": 128,
+    "directory_gate": 0.65,
+    "fresh_calls_per_case": 1,
+    "retries": 0,
+    "prefix": "same recorded final pools and full raw tasks; no fresh root calls",
+    "only_changed_factor": "independent candidate judgments to one comparative Choice",
+    "confidence": "raw provider confidence, no recalibration or sorting",
+    "stopping": "unknown usage/outcome, error, or budget stops all further sends"
+  },
+  "qualification": "Paired final-stage replay only; old roots reused; no fresh end-to-end timing, execution, blind or full-catalog validation.",
+  "union_preflight": {
+    "condition": "recorded .2 root choices, all three failed cases share frontier",
+    "frontiers": {
+      "fresh_backend_exception_design": [
+        "n.root/software",
+        "n.root/information",
+        "n.root/content",
+        "n.root/office",
+        "n.root/operations",
+        "n.root/specialized",
+        "n.unknown"
+      ],
+      "new_access_control_design": [
+        "n.root/software",
+        "n.root/information",
+        "n.root/content",
+        "n.root/office",
+        "n.root/operations",
+        "n.root/specialized",
+        "n.unknown"
+      ],
+      "new_test_driven_feature_plan": [
+        "n.root/software",
+        "n.root/information",
+        "n.root/content",
+        "n.root/office",
+        "n.root/operations",
+        "n.root/specialized",
+        "n.unknown"
+      ]
+    },
+    "unique_union": 211,
+    "refined_roots": [
+      "software",
+      "information",
+      "content",
+      "office",
+      "operations",
+      "specialized"
+    ],
+    "calls": [
+      {
+        "stage": "union-leaf-1",
+        "reserve": 25809,
+        "questions": 32
+      },
+      {
+        "stage": "union-leaf-2",
+        "reserve": 21181,
+        "questions": 32
+      },
+      {
+        "stage": "union-leaf-3",
+        "reserve": 21296,
+        "questions": 32
+      },
+      {
+        "stage": "union-leaf-4",
+        "reserve": 19840,
+        "questions": 32
+      },
+      {
+        "stage": "union-leaf-5",
+        "reserve": 21442,
+        "questions": 32
+      },
+      {
+        "stage": "union-leaf-6",
+        "reserve": 25086,
+        "questions": 32
+      },
+      {
+        "stage": "union-leaf-7",
+        "reserve": 5386,
+        "questions": 3
+      }
+    ],
+    "total_reserved_tokens": 140040,
+    "model_calls": 0,
+    "answers": "synthetic only for deterministic payload sizing; no membership-quality claim",
+    "decision": "do not spend additional classification calls after comparative final failed acceptance"
+  },
+  "scope_notes": [
+    "No live directory refinement; 8 injected-response tests cover union mechanics only.",
+    "Single final selector package changes prompt, representation and Choice structure; not an isolated call-count or ranking ablation.",
+    "Both old and new use one final request per case.",
+    "All three are previously exposed failures in an enriched 240-record sample of a 45,325-record merged public catalog.",
+    "Frozen reference list is not exhaustive: new top TDD and security candidates explicitly match subject but are absent from acceptable lists; both abstain below .7 so no post-hoc pass is awarded.",
+    "Backend reference ambiguity remains: broad backend design vs a package naming error handling, neither proves every task detail.",
+    "Direct/frequent shortcut integration and actual capability execution were not exercised."
+  ],
+  "decision": "retain experiment only; no daily deployment or more model calls",
+  "source_files": [
+    "benchmarks/simple_backpack_selector.py",
+    "benchmarks/simple_selection_pilot.py",
+    "benchmarks/union_directory_refinement.py"
+  ],
+  "verification_tests": {
+    "simple_selector": 9,
+    "union_refinement": 8,
+    "existing_builder": 20
+  },
+  "preservation": {
+    "tracked_paths": 459,
+    "initially_absent_paths": 2,
+    "differences_after_work": 0,
+    "other_worktree_heads_and_status_unchanged": true,
+    "daily_runtime_modified": false
+  }
+}
